@@ -1,0 +1,114 @@
+类型 ,启动路径 ,运行名称 ,运行关键字 ,热键关键字 ,热串关键字 
+app,netstat,网络状态,wangluozhuangtai|网络状态,,
+app,inetcpl.cpl,Internet选项,inetcpl|Internet选项,,
+app,Firewall.cpl,防火墙,fanghuoqiang|防火墙,,
+app,winver,关于Windows,guanyuwindows|关于Windows,,
+app,diskmgmt.msc,磁盘管理,diskmgmt|dianyuanxuanxiang|磁盘管理,,
+app,powercfg.cpl,电源选项,dianyuanxuanxiang|电源选项,,
+app,magnify,放大镜,fangdajing|放大镜,,
+app,mspaint,画图,huatu|画图,,
+app,osk,屏幕键盘,pingmujianpan|屏幕键盘,,
+app,Notepad,记事本,notepad|jishiben|记事本,!n,
+app,control,控制面板,kongzhimianban|控制面板,,
+app,sk.cpl,屏幕分辨率,pingmufenbianlv|屏幕分辨率,,
+app,hdwwiz.cpl ,设备管理器,hdwwiz.cpl|shebeiguanliqi|设备管理器,,
+app,main.cpl,鼠标属性,main.cpl|shubiaoshuxing|鼠标属性,,
+app,eventvwr ,事件查看器,eventvwr|shijianchakanqi|事件查看器,,
+app,mmsys.cpl,声音属性,mmsys.cpl|shengyinshuxing|声音属性,,
+app,taskmgr,任务管理器,taskmgr|renwuguanliqi|任务管理器,,
+app,explorer,资源管理器,explorer|ziyuanguanliqi|资源管理器,,
+app,mstsc,远程协助,mstsc|yuanchengzhuomian|远程协助,,
+app,write,写字板,write|xieziban|写字板,,
+app,C:\Users\ferder\AppData\Local\Microsoft\WindowsApps\wt.exe,终端,terminal|zhongduan|终端,!4,
+app,C:\Users\ferder\AppData\Local\360ChromeX\Chrome\Application\360ChromeX.exe,360极速浏览器,jisuliulanqi|360极速浏览器,!2,
+app,C:\Program Files (x86)\Battle.net\Battle.net Launcher.exe,battle,lushichuanshuo|hs|battle,,
+app,C:\Program Files (x86)\Tencent\WeChat\WeChat.exe,微信,wechat|weixin|微信,!3,
+app,C:\Program Files\Nutstore\Nutstore.exe,坚果云,jianguoyun|坚果云,,
+app,C:\Users\ferder\AppData\Local\Programs\aDrive\aDrive.exe,阿里云盘,aliyunpan|aDrive|阿里云盘,,
+app,C:\Program Files (x86)\ecloud\eCloud.exe,天翼云盘,tianyiyunpan|eCloud|天翼云盘,,
+app,D:\alee\exec\development\数据库管理\Beekeeper-Studio\Beekeeper-Studio-3.9.17-portable.exe,beekeeper,beekeeper,,
+app,D:\alee\exec\日-必备类\in\bitwarden\Bitwarden.exe,bitwarden,bitwarden|mmgl,,
+app,C:\Program Files\ClearVPN\ClearVPN.exe,ClearVPN,clearVPN,,
+app,C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe,edge,edge,,
+app,D:\alee\exec\development\FTP\FileZilla\filezilla.exe,filezilla,filezilla,,
+app,D:\Program Files\Foxmail 7.2\Foxmail.exe,foxmail,foxmail,,
+app,D:\alee\exec\development\数据库管理\HeidiSQL\heidisql.exe,heidisql,heidisql,,
+app,D:\alee\exec\development\IDE\ideaIC-2022.3.3.win\bin\idea64.exe,idea,idea,,
+app,D:\alee\exec\日-办公类\in\SumatraPDF\SumatraPDF.exe,SumatraPDF,SumatraPDF,,
+app,D:\alee\exec\日-视频类\in\Pot_Player64\PotPlayerMini64.exe,PotPlayer,PotPlayer,,
+app,C:\Users\ferder\AppData\Local\Postman\Postman.exe,Postman,Postman,,
+app,C:\Program Files\Tencent\QQNT\QQ.exe,qq,qq,,
+app,D:\Program Files (x86)\Tencent\QQMusic\QQMusic.exe,qq音乐,yy|qqyy|qq音乐,!u ,
+app,C:\Program Files (x86)\ToDesk\ToDesk.exe,ToDesk,ToDesk,,
+app,C:\Users\ferder\AppData\Local\Programs\Microsoft VS Code\Code.exe,vscode,vscode,!5,
+app,D:\alee\exec\拓展\工具 系统 极客卸载.exe,极客卸载,uninstall|geekxiezai|极客卸载,,
+app,C:\Program Files\bilibili\哔哩哔哩.exe,b站,bilibili|哔哩哔哩|b站,,
+app,C:\Users\ferder\AppData\Local\Programs\AutoHotkey\UX\AutoHotkeyUX.exe C:\Users\ferder\AppData\Local\Programs\AutoHotkey\UX\ui-dash.ahk,ahkdash,ahkdash,,
+app,C:\Users\ferder\AppData\Local\JetBrains\PyCharm Community Edition 2021.3.3\bin\pycharm64.exe,PyCharm,PyCharm,,
+app,D:\Program Files (x86)\Tencent\WeMeet\wemeetapp.exe,腾讯会议,huiyi|腾讯会议,,
+,,,,,
+,,,,,
+file,D:\alee\git-repos-mfoxLocal,公司仓库,,!k,
+file,D:\alee\exec,快捷软件,,!a,
+file,D:\alee\git-repos-gitee,码云,,!e,
+file,D:\alee\git-repos-github,github,,!h,
+,,,,,
+,,,,,
+,,,,,
+text,很牛呀,,,,xnb 
+text,你妹的,,,,xnm 
+text,acc8226,用户名,,,xac 
+text,北京市 通州区 台湖镇 鸿坤云时代 b2 座地下一层电梯间东侧丰巢柜,收货地址,,,xad 
+text,17090412860,联系方式,,,xmo 
+text,acc8226@qq.com,邮箱,,,xem 
+text,1334598467,qq号,,,xqq 
+text,很牛呀,,,,xnb 
+text,你妹的,,,,xnm 
+text,😄,微笑,,,xwx 
+text,😊,脸红,,,xlh
+text,👌,OK,,,xok
+text,❤️,爱心,,,xax
+text,📰,报纸,,,xbz
+text,🏷,标签,,,xbq
+text,🔖,书签,,,xsq
+text,💩,大便,,,xsh
+text,👻,鬼魂,,,xgh
+,,,,,
+,,,,,
+,,,,,
+text,```json{Enter}{Enter}```{Up},,,,xjson
+text,```yml{Enter}{Enter}```{Up},,,,xyml
+text,```java{Enter}{Enter}```{Up},,,,xjava
+text,```kotlin{Enter}{Enter}```{Up},,,,xkt
+text,```js{Enter}{Enter}```{Up},,,,xjs
+text,```xml{Enter}{Enter}```{Up},,,,xxml
+text,```py{Enter}{Enter}```{Up},,,,xpy
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+web,https://www.baidu.com,百度,baidu,,zbd
+web,https://www.cnblogs.com,博客园,bokeyuan|cnblogs|博客园,,zcn
+web,https://www.bilibili.com,b站,bilibili|哔哩哔哩|b站,!6,zbi
+web,https://fanyi.caiyunapp.com/#,彩云小译,fanyi|彩云小译,,zfan
+web,https://www.douyin.com/,抖音,douyin|抖音,,
+web,https://www.dytt8.net/index2.htm,电影天堂,dianyingtiantang|电影天堂,,zdy
+web,https://www.jianshu.com/,简书网,jianshu|简书网,,
+web,https://www.landiannews.com,蓝点网,landian|蓝点网,,zld
+web,https://gitee.com/,码云,gitee|码云,,zge
+web,http://114.114.114.114:90/login ,上网认证,shangwangrenzheng|上网认证,,z14
+web,https://nav.feipig.fun/ ,网址导航,wangzhidaohang|网址导航,,zna
+web,https://www.ixigua.com,西瓜视频,xiguashpin|西瓜视频,!8,zxg
+web,https://www.iplaysoft.com,异次元软件,yiciyuan|异次元软件,,zyc
+web,https://www.zhihu.com,知乎,zhihu|知乎,,
+web,https://www.csdn.net,csdn,csdn,,
+web,http://dc.mfox.cn/tongyong.php?a=dingcan_admin,云狐订餐,dingcan|云狐订餐,,zdc
+web,https://github.com,github,github,,zgh
+web,http://192.168.3.175:9494/,gitlab 1,gitlab1,,zgl
+web,https://www.ithome.com,IT之家,itzhijia|IT之家,!7,zit
+web,https://www.json.cn/#,json,json,,zjs
+web,https://mail.qq.com,qq邮箱,qqyouxiang|qq邮箱,,zma
+web,https://start.spring.io/,SpringInitializr,SpringInitializr,,
+web,https://chat-shared2.zhile.io/,chatgpt,chatgpt,,
+web,https://juejin.cn/,掘金,juejin|掘金,,
+web,https://www.mgtv.com/,芒果TV,mangguotv|芒果TV,,
