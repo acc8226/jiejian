@@ -28,13 +28,13 @@ https://wyagd001.github.io/v2/docs/
 settingTray() {
     A_IconTip := "捷键"
     item_count := DllCall("GetMenuItemCount", "ptr", A_TrayMenu.Handle)
-    A_TrayMenu.Insert(item_count "&", "捷键1.0.3(2023.8.27)", MenuHandler)
+    A_TrayMenu.Insert(item_count "&", "捷键 2023.09 by acc8226", MenuHandler)
     Persistent
     ; 建议使用宽度为 16 或 32 像素的图标
     TraySetIcon "favicon.ico"
 
     MenuHandler(*) {
-        Run "https://gitee.com/acc8226/my-cmd/releases"
+        Run "https://gitee.com/acc8226/shortcut-key/releases/"
     }
 }
 settingTray()
@@ -59,8 +59,9 @@ Esc::WinClose "A"
 #HotIf WinActive("ahk_exe Code.exe")
 ^F3::Send "{Control Down}n{Control Up}"
 ; 系统类软件 资源管理器
-#HotIf WinActive("ahk_class SunAwtFrame ahk_exe javaw.exe") ; netbean 32 位
+#HotIf WinActive("ahk_class SunAwtFrame ahk_exe javaw.exe") ; netbean 32 位 / jmeter
     or WinActive("ahk_class SunAwtFrame ahk_exe netbeans64.exe") ; netbean 64 位
+    or WinActive("ahk_exe devenv.exe") ; visual studio
     or WinActive("ahk_exe explorer.exe ahk_class CabinetWClass")
     or WinActive("ahk_exe eclipse.exe")
     or WinActive("ahk_exe editplus.exe")
@@ -86,25 +87,19 @@ Esc::WinClose "A"
 ; ^F4 表示 esc 退出弹窗
 #HotIf WinActive("ahk_class SunAwtDialog") ; netbean 32/64 位 和 jb 全家桶的弹窗
     or WinActive("ahk_class Chrome_WidgetWin_2 ahk_exe 360ChromeX.exe") ; 360 极速浏览器的下载管理窗口    
-    or WinActive("ahk_class #32770")
-        and (WinActive("ahk_exe SpringToolSuite4.exe")
-             or WinActive("ahk_exe sublime_text.exe")         
-             or WinActive("ahk_exe Code.exe")
-             or WinActive("ahk_exe eclipse.exe")
-             or WinActive("ahk_exe editplus.exe")
-             or WinActive("ahk_exe HBuilderX.exe")
-             or WinActive("ahk_exe kate.exe")
-             or WinActive("ahk_exe javaw.exe") ; myeclipse 弹窗
-             or WinActive("ahk_exe wps.exe") ; wps 的另存为窗口
-             or WinActive("ahk_exe uedit64.exe")
-             ; 浏览器的打开文件窗口
-             or WinActive("ahk_group browser_group")
-    )
+    or WinActive("ahk_class #32770") and not WinActive("ahk_exe 360zip.exe") 
     ; 特定软件
+    or WinActive("ahk_exe devenv.exe") ; Visual Studio 窗口的特殊处理
+       and (WinActive("Microsoft Visual Studio 帐户设置")
+           or WinActive("自定义")
+           or WinActive("关于 Microsoft Visual Studio")
+        )
     or WinActive("ahk_exe QQ.exe")
     or WinActive("ahk_exe Snipaste.exe")
     or WinActive("ahk_exe WeChat.exe")
-^F4::Send "{Esc}"
+^F4::{
+    Send "{Esc}"
+}
 
 ; ^F4 关闭标签/窗口/应用
 ; 桌面
@@ -125,13 +120,14 @@ Esc::WinClose "A"
 ^F4::Send "^w"
 ; 兜底：排除的软件设置为 close
 #HotIf not (WinActive("ahk_exe Code.exe")
+         or WinActive("ahk_exe devenv.exe") ; visual studio
          or WinActive("ahk_exe eclipse.exe")
          or WinActive("ahk_exe HBuilderX.exe")
          or WinActive("ahk_class SWT_Window0 ahk_exe javaw.exe") ; 排除 myeclipse
          or WinActive("ahk_exe SpringToolSuite4.exe")
          or WinActive("ahk_exe sublime_text.exe")
          or WinActive("ahk_exe SumatraPDF.exe ahk_class SUMATRA_PDF_FRAME")         
-         or WinActive("ahk_class SunAwtFrame") ; 排除 netbean 32/64 位 和标签类软件 jb 全家桶
+         or WinActive("ahk_class SunAwtFrame",,"Apache JMeter") ; 排除 netbean 32/64 位 和标签类软件 jb 全家桶
          or WinActive("ahk_exe ahk_exe uedit64.exe")
          or WinActive("ahk_exe wps.exe")
          or WinActive("ahk_group browser_group")
@@ -146,7 +142,7 @@ Esc::WinClose "A"
 ; 切换标签
 #HotIf WinActive("ahk_exe eclipse.exe") 
     or WinActive("ahk_exe HBuilderX.exe")
-    or WinActive("ahk_class SunAwtFrame ahk_exe javaw.exe") ; netbean 32 位
+    or WinActive("ahk_class SunAwtFrame ahk_exe javaw.exe") ; netbean 32 位 / jmeter
     or WinActive("ahk_class SunAwtFrame ahk_exe netbeans64.exe") ; netbean 64 位
     or WinActive("ahk_class SWT_Window0 ahk_exe javaw.exe") ; myeclipse
     or WinActive("ahk_exe SpringToolSuite4.exe")
@@ -221,7 +217,10 @@ Loop appList.Length {
     newText := A_Clipboard
     newText := RegExReplace(newText, "\s*$", "") ; 去掉尾部空格
     newText := RegExReplace(newText, "^#{1,6}\s+(.*)", "$1")
-    Send "{Home}{# " . nums . "}" . " " . newText . "{End}"
+    Send "{Home}{# " . nums . "}" . " "
+    ; 之所以拆开是为防止被中文输入法影响
+    SendText newText
+    Send "{End}"
     A_Clipboard := oldText
 }
 #HotIf
