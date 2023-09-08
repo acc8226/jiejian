@@ -28,7 +28,7 @@ https://wyagd001.github.io/v2/docs/
 settingTray() {
     A_IconTip := "捷键"
     item_count := DllCall("GetMenuItemCount", "ptr", A_TrayMenu.Handle)
-    A_TrayMenu.Insert(item_count "&", "捷键 2023.09 by acc8226", MenuHandler)
+    A_TrayMenu.Insert(item_count "&", "捷键 2023.09 测试版 by acc8226", MenuHandler)
     Persistent
     ; 建议使用宽度为 16 或 32 像素的图标
     TraySetIcon "favicon.ico"
@@ -61,18 +61,19 @@ Esc::WinClose "A"
 ; 系统类软件 资源管理器
 #HotIf WinActive("ahk_class SunAwtFrame ahk_exe javaw.exe") ; netbean 32 位 / jmeter
     or WinActive("ahk_class SunAwtFrame ahk_exe netbeans64.exe") ; netbean 64 位
+    or WinActive("ahk_class SWT_Window0 ahk_exe javaw.exe") ; myeclipse
     or WinActive("ahk_exe devenv.exe") ; visual studio
     or WinActive("ahk_exe explorer.exe ahk_class CabinetWClass")
     or WinActive("ahk_exe eclipse.exe")
     or WinActive("ahk_exe editplus.exe")
     or WinActive("ahk_exe Fleet.exe")
-    or WinActive("ahk_class SWT_Window0 ahk_exe javaw.exe") ; myeclipse
     or WinActive("ahk_exe kate.exe")
     or WinActive("ahk_exe Notepad--.exe")
     or WinActive("ahk_exe notepad++.exe")
     or WinActive("ahk_exe SpringToolSuite4.exe")
     or WinActive("ahk_exe sublime_text.exe")
-    or WinActive("ahk_exe ahk_exe uedit64.exe")
+    or WinActive("ahk_exe uedit64.exe")
+    or WinActive("ahk_exe WinMergeU.exe")
     or WinActive("ahk_exe wps.exe")
 ^F3::Send "^n"
 ; 标签类软件 Windows Terminall ---不太好用，目前是失效状态---
@@ -128,7 +129,8 @@ Esc::WinClose "A"
          or WinActive("ahk_exe sublime_text.exe")
          or WinActive("ahk_exe SumatraPDF.exe ahk_class SUMATRA_PDF_FRAME")         
          or WinActive("ahk_class SunAwtFrame",,"Apache JMeter") ; 排除 netbean 32/64 位 和标签类软件 jb 全家桶
-         or WinActive("ahk_exe ahk_exe uedit64.exe")
+         or WinActive("ahk_exe uedit64.exe")
+         or WinActive("ahk_exe WinMergeU.exe")
          or WinActive("ahk_exe wps.exe")
          or WinActive("ahk_group browser_group")
         )
@@ -153,6 +155,13 @@ Esc::WinClose "A"
     or WinActive("ahk_class SunAwtFrame")
 ^+Tab::Send "!{Left}" ; 切换到左标签
 ^Tab::Send "!{Right}" ; 切换到右标签
+
+; 侧边按键
+; 当前台是浏览器时候改为切换标签
+#HotIf WinActive("ahk_group browser_group")
+XButton1::Send "^+{Tab}" ; 切换到右标签而非前进后退
+XButton2::Send "^{Tab}" ; 切换到左标签
+
 #HotIf ; 结束标记
 
 ; 仅是实验，使用 alt 就怕和编辑器冲突，能鼠标手势还是鼠标手势靠谱，跳过了快捷键，实现效果更好

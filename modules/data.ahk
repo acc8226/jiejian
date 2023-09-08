@@ -17,10 +17,11 @@ GroupAdd "browser_group", "ahk_exe TSBrowser.exe" ; 极速浏览器
 GroupAdd "browser_group", "ahk_exe SLBrowser.exe" ; 联想浏览器
 GroupAdd "browser_group", "ahk_exe SogouExplorer.exe" ; 搜狗浏览器
 
-; 标签类：类浏览器
+; 标签类：类浏览器 使用了 标准的 ctrl + t 新建标签， ctrl + w 关闭标签
+GroupAdd "browser_like", "ahk_exe Beekeeper Studio.exe"
 GroupAdd "browser_like", "ahk_exe notepad.exe" ; 完美适配 win11 新版 记事本
 GroupAdd "browser_like", "ahk_exe Postman.exe"
-GroupAdd "browser_like", "ahk_exe Beekeeper Studio.exe"
+GroupAdd "browser_like", "ahk_exe SourceTree.exe"
 
 ; 文本类
 GroupAdd "text_group", "ahk_exe notepad.exe" ; 记事本
