@@ -8,15 +8,15 @@ GroupAdd "browser_group", "ahk_exe i)115chrome.exe" ; 115 浏览器
 GroupAdd "browser_group", "ahk_exe i)2345Explorer.exe" ; 2345 浏览器
 GroupAdd "browser_group", "ahk_exe i)360ChromeX.exe" ; 360 极速浏览器
 GroupAdd "browser_group", "ahk_exe i)360se.exe" ; 360 安全浏览器
-GroupAdd "browser_group", "ahk_exe i)AvastBrowser.exe" ; AvastBrowser 浏览器
+GroupAdd "browser_group", "ahk_exe i)AvastBrowser.exe" ; Avast 浏览器
 
 GroupAdd "browser_group", "ahk_exe i)brave.exe" ; brave 浏览器
 GroupAdd "browser_group", "ahk_exe browser.exe ahk_class YandexBrowser_WidgetWin_1" ; Yandex Browser
-GroupAdd "browser_group", "ahk_exe i)chrome.exe" ; chrome 谷歌浏览器 and 百分浏览器
+GroupAdd "browser_group", "ahk_exe i)chrome.exe" ; chrome 谷歌浏览器 & 百分浏览器
 GroupAdd "browser_group", "ahk_exe i)DCBrowser.exe" ; 小智双核浏览器
 GroupAdd "browser_group", "ahk_exe i)DuckDuckGo.exe" ; Duck 浏览器
 
-GroupAdd "browser_group", "ahk_exe i)firefox.exe" ; 火狐安全浏览器
+GroupAdd "browser_group", "ahk_exe i)firefox.exe" ; 火狐安全浏览器 & Tor 浏览器
 GroupAdd "browser_group", "ahk_exe i)HuaweiBrowser.exe" ; 华为浏览器
 GroupAdd "browser_group", "ahk_exe i)liebao.exe" ; 猎豹浏览器
 GroupAdd "browser_group", "ahk_exe i)msedge.exe" ; edge 浏览器
@@ -51,11 +51,13 @@ GroupAdd "keepF4_group", "ahk_exe devenv.exe"
 GroupAdd "keepF4_group", "ahk_exe eclipse.exe"
 GroupAdd "keepF4_group", "ahk_exe HBuilderX.exe"
 GroupAdd "keepF4_group", "ahk_class SWT_Window0 ahk_exe javaw.exe"
+
 GroupAdd "keepF4_group", "ahk_exe SpringToolSuite4.exe"
 GroupAdd "keepF4_group", "ahk_exe sublime_text.exe"
 GroupAdd "keepF4_group", "ahk_exe SumatraPDF.exe ahk_class SUMATRA_PDF_FRAME"
 GroupAdd "keepF4_group", "ahk_class SunAwtFrame",,"Apache JMeter" ; 排除 netbean 32/64 位 和标签类软件 jb 全家桶
 GroupAdd "keepF4_group", "ahk_exe uedit64.exe"
+
 GroupAdd "keepF4_group", "ahk_exe WinMergeU.exe"
 GroupAdd "keepF4_group", "ahk_exe wps.exe"
 GroupAdd "keepF4_group", "ahk_group browser_group"
@@ -82,27 +84,23 @@ parseAppInfo() {
   return appList  
 }
 
-parseLine(line) {
-  info := {}
-  
+parseLine(line) {  
   split := StrSplit(line, ",")
-  if (split.Length != 6) 
+  if split.Length != 6
     return 
   
+  info := {}
   info.type := Trim(split[1])
 
   ; 去掉首尾的双引号，但不知为何首尾的一对双引号会转义为三对
   info.path := Trim(split[2])
-  if StrLen(info.path) > 1 and '"""' == SubStr(info.path, 1, 3) and '"""' == SubStr(info.path, -3) {
+  if StrLen(info.path) > 1 and '"""' == SubStr(info.path, 1, 3) and '"""' == SubStr(info.path, -3)
     info.path := SubStr(info.path, 4, -3)
-  }
 
-  info.title := Trim(split[3])
-  
+  info.title := Trim(split[3])  
   aliases := StrSplit(Trim(split[4]), "|")
   ; 如果数组长度 > 1 则存成数组
   info.alias := (aliases.Length > 1) ? aliases : Trim(split[4])
-
   info.hk := Trim(split[5])
   info.hs := Trim(split[6])
 

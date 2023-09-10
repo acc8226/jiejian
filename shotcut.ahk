@@ -47,25 +47,19 @@ settingTray()
 WheelUp::Send "{Volume_Up}"
 WheelDown::Send "{Volume_Down}"
 XButton1::Send "{Media_Next}" ; 下一曲
-XButton2::Send "{Media_Prev}" ; 上一曲
+XButton2::Send "{Media_Play_Pause}" ; 暂停
 
 ; ----- 2. 热键 之 重写快捷键 -----
+
 ; 禁用快捷键
 ;^v::return
 
-; 设计原则，根据 hotIf 的优先匹配，先小后大进行判断
-; ESC 增强
-; 系统类软件 记事本
-#HotIf WinActive("ahk_exe notepad.exe")
-Esc::WinClose "A"
-
-;^F3 新建标签/窗口
-; 标签类软件 vs code
-#HotIf WinActive("ahk_exe Code.exe")
+; ^F3
+; 新建标签/窗口
+#HotIf WinActive("ahk_exe Code.exe") ; 标签类软件 vs code
 ^F3::Send "{Control Down}n{Control Up}"
-; 系统类软件 资源管理器
 #HotIf WinActive("ahk_exe devenv.exe") ; visual studio
-    or WinActive("ahk_exe explorer.exe ahk_class CabinetWClass") ; 资源管理器
+    or WinActive("ahk_exe explorer.exe ahk_class CabinetWClass") ; 系统类软件 资源管理器
     or WinActive("ahk_exe eclipse.exe")
     or WinActive("ahk_exe editplus.exe")
     or WinActive("ahk_exe Fleet.exe")
@@ -81,60 +75,122 @@ Esc::WinClose "A"
     or WinActive("ahk_exe uedit64.exe")
     or WinActive("ahk_exe WinMergeU.exe")
     or WinActive("ahk_exe wps.exe")
+    or WinActive("ahk_exe Xftp.exe")
+; ctrl + n
 ^F3::Send "^n"
 #HotIf WinActive("ahk_exe WindTerm.exe") ; WindTerm 新建标签
+    or WinActive("ahk_exe Xshell.exe")
+; alt + n
 ^F3::Send "!n"
-; 标签类软件 Windows Terminall ---不太好用，目前是失效状态---
-#HotIf WinActive("ahk_group terminal_group")
+#HotIf WinActive("ahk_group terminal_group") ; 标签类软件 Windows Terminall 不太好用，目前是失效状态
+; ctrl + shift + t
 ^F3::Send "^+t"
-; 标签类软件（浏览器大类，类浏览器）
 #HotIf WinActive("ahk_exe HBuilderX.exe")
     or WinActive("ahk_group browser_group")
-    or WinActive("ahk_group browser_like_group")
-^F3::Send "^t" ; 统一为 ctrl + t 意为新建标签
+    or WinActive("ahk_group browser_like_group") ; 标签类软件（浏览器大类，类浏览器）
+; ctrl + t
+^F3::Send "^t"
+#HotIf WinActive("ahk_exe MobaXterm_Personal.*.exe ahk_class TMobaXtermForm") ; MobaXterm
+; ctrl + alt + t
+^F3::Send "^!t"
+
+; ESC 退出键
+; 退出弹窗
+#HotIf WinActive("ahk_exe notepad.exe") ; 系统类软件 记事本
+Esc::WinClose "A"
 
 ; ^F4 和 鼠标侧边按键 XButton1 定义为万能关闭键
-; esc 退出弹窗
+; 弹窗类软件 退出弹窗
 #HotIf WinActive("ahk_exe 360ChromeX.exe ahk_class Chrome_WidgetWin_2") ; 360 极速浏览器的下载管理窗口  
-    ; 特定软件
     or WinActive("ahk_exe devenv.exe") ; Visual Studio 窗口的特殊处理
        and (WinActive("Microsoft Visual Studio 帐户设置")
             or WinActive("管理扩展")
             or WinActive("关于 Microsoft Visual Studio")
             or WinActive("自定义")
        )
+    or WinActive("ahk_exe Hearthstone.exe") ; 炉石传说的 关闭 改为 esc
     or WinActive("ahk_exe QQ.exe")
     or WinActive("ahk_exe Snipaste.exe")
     or WinActive("ahk_exe WeChat.exe")
     or WinActive("ahk_class #32770",,"ahk_exe 360zip.exe") ; 通用窗口
     or WinActive("ahk_class SunAwtDialog") ; netbean 32/64 位 和 jb 全家桶的弹窗
 ^F4::
-XButton1::Send "{Esc}"
+XButton1::Send "{Esc}" ; esc 退出弹窗
 
-; ^F4 关闭标签/窗口/应用
+; ^F4 和 鼠标侧边按键 XButton1 定义为万能关闭键
+; 标签类软件 关闭标签
 #HotIf WinActive("ahk_exe explorer.exe ahk_class WorkerW") ; 桌面
 ^F4::
 XButton1::Send "{Alt Down}{F4 Down}{F4 Up}{Alt Up}" ; 直接 Send alt + f4 不好使
-
-; 标签类软件 Windows Terminal ---不太好用，目前仅设置页面有时有效---
 #HotIf WinActive("ahk_group terminal_group")
     or WinActive("ahk_exe WindTerm.exe")
+; ctrl + shift + w
 ^F4::
 XButton1::Send "^+w"
-; 资源管理器 或者 标签类软件（类浏览器）
 #HotIf WinActive("ahk_exe editplus.exe")
     or WinActive("ahk_exe explorer.exe ahk_class CabinetWClass") ; 资源管理器
     or WinActive("ahk_exe kate.exe")
     or WinActive("ahk_exe Notepad--.exe")
     or WinActive("ahk_exe notepad++.exe")
-    or WinActive("ahk_group browser_like_group")
+    or WinActive("ahk_group browser_like_group") ; 类浏览器
+; ctrl + w
 ^F4::
 XButton1::Send "^w"
+#HotIf WinActive("ahk_exe MobaXterm_Personal.*.exe ahk_class TMobaXtermForm")
+; ctrl + alt + q
+^F4::
+XButton1::Send "^!q"
+#HotIf WinActive("ahk_exe Xftp.exe")
+    or WinActive("ahk_exe Xshell.exe")
+; ctrl + shift + f4
+^F4::
+XButton1::Send "^+{F4}"
 
-; 兜底前准备
-#HotIf WinActive("ahk_group keepF4_group")
+; ^+Tab XButton2 ^Tab
+; 标签类软件 切换到左右标签
+#HotIf WinActive("ahk_exe eclipse.exe") 
+    or WinActive("ahk_exe HBuilderX.exe")
+    or WinActive("ahk_exe javaw.exe ahk_class SunAwtFrame") ; netbean 32 位 / jmeter
+    or WinActive("ahk_exe javaw.exe ahk_class SWT_Window0") ; myeclipse
+    or WinActive("ahk_exe netbeans64.exe ahk_class SunAwtFrame") ; netbean 64 位
+    or WinActive("ahk_exe SpringToolSuite4.exe")
+; ctrl + 翻页键
+^+Tab::
+XButton2::Send "^{PgUp}"
+^Tab::Send "^{PgDn}"
+#HotIf WinActive("ahk_exe kate.exe")
+       or WinActive("ahk_exe Termius.exe")
+       or WinActive("ahk_class SunAwtFrame") ; 标签类软件 jb 全家桶
+; alt + 左右箭头
+^+Tab::
+XButton2::Send "!{Left}"
+^Tab::Send "!{Right}"
+#HotIf WinActive("ahk_exe WindTerm.exe")
+; alt + 左右中括号
+^+Tab::
+XButton2::Send "!["
+^Tab::Send "!]"
+#HotIf WinActive("ahk_exe MobaXterm_Personal.*.exe ahk_class TMobaXtermForm")
+^+Tab::
+XButton2::Send "^!{Left}"
+^Tab::Send "^!{Right}"
+
+; 鼠标侧边按键 XButton2 定义为 万能后退键 或 切换到上一个标签/下一曲
+#HotIf WinActive("ahk_exe Code.exe")
+       or WinActive("ahk_group browser_group")
+       or WinActive("ahk_exe Xftp.exe")
+       or WinActive("ahk_exe Xshell.exe")
+XButton2::Send "^+{Tab}" ; 切换到上一个标签
+#HotIf WinActive("ahk_exe explorer.exe ahk_class CabinetWClass") ; 资源管理器
+XButton2::Send "!{Left}" ; 后退
+#HotIf WinActive("ahk_exe QQMusic.exe")
+XButton1::Send "{Media_Next}" ; 下一曲
+XButton2::Send "{Media_Play_Pause}" ; 暂停
+
+; ^F4 和 鼠标侧边按键 XButton1 定义为万能关闭键
+; 应用类软件 退出应用
+#HotIf WinActive("ahk_group keepF4_group") ; XButton1 模拟 ctrl + f4 同样的效果 为兜底做准备
 XButton1::Send "^{F4}" ; 关闭当前
-
 ; 正式兜底：排除的软件设置为 close
 #HotIf not WinActive("ahk_group keepF4_group")
 ^F4::
@@ -144,39 +200,6 @@ XButton1::{
         MsgBox "关闭窗口失败，请重试"
     }
 }
-
-; 标签类软件：切换到左右标签
-; ctrl + Page翻页键
-#HotIf WinActive("ahk_exe eclipse.exe") 
-    or WinActive("ahk_exe HBuilderX.exe")
-    or WinActive("ahk_exe javaw.exe ahk_class SunAwtFrame") ; netbean 32 位 / jmeter
-    or WinActive("ahk_exe javaw.exe ahk_class SWT_Window0") ; myeclipse
-    or WinActive("ahk_exe netbeans64.exe ahk_class SunAwtFrame") ; netbean 64 位
-    or WinActive("ahk_exe SpringToolSuite4.exe")
-^+Tab::
-XButton2::Send "^{PgUp}"
-^Tab::Send "^{PgDn}"
-; alt + 左右箭头
-#HotIf WinActive("ahk_exe kate.exe")
-       or WinActive("ahk_exe Termius.exe")
-       or WinActive("ahk_class SunAwtFrame") ; 标签类软件 jb 全家桶
-^+Tab::
-XButton2::Send "!{Left}"
-^Tab::Send "!{Right}"
-; alt + 左右中括号
-#HotIf WinActive("ahk_exe WindTerm.exe")
-^+Tab::
-XButton2::Send "!["
-^Tab::Send "!]"
-
-; 鼠标侧边按键 XButton2 定义为 万能后退键 或 切换到上一个标签/下一曲
-#HotIf WinActive("ahk_exe Code.exe")
-       or WinActive("ahk_group browser_group")
-XButton2::Send "^+{Tab}" ; 切换到上一个标签
-#HotIf WinActive("ahk_exe explorer.exe ahk_class CabinetWClass") ; 资源管理器
-XButton2::Send "!{Left}" ; 后退
-#HotIf WinActive("ahk_exe QQMusic.exe")
-XButton2::Send "{Media_Next}" ; 下一曲
 
 #HotIf ; 结束标记
 
