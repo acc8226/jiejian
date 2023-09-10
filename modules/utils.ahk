@@ -1,7 +1,8 @@
-﻿; 鼠标移动到屏幕左边缘 或 任务栏上可通过鼠标滑轮上下控制音量
-mouseIsOverTaskBarOrLeftEdge() {
-    MouseGetPos &OutputVarX,, &Win
+﻿; 鼠标移动到屏幕左或上边缘 或 任务栏上
+mouseIsOverTaskBarOrEdge() {
+    MouseGetPos &OutputVarX, &OutputVarY, &Win
     return OutputVarX == 0 or OutputVarX == 1 or OutputVarX == 2
+           or OutputVarY == 0 or OutputVarY == 1 or OutputVarY == 2
            or WinExist("ahk_class Shell_TrayWnd" " ahk_id " Win)
 }
 

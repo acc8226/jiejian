@@ -105,13 +105,13 @@
 
 bd 进行百度搜索
 
-![](https://gitee.com/acc8226/my-cmd/raw/main/markdown/imgs/7%20%E6%89%93%E5%BC%80%E7%99%BE%E5%BA%A6.apng)
+![](https://gitee.com/acc8226/shortcut-key/raw/main/imgs/7%20%E6%89%93%E5%BC%80%E7%99%BE%E5%BA%A6.apng)
 
 ip 进行 IP 归属地查询
 
 使用简拼 kz 打开了控制面板
 
-![](https://gitee.com/acc8226/my-cmd/raw/main/markdown/imgs/7%20%E6%89%93%E5%BC%80%E6%8E%A7%E5%88%B6%E9%9D%A2%E6%9D%BF.apng)
+![](https://gitee.com/acc8226/shortcut-key/raw/main/imgs/7%20%E6%89%93%E5%BC%80%E6%8E%A7%E5%88%B6%E9%9D%A2%E6%9D%BF.apng)
 
 ## 8. 热串 之 直达网址（Z 直达模式）【可配置】
 
@@ -182,6 +182,17 @@ ip 进行 IP 归属地查询
 
 ## 版本发布
 
+捷键 v1.0.4 for windows 2023.9-beta
+
+新增
+
+* 支持 netbean、editplus、JB fleet、eclipse、myeclipse、Notepad--、Notepad++、SpringToolSuite4、sublime、ultraedit64 位、HBuilderX
+
+优化
+
+* 导入 csv 的 path 支持首尾都包含双引号
+* 调整 x 模式的激活条件使更合理
+
 捷键 v1.0.3 for windows 2023.8.27
 
 新增：
@@ -220,3 +231,16 @@ ip 进行 IP 归属地查询
 捷键 v1.0.0 for windows
 
 第一个正式版本
+
+* 代码注释调整 和 丰富数据源
+* 修复 bug
+* anyrun 组件完善当鼠标在窗口外点击后关闭窗口
+
+捷键 v0.0.2 for windows
+
+* 运行框支持英文大小写混写
+* 创建 anyrun 组件以及其他优化
+
+捷键 v0.0.1 for windows
+
+这是一个伟大的里程碑

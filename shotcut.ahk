@@ -24,11 +24,14 @@ https://wyagd001.github.io/v2/docs/
 #Include "modules\data.ahk"
 #Include "modules\utils.ahk"
 
+SetTitleMatchMode "RegEx" ; 使 WinTitle, WinText, ExcludeTitle 和 ExcludeText 接受正则表达式
+CoordMode "Mouse", "Screen" ; 坐标相对于桌面(整个屏幕)
+
 ; 设置托盘图标和菜单
 settingTray() {
     A_IconTip := "捷键"
     item_count := DllCall("GetMenuItemCount", "ptr", A_TrayMenu.Handle)
-    A_TrayMenu.Insert(item_count "&", "捷键 2023.09 测试版 by acc8226", MenuHandler)
+    A_TrayMenu.Insert(item_count "&", "捷键 2023.09-测试版 by acc8226", MenuHandler)
     Persistent
     ; 建议使用宽度为 16 或 32 像素的图标
     TraySetIcon "favicon.ico"
@@ -40,9 +43,11 @@ settingTray() {
 settingTray()
 
 ; ----- 1. 热键 之 鼠标操作 -----
-#HotIf mouseIsOverTaskBarOrLeftEdge()
+#HotIf mouseIsOverTaskBarOrEdge()
 WheelUp::Send "{Volume_Up}"
 WheelDown::Send "{Volume_Down}"
+XButton1::Send "{Media_Next}" ; 下一曲
+XButton2::Send "{Media_Prev}" ; 上一曲
 
 ; ----- 2. 热键 之 重写快捷键 -----
 ; 禁用快捷键
@@ -59,108 +64,119 @@ Esc::WinClose "A"
 #HotIf WinActive("ahk_exe Code.exe")
 ^F3::Send "{Control Down}n{Control Up}"
 ; 系统类软件 资源管理器
-#HotIf WinActive("ahk_class SunAwtFrame ahk_exe javaw.exe") ; netbean 32 位 / jmeter
-    or WinActive("ahk_class SunAwtFrame ahk_exe netbeans64.exe") ; netbean 64 位
-    or WinActive("ahk_class SWT_Window0 ahk_exe javaw.exe") ; myeclipse
-    or WinActive("ahk_exe devenv.exe") ; visual studio
-    or WinActive("ahk_exe explorer.exe ahk_class CabinetWClass")
+#HotIf WinActive("ahk_exe devenv.exe") ; visual studio
+    or WinActive("ahk_exe explorer.exe ahk_class CabinetWClass") ; 资源管理器
     or WinActive("ahk_exe eclipse.exe")
     or WinActive("ahk_exe editplus.exe")
     or WinActive("ahk_exe Fleet.exe")
+    or WinActive("ahk_exe GitHubDesktop.exe")
     or WinActive("ahk_exe kate.exe")
-    or WinActive("ahk_exe Notepad--.exe")
+    or WinActive("ahk_exe javaw.exe ahk_class SunAwtFrame") ; netbean 32 位 / jmeter
+    or WinActive("ahk_exe javaw.exe ahk_class SWT_Window0 ") ; myeclipse
+    or WinActive("ahk_exe netbeans64.exe ahk_class SunAwtFrame") ; netbean 64 位
     or WinActive("ahk_exe notepad++.exe")
+    or WinActive("ahk_exe Notepad--.exe")
     or WinActive("ahk_exe SpringToolSuite4.exe")
     or WinActive("ahk_exe sublime_text.exe")
     or WinActive("ahk_exe uedit64.exe")
     or WinActive("ahk_exe WinMergeU.exe")
     or WinActive("ahk_exe wps.exe")
 ^F3::Send "^n"
+#HotIf WinActive("ahk_exe WindTerm.exe") ; WindTerm 新建标签
+^F3::Send "!n"
 ; 标签类软件 Windows Terminall ---不太好用，目前是失效状态---
-#HotIf WinActive("ahk_exe WindowsTerminal.exe")
+#HotIf WinActive("ahk_group terminal_group")
 ^F3::Send "^+t"
 ; 标签类软件（浏览器大类，类浏览器）
-#HotIf WinActive("ahk_group browser_group")
-    or WinActive("ahk_group browser_like")
-    or WinActive("ahk_exe HBuilderX.exe")
+#HotIf WinActive("ahk_exe HBuilderX.exe")
+    or WinActive("ahk_group browser_group")
+    or WinActive("ahk_group browser_like_group")
 ^F3::Send "^t" ; 统一为 ctrl + t 意为新建标签
 
-; ^F4 表示 esc 退出弹窗
-#HotIf WinActive("ahk_class SunAwtDialog") ; netbean 32/64 位 和 jb 全家桶的弹窗
-    or WinActive("ahk_class Chrome_WidgetWin_2 ahk_exe 360ChromeX.exe") ; 360 极速浏览器的下载管理窗口    
-    or WinActive("ahk_class #32770") and not WinActive("ahk_exe 360zip.exe") 
+; ^F4 和 鼠标侧边按键 XButton1 定义为万能关闭键
+; esc 退出弹窗
+#HotIf WinActive("ahk_exe 360ChromeX.exe ahk_class Chrome_WidgetWin_2") ; 360 极速浏览器的下载管理窗口  
     ; 特定软件
     or WinActive("ahk_exe devenv.exe") ; Visual Studio 窗口的特殊处理
        and (WinActive("Microsoft Visual Studio 帐户设置")
-           or WinActive("自定义")
-           or WinActive("关于 Microsoft Visual Studio")
-        )
+            or WinActive("管理扩展")
+            or WinActive("关于 Microsoft Visual Studio")
+            or WinActive("自定义")
+       )
     or WinActive("ahk_exe QQ.exe")
     or WinActive("ahk_exe Snipaste.exe")
     or WinActive("ahk_exe WeChat.exe")
-^F4::{
-    Send "{Esc}"
-}
+    or WinActive("ahk_class #32770",,"ahk_exe 360zip.exe") ; 通用窗口
+    or WinActive("ahk_class SunAwtDialog") ; netbean 32/64 位 和 jb 全家桶的弹窗
+^F4::
+XButton1::Send "{Esc}"
 
 ; ^F4 关闭标签/窗口/应用
-; 桌面
-#HotIf WinActive("ahk_exe explorer.exe ahk_class WorkerW")
-^F4::{ ; 直接 Send alt + f4 不好使
-    Send "{Alt Down}{F4 Down}{F4 Up}{Alt Up}"
-}
+#HotIf WinActive("ahk_exe explorer.exe ahk_class WorkerW") ; 桌面
+^F4::
+XButton1::Send "{Alt Down}{F4 Down}{F4 Up}{Alt Up}" ; 直接 Send alt + f4 不好使
+
 ; 标签类软件 Windows Terminal ---不太好用，目前仅设置页面有时有效---
-#HotIf WinActive("ahk_exe WindowsTerminal.exe")
-^F4::Send "^+w"
+#HotIf WinActive("ahk_group terminal_group")
+    or WinActive("ahk_exe WindTerm.exe")
+^F4::
+XButton1::Send "^+w"
 ; 资源管理器 或者 标签类软件（类浏览器）
-#HotIf WinActive("ahk_class CabinetWClass ahk_exe explorer.exe")
-    or WinActive("ahk_exe editplus.exe")      
+#HotIf WinActive("ahk_exe editplus.exe")
+    or WinActive("ahk_exe explorer.exe ahk_class CabinetWClass") ; 资源管理器
     or WinActive("ahk_exe kate.exe")
     or WinActive("ahk_exe Notepad--.exe")
     or WinActive("ahk_exe notepad++.exe")
-    or WinActive("ahk_group browser_like")
-^F4::Send "^w"
-; 兜底：排除的软件设置为 close
-#HotIf not (WinActive("ahk_exe Code.exe")
-         or WinActive("ahk_exe devenv.exe") ; visual studio
-         or WinActive("ahk_exe eclipse.exe")
-         or WinActive("ahk_exe HBuilderX.exe")
-         or WinActive("ahk_class SWT_Window0 ahk_exe javaw.exe") ; 排除 myeclipse
-         or WinActive("ahk_exe SpringToolSuite4.exe")
-         or WinActive("ahk_exe sublime_text.exe")
-         or WinActive("ahk_exe SumatraPDF.exe ahk_class SUMATRA_PDF_FRAME")         
-         or WinActive("ahk_class SunAwtFrame",,"Apache JMeter") ; 排除 netbean 32/64 位 和标签类软件 jb 全家桶
-         or WinActive("ahk_exe uedit64.exe")
-         or WinActive("ahk_exe WinMergeU.exe")
-         or WinActive("ahk_exe wps.exe")
-         or WinActive("ahk_group browser_group")
-        )
-^F4::{
+    or WinActive("ahk_group browser_like_group")
+^F4::
+XButton1::Send "^w"
+
+; 兜底前准备
+#HotIf WinActive("ahk_group keepF4_group")
+XButton1::Send "^{F4}" ; 关闭当前
+
+; 正式兜底：排除的软件设置为 close
+#HotIf not WinActive("ahk_group keepF4_group")
+^F4::
+XButton1::{
     try WinClose "A"
     catch {
         MsgBox "关闭窗口失败，请重试"
     }
 }
 
-; 切换标签
+; 标签类软件：切换到左右标签
+; ctrl + Page翻页键
 #HotIf WinActive("ahk_exe eclipse.exe") 
     or WinActive("ahk_exe HBuilderX.exe")
-    or WinActive("ahk_class SunAwtFrame ahk_exe javaw.exe") ; netbean 32 位 / jmeter
-    or WinActive("ahk_class SunAwtFrame ahk_exe netbeans64.exe") ; netbean 64 位
-    or WinActive("ahk_class SWT_Window0 ahk_exe javaw.exe") ; myeclipse
+    or WinActive("ahk_exe javaw.exe ahk_class SunAwtFrame") ; netbean 32 位 / jmeter
+    or WinActive("ahk_exe javaw.exe ahk_class SWT_Window0") ; myeclipse
+    or WinActive("ahk_exe netbeans64.exe ahk_class SunAwtFrame") ; netbean 64 位
     or WinActive("ahk_exe SpringToolSuite4.exe")
-^+Tab::Send "^{PgUp}" ; 切换到左标签
-^Tab::Send "^{PgDn}" ; 切换到右标签
-; 标签类软件 jb 全家桶
+^+Tab::
+XButton2::Send "^{PgUp}"
+^Tab::Send "^{PgDn}"
+; alt + 左右箭头
 #HotIf WinActive("ahk_exe kate.exe")
-    or WinActive("ahk_class SunAwtFrame")
-^+Tab::Send "!{Left}" ; 切换到左标签
-^Tab::Send "!{Right}" ; 切换到右标签
+       or WinActive("ahk_exe Termius.exe")
+       or WinActive("ahk_class SunAwtFrame") ; 标签类软件 jb 全家桶
+^+Tab::
+XButton2::Send "!{Left}"
+^Tab::Send "!{Right}"
+; alt + 左右中括号
+#HotIf WinActive("ahk_exe WindTerm.exe")
+^+Tab::
+XButton2::Send "!["
+^Tab::Send "!]"
 
-; 侧边按键
-; 当前台是浏览器时候改为切换标签
-#HotIf WinActive("ahk_group browser_group")
-XButton1::Send "^+{Tab}" ; 切换到右标签而非前进后退
-XButton2::Send "^{Tab}" ; 切换到左标签
+; 鼠标侧边按键 XButton2 定义为 万能后退键 或 切换到上一个标签/下一曲
+#HotIf WinActive("ahk_exe Code.exe")
+       or WinActive("ahk_group browser_group")
+XButton2::Send "^+{Tab}" ; 切换到上一个标签
+#HotIf WinActive("ahk_exe explorer.exe ahk_class CabinetWClass") ; 资源管理器
+XButton2::Send "!{Left}" ; 后退
+#HotIf WinActive("ahk_exe QQMusic.exe")
+XButton2::Send "{Media_Next}" ; 下一曲
 
 #HotIf ; 结束标记
 
