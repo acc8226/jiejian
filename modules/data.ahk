@@ -45,40 +45,104 @@ GroupAdd "browser_like_group", "ahk_exe i)SourceTree.exe"
 GroupAdd "text_group", "ahk_exe i)notepad.exe" ; 记事本
 GroupAdd "text_group", "ahk_exe i)Code.exe" ; vscode
 
-; 使用了 标准的 ctrl + f4 关闭标签
-GroupAdd "keepF4_group", "ahk_exe i)Code.exe"
-GroupAdd "keepF4_group", "ahk_exe i)devenv.exe"
-GroupAdd "keepF4_group", "ahk_exe i)eclipse.exe"
-GroupAdd "keepF4_group", "ahk_exe i)HBuilderX.exe"
-GroupAdd "keepF4_group", "ahk_exe javaw.exe ahk_class SWT_Window0"
-
-GroupAdd "keepF4_group", "ahk_exe i)SecureCRT.exe"
-GroupAdd "keepF4_group", "ahk_exe i)SpringToolSuite4.exe"
-GroupAdd "keepF4_group", "ahk_exe i)sublime_text.exe"
-GroupAdd "keepF4_group", "ahk_exe i)SumatraPDF.exe ahk_class SUMATRA_PDF_FRAME"
-GroupAdd "keepF4_group", "ahk_class SunAwtFrame",,"Apache JMeter" ; netbean 32/64 位 & 标签类软件 jb 全家桶 & fleet
-GroupAdd "keepF4_group", "ahk_exe i)uedit64.exe"
-
-GroupAdd "keepF4_group", "ahk_exe i)WinMergeU.exe"
-GroupAdd "keepF4_group", "ahk_exe i)wps.exe"
-GroupAdd "keepF4_group", "ahk_group browser_group"
-
-; 使用了 标准的 ctrl + shift + tab 切换上一个标签
-GroupAdd "keep_ctrl_shift_tab_group", "ahk_exe i)Code.exe"
-GroupAdd "keep_ctrl_shift_tab_group", "ahk_exe i)Notepad.exe"
-GroupAdd "keep_ctrl_shift_tab_group", "ahk_exe i)Postman.exe"
-GroupAdd "keep_ctrl_shift_tab_group", "ahk_exe i)SecureCRT.exe"
-
-GroupAdd "keep_ctrl_shift_tab_group", "ahk_exe i)Xftp.exe"
-GroupAdd "keep_ctrl_shift_tab_group", "ahk_exe i)Xshell.exe"
-
-GroupAdd "keep_ctrl_shift_tab_group", "ahk_exe i)wps.exe"
-GroupAdd "keep_ctrl_shift_tab_group", "ahk_exe i)zoc.exe"
-
 ; 标签类：终端类 ctrl + shift + t 新建标签， ctrl + shift + w 关闭标签
 GroupAdd "terminal_group", "ahk_exe i)Tabby.exe"
 GroupAdd "terminal_group", "ahk_exe i)Termius.exe"
 GroupAdd "terminal_group", "ahk_exe i)WindowsTerminal.exe"
+
+; ctrl + n 新建标签 / 窗口 
+GroupAdd "keep_ctrl_n_g", "ahk_exe i)devenv.exe" ; visual studio
+GroupAdd "keep_ctrl_n_g", "ahk_exe i)eclipse.exe"
+GroupAdd "keep_ctrl_n_g", "ahk_exe i)editplus.exe"
+GroupAdd "keep_ctrl_n_g", "ahk_exe i)EverEdit.exe"
+GroupAdd "keep_ctrl_n_g", "ahk_exe i)Fleet.exe"
+GroupAdd "keep_ctrl_n_g", "ahk_exe i)MarkdownPad2.exe"
+
+GroupAdd "keep_ctrl_n_g", "ahk_exe i)GitHubDesktop.exe"
+GroupAdd "keep_ctrl_n_g", "ahk_exe i)kate.exe"
+GroupAdd "keep_ctrl_n_g", "ahk_exe javaw.exe ahk_class SunAwtFrame" ; netbean 32 位 / jmeter
+GroupAdd "keep_ctrl_n_g", "xe javaw.exe ahk_class SWT_Window0" ; myeclipse
+GroupAdd "keep_ctrl_n_g", "ahk_exe netbeans64.exe ahk_class SunAwtFrame" ; netbean 64 位
+
+GroupAdd "keep_ctrl_n_g", "ahk_exe i)notepad++.exe"
+GroupAdd "keep_ctrl_n_g", "ahk_exe i)Notepad--.exe"
+GroupAdd "keep_ctrl_n_g", "ahk_exe i)SpringToolSuite4.exe"
+GroupAdd "keep_ctrl_n_g", "ahk_exe i)sublime_text.exe"
+GroupAdd "keep_ctrl_n_g", "ahk_exe i)uedit64.exe"
+
+GroupAdd "keep_ctrl_n_g", "ahk_exe i)WinMergeU.exe"
+GroupAdd "keep_ctrl_n_g", "ahk_exe i)wps.exe"
+GroupAdd "keep_ctrl_n_g", "ahk_exe i)Xftp.exe"
+GroupAdd "keep_ctrl_n_g", "ahk_exe i)Brackets.exe"
+GroupAdd "keep_ctrl_n_g", "ahk_exe i)Typora.exe"
+
+; ctrl + t 新建标签 / 窗口 
+GroupAdd "keep_ctrl_t_g", "ahk_exe explorer.exe ahk_class CabinetWClass" ; 系统类软件 win 11 版资源管理器终于支持多标签页了
+GroupAdd "keep_ctrl_t_g", "ahk_exe i)HBuilderX.exe"
+GroupAdd "keep_ctrl_t_g", "ahk_exe i)notepad.exe"
+GroupAdd "keep_ctrl_t_g", "ahk_exe i)MarkText.exe"
+GroupAdd "keep_ctrl_t_g", "ahk_group browser_group"
+GroupAdd "keep_ctrl_t_g", "ahk_group browser_like_group" ; 标签类软件（浏览器大类，类浏览器）
+
+; ctrl + w 关闭标签
+GroupAdd "keep_ctrl_w_g", "ahk_exe i)Brackets.exe"
+GroupAdd "keep_ctrl_w_g", "ahk_exe i)editplus.exe" ; editplus
+GroupAdd "keep_ctrl_w_g", "ahk_exe i)EverEdit.exe"
+GroupAdd "keep_ctrl_w_g", "ahk_exe explorer.exe ahk_class CabinetWClass" ; 资源管理器
+GroupAdd "keep_ctrl_w_g", "ahk_exe i)kate.exe"
+
+GroupAdd "keep_ctrl_w_g", "ahk_exe i)MarkText.exe"
+GroupAdd "keep_ctrl_w_g", "ahk_exe i)Notepad.exe"
+GroupAdd "keep_ctrl_w_g", "ahk_exe i)Notepad--.exe"
+GroupAdd "keep_ctrl_w_g", "ahk_exe i)notepad++.exe"
+GroupAdd "keep_ctrl_w_g", "ahk_exe i)thunderbird.exe"
+GroupAdd "keep_ctrl_w_g", "ahk_group browser_like_group"
+
+; ctrl + f4 关闭标签 兜底
+GroupAdd "keep_f4_g", "ahk_exe i)Code.exe"
+GroupAdd "keep_f4_g", "ahk_exe i)MarkdownPad2.exe"
+GroupAdd "keep_f4_g", "ahk_exe i)devenv.exe"
+GroupAdd "keep_f4_g", "ahk_exe i)eclipse.exe"
+GroupAdd "keep_f4_g", "ahk_exe i)HBuilderX.exe"
+GroupAdd "keep_f4_g", "ahk_exe javaw.exe ahk_class SWT_Window0"
+
+GroupAdd "keep_f4_g", "ahk_exe i)SecureCRT.exe"
+GroupAdd "keep_f4_g", "ahk_exe i)SpringToolSuite4.exe"
+GroupAdd "keep_f4_g", "ahk_exe i)sublime_text.exe"
+GroupAdd "keep_f4_g", "ahk_exe i)SumatraPDF.exe ahk_class SUMATRA_PDF_FRAME"
+GroupAdd "keep_f4_g", "ahk_class SunAwtFrame",,"Apache JMeter" ; netbean 32/64 位 & 标签类软件 jb 全家桶 & fleet
+
+GroupAdd "keep_f4_g", "ahk_exe i)uedit64.exe"
+GroupAdd "keep_f4_g", "ahk_exe i)WinMergeU.exe"
+GroupAdd "keep_f4_g", "ahk_exe i)wps.exe"
+GroupAdd "keep_f4_g", "ahk_group browser_group"
+
+; 使用了 标准的 ctrl + Page 进行切换标签
+GroupAdd "keep_ctrl_page_g", "ahk_exe eclipse.exe"
+GroupAdd "keep_ctrl_page_g", "ahk_exe Fleet.exe ahk_class SunAwtFrame" ; Fleet
+GroupAdd "keep_ctrl_page_g", "ahk_exe HBuilderX.exe"
+GroupAdd "keep_ctrl_page_g", "ahk_exe javaw.exe ahk_class SunAwtFrame" ; netbean 32 位 / jmeter
+GroupAdd "keep_ctrl_page_g", "ahk_exe javaw.exe ahk_class SWT_Window0" ; myeclipse
+
+GroupAdd "keep_ctrl_page_g", "ahk_exe netbeans64.exe ahk_class SunAwtFrame" ; netbean 64 位
+GroupAdd "keep_ctrl_page_g", "ahk_exe SpringToolSuite4.exe"
+GroupAdd "keep_ctrl_page_g", "ahk_exe i)Brackets.exe"
+
+; 使用了 标准的 ctrl + shift + tab 切换上一个标签
+GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe Beekeeper Studio.exe"
+GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe i)MarkdownPad2.exe"
+GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe i)Code.exe"
+GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe i)EverEdit.exe"
+GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe i)Notepad.exe"
+GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe i)Postman.exe"
+GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe i)SecureCRT.exe"
+GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe i)MarkText.exe"
+
+GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe i)thunderbird.exe"
+GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe i)Xftp.exe"
+GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe i)Xshell.exe"
+GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe i)wps.exe"
+GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe i)zoc.exe"
 
 global appList := parseAppInfo()
 

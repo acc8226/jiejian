@@ -76,33 +76,10 @@ or WinActive("ahk_exe Xshell.exe")
 ; ctrl + n
 #HotIf WinActive("ahk_exe Code.exe") ; 标签类软件 vs code
 ^F3::Send "{Control Down}n{Control Up}"
-#HotIf WinActive("ahk_exe devenv.exe") ; visual studio
-    or WinActive("ahk_exe eclipse.exe")
-    or WinActive("ahk_exe editplus.exe")
-    or WinActive("ahk_exe Fleet.exe")
-
-    or WinActive("ahk_exe GitHubDesktop.exe")
-    or WinActive("ahk_exe kate.exe")
-    or WinActive("ahk_exe javaw.exe ahk_class SunAwtFrame") ; netbean 32 位 / jmeter
-    or WinActive("ahk_exe javaw.exe ahk_class SWT_Window0 ") ; myeclipse
-    or WinActive("ahk_exe netbeans64.exe ahk_class SunAwtFrame") ; netbean 64 位
-
-    or WinActive("ahk_exe i)notepad++.exe")
-    or WinActive("ahk_exe i)Notepad--.exe")
-    or WinActive("ahk_exe SpringToolSuite4.exe")
-    or WinActive("ahk_exe sublime_text.exe")
-    or WinActive("ahk_exe uedit64.exe")
-
-    or WinActive("ahk_exe WinMergeU.exe")
-    or WinActive("ahk_exe wps.exe")
-    or WinActive("ahk_exe Xftp.exe")
+#HotIf WinActive("ahk_group keep_ctrl_n_g")
 ^F3::Send "^n"
 ; ctrl + t
-#HotIf WinActive("ahk_exe explorer.exe ahk_class CabinetWClass") ; 系统类软件 win 11 版资源管理器终于支持多标签页了
-    or WinActive("ahk_exe HBuilderX.exe")
-    or WinActive("ahk_exe i)notepad.exe")
-    or WinActive("ahk_group browser_group")
-    or WinActive("ahk_group browser_like_group") ; 标签类软件（浏览器大类，类浏览器）
+#HotIf WinActive("ahk_group keep_ctrl_t_g")
 ^F3::Send "^t"
 ; ctrl + alt + t
 #HotIf WinActive("ahk_exe MobaXterm_Personal.*.exe ahk_class TMobaXtermForm") ; MobaXterm
@@ -156,14 +133,7 @@ XButton1::Send "!q"
 ^F4::
 XButton1::Send "!w"
 ; ctrl + w
-#HotIf WinActive("ahk_exe editplus.exe")
-    or WinActive("ahk_exe explorer.exe ahk_class CabinetWClass") ; 资源管理器
-    or WinActive("ahk_exe kate.exe")
-    or WinActive("ahk_exe i)Notepad.exe")
-    or WinActive("ahk_exe i)Notepad--.exe")
-
-    or WinActive("ahk_exe i)notepad++.exe")
-    or WinActive("ahk_group browser_like_group") ; 类浏览器
+#HotIf WinActive("ahk_group keep_ctrl_w_g")
 ^F4::
 XButton1::Send "^w"
 ; ctrl + alt + q
@@ -208,14 +178,7 @@ XButton2::Send "!{Left}"
 XButton2::Send "!["
 ^Tab::Send "!]"
 ; ctrl + 翻页键
-#HotIf WinActive("ahk_exe eclipse.exe") 
-    or WinActive("ahk_exe Fleet.exe ahk_class SunAwtFrame") ; Fleet
-    or WinActive("ahk_exe HBuilderX.exe")
-    or WinActive("ahk_exe javaw.exe ahk_class SunAwtFrame") ; netbean 32 位 / jmeter
-    or WinActive("ahk_exe javaw.exe ahk_class SWT_Window0") ; myeclipse
-
-    or WinActive("ahk_exe netbeans64.exe ahk_class SunAwtFrame") ; netbean 64 位
-    or WinActive("ahk_exe SpringToolSuite4.exe")
+#HotIf WinActive("ahk_group keep_ctrl_page_g") 
 ^+Tab::
 XButton2::Send "^{PgUp}"
 ^Tab::Send "^{PgDn}"
@@ -224,20 +187,18 @@ XButton2::Send "^{PgUp}"
 ^+Tab::
 XButton2::Send "^!{Left}"
 ^Tab::Send "^!{Right}"
-; 兜底 BackSpace 后退
-#HotIf WinActive("ahk_group browser_group")
-XButton2::Send "{BackSpace}"
 ; 兜底 ctrl + shift + tab
-#HotIf WinActive("ahk_group keep_ctrl_shift_tab_group")
+#HotIf WinActive("ahk_group browser_group")
+    or WinActive("ahk_group keep_ctrl_shift_tab_g")
 XButton2::Send "^+{Tab}"
 
 ;【应用类软件 退出应用】^F4 和 鼠标侧边键 XButton1 定义为万能关闭键
-#HotIf WinActive("ahk_group keepF4_group") ; XButton1 模拟 ctrl + f4 同样的效果 为兜底做准备
+#HotIf WinActive("ahk_group keep_f4_g") ; XButton1 模拟 ctrl + f4 同样的效果 为兜底做准备
 XButton1::Send "^{F4}" ; 关闭当前
 #HotIf WinActive("ahk_exe Taskmgr.exe ahk_class TaskManagerWindow") ; 不管用
 XButton1::Send "!F4"
 ; 正式兜底：排除的软件设置为 close
-#HotIf not WinActive("ahk_group keepF4_group")
+#HotIf not WinActive("ahk_group keep_f4_g")
 ^F4::
 XButton1::{
     try WinClose "A" ; not WinActive 必须和 WinClose 搭配，且 WinClose 通用性更好
