@@ -35,37 +35,50 @@ GroupAdd "browser_group", "ahk_exe i)waterfox.exe" ; waterfox 浏览器
 GroupAdd "browser_group", "ahk_exe i)Yidian.exe" ; 一点浏览器 搜狗 过时
 
 ; 标签类：类浏览器 使用了 标准的 ctrl + t 新建标签， ctrl + w 关闭标签
-GroupAdd "browser_like_group", "ahk_exe Beekeeper Studio.exe"
-GroupAdd "browser_like_group", "ahk_exe BCompare.exe"
-GroupAdd "browser_like_group", "ahk_exe notepad.exe" ; 完美适配 win11 新版 记事本
-GroupAdd "browser_like_group", "ahk_exe Postman.exe"
-GroupAdd "browser_like_group", "ahk_exe SourceTree.exe"
+GroupAdd "browser_like_group", "ahk_exe i)Beekeeper Studio.exe"
+GroupAdd "browser_like_group", "ahk_exe i)BCompare.exe"
+GroupAdd "browser_like_group", "ahk_exe i)notepad.exe" ; 完美适配 win11 新版 记事本
+GroupAdd "browser_like_group", "ahk_exe i)Postman.exe"
+GroupAdd "browser_like_group", "ahk_exe i)SourceTree.exe"
 
 ; 文本类 为了 md 增强
-GroupAdd "text_group", "ahk_exe notepad.exe" ; 记事本
-GroupAdd "text_group", "ahk_exe Code.exe" ; vscode
+GroupAdd "text_group", "ahk_exe i)notepad.exe" ; 记事本
+GroupAdd "text_group", "ahk_exe i)Code.exe" ; vscode
 
 ; 使用了 标准的 ctrl + f4 关闭标签
-GroupAdd "keepF4_group", "ahk_exe Code.exe"
-GroupAdd "keepF4_group", "ahk_exe devenv.exe"
-GroupAdd "keepF4_group", "ahk_exe eclipse.exe"
-GroupAdd "keepF4_group", "ahk_exe HBuilderX.exe"
-GroupAdd "keepF4_group", "ahk_class SWT_Window0 ahk_exe javaw.exe"
+GroupAdd "keepF4_group", "ahk_exe i)Code.exe"
+GroupAdd "keepF4_group", "ahk_exe i)devenv.exe"
+GroupAdd "keepF4_group", "ahk_exe i)eclipse.exe"
+GroupAdd "keepF4_group", "ahk_exe i)HBuilderX.exe"
+GroupAdd "keepF4_group", "ahk_exe javaw.exe ahk_class SWT_Window0"
 
-GroupAdd "keepF4_group", "ahk_exe SpringToolSuite4.exe"
-GroupAdd "keepF4_group", "ahk_exe sublime_text.exe"
-GroupAdd "keepF4_group", "ahk_exe SumatraPDF.exe ahk_class SUMATRA_PDF_FRAME"
-GroupAdd "keepF4_group", "ahk_class SunAwtFrame",,"Apache JMeter" ; 排除 netbean 32/64 位 和标签类软件 jb 全家桶
-GroupAdd "keepF4_group", "ahk_exe uedit64.exe"
+GroupAdd "keepF4_group", "ahk_exe i)SecureCRT.exe"
+GroupAdd "keepF4_group", "ahk_exe i)SpringToolSuite4.exe"
+GroupAdd "keepF4_group", "ahk_exe i)sublime_text.exe"
+GroupAdd "keepF4_group", "ahk_exe i)SumatraPDF.exe ahk_class SUMATRA_PDF_FRAME"
+GroupAdd "keepF4_group", "ahk_class SunAwtFrame",,"Apache JMeter" ; netbean 32/64 位 & 标签类软件 jb 全家桶 & fleet
+GroupAdd "keepF4_group", "ahk_exe i)uedit64.exe"
 
-GroupAdd "keepF4_group", "ahk_exe WinMergeU.exe"
-GroupAdd "keepF4_group", "ahk_exe wps.exe"
+GroupAdd "keepF4_group", "ahk_exe i)WinMergeU.exe"
+GroupAdd "keepF4_group", "ahk_exe i)wps.exe"
 GroupAdd "keepF4_group", "ahk_group browser_group"
 
+; 使用了 标准的 ctrl + shift + tab 切换上一个标签
+GroupAdd "keep_ctrl_shift_tab_group", "ahk_exe i)Code.exe"
+GroupAdd "keep_ctrl_shift_tab_group", "ahk_exe i)Notepad.exe"
+GroupAdd "keep_ctrl_shift_tab_group", "ahk_exe i)Postman.exe"
+GroupAdd "keep_ctrl_shift_tab_group", "ahk_exe i)SecureCRT.exe"
+
+GroupAdd "keep_ctrl_shift_tab_group", "ahk_exe i)Xftp.exe"
+GroupAdd "keep_ctrl_shift_tab_group", "ahk_exe i)Xshell.exe"
+
+GroupAdd "keep_ctrl_shift_tab_group", "ahk_exe i)wps.exe"
+GroupAdd "keep_ctrl_shift_tab_group", "ahk_exe i)zoc.exe"
+
 ; 标签类：终端类 ctrl + shift + t 新建标签， ctrl + shift + w 关闭标签
-GroupAdd "terminal_group", "ahk_exe Tabby.exe"
-GroupAdd "terminal_group", "ahk_exe Termius.exe"
-GroupAdd "terminal_group", "ahk_exe WindowsTerminal.exe"
+GroupAdd "terminal_group", "ahk_exe i)Tabby.exe"
+GroupAdd "terminal_group", "ahk_exe i)Termius.exe"
+GroupAdd "terminal_group", "ahk_exe i)WindowsTerminal.exe"
 
 global appList := parseAppInfo()
 
