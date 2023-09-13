@@ -16,25 +16,27 @@ GroupAdd "browser_group", "ahk_exe i)chrome.exe" ; chrome 谷歌浏览器 & 百�
 GroupAdd "browser_group", "ahk_exe i)DCBrowser.exe" ; 小智双核浏览器
 GroupAdd "browser_group", "ahk_exe i)DuckDuckGo.exe" ; Duck 浏览器
 
+GroupAdd "browser_group", "ahk_exe i)duoyu.exe" ; duoyu 多御浏览器
 GroupAdd "browser_group", "ahk_exe i)firefox.exe" ; 火狐安全浏览器 & Tor 浏览器
 GroupAdd "browser_group", "ahk_exe i)HuaweiBrowser.exe" ; 华为浏览器
 GroupAdd "browser_group", "ahk_exe i)liebao.exe" ; 猎豹浏览器
 GroupAdd "browser_group", "ahk_exe i)msedge.exe" ; edge 浏览器
-GroupAdd "browser_group", "ahk_exe i)Maxthon.exe" ; 傲游浏览器
 
+GroupAdd "browser_group", "ahk_exe i)Maxthon.exe" ; 傲游浏览器
 GroupAdd "browser_group", "ahk_exe i)opera.exe" ; opera 浏览器
 GroupAdd "browser_group", "ahk_exe i)QQBrowser.exe" ; QQ 浏览器
 GroupAdd "browser_group", "ahk_exe i)TSBrowser.exe" ; 极速浏览器
 GroupAdd "browser_group", "ahk_exe i)SLBrowser.exe" ; 联想浏览器
-GroupAdd "browser_group", "ahk_exe i)SogouExplorer.exe" ; 搜狗浏览器
 
+GroupAdd "browser_group", "ahk_exe i)SogouExplorer.exe" ; 搜狗浏览器
 GroupAdd "browser_group", "ahk_exe i)twinkstar.exe" ; 星愿浏览器
 GroupAdd "browser_group", "ahk_exe i)UCBrowser.exe" ; UC 浏览器
 GroupAdd "browser_group", "ahk_exe i)vivaldi.exe" ; vivaldi 浏览器
 GroupAdd "browser_group", "ahk_exe i)waterfox.exe" ; waterfox 浏览器
+
 GroupAdd "browser_group", "ahk_exe i)Yidian.exe" ; 一点浏览器 搜狗 过时
 
-; 标签类：类浏览器 使用了 标准的 ctrl + t 新建标签， ctrl + w 关闭标签
+; 标签类：类浏览器 使用了 标准的 ctrl + t 新建标签， ctrl + w 关闭标签在理论上比 ctrl + f4 更加通用
 GroupAdd "browser_like_group", "ahk_exe i)Beekeeper Studio.exe"
 GroupAdd "browser_like_group", "ahk_exe i)BCompare.exe"
 GroupAdd "browser_like_group", "ahk_exe i)notepad.exe" ; 完美适配 win11 新版 记事本
@@ -56,31 +58,36 @@ GroupAdd "keep_ctrl_n_g", "ahk_exe i)eclipse.exe"
 GroupAdd "keep_ctrl_n_g", "ahk_exe i)editplus.exe"
 GroupAdd "keep_ctrl_n_g", "ahk_exe i)EverEdit.exe"
 GroupAdd "keep_ctrl_n_g", "ahk_exe i)Fleet.exe"
-GroupAdd "keep_ctrl_n_g", "ahk_exe i)MarkdownPad2.exe"
 
+GroupAdd "keep_ctrl_n_g", "ahk_exe i)MarkdownPad2.exe"
 GroupAdd "keep_ctrl_n_g", "ahk_exe i)GitHubDesktop.exe"
 GroupAdd "keep_ctrl_n_g", "ahk_exe i)kate.exe"
 GroupAdd "keep_ctrl_n_g", "ahk_exe javaw.exe ahk_class SunAwtFrame" ; netbean 32 位 / jmeter
-GroupAdd "keep_ctrl_n_g", "xe javaw.exe ahk_class SWT_Window0" ; myeclipse
-GroupAdd "keep_ctrl_n_g", "ahk_exe netbeans64.exe ahk_class SunAwtFrame" ; netbean 64 位
+GroupAdd "keep_ctrl_n_g", "ahk_exe javaw.exe ahk_class SWT_Window0" ; myeclipse
 
+GroupAdd "keep_ctrl_n_g", "ahk_exe netbeans64.exe ahk_class SunAwtFrame" ; netbean 64 位
 GroupAdd "keep_ctrl_n_g", "ahk_exe i)notepad++.exe"
 GroupAdd "keep_ctrl_n_g", "ahk_exe i)Notepad--.exe"
 GroupAdd "keep_ctrl_n_g", "ahk_exe i)SpringToolSuite4.exe"
 GroupAdd "keep_ctrl_n_g", "ahk_exe i)sublime_text.exe"
-GroupAdd "keep_ctrl_n_g", "ahk_exe i)uedit64.exe"
 
+GroupAdd "keep_ctrl_n_g", "ahk_exe i)uedit64.exe"
 GroupAdd "keep_ctrl_n_g", "ahk_exe i)WinMergeU.exe"
 GroupAdd "keep_ctrl_n_g", "ahk_exe i)wps.exe"
 GroupAdd "keep_ctrl_n_g", "ahk_exe i)Xftp.exe"
 GroupAdd "keep_ctrl_n_g", "ahk_exe i)Brackets.exe"
+
 GroupAdd "keep_ctrl_n_g", "ahk_exe i)Typora.exe"
 
 ; ctrl + t 新建标签 / 窗口 
 GroupAdd "keep_ctrl_t_g", "ahk_exe explorer.exe ahk_class CabinetWClass" ; 系统类软件 win 11 版资源管理器终于支持多标签页了
 GroupAdd "keep_ctrl_t_g", "ahk_exe i)HBuilderX.exe"
+GroupAdd "keep_ctrl_t_g", "ahk_exe i)heidisql.exe"
 GroupAdd "keep_ctrl_t_g", "ahk_exe i)notepad.exe"
 GroupAdd "keep_ctrl_t_g", "ahk_exe i)MarkText.exe"
+
+GroupAdd "keep_ctrl_t_g", "ahk_exe i)SQLyog.exe"
+
 GroupAdd "keep_ctrl_t_g", "ahk_group browser_group"
 GroupAdd "keep_ctrl_t_g", "ahk_group browser_like_group" ; 标签类软件（浏览器大类，类浏览器）
 
@@ -96,53 +103,62 @@ GroupAdd "keep_ctrl_w_g", "ahk_exe i)Notepad.exe"
 GroupAdd "keep_ctrl_w_g", "ahk_exe i)Notepad--.exe"
 GroupAdd "keep_ctrl_w_g", "ahk_exe i)notepad++.exe"
 GroupAdd "keep_ctrl_w_g", "ahk_exe i)thunderbird.exe"
+
 GroupAdd "keep_ctrl_w_g", "ahk_group browser_like_group"
 
 ; ctrl + f4 关闭标签 兜底
 GroupAdd "keep_f4_g", "ahk_exe i)Code.exe"
-GroupAdd "keep_f4_g", "ahk_exe i)MarkdownPad2.exe"
 GroupAdd "keep_f4_g", "ahk_exe i)devenv.exe"
 GroupAdd "keep_f4_g", "ahk_exe i)eclipse.exe"
 GroupAdd "keep_f4_g", "ahk_exe i)HBuilderX.exe"
-GroupAdd "keep_f4_g", "ahk_exe javaw.exe ahk_class SWT_Window0"
+GroupAdd "keep_f4_g", "ahk_exe i)heidisql.exe"
 
+GroupAdd "keep_f4_g", "ahk_exe i)MarkdownPad2.exe"
+GroupAdd "keep_f4_g", "ahk_exe javaw.exe ahk_class SWT_Window0"
 GroupAdd "keep_f4_g", "ahk_exe i)SecureCRT.exe"
 GroupAdd "keep_f4_g", "ahk_exe i)SpringToolSuite4.exe"
-GroupAdd "keep_f4_g", "ahk_exe i)sublime_text.exe"
 GroupAdd "keep_f4_g", "ahk_exe i)SumatraPDF.exe ahk_class SUMATRA_PDF_FRAME"
-GroupAdd "keep_f4_g", "ahk_class SunAwtFrame",,"Apache JMeter" ; netbean 32/64 位 & 标签类软件 jb 全家桶 & fleet
 
+GroupAdd "keep_f4_g", "ahk_exe i)sublime_text.exe"
 GroupAdd "keep_f4_g", "ahk_exe i)uedit64.exe"
 GroupAdd "keep_f4_g", "ahk_exe i)WinMergeU.exe"
 GroupAdd "keep_f4_g", "ahk_exe i)wps.exe"
+GroupAdd "keep_f4_g", "ahk_class SunAwtFrame",,"Apache JMeter" ; netbean 32/64 位 & 标签类软件 jb 全家桶 & fleet
+
 GroupAdd "keep_f4_g", "ahk_group browser_group"
 
 ; 使用了 标准的 ctrl + Page 进行切换标签
-GroupAdd "keep_ctrl_page_g", "ahk_exe eclipse.exe"
-GroupAdd "keep_ctrl_page_g", "ahk_exe Fleet.exe ahk_class SunAwtFrame" ; Fleet
-GroupAdd "keep_ctrl_page_g", "ahk_exe HBuilderX.exe"
-GroupAdd "keep_ctrl_page_g", "ahk_exe javaw.exe ahk_class SunAwtFrame" ; netbean 32 位 / jmeter
-GroupAdd "keep_ctrl_page_g", "ahk_exe javaw.exe ahk_class SWT_Window0" ; myeclipse
-
-GroupAdd "keep_ctrl_page_g", "ahk_exe netbeans64.exe ahk_class SunAwtFrame" ; netbean 64 位
-GroupAdd "keep_ctrl_page_g", "ahk_exe SpringToolSuite4.exe"
 GroupAdd "keep_ctrl_page_g", "ahk_exe i)Brackets.exe"
+GroupAdd "keep_ctrl_page_g", "ahk_exe i)eclipse.exe"
+GroupAdd "keep_ctrl_page_g", "ahk_exe i)Fleet.exe ahk_class SunAwtFrame" ; Fleet
+GroupAdd "keep_ctrl_page_g", "ahk_exe i)HBuilderX.exe"
+GroupAdd "keep_ctrl_page_g", "ahk_exe i)javaw.exe ahk_class SunAwtFrame" ; netbean 32 位 / jmeter
+
+GroupAdd "keep_ctrl_page_g", "ahk_exe i)javaw.exe ahk_class SWT_Window0" ; myeclipse
+GroupAdd "keep_ctrl_page_g", "ahk_exe i)netbeans64.exe ahk_class SunAwtFrame" ; netbean 64 位
+GroupAdd "keep_ctrl_page_g", "ahk_exe i)SpringToolSuite4.exe"
+GroupAdd "keep_ctrl_page_g", "ahk_exe i)SQLyog.exe"
 
 ; 使用了 标准的 ctrl + shift + tab 切换上一个标签
-GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe Beekeeper Studio.exe"
-GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe i)MarkdownPad2.exe"
+GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe i)Beekeeper Studio.exe"
 GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe i)Code.exe"
+GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe explorer.exe ahk_class CabinetWClass" ; 资源管理器
 GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe i)EverEdit.exe"
+GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe i)heidisql.exe"
+
 GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe i)Notepad.exe"
 GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe i)Postman.exe"
 GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe i)SecureCRT.exe"
+GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe i)MarkdownPad2.exe"
 GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe i)MarkText.exe"
-
 GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe i)thunderbird.exe"
+
 GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe i)Xftp.exe"
 GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe i)Xshell.exe"
 GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe i)wps.exe"
 GroupAdd "keep_ctrl_shift_tab_g", "ahk_exe i)zoc.exe"
+
+GroupAdd "keep_ctrl_shift_tab_g", "ahk_group browser_group"
 
 global appList := parseAppInfo()
 
