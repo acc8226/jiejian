@@ -24,7 +24,7 @@ https://wyagd001.github.io/v2/docs/
 #Include "modules\data.ahk"
 #Include "modules\utils.ahk"
 
-isDebug := false
+global isDebug := true
 
 SetTitleMatchMode "RegEx" ; 使 WinTitle, WinText, ExcludeTitle 和 ExcludeText 接受正则表达式
 CoordMode "Mouse", "Screen" ; 坐标相对于桌面(整个屏幕)
@@ -56,10 +56,15 @@ XButton2::Send "{Media_Play_Pause}" ; 暂停
 ; 禁用快捷键
 ;^v::return
 
-; 重写 esc 退出弹窗
-; 特殊处理 windows 记事本 和 BvSsh
-#HotIf WinActive("ahk_exe i)notepad.exe") or WinActive("ahk_exe BvSsh.exe ahk_class #32770")
-Esc::WinClose ; 退出弹窗
+; 重写 esc 退出弹窗/关闭应用
+; 关闭应用
+#HotIf WinActive("ahk_exe i)notepad.exe")
+Esc::WinClose
+; 关闭弹窗
+#HotIf WinActive("ahk_exe BvSsh.exe ahk_class #32770")
+    or WinActive("ahk_exe skylark.exe ahk_class #32770")
+Esc::WinClose
+XButton1::WinClose
 
 ; 重写 alt + 左右方向键、ctrl + (shift) + tab 按键 和 定义 xbutton2 为万能切换键
 ; 特殊处理 QQ 音乐
@@ -74,6 +79,8 @@ XButton2::Send "{Media_Prev}" ; 上一曲
 XButton2::Send "!{Left}" ; 后退
 
 ;【标签类软件 切换上下标签】
+#HotIf WinActive("ahk_exe i)想天浏览器.exe")
+^Tab::Send "^+{PgDn}"
 ; finalshell
 #HotIf WinActive("FinalShell.* ahk_exe java.exe ahk_class SunAwtFrame")
 ^+Tab::
@@ -154,13 +161,11 @@ or WinActive("ahk_exe Xshell.exe")
 
     or WinActive("ahk_exe WeChat.exe")
     or WinActive("ahk_class #32770") ; 通用窗口
-       and not WinActive("ahk_exe 360zip.exe")
-       and not WinActive("ahk_exe geek64.exe")
+       and not WinActive("ahk_exe 360zip.exe") ; 排除不处理 360 压缩
+       and not WinActive("ahk_exe geek64.exe") ; 排除不处理 极客卸载
     or WinActive("ahk_class SunAwtDialog") ; netbean 32/64 位 和 jb 全家桶的弹窗
 ^F4::
 XButton1::{
-    if isDebug        
-        MsgBox "ctrl + F4 -> esc"
     Send "{Esc}"
 }
 
@@ -282,6 +287,10 @@ Loop appList.Length {
     Send "{End}"
     A_Clipboard := oldText
 }
+
+; 暂停脚本 Ctrl+Alt+S
+#HotIf isDebug
+^!s::Suspend
 #HotIf
 
 ; ctrl + alt + v 将剪贴板的内容输入到当前活动应用程序中，防止了一些网站禁止在 HTML 密码框中进行粘贴操作
