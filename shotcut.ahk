@@ -21,7 +21,8 @@ https://wyagd001.github.io/v2/docs/
 #Requires AutoHotkey v2.0
 #SingleInstance force
 #Include "modules\anyrun.ahk"
-#Include "modules\data.ahk"
+#Include "modules\readApp.ahk"
+#Include "modules\readData.ahk"
 #Include "modules\utils.ahk"
 
 global isDebug := true
@@ -32,15 +33,14 @@ CoordMode "Mouse", "Screen" ; 坐标相对于桌面(整个屏幕)
 ; 设置托盘图标和菜单
 settingTray() {
     A_IconTip := "捷键"
-    item_count := DllCall("GetMenuItemCount", "ptr", A_TrayMenu.Handle)
-    A_TrayMenu.Insert(item_count "&", "捷键 2023.09-测试版 by acc8226", MenuHandler)
-    Persistent
-    ; 建议使用宽度为 16 或 32 像素的图标
-    TraySetIcon "favicon.ico"
-
+    itemCount := DllCall("GetMenuItemCount", "ptr", A_TrayMenu.Handle)
     MenuHandler(*) {
         Run "https://gitee.com/acc8226/shortcut-key/releases/"
     }
+    A_TrayMenu.Insert(itemCount . "&", "捷键 2023.09-测试版 by acc8226", MenuHandler)
+    Persistent
+    ; 建议使用宽度为 16 或 32 像素的图标
+    TraySetIcon "favicon.ico"
 }
 settingTray()
 
@@ -55,25 +55,6 @@ XButton2::Send "{Media_Play_Pause}" ; 暂停
 
 ; 禁用快捷键
 ;^v::return
-
-#HotIf WinActive("ahk_exe 360ChromeX.exe ahk_class Chrome_WidgetWin_2") ; 360 极速浏览器的下载管理窗口
-    or WinActive("ahk_exe devenv.exe") ; Visual Studio 窗口的特殊处理
-       and (WinActive("Microsoft Visual Studio 帐户设置")
-            or WinActive("管理扩展")
-            or WinActive("关于 Microsoft Visual Studio")
-            or WinActive("自定义")
-       )
-    or WinActive("ahk_exe Hearthstone.exe") ; 炉石传说的 关闭 改为 esc
-    or WinActive("ahk_exe QQ.exe")
-    or WinActive("ahk_exe Snipaste.exe")
-
-    or WinActive("ahk_exe WeChat.exe")
-    or WinActive("ahk_class #32770") ; 通用窗口
-       and not WinActive("ahk_exe 360zip.exe") ; 排除不处理 360 压缩
-       and not WinActive("ahk_exe geek64.exe") ; 排除不处理 极客卸载
-    or WinActive("ahk_class SunAwtDialog") ; netbean 32/64 位 和 jb 全家桶的弹窗
-^F4::
-XButton1::Send "{Esc}"
 
 ; 仅是实验，使用 alt 就怕和编辑器冲突，能鼠标手势还是鼠标手势靠谱，跳过了快捷键，实现效果更好
 ; ; alt + m Minimize 最小化当前活动窗口
@@ -92,27 +73,6 @@ XButton1::Send "{Esc}"
 ; ----- 3. 热键 之 打开网址 -----
 ; !6::Run url_bilibili
 
-; 注册热键 和 热字符串
-Loop appList.Length {
-    it := appList[A_Index]
-    ; 热键
-    if StrLen(it.hk) > 0 and StrLen(it.path) > 0
-        Hotkey it.hk, appStartByHk
-    ; 热串
-    if StrLen(it.hs) > 0 {
-        if it.type == "web" {
-            ; 排除 vscode 和 【浏览器中鼠标处于光标形状，由于 CaretGetPos() 目前不太完美】
-            HotIf (*) => not (WinActive("ahk_exe Code.exe")
-                              or WinActive("ahk_group browser_group") and A_Cursor == 'IBeam'
-                         )
-            Hotstring ":C*:" it.hs, openUrl
-        } else if it.type == "text" {
-            ; 由于 CaretGetPos() 目前不太完美，目前只排除 vscode
-            HotIf (*) => not WinActive("ahk_exe Code.exe")
-            Hotstring ":C*:" it.hs, it.path
-        }
-    }
-}
 ; ----- 4. 热键 之 运行程序 ;问题是怎么添加应用商店的路径-----
 ; !1::Run "explorer"
 
@@ -120,6 +80,9 @@ Loop appList.Length {
 ; !d::Run "D:"
 
 ; ----- 6. 热键 之 其他 -----
+; 文本类 为了 md 增强
+GroupAdd "text_group", "ahk_exe i)notepad.exe" ; 记事本
+GroupAdd "text_group", "ahk_exe i)Code.exe" ; vscode
 ; ctrl + 数字 1-5 为光标所在行添加 markdown 格式标题
 #HotIf WinActive("ahk_group text_group")
 ^1::
