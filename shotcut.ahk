@@ -20,6 +20,8 @@ https://wyagd001.github.io/v2/docs/
 */
 #Requires AutoHotkey v2.0
 #SingleInstance force
+; ----- 1. 热键 之 鼠标操作 -----
+#Include "modules\configMouse.ahk"
 #Include "modules\anyrun.ahk"
 #Include "modules\readApp.ahk"
 #Include "modules\readData.ahk"
@@ -43,13 +45,6 @@ settingTray() {
     TraySetIcon "favicon.ico"
 }
 settingTray()
-
-; ----- 1. 热键 之 鼠标操作 -----
-#HotIf mouseIsOverTaskBarOrEdge()
-WheelUp::Send "{Volume_Up}"
-WheelDown::Send "{Volume_Down}"
-XButton1::Send "{Media_Next}" ; 下一曲
-XButton2::Send "{Media_Play_Pause}" ; 暂停
 
 ; ----- 2. 热键 之 快捷键重写和增强 -----
 
@@ -111,7 +106,6 @@ GroupAdd "text_group", "ahk_exe i)Code.exe" ; vscode
 #HotIf isDebug
 ^!s::Suspend
 #HotIf
-
 ; ctrl + alt + v 将剪贴板的内容输入到当前活动应用程序中，防止了一些网站禁止在 HTML 密码框中进行粘贴操作
 ^!v::Send A_Clipboard
 ^+"::Send '""{Left}' ; ctrl + shift + " 快捷操作-插入双引号
@@ -131,7 +125,3 @@ GroupAdd "text_group", "ahk_exe i)Code.exe" ; vscode
 ; C 区分大小写  * 不需要额外键入终止符
 ; ----- 10. 热串之 自定义表情符号：将输入的特定字符串替换为自定义的表情符号或 Emoji -----
 ; :C*:xwx::😄 ; 微笑
-
-openUrl(hs) {
-    Run webFindPathByHs(appList, StrReplace(hs, ":C*:"))
-}

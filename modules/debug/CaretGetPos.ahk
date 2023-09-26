@@ -1,4 +1,4 @@
-﻿SetTimer WatchCaret, 100
+﻿SetTimer WatchCaret, 150
 ; 查看光标是否在编辑框上
 WatchCaret() {
     if CaretGetPos(&x, &y)

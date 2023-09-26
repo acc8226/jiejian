@@ -44,7 +44,7 @@ anyrun() {
             
             listBox.Delete()
             dataArray := Array()
-            for value in appList {
+            for value in dataList {
                 if Type(value.alias) == "Array" {
                     Loop value.alias.Length
                         if RegExMatch(value.alias[A_Index], needleRegEx, &OutputVar) {
@@ -76,7 +76,7 @@ anyrun() {
         listbox.OnEvent("DoubleClick", listBoxOnDoubleClick)
         listBoxOnDoubleClick(thisGui, *) {
             ; 此时 listbox 必定有焦点，则根据 title 反查 path
-            try Run appFindPathByListBoxText(appList, listBox.Text)
+            try Run appFindPathByListBoxText(dataList, listBox.Text)
             catch {
                 MsgBox "找不到目标应用"
             }

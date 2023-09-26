@@ -1,9 +1,9 @@
-﻿global dataList := parseData()
+﻿global appList := parseApp()
 
 ; 注册热键 和 热字符串
-Loop dataList.Length {
+Loop appList.Length {
   if A_Index > 1 {
-      it := dataList[A_Index]
+      it := appList[A_Index]
       
       ; 新建
       if it.new = "{F8}"
@@ -35,6 +35,8 @@ Loop dataList.Length {
       if it.close = "^{F4}" or it.close = "" {
         ; do nothing
       }
+      else if it.close = "{Esc}"
+        GroupAdd "close_esc", it.exe
       else if it.close = "!{F4}"
         GroupAdd "close_alt_f4", it.exe
       else if it.close = "{Alt Down}{F4 Down}{F4 Up}{Alt Up}"
@@ -51,17 +53,17 @@ Loop dataList.Length {
         GroupAdd "close_ctrl_alt_q", it.exe
       else if it.close = "^+w"
         GroupAdd "close_ctrl_shift_w", it.exe
-      else if it.close = "{Esc}"
-        GroupAdd "close_esc", it.exe
       else
         GroupAdd "close_WinClose", it.exe
 
       ; 侧边后退键
-      if it.sideBack = "!{F4}"
+      if it.sideBack = "{Esc}"
+        GroupAdd "sideBack_esc", it.exe
+      else if it.sideBack = "!{F4}"
         GroupAdd "sideBack_alt_f4", it.exe
       else if it.sideBack = "{Alt Down}{F4 Down}{F4 Up}{Alt Up}"
         GroupAdd "sideBack_alt_f4_2", it.exe
-      if it.sideBack = "!l"
+      else if it.sideBack = "!l"
         GroupAdd "sideBack_alt_l", it.exe
       else if it.sideBack = "!q"
         GroupAdd "sideBack_alt_q", it.exe
@@ -75,8 +77,6 @@ Loop dataList.Length {
         GroupAdd "sideBack_ctrl_alt_q", it.exe
       else if it.sideBack = "^+w"          
         GroupAdd "sideBack_ctrl_shift_w", it.exe
-      else if it.sideBack = "{Esc}"
-        GroupAdd "sideBack_esc", it.exe
       else
         GroupAdd "sideBack_WinClose", it.exe
 
@@ -129,8 +129,8 @@ Loop dataList.Length {
     }
 }
 
-parseData() {
-  dataList := []
+parseApp() {
+  appList := []
   ; 每次从字符串中检索字符串(片段)
   Loop Parse, FileRead("app.csv", "UTF-8"), "`n", "`r" {
       ; 跳过首行
@@ -139,10 +139,10 @@ parseData() {
       else {
         appInfo := parseDataLine(A_LoopField)    
         if appInfo
-            dataList.Push(appInfo)
+            appList.Push(appInfo)
       }
   }
-  return dataList  
+  return appList  
 }
 
 parseDataLine(line) {
@@ -233,6 +233,8 @@ Esc::WinClose
 ; 打头
 #HotIf WinActive("ahk_group close_esc")
 ^F4::Send "{Esc}"
+#HotIf WinActive("ahk_group close_alt_f4")
+^F4::Send "!{F4}"
 #HotIf WinActive("ahk_group close_alt_f4_2")
 ^F4::Send "{Alt Down}{F4 Down}{F4 Up}{Alt Up}"
 #HotIf WinActive("ahk_group close_alt_l")

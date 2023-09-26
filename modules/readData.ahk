@@ -5,13 +5,11 @@
 ; 理论上兼容的浏览器（未经过完全测试）：360 安全浏览器、QQ 浏览器、傲游浏览器、猎豹浏览器、极速浏览器
 ; 目前已知对搜狗浏览器极度不兼容
 
-GroupAdd "keep_f4_g", "ahk_class SunAwtFrame",,"Apache JMeter" ; netbean 32/64 位 & 标签类软件 jb 全家桶 & fleet
-
-global appList := parseApp()
+global dataList := parseData()
 
 ; 注册热键 和 热字符串
-Loop appList.Length {
-  it := appList[A_Index]
+Loop dataList.Length {
+  it := dataList[A_Index]
   ; 热键
   if StrLen(it.hk) > 0 and StrLen(it.path) > 0
       Hotkey it.hk, appStartByHk
@@ -31,8 +29,8 @@ Loop appList.Length {
   }
 }
 
-parseApp() {
-  appList := []
+parseData() {
+  dataList := []
   ; 每次从字符串中检索字符串(片段)
   Loop Parse, FileRead("data.csv", "UTF-8"), "`n", "`r" {
       ; 跳过首行
@@ -41,9 +39,9 @@ parseApp() {
 
       appInfo := parseAppLine(A_LoopField)    
       if appInfo
-          appList.Push(appInfo)
+          dataList.Push(appInfo)
   }
-  return appList  
+  return dataList  
 }
 
 parseAppLine(line) {  
@@ -67,4 +65,8 @@ parseAppLine(line) {
   info.hs := Trim(split[6])
 
   return info
+}
+
+openUrl(hs) {
+  Run webFindPathByHs(dataList, StrReplace(hs, ":C*:"))
 }

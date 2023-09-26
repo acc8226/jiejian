@@ -1,13 +1,5 @@
-﻿; 鼠标移动到屏幕左或上边缘 或 任务栏上
-mouseIsOverTaskBarOrEdge() {
-    MouseGetPos &OutputVarX, &OutputVarY, &Win
-    return OutputVarX == 0 or OutputVarX == 1 or OutputVarX == 2
-           or OutputVarY == 0 or OutputVarY == 1 or OutputVarY == 2
-           or WinExist("ahk_class Shell_TrayWnd" " ahk_id " Win)
-}
-
-findPathByHk(appList, hk) {
-    for value in appList {
+﻿findPathByHk(dataList, hk) {
+    for value in dataList {
         if value.hk == hk
             return value.path
     }
@@ -19,14 +11,14 @@ quickTitle(value) {
 }
 
 ; 根据显示内容反向查询路径
-appFindPathByListBoxText(appList, listBoxText) {
+appFindPathByListBoxText(dataList, listBoxText) {
     if StrLen(listBoxText) > 0 {
         split := StrSplit(listBoxText, '-')
         if split.Length == 2 {
             type := split[2]
             if type == 'app' or type == 'web' {
                 title := split[1]
-                for value in appList {
+                for value in dataList {
                     if StrLen(value.title) > 0 and title == value.title and type == value.type                            
                         return value.path                    
                 }
@@ -35,8 +27,8 @@ appFindPathByListBoxText(appList, listBoxText) {
     }
 }
 
-webFindPathByHs(appList, hs) {
-    for value in appList {
+webFindPathByHs(dataList, hs) {
+    for value in dataList {
         if value.type == 'web' and value.hs == hs
             return value.path
     }
@@ -44,7 +36,7 @@ webFindPathByHs(appList, hs) {
 
 ; 复杂启动
 appStartByHk(hk) {
-    for value in appList {
+    for value in dataList {
         if value.hk == hk {
             if value.type == 'web' or value.type == 'file' {
                 Run value.path
