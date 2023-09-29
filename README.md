@@ -1,10 +1,14 @@
 # 捷键 for windows 使用说明
 
-最新版下载地址：<https://gitee.com/acc8226/my-cmd/releases>
+最新版下载地址：<https://gitee.com/acc8226/shortcut-key/releases>
 
 ## 1. 热键 之 鼠标操作
 
-调节音量大小：当鼠标移动到屏幕左边缘或者上边缘以及停留在任务栏上，可通过鼠标滑轮滚动调节音量。
+当鼠标移动到屏幕左边缘或者上边缘以及停留在任务栏上。
+
+1. 可通过鼠标滑轮滚动调节音量。
+2. 鼠标侧边前进键用于暂停播放音乐
+3. 鼠标侧边后退键用于下一曲
 
 ![1](https://foruda.gitee.com/images/1689318820722473769/d4f9efe3_426858.gif)
 
@@ -12,17 +16,17 @@
 
 增强已有快捷键以及新增快捷键。支持众多常用软件，详细列表见附录。
 
-* 新建 ctrl + f3 避免和已有 ctrl + t 冲突 新建标签/窗口
-* 逃逸键 {Esc} 避免和已有 ctrl + w 冲突 关闭标签/窗口 Esc 增强 可用于关闭窗口 目前支持记事本
-* 关闭 ctrl + f4
-* 侧边后退键 XButton1 鼠标侧边后退键定义为万能关闭键
+* 新建 ctrl + f3 用于新建标签/窗口
+* 逃逸键 Esc 增强 可用于关闭特定窗口
+* 关闭 ctrl + f4 用于关闭标签/窗口
 * 前进 alt + 左
-* 上个标签 ctrl + shift + tab
-* 侧边前进键 XButton2 鼠标侧边前进键定义为万能后退键
-* 后退 alt + 右
 * 下个标签 ctrl + tab
+* 后退 alt + 右
+* 上个标签 ctrl + shift + tab
+* 鼠标侧边前进键定义为万能后退键
+* 鼠标侧边后退键定义为万能关闭键
 
-（以下部分场景使用了鼠标手势 WGestures 1.8.5.0 替代了手动敲击快捷键）
+（以下部分场景使用了鼠标手势 WGestures 1.8.5.0 替代了手动键入）
 
 操作资源管理器
 
@@ -62,7 +66,7 @@
 
 ## 6. 热键 之 其他
 
-* ctrl + 数字 1-5 为光标所在行添加 markdown 格式标题（目前仅放开了 vscode 和 记事本窗口的权限）
+* ctrl + 数字 1-5 为光标所在行添加 markdown 格式标题（目前仅开放了 vscode 和 记事本窗口的权限）
 
 ![输入图片说明](https://foruda.gitee.com/images/1689318964909077353/0518d03d_426858.gif "动画6.gif")
 
@@ -89,13 +93,13 @@
 
 只要输入对应启动程序/网址的全拼或首字母简拼这种模糊搜索，如果候选词有多个可以按下 tab 键切换到列表框中方向上下键选中后回车或鼠标双击。
 
-### 输入 bd 进行百度搜索
+### bd 百度搜索
 
 在框中输入 bd[空格?]{关键字} 进行百度搜索
 
 ![输入图片说明](https://foruda.gitee.com/images/1689321508560702893/2457a573_426858.gif "2.gif")
 
-### 输入 ip 进行 IP 归属地查询
+### ip 归属地查询
 
 ### 快速跳转到应用程序、文件位置和网址
 
@@ -110,18 +114,15 @@ bd 打开百度网
 ## 8. 热串 之 直达网址（Z 直达模式）
 
 * zbd 打开百度
-
-![输入图片说明](https://foruda.gitee.com/images/1689318989538537685/7b71d232_426858.gif "动画7-1.gif")
-
-* zbi 打开 哔哩哔哩
-
-![输入图片说明](https://foruda.gitee.com/images/1689319007424875617/4934e693_426858.gif "动画7-2.gif")
-
 * zbi 打开哔哩哔哩
 * zdy 打开电影天堂
 * zit 打开 IT 之家
 * zma 打开 QQ 邮箱
 * zxg 打开西瓜视频
+
+![图片说明](https://foruda.gitee.com/images/1689318989538537685/7b71d232_426858.gif)
+
+![图片说明](https://foruda.gitee.com/images/1689319007424875617/4934e693_426858.gif)
 
 ## 9. 热串之 扩展片段：将字符串替换为自定义话术（X 拓展模式）【可配置】
 
@@ -146,15 +147,17 @@ bd 打开百度网
 
 ## 10. 自定义配置说明
 
-配置文件 app.csv（用于配置软件的快捷键）、data.csv（用于配置启动器候选项以及热键、热串） 必须和 ahk 脚本文件在同一级目录，文本编码必须为 utf-8。
+配置文件 **app.csv**（用于配置软件的快捷键）、**data.csv**（用于配置启动器候选项以及热键、热串） 必须和 ahk 脚本文件在同一级目录，且文本编码必须为 utf-8。
 
 推荐使用 [LiberOffice](https://www.libreoffice.org/download/download-libreoffice/) 或者微软 Office utf8 模式打开。
 
 强烈不建议使用 WPS 进行打开，因为 WPS 默认使用 gbk 会导致编码冲突。
 
-### 配置软件的快捷键
+### 自定义快捷键
 
-第二列（标识符）为必须项。其余皆为可选项。只需填写需要变更的快捷键即可，否则留空即可。
+B列（标识符）为必须项。其余皆为可选项。只需填写需要变更的快捷键即可，否则可留空。
+
+若该行全部留空则表示 ctrl + f4 和 鼠标侧边后退键用于关闭窗口。
 
 ### 自定义快捷启动项
 
@@ -177,22 +180,24 @@ bd 打开百度网
 
 ## 已知 bug
 
-windowsTerminal 对该软件不太友好，可能触发不了关闭和新建标签。
+目前适配不太好的软件：fleet、搜狗浏览器、Windows terminal（可能触发不了关闭和新建标签）、windows 任务管理器（似乎屏蔽了 ctrl 键）
 
 ## 版本发布
 
-### 捷键 v1.0.4 for windows 2023.9-beta
+### 捷键 2023.09
+
+2023 年 9 月 29 晚 于北京
 
 新增
 
-* 支持 netbean、editplus、JB fleet、eclipse、myeclipse、Notepad--、Notepad++、SpringToolSuite4、sublime、ultraedit64 位、HBuilderX
+* 支持 netbean、editplus、JB fleet、eclipse、myeclipse、Notepad--、Notepad++、SpringToolSuite4、sublime、ultraedit 64 位、HBuilderX
 
 优化
 
 * 导入 csv 的 path 支持首尾都包含双引号
 * 调整 x 模式的激活条件使更合理
 
-### 捷键 v1.0.3 for windows 2023-8-27
+### 捷键 v1.0.3 2023-8-27
 
 新增：
 
@@ -209,7 +214,7 @@ windowsTerminal 对该软件不太友好，可能触发不了关闭和新建标�
 * 新建标签/窗口 改为使用 ctrl + f3
 * 删除用的不多的禁用脚本快捷键 ctrl + alt + s
 
-### 捷键 v1.0.2 for windows 2023-08-17
+### 捷键 v1.0.2 2023-08-17
 
 优化：
 
@@ -217,7 +222,7 @@ windowsTerminal 对该软件不太友好，可能触发不了关闭和新建标�
 * anyrun 组件优先使用微软雅黑字体，匹配按照优先级排序：匹配位置 + 字符串长度
 * 关闭标签从 ctrl + w 改为了 ctrl + f4
 
-### 捷键 v1.0.1 for windows 2023-08-07
+### 捷键 v1.0.1 2023-08-07
 
 新增：
 
@@ -247,6 +252,8 @@ windowsTerminal 对该软件不太友好，可能触发不了关闭和新建标�
 ## 附录
 
 ### 支持软件
+
+全量软件请见 [app.csv](app.csv)，目前列表持续更新中...
 
 * 123 浏览器
 * 115 浏览器
@@ -352,3 +359,23 @@ windowsTerminal 对该软件不太友好，可能触发不了关闭和新建标�
 * ahk spy 窗口
 * WinRAR
 * 360 压缩
+
+### 软件设计思路
+
+根据 ahk 中的 hotIf 的优先匹配原则。
+
+* alt + 左方向键 比 backspace 更加通用
+* xbutton1 键：万能关闭键（如果在多标签页则是关闭当前标签，否则就是关闭窗口）
+* xbutton2 键: 万能后退键（如果在多标签页则是切换到上个标签，否则就是后退）
+
+在 QQ 音乐中 xbutton1 用于暂停播放音乐，xbutton2 用于下一曲
+
+app.csv 中没有先后顺序，但不能是通用的 ahk_class，必须是互斥的关系，实在不行就是归属关系，归属关系则看代码预设配置了。
+app.csv 解析类中的的 hotif 严格按照优先匹配的原则，esc 必须在前。
+
+### 打包发版目录结构
+
+app.csv 配置文件
+data.csv 配置文件
+shotcut.exe 主程序
+extra/WGestures 1.8.5.0.wgb 【增强体验】WGestures 用户可额外导入鼠标手势的配置

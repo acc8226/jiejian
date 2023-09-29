@@ -27,7 +27,7 @@ https://wyagd001.github.io/v2/docs/
 #Include "modules\readData.ahk"
 #Include "modules\utils.ahk"
 
-global isDebug := true
+global isDebug := false
 
 SetTitleMatchMode "RegEx" ; 使 WinTitle, WinText, ExcludeTitle 和 ExcludeText 接受正则表达式
 CoordMode "Mouse", "Screen" ; 坐标相对于桌面(整个屏幕)
@@ -39,7 +39,7 @@ settingTray() {
     MenuHandler(*) {
         Run "https://gitee.com/acc8226/shortcut-key/releases/"
     }
-    A_TrayMenu.Insert(itemCount . "&", "捷键 2023.09-测试版 by acc8226", MenuHandler)
+    A_TrayMenu.Insert(itemCount . "&", "捷键 2023.09 by acc8226", MenuHandler)
     Persistent
     ; 建议使用宽度为 16 或 32 像素的图标
     TraySetIcon "favicon.ico"
@@ -91,8 +91,7 @@ GroupAdd "text_group", "ahk_exe i)Code.exe" ; vscode
     Sleep 100
     Send "^x"
     ClipWait ; 等待剪贴板中出现文本.
-    newText := A_Clipboard
-    newText := RegExReplace(newText, "\s*$", "") ; 去掉尾部空格
+    newText := RegExReplace(A_Clipboard, "\s*$", "") ; 去掉尾部空格
     newText := RegExReplace(newText, "^#{1,6}\s+(.*)", "$1")
     nums := SubStr(A_ThisHotkey, 2)
     Send "{Home}{# " . nums . "}" . " "
