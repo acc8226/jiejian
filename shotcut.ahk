@@ -1,7 +1,7 @@
 ﻿/*
-捷键 --- 更简单和易用的 windows 小工具。
+捷键-一个简单易用的 windows 小工具
 
-它简化了计算机操作。模拟键盘按键、鼠标点击等操作，从而实现自动化任务、自定义快捷键和用户界面增强等功能。
+只为简化操作。模拟键盘按键、鼠标点击等操作，从而实现自动化任务、自定义快捷键和用户界面增强等功能。
 
 快速参考 | AutoHotkey v2
 https://wyagd001.github.io/v2/docs/
@@ -18,8 +18,9 @@ https://wyagd001.github.io/v2/docs/
 
 * Esc 逃逸键 用于关闭窗口 目前仅支持记事本
 */
-#Requires AutoHotkey v2.0
-#SingleInstance force
+#Requires AutoHotkey >=v2.0
+#SingleInstance force ; 跳过对话框并自动替换旧实例
+
 ; ----- 1. 热键 之 鼠标操作 -----
 #Include "modules\configMouse.ahk"
 #Include "modules\anyrun.ahk"
@@ -75,11 +76,9 @@ settingTray()
 ; !d::Run "D:"
 
 ; ----- 6. 热键 之 其他 -----
-; 文本类 为了 md 增强
-GroupAdd "text_group", "ahk_exe i)notepad.exe" ; 记事本
-GroupAdd "text_group", "ahk_exe i)Code.exe" ; vscode
+; 文本类 为了 md 增强 记事本 & vscode
 ; ctrl + 数字 1-5 为光标所在行添加 markdown 格式标题
-#HotIf WinActive("ahk_group text_group")
+#HotIf WinActive("ahk_exe i)notepad.exe") or WinActive("ahk_exe i)Code.exe") 
 ^1::
 ^2::
 ^3::

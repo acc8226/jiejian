@@ -110,6 +110,13 @@ anyrun() {
                     MyGui.Destroy()
                     return
                 }
+                ; bing 搜索
+                RegExMatch(editValue, "i)^bing(.+)", &SubPat)
+                if IsObject(SubPat) and SubPat.Count == 1 {
+                    Run "https://cn.bing.com/search?q=" . Trim(SubPat[1])
+                    MyGui.Destroy()
+                    return
+                }
                 ; ip 进行 IP 归属地查询
                 RegExMatch(editValue, "i)^ip(.+)", &SubPat)
                 if IsObject(SubPat) and SubPat.Count == 1 {

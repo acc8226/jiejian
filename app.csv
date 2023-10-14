@@ -4,13 +4,13 @@
 123 浏览器,ahk_exe 123browser.exe,^t,,^{F4},^{F4},,,,,^+{Tab}
 115 浏览器,ahk_exe 115chrome.exe,^t,,^{F4},^{F4},,,,,^+{Tab}
 360 极速浏览器,ahk_exe 360ChromeX.exe,^t,,^{F4},^{F4},,,,,^+{Tab}
-360 极速浏览器的下载管理窗口,ahk_exe 360ChromeX.exe ahk_class Chrome_WidgetWin_2,,,{Esc} ,{Esc},,,,,
+360 极速浏览器-下载管理窗口,ahk_exe 360ChromeX.exe ahk_class Chrome_WidgetWin_2,,,{Esc} ,{Esc},,,,,
 2345 浏览器,ahk_exe 2345Explorer.exe,^t,,^{F4},^{F4},,,,,^+{Tab}
 360 安全浏览器,ahk_exe 360se.exe,^t,,^{F4},^{F4},,,,,^+{Tab}
 Avast 浏览器,ahk_exe AvastBrowser.exe,^t,,^{F4},^{F4},,,,,^+{Tab}
 brave 浏览器,ahk_exe brave.exe,^t,,^{F4},^{F4},,,,,^+{Tab}
 Yandex 浏览器,ahk_exe browser.exe ahk_class YandexBrowser_WidgetWin_1 ,^t,,^{F4},^{F4},,,,,^+{Tab}
-猫眼浏览,ahk_exe catsxp.exe,^t,,^{F4},^{F4},,,,,^+{Tab}
+猫眼浏览器,ahk_exe catsxp.exe,^t,,^{F4},^{F4},,,,,^+{Tab}
 chrome 谷歌浏览器 & 百分 & 小马 ,ahk_exe chrome.exe ,^t,,^{F4},^{F4},,,,,^+{Tab}
 斑斓石浏览器,ahk_exe Colorfulstone.exe,^t,,^{F4},^{F4},,,,,^+{Tab}
 小智双核浏览器,ahk_exe DCBrowser.exe,^t,,^{F4},^{F4},,,,,^+{Tab}
@@ -36,15 +36,11 @@ waterfox 浏览器,ahk_exe waterfox.exe,^t,,^{F4},^{F4},,,,,^+{Tab}
 双核浏览器,ahk_exe ChromeCore.exe,^t,,^{F4},^{F4},,,,,^+{Tab}
 T加浏览器 对快捷键无效,ahk_exe tplusbrowser.exe,,,,,,,,,
 ,,,,,,,,,,
-,,,,,,,,,,
-,,,,,,,,,,
 Beekeeper Studio,ahk_exe Beekeeper Studio.exe,^t,,^w,^w,,,,,^+{Tab}
 Bcompare,ahk_exe Bcompare.exe ,^t,,^w,^w,,,,,^+{Tab}
 windows 旧版记事本 ,ahk_exe notepad.exe,^t,WinClose,^w,^w,,,,,^+{Tab}
 win11 新版 记事本 ,ahk_exe Notepad.exe,^t,WinClose,^w,^w,,,,,^+{Tab}
-Postman,ahk_exe Postman.exe,^t,,^w,^w,,,,,^+{Tab}
 SourceTree,ahk_exe SourceTree.exe,^t,,^w,^w,,,,,^+{Tab}
-Apifox,ahk_exe Apifox.exe,^t,,^w,^w,,,,,^+{Tab}
 Win 11 21h1 桌面,ahk_exe explorer.exe ahk_class WorkerW,,,{Alt Down}{F4 Down}{F4 Up}{Alt Up},{Alt Down}{F4 Down}{F4 Up}{Alt Up},,,,,
 Win 11 22h2 桌面,ahk_exe explorer.exe ahk_class Progman,,,{Alt Down}{F4 Down}{F4 Up}{Alt Up},{Alt Down}{F4 Down}{F4 Up}{Alt Up},,,,,
 资源管理器 ,ahk_exe explorer.exe ahk_class CabinetWClass,^t,,^w ,^w ,,,,,^+{Tab}
@@ -137,7 +133,9 @@ visual studio 窗口,自定义 ahk_exe devenv.exe,,,{Esc} ,{Esc} ,,,,,
 ,,,,,,,,,,
 火绒杀毒,ahk_exe HipsMain.exe,,,!{F4},!{F4},,,,,
 ,,,,,,,,,,
-windows 图片查看器,ahk_exe rundll32.exe ahk_class Photo_Lightweight_Viewer,,,,,,,,,
-汽水音乐,ahk_exe SodaMusic.exe ahk_class Chrome_WidgetWin_1,,,,,,,,,
+Postman,ahk_exe Postman.exe,^t,,^w,^w,,,,,^+{Tab}
+Apifox,ahk_exe Apifox.exe,^t,,^w,^w,,,,,^+{Tab}
+HTTPie,ahk_exe HTTPie.exe,^t,,^w,^w,,,,,^+{Tab}
+ApiPost,ahk_exe ApiPost7.exe ,^t,,^w,^w,,,,,
 ,,,,,,,,,,
-哔哩哔哩,ahk_exe 哔哩哔哩.exe,,,,,,,,,
+navicat,ahk_exe navicat.exe,,,^w,^w,,,,,^+{Tab}

@@ -32,10 +32,7 @@ Loop appList.Length {
         GroupAdd "esc_WinClose", it.exe
 
       ; 3. 关闭
-      if it.close = "^{F4}" {
-        ; do nothing
-      }
-      else if it.close = "{Esc}"
+      if it.close = "{Esc}"
         GroupAdd "close_esc", it.exe
       else if it.close = "!{F4}"
         GroupAdd "close_alt_f4", it.exe
@@ -47,14 +44,14 @@ Loop appList.Length {
         GroupAdd "close_alt_q", it.exe
       else if it.close = "!w"
         GroupAdd "close_alt_w", it.exe
+      else if it.close = "^{F4}"
+        GroupAdd "close_ctrl_f4", it.exe
       else if it.close = "^w"
         GroupAdd "close_ctrl_w", it.exe
       else if it.close = "^!q"
         GroupAdd "close_ctrl_alt_q", it.exe
       else if it.close = "^+w"
         GroupAdd "close_ctrl_shift_w", it.exe
-      else
-        GroupAdd "close_WinClose", it.exe ; 兜底
 
       ; 4. 侧边后退键
       if it.sideBack = "{Esc}"
@@ -77,8 +74,6 @@ Loop appList.Length {
         GroupAdd "sideBack_ctrl_alt_q", it.exe
       else if it.sideBack = "^+w"          
         GroupAdd "sideBack_ctrl_shift_w", it.exe
-      else
-        GroupAdd "sideBack_WinClose", it.exe ; 兜底
 
       ; 5. 前进
       if it.forward = "{Media_Next}"
@@ -204,7 +199,7 @@ app_hotkey2(app_title)
 ^F4::
 XButton1::Send "{Esc}"
 
-; 新建
+; 1. 新建
 #HotIf WinActive("ahk_group new_F8")
 ^F3::Send "{F8}"
 #HotIf WinActive("ahk_group new_alt_a")
@@ -226,11 +221,11 @@ XButton1::Send "{Esc}"
 #HotIf WinActive("ahk_group new_ctrl_shift_t")
 ^F3::Send "^+t"
 
-; 逃逸
+; 2. 逃逸
 #HotIf WinActive("ahk_group esc_WinClose")
 Esc::WinClose
 
-; 关闭 打头
+; 3. 关闭 打头
 #HotIf WinActive("ahk_group close_esc")
 ^F4::Send "{Esc}"
 #HotIf WinActive("ahk_group close_alt_f4")
@@ -249,16 +244,16 @@ Esc::WinClose
 ^F4::Send "^!q"
 #HotIf WinActive("ahk_group close_ctrl_shift_w")
 ^F4::Send "^+w"
+#HotIf not WinActive("ahk_group close_ctrl_f4")
 ; 兜底
-#HotIf WinActive("ahk_group close_WinClose")
 ^F4::{
-  try WinClose "A" ; not WinActive 必须和 WinClose 搭配，且 WinClose 通用性更好
+  try WinClose "A"
   catch {
       MsgBox "关闭窗口失败，请重试"
   }
 }
 
-; 侧边后退键 打头
+; 4. 侧边后退键 打头
 #HotIf WinActive("ahk_group sideBack_esc")
 XButton1::Send "{Esc}"
 #HotIf WinActive("ahk_group sideBack_alt_f4")
@@ -279,21 +274,21 @@ XButton1::Send "^w"
 XButton1::Send "^!q"
 #HotIf WinActive("ahk_group sideBack_ctrl_shift_w")
 XButton1::Send "^+w"
-#HotIf WinActive("ahk_group sideBack_WinClose")
+#HotIf
 ; 兜底
 XButton1::{
-  try WinClose "A" ; not WinActive 必须和 WinClose 搭配，且 WinClose 通用性更好
+  try WinClose "A"
   catch {
       MsgBox "关闭窗口失败，请重试"
   }
 }
 
-; 前进键
+; 5. 前进键
 #HotIf WinActive("ahk_group forward_Media_Next")
 !Left::Send "{Media_Next}" ; 下一曲
 #HotIf WinActive("ahk_group forward_ctrl_right")
 ^+Tab::Send "^{Right}"
-; 下个标签
+; 6. 下个标签
 #HotIf WinActive("ahk_group next_Media_Next")
 ^Tab::Send "{Media_Next}" ; 下一曲
 #HotIf WinActive("ahk_group next_ctrl_shift_pgdn")
@@ -307,10 +302,10 @@ XButton1::{
 #HotIf WinActive("ahk_group next_ctrl_alt_right")
 ^Tab::Send "^!{Right}"
 
-; 后退
+; 7. 后退
 #HotIf WinActive("ahk_group back_Media_Prev")
 !Left::Send "{Media_Prev}" ; 上一曲
-; 上个标签
+; 8. 上个标签
 #HotIf WinActive("ahk_group previous_Media_Prev")
 ^+Tab::Send "{Media_Prev}" ; 上一曲
 #HotIf WinActive("ahk_group previous_alt_0")
@@ -325,7 +320,7 @@ XButton1::{
 ^+Tab::Send "^!{Left}"
 #HotIf WinActive("ahk_group previous_ctrl_pgup")
 ^+Tab::Send "^{PgUp}"
-; 侧边前进键
+; 9. 侧边前进键
 #HotIf WinActive("ahk_group sideForward_Media_Prev")
 XButton2::Send "{Media_Prev}" ; 上一曲
 #HotIf WinActive("ahk_group sideForward_alt_left")

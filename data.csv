@@ -58,6 +58,7 @@ app,C:\Users\ferder\AppData\Local\Programs\AutoHotkey\UX\AutoHotkeyUX.exe C:\Use
 app,C:\Users\ferder\AppData\Local\Programs\tts-vue\tts-vue.exe,tts,tts,,
 app,C:\Users\ferder\AppData\Local\Kingsoft\WPS Office\ksolaunch.exe,WPS Office,WPS,,
 app,C:\Users\ferder\AppData\Local\Programs\redisinsight\RedisInsight-v2.exe,RedisInsight,RedisInsight,,
+app,C:\Users\ferder\AppData\Local\Programs\ApiPost7\ApiPost7.exe,ApiPost,ApiPost,,
 ,,,,,
 file,D:\,D盘,,!d,
 file,D:\alee\git-repos-mfoxLocal,公司仓库,,!k,
