@@ -285,7 +285,7 @@ XButton1::{
 
 ; 5. 前进键
 #HotIf WinActive("ahk_group forward_Media_Next")
-!Left::Send "{Media_Next}" ; 下一曲
+!Right::Send "{Media_Next}" ; 下一曲
 #HotIf WinActive("ahk_group forward_ctrl_right")
 ^+Tab::Send "^{Right}"
 ; 6. 下个标签
