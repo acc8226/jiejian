@@ -44,7 +44,7 @@ SourceTree,ahk_exe SourceTree.exe,^t,,^w,^w,,,,,^+{Tab}
 Win 11 21h1 桌面,ahk_exe explorer.exe ahk_class WorkerW,,,{Alt Down}{F4 Down}{F4 Up}{Alt Up},{Alt Down}{F4 Down}{F4 Up}{Alt Up},,,,,
 Win 11 22h2 桌面,ahk_exe explorer.exe ahk_class Progman,,,{Alt Down}{F4 Down}{F4 Up}{Alt Up},{Alt Down}{F4 Down}{F4 Up}{Alt Up},,,,,
 资源管理器 ,ahk_exe explorer.exe ahk_class CabinetWClass,^t,,^w ,^w ,,,,,^+{Tab}
-HbuilderX,ahk_exe HbuilderX.exe,^t,,,^{F4},,^{PgDn},,^{PgUp},^{PgUp} 
+HbuilderX,ahk_exe HBuilderX.exe,^t,,,^{F4},,^{PgDn},,^{PgUp},^{PgUp} 
 heidisql,ahk_exe heidisql.exe,^t,,,^{F4},,,,,^+{Tab}
 MarkText,ahk_exe MarkText.exe,^t,,^w ,^w ,,,,,^+{Tab}
 SQLyog,ahk_exe SQLyog.exe,^t,,!l ,!l ,,^{PgDn},,^{PgUp},^{PgUp}
@@ -101,7 +101,7 @@ Snipaste,Snipaste ahk_exe Snipaste.exe ,,,{Esc},{Esc},,,,,
 ,,,,,,,,,,
 网易云音乐,ahk_exe cloudmusic.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
 酷我音乐,ahk_exe kwmusic.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
-QQ 音乐,ahk_exe QQMusic.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+QQ音乐,ahk_exe QQMusic.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
 ,,,,,,,,,,
 新版 win 11 设置,ahk_exe ApplicationFrameHost.exe ahk_class ApplicationFrameWindow,,,,,,,,,!{Left} 
 ,,,,,,,,,,
@@ -110,7 +110,7 @@ clion,ahk_exe clion64.exe ahk_class SunAwtFrame,,,, ,,!{Right},,!{Left},!{Left}
 pycharm,ahk_exe pycharm64.exe ahk_class SunAwtFrame,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
 idea,ahk_exe idea64.exe ahk_class SunAwtFrame,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
 finalshell,FinalShell.* ahk_exe java.exe ahk_class SunAwtFrame,!a ,,!q,!q,,!] ,,!0 ,!0 
-netbean 32 位 / jmeter,ahk_exe javaw.exe ahk_class SunAwtFrame,^n ,,,,,^{PgDn} ,,^{PgUp},^{PgUp} 
+netbean 32 位 & jmeter,ahk_exe javaw.exe ahk_class SunAwtFrame,^n ,,,,,^{PgDn} ,,^{PgUp},^{PgUp} 
 netbean 64 位,ahk_exe netbeans64.exe ahk_class SunAwtFrame,^n ,,,,,^{PgDn} ,,^{PgUp},^{PgUp} 
 ,,,,,,,,,,
 LibreOffice,ahk_exe soffice.bin ahk_class SALFRAME,^n ,,^{F4},^{F4},,,,,
@@ -118,9 +118,9 @@ skylark,ahk_exe skylark.exe,^n ,,^w,^w,,,,,
 ,,,,,,,,,,
 WinRAR,ahk_exe WinRAR.exe ahk_class WinRarWindow,,,,,,,,,
 微信小程序PC版,ahk_exe WeChatAppEx.exe ahk_class Chrome_WidgetWin_0,,,,,,,,,
-360压缩内置 pdf 查看器,ahk_exe 360ZipPdfView.exe,,,,,,,,,
+360压缩内置PDF查看器,ahk_exe 360ZipPdfView.exe,,,,,,,,,
 ,,,,,,,,,,
-小乌龟合并窗口,ahk_exe TortoiseGitMerge.exe,,,{Esc},{Esc},,,,,
+小乌龟合并 窗口,ahk_exe TortoiseGitMerge.exe,,,{Esc},{Esc},,,,,
 LibreOffice 窗口,ahk_exe soffice.bin ahk_class SALSUBFRAME,,,{Esc},{Esc},,,,,
 ahk 打开窗口,ahk_exe AutoHotkey64.exe ahk_class AutoHotkey,,,{Esc},{Esc},,,,,
 ahk spy 窗口,ahk_exe AutoHotkeyUX.exe ahk_class AutoHotkeyGUI,,,!{F4},!{F4},,,,,

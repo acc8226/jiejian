@@ -43,9 +43,13 @@ appStartByHk(hk) {
             } else if value.type == 'app' {
                 ; 如果未启动则启动,否则激活
                 if WinExist("ahk_exe " value.path)
-
                     WinActivate
-                else Run value.path
+                else {
+                    try Run value.path
+                    catch {
+                        MsgBox "程序启动失败，请确认 " value.path " 是否存在？"
+                    }
+                }
             }
             return
         }            
