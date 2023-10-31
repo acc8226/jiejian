@@ -102,6 +102,7 @@ Snipaste,Snipaste ahk_exe Snipaste.exe ,,,{Esc},{Esc},,,,,
 网易云音乐,ahk_exe cloudmusic.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
 酷我音乐,ahk_exe kwmusic.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
 QQ音乐,ahk_exe QQMusic.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+汽水音乐,ahk_exe SodaMusic.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
 ,,,,,,,,,,
 新版 win 11 设置,ahk_exe ApplicationFrameHost.exe ahk_class ApplicationFrameWindow,,,,,,,,,!{Left} 
 ,,,,,,,,,,
@@ -139,3 +140,4 @@ HTTPie,ahk_exe HTTPie.exe,^t,,^w,^w,,,,,^+{Tab}
 ApiPost,ahk_exe ApiPost7.exe ,^t,,^w,^w,,,,,
 ,,,,,,,,,,
 navicat,ahk_exe navicat.exe,,,^w,^w,,,,,^+{Tab}
+稻壳阅读器,ahk_exe DocBox.exe,,,,^w,,,,,^+{Tab}
