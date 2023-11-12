@@ -34,6 +34,7 @@ vivaldi 浏览器,ahk_exe vivaldi.exe,^t,,^{F4},^{F4},,,,,^+{Tab}
 waterfox 浏览器,ahk_exe waterfox.exe,^t,,^{F4},^{F4},,,,,^+{Tab}
 一点浏览器,ahk_exe Yidian.exe,^t,,^{F4},^{F4},,,,,^+{Tab}
 双核浏览器,ahk_exe ChromeCore.exe,^t,,^{F4},^{F4},,,,,^+{Tab}
+青鸟浏览器,ahk_exe QingniaoChrome.exe,^t,,^{F4},^{F4},,,,,^+{Tab}
 T加浏览器 对快捷键无效,ahk_exe tplusbrowser.exe,,,,,,,,,
 ,,,,,,,,,,
 Beekeeper Studio,ahk_exe Beekeeper Studio.exe,^t,,^w,^w,,,,,^+{Tab}

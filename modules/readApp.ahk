@@ -277,10 +277,24 @@ XButton1::Send "^+w"
 #HotIf
 ; 兜底
 XButton1::{
-  try WinClose "A"
-  catch {
-      MsgBox "关闭窗口失败，请重试"
-  }
+  ; title := WinGetTitle("A")
+  ; class := WinGetClass("A")
+  ; pid := WinGetPID("A")  
+  ; id := WinGetID("A")
+  ; processName := WinGetProcessName("A")
+  ; ToolTip
+  ; (
+  ;     "title = " title
+  ;     "`nahk_class = " class
+  ;     "`nahk_exe = " processName
+  ;     "`nahk_pid = " pid
+  ;     "`nahk_id = " id
+  ; )
+  Send "^{F4}" ; 比 WinClose "A" 好使
+  ; try WinClose "A"
+  ; catch {
+  ;     MsgBox "关闭窗口失败，请重试"
+  ; }
 }
 
 ; 5. 前进键

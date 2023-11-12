@@ -140,4 +140,3 @@ anyrun() {
         myGui.Show(Format("xCenter y{1} AutoSize", A_ScreenHeight / 2 - 300))
     }
 }
-

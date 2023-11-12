@@ -40,7 +40,7 @@ settingTray() {
     MenuHandler(*) {
         Run "https://gitee.com/acc8226/shortcut-key/releases/"
     }
-    A_TrayMenu.Insert(itemCount . "&", "捷键 2023.09 by acc8226", MenuHandler)
+    A_TrayMenu.Insert(itemCount . "&", "捷键 2023.10 by acc8226", MenuHandler)
     Persistent
     ; 建议使用宽度为 16 或 32 像素的图标
     TraySetIcon "favicon.ico"

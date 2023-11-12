@@ -9,10 +9,10 @@ WatchCursor() {
     processName := WinGetProcessName("A")
     ToolTip
     (
-        title
-        "`nahk_class=" class
-        "`nahk_exe=" processName
-        "`nahk_pid=" pid
-        "`nahk_id=" id
+        "title = " title
+        "`nahk_class = " class
+        "`nahk_exe = " processName
+        "`nahk_pid = " pid
+        "`nahk_id = " id
     )
 }
