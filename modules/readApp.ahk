@@ -2,153 +2,155 @@
 
 ; 注册热键 和 热字符串
 Loop appList.Length {
-  if A_Index > 1 {
-    it := appList[A_Index]
-    if it.highLevel {
-      ; 高优先级
-      ; 2. 逃逸
-      if it.escape = "WinClose"
-        GroupAdd "HL_esc_WinClose", it.exe
+  if A_Index <= 1
+    continue
 
-      ; 3. 关闭
-      if it.close = "{Esc}"
-        GroupAdd "HL_close_esc", it.exe
-      else if it.close = "!{F4}"
-        GroupAdd "HL_close_alt_f4", it.exe
+  it := appList[A_Index]
+  if it.highLevel {
 
-      ; 4. 侧边后退键
-      if it.sideBack = "{Esc}"
-        GroupAdd "HL_sideBack_esc", it.exe
-      else if it.sideBack = "!{F4}"
-        GroupAdd "HL_sideBack_alt_f4", it.exe
-    } else {
-      ; 低优先级
-      ; 1. 新建
-      if it.new = "{F8}"
-        GroupAdd "new_F8", it.exe
-      else if it.new = "!a"
-        GroupAdd "new_alt_a", it.exe
-      else if it.new = "!c"
-        GroupAdd "new_alt_c", it.exe
-      else if it.new = "!n"
-        GroupAdd "new_alt_n", it.exe
-      else if it.new = "!o"
-        GroupAdd "new_alt_o", it.exe
-      else if it.new = "^n"
-        GroupAdd "new_ctrl_n", it.exe
-      else if it.new = "{Control Down}n{Control Up}"
-        GroupAdd "new_ctrl_n_2", it.exe   
-      else if it.new = "^t"
-        GroupAdd "new_ctrl_t", it.exe
-      else if it.new = "^!t"          
-        GroupAdd "new_ctrl_alt_t", it.exe
-      else if it.new = "^+t"          
-        GroupAdd "new_ctrl_shift_t", it.exe
+    ; 高优先级
+    ; 2. 逃逸
+    if it.escape = "WinClose"
+      GroupAdd "HL_esc_WinClose", it.exe
 
-      ; 2. 逃逸
-      if it.escape = "WinClose"
-        GroupAdd "esc_WinClose", it.exe
+    ; 3. 关闭
+    if it.close = "{Esc}"
+      GroupAdd "HL_close_esc", it.exe
+    else if it.close = "!{F4}"
+      GroupAdd "HL_close_alt_f4", it.exe
 
-      ; 3. 关闭
-      if it.close = "{Esc}"
-        GroupAdd "close_esc", it.exe
-      else if it.close = "!{F4}"
-        GroupAdd "close_alt_f4", it.exe
-      else if it.close = "{Alt Down}{F4 Down}{F4 Up}{Alt Up}"
-        GroupAdd "close_alt_f4_2", it.exe
-      else if it.close = "!l"
-        GroupAdd "close_alt_l", it.exe
-      else if it.close = "!q"
-        GroupAdd "close_alt_q", it.exe
-      else if it.close = "!w"
-        GroupAdd "close_alt_w", it.exe
-      else if it.close = "^{F4}"
-        GroupAdd "close_ctrl_f4", it.exe
-      else if it.close = "^w"
-        GroupAdd "close_ctrl_w", it.exe
-      else if it.close = "^!q"
-        GroupAdd "close_ctrl_alt_q", it.exe
-      else if it.close = "^+w"
-        GroupAdd "close_ctrl_shift_w", it.exe
+    ; 4. 侧边后退键
+    if it.sideBack = "{Esc}"
+      GroupAdd "HL_sideBack_esc", it.exe
+    else if it.sideBack = "!{F4}"
+      GroupAdd "HL_sideBack_alt_f4", it.exe
+  } else {
+    ; 低优先级
+    ; 1. 新建
+    if it.new = "{F8}"
+      GroupAdd "new_F8", it.exe
+    else if it.new = "!a"
+      GroupAdd "new_alt_a", it.exe
+    else if it.new = "!c"
+      GroupAdd "new_alt_c", it.exe
+    else if it.new = "!n"
+      GroupAdd "new_alt_n", it.exe
+    else if it.new = "!o"
+      GroupAdd "new_alt_o", it.exe
+    else if it.new = "^n"
+      GroupAdd "new_ctrl_n", it.exe
+    else if it.new = "{Control Down}n{Control Up}"
+      GroupAdd "new_ctrl_n_2", it.exe   
+    else if it.new = "^t"
+      GroupAdd "new_ctrl_t", it.exe
+    else if it.new = "^!t"          
+      GroupAdd "new_ctrl_alt_t", it.exe
+    else if it.new = "^+t"          
+      GroupAdd "new_ctrl_shift_t", it.exe
 
-      ; 4. 侧边后退键
-      if it.sideBack = "{Esc}"
-        GroupAdd "sideBack_esc", it.exe
-      else if it.sideBack = "!{F4}"
-        GroupAdd "sideBack_alt_f4", it.exe
-      else if it.sideBack = "{Alt Down}{F4 Down}{F4 Up}{Alt Up}"
-        GroupAdd "sideBack_alt_f4_2", it.exe
-      else if it.sideBack = "!l"
-        GroupAdd "sideBack_alt_l", it.exe
-      else if it.sideBack = "!q"
-        GroupAdd "sideBack_alt_q", it.exe
-      else if it.sideBack = "!w"
-        GroupAdd "sideBack_alt_w", it.exe
-      else if it.sideBack = "^{F4}"
-        GroupAdd "sideBack_ctrl_f4", it.exe
-      else if it.sideBack = "^w"
-        GroupAdd "sideBack_ctrl_w", it.exe
-      else if it.close = "^!q"
-        GroupAdd "sideBack_ctrl_alt_q", it.exe
-      else if it.sideBack = "^+w"          
-        GroupAdd "sideBack_ctrl_shift_w", it.exe
+    ; 2. 逃逸
+    if it.escape = "WinClose"
+      GroupAdd "esc_WinClose", it.exe
 
-      ; 5. 前进
-      if it.forward = "{Media_Next}"
-        GroupAdd "forward_Media_Next", it.exe
-      else if it.forward = "^{Right}"
-        GroupAdd "forward_ctrl_right", it.exe
+    ; 3. 关闭
+    if it.close = "{Esc}"
+      GroupAdd "close_esc", it.exe
+    else if it.close = "!{F4}"
+      GroupAdd "close_alt_f4", it.exe
+    else if it.close = "{Alt Down}{F4 Down}{F4 Up}{Alt Up}"
+      GroupAdd "close_alt_f4_2", it.exe
+    else if it.close = "!l"
+      GroupAdd "close_alt_l", it.exe
+    else if it.close = "!q"
+      GroupAdd "close_alt_q", it.exe
+    else if it.close = "!w"
+      GroupAdd "close_alt_w", it.exe
+    else if it.close = "^{F4}"
+      GroupAdd "close_ctrl_f4", it.exe
+    else if it.close = "^w"
+      GroupAdd "close_ctrl_w", it.exe
+    else if it.close = "^!q"
+      GroupAdd "close_ctrl_alt_q", it.exe
+    else if it.close = "^+w"
+      GroupAdd "close_ctrl_shift_w", it.exe
 
-      ; 6. 下个标签
-      if it.nextTag = "{Media_Next}"
-        GroupAdd "next_Media_Next", it.exe
-      else if it.nextTag = "^+{PgDn}"
-        GroupAdd "next_ctrl_shift_pgdn", it.exe
-      else if it.nextTag = "!]"
-        GroupAdd "next_alt_youfang", it.exe
-      else if it.nextTag = "!{Right}"
-        GroupAdd "next_alt_right", it.exe
-      else if it.nextTag = "^{PgDn}"
-        GroupAdd "next_ctrl_pgdn", it.exe
-      else if it.nextTag = "^!{Right}"
-        GroupAdd "next_ctrl_alt_right", it.exe
+    ; 4. 侧边后退键
+    if it.sideBack = "{Esc}"
+      GroupAdd "sideBack_esc", it.exe
+    else if it.sideBack = "!{F4}"
+      GroupAdd "sideBack_alt_f4", it.exe
+    else if it.sideBack = "{Alt Down}{F4 Down}{F4 Up}{Alt Up}"
+      GroupAdd "sideBack_alt_f4_2", it.exe
+    else if it.sideBack = "!l"
+      GroupAdd "sideBack_alt_l", it.exe
+    else if it.sideBack = "!q"
+      GroupAdd "sideBack_alt_q", it.exe
+    else if it.sideBack = "!w"
+      GroupAdd "sideBack_alt_w", it.exe
+    else if it.sideBack = "^{F4}"
+      GroupAdd "sideBack_ctrl_f4", it.exe
+    else if it.sideBack = "^w"
+      GroupAdd "sideBack_ctrl_w", it.exe
+    else if it.close = "^!q"
+      GroupAdd "sideBack_ctrl_alt_q", it.exe
+    else if it.sideBack = "^+w"          
+      GroupAdd "sideBack_ctrl_shift_w", it.exe
 
-      ; 7. 后退
-      if it.back = "{Media_Prev}"
-        GroupAdd "back_Media_Prev", it.exe
+    ; 5. 前进
+    if it.forward = "{Media_Next}"
+      GroupAdd "forward_Media_Next", it.exe
+    else if it.forward = "^{Right}"
+      GroupAdd "forward_ctrl_right", it.exe
 
-      ; 8. 上个标签
-      if it.previousTag = "{Media_Prev}"
-        GroupAdd "previous_Media_Prev", it.exe
-      else if it.previousTag = "!0"
-        GroupAdd "previous_alt_0", it.exe
-      else if it.previousTag = "!{Left}"
-        GroupAdd "previous_alt_left", it.exe
-      else if it.previousTag = "!["
-        GroupAdd "previous_alt_zuofang", it.exe
-      else if it.previousTag = "^{Left}"
-        GroupAdd "previous_ctrl_left", it.exe
-      else if it.previousTag = "^!{Left}"
-        GroupAdd "previous_ctrl_alt_left", it.exe
-      else if it.previousTag = "^{PgUp}"
-        GroupAdd "previous_ctrl_pgup", it.exe
+    ; 6. 下个标签
+    if it.nextTag = "{Media_Next}"
+      GroupAdd "next_Media_Next", it.exe
+    else if it.nextTag = "^+{PgDn}"
+      GroupAdd "next_ctrl_shift_pgdn", it.exe
+    else if it.nextTag = "!]"
+      GroupAdd "next_alt_youfang", it.exe
+    else if it.nextTag = "!{Right}"
+      GroupAdd "next_alt_right", it.exe
+    else if it.nextTag = "^{PgDn}"
+      GroupAdd "next_ctrl_pgdn", it.exe
+    else if it.nextTag = "^!{Right}"
+      GroupAdd "next_ctrl_alt_right", it.exe
 
-      ; 9. 侧边前进键
-      if it.sideForward = "{Media_Prev}"
-        GroupAdd "sideForward_Media_Prev", it.exe
-      else if it.sideForward = "!{Left}"
-        GroupAdd "sideForward_alt_left", it.exe
-      else if it.sideForward = "!0"
-        GroupAdd "sideForward_alt_0", it.exe
-      else if it.sideForward = "!["
-        GroupAdd "sideForward_alt_zuofang", it.exe
-      else if it.sideForward = "^{Left}"
-        GroupAdd "sideForward_ctrl_left", it.exe
-      else if it.sideForward = "^{PgUp}"
-        GroupAdd "sideForward_ctrl_pgup", it.exe
-      else if it.sideForward = "^!{Left}"
-        GroupAdd "sideForward_ctrl_alt_left", it.exe
-    }
+    ; 7. 后退
+    if it.back = "{Media_Prev}"
+      GroupAdd "back_Media_Prev", it.exe
+
+    ; 8. 上个标签
+    if it.previousTag = "{Media_Prev}"
+      GroupAdd "previous_Media_Prev", it.exe
+    else if it.previousTag = "!0"
+      GroupAdd "previous_alt_0", it.exe
+    else if it.previousTag = "!{Left}"
+      GroupAdd "previous_alt_left", it.exe
+    else if it.previousTag = "!["
+      GroupAdd "previous_alt_zuofang", it.exe
+    else if it.previousTag = "^{Left}"
+      GroupAdd "previous_ctrl_left", it.exe
+    else if it.previousTag = "^!{Left}"
+      GroupAdd "previous_ctrl_alt_left", it.exe
+    else if it.previousTag = "^{PgUp}"
+      GroupAdd "previous_ctrl_pgup", it.exe
+
+    ; 9. 侧边前进键
+    if it.sideForward = "{Media_Prev}"
+      GroupAdd "sideForward_Media_Prev", it.exe
+    else if it.sideForward = "!{Left}"
+      GroupAdd "sideForward_alt_left", it.exe
+    else if it.sideForward = "!0"
+      GroupAdd "sideForward_alt_0", it.exe
+    else if it.sideForward = "!["
+      GroupAdd "sideForward_alt_zuofang", it.exe
+    else if it.sideForward = "^{Left}"
+      GroupAdd "sideForward_ctrl_left", it.exe
+    else if it.sideForward = "^{PgUp}"
+      GroupAdd "sideForward_ctrl_pgup", it.exe
+    else if it.sideForward = "^!{Left}"
+      GroupAdd "sideForward_ctrl_alt_left", it.exe
   }  
 }
 
@@ -170,8 +172,11 @@ parseApp() {
 
 parseDataLine(line) {
   split := StrSplit(line, ",")
+  ; 跳过不符合条件的行
+  if split.Length < 12
+    return 
   info := {}
-  ; 跳过空行
+  ; 跳过 exe 未填写的行
   info.exe := Trim(split[3])
   if info.exe = ''
     return
