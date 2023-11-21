@@ -3,8 +3,26 @@
 ; 注册热键 和 热字符串
 Loop appList.Length {
   if A_Index > 1 {
-      it := appList[A_Index]
-      
+    it := appList[A_Index]
+    if it.highLevel {
+      ; 高优先级
+      ; 2. 逃逸
+      if it.escape = "WinClose"
+        GroupAdd "HL_esc_WinClose", it.exe
+
+      ; 3. 关闭
+      if it.close = "{Esc}"
+        GroupAdd "HL_close_esc", it.exe
+      else if it.close = "!{F4}"
+        GroupAdd "HL_close_alt_f4", it.exe
+
+      ; 4. 侧边后退键
+      if it.sideBack = "{Esc}"
+        GroupAdd "HL_sideBack_esc", it.exe
+      else if it.sideBack = "!{F4}"
+        GroupAdd "HL_sideBack_alt_f4", it.exe
+    } else {
+      ; 低优先级
       ; 1. 新建
       if it.new = "{F8}"
         GroupAdd "new_F8", it.exe
@@ -130,9 +148,8 @@ Loop appList.Length {
         GroupAdd "sideForward_ctrl_pgup", it.exe
       else if it.sideForward = "^!{Left}"
         GroupAdd "sideForward_ctrl_alt_left", it.exe
-      else if it.sideForward = "^+{Tab}"
-        GroupAdd "sideForward_ctrl_alt_tab", it.exe
     }
+  }  
 }
 
 parseApp() {
@@ -153,30 +170,37 @@ parseApp() {
 
 parseDataLine(line) {
   split := StrSplit(line, ",")
-  if split.Length != 11
-    return 
   info := {}
-  info.exe := Trim(split[2])
+  ; 跳过空行
+  info.exe := Trim(split[3])
+  if info.exe = ''
+    return
+  ; 判断是否是高等级
+  info.highLevel := split[2] = "高"
+  info.new := Trim(split[4])
+  info.escape := Trim(split[5])
+  info.close := Trim(split[6])
 
-  info.new := Trim(split[3])
+  info.sideBack := Trim(split[7])
+  info.forward := Trim(split[8])
+  info.nextTag := Trim(split[9])
+  info.back := Trim(split[10])
+  info.previousTag := Trim(split[11])
+  info.sideForward := Trim(split[12])
 
-  info.escape := Trim(split[4])
-
-  info.close := Trim(split[5])
-  info.sideBack := Trim(split[6])
-
-  info.forward := Trim(split[7])
-  info.nextTag := Trim(split[8])
-
-  info.back := Trim(split[9])
-  info.previousTag := Trim(split[10])
-  info.sideForward := Trim(split[11])
-
-  if (info.exe = '' and info.new = '' and info.escape = '' and info.close = '' and info.sideBack = ''    
-    and info.forward = '' and info.previousTag = '' and info.sideForward = '' and info.back = '' and info.nextTag = '') {        
-      return    
-    }  
-    return info
+  ; 过滤空行
+  if (info.new = ''
+    and info.escape = ''
+    and info.close = ''
+    and info.sideBack = ''    
+    and info.forward = ''
+    and info.nextTag = ''
+    and info.back = ''
+    and info.previousTag = ''
+    and info.sideForward = ''    
+    )  
+    return  
+  return info
 }
 
 ; 闭包的使用
@@ -189,16 +213,24 @@ app_hotkey2(app_title)
     return isActivate
 }
 
-; 单独的 class 必须单独配置，不能配置在表格中。因为 class 的适配范围太广了
-; 通用 dialog，适用于 netbean 32/64 位 和 jb 全家桶的弹窗
-#HotIf WinActive("ahk_class SunAwtDialog")
-       or WinActive("ahk_class #32770") ; 通用窗口
-            and not WinActive("ahk_exe 360zip.exe") ; 排除不处理 360 压缩
-            and not WinActive("ahk_exe geek64.exe") ; 排除不处理 极客卸载
+; 高等级
+; 2. 逃逸
+#HotIf WinActive("ahk_group HL_esc_WinClose")
+Esc::
 
-^F4::
+; 3. 关闭 打头
+#HotIf WinActive("ahk_group HL_close_alt_f4")
+^F4::Send "!{F4}"
+#HotIf WinActive("ahk_group HL_close_esc")
+^F4::Send "{Esc}"
+
+; 4. 侧边后退键 打头
+#HotIf WinActive("ahk_group HL_sideBack_alt_f4")
+XButton1::Send "!{F4}"
+#HotIf WinActive("ahk_group HL_sideBack_esc")
 XButton1::Send "{Esc}"
 
+; 低等级
 ; 1. 新建
 #HotIf WinActive("ahk_group new_F8")
 ^F3::Send "{F8}"
@@ -244,14 +276,9 @@ Esc::WinClose
 ^F4::Send "^!q"
 #HotIf WinActive("ahk_group close_ctrl_shift_w")
 ^F4::Send "^+w"
-#HotIf not WinActive("ahk_group close_ctrl_f4")
 ; 兜底
-^F4::{
-  try WinClose "A"
-  catch {
-      MsgBox "关闭窗口失败，请重试"
-  }
-}
+#HotIf not WinActive("ahk_group close_ctrl_f4")
+^F4::Send "!{F4}"
 
 ; 4. 侧边后退键 打头
 #HotIf WinActive("ahk_group sideBack_esc")
@@ -274,28 +301,9 @@ XButton1::Send "^w"
 XButton1::Send "^!q"
 #HotIf WinActive("ahk_group sideBack_ctrl_shift_w")
 XButton1::Send "^+w"
-#HotIf
 ; 兜底
-XButton1::{
-  ; title := WinGetTitle("A")
-  ; class := WinGetClass("A")
-  ; pid := WinGetPID("A")  
-  ; id := WinGetID("A")
-  ; processName := WinGetProcessName("A")
-  ; ToolTip
-  ; (
-  ;     "title = " title
-  ;     "`nahk_class = " class
-  ;     "`nahk_exe = " processName
-  ;     "`nahk_pid = " pid
-  ;     "`nahk_id = " id
-  ; )
-  Send "^{F4}" ; 比 WinClose "A" 好使
-  ; try WinClose "A"
-  ; catch {
-  ;     MsgBox "关闭窗口失败，请重试"
-  ; }
-}
+#HotIf
+XButton1::Send "!{F4}" ; 比 WinClose "A" 好使
 
 ; 5. 前进键
 #HotIf WinActive("ahk_group forward_Media_Next")
@@ -349,5 +357,6 @@ XButton2::Send "^{Left}"
 XButton2::Send "^{PgUp}"
 #HotIf WinActive("ahk_group sideForward_ctrl_alt_left")
 XButton2::Send "^!{Left}"
-#HotIf WinActive("ahk_group sideForward_ctrl_alt_tab")
+; 兜底
+#HotIf
 XButton2::Send "^+{Tab}"
