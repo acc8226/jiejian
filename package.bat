@@ -8,3 +8,4 @@ copy shortcut.exe      out\
 copy template\data.csv out\
 copy template\README.pdf out\
 copy "extra\WGestures 1.8.5.0.wgb" out\extra\
+copy "extra\WGestures 2.9.1.wg28bw" out\extra\
