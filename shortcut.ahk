@@ -6,13 +6,13 @@ https://wyagd001.github.io/v2/docs/
 
 考虑到快捷键的方便性，原则上只使用和改写现有快捷键，但是如果原有快捷键已经占用则只能新造快捷键
 
-* ctrl + f3 新建标签/窗口 避免和已有 ctrl + t 冲突
-* ctrl + shift + tab / ctrl + tab 切换到上/下个标签 默认不需要重写
-* ctrl + f4 关闭标签/窗口
-* ctrl + shift + t 撤销关闭标签 默认不需要重写
+* Ctrl + F3 新建标签/窗口 避免和已有 Ctrl + t 冲突
+* Ctrl + Shift + tab / Ctrl + tab 切换到上/下个标签 默认不需要重写
+* Ctrl + F4 关闭标签/窗口
+* Ctrl + Shift + t 撤销关闭标签 默认不需要重写
 
-* 前进 默认 alt + 右
-* 后退 默认 alt + 左
+* 前进 默认 Alt + 右
+* 后退 默认 Alt + 左
 
 * Esc 逃逸键 用于关闭窗口 目前仅支持记事本
 */
@@ -35,10 +35,16 @@ CoordMode "Mouse", "Screen" ; 坐标相对于桌面(整个屏幕)
 settingTray() {
     A_IconTip := "捷键"
     itemCount := DllCall("GetMenuItemCount", "ptr", A_TrayMenu.Handle)
-    MenuHandler(*) {
-        Run "https://gitee.com/acc8226/shortcut-key/releases/"
+    
+    MenuHandler1(*) {
+        Run "https://gitcode.com/acc8226/jiejian/overview"
     }
-    A_TrayMenu.Insert(itemCount . "&", "捷键 2023.10 by acc8226", MenuHandler)
+    A_TrayMenu.Insert(itemCount++ . "&", "在线帮助文档", MenuHandler1)
+
+    MenuHandler2(*) {
+        Run "https://gitcode.com/acc8226/jiejian/releases"
+    }
+    A_TrayMenu.Insert(itemCount++ . "&", "【捷键】23年度纪念版 by acc8226", MenuHandler2)
     Persistent
     ; 建议使用宽度为 16 或 32 像素的图标
     TraySetIcon "favicon.ico"

@@ -1,15 +1,6 @@
 # 捷键 for windows 使用说明
 
-最新版下载地址：<https://gitee.com/acc8226/shortcut-key/releases>
-
-打包发版目录结构
-
-1. extra/ 【增强体验】WGestures1 和 WGestures2 用户可额外导入鼠标手势的配置
-2. app.csv 配置文件
-3. data.csv 配置文件
-4. favicon.ico 图标文件
-5. README.html 软件使用说明书
-6. **shortcut.exe 主程序** 免安装，双击即用
+最新版下载地址：<https://gitcode.com/acc8226/jiejian/releases>
 
 ## 1. 热键 之 鼠标操作
 
@@ -26,17 +17,17 @@
 
 增强已有快捷键以及新增快捷键。支持众多常用软件，详细列表见附录。
 
-| 功能   | 按键  | 用途 |
-|  ----  | ----  | ---- |
-| 新建   | Ctrl + F3 | 用于新建标签/窗口 |
-| 逃逸键  | Esc | 可用于关闭特定窗口 |
-| 关闭  | Ctrl + F4 | 用于关闭标签/窗口 |
-| 鼠标侧边后退键 | Xbutton1 | 万能关闭键，在音乐软件中用于暂停播放 |
-| 前进  | Alt + 左 | 前进键 |
-| 下个标签  | Ctrl + Tab | 切换下一个标签 |
-| 后退  | Alt + 右 | 后退键 |
-| 上个标签  | Ctrl + Shift + Tab | 切换上一个标签 |
-| 鼠标侧边前进键 | Xbutton2 | 万能后退键，在音乐软件中用于下一曲 |
+| 功能 | 按键  | 用途 |
+| ---- | ----  | ---- |
+| 新建 | Ctrl + F3 | 用于新建标签/窗口 |
+| 逃逸键 | Esc | 可用于关闭特定窗口 |
+| 关闭 | Ctrl + F4 | 用于关闭标签/窗口 |
+| 鼠标侧边后退键 | Xbutton1 | 万能关闭键：在多标签页则是关闭当前标签，否则就是关闭窗口，在音乐软件中用于下一曲 |
+| 前进 | Alt + 左 | 前进键 |
+| 下个标签 | Ctrl + Tab | 切换下一个标签 |
+| 后退 | Alt + 右 | 后退键 |
+| 上个标签 | Ctrl + Shift + Tab | 切换上一个标签 |
+| 鼠标侧边前进键 | Xbutton2 | 万能后退键：在多标签页则是切换到上个标签，否则就是后退，在音乐软件中用于暂停播放 |
 
 注：以下部分场景使用了鼠标手势 WGestures 替代了手动键入快捷键
 
@@ -196,15 +187,23 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 
 ## 已知 bug
 
-目前适配不太好的软件：fleet、搜狗浏览器、Windows terminal（可能触发不了关闭和新建标签）、windows 任务管理器（似乎屏蔽了 ctrl 键）
+目前适配不太好的软件：fleet、搜狗浏览器、、windows 任务管理器（似乎屏蔽了 ctrl 键）、微信 PC 版内置的微信小程序。
 
 ## 版本发布
 
-### 捷键 2023 年终版
+### 未来计划
 
-开发中...
+* 支持已过时的 Atom
+* 适配 android studio
+* 是否提供软件检测升级功能
 
-作者无力支撑，是 23 年最后的一个版本，需蛰伏很长时间。
+### 捷键 2023 年度纪念版
+
+这是 23 年最后的一个版本。提前祝大家 2024 年元旦快乐。
+
+* 支持青鸟浏览器、小白浏览器、阿里云客户端、Spotify、CudaText、PotPlayer、Devecostudio 64位。
+* 提供了 WGestures2 预设手势方案
+* bug 修复
 
 ### 捷键 2023.10
 
@@ -285,65 +284,82 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 
 一个伟大的里程碑
 
+## 常见问题
+
+### 如何将捷键设置为开机自启
+
+在运行窗口中运行 shell:startup，按住 alt 键将 shortcut.exe 拖入该 Startup 文件夹中即可。
+
 ## 附录
 
 ### 支持软件
 
-支持且不限于下列软件，且目前持续更新中...
+支持且不限于以下百款软件，且目前持续更新中...
 
+* 360 压缩
+* 小乌龟 Git 的 merge 窗口
+* LibreOffice 窗口
+* ahk 应用程序
+* visual studio
+* skylark
+* 360 极速浏览器
+* Win11 21h1 桌面
+* Win11 22h2 桌面
+* Win11 资源管理器
+* Win11 旧版 记事本
+* win11 新版 记事本
+* 新版 win 11 设置
 * 123 浏览器
 * 115 浏览器
-* 360 极速浏览器
-* 360 极速浏览器的下载管理窗口
 * 2345 浏览器
 * 360 安全浏览器
 * Avast 浏览器
-* brave 浏览器
-* Yandex 浏览器
-* 猫眼浏览
-* chrome 谷歌浏览器 & 百分 & 小马
-* 斑斓石浏览器
-* 小智双核浏览器
+* Brave 浏览器
+* Chrome 谷歌 & 百分 & 小马浏览器
 * Duck 浏览器
 * duoyu 多御浏览器
-* 火狐安全浏览器 & Tor
+* edge 浏览器
+* opera 浏览器
+* QQ 浏览器
+* UC 浏览器
+* vivaldi 浏览器
+* waterfox 浏览器
+* Yandex 浏览器
+* 猫眼浏览器
+* 斑斓石浏览器
+* 小智双核浏览器
+* 火狐 Firefox & Tor 浏览器
 * 华为浏览器
 * 猎豹浏览器
 * 傲游浏览器
-* edge 浏览器
 * 蚂蚁浏览器
-* opera 浏览器
-* QQ 浏览器
 * 红芯浏览器
 * 极速浏览器
 * 联想浏览器
 * 搜狗浏览器
 * 星愿浏览器
-* UC 浏览器
-* vivaldi 浏览器
-* waterfox 浏览器
 * 一点浏览器
+* 双核浏览器
+* 青鸟浏览器
+* 想天浏览器
+* 小白浏览器
+* 小K浏览器
+* UU浏览器
 * Beekeeper Studio
 * Bcompare
-* windows 旧版记事本
-* win11 新版 记事本
-* Postman
 * SourceTree
-* Apifox
-* Win 11 21h1 桌面
-* Win 11 22h2 桌面
-* 资源管理器
 * HbuilderX
 * heidisql
 * MarkText
 * SQLyog
-* 想天浏览器
+* 阿里云客户端
+* zeal
 * thunderbird
 * Tabby
 * Termius
 * WindowsTerminal
 * windTerm
-* visual studio
+* eclipse
 * editplus
 * everedit
 * Fleet
@@ -363,7 +379,6 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 * devc++
 * typora
 * BvSsh
-* skylark
 * Notepad2
 * Notepad3
 * xshell
@@ -377,35 +392,46 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 * QQ
 * Snipaste
 * 微信
-* 任务管理器 关闭不管用
-* qq 音乐
-* 新版 win 11 设置
-* datagrip
-* clion
-* pycharm
-* idea
+* 网易云音乐
+* 酷我音乐
+* QQ音乐
+* 汽水音乐
+* Spotify
 * finalshell
-* netbean 32 位
-* jmeter
-* netbean 64 位
-* 小乌龟合并窗口
+* datagrip 64位
+* clion 64位
+* pycharm 64位
+* idea 64位
+* Writerside 64位
+* Devecostudio 64位
+* Netbean 32 位 & Jmeter
+* Netbean 64 位
 * LibreOffice
-* LibreOffice 窗口
-* ahk 打开窗口
-* ahk spy 窗口
-* WinRAR
-* 360 压缩
+* Postman
+* Apifox
+* HTTPie
+* ApiPost
+* Navicat
+* 稻壳阅读器
+* WPS 图片查看器
+* CudaText
+* PotPlayer 64位
+
+### 打包发版目录结构
+
+1. extra/ 【增强体验】WGestures1 和 WGestures2 用户可导入预设手势模版，WindowSpy U64.exe 供给开发者进行调试。
+2. app.csv 配置文件
+3. data.csv 配置文件
+4. favicon.ico 图标文件
+5. 说明书.pdf 软件使用说明书
+6. **shortcut.exe 主程序** 免安装，双击即用
 
 ### 软件设计思路
 
-严格按照 ahk 中的 hotIf 的优先匹配原则。一般 esc 会在前。
-
-* alt + 左方向键 比 backspace 更加通用
-* xbutton1 键：万能关闭键（如果在多标签页则是关闭当前标签，否则就是关闭窗口）
-* xbutton2 键: 万能后退键（如果在多标签页则是切换到上个标签，否则就是后退）
-
-app.csv 中先后顺序关系通过优先级进行定义
+* 严格按照 ahk 中的 hotIf 的优先匹配原则。一般 esc 会在前。
+* Alt + 左方向键 比 backspace 更加通用
+* app.csv 中先后顺序关系通过优先级进行定义
 
 ## 感谢
 
-本程序编辑 csv 文件用到了开源的 LiberOffice。代码编辑用到了 jetbrains 公司的 IDEA。主要发布平台为 github 和 gitcode。项目主页发布在 GitHub Page。
+本程序编辑 csv 文件用到了开源的 LiberOffice。代码编辑用到了 Jetbrains 公司的 IDEA。主要发布平台为 GitHub 和 gitcode.com。项目主页发布在 GitHub Page。

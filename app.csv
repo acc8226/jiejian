@@ -4,11 +4,11 @@
 通用窗口,低,ahk_class #32770,,,{Esc},{Esc},,,,,
 360 压缩,高,ahk_class #32770 ahk_exe 360zip.exe,,,!{F4},!{F4},,,,,
 ,,,,,,,,,,,
-小乌龟 merge 窗口,,ahk_exe TortoiseGitMerge.exe,,,{Esc},{Esc},,,,,
+小乌龟 Git 的 merge 窗口,,ahk_exe TortoiseGitMerge.exe,,,{Esc},{Esc},,,,,
 LibreOffice 窗口,,ahk_exe soffice.bin ahk_class SALSUBFRAME,,,{Esc},{Esc},,,,,
-ahk 打开窗口,,ahk_exe AutoHotkey64.exe ahk_class AutoHotkey,,,{Esc},{Esc},,,,,
+ahk 应用程序,,ahk_exe AutoHotkey64.exe ahk_class AutoHotkey,,,{Esc},{Esc},,,,,
 ,,,,,,,,,,,
-visual studio,低,ahk_exe devenv.exe,^n,,,^{F4},,,,,
+visual studio,低,ahk_exe devenv.exe,^n,,^{F4},^{F4},,,,,
 visual studio 窗口,高,Microsoft Visual Studio 帐户设置 ahk_exe devenv.exe,,,{Esc} ,{Esc} ,,,,,
 visual studio 窗口,高,管理扩展 ahk_exe devenv.exe,,,{Esc},{Esc} ,,,,,
 visual studio 窗口,高,关于 Microsoft Visual Studio ahk_exe devenv.exe,,,{Esc} ,{Esc} ,,,,,
@@ -20,14 +20,12 @@ skylark 窗口,高,ahk_exe skylark.exe ahk_class #32770,,WinClose,,,,,,,
 360 极速浏览器,低,ahk_exe 360ChromeX.exe,^t,,^{F4},^{F4},,,,,
 360 极速浏览器-下载管理窗口,高,ahk_exe 360ChromeX.exe ahk_class Chrome_WidgetWin_2,,,{Esc} ,{Esc},,,,,
 ,,,,,,,,,,,
-Win 11 21h1 桌面,,ahk_exe explorer.exe ahk_class WorkerW,,,{Alt Down}{F4 Down}{F4 Up}{Alt Up},{Alt Down}{F4 Down}{F4 Up}{Alt Up},,,,,
-Win 11 22h2 桌面,,ahk_exe explorer.exe ahk_class Progman,,,{Alt Down}{F4 Down}{F4 Up}{Alt Up},{Alt Down}{F4 Down}{F4 Up}{Alt Up},,,,,
-资源管理器 ,,ahk_exe explorer.exe ahk_class CabinetWClass,^t,,^w ,^w ,,,,,
+Win11 21h1 桌面,,ahk_exe explorer.exe ahk_class WorkerW,,,{Alt Down}{F4 Down}{F4 Up}{Alt Up},{Alt Down}{F4 Down}{F4 Up}{Alt Up},,,,,
+Win11 22h2 桌面,,ahk_exe explorer.exe ahk_class Progman,,,{Alt Down}{F4 Down}{F4 Up}{Alt Up},{Alt Down}{F4 Down}{F4 Up}{Alt Up},,,,,
+Win11 资源管理器,,ahk_exe explorer.exe ahk_class CabinetWClass,^t,,^w ,^w ,,,,,
 ,,,,,,,,,,,
-windows 旧版 记事本,,ahk_exe notepad.exe,^t,WinClose,^w,^w,,,,,
-win11 新版 记事本,,ahk_exe Notepad.exe,^t,WinClose,^w,^w,,,,,
-,,,,,,,,,,,
-任务管理器 关闭不管用,,ahk_exe Taskmgr.exe ahk_class TaskManagerWindow,,,!{F4},!{F4},,,,,
+Win11 旧版 记事本,,ahk_exe notepad.exe,^t,WinClose,^w,^w,,,,,
+Win11 新版 记事本,,ahk_exe Notepad.exe,^t,WinClose,^w,^w,,,,,
 ,,,,,,,,,,,
 新版 win 11 设置,,ahk_exe ApplicationFrameHost.exe ahk_class ApplicationFrameWindow,,,,,,,,,!{Left} 
 ,,,,,,,,,,,
@@ -36,12 +34,12 @@ win11 新版 记事本,,ahk_exe Notepad.exe,^t,WinClose,^w,^w,,,,,
 2345 浏览器,,ahk_exe 2345Explorer.exe,^t,,^{F4},^{F4},,,,,
 360 安全浏览器,,ahk_exe 360se.exe,^t,,^{F4},^{F4},,,,,
 Avast 浏览器,,ahk_exe AvastBrowser.exe,^t,,^{F4},^{F4},,,,,
-brave 浏览器,,ahk_exe brave.exe,^t,,^{F4},^{F4},,,,,
-chrome 谷歌浏览器 & 百分 & 小马,,ahk_exe chrome.exe,^t,,^{F4},^{F4},,,,,
+Brave 浏览器,,ahk_exe brave.exe,^t,,^{F4},^{F4},,,,,
+Chrome 谷歌 & 百分 & 小马浏览器,,ahk_exe chrome.exe,^t,,^{F4},^{F4},,,,,
 Duck 浏览器,,ahk_exe DuckDuckGo.exe,^t,,^{F4},^{F4},,,,,
 duoyu 多御浏览器,,ahk_exe duoyu.exe,^t,,^{F4},^{F4},,,,,
 edge 浏览器,,ahk_exe msedge.exe,^t,,^{F4},^{F4},,,,,
-opera 浏览器 ,,ahk_exe opera.exe,^t,,^{F4},^{F4},,,,,
+opera 浏览器,,ahk_exe opera.exe,^t,,^{F4},^{F4},,,,,
 QQ 浏览器,,ahk_exe QQBrowser.exe,^t,,^{F4},^{F4},,,,,
 UC 浏览器,,ahk_exe UCBrowser.exe,^t,,^{F4},^{F4},,,,,
 vivaldi 浏览器,,ahk_exe vivaldi.exe,^t,,^{F4},^{F4},,,,,
@@ -50,7 +48,7 @@ Yandex 浏览器,,ahk_exe browser.exe ahk_class YandexBrowser_WidgetWin_1,^t,,^{
 猫眼浏览器,,ahk_exe catsxp.exe,^t,,^{F4},^{F4},,,,,
 斑斓石浏览器,,ahk_exe Colorfulstone.exe,^t,,^{F4},^{F4},,,,,
 小智双核浏览器,,ahk_exe DCBrowser.exe,^t,,^{F4},^{F4},,,,,
-火狐安全浏览器 & Tor,,ahk_exe firefox.exe,^t,,^{F4},^{F4},,,,,
+火狐 Firefox & Tor 浏览器,,ahk_exe firefox.exe,^t,,^{F4},^{F4},,,,,
 华为浏览器,,ahk_exe HuaweiBrowser.exe,^t,,^{F4},^{F4},,,,,
 猎豹浏览器,,ahk_exe liebao.exe,^t,,^{F4},^{F4},,,,,
 傲游浏览器,,ahk_exe Maxthon.exe,^t,,^{F4},^{F4},,,,,
@@ -71,11 +69,12 @@ UU浏览器,,ahk_exe UUBrowser.exe,^t,,^{F4},^{F4},,,,,
 Beekeeper Studio,,ahk_exe Beekeeper Studio.exe,^t,,^w,^w,,,,,
 Bcompare,,ahk_exe Bcompare.exe,^t,,^w,^w,,,,,
 SourceTree,,ahk_exe SourceTree.exe,^t,,^w,^w,,,,,
-HbuilderX,,ahk_exe HBuilderX.exe,^t,,,^{F4},,^{PgDn},,^{PgUp},^{PgUp}
-heidisql,,ahk_exe heidisql.exe,^t,,,^{F4},,,,,
+HbuilderX,,ahk_exe HBuilderX.exe,^t,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
+heidisql,,ahk_exe heidisql.exe,^t,,^{F4},^{F4},,,,,
 MarkText,,ahk_exe MarkText.exe,^t,,^w ,^w ,,,,,
 SQLyog,,ahk_exe SQLyog.exe,^t,,!l ,!l ,,^{PgDn},,^{PgUp},^{PgUp}
 阿里云客户端,,ahk_exe Alibaba Cloud Client.exe,^t,,^w,^w,,,,,
+Zeal,,ahk_exe zeal.exe,^t,,^w,^w,,,,,
 ,,,,,,,,,,,
 thunderbird,,ahk_exe thunderbird.exe,,,^w,^w,,,,,^{PgUp}
 Tabby,,ahk_exe Tabby.exe,^+t ,,^+w ,^+w ,,,,,
@@ -87,17 +86,17 @@ eclipse,,ahk_exe eclipse.exe,^n,,,^{F4},,^{PgDn},,^{PgUp},^{PgUp}
 editplus,,ahk_exe editplus.exe,^n ,,^w,^w,,,,,
 everedit,,ahk_exe EverEdit.exe,^n ,,^w,^w,,,,,
 Fleet,,ahk_exe Fleet.exe,^n,,,,,^{PgDn},,^{PgUp},^{PgUp}
-MarkdownPad2,,ahk_exe MarkdownPad2.exe,^n,,,^{F4},,,,,
+MarkdownPad2,,ahk_exe MarkdownPad2.exe,^n,,^{F4},^{F4},,,,,
 GitHub 桌面版,,ahk_exe GitHubDesktop.exe,^n,,,,,,,,
 kate,,ahk_exe kate.exe,^n ,,^w,^w,,!{Right},,!{Left},!{Left}
-myeclipse,,ahk_class SWT_Window0 ahk_exe javaw.exe,^n,,,^{F4},,^{PgDn},,^{PgUp},^{PgUp}
+myeclipse,,ahk_class SWT_Window0 ahk_exe javaw.exe,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
 Notepad++,,ahk_exe notepad++.exe,^n,,^w,^w,,,,,
 Notepad--,,ahk_exe Notepad--.exe,^n,,^w,^w,,,,,
-sts,,ahk_exe SpringToolSuite4.exe,^n,,,^{F4},,^{PgDn},,^{PgUp},^{PgUp}
-sublime,,ahk_exe sublime_text.exe,^n,,,^{F4},,,,,
-ultraedit,,ahk_exe uedit64.exe,^n,,,^{F4},,,,,
-winmerge,,ahk_exe WinMergeU.exe,^n,,,^{F4},,,,,
-wps,,ahk_exe wps.exe,^n,,,^{F4},,,,,
+sts,,ahk_exe SpringToolSuite4.exe,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
+sublime,,ahk_exe sublime_text.exe,^n,,^{F4},^{F4},,,,,
+ultraedit,,ahk_exe uedit64.exe,^n,,^{F4},^{F4},,,,,
+winmerge,,ahk_exe WinMergeU.exe,^n,,^{F4},^{F4},,,,,
+WPS,,ahk_exe wps.exe,^n,,^{F4},^{F4},,,,,
 xftp,,ahk_exe Xftp.exe,^n,,,,,,,,
 Bracket,,ahk_exe Brackets.exe,^n,,^w,^w,,^{PgDn},,^{PgUp},^{PgUp} 
 devc++,,ahk_exe devcpp.exe,^n,,^w,^w,,,,,
@@ -106,7 +105,7 @@ BvSsh,,ahk_exe BvSsh.exe ahk_class #32770,,WinClose ,,,,,,,
 ,,,,,,,,,,,
 Notepad2,,ahk_exe Notepad2.exe,^n,,,,,,,,
 Notepad3,,ahk_exe Notepad3.exe,^n,,,,,,,,
-xshell,,ahk_exe Xshell.exe,^n,,,,,,,,
+Xshell,,ahk_exe Xshell.exe,^n,,,,,,,,
 ,,,,,,,,,,,
 vscode,,ahk_exe Code.exe ahk_class Chrome_WidgetWin_1,{Control Down}n{Control Up},,^{F4},^{F4},,,,,
 SecureCRT,,ahk_exe SecureCRT.exe,!c,,^{F4},^{F4},,,,,
@@ -130,16 +129,17 @@ QQ音乐,,ahk_exe QQMusic.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_
 汽水音乐,,ahk_exe SodaMusic.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
 Spotify,,ahk_exe Spotify.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
 ,,,,,,,,,,,
-finalshell,,FinalShell.* ahk_exe java.exe ahk_class SunAwtFrame,!a,,!q,!q,,!],,!0,!0
+Finalshell,,FinalShell.* ahk_exe java.exe ahk_class SunAwtFrame,!a,,!q,!q,,!],,!0,!0
 ,,,,,,,,,,,
-datagrip,,ahk_class SunAwtFrame ahk_exe datagrip64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-clion,,ahk_class SunAwtFrame ahk_exe clion64.exe,,,,,,!{Right},,!{Left},!{Left}
-pycharm,,ahk_class SunAwtFrame ahk_exe pycharm64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-idea,,ahk_class SunAwtFrame ahk_exe idea64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-Writerside,,ahk_class SunAwtFrame ahk_exe writerside64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+Datagrip 64位,,ahk_class SunAwtFrame ahk_exe datagrip64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+Clion 64位,,ahk_class SunAwtFrame ahk_exe clion64.exe,,,,,,!{Right},,!{Left},!{Left}
+Pycharm 64位,,ahk_class SunAwtFrame ahk_exe pycharm64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+idea 64位,,ahk_class SunAwtFrame ahk_exe idea64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+Writerside 64位,,ahk_class SunAwtFrame ahk_exe writerside64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+Devecostudio 64位,,ahk_class SunAwtFrame ahk_exe devecostudio64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
 ,,,,,,,,,,,
-netbean 32 位 & jmeter,,ahk_class SunAwtFrame ahk_exe javaw.exe,^n,,,,,^{PgDn} ,,^{PgUp},^{PgUp}
-netbean 64 位,,ahk_class SunAwtFrame ahk_exe netbeans64.exe,^n,,,,,^{PgDn} ,,^{PgUp},^{PgUp}
+Netbean 32 位 & Jmeter,,ahk_class SunAwtFrame ahk_exe javaw.exe,^n,,,,,^{PgDn} ,,^{PgUp},^{PgUp}
+Netbean 64 位,,ahk_class SunAwtFrame ahk_exe netbeans64.exe,^n,,,,,^{PgDn} ,,^{PgUp},^{PgUp}
 ,,,,,,,,,,,
 LibreOffice,,ahk_exe soffice.bin ahk_class SALFRAME,^n,,^{F4},^{F4},,,,,
 Postman,,ahk_exe Postman.exe,^t,,^w,^w,,,,,
@@ -147,12 +147,13 @@ Apifox,,ahk_exe Apifox.exe,^t,,^w,^w,,,,,
 HTTPie,,ahk_exe HTTPie.exe,^t,,^w,^w,,,,,
 ApiPost,,ahk_exe ApiPost7.exe,^t,,^w,^w,,,,,
 navicat,,ahk_exe navicat.exe,,,^w,^w,,,,,
-稻壳阅读器,,ahk_exe DocBox.exe,,,,^w,,,,,
+稻壳阅读器,,ahk_exe DocBox.exe,,,^w,^w,,,,,
 ,,,,,,,,,,,
 WPS 图片查看器,,ahk_exe photolaunch.exe,,,{Esc},{Esc},,,,,
 ,,,,,,,,,,,
 CudaText,,ahk_exe cudatext.exe,^n,,^w,^w,,,,,
 ,,,,,,,,,,,
-微信小程序 不起作用,,ahk_exe WeChatAppEx.exe,,,,,,,,,
+PotPlayer 64位,,ahk_exe PotPlayerMini64.exe,{F3},,,,{PgDn},{PgDn},{PgUp},{PgUp},
 ,,,,,,,,,,,
-PotPlayer,,ahk_exe PotPlayerMini64.exe,,,,,{Right},{PgDn},{Left},{PgUp},
+任务管理器 关闭不管用,,ahk_exe Taskmgr.exe ahk_class TaskManagerWindow,,,!{F4},!{F4},,,,,
+微信小程序 不起作用,,ahk_exe WeChatAppEx.exe,,,,,,,,,

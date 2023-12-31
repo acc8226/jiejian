@@ -7,7 +7,6 @@ Loop appList.Length {
 
   it := appList[A_Index]
   if it.highLevel {
-
     ; 高优先级
     ; 2. 逃逸
     if it.escape = "WinClose"
@@ -27,7 +26,9 @@ Loop appList.Length {
   } else {
     ; 低优先级
     ; 1. 新建
-    if it.new = "{F8}"
+    if it.new = "{F3}"
+      GroupAdd "new_F3", it.exe
+    else if it.new = "{F8}"
       GroupAdd "new_F8", it.exe
     else if it.new = "!a"
       GroupAdd "new_alt_a", it.exe
@@ -248,6 +249,8 @@ XButton1::Send "{Esc}"
 
 ; 低等级
 ; 1. 新建
+#HotIf WinActive("ahk_group new_F3")
+^F3::Send "{F3}"
 #HotIf WinActive("ahk_group new_F8")
 ^F3::Send "{F8}"
 #HotIf WinActive("ahk_group new_alt_a")
