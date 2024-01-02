@@ -1,4 +1,4 @@
-软件,优先级（高或者低，默认为低）,标识符,新建 ctrl+F3,逃逸键 esc,关闭 ctrl+F4,侧边后退键,前进 alt+right,下个标签 ctrl+tab,后退 alt+left,上个标签 ctrl+shift+tab,侧边前进键
+软件,优先级（高或者低，默认为低）,标识符,新建 ctrl+F3,逃逸键 esc,关闭 ctrl+F4,侧边后退键 XB1,前进 alt+right,下个标签 ctrl+tab,后退 alt+left,上个标签 ctrl+shift+tab,侧边前进键  XB2
 通用窗口,低,ahk_class SunAwtDialog,,,{Esc},{Esc},,,,,
 ,,,,,,,,,,,
 通用窗口,低,ahk_class #32770,,,{Esc},{Esc},,,,,
@@ -7,6 +7,7 @@
 小乌龟 Git 的 merge 窗口,,ahk_exe TortoiseGitMerge.exe,,,{Esc},{Esc},,,,,
 LibreOffice 窗口,,ahk_exe soffice.bin ahk_class SALSUBFRAME,,,{Esc},{Esc},,,,,
 ahk 应用程序,,ahk_exe AutoHotkey64.exe ahk_class AutoHotkey,,,{Esc},{Esc},,,,,
+Motrix,,ahk_exe Motrix.exe,^n,,,,,,,,
 ,,,,,,,,,,,
 visual studio,低,ahk_exe devenv.exe,^n,,^{F4},^{F4},,,,,
 visual studio 窗口,高,Microsoft Visual Studio 帐户设置 ahk_exe devenv.exe,,,{Esc} ,{Esc} ,,,,,
@@ -37,13 +38,13 @@ Avast 浏览器,,ahk_exe AvastBrowser.exe,^t,,^{F4},^{F4},,,,,
 Brave 浏览器,,ahk_exe brave.exe,^t,,^{F4},^{F4},,,,,
 Chrome 谷歌 & 百分 & 小马浏览器,,ahk_exe chrome.exe,^t,,^{F4},^{F4},,,,,
 Duck 浏览器,,ahk_exe DuckDuckGo.exe,^t,,^{F4},^{F4},,,,,
-duoyu 多御浏览器,,ahk_exe duoyu.exe,^t,,^{F4},^{F4},,,,,
-edge 浏览器,,ahk_exe msedge.exe,^t,,^{F4},^{F4},,,,,
-opera 浏览器,,ahk_exe opera.exe,^t,,^{F4},^{F4},,,,,
+Duoyu 多御浏览器,,ahk_exe duoyu.exe,^t,,^{F4},^{F4},,,,,
+Edge 浏览器,,ahk_exe msedge.exe,^t,,^{F4},^{F4},,,,,
+Opera 浏览器,,ahk_exe opera.exe,^t,,^{F4},^{F4},,,,,
 QQ 浏览器,,ahk_exe QQBrowser.exe,^t,,^{F4},^{F4},,,,,
 UC 浏览器,,ahk_exe UCBrowser.exe,^t,,^{F4},^{F4},,,,,
-vivaldi 浏览器,,ahk_exe vivaldi.exe,^t,,^{F4},^{F4},,,,,
-waterfox 浏览器,,ahk_exe waterfox.exe,^t,,^{F4},^{F4},,,,,
+Vivaldi 浏览器,,ahk_exe vivaldi.exe,^t,,^{F4},^{F4},,,,,
+Waterfox 浏览器,,ahk_exe waterfox.exe,^t,,^{F4},^{F4},,,,,
 Yandex 浏览器,,ahk_exe browser.exe ahk_class YandexBrowser_WidgetWin_1,^t,,^{F4},^{F4},,,,,
 猫眼浏览器,,ahk_exe catsxp.exe,^t,,^{F4},^{F4},,,,,
 斑斓石浏览器,,ahk_exe Colorfulstone.exe,^t,,^{F4},^{F4},,,,,
@@ -76,37 +77,38 @@ SQLyog,,ahk_exe SQLyog.exe,^t,,!l ,!l ,,^{PgDn},,^{PgUp},^{PgUp}
 阿里云客户端,,ahk_exe Alibaba Cloud Client.exe,^t,,^w,^w,,,,,
 Zeal,,ahk_exe zeal.exe,^t,,^w,^w,,,,,
 ,,,,,,,,,,,
-thunderbird,,ahk_exe thunderbird.exe,,,^w,^w,,,,,^{PgUp}
+Thunderbird,,ahk_exe thunderbird.exe,,,^w,^w,,,,,^{PgUp}
 Tabby,,ahk_exe Tabby.exe,^+t ,,^+w ,^+w ,,,,,
 Termius,,ahk_exe Termius.exe ,^+t,,^+w ,^+w,,!{Right},,!{Left},!{Left}
 WindowsTerminal,,ahk_exe WindowsTerminal.exe,^+t ,,^+w ,^+w ,,,,,
 windTerm,,ahk_exe WindTerm.exe,^n,,^+w ,^+w,,!],,![,![ 
 ,,,,,,,,,,,
-eclipse,,ahk_exe eclipse.exe,^n,,,^{F4},,^{PgDn},,^{PgUp},^{PgUp}
-editplus,,ahk_exe editplus.exe,^n ,,^w,^w,,,,,
-everedit,,ahk_exe EverEdit.exe,^n ,,^w,^w,,,,,
+Eclipse,,ahk_exe eclipse.exe,^n,,,^{F4},,^{PgDn},,^{PgUp},^{PgUp}
+Editplus,,ahk_exe editplus.exe,^n ,,^w,^w,,,,,
+Everedit,,ahk_exe EverEdit.exe,^n ,,^w,^w,,,,,
 Fleet,,ahk_exe Fleet.exe,^n,,,,,^{PgDn},,^{PgUp},^{PgUp}
 MarkdownPad2,,ahk_exe MarkdownPad2.exe,^n,,^{F4},^{F4},,,,,
 GitHub 桌面版,,ahk_exe GitHubDesktop.exe,^n,,,,,,,,
 kate,,ahk_exe kate.exe,^n ,,^w,^w,,!{Right},,!{Left},!{Left}
-myeclipse,,ahk_class SWT_Window0 ahk_exe javaw.exe,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
+Myeclipse,,ahk_class SWT_Window0 ahk_exe javaw.exe,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
 Notepad++,,ahk_exe notepad++.exe,^n,,^w,^w,,,,,
 Notepad--,,ahk_exe Notepad--.exe,^n,,^w,^w,,,,,
 sts,,ahk_exe SpringToolSuite4.exe,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
 sublime,,ahk_exe sublime_text.exe,^n,,^{F4},^{F4},,,,,
-ultraedit,,ahk_exe uedit64.exe,^n,,^{F4},^{F4},,,,,
-winmerge,,ahk_exe WinMergeU.exe,^n,,^{F4},^{F4},,,,,
+Ultraedit,,ahk_exe uedit64.exe,^n,,^{F4},^{F4},,,,,
+Winmerge,,ahk_exe WinMergeU.exe,^n,,^{F4},^{F4},,,,,
 WPS,,ahk_exe wps.exe,^n,,^{F4},^{F4},,,,,
-xftp,,ahk_exe Xftp.exe,^n,,,,,,,,
+Xftp,,ahk_exe Xftp.exe,^n,,,,,,,,
 Bracket,,ahk_exe Brackets.exe,^n,,^w,^w,,^{PgDn},,^{PgUp},^{PgUp} 
-devc++,,ahk_exe devcpp.exe,^n,,^w,^w,,,,,
-typora,,ahk_exe Typora.exe,^n,,^w,^w,,,,,
+Devc++,,ahk_exe devcpp.exe,^n,,^w,^w,,,,,
+Typora,,ahk_exe Typora.exe,^n,,^w,^w,,,,,
 BvSsh,,ahk_exe BvSsh.exe ahk_class #32770,,WinClose ,,,,,,,
 ,,,,,,,,,,,
 Notepad2,,ahk_exe Notepad2.exe,^n,,,,,,,,
 Notepad3,,ahk_exe Notepad3.exe,^n,,,,,,,,
 Xshell,,ahk_exe Xshell.exe,^n,,,,,,,,
 ,,,,,,,,,,,
+Atom,,ahk_exe atom.exe,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
 vscode,,ahk_exe Code.exe ahk_class Chrome_WidgetWin_1,{Control Down}n{Control Up},,^{F4},^{F4},,,,,
 SecureCRT,,ahk_exe SecureCRT.exe,!c,,^{F4},^{F4},,,,,
 SumatraPDF,,ahk_exe SumatraPDF.exe ahk_class SUMATRA_PDF_FRAME,,,^{F4},^{F4},,,,,
@@ -128,15 +130,24 @@ Snipaste,,Snipaste ahk_exe Snipaste.exe,,,{Esc},{Esc},,,,,
 QQ音乐,,ahk_exe QQMusic.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
 汽水音乐,,ahk_exe SodaMusic.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
 Spotify,,ahk_exe Spotify.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+MusicPlayer2,,ahk_exe MusicPlayer2.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
 ,,,,,,,,,,,
 Finalshell,,FinalShell.* ahk_exe java.exe ahk_class SunAwtFrame,!a,,!q,!q,,!],,!0,!0
 ,,,,,,,,,,,
-Datagrip 64位,,ahk_class SunAwtFrame ahk_exe datagrip64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-Clion 64位,,ahk_class SunAwtFrame ahk_exe clion64.exe,,,,,,!{Right},,!{Left},!{Left}
-Pycharm 64位,,ahk_class SunAwtFrame ahk_exe pycharm64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-idea 64位,,ahk_class SunAwtFrame ahk_exe idea64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-Writerside 64位,,ahk_class SunAwtFrame ahk_exe writerside64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-Devecostudio 64位,,ahk_class SunAwtFrame ahk_exe devecostudio64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+Clion,,ahk_class SunAwtFrame ahk_exe clion64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+Datagrip,,ahk_class SunAwtFrame ahk_exe datagrip64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+Goland,,ahk_class SunAwtFrame ahk_exe goland64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+Idea,,ahk_class SunAwtFrame ahk_exe idea64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+Phpstorm,,ahk_class SunAwtFrame ahk_exe phpstorm64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+Pycharm,,ahk_class SunAwtFrame ahk_exe pycharm64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+Rider,,ahk_class SunAwtFrame ahk_exe rider64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+RustrOver,,ahk_class SunAwtFrame ahk_exe rustrover64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+Rubymine,,ahk_class SunAwtFrame ahk_exe rubymine64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+Webstorm,,ahk_class SunAwtFrame ahk_exe webstorm64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+Writerside,,ahk_class SunAwtFrame ahk_exe writerside64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+,,,,,,,,,,,
+Android Studio,,ahk_class SunAwtFrame ahk_exe studio64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+DevEcoStudio 64位,,ahk_class SunAwtFrame ahk_exe devecostudio64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
 ,,,,,,,,,,,
 Netbean 32 位 & Jmeter,,ahk_class SunAwtFrame ahk_exe javaw.exe,^n,,,,,^{PgDn} ,,^{PgUp},^{PgUp}
 Netbean 64 位,,ahk_class SunAwtFrame ahk_exe netbeans64.exe,^n,,,,,^{PgDn} ,,^{PgUp},^{PgUp}

@@ -2,11 +2,10 @@
 @REM updateDate: 2023-12-31
 
 rd /S /Q out
-mkdir out
-mkdir out\extra
-copy extra\*           out\extra\
-copy app.csv           out\
-copy template\data.csv out\
-copy favicon.ico       out\
-copy *.pdf             out\
-copy shortcut.exe      out\
+MKDIR out\shortcut\extra\
+copy extra\*           out\shortcut\extra\
+copy app.csv           out\shortcut\
+copy template\data.csv out\shortcut\
+copy favicon.ico       out\shortcut\
+copy *.url             out\shortcut\
+copy shortcut.exe      out\shortcut\shortcut64.exe
