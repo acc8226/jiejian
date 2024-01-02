@@ -1,4 +1,4 @@
-# 捷键 for windows 使用说明
+# 捷键 for win 使用说明
 
 [最新版下载地址](https://gitcode.com/acc8226/jiejian/releases)
 
@@ -288,9 +288,19 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 
 ### 如何将捷键设置为开机自启
 
-在运行窗口中运行 shell:startup，按住 alt 键将 shortcut.exe 拖入该 Startup 文件夹中即可。
+在运行窗口中运行 shell:startup，按住 alt 键将 shortcut64.exe 拖入 Startup 文件夹内即可。
 
 ## 附录
+
+### 搭配软件
+
+【免费】【win】WGestures 1 鼠标手势
+<https://www.yingdev.com/projects/wgestures>
+
+或者
+
+【付费】【win mac】WGestures 2 鼠标手势
+<https://www.yingdev.com/projects/wgestures2>
 
 ### 支持软件
 
@@ -423,8 +433,8 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 2. app.csv 配置文件
 3. data.csv 配置文件
 4. favicon.ico 图标文件
-5. 说明书.pdf 软件使用说明书
-6. **shortcut.exe 主程序** 免安装，双击即用
+5. **shortcut64.exe** 主程序 免安装，双击即用
+6. 在线帮助文档.url 网络书签
 
 ### 软件设计思路
 
