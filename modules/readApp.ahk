@@ -99,7 +99,7 @@ Loop appList.Length {
 
     ; 5. 前进
     if it.forward = "{Media_Next}"
-      GroupAdd "forward_Media_Next", it.exe
+      GroupAdd "forward_mediaNext", it.exe
     else if it.forward = "^{Right}"
       GroupAdd "forward_ctrl_right", it.exe
     else if it.forward = "{PgDn}"
@@ -109,19 +109,21 @@ Loop appList.Length {
 
     ; 6. 下个标签
     if it.nextTag = "{Media_Next}"
-      GroupAdd "next_Media_Next", it.exe
+      GroupAdd "next_mediaNext", it.exe
+    else if it.nextTag = "]"
+      GroupAdd "next_closeBracket", it.exe
     else if it.nextTag = "^+{PgDn}"
-      GroupAdd "next_ctrl_shift_PgDn", it.exe
+      GroupAdd "next_ctrl_shift_pgDn", it.exe
     else if it.nextTag = "!]"
-      GroupAdd "next_alt_youfang", it.exe
+      GroupAdd "next_alt_closeBracket", it.exe
     else if it.nextTag = "!{Right}"
       GroupAdd "next_alt_right", it.exe
     else if it.nextTag = "^{PgDn}"
-      GroupAdd "next_ctrl_pgdn", it.exe
+      GroupAdd "next_ctrl_pgDn", it.exe
     else if it.nextTag = "^!{Right}"
       GroupAdd "next_ctrl_alt_right", it.exe
     else if it.nextTag = "{PgDn}"
-      GroupAdd "next_PgDn", it.exe   
+      GroupAdd "next_pgDn", it.exe   
 
     ; 7. 后退
     if it.back = "{Media_Prev}"
@@ -132,13 +134,15 @@ Loop appList.Length {
       GroupAdd "back_Left", it.exe
     ; 8. 上个标签
     if it.previousTag = "{Media_Prev}"
-      GroupAdd "previous_Media_Prev", it.exe
+      GroupAdd "previous_mediaPrev", it.exe
+    else if it.previousTag = "["
+      GroupAdd "previous_openBracket", it.exe
     else if it.previousTag = "!0"
       GroupAdd "previous_alt_0", it.exe
     else if it.previousTag = "!{Left}"
       GroupAdd "previous_alt_left", it.exe
     else if it.previousTag = "!["
-      GroupAdd "previous_alt_zuofang", it.exe
+      GroupAdd "previous_alt_openBracket", it.exe
     else if it.previousTag = "^{Left}"
       GroupAdd "previous_ctrl_left", it.exe
     else if it.previousTag = "^!{Left}"
@@ -156,7 +160,7 @@ Loop appList.Length {
     else if it.sideForward = "!0"
       GroupAdd "sideForward_alt_0", it.exe
     else if it.sideForward = "!["
-      GroupAdd "sideForward_alt_zuofang", it.exe
+      GroupAdd "sideForward_alt_openBracket", it.exe
     else if it.sideForward = "^{Left}"
       GroupAdd "sideForward_ctrl_left", it.exe
     else if it.sideForward = "^{PgUp}"
@@ -325,7 +329,7 @@ XButton1::Send "^+w"
 XButton1::Send "!{F4}" ; 比 WinClose "A" 好使
 
 ; 5. 前进键
-#HotIf WinActive("ahk_group forward_Media_Next")
+#HotIf WinActive("ahk_group forward_mediaNext")
 !Right::Send "{Media_Next}" ; 下一曲
 #HotIf WinActive("ahk_group forward_ctrl_right")
 !Right::Send "^{Right}"
@@ -335,19 +339,21 @@ XButton1::Send "!{F4}" ; 比 WinClose "A" 好使
 !Right::Send "{Right}"
 
 ; 6. 下个标签
-#HotIf WinActive("ahk_group next_Media_Next")
+#HotIf WinActive("ahk_group next_mediaNext")
 ^Tab::Send "{Media_Next}" ; 下一曲
-#HotIf WinActive("ahk_group next_ctrl_shift_PgDn")
+#HotIf WinActive("ahk_group next_closeBracket")
+^Tab::Send "]"
+#HotIf WinActive("ahk_group next_ctrl_shift_pgDn")
 ^Tab::Send "^+{PgDn}"
-#HotIf WinActive("ahk_group next_alt_youfang")
+#HotIf WinActive("ahk_group next_alt_closeBracket")
 ^Tab::Send "!]"
 #HotIf WinActive("ahk_group next_alt_right")
 ^Tab::Send "!{Right}"
-#HotIf WinActive("ahk_group next_ctrl_pgdn")
+#HotIf WinActive("ahk_group next_ctrl_pgDn")
 ^Tab::Send "^{PgDn}"
 #HotIf WinActive("ahk_group next_ctrl_alt_right")
 ^Tab::Send "^!{Right}"
-#HotIf WinActive("ahk_group next_PgDn")
+#HotIf WinActive("ahk_group next_pgDn")
 ^Tab::Send "{PgDn}"
 
 ; 7. 后退
@@ -358,13 +364,15 @@ XButton1::Send "!{F4}" ; 比 WinClose "A" 好使
 #HotIf WinActive("ahk_group back_Left")
 !Left::Send "{Left}"
 ; 8. 上个标签
-#HotIf WinActive("ahk_group previous_Media_Prev")
+#HotIf WinActive("ahk_group previous_mediaPrev")
 ^+Tab::Send "{Media_Prev}" ; 上一曲
+#HotIf WinActive("ahk_group previous_openBracket")
+^+Tab::Send "[" ; 对 bilibili 不好用，由于会触发 ctrl + shift 切换输入法我就醉了
 #HotIf WinActive("ahk_group previous_alt_0")
 ^+Tab::Send "!0"
 #HotIf WinActive("ahk_group previous_alt_left")
 ^+Tab::Send "!{Left}"
-#HotIf WinActive("ahk_group previous_alt_zuofang")
+#HotIf WinActive("ahk_group previous_alt_openBracket")
 ^+Tab::Send "!["
 #HotIf WinActive("ahk_group previous_ctrl_left")
 ^+Tab::Send "^{Left}"
@@ -381,7 +389,7 @@ XButton2::Send "{Media_Prev}" ; 上一曲
 XButton2::Send "!{Left}"
 #HotIf WinActive("ahk_group sideForward_alt_0")
 XButton2::Send "!0"
-#HotIf WinActive("ahk_group sideForward_alt_zuofang")
+#HotIf WinActive("ahk_group sideForward_alt_openBracket")
 XButton2::Send "!["
 #HotIf WinActive("ahk_group sideForward_ctrl_left")
 XButton2::Send "^{Left}"

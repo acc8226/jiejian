@@ -1,26 +1,16 @@
 ﻿/*
-捷键-为简化操作而生。支持自定义快捷键、提供快捷启动等功能。
+捷键-为简化 windows 操作。可自定义快捷键、快捷键改写、快捷键功能增强。提供快捷启动等功能。可搭配契合鼠标手势软件。
 
 快速参考 | AutoHotkey v2
 https://wyagd001.github.io/v2/docs/
 
-考虑到快捷键的方便性，原则上只使用和改写现有快捷键，但是如果原有快捷键已经占用则只能新造快捷键
-
-* Ctrl + F3 新建标签/窗口 避免和已有 Ctrl + t 冲突
-* Ctrl + Shift + Tab / Ctrl + tab 切换到上/下个标签 默认不需要重写
-* Ctrl + F4 关闭标签/窗口
-* Ctrl + Shift + t 撤销关闭标签 默认不需要重写
-
-* 前进 默认 Alt + 右
-* 后退 默认 Alt + 左
-
-* Esc 逃逸键 用于关闭窗口 目前仅支持记事本
+考虑到快捷键的方便性，原则上只使用和改写现有快捷键，但是如果原有快捷键已经占用则会考虑新造快捷键
 */
 #Requires AutoHotkey >=v2.0
 #SingleInstance force ; 跳过对话框并自动替换旧实例
 
 ; ----- 1. 热键 之 鼠标操作 -----
-global isDebug := false
+global isDebug := true
 
 CoordMode "Mouse" ; 默认坐标相对于桌面(整个屏幕)
 
@@ -38,17 +28,17 @@ settingTray() {
     MenuHandler1(*) {
         Run "https://gitcode.com/acc8226/jiejian/overview"
     }
-    A_TrayMenu.Insert(itemCount++ . "&", "帮助文档", MenuHandler1)
+    A_TrayMenu.Insert(itemCount++ . "&", "帮助", MenuHandler1)
 
     MenuHandler2(*) {
         Run "https://gitcode.com/acc8226/jiejian/releases"
     }
-    A_TrayMenu.Insert(itemCount++ . "&", "捷键 2024年1月 beta 版", MenuHandler2)
+    A_TrayMenu.Insert(itemCount++ . "&", "捷键 24年1月 beta 版", MenuHandler2)
 
     MenuHandler3(*) {
         Run "https://gitcode.com/acc8226/"
     }
-    A_TrayMenu.Insert(itemCount++ . "&", "作者主页", MenuHandler3)
+    A_TrayMenu.Insert(itemCount++ . "&", "关于作者", MenuHandler3)
 
     Persistent
     ; 建议使用宽度为 16 或 32 像素的图标
@@ -87,7 +77,7 @@ settingTray()
 ; ----- 6. 热键 之 其他 -----
 ; 文本类 为了 md 增强 记事本 & vscode
 ; ctrl + 数字 1-5 为光标所在行添加 markdown 格式标题
-#HotIf WinActive("ahk_exe i)notepad.exe") or WinActive("ahk_exe i)Code.exe") 
+#HotIf WinActive("ahk_exe notepad.exe") or WinActive("ahk_exe Notepad.exe") or WinActive("ahk_class Chrome_WidgetWin_1 ahk_exe Code.exe") 
 ^1::
 ^2::
 ^3::
