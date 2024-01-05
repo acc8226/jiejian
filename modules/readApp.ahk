@@ -78,6 +78,8 @@ Loop appList.Length {
     ; 4. 侧边后退键
     if it.sideBack = "{Esc}"
       GroupAdd "sideBack_esc", it.exe
+    else if it.sideBack = "]"
+      GroupAdd "sideBack_closeBracket", it.exe
     else if it.sideBack = "!{F4}"
       GroupAdd "sideBack_alt_f4", it.exe
     else if it.sideBack = "{Alt Down}{F4 Down}{F4 Up}{Alt Up}"
@@ -154,7 +156,15 @@ Loop appList.Length {
 
     ; 9. 侧边前进键
     if it.sideForward = "{Media_Prev}"
-      GroupAdd "sideForward_Media_Prev", it.exe
+      GroupAdd "sideForward_mediaPrev", it.exe
+    else if it.sideForward = "{Media_Play_Pause}"
+      GroupAdd "sideForward_mediaPlayPause", it.exe
+    else if it.sideForward = "{Space}"
+      GroupAdd "sideForward_space", it.exe
+    else if it.sideForward = "["
+      GroupAdd "sideForward_openBracket", it.exe
+    else if it.sideForward = "{PgUp}"
+      GroupAdd "sideForward_PgUp", it.exe
     else if it.sideForward = "!{Left}"
       GroupAdd "sideForward_alt_left", it.exe
     else if it.sideForward = "!0"
@@ -306,6 +316,8 @@ Esc::WinClose
 ; 4. 侧边后退键 打头
 #HotIf WinActive("ahk_group sideBack_esc")
 XButton1::Send "{Esc}"
+#HotIf WinActive("ahk_group sideBack_closeBracket")
+XButton1::Send "]"
 #HotIf WinActive("ahk_group sideBack_alt_f4")
 XButton1::Send "!{F4}"
 #HotIf WinActive("ahk_group sideBack_alt_f4_2")
@@ -383,8 +395,16 @@ XButton1::Send "!{F4}" ; 比 WinClose "A" 好使
 #HotIf WinActive("ahk_group previous_PgUp")
 ^+Tab::Send "{PgUp}"
 ; 9. 侧边前进键
-#HotIf WinActive("ahk_group sideForward_Media_Prev")
+#HotIf WinActive("ahk_group sideForward_mediaPrev")
 XButton2::Send "{Media_Prev}" ; 上一曲
+#HotIf WinActive("ahk_group sideForward_mediaPlayPause")
+XButton2::Send "{Media_Play_Pause}"
+#HotIf WinActive("ahk_group sideForward_space")
+XButton2::Send "{Space}"
+#HotIf WinActive("ahk_group sideForward_openBracket")
+XButton2::Send "["
+#HotIf WinActive("ahk_group sideForward_PgUp")
+XButton2::Send "{PgUp}"
 #HotIf WinActive("ahk_group sideForward_alt_left")
 XButton2::Send "!{Left}"
 #HotIf WinActive("ahk_group sideForward_alt_0")
