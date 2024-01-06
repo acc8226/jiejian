@@ -77,7 +77,8 @@ text,```xml{Enter}{Enter}```{Up},,,,xxml
 text,```py{Enter}{Enter}```{Up},,,,xpy
 ,,,,,
 ,,,,,
-web,https://www.baidu.com,百度,baidu,,zbd
+web,https://www.baidu.com,百度,baidu,,
+web,https://www.doubao.com/,豆包,doubao,,zdb
 web,https://www.cnblogs.com,博客园,bokeyuan|cnblogs|博客园,,zcn
 web,https://www.bilibili.com,b站,bilibili|哔哩哔哩|b站,!6,zbi
 web,https://fanyi.caiyunapp.com/#,彩云小译,fanyi|彩云小译,,zfan
@@ -94,7 +95,6 @@ web,https://www.zhihu.com,知乎,zhihu|知乎,,
 web,https://www.csdn.net,csdn,csdn,,
 web,http://dc.mfox.cn/tongyong.php?a=dingcan_admin,云狐订餐,dingcan|云狐订餐,,zdc
 web,https://github.com,github,github,,zgh
-web,http://192.168.3.175:9494/,gitlab 1,gitlab1,,zgl
 web,https://www.ithome.com,IT之家,itzhijia|IT之家,!7,zit
 web,https://www.json.cn/#,json,json,,zjs
 web,https://mail.qq.com,qq邮箱,qqyouxiang|qq邮箱,,zma

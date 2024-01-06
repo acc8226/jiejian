@@ -247,7 +247,7 @@ app_hotkey2(app_title)
 ; 高等级
 ; 2. 逃逸
 #HotIf WinActive("ahk_group HL_esc_WinClose")
-Esc::
+Esc::WinClose
 
 ; 3. 关闭 打头
 #HotIf WinActive("ahk_group HL_close_alt_f4")

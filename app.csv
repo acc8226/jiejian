@@ -1,19 +1,20 @@
 软件,优先级（高或者低，默认为低）,标识符,新建 ctrl+F3,逃逸键 esc,关闭 ctrl+F4,侧边后退键 XB1,前进 alt+right,下个标签 ctrl+tab,后退 alt+left,上个标签 ctrl+shift+tab,侧边前进键  XB2
-通用窗口,低,ahk_class SunAwtDialog,,,{Esc},{Esc},,,,,
+通用窗口1,低,ahk_class SunAwtDialog,,,{Esc},{Esc},,,,,
 ,,,,,,,,,,,
-通用窗口,低,ahk_class #32770,,,{Esc},{Esc},,,,,
+通用窗口2,低,ahk_class #32770（bug 极客卸载 免疫）,,,{Esc},{Esc},,,,,
 360 压缩,高,ahk_class #32770 ahk_exe 360zip.exe,,,!{F4},!{F4},,,,,
+BvSsh,高,ahk_class #32770 ahk_exe BvSsh.exe,,WinClose ,,,,,,,
 ,,,,,,,,,,,
 小乌龟 Git 的 merge 窗口,,ahk_exe TortoiseGitMerge.exe,,,{Esc},{Esc},,,,,
 LibreOffice 窗口,,ahk_exe soffice.bin ahk_class SALSUBFRAME,,,{Esc},{Esc},,,,,
 ahk 应用程序,,ahk_exe AutoHotkey64.exe ahk_class AutoHotkey,,,{Esc},{Esc},,,,,
 Motrix,,ahk_exe Motrix.exe,^n,,,,,,,,
 ,,,,,,,,,,,
-visual studio,低,ahk_exe devenv.exe,^n,,^{F4},^{F4},,,,,
-visual studio 窗口,高,Microsoft Visual Studio 帐户设置 ahk_exe devenv.exe,,,{Esc} ,{Esc} ,,,,,
-visual studio 窗口,高,管理扩展 ahk_exe devenv.exe,,,{Esc},{Esc} ,,,,,
-visual studio 窗口,高,关于 Microsoft Visual Studio ahk_exe devenv.exe,,,{Esc} ,{Esc} ,,,,,
-visual studio 窗口,高,自定义 ahk_exe devenv.exe,,,{Esc},{Esc} ,,,,,
+Visual Studio,低,ahk_exe devenv.exe,^n,,^{F4},^{F4},,,,,
+Visual Studio 窗口,高,Microsoft Visual Studio 帐户设置 ahk_exe devenv.exe,,,{Esc} ,{Esc} ,,,,,
+Visual Studio 窗口,高,管理扩展 ahk_exe devenv.exe,,,{Esc},{Esc} ,,,,,
+Visual Studio 窗口,高,关于 Microsoft Visual Studio ahk_exe devenv.exe,,,{Esc} ,{Esc} ,,,,,
+Visual Studio 窗口,高,自定义 ahk_exe devenv.exe,,,{Esc},{Esc} ,,,,,
 ,,,,,,,,,,,
 skylark,低,ahk_exe skylark.exe,^n ,,^w,^w,,,,,
 skylark 窗口,高,ahk_exe skylark.exe ahk_class #32770,,WinClose,,,,,,,
@@ -81,7 +82,7 @@ Thunderbird,,ahk_exe thunderbird.exe,,,^w,^w,,,,,^{PgUp}
 Tabby,,ahk_exe Tabby.exe,^+t ,,^+w ,^+w ,,,,,
 Termius,,ahk_exe Termius.exe ,^+t,,^+w ,^+w,,!{Right},,!{Left},!{Left}
 WindowsTerminal,,ahk_exe WindowsTerminal.exe,^+t ,,^+w ,^+w ,,,,,
-windTerm,,ahk_exe WindTerm.exe,^n,,^+w ,^+w,,!],,![,![ 
+WindTerm,,ahk_exe WindTerm.exe,^n,,^+w ,^+w,,!],,![,![ 
 ,,,,,,,,,,,
 Eclipse,,ahk_exe eclipse.exe,^n,,,^{F4},,^{PgDn},,^{PgUp},^{PgUp}
 Editplus,,ahk_exe editplus.exe,^n ,,^w,^w,,,,,
@@ -93,16 +94,15 @@ kate,,ahk_exe kate.exe,^n ,,^w,^w,,!{Right},,!{Left},!{Left}
 Myeclipse,,ahk_class SWT_Window0 ahk_exe javaw.exe,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
 Notepad++,,ahk_exe notepad++.exe,^n,,^w,^w,,,,,
 Notepad--,,ahk_exe Notepad--.exe,^n,,^w,^w,,,,,
-sts,,ahk_exe SpringToolSuite4.exe,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
+SpringToolSuite4,,ahk_exe SpringToolSuite4.exe,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
 sublime,,ahk_exe sublime_text.exe,^n,,^{F4},^{F4},,,,,
 Ultraedit,,ahk_exe uedit64.exe,^n,,^{F4},^{F4},,,,,
 Winmerge,,ahk_exe WinMergeU.exe,^n,,^{F4},^{F4},,,,,
 WPS,,ahk_exe wps.exe,^n,,^{F4},^{F4},,,,,
 Xftp,,ahk_exe Xftp.exe,^n,,,,,,,,
 Bracket,,ahk_exe Brackets.exe,^n,,^w,^w,,^{PgDn},,^{PgUp},^{PgUp} 
-Devc++,,ahk_exe devcpp.exe,^n,,^w,^w,,,,,
+Dev-C++,,ahk_exe devcpp.exe,^n,,^w,^w,,,,,
 Typora,,ahk_exe Typora.exe,^n,,^w,^w,,,,,
-BvSsh,,ahk_exe BvSsh.exe ahk_class #32770,,WinClose ,,,,,,,
 ,,,,,,,,,,,
 Notepad2,,ahk_exe Notepad2.exe,^n,,,,,,,,
 Notepad3,,ahk_exe Notepad3.exe,^n,,,,,,,,
@@ -125,12 +125,14 @@ QQ,,ahk_exe QQ.exe,,,{Esc},{Esc},,,,,
 Snipaste,,Snipaste ahk_exe Snipaste.exe,,,{Esc},{Esc},,,,,
 微信,,ahk_exe WeChat.exe,,,{Esc},{Esc},,,,,
 ,,,,,,,,,,,
-网易云音乐,,ahk_exe cloudmusic.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Play_Pause}
-酷我音乐,,ahk_exe kwmusic.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Play_Pause}
-QQ音乐,,ahk_exe QQMusic.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Play_Pause}
-汽水音乐,,ahk_exe SodaMusic.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Play_Pause}
-Spotify,,ahk_exe Spotify.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Play_Pause}
-MusicPlayer2,,ahk_exe MusicPlayer2.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Play_Pause}
+网易云音乐,,ahk_exe cloudmusic.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+酷我音乐,,ahk_exe kwmusic.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+QQ音乐,,ahk_exe QQMusic.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+汽水音乐,,ahk_exe SodaMusic.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+Spotify,,ahk_exe Spotify.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+MusicPlayer2,,ahk_exe MusicPlayer2.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+foobar2000,,ahk_exe foobar2000.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+方格音乐,,ahk_class Chrome_WidgetWin_1 ahk_exe 方格音乐.exe,,,,,,,,,{Media_Prev}
 ,,,,,,,,,,,
 Finalshell,,FinalShell.* ahk_exe java.exe ahk_class SunAwtFrame,!a,,!q,!q,,!],,!0,!0
 ,,,,,,,,,,,
