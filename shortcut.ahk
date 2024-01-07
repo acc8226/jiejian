@@ -14,11 +14,15 @@ global isDebug := true
 
 CoordMode "Mouse" ; 默认坐标相对于桌面(整个屏幕)
 
+#Include "lib\Functions.ahk"
+#Include "lib\Actions.ahk"
+#Include "lib\MoveWindow.ahk"
+
 #Include "modules\configMouse.ahk"
+#Include "modules\utils.ahk"
 #Include "modules\anyrun.ahk"
 #Include "modules\readApp.ahk"
 #Include "modules\readData.ahk"
-#Include "modules\utils.ahk"
 
 ; 设置托盘图标和菜单
 settingTray() {
@@ -41,7 +45,7 @@ settingTray() {
     A_TrayMenu.Insert(itemCount++ . "&", "关于作者", MenuHandler3)
 
     Persistent
-    ; 建议使用宽度为 16 或 32 像素的图标
+    ; 建议使用 16*16 或 32*32 像素的图标
     TraySetIcon "favicon.ico"
 }
 settingTray()
@@ -123,3 +127,7 @@ settingTray()
 
 ; ----- 10. 热串之 自定义表情符号：将输入的特定字符串替换为自定义的表情符号或 Emoji -----
 ; :C*:xwx::😄 ; 微笑
+
+; ----- 11. 其他-----
+; 按住 CapsLock 后可以用鼠标左键拖动窗口
+CapsLock & LButton::EWD_MoveWindow

@@ -311,7 +311,7 @@ Esc::WinClose
 ^F4::Send "^+w"
 ; 兜底
 #HotIf not WinActive("ahk_group close_ctrl_f4")
-^F4::Send "!{F4}"
+^F4::SmartCloseWindow ; 比 WinClose "A" 好使
 
 ; 4. 侧边后退键 打头
 #HotIf WinActive("ahk_group sideBack_esc")
@@ -338,7 +338,7 @@ XButton1::Send "^!q"
 XButton1::Send "^+w"
 ; 兜底
 #HotIf
-XButton1::Send "!{F4}" ; 比 WinClose "A" 好使
+XButton1::SmartCloseWindow ; 比 WinClose "A" 好使
 
 ; 5. 前进键
 #HotIf WinActive("ahk_group forward_mediaNext")

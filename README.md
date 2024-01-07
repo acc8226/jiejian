@@ -294,32 +294,31 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 
 ## 附录
 
-### 搭配软件
+### 软件搭配玩法
 
-【免费】【win】WGestures 1 鼠标手势
-<https://www.yingdev.com/projects/wgestures>
+1\. [【免费】【win】WGestures 1 鼠标手势](https://www.yingdev.com/projects/wgestures) / [【付费】【win mac】WGestures 2 鼠标手势](https://www.yingdev.com/projects/wgestures2)
 
-或者
-
-【付费】【win mac】WGestures 2 鼠标手势
-<https://www.yingdev.com/projects/wgestures2>
+2\. [MyKeymap](https://xianyukang.com/MyKeymap.html)
 
 ### 支持软件
 
-支持且不限于以下百款软件，且目前持续更新中...
+支持但不限于以下百余款软件，且持续更新中...
 
 * 360 压缩
+* BvSsh
 * 小乌龟 Git 的 merge 窗口
-* LibreOffice 窗口
+* LibreOffice
 * ahk 应用程序
-* visual studio
+* Motrix
+* Visual Studio
 * skylark
 * 360 极速浏览器
+* 360 极速浏览器-下载管理窗口
 * Win11 21h1 桌面
 * Win11 22h2 桌面
 * Win11 资源管理器
 * Win11 旧版 记事本
-* win11 新版 记事本
+* Win11 新版 记事本
 * 新版 win 11 设置
 * 123 浏览器
 * 115 浏览器
@@ -329,13 +328,13 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 * Brave 浏览器
 * Chrome 谷歌 & 百分 & 小马浏览器
 * Duck 浏览器
-* duoyu 多御浏览器
-* edge 浏览器
-* opera 浏览器
+* Duoyu 多御浏览器
+* Edge 浏览器
+* Opera 浏览器
 * QQ 浏览器
 * UC 浏览器
-* vivaldi 浏览器
-* waterfox 浏览器
+* Vivaldi 浏览器
+* Waterfox 浏览器
 * Yandex 浏览器
 * 猫眼浏览器
 * 斑斓石浏览器
@@ -365,35 +364,35 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 * MarkText
 * SQLyog
 * 阿里云客户端
-* zeal
-* thunderbird
+* Zeal
+* Thunderbird
 * Tabby
 * Termius
 * WindowsTerminal
-* windTerm
-* eclipse
-* editplus
-* everedit
+* WindTerm
+* Eclipse
+* Editplus
+* Everedit
 * Fleet
 * MarkdownPad2
 * GitHub 桌面版
 * kate
-* myeclipse
+* Myeclipse
 * Notepad++
 * Notepad--
-* sts
+* SpringToolSuite4
 * sublime
-* ultraedit
-* winmerge
-* wps
-* xftp
+* Ultraedit
+* Winmerge
+* WPS
+* Xftp
 * Bracket
-* devc++
-* typora
-* BvSsh
+* Dev-C++
+* Typora
 * Notepad2
 * Notepad3
-* xshell
+* Xshell
+* Atom
 * vscode
 * SecureCRT
 * SumatraPDF
@@ -409,13 +408,25 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 * QQ音乐
 * 汽水音乐
 * Spotify
-* finalshell
-* datagrip 64位
-* clion 64位
-* pycharm 64位
-* idea 64位
-* Writerside 64位
-* Devecostudio 64位
+* MusicPlayer2
+* foobar2000
+* 方格音乐
+* Finalshell
+* Aqua
+* Clion
+* Datagrip
+* Dataspell
+* Goland
+* Idea
+* Phpstorm
+* Pycharm
+* Rider
+* RustrOver
+* Rubymine
+* Webstorm
+* Writerside
+* Android Studio
+* DevEco Studio 64位
 * Netbean 32 位 & Jmeter
 * Netbean 64 位
 * LibreOffice
@@ -428,6 +439,7 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 * WPS 图片查看器
 * CudaText
 * PotPlayer 64位
+* 哔哩哔哩
 
 ### 打包发版目录结构
 
@@ -451,4 +463,6 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 
 ## 感谢
 
-本程序编辑 csv 文件用到了开源的 LiberOffice。代码编辑用到了 Jetbrains 公司的 IDEA。主要发布平台为 GitHub 和 gitcode.com。项目主页发布在 GitHub Page。
+本程序编辑 csv 文件用到了开源的 LiberOffice。主要发布平台为 [GitHub](https://github.com) 和 [GitCode](https://gitcode.com)。项目主页发布在 GitHub Page。
+
+lib 下部分代码源自 [MyKeymap](https://xianyukang.com/MyKeymap.html) 项目。

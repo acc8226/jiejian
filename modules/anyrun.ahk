@@ -1,5 +1,4 @@
-﻿#Include "utils.ahk"
-#Include "sort.ahk"
+﻿#Include "sort.ahk"
 
 anyrun() {
     guiTitle := "快捷启动"
