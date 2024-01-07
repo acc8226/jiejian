@@ -296,9 +296,61 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 
 ### 软件搭配玩法
 
-1\. [【免费】【win】WGestures 1 鼠标手势](https://www.yingdev.com/projects/wgestures) / [【付费】【win mac】WGestures 2 鼠标手势](https://www.yingdev.com/projects/wgestures2)
+#### 搭配 WGestures
 
-2\. [MyKeymap](https://xianyukang.com/MyKeymap.html)
+[【免费】【win】WGestures 1 鼠标手势](https://www.yingdev.com/projects/wgestures) / [【付费】【win mac】WGestures 2 鼠标手势](https://www.yingdev.com/projects/wgestures2)
+
+| 方向 | 名称 | 按键/功能 |
+| ----  | ---- | ---- |
+| ↗︎ | 最小化 | 最小化 |
+| ↙︎ | 最大化 | 最大化/还原 |
+| ↘︎ | copy | ctrl + c |
+| ↖︎ | paste | ctrl + v |
+| ↑ | new | ctrl + f3 |
+| ↓ | close | ctrl + f4 |
+| → | prev | alt <- |
+| ← | next | alt -> |
+| 下左 | reopen | ctrl + shift + t |
+| 下右 | close| alt + f4 |
+| 上左 | prev | ctrl + shift + tab |
+| 上右 | next | ctrl + tab |
+
+#### 搭配 [MyKeymap](https://xianyukang.com/MyKeymap.html)
+
+CapsLock 模式
+
+| 按键 | 用途 |
+| ----  | ---- |
+| CapsLock + B | 窗口最小化 |
+| CapsLock + E | 窗口管理 EDSF 切换 X关闭、空格选择 |
+| CapsLock + G | 置顶/取消置顶 窗口 |
+| CapsLock + Q | 窗口最大化或还原 |
+| CapsLock + R | 在当前程序的窗口间轮换 |
+| CapsLock + W | 切换到上一个窗口 |
+| CapsLock + X | 关闭窗口 |
+| CapsLock + Z | 复制文件路径或纯文本 |
+
+CapsLock F 模式
+
+| 按键 | 窗口标识符 | 当窗口不在时启动 | 备注 和 短语 |
+| ----  | ---- | ---- | ---- |
+| Q | ahk_exe SumatraPDF.exe | D:\alee\exec\daily\0.日常\2.办公类\SumatraPDF\SumatraPDF.exe | SumatraPDF【pd】 |
+| W | ahk_exe PotPlayerMini64.exe | D:\alee\exec\daily\0.日常\4.视频类\Pot_Player64\PotPlayerMini64.exe | PotPlayer【vi】 |
+| E | ahk_exe MusicPlayer2.exe | D:\alee\exec\daily\0.日常\3.音频类\MusicPlayer2_x64\MusicPlayer2.exe | MusicPlayer2【mu】 |
+| A | ahk_exe 360ChromeX.exe | shortcuts\360 极速浏览器X.lnk | 360极速浏览器【ch】 |
+| S | ahk_class CabinetWClass ahk_exe Explorer.EXE | D:\ | 资源管理器【ex】 |
+| D | ahk_exe WeChat.exe | shortcuts\微信.lnk | 微信【we】 |
+| Z | ahk_exe WindowsTerminal.exe | shortcuts\PowerShell 7 (x64).lnk | WindowsTerminal【te】 |
+| X | ahk_exe Code.exe | shortcuts\Visual Studio Code.lnk | vscode【co】 |
+| C | ahk_exe idea64.exe | D:\alee\exec\dev\IDE\ideaIC-2022.3.3.win\bin\idea64.exe | IntelliJ IDEA【id】 |
+| M | 一些内置函数 | ProcessExistSendKeyOrRun("TIM.exe", "^!z", "shortcuts\TIM.lnk") | 如果 TIM.exe 进程存在则输入 Ctrl+Alt+Z 热键激活 TIM，否则启动 TIM |
+
+CapsLock 命令
+
+| 按键 | 参数1 | 参数2 | 参数3 |
+| ----  | ---- | ---- | ---- |
+| cc | shortcuts\Visual Studio Code.lnk | -n "{selected}" | 用 VS Code 打开选中的文件，在新窗口中打开 |
+| wt | wt.exe | -d "{selected}" | 用 Windows Terminal 打开选中的文件夹 |
 
 ### 支持软件
 
@@ -443,7 +495,7 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 
 ### 打包发版目录结构
 
-1. extra/ 【增强体验】WGestures1 和 WGestures2 用户可导入预设手势模版，WindowSpy U64.exe 供给开发者进行调试。
+1. extra/ 【增强体验】MyKeymap2.0 预设配置。WGestures 为 可导入的预设手势模版。WindowSpyU64.exe 用于查看窗口信息。
 2. app.csv 配置文件
 3. data.csv 配置文件
 4. favicon.ico 图标文件

@@ -3,7 +3,7 @@
 
 rd /S /Q out
 MKDIR out\shortcut\extra\
-copy extra\*           out\shortcut\extra\
+xcopy /s  extra\       out\shortcut\extra\
 copy app.csv           out\shortcut\
 copy template\data.csv out\shortcut\
 copy favicon.ico       out\shortcut\
