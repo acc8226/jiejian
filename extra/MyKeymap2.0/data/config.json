@@ -8,14 +8,6 @@
       "parentID": 0,
       "delay": 0,
       "hotkeys": {
-        "*,": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 4,
-            "comment": "鼠标左键按下 (之后按空格松开)",
-            "actionValueID": 12
-          }
-        ],
         "*.": [
           {
             "windowGroupID": 0,
@@ -32,14 +24,6 @@
             "actionValueID": 13
           }
         ],
-        "*0": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 6,
-            "comment": "删除一行东西，然后输入一串文本，然后等待 1000 毫秒，再依次按下 enter、y、e、s、enter 键",
-            "keysToSend": "{home}+{end}{backspace}\n{text}i love homura and hikari\nsleep 1000\n{enter}yes{enter}"
-          }
-        ],
         "*;": [
           {
             "windowGroupID": 0,
@@ -51,9 +35,10 @@
         "*a": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 3,
-            "comment": "窗口居中 (1370x930)",
-            "actionValueID": 11
+            "actionTypeID": 1,
+            "comment": "360ChromeX",
+            "winTitle": "ahk_exe 360ChromeX.exe",
+            "target": "shortcuts\\360 极速浏览器X.lnk"
           }
         ],
         "*b": [
@@ -67,17 +52,19 @@
         "*c": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 2,
-            "comment": "音量调节",
-            "actionValueID": 5
+            "actionTypeID": 1,
+            "comment": "Visual Studio Code",
+            "winTitle": "ahk_exe Code.exe",
+            "target": "shortcuts\\Visual Studio Code.lnk"
           }
         ],
         "*d": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 8,
-            "comment": "窗口居中并设置大小为 1600x1000",
-            "ahkCode": "CenterAndResizeWindow(1600, 1000)"
+            "actionTypeID": 1,
+            "comment": "微信",
+            "winTitle": "ahk_exe WeChat.exe",
+            "target": "shortcuts\\微信.lnk"
           }
         ],
         "*e": [
@@ -91,9 +78,10 @@
         "*g": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 3,
-            "comment": "切换窗口置顶状态",
-            "actionValueID": 12
+            "actionTypeID": 1,
+            "comment": "Windows Terminal",
+            "winTitle": "ahk_exe WindowsTerminal.exe",
+            "target": "wt.exe"
           }
         ],
         "*h": [
@@ -102,38 +90,6 @@
             "actionTypeID": 4,
             "comment": "滚轮左滑",
             "actionValueID": 7
-          }
-        ],
-        "*i": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 4,
-            "comment": "鼠标上移",
-            "actionValueID": 1
-          }
-        ],
-        "*j": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 4,
-            "comment": "鼠标左移",
-            "actionValueID": 3
-          }
-        ],
-        "*k": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 4,
-            "comment": "鼠标下移",
-            "actionValueID": 2
-          }
-        ],
-        "*l": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 4,
-            "comment": "鼠标右移",
-            "actionValueID": 4
           }
         ],
         "*m": [
@@ -187,17 +143,19 @@
         "*s": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 3,
-            "comment": "窗口居中 (1200x800)",
-            "actionValueID": 10
+            "actionTypeID": 1,
+            "comment": "File Explorer",
+            "winTitle": "ahk_class CabinetWClass ahk_exe Explorer.EXE",
+            "target": "D:\\"
           }
         ],
         "*t": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 3,
-            "comment": "绑定当前窗口 (长按绑定,短按激活",
-            "actionValueID": 14
+            "actionTypeID": 1,
+            "comment": "Termius",
+            "winTitle": "ahk_class Chrome_WidgetWin_1 ahk_exe Termius.exe",
+            "target": "C:\\Users\\ferder\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Termius.lnk"
           }
         ],
         "*u": [
@@ -211,9 +169,10 @@
         "*v": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 3,
-            "comment": "移动窗口到下一个显示器",
-            "actionValueID": 7
+            "actionTypeID": 1,
+            "comment": "IntelliJ IDEA",
+            "winTitle": "ahk_exe idea64.exe",
+            "target": "D:\\alee\\exec\\dev\\IDE\\ideaIC-2022.3.3.win\\bin\\idea64.exe"
           }
         ],
         "*w": [
@@ -320,6 +279,15 @@
             "target": "D:\\"
           }
         ],
+        "*t": [
+          {
+            "windowGroupID": 0,
+            "actionTypeID": 1,
+            "comment": "Termius",
+            "winTitle": "ahk_class Chrome_WidgetWin_1 ahk_exe Termius.exe",
+            "target": "shortcuts\\Termius.lnk"
+          }
+        ],
         "*w": [
           {
             "windowGroupID": 0,
@@ -344,7 +312,7 @@
             "actionTypeID": 1,
             "comment": "Windows Terminal",
             "winTitle": "ahk_exe WindowsTerminal.exe",
-            "target": "shortcuts\\PowerShell 7 (x64).lnk"
+            "target": "wt.exe"
           }
         ],
         "singlePress": [
@@ -1836,14 +1804,6 @@
             "target": "D:\\alee\\exec\\daily\\0.日常\\2.办公类\\SumatraPDF\\SumatraPDF.exe"
           }
         ],
-        "rex": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 2,
-            "comment": "重启文件资源管理器",
-            "actionValueID": 7
-          }
-        ],
         "se": [
           {
             "windowGroupID": 0,
@@ -1860,24 +1820,6 @@
             "actionValueID": 2
           }
         ],
-        "sp": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 1,
-            "comment": "Spotify 网页",
-            "winTitle": "Spotify",
-            "target": "https://open.spotify.com/"
-          }
-        ],
-        "ss": [
-          {
-            "windowGroupID": 0,
-            "actionTypeID": 1,
-            "comment": "Spotify 应用",
-            "winTitle": "ahk_exe Spotify.exe",
-            "target": "shortcuts\\Spotify.lnk"
-          }
-        ],
         "te": [
           {
             "windowGroupID": 0,
@@ -1890,9 +1832,10 @@
         "tm": [
           {
             "windowGroupID": 0,
-            "actionTypeID": 6,
-            "comment": "Ctrl + Shift + Esc 打开任务管理器",
-            "keysToSend": "^+{esc}"
+            "actionTypeID": 1,
+            "comment": "Termius",
+            "winTitle": "ahk_class Chrome_WidgetWin_1 ahk_exe Termius.exe",
+            "target": "shortcuts\\Termius.lnk"
           }
         ],
         "vi": [
