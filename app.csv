@@ -171,4 +171,6 @@ CudaText,,ahk_exe cudatext.exe,^n,,^w,^w,,,,,
 PotPlayer 64位,,ahk_exe PotPlayerMini64.exe,{F3},,,,{Right},{PgDn},{Left},{PgUp},{PgUp}
 哔哩哔哩,,ahk_class Chrome_WidgetWin_1 ahk_exe 哔哩哔哩.exe,,,,,{Right},],{Left},[,[
 ,,,,,,,,,,,
+Rstudio,,ahk_exe rstudio.exe,^+n,,^w,^w,,,,,
+,,,,,,,,,,,
 微信小程序 不起作用,,ahk_exe WeChatAppEx.exe,,,,,,,,,

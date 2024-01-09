@@ -41,13 +41,15 @@ Loop appList.Length {
     else if it.new = "^n"
       GroupAdd "new_ctrl_n", it.exe
     else if it.new = "{Control Down}n{Control Up}"
-      GroupAdd "new_ctrl_n_2", it.exe   
+      GroupAdd "new_ctrl_n_2", it.exe
     else if it.new = "^t"
       GroupAdd "new_ctrl_t", it.exe
-    else if it.new = "^!t"          
+    else if it.new = "^!t"
       GroupAdd "new_ctrl_alt_t", it.exe
-    else if it.new = "^+t"          
+    else if it.new = "^+t"
       GroupAdd "new_ctrl_shift_t", it.exe
+    else if it.new = "^+n"
+      GroupAdd "new_ctrl_shift_n", it.exe
 
     ; 2. 逃逸
     if it.escape = "WinClose"
@@ -96,7 +98,7 @@ Loop appList.Length {
       GroupAdd "sideBack_ctrl_w", it.exe
     else if it.close = "^!q"
       GroupAdd "sideBack_ctrl_alt_q", it.exe
-    else if it.sideBack = "^+w"          
+    else if it.sideBack = "^+w"
       GroupAdd "sideBack_ctrl_shift_w", it.exe
 
     ; 5. 前进
@@ -125,7 +127,7 @@ Loop appList.Length {
     else if it.nextTag = "^!{Right}"
       GroupAdd "next_ctrl_alt_right", it.exe
     else if it.nextTag = "{PgDn}"
-      GroupAdd "next_pgDn", it.exe   
+      GroupAdd "next_pgDn", it.exe
 
     ; 7. 后退
     if it.back = "{Media_Prev}"
@@ -185,10 +187,10 @@ parseApp() {
   ; 每次从字符串中检索字符串(片段)
   Loop Parse, FileRead("app.csv", "UTF-8"), "`n", "`r" {
       ; 跳过首行
-      if A_Index < 2       
+      if A_Index < 2
         continue
       else {
-        appInfo := parseDataLine(A_LoopField)    
+        appInfo := parseDataLine(A_LoopField)
         if appInfo
             appList.Push(appInfo)
       }
@@ -223,12 +225,12 @@ parseDataLine(line) {
   if (info.new = ''
     and info.escape = ''
     and info.close = ''
-    and info.sideBack = ''    
+    and info.sideBack = ''
     and info.forward = ''
     and info.nextTag = ''
     and info.back = ''
     and info.previousTag = ''
-    and info.sideForward = ''    
+    and info.sideForward = ''
     )  
     return  
   return info
@@ -285,6 +287,8 @@ XButton1::Send "{Esc}"
 ^F3::Send "^!t"
 #HotIf WinActive("ahk_group new_ctrl_shift_t")
 ^F3::Send "^+t"
+#HotIf WinActive("ahk_group new_ctrl_shift_n")
+^F3::Send "^+n"
 
 ; 2. 逃逸
 #HotIf WinActive("ahk_group esc_WinClose")
