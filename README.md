@@ -1,15 +1,18 @@
 # 捷键 for win 使用说明
 
-* 一个基于 ahk2 开发的热键软件，为增强鼠标和键盘按键功能而生。
-* 不区分鼠标厂商，推荐使用带侧边按键的鼠标，体验会更加完整。
-* 可自定义快捷键、快捷键改写、快捷键功能增强。提供快捷启动等功能。
-* 亦可搭配鼠标手势软件。
+* 基于 autohotkey2 开发的按键映射 / 快捷键增强工具
+* 为增强鼠标和键盘按键功能而生
+* 不区分鼠标厂商，选择使用带侧边按键的鼠标，体验更完善。
+* 支持自定义快捷键、快捷键改写、快捷键功能增强。提供快捷启动等功能。
+* 建议搭配 WGestures（全局鼠标手势） + MyKeymap（完善的窗口操作 & 启动程序 & 召唤窗口）使用。
 
 注意：说明书指向最新版软件，若功能有差异，请[下载并使用最新版](https://gitcode.com/acc8226/jiejian/releases)。
 
 ## 1. 热键 之 鼠标操作
 
-当鼠标移动到屏幕左边缘或者上边缘以及停留在任务栏时，鼠标滑轮滚动可以调节音量。
+1\. 当鼠标移动到屏幕左边缘或者上边缘以及停留在任务栏时，鼠标滑轮滚动可以调节音量。
+
+2\. 鼠标按键用法
 
 | 按键 | 正常用途 | 音乐类软件 | 视频类软件 | 焦点在任务栏 | 焦点在左或上边界
 | ----  | ---- | ---- | ---- | ---- | ---- |
@@ -19,6 +22,8 @@
 | Xbutton1（鼠标侧边后退键） | 万能**关闭**键：在多标签页则是关闭当前标签 | 关闭窗口 | 关闭窗口 | 下一曲 | 下一曲 |
 
 ![1](https://foruda.gitee.com/images/1689318820722473769/d4f9efe3_426858.gif)
+
+3\. 按住 CapsLock 后可以用鼠标左键拖动窗口
 
 ## 2. 热键 之 重写快捷键
 
@@ -196,7 +201,9 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 
 ## 已知 bug
 
-目前适配不太好的软件：fleet、搜狗浏览器、windows 任务管理器（似乎屏蔽了 ctrl 键）、微信 PC 版内置的微信小程序。
+目前适配不太好的软件：搜狗浏览器。
+
+目前测试关闭窗口不奏效的软件：搜狗浏览器、windows 任务管理器（似乎屏蔽了 ctrl 键）、windows 任务管理器。
 
 ## 版本发布
 
@@ -371,10 +378,7 @@ CapsLock 命令
 
 * 360 压缩
 * BvSsh
-* 小乌龟 Git 的 merge 窗口
-* LibreOffice
 * ahk 应用程序
-* Motrix
 * Visual Studio
 * skylark
 * 360 极速浏览器
@@ -395,88 +399,85 @@ CapsLock 命令
 * Duck 浏览器
 * Duoyu 多御浏览器
 * Edge 浏览器
+* Firefox 火狐 & Tor 洋葱浏览器
 * Opera 浏览器
 * QQ 浏览器
 * UC 浏览器
+* UU 浏览器
 * Vivaldi 浏览器
 * Waterfox 浏览器
 * Yandex 浏览器
-* 猫眼浏览器
-* 斑斓石浏览器
-* 小智双核浏览器
-* 火狐 Firefox & Tor 浏览器
-* 华为浏览器
-* 猎豹浏览器
 * 傲游浏览器
-* 蚂蚁浏览器
+* 斑斓石浏览器
+* 华为浏览器
 * 红芯浏览器
 * 极速浏览器
+* 猫眼浏览器
+* 蚂蚁浏览器
+* 猎豹浏览器
+* 青鸟浏览器
 * 联想浏览器
 * 搜狗浏览器
-* 星愿浏览器
-* 一点浏览器
 * 双核浏览器
-* 青鸟浏览器
+* 星愿浏览器
 * 想天浏览器
+* 小K 浏览器
 * 小白浏览器
-* 小K浏览器
-* UU浏览器
-* Beekeeper Studio
-* Bcompare
-* SourceTree
-* HbuilderX
-* heidisql
-* MarkText
-* SQLyog
-* 阿里云客户端
-* Zeal
-* Thunderbird
-* Tabby
-* Termius
-* WindowsTerminal
-* WindTerm
-* Eclipse
-* Editplus
-* Everedit
-* Fleet
-* MarkdownPad2
-* GitHub 桌面版
-* kate
-* Myeclipse
-* Notepad++
-* Notepad--
-* SpringToolSuite4
-* sublime
-* Ultraedit
-* Winmerge
-* WPS
-* Xftp
-* Bracket
-* Dev-C++
-* Typora
-* Notepad2
-* Notepad3
-* Xshell
-* Atom
-* vscode
-* SecureCRT
-* SumatraPDF
-* zoc
-* FlashFXP
-* MobaXterm
-* 炉石传说
+* 小智双核浏览器
+* 一点浏览器
+* foobar2000
+* MusicPlayer2
+* QQ 音乐
+* Spotify
+* 方格音乐
+* 酷我音乐
+* 汽水音乐
+* 网易云音乐
+* LibreOffice 窗口
+* LibreOffice 主体
+* Motrix
+* Sumatra PDF
+* PotPlayer 64位
 * QQ
 * Snipaste
+* Thunderbird
+* WPS
+* WPS 图片查看器
+* 哔哩哔哩
+* 稻壳阅读器
 * 微信
-* 网易云音乐
-* 酷我音乐
-* QQ音乐
-* 汽水音乐
-* Spotify
-* MusicPlayer2
-* foobar2000
-* 方格音乐
-* Finalshell
+* 阿里云客户端
+* 炉石传说
+* Beekeeper Studio
+* heidisql
+* Navicat
+* SQLyog
+* MarkdownPad2
+* MarkText
+* Typora
+* Atom
+* Bracket
+* Fleet
+* CudaText
+* Editplus
+* Everedit
+* Geany
+* Kate
+* Notepad++
+* Notepad--
+* Notepad2
+* Notepad3
+* Sublime
+* Ultraedit
+* Bcompare
+* Winmerge
+* HbuilderX
+* Dev C++
+* Eclipse
+* MyEclipse
+* Rstudio
+* SpringToolSuite4
+* VS Code
 * Aqua
 * Clion
 * Datagrip
@@ -486,25 +487,34 @@ CapsLock 命令
 * Phpstorm
 * Pycharm
 * Rider
-* RustrOver
 * Rubymine
+* RustrOver
 * Webstorm
 * Writerside
 * Android Studio
-* DevEco Studio 64位
+* 华为 DevEco Studio
 * Netbean 32 位 & Jmeter
 * Netbean 64 位
-* LibreOffice
-* Postman
 * Apifox
-* HTTPie
 * ApiPost
-* Navicat
-* 稻壳阅读器
-* WPS 图片查看器
-* CudaText
-* PotPlayer 64位
-* 哔哩哔哩
+* HTTPie
+* Postman
+* Zeal
+* GitHub 桌面版
+* GitKraken
+* SourceTree
+* 小乌龟 Git 的 merge 窗口
+* Xshell
+* Finalshell
+* MobaXterm
+* SecureCRT
+* Tabby
+* Termius
+* zoc
+* FlashFXP
+* Xftp
+* WindowsTerminal
+* WindTerm
 
 ### 打包发版目录结构
 
