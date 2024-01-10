@@ -316,16 +316,16 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 | ----  | ---- | ---- |
 | ↗︎ | 最小化 | 最小化 |
 | ↙︎ | 最大化 | 最大化/还原 |
-| ↘︎ | copy | ctrl + c |
-| ↖︎ | paste | ctrl + v |
-| ↑ | new | ctrl + f3 |
-| ↓ | close | ctrl + f4 |
-| → | prev | alt <- |
-| ← | next | alt -> |
-| 下左 | reopen | ctrl + shift + t |
-| 下右 | close| alt + f4 |
-| 上左 | prev | ctrl + shift + tab |
-| 上右 | next | ctrl + tab |
+| ↘︎ | 复制/copy | ctrl + c |
+| ↖︎ | 粘贴/paste | ctrl + v |
+| ↑ | 新建/new | ctrl + f3 |
+| ↓ | 关闭/close | ctrl + f4 |
+| ← | 后退/prev | alt ← |
+| → | 前进/next | alt → |
+| ↩ | 重新打开/reopen | ctrl + shift + t |
+| ↪ | 关闭/close | alt + f4 |
+| 上左 | 上一个/prev | ctrl + shift + tab |
+| 上右 | 下一个/next | ctrl + tab |
 
 #### 搭配 [MyKeymap](https://xianyukang.com/MyKeymap.html)
 
@@ -488,7 +488,7 @@ CapsLock 命令
 * Pycharm
 * Rider
 * Rubymine
-* RustrOver
+* RustRover
 * Webstorm
 * Writerside
 * Android Studio

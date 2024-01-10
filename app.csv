@@ -125,7 +125,7 @@ Eclipse,,ahk_exe eclipse.exe,^n,,,^{F4},,^{PgDn},,^{PgUp},^{PgUp}
 MyEclipse,,ahk_class SWT_Window0 ahk_exe javaw.exe,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
 Rstudio,,ahk_exe rstudio.exe,^+n,,^w,^w,,,,,
 SpringToolSuite4,,ahk_exe SpringToolSuite4.exe,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
-VS Code,,ahk_exe Code.exe ahk_class Chrome_WidgetWin_1,{Control Down}n{Control Up},,^{F4},^{F4},,,,,
+VS Code,,ahk_exe Code.exe ahk_class Chrome_WidgetWin_1,{Control Down}n{Control Up},,^{F4},^{F4},,^{PgDn} ,,^{PgUp},^{PgUp}
 ,,,,,,,,,,,
 Aqua,,ahk_class SunAwtFrame ahk_exe aqua64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
 Clion,,ahk_class SunAwtFrame ahk_exe clion64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
@@ -136,8 +136,8 @@ Idea,,ahk_class SunAwtFrame ahk_exe idea64.exe,,,^{F4},^{F4},,!{Right},,!{Left},
 Phpstorm,,ahk_class SunAwtFrame ahk_exe phpstorm64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
 Pycharm,,ahk_class SunAwtFrame ahk_exe pycharm64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
 Rider,,ahk_class SunAwtFrame ahk_exe rider64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-Rubymine,,ahk_class SunAwtFrame ahk_exe rubymine64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-RustrOver,,ahk_class SunAwtFrame ahk_exe rustrover64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+RubyMine,,ahk_class SunAwtFrame ahk_exe rubymine64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+RustRover ,,ahk_class SunAwtFrame ahk_exe rustrover64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
 Webstorm,,ahk_class SunAwtFrame ahk_exe webstorm64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
 Writerside,,ahk_class SunAwtFrame ahk_exe writerside64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
 ,,,,,,,,,,,
