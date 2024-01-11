@@ -2,7 +2,7 @@
     ; 随机弹出是否要升级的提示
     regKeyName := "HKEY_CURRENT_USER\SOFTWARE\jiejian"
     regValueName := "lastCheckDate"
-    if DateDiff(A_NowUTC, RegRead(regKeyName, regValueName, 20000101000000), "days") > 0 {
+    if not A_IsCompiled or DateDiff(A_NowUTC, RegRead(regKeyName, regValueName, 20000101000000), "days") > 0 {
         req := ComObject("Msxml2.XMLHTTP")
         ; 打开启用异步的请求.
         localIsAlphaOrBeta := InStr(CodeVersion, "alpha") or InStr(CodeVersion, "beta")
