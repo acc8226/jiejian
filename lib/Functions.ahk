@@ -30,3 +30,65 @@ GetProcessName() {
 
   return WinGetProcessName(winTitle)
 }
+
+/**
+ * 托盘菜单被点击
+ * @param ItemName 
+ * @param ItemPos 
+ * @param MyMenu 
+ */
+TrayMenuHandler(ItemName, ItemPos, MyMenu) {
+  switch ItemName {
+    case "暂停":
+      jiejianToggleSuspend()
+    case "重启程序":
+      jiejianReload()
+    case "检查更新":
+      checkUpdate(true)
+    case "帮助文档":
+      Run "https://gitcode.com/acc8226/jiejian/overview"
+    case "关于作者":
+      Run "https://gitcode.com/acc8226/"
+    case "查看窗口标识符":
+      Run "extra/WindowSpyU32.exe"
+    case "退出":
+      jiejianExit()
+  }
+}
+
+TrayMenuHandlerToRelease(*) {
+  Run "https://gitcode.com/acc8226/jiejian/releases"
+}
+
+/**
+ * 暂停
+ */
+jiejianToggleSuspend() {
+  Suspend(!A_IsSuspended)
+  if (A_IsSuspended) {
+    ; TraySetIcon("./bin/icons/logo2.ico")
+    A_TrayMenu.Check("暂停")
+    Tip("  暂停捷键  ", -500)
+  } else {
+    ; TraySetIcon("./bin/icons/logo.ico")
+    A_TrayMenu.UnCheck("暂停")
+    Tip("  恢复捷键  ", -500)
+  }
+}
+
+/**
+ * 重启程序
+ */
+jiejianReload() {  
+  Tip("Reload")
+  Reload()
+}
+
+/**
+ * 退出程序
+ * @param ExitReason 退出原因
+ * @param ExitCode 传递给 Exit 或 ExitApp 的退出代码.
+ */
+jiejianExit(ExitReason?, ExitCode?) {
+  ExitApp
+}

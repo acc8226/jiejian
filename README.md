@@ -518,12 +518,11 @@ CapsLock 命令
 
 ### 打包发版目录结构
 
-1. extra/ 【增强体验】MyKeymap2.0 预设配置。WGestures 为 可导入的预设手势模版。WindowSpyU64.exe 用于查看窗口信息。
+1. extra/ 【增强体验】MyKeymap2/data/config.json 为预设配置。WGestures V1/V2 为预设手势模版。WindowSpyU32.exe 用于查看窗口标识符。
 2. app.csv 配置文件
 3. data.csv 配置文件
 4. help.url 在线帮助文档
-5. **jiejian32.exe** 分别为 32/64 位主程序 免安装，双击即用
-6. **jiejian64.exe**
+5. **jiejian32/64.exe** 分别为 32/64 位主程序 免安装，双击即用
 
 ### 软件设计思路
 
@@ -537,6 +536,14 @@ CapsLock 命令
 * app.csv 中先后顺序关系通过优先级进行定义
 
 ### 软件升级
+
+jiejian.exe 的文件版本为当前四位版本号，产品版本为当前编译的 ahk 版本。
+
+升级信息会写入了注册表，而非传统 ini 文件。
+
+自动检查默认为间隔 1 天，当然也可手动检查更新。
+
+渠道分为正式版 和 beta 测试版。
 
 下载新的发布包，提取 jiejian.exe / jiejian64.exe 覆盖即可。
 

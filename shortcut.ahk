@@ -14,63 +14,25 @@ https://wyagd001.github.io/v2/docs/
 ;@Ahk2Exe-SetCopyright 全民反诈 union
 ;@Ahk2Exe-SetDescription 捷键-为简化键鼠操作而生
 
-CodeVersion := "24.1.11-beta2"
+CodeVersion := "24.1.11-beta3"
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2%
 ;@Ahk2Exe-Set FileVersion, %U_version%
 
 ; ----- 1. 热键 之 鼠标操作 -----
 CoordMode "Mouse" ; 默认坐标相对于桌面(整个屏幕)
 
-#Include "lib\Functions.ahk"
-#Include "lib\Actions.ahk"
-#Include "lib\MoveWindow.ahk"
+#Include "lib/Functions.ahk"
+#Include "lib/Actions.ahk"
+#Include "lib/MoveWindow.ahk"
+#Include "lib/Utils.ahk"
 
-#Include "modules\configMouse.ahk"
-#Include "modules\utils.ahk"
-#Include "modules\anyrun.ahk"
-#Include "modules\readApp.ahk"
-#Include "modules\readData.ahk"
+#Include "modules/configMouse.ahk"
+#Include "modules/utils.ahk"
+#Include "modules/anyrun.ahk"
+#Include "modules/readApp.ahk"
+#Include "modules/readData.ahk"
 
-; 设置托盘图标和菜单
-settingTray() {
-    A_IconTip := "捷键"
-    itemCount := DllCall("GetMenuItemCount", "ptr", A_TrayMenu.Handle)
-    localIsAlphaOrBeta := InStr(CodeVersion, "alpha") or InStr(CodeVersion, "beta")
-    
-    MenuHandler1(*) {
-        Run "https://gitcode.com/acc8226/jiejian/overview"
-    }
-    A_TrayMenu.Insert(itemCount++ . "&", "帮助", MenuHandler1)
- 
-    MenuHandler2(*) {
-        Run "https://gitcode.com/acc8226/jiejian/releases"
-    }
-    A_TrayMenu.Insert(itemCount++ . "&", "捷键 " CodeVersion (localIsAlphaOrBeta ? " 测试版" : " 正式版"), MenuHandler2)
-
-    MenuHandler3(*) {
-        Run "https://gitcode.com/acc8226/"
-    }
-    A_TrayMenu.Insert(itemCount++ . "&", "关于作者", MenuHandler3)
-    ; 建议使用 16*16 或 32*32 像素的图标
-
-    faviconIco := "favicon.ico"
-    ;@Ahk2Exe-Let U_faviconIco = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2%
-
-    if A_IsCompiled {
-        ;@Ahk2Exe-SetMainIcon %U_faviconIco%
-    } else {
-        TraySetIcon faviconIco
-        FileObj := ''
-        if localIsAlphaOrBeta {
-            FileObj := FileOpen("CURRENT_VERSION", "w")
-        } else {
-            FileObj := FileOpen("RELEASE", "w")
-        }
-        FileObj.Write(CodeVersion)
-        FileObj.Close()
-    }
-}
-settingTray()
+settingTray() ; 设置托盘图标和菜单
 
 ; ----- 2. 热键 之 快捷键重写和增强 -----
 
@@ -156,3 +118,41 @@ settingTray()
 CapsLock & LButton::EWD_MoveWindow
 
 #Include "modules\CheckUpdate.ahk"
+
+; 设置托盘图标和菜单
+settingTray() {
+    localIsAlphaOrBeta := InStr(CodeVersion, "alpha") or InStr(CodeVersion, "beta")
+
+    A_TrayMenu.Delete()
+    A_TrayMenu.Add("暂停", TrayMenuHandler)
+    A_TrayMenu.Add("重启程序", TrayMenuHandler)
+    A_TrayMenu.Add("检查更新", TrayMenuHandler)
+    A_TrayMenu.Add("帮助文档", TrayMenuHandler)
+    A_TrayMenu.Add("关于作者", TrayMenuHandler)
+    A_TrayMenu.Add("查看窗口标识符", TrayMenuHandler)
+    A_TrayMenu.Add("捷键 " CodeVersion (localIsAlphaOrBeta ? " 测试版" : " 正式版"), TrayMenuHandlerToRelease)
+    A_TrayMenu.Add("退出", TrayMenuHandler)
+
+    A_TrayMenu.Default := "暂停"
+    A_TrayMenu.ClickCount := 1
+  
+    A_IconTip := "捷键"
+
+    ; 建议使用 16*16 或 32*32 像素的图标
+    faviconIco := "favicon.ico"
+    ;@Ahk2Exe-Let U_faviconIco = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2%
+
+    if A_IsCompiled {
+        ;@Ahk2Exe-SetMainIcon %U_faviconIco%
+    } else {
+        TraySetIcon faviconIco
+        FileObj := ''
+        if localIsAlphaOrBeta {
+            FileObj := FileOpen("CURRENT_VERSION", "w")
+        } else {
+            FileObj := FileOpen("RELEASE", "w")
+        }
+        FileObj.Write(CodeVersion)
+        FileObj.Close()
+    }
+}
