@@ -521,9 +521,9 @@ CapsLock 命令
 1. extra/ 【增强体验】MyKeymap2.0 预设配置。WGestures 为 可导入的预设手势模版。WindowSpyU64.exe 用于查看窗口信息。
 2. app.csv 配置文件
 3. data.csv 配置文件
-4. favicon.ico 图标文件
-5. help.url 在线帮助文档
-6. **shortcut64.exe** 主程序 免安装，双击即用
+4. help.url 在线帮助文档
+5. **jiejian32.exe** 分别为 32/64 位主程序 免安装，双击即用
+6. **jiejian64.exe**
 
 ### 软件设计思路
 
@@ -535,6 +535,12 @@ CapsLock 命令
 * Alt + 左方向键 比 backspace 更加通用
 * 后退 默认 Alt + 左
 * app.csv 中先后顺序关系通过优先级进行定义
+
+### 软件升级
+
+下载新的发布包，提取 jiejian.exe / jiejian64.exe 覆盖即可。
+
+另外 app.csv 和 data.csv 可按需覆盖。一般情况下建议 app.csv 和 data.csv 自定义内容追加在尾部，方便迁移数据。
 
 ## 感谢
 

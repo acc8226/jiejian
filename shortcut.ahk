@@ -9,9 +9,16 @@ https://wyagd001.github.io/v2/docs/
 #Requires AutoHotkey >=v2.0
 #SingleInstance force ; 跳过对话框并自动替换旧实例
 
-; ----- 1. 热键 之 鼠标操作 -----
-global isDebug := true
+;@Ahk2Exe-Set Language, 0x0804
 
+;@Ahk2Exe-SetCopyright 全民反诈 union
+;@Ahk2Exe-SetDescription 捷键-为简化键鼠操作而生
+
+CodeVersion := "24.1.11-beta"
+;@Ahk2Exe-Let U_version = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2%
+;@Ahk2Exe-Set FileVersion, %U_version%
+
+; ----- 1. 热键 之 鼠标操作 -----
 CoordMode "Mouse" ; 默认坐标相对于桌面(整个屏幕)
 
 #Include "lib\Functions.ahk"
@@ -28,25 +35,40 @@ CoordMode "Mouse" ; 默认坐标相对于桌面(整个屏幕)
 settingTray() {
     A_IconTip := "捷键"
     itemCount := DllCall("GetMenuItemCount", "ptr", A_TrayMenu.Handle)
+    localIsAlphaOrBeta := InStr(CodeVersion, "alpha") or InStr(CodeVersion, "beta")
     
     MenuHandler1(*) {
         Run "https://gitcode.com/acc8226/jiejian/overview"
     }
     A_TrayMenu.Insert(itemCount++ . "&", "帮助", MenuHandler1)
-
+ 
     MenuHandler2(*) {
         Run "https://gitcode.com/acc8226/jiejian/releases"
     }
-    A_TrayMenu.Insert(itemCount++ . "&", "捷键 24年1月 beta 版", MenuHandler2)
+    A_TrayMenu.Insert(itemCount++ . "&", "捷键 " CodeVersion (localIsAlphaOrBeta ? " 测试版" : " 正式版"), MenuHandler2)
 
     MenuHandler3(*) {
         Run "https://gitcode.com/acc8226/"
     }
     A_TrayMenu.Insert(itemCount++ . "&", "关于作者", MenuHandler3)
-
-    Persistent
     ; 建议使用 16*16 或 32*32 像素的图标
-    TraySetIcon "favicon.ico"
+
+    faviconIco := "favicon.ico"
+    ;@Ahk2Exe-Let U_faviconIco = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2%
+
+    if A_IsCompiled {
+        ;@Ahk2Exe-SetMainIcon %U_faviconIco%
+    } else {
+        TraySetIcon faviconIco
+        FileObj := ''
+        if localIsAlphaOrBeta {
+            FileObj := FileOpen("CURRENT_VERSION", "w")
+        } else {
+            FileObj := FileOpen("RELEASE", "w")
+        }
+        FileObj.Write(CodeVersion)
+        FileObj.Close()
+    }
 }
 settingTray()
 
@@ -104,9 +126,10 @@ settingTray()
 }
 
 ; 暂停脚本 Ctrl+Alt+S
-#HotIf isDebug
+;@Ahk2Exe-IgnoreBegin
 ^!s::Suspend
-#HotIf
+;@Ahk2Exe-IgnoreEnd
+
 ; ctrl + alt + v 将剪贴板的内容输入到当前活动应用程序中，防止了一些网站禁止在 HTML 密码框中进行粘贴操作
 ^!v::Send A_Clipboard
 ^+"::Send '""{Left}' ; ctrl + shift + " 快捷操作-插入双引号
@@ -131,3 +154,5 @@ settingTray()
 ; ----- 11. 其他-----
 ; 按住 CapsLock 后可以用鼠标左键拖动窗口
 CapsLock & LButton::EWD_MoveWindow
+
+#Include "modules\CheckUpdate.ahk"
