@@ -14,7 +14,7 @@ https://wyagd001.github.io/v2/docs/
 ;@Ahk2Exe-SetCopyright 全民反诈 union
 ;@Ahk2Exe-SetDescription 捷键-为简化键鼠操作而生
 
-CodeVersion := "24.1.12-beta"
+CodeVersion := "24.1.12-beta3"
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2%
 ;@Ahk2Exe-Set FileVersion, %U_version%
 
@@ -31,8 +31,10 @@ CoordMode "Mouse" ; 默认坐标相对于桌面(整个屏幕)
 #Include "modules/anyrun.ahk"
 #Include "modules/readApp.ahk"
 #Include "modules/readData.ahk"
+#Include "modules/CheckUpdate.ahk"
 
-settingTray() ; 设置托盘图标和菜单
+SettingTray ; 设置托盘图标和菜单
+CheckUpdate ; 检查更新
 
 ; ----- 2. 热键 之 快捷键重写和增强 -----
 
@@ -86,6 +88,7 @@ settingTray() ; 设置托盘图标和菜单
     Send "{End}"
     A_Clipboard := oldText
 }
+#HotIf
 
 ; 暂停脚本 Ctrl+Alt+S
 ;@Ahk2Exe-IgnoreBegin
@@ -96,7 +99,7 @@ settingTray() ; 设置托盘图标和菜单
 ^!v::Send A_Clipboard
 ^+"::Send '""{Left}' ; ctrl + shift + " 快捷操作-插入双引号
 ^!r::Reload ; Ctrl + Alt + R 重启脚本
-!Space::anyrun ; 启动窗口
+!Space::Anyrun ; 启动窗口
 
 ; ----- 7. 热串 之 打开网址。选择 z 而非 q，因为 q 的距离在第一行太远了，我称之为 Z 模式，用于全局跳转网址 -----
 ; ----- 8. 热串之 缩写扩展：将短缩词自动扩展为长词或长句（英文单词中哪个字母开头的单词数最少，我称之为 X 模式）-----
@@ -117,20 +120,19 @@ settingTray() ; 设置托盘图标和菜单
 ; 按住 CapsLock 后可以用鼠标左键拖动窗口
 CapsLock & LButton::EWD_MoveWindow
 
-#Include "modules\CheckUpdate.ahk"
-
 ; 设置托盘图标和菜单
-settingTray() {
+SettingTray() {
     localIsAlphaOrBeta := InStr(CodeVersion, "alpha") or InStr(CodeVersion, "beta")
 
     A_TrayMenu.Delete()
     A_TrayMenu.Add("暂停", TrayMenuHandler)
     A_TrayMenu.Add("重启程序", TrayMenuHandler)
+    A_TrayMenu.Add("运行anyrun", TrayMenuHandler)
     A_TrayMenu.Add("检查更新", TrayMenuHandler)
     A_TrayMenu.Add("帮助文档", TrayMenuHandler)
     A_TrayMenu.Add("关于作者", TrayMenuHandler)
     A_TrayMenu.Add("查看窗口标识符", TrayMenuHandler)
-    A_TrayMenu.Add("捷键 " CodeVersion (localIsAlphaOrBeta ? " 测试版" : " 正式版"), TrayMenuHandlerToRelease)
+    A_TrayMenu.Add("捷键 " CodeVersion (A_IsCompiled ? "" : " debug") (localIsAlphaOrBeta ? " 测试版" : " 正式版"), TrayMenuHandlerToRelease)
     A_TrayMenu.Add("退出", TrayMenuHandler)
 
     A_TrayMenu.Default := "暂停"
@@ -138,21 +140,16 @@ settingTray() {
   
     A_IconTip := "捷键"
 
-    ; 建议使用 16*16 或 32*32 像素的图标
+    ; 建议使用 16*16 或 32*32 像素的图标，使用 Ahk2Exe-Let 提取出 favicon.ico
     faviconIco := "favicon.ico"
     ;@Ahk2Exe-Let U_faviconIco = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2%
+    ;@Ahk2Exe-SetMainIcon %U_faviconIco%
 
-    if A_IsCompiled {
-        ;@Ahk2Exe-SetMainIcon %U_faviconIco%
-    } else {
+    if not A_IsCompiled
         TraySetIcon faviconIco
-        FileObj := ''
-        if localIsAlphaOrBeta {
-            FileObj := FileOpen("CURRENT_VERSION", "w")
-        } else {
-            FileObj := FileOpen("RELEASE", "w")
-        }
-        FileObj.Write(CodeVersion)
-        FileObj.Close()
-    }
 }
+
+; 往对应文件写入对应版本号，只在生成 32 位 exe 的时候执行
+;@Ahk2Exe-Obey U_V, = %A_PtrSize% * 8 = 32 ? "PostExec" : "Nop"
+; 提取出 文件名 再拼接 PostExec.ahk; 版本号; 脚本所在路径
+;@Ahk2Exe-%U_V% %A_ScriptName~\.[^\.]+$~PostExec.ahk% %U_version%, , %A_ScriptDir%

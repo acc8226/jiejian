@@ -1,4 +1,4 @@
-﻿checkUpdate(isNeedCallback := false) {
+﻿CheckUpdate(isNeedCallback := false) {
     regKeyName := "HKEY_CURRENT_USER\SOFTWARE\jiejian"
     regValueName := "lastCheckDate"
     localIsAlphaOrBeta := InStr(CodeVersion, "alpha") or InStr(CodeVersion, "beta")
@@ -7,7 +7,7 @@
         req := ComObject("Msxml2.XMLHTTP")
         ; 打开启用异步的请求.
         checkUrl := localIsAlphaOrBeta 
-            ? "https://raw.gitcode.com/acc8226/jiejian/raw/main/CURRENT_VERSION" 
+            ? "https://raw.gitcode.com/acc8226/jiejian/raw/main/SNAPSHOT" 
             : "https://raw.gitcode.com/acc8226/jiejian/raw/main/RELEASE"
         req.open("GET", checkUrl, true)
 
@@ -30,15 +30,17 @@
                     if isNeedCallback
                         MsgBox "已是最新版本", '检查更新'
                 }
-            } else if req.status = 12007 {
-                if isNeedCallback
+            } 
+            ; 0 表示安全证书的吊销信息不可用， 12007 表示没有网
+            else if req.status = 0 or req.status = 12007 {
+                if not A_IsCompiled or isNeedCallback
                     MsgBox "请连接网络后重试", '检查更新'
-                else
-                    SetTimer checkUpdate, -25 * 60 * 60 ; 无网络则 25 分钟后重试
+                SetTimer CheckUpdate, -25 * 60 * 60 ; 无网络则 25 分钟后重试
+            } else if req.status = 404 {
+                if not A_IsCompiled or isNeedCallback
+                    MsgBox "升级地址找不到", '检查更新'
             } else                        
                 MsgBox "检测升级失败 " req.status, "检查更新", 16
         }
     }
 }
-
-checkUpdate()

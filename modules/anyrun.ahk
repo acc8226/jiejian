@@ -1,6 +1,6 @@
 ﻿#Include "sort.ahk"
 
-anyrun() {
+Anyrun() {
     guiTitle := "快捷启动"
     ; 检查窗口是否已经存在，如果窗口已经存在，如果窗口不存在，则创建新窗口 
     If WinExist(guiTitle)

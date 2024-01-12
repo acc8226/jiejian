@@ -43,6 +43,8 @@ TrayMenuHandler(ItemName, ItemPos, MyMenu) {
       jiejianToggleSuspend()
     case "重启程序":
       jiejianReload()
+    case "运行anyrun":
+      Anyrun()
     case "检查更新":
       checkUpdate(true)
     case "帮助文档":
