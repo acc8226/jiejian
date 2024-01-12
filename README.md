@@ -1,10 +1,10 @@
 # 捷键 for win 使用说明
 
-* 基于 autohotkey2 开发的按键映射 / 快捷键增强工具
+* 基于 Autohotkey2 开发的按键映射 / 快捷键增强工具
 * 为增强鼠标和键盘按键功能而生
 * 不区分鼠标厂商，选择使用带侧边按键的鼠标，体验更完善。
 * 支持自定义快捷键、快捷键改写、快捷键功能增强。提供快捷启动等功能。
-* 建议搭配 WGestures（全局鼠标手势） + [MyKeymap](https://xianyukang.com/MyKeymap.html)（完善的窗口操作 & 启动程序 & 召唤窗口）使用。
+* 建议搭配 WGestures 全局鼠标手势 + [MyKeymap](https://xianyukang.com/MyKeymap.html)（完善的窗口操作 & 启动程序 & 召唤窗口）软件进行使用。
 
 注意：说明书指向最新版软件，若功能有差异，请[下载并使用最新版](https://gitcode.com/acc8226/jiejian/releases)。
 
@@ -209,7 +209,24 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 
 ### 未来计划
 
-* 考虑是否提供软件检测升级功能
+使程序更易用。
+
+### 捷键 2024.01
+
+项目名从 shortcut 正式改名为 jiejian
+
+新增：
+
+* 完善对 jetbrains 系列软件的支持，包含衍生的 Google Android Studio 和 华为的 DevEco Studio。
+* 支持已过时的 Atom
+* 哔哩哔哩、GitKraken、Rstudio、foobar2000 和 方格音乐部分按键的支持
+* 新增鼠标中间和右键的一些支持
+* 新增 按住 CapsLock 后可以用鼠标左键拖动窗口 和 兜底的关闭功能更加完善了
+  
+* 添加 MyKeymap 和 wg 鼠标手势的玩法
+* 新增了版本升级的功能
+* 菜单完全重新定制
+* 新增一键打包 package.ahk
 
 ### 捷键 2023 年度纪念版
 
@@ -302,7 +319,7 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 
 ### 如何将捷键设置为开机自启
 
-在运行窗口中运行 shell:startup，按住 alt 键将 shortcut64.exe 拖入 Startup 文件夹内即可。
+在运行窗口中运行 shell:startup，按住 alt 键将 jiejian32/64.exe 拖入 Startup 文件夹内即可。
 
 ## 附录
 
@@ -310,7 +327,11 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 
 #### 搭配 WGestures
 
-[【免费】【win】WGestures 1 鼠标手势](https://www.yingdev.com/projects/wgestures) / [【付费】【win mac】WGestures 2 鼠标手势](https://www.yingdev.com/projects/wgestures2)
+[【免费】【win】WGestures 1 鼠标手势](https://www.yingdev.com/projects/wgestures)
+
+或者
+
+ [【付费】【win mac】WGestures 2 鼠标手势](https://www.yingdev.com/projects/wgestures2)
 
 | 方向 | 名称 | 按键/功能 |
 | ----  | ---- | ---- |
@@ -326,6 +347,10 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 | ↪ | 关闭/close | alt + f4 |
 | 上左 | 上一个/prev | ctrl + shift + tab |
 | 上右 | 下一个/next | ctrl + tab |
+| 左上 | 剪切 | ctrl + x |
+| 左下 | 删除 | Del |
+| 右上 | 百度选定文字 | wg 的网址直达功能 `https://baidu.com/s?wd={WG_SELECTED_TEXT}` |
+| 右下 | 新建窗口 | ctrl + shift + n |
 
 #### 搭配 [MyKeymap](https://xianyukang.com/MyKeymap.html)
 
@@ -340,13 +365,12 @@ CapsLock 模式
 | R | 在当前程序的窗口间轮换 |
 | Z | 复制文件路径或纯文本 |
 | B | 窗口最小化 |
-| | |
-| a | 360 chrome |
+| a | 360 极速浏览器 |
 | s | 资源管理器 |
 | d | 微信 |
 | x | WindowsTerminal |
-| c | Code |
-| v | idea64 |
+| c | VSCode |
+| v | IDEA |
 | t | Termius |
 
 CapsLock F 模式
@@ -518,13 +542,15 @@ CapsLock 命令
 
 ### 打包发版目录结构
 
+每次打包都在 out 目录。
+
 1. extra/ 【增强体验】MyKeymap2/data/config.json 为预设配置。WGestures V1/V2 为预设手势模版。WindowSpyU32.exe 用于查看窗口标识符。
 2. app.csv 配置文件
 3. data.csv 配置文件
 4. help.url 在线帮助文档
 5. **jiejian32/64.exe** 分别为 32/64 位主程序 免安装，双击即用
 
-### 软件设计思路
+### 快捷键设计思路
 
 * 严格按照 ahk 中的 hotIf 的优先匹配原则。一般 esc 会在前。由于考虑到 Esc 逃逸键 用于关闭窗口，目前支持记事本中使用。
 * Ctrl + F3 为新建标签/窗口 避免和已有 Ctrl + t 冲突
@@ -546,6 +572,18 @@ jiejian.exe 的文件版本为当前四位版本号，产品版本为当前编�
 下载新的发布包，提取 jiejian.exe / jiejian64.exe 覆盖即可。
 
 另外 app.csv 和 data.csv 可按需覆盖。一般情况下建议 app.csv 和 data.csv 自定义内容追加在尾部，方便迁移数据。
+
+## 软件构建
+
+建议在 64 为环境编译和打包该软件。32 位平台我就没试过。
+
+测试平台：win11 22H2 64 位操作系统 + ahk 2.0.11 64 位 + UPX 压缩
+
+在安装 ahk 之后，双击 jiejian.ahk 即可运行
+
+打包则双击 package.ahk 即可。
+
+package.ahk 的设计思路：Ahk2Exe.exe 将 ahk 转化为 exe，期间使用 /compress 制定了压缩方式。ahk 编译会触发 jiejianPostExec.ahk。jiejianPostExec.ahk 做了两件事：写入版本信息 和 将文件夹命名为 jiejian-版本。
 
 ## 感谢
 
