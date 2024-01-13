@@ -1,4 +1,4 @@
-类型 ,启动路径 ,运行名称 ,运行关键字 ,热键关键字 ,热串关键字 
+类型,启动路径,运行名称,运行关键字,热键关键字,热串关键字 
 app,netstat,网络状态,wangluozhuangtai|网络状态,,
 app,inetcpl.cpl,Internet选项,inetcpl|Internet选项,,
 app,Firewall.cpl,防火墙,fanghuoqiang|防火墙,,

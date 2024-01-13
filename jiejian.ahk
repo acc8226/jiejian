@@ -125,20 +125,27 @@ SettingTray() {
     localIsAlphaOrBeta := InStr(CodeVersion, "alpha") or InStr(CodeVersion, "beta")
 
     A_TrayMenu.Delete()
+    if not A_IsCompiled {
+        A_TrayMenu.Add("编辑脚本", TrayMenuHandler)
+        A_TrayMenu.Add("查看变量", TrayMenuHandler)
+        A_TrayMenu.Add
+    }
     A_TrayMenu.Add("暂停", TrayMenuHandler)
-    A_TrayMenu.Add("重启程序", TrayMenuHandler)
-    A_TrayMenu.Add("运行anyrun", TrayMenuHandler)
+    A_TrayMenu.Add("重启", TrayMenuHandler)
+    A_TrayMenu.Add("搜一搜", TrayMenuHandler)
+    A_TrayMenu.Add("查看窗口标识符", TrayMenuHandler)
     A_TrayMenu.Add("检查更新", TrayMenuHandler)
+    A_TrayMenu.Add
+    A_TrayMenu.Add("项目主页", TrayMenuHandler)
     A_TrayMenu.Add("帮助文档", TrayMenuHandler)
     A_TrayMenu.Add("关于作者", TrayMenuHandler)
-    A_TrayMenu.Add("查看窗口标识符", TrayMenuHandler)
-    A_TrayMenu.Add("捷键 " CodeVersion (A_IsCompiled ? "" : " debug") (localIsAlphaOrBeta ? " 测试版" : " 正式版"), TrayMenuHandlerToRelease)
+    A_TrayMenu.Add
     A_TrayMenu.Add("退出", TrayMenuHandler)
 
     A_TrayMenu.Default := "暂停"
     A_TrayMenu.ClickCount := 1
   
-    A_IconTip := "捷键"
+    A_IconTip := "捷键" CodeVersion (A_IsCompiled ? "" : " debug") (localIsAlphaOrBeta ? " 测试版" : " 正式版")
 
     ; 建议使用 16*16 或 32*32 像素的图标，使用 Ahk2Exe-Let 提取出 favicon.ico
     faviconIco := "favicon.ico"
