@@ -561,7 +561,7 @@ jiejian.exe 的文件版本为当前四位版本号，产品版本为当前编�
 
 升级信息会写入了注册表，而非传统 ini 文件。
 
-升级有两个渠道，release 为正式版 和 snapshot 为测试版。release 版本中会自动检查更新，间隔为 1 天。snapshot 版本中需要手动检查更新。
+升级有两个渠道，release 为正式版 和 snapshot 为测试版。release 版本中会自动检查更新间隔为 1 天。snapshot 版本中为每次启动的时候。
 
 下载新的发布包，提取 jiejian.exe / jiejian64.exe 覆盖即可。
 
@@ -571,7 +571,7 @@ jiejian.exe 的文件版本为当前四位版本号，产品版本为当前编�
 
 建议在 64 为环境编译和打包该软件。32 位平台我就没试过。
 
-测试平台：win11 22H2 64 位操作系统 + ahk 2.0.11 64 位 + UPX 压缩
+测试平台：win11 22H2 64 位系统 + ahk 2.0.11 64 位主程序 + UPX 压缩
 
 在安装 ahk 之后，双击 jiejian.ahk 即可运行
 
@@ -579,7 +579,7 @@ jiejian.exe 的文件版本为当前四位版本号，产品版本为当前编�
 
 package.ahk 的设计思路：Ahk2Exe.exe 将 ahk 转化为 exe，期间使用 /compress 制定了压缩方式。ahk 编译会触发 jiejianPostExec.ahk。jiejianPostExec.ahk 做了两件事：写入版本信息 和 将文件夹命名为 jiejian-版本。
 
-## 感谢
+## 鸣谢
 
 本程序编辑 csv 文件用到了开源的 LiberOffice。主要发布平台为 [GitHub](https://github.com) 和 [GitCode](https://gitcode.com)。项目主页发布在 GitHub Page。
 
