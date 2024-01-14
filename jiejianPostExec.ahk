@@ -1,4 +1,8 @@
 ﻿; 写入版本信息
+if A_Args.Length = 0 {
+    MsgBox '打包失败，参数不能为空'
+    return
+}
 version := A_Args[1]
 localIsAlphaOrBeta := InStr(version, "alpha") or InStr(version, "beta")
 fileObj := localIsAlphaOrBeta ? FileOpen("SNAPSHOT", "w") : FileOpen("RELEASE", "w")

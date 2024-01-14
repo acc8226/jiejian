@@ -424,3 +424,9 @@ XButton2::Send "^!{Left}"
 ; 兜底
 #HotIf
 XButton2::Send "^+{Tab}"
+
+; 固定写法
+; win 11 资源管理器的新建窗口，不过这样会使得新建文件夹失效，直接用鼠标手势不失一种好选择
+; #HotIf WinActive("ahk_class CabinetWClass ahk_exe explorer.exe")
+; ^+n::Send "^n"
+; #HotIf

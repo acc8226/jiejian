@@ -360,36 +360,28 @@ CapsLock 模式
 
 | 按键 | 用途 |
 | ----  | ---- |
-| W | 切换到上一个窗口 |
-| E | 窗口管理 EDSF 切换 X关闭、空格选择 |
-| G | 置顶/取消置顶 窗口 |
-| Q | 窗口最大化或还原 |
+| W | IDEA |
+| E | VSCode |
 | R | 在当前程序的窗口间轮换 |
+| A | 360 极速浏览器 |
+| S | 资源管理器 |
+| D | 微信 |
 | Z | 复制文件路径或纯文本 |
-| B | 窗口最小化 |
-| a | 360 极速浏览器 |
-| s | 资源管理器 |
-| d | 微信 |
-| x | WindowsTerminal |
-| c | VSCode |
-| v | IDEA |
-| t | Termius |
+| C | musicplayer2 |
 
-CapsLock F 模式
-
-| 按键 | 窗口标识符 | 当窗口不在时启动 | 备注 和 短语 和 key |
-| ----  | ---- | ---- | ---- |
-| Q | ahk_exe SumatraPDF.exe | D:\alee\exec\daily\0.日常\2.办公类\SumatraPDF\SumatraPDF.exe | SumatraPDF【pd】 |
-| W | ahk_exe PotPlayerMini64.exe | D:\alee\exec\daily\0.日常\4.视频类\Pot_Player64\PotPlayerMini64.exe | PotPlayer【vi】 |
-| T | ahk_class Chrome_WidgetWin_1 ahk_exe Termius.exe | C:\Users\ferder\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Termius.lnk | Termius【tm】【t】 |
-| E | ahk_exe MusicPlayer2.exe | D:\alee\exec\daily\0.日常\3.音频类\MusicPlayer2_x64\MusicPlayer2.exe | MusicPlayer2【mu】 |
-| A | ahk_exe 360ChromeX.exe | shortcuts\360 极速浏览器X.lnk | 360极速浏览器【ch】【a】|
-| S | ahk_class CabinetWClass ahk_exe Explorer.EXE | D:\ | 资源管理器【ex】【s】|
-| D | ahk_exe WeChat.exe | shortcuts\微信.lnk | 微信【we】【d】|
-| Z | ahk_exe WindowsTerminal.exe | wt.exe | WindowsTerminal【te】【g】 |
-| X | ahk_exe Code.exe | shortcuts\Visual Studio Code.lnk | vscode【co】【c】|
-| C | ahk_exe idea64.exe | D:\alee\exec\dev\IDE\ideaIC-2022.3.3.win\bin\idea64.exe | IntelliJ IDEA【id】【v】|
-| M | 一些内置函数 | ProcessExistSendKeyOrRun("TIM.exe", "^!z", "shortcuts\TIM.lnk") | 如果 TIM.exe 进程存在则输入 Ctrl+Alt+Z 热键激活 TIM，否则启动 TIM |
+| 窗口标识符 | 当窗口不在时启动 | 备注 和 短语 和 key |
+| ---- | ---- | ---- |
+| ahk_exe SumatraPDF.exe | D:\alee\exec\daily\0.日常\2.办公类\SumatraPDF\SumatraPDF.exe | SumatraPDF【pd】 |
+| ahk_exe PotPlayerMini64.exe | D:\alee\exec\daily\0.日常\4.视频类\Pot_Player64\PotPlayerMini64.exe | PotPlayer【vi】 |
+| ahk_class Chrome_WidgetWin_1 ahk_exe Termius.exe | C:\Users\ferder\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Termius.lnk | Termius【tm】【t】 |
+| ahk_exe MusicPlayer2.exe | D:\alee\exec\daily\0.日常\3.音频类\MusicPlayer2_x64\MusicPlayer2.exe | MusicPlayer2【mu】 |
+| ahk_exe 360ChromeX.exe | shortcuts\360 极速浏览器X.lnk | 360极速浏览器【ch】【a】|
+| ahk_class CabinetWClass ahk_exe Explorer.EXE | D:\ | 资源管理器【ex】【s】|
+| ahk_exe WeChat.exe | shortcuts\微信.lnk | 微信【we】【d】|
+| ahk_exe WindowsTerminal.exe | wt.exe | WindowsTerminal【te】【g】 |
+| ahk_exe Code.exe | shortcuts\Visual Studio Code.lnk | vscode【co】【c】|
+| ahk_exe idea64.exe | D:\alee\exec\dev\IDE\ideaIC-2022.3.3.win\bin\idea64.exe | IntelliJ IDEA【id】【v】|
+| 一些内置函数 | ProcessExistSendKeyOrRun("TIM.exe", "^!z", "shortcuts\TIM.lnk") | 如果 TIM.exe 进程存在则输入 Ctrl+Alt+Z 热键激活 TIM，否则启动 TIM |
 
 CapsLock 命令
 
