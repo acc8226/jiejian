@@ -42,6 +42,8 @@ Loop appList.Length {
       GroupAdd "new_ctrl_n", it.exe
     else if it.new = "{Control Down}n{Control Up}"
       GroupAdd "new_ctrl_n_2", it.exe
+    else if it.new = "^o"
+      GroupAdd "new_ctrl_o", it.exe
     else if it.new = "^t"
       GroupAdd "new_ctrl_t", it.exe
     else if it.new = "^!t"
@@ -116,6 +118,8 @@ Loop appList.Length {
       GroupAdd "next_mediaNext", it.exe
     else if it.nextTag = "]"
       GroupAdd "next_closeBracket", it.exe
+    else if it.nextTag = "n"
+      GroupAdd "next_n", it.exe
     else if it.nextTag = "^+{PgDn}"
       GroupAdd "next_ctrl_shift_pgDn", it.exe
     else if it.nextTag = "!]"
@@ -141,6 +145,8 @@ Loop appList.Length {
       GroupAdd "previous_mediaPrev", it.exe
     else if it.previousTag = "["
       GroupAdd "previous_openBracket", it.exe
+    else if it.previousTag = "p"
+      GroupAdd "previous_p", it.exe
     else if it.previousTag = "!0"
       GroupAdd "previous_alt_0", it.exe
     else if it.previousTag = "!{Left}"
@@ -165,6 +171,8 @@ Loop appList.Length {
       GroupAdd "sideForward_space", it.exe
     else if it.sideForward = "["
       GroupAdd "sideForward_openBracket", it.exe
+    else if it.sideForward = "p"
+      GroupAdd "sideForward_p", it.exe
     else if it.sideForward = "{PgUp}"
       GroupAdd "sideForward_PgUp", it.exe
     else if it.sideForward = "!{Left}"
@@ -281,6 +289,8 @@ XButton1::Send "{Esc}"
 ^F3::Send "^n"
 #HotIf WinActive("ahk_group new_ctrl_n_2")
 ^F3::Send "{Control Down}n{Control Up}"
+#HotIf WinActive("ahk_group new_ctrl_o")
+^F3::Send "^o"
 #HotIf WinActive("ahk_group new_ctrl_t")
 ^F3::Send "^t"
 #HotIf WinActive("ahk_group new_ctrl_alt_t")
@@ -359,6 +369,8 @@ XButton1::SmartCloseWindow ; 比 WinClose "A" 好使
 ^Tab::Send "{Media_Next}" ; 下一曲
 #HotIf WinActive("ahk_group next_closeBracket")
 ^Tab::Send "]"
+#HotIf WinActive("ahk_group next_n")
+^Tab::Send "n"
 #HotIf WinActive("ahk_group next_ctrl_shift_pgDn")
 ^Tab::Send "^+{PgDn}"
 #HotIf WinActive("ahk_group next_alt_closeBracket")
@@ -384,6 +396,8 @@ XButton1::SmartCloseWindow ; 比 WinClose "A" 好使
 ^+Tab::Send "{Media_Prev}" ; 上一曲
 #HotIf WinActive("ahk_group previous_openBracket")
 ^+Tab::Send "[" ; 对 bilibili 不好用，由于会触发 ctrl + shift 切换输入法我就醉了
+#HotIf WinActive("ahk_group previous_p")
+^+Tab::Send "p"
 #HotIf WinActive("ahk_group previous_alt_0")
 ^+Tab::Send "!0"
 #HotIf WinActive("ahk_group previous_alt_left")
@@ -407,6 +421,8 @@ XButton2::Send "{Media_Play_Pause}"
 XButton2::Send "{Space}"
 #HotIf WinActive("ahk_group sideForward_openBracket")
 XButton2::Send "["
+#HotIf WinActive("ahk_group sideForward_p")
+XButton2::Send "p"
 #HotIf WinActive("ahk_group sideForward_PgUp")
 XButton2::Send "{PgUp}"
 #HotIf WinActive("ahk_group sideForward_alt_left")
