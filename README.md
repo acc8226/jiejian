@@ -12,14 +12,14 @@
 
 1\. 当鼠标移动到屏幕左边缘或者上边缘以及停留在任务栏时，鼠标滑轮滚动可以调节音量。
 
-2\. 鼠标按键用法
+2\. 鼠标按键功能
 
-| 按键 | 正常用途 | 音乐类软件 | 视频类软件 | 焦点在任务栏 | 焦点在左或上边界
-| ----  | ---- | ---- | ---- | ---- | ---- |
-| 鼠标右键 | - | - | - | - | 播放/暂停 |
-| 鼠标中键 | - | - | - | 静音 | 静音 |
-| Xbutton2（鼠标侧边前进键） | 万能**后退**键：在多标签页则是切换到上个标签 | 上一曲 | 上一个视频 | 上一曲 | 上一曲 |
-| Xbutton1（鼠标侧边后退键） | 万能**关闭**键：在多标签页则是关闭当前标签 | 关闭窗口 | 关闭窗口 | 下一曲 | 下一曲 |
+| 按键 | 正常用途 | 多标签软件 | 音乐类软件 | 视频类软件 | 焦点在任务栏 | 焦点在左或上边界 |
+| ----  | ---- | ---- | ---- | ---- | ---- | ---- |
+| 鼠标右键 | - | - | - | - | - | 播放/暂停 |
+| 鼠标中键 | - | - | - | - | 静音 | 静音 |
+| 鼠标侧边前进键（XB2） | 同 alt + tab 按键 | 切换到上个标签 | 上一曲 | 上一个视频 | 上一曲 | 上一曲 |
+| 鼠标侧边后退键（XB1） | 关闭窗口 | 在多标签页则是关闭当前标签 | 关闭当前标签 | 关闭窗口 | 关闭窗口 | 下一曲 | 下一曲 |
 
 ![1](https://foruda.gitee.com/images/1689318820722473769/d4f9efe3_426858.gif)
 
@@ -29,17 +29,22 @@
 
 增强已有快捷键以及新增快捷键。支持众多常用软件，详细列表见附录。
 
-| 按键 | 正常用途 | 音乐类软件 | 视频类软件 | 焦点在任务栏或左/上边界
-| ----  | ---- | ---- | ---- | ---- |
-| Ctrl + F3 | 用于**新建**标签/窗口 | - | - | - |
-| Esc（逃逸键）| 可用于**关闭**特定窗口 | - | - | - |
-| Ctrl + F4 | 用于**关闭**标签/窗口 | 同左 | 同左 | 同左 |
-| Alt + → | 前进/快进 | 下一曲 | 快进 | 下一曲 |
-| Ctrl + Tab | 切换下一个标签| 下一曲 | 下一个视频 | 下一曲 |
-| Alt + ← | 后退/快退 | 上一曲 | 快退 | 上一曲 |
-| Ctrl + Shift + Tab | 切换上一个标签 | 上一曲 | 上一个视频 | 上一曲 |
+| 按键 | 正常用途 | 多标签软件 | 音乐类软件 | 视频类软件 | 焦点在任务栏或左/上边界
+| ----  | ---- | ---- | ---- | ---- | ---- |
+| Esc（逃逸键）| 关闭特定窗口 | - | - | - | - |
+| Ctrl + F3 | 打开文件 或 新建文件/窗口 | 新建标签 | 打开文件 或 无操作 | 打开文件 或 无操作 | - |
+| Ctrl + F4 | 关闭窗口 | 关闭标签 | 关闭窗口 | 关闭窗口 | 关闭窗口 |
+| Alt + → | 前进 | 前进 | 下一曲 | 快进 | 下一曲 |
+| Ctrl + Tab | - | 切换下一个标签 | 下一曲 | 下一个视频 | 下一曲 |
+| Alt + ← | 后退 | 后退 | 上一曲 | 快退 | 上一曲 |
+| Ctrl + Shift + Tab | - |切换上一个标签 | 上一曲 | 上一个视频 | 上一曲 |
 
-注：以下部分场景使用了鼠标手势 WGestures 替代了手动键入快捷键
+注：
+
+1. 多标签软件主要为浏览器，支持多标签的文本编辑器、IDE 等。
+2. 音乐类软件如 QQ 音乐 等。其中 ctrl + f3 打开文件的功能仅适用于本地音乐播放器，在线音乐类软件可能不适用。
+3. 视频类软件如 potplayer 等。
+4. 以下部分场景使用了鼠标手势 WGestures 替代了手动键入快捷键
 
 操作资源管理器
 
@@ -49,11 +54,11 @@
 
 ![输入图片说明](https://foruda.gitee.com/images/1689320148290015829/d0563e32_426858.gif "2.gif")
 
-操作 idea
+操作 Jetbrains IDEA
 
 ![输入图片说明](https://foruda.gitee.com/images/1689318910813101697/359f150e_426858.gif "动画2-4.gif")
 
-操作 vscode
+操作 microsoft vscode
 
 ![输入图片说明](https://foruda.gitee.com/images/1689318894573526368/39027a0d_426858.gif "动画2-2.gif")
 
@@ -199,19 +204,13 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 * B列 启动路径：实际运行的网址或程序路径
 * F列 热串关键字：例如 zbd 表示打开百度网
 
-## 已知 bug
-
-目前适配不太好的软件：搜狗浏览器。
-
-目前测试关闭窗口不奏效的软件：搜狗浏览器、windows 任务管理器（似乎屏蔽了 ctrl 键）、windows 任务管理器。
-
 ## 版本发布
 
 ### 未来计划
 
-配置文件不太易用，需要优化
-
-icon 添加按下效果
+* 支持 尚未发布的 arc 浏览器 windows 版
+* icon 添加按下效果
+* 配置文件不太易用，需要优化
 
 ### 捷键 2024.01
 
@@ -219,7 +218,7 @@ icon 添加按下效果
 
 新增：
 
-* 完善对 jetbrains 系列软件的支持，包含衍生的 Google Android Studio 和 华为的 DevEco Studio。
+* 完善对 jetbrains 系列软件的支持，包含衍生的 Google Android Studio 和 华为 DevEco Studio。
 * 支持已过时的 Atom
 * 哔哩哔哩、GitKraken、Rstudio、foobar2000 和 方格音乐部分按键的支持
 * 新增鼠标中间和右键的一些支持
@@ -227,7 +226,7 @@ icon 添加按下效果
   
 * 添加 MyKeymap 和 wg 鼠标手势的玩法
 * 新增了版本升级的功能
-* 菜单完全重新定制
+* 菜单选项重新调整
 * 新增一键打包 package.ahk
 
 ### 捷键 2023 年度纪念版
@@ -321,7 +320,7 @@ icon 添加按下效果
 
 ### 如何将捷键设置为开机自启
 
-在运行窗口中运行 shell:startup，按住 alt 键将 jiejian32/64.exe 拖入 Startup 文件夹内即可。
+在运行窗口中运行 `shell:startup`，根据自己是 32 还是 64 位系统，按住 alt 键将 `jiejian32.exe` 或 `jiejian64.exe` 拖入 Startup 文件夹内即可。
 
 ## 附录
 
@@ -350,7 +349,7 @@ icon 添加按下效果
 | 上左 | 上一个/prev | ctrl + shift + tab |
 | 上右 | 下一个/next | ctrl + tab |
 | 左上 | 剪切 | ctrl + x |
-| 左下 | 删除 | Del |
+| 左下 | 删除 | del |
 | 右上 | 百度选定文字 | wg 的网址直达功能 `https://baidu.com/s?wd={WG_SELECTED_TEXT}` |
 | 右下 | 新建窗口 | ctrl + shift + n |
 
@@ -390,7 +389,15 @@ CapsLock 命令
 | cc | shortcuts\Visual Studio Code.lnk | -n "{selected}" | 用 VS Code 打开选中的文件，在新窗口中打开 |
 | wt | wt.exe | -d "{selected}" | 用 Windows Terminal 打开选中的文件夹 |
 
-### 支持软件
+### 已适配软件
+
+软件入选原则：主要收录热门软件，其中主要以浏览器比较全。
+
+已知 bug：
+
+* Right PDF Reader 的鼠标侧边后退键无效。
+* 适配不太好的软件：搜狗浏览器。
+* 测试关闭窗口不奏效的软件：极客卸载、windows 任务管理器（似乎屏蔽了 ctrl 键）。
 
 支持但不限于以下百余款软件，且持续更新中...
 
@@ -399,140 +406,144 @@ CapsLock 命令
 * ahk 应用程序
 * Visual Studio
 * skylark
-* 360 极速浏览器
-* 360 极速浏览器-下载管理窗口
-* Win11 21h1 桌面
-* Win11 22h2 桌面
-* Win11 资源管理器
-* Win11 旧版 记事本
-* Win11 新版 记事本
-* 新版 win 11 设置
-* 123 浏览器
-* 115 浏览器
-* 2345 浏览器
-* 360 安全浏览器
-* Avast 浏览器
-* Brave 浏览器
-* Chrome 谷歌 & 百分 & 小马浏览器
-* Duck 浏览器
-* Duoyu 多御浏览器
-* Edge 浏览器
-* Firefox 火狐 & Tor 洋葱浏览器
-* Opera 浏览器
-* QQ 浏览器
-* UC 浏览器
-* UU 浏览器
-* Vivaldi 浏览器
-* Waterfox 浏览器
-* Yandex 浏览器
-* 傲游浏览器
-* 斑斓石浏览器
-* 华为浏览器
-* 红芯浏览器
-* 极速浏览器
-* 猫眼浏览器
-* 蚂蚁浏览器
-* 猎豹浏览器
-* 青鸟浏览器
-* 联想浏览器
-* 搜狗浏览器
-* 双核浏览器
-* 星愿浏览器
-* 想天浏览器
-* 小K 浏览器
-* 小白浏览器
-* 小智双核浏览器
-* 一点浏览器
-* foobar2000
-* MusicPlayer2
-* QQ 音乐
-* Spotify
-* 方格音乐
-* 酷我音乐
-* 汽水音乐
-* 网易云音乐
+* 【浏览器】360 极速浏览器
+* 【浏览器】360 极速浏览器-下载管理窗口
+* 【系统】Win11 21h1 桌面
+* 【系统】Win11 22h2 桌面
+* 【系统】Win11 资源管理器
+* 【系统】Win11 旧版 记事本
+* 【系统】Win11 新版 记事本
+* 【系统】新版 win 11 设置
+* 【浏览器】115 浏览器
+* 【浏览器】123 浏览器
+* 【浏览器】2345 浏览器
+* 【浏览器】360 安全浏览器
+* 【浏览器】Avast 浏览器
+* 【浏览器】Brave 浏览器
+* 【浏览器】Chrome 谷歌 & 百分 & 小马浏览器
+* 【浏览器】Duck 浏览器
+* 【浏览器】Duoyu 多御浏览器
+* 【浏览器】Edge 浏览器
+* 【浏览器】Firefox 火狐 & Tor 洋葱浏览器
+* 【浏览器】Opera 浏览器
+* 【浏览器】QQ 浏览器
+* 【浏览器】UC 浏览器
+* 【浏览器】UU 浏览器
+* 【浏览器】Vivaldi 浏览器
+* 【浏览器】Waterfox 浏览器
+* 【浏览器】Yandex 浏览器
+* 【浏览器】傲游浏览器
+* 【浏览器】斑斓石浏览器
+* 【浏览器】红芯浏览器
+* 【浏览器】华为浏览器
+* 【浏览器】极速浏览器
+* 【浏览器】联想浏览器
+* 【浏览器】猎豹浏览器
+* 【浏览器】猫眼浏览器
+* 【浏览器】蚂蚁浏览器
+* 【浏览器】青鸟浏览器
+* 【浏览器】搜狗浏览器
+* 【浏览器】双核浏览器
+* 【浏览器】星愿浏览器
+* 【浏览器】想天浏览器
+* 【浏览器】小K浏览器
+* 【浏览器】小白浏览器
+* 【浏览器】小智双核浏览器
+* 【浏览器】一点浏览器
+* 【音乐类】foobar2000
+* 【音乐类】MusicPlayer2
+* 【音乐类】QQ音乐
+* 【音乐类】Spotify
+* 【音乐类】方格音乐
+* 【音乐类】酷我音乐
+* 【音乐类】汽水音乐
+* 【音乐类】网易云音乐
+* 【视频类】KMPlayer 64位
+* 【视频类】PotPlayer 64位
+* 【视频类】vlc
+* 【视频类】恒星播放器
+* 【sql】Beekeeper Studio
+* 【sql】Heidisql
+* 【sql】Navicat
+* 【sql】SQLyog
+* 【md】MarkdownPad2
+* 【md】MarkText
+* 【md】Typora
+* 【editor】Atom
+* 【editor】Bracket
+* 【editor】CudaText
+* 【editor】Editplus
+* 【editor】Everedit
+* 【editor】Fleet
+* 【editor】Geany
+* 【editor】Kate
+* 【editor】Notepad++
+* 【editor】Notepad--
+* 【editor】Notepad2
+* 【editor】Notepad3
+* 【editor】Sublime
+* 【editor】Ultraedit
+* 【file compare】Beyond Compare
+* 【file compare】WinMerge
+* 【IDE】Dev C++
+* 【IDE】Eclipse
+* 【IDE】HbuilderX
+* 【IDE】MyEclipse
+* 【IDE】Rstudio
+* 【IDE】SpringToolSuite4
+* 【IDE】VS Code
+* 【jetbrains】Aqua
+* 【jetbrains】Clion
+* 【jetbrains】Datagrip
+* 【jetbrains】Dataspell
+* 【jetbrains】Goland
+* 【jetbrains】Idea
+* 【jetbrains】Phpstorm
+* 【jetbrains】Pycharm
+* 【jetbrains】Rider
+* 【jetbrains】RubyMine
+* 【jetbrains】RustRover
+* 【jetbrains】Webstorm
+* 【jetbrains】Writerside
+* 【jetbrains】Android Studio
+* 【jetbrains】华为 DevEco Studio
+* Netbean 32 位 & Jmeter
+* Netbean 64 位
+* 【http调试】Apifox
+* 【http调试】ApiPost
+* 【http调试】HTTPie
+* 【http调试】Postman
+* Zeal
+* 【git】GitHub 桌面版
+* 【git】GitKraken
+* 【git】SourceTree
+* 【git】小乌龟 Git 的 merge 窗口
+* 【终端类】Xshell
+* 【终端类】Finalshell
+* 【终端类】MobaXterm
+* 【终端类】SecureCRT
+* 【终端类】Tabby
+* 【终端类】Termius
+* 【终端类】zoc
+* 【终端类】WindTerm
+* 【终端类】WindowsTerminal
+* 【ftp】FlashFXP
+* 【ftp】Xftp
 * LibreOffice 窗口
 * LibreOffice 主体
 * Motrix
 * Sumatra PDF
-* PotPlayer 64位
-* QQ
 * Snipaste
-* Thunderbird
-* WPS
+* WPS Office
 * WPS 图片查看器
 * 哔哩哔哩
+* 阿里云客户端
+* 雷鸟
+* 炉石传说
+* 腾讯QQ
 * 稻壳阅读器
 * 微信
-* 阿里云客户端
-* 炉石传说
-* Beekeeper Studio
-* heidisql
-* Navicat
-* SQLyog
-* MarkdownPad2
-* MarkText
-* Typora
-* Atom
-* Bracket
-* Fleet
-* CudaText
-* Editplus
-* Everedit
-* Geany
-* Kate
-* Notepad++
-* Notepad--
-* Notepad2
-* Notepad3
-* Sublime
-* Ultraedit
-* Bcompare
-* Winmerge
-* HbuilderX
-* Dev C++
-* Eclipse
-* MyEclipse
-* Rstudio
-* SpringToolSuite4
-* VS Code
-* Aqua
-* Clion
-* Datagrip
-* Dataspell
-* Goland
-* Idea
-* Phpstorm
-* Pycharm
-* Rider
-* Rubymine
-* RustRover
-* Webstorm
-* Writerside
-* Android Studio
-* 华为 DevEco Studio
-* Netbean 32 位 & Jmeter
-* Netbean 64 位
-* Apifox
-* ApiPost
-* HTTPie
-* Postman
-* Zeal
-* GitHub 桌面版
-* GitKraken
-* SourceTree
-* 小乌龟 Git 的 merge 窗口
-* Xshell
-* Finalshell
-* MobaXterm
-* SecureCRT
-* Tabby
-* Termius
-* zoc
-* FlashFXP
-* Xftp
-* WindowsTerminal
-* WindTerm
+* 微信内置浏览器
 
 ### 打包发版目录结构
 
@@ -544,7 +555,7 @@ CapsLock 命令
 4. help.url 在线帮助文档
 5. **jiejian32/64.exe** 分别为 32/64 位主程序 免安装，双击即用
 
-### 快捷键设计思路
+### 设计思路
 
 * 严格按照 ahk 中的 hotIf 的优先匹配原则。一般 esc 会在前。由于考虑到 Esc 逃逸键 用于关闭窗口，目前支持记事本中使用。
 * Ctrl + F3 为新建标签/窗口 避免和已有 Ctrl + t 冲突
@@ -554,6 +565,8 @@ CapsLock 命令
 * Alt + 左方向键 比 backspace 更加通用
 * 后退 默认 Alt + 左
 * app.csv 中先后顺序关系通过优先级进行定义
+
+适配视频类软件：分别找出打开、快进、快退、切换上一个视频、切换下一个视频的快捷键。
 
 ### 软件升级
 

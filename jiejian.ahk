@@ -14,9 +14,14 @@ https://wyagd001.github.io/v2/docs/
 ;@Ahk2Exe-SetCopyright 全民反诈 union
 ;@Ahk2Exe-SetDescription 捷键-为简化键鼠操作而生
 
-CodeVersion := "24.1.13-beta"
+CodeVersion := "24.1.18-beta"
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2%
+; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
+; 往对应文件写入对应版本号，只在生成 32 位 exe 的时候执行
+;@Ahk2Exe-Obey U_V, = %A_PtrSize% * 8 = 32 ? "PostExec" : "Nop"
+; 提取出 文件名 再拼接 PostExec.ahk; 版本号; 脚本所在路径
+;@Ahk2Exe-%U_V% %A_ScriptName~\.[^\.]+$~PostExec.ahk% %U_version%, , %A_ScriptDir%
 
 ; ----- 1. 热键 之 鼠标操作 -----
 CoordMode "Mouse" ; 默认坐标相对于桌面(整个屏幕)
@@ -122,8 +127,6 @@ CapsLock & LButton::EWD_MoveWindow
 
 ; 设置托盘图标和菜单
 SettingTray() {
-    localIsAlphaOrBeta := InStr(CodeVersion, "alpha") or InStr(CodeVersion, "beta")
-
     A_TrayMenu.Delete()
     if not A_IsCompiled {
         A_TrayMenu.Add("编辑脚本", TrayMenuHandler)
@@ -143,20 +146,19 @@ SettingTray() {
     A_TrayMenu.Add("退出", TrayMenuHandler)
 
     A_TrayMenu.Default := "暂停"
-    A_TrayMenu.ClickCount := 1
+    A_TrayMenu.ClickCount := 1 ; 单击可以暂停
   
+    localIsAlphaOrBeta := InStr(CodeVersion, "alpha") or InStr(CodeVersion, "beta")
     A_IconTip := "捷键 " CodeVersion (A_IsCompiled ? "" : " 未编译") (localIsAlphaOrBeta ? " 测试版" : "")
 
-    ; 建议使用 16*16 或 32*32 像素的图标，使用 Ahk2Exe-Let 提取出 favicon.ico
-    faviconIco := "favicon.ico"
-    ;@Ahk2Exe-Let U_faviconIco = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2%
-    ;@Ahk2Exe-SetMainIcon %U_faviconIco%
-
-    if not A_IsCompiled
+    if not A_IsCompiled {
+        ; 建议使用 16*16 或 32*32 像素的图标，使用 Ahk2Exe-Let 提取出 favicon.ico
+        faviconIco := "favicon.ico"
+        ;@Ahk2Exe-Let U_faviconIco = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2%
+        ;@Ahk2Exe-SetMainIcon %U_faviconIco%
         TraySetIcon faviconIco
+    }        
 }
 
-; 往对应文件写入对应版本号，只在生成 32 位 exe 的时候执行
-;@Ahk2Exe-Obey U_V, = %A_PtrSize% * 8 = 32 ? "PostExec" : "Nop"
-; 提取出 文件名 再拼接 PostExec.ahk; 版本号; 脚本所在路径
-;@Ahk2Exe-%U_V% %A_ScriptName~\.[^\.]+$~PostExec.ahk% %U_version%, , %A_ScriptDir%
+; 触发热键时, 热键中按键原有的功能不会被屏蔽(对操作系统隐藏).
+; ~LButton & b::Run "https://www.baidu.com"
