@@ -135,8 +135,8 @@ skylark 主程序,低,ahk_exe skylark.exe,^n,,^w,^w,,,,,
 【jetbrains】Webstorm,,ahk_class SunAwtFrame ahk_exe webstorm64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
 【jetbrains】Writerside,,ahk_class SunAwtFrame ahk_exe writerside64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
 ,,,,,,,,,,,
-【jetbrains】Android Studio,,ahk_class SunAwtFrame ahk_exe studio64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-【jetbrains】华为 DevEco Studio,,ahk_class SunAwtFrame ahk_exe devecostudio64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+【jetbrains ext】Android Studio,,ahk_class SunAwtFrame ahk_exe studio64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+【jetbrains ext】华为 DevEco Studio,,ahk_class SunAwtFrame ahk_exe devecostudio64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
 ,,,,,,,,,,,
 Netbean 32 位 & Jmeter,,ahk_class SunAwtFrame ahk_exe javaw.exe,^n,,,,,^{PgDn},,^{PgUp},^{PgUp}
 Netbean 64 位,,ahk_class SunAwtFrame ahk_exe netbeans64.exe,^n,,,,,^{PgDn},,^{PgUp},^{PgUp}
@@ -174,17 +174,17 @@ Zeal,,ahk_exe zeal.exe,^t,,^w,^w,,,,,
 【pdf】福昕阅读器,,ahk_exe FoxitPDFReader.exe,^o,,^{F4},^{F4},,,,,
 【pdf】极速 PDF,,ahk_exe JisuPdf.exe,^o,,^w,^w,,,,,
 【pdf】金山PDF独立版,,ahk_exe wpspdf.exe,^n,,^{F4},^{F4},,,,,
-【pdf】迅读PDF,,ahk_exe MasterPDF.exe ahk_class MASTER_PDF_FRAME,^o,,^w,^w,,,,,
+【pdf】迅读 PDF,,ahk_exe MasterPDF.exe ahk_class MASTER_PDF_FRAME,^o,,^w,^w,,,,,
 ,,,,,,,,,,,
 LibreOffice 窗口,,ahk_class SALSUBFRAME ahk_exe soffice.bin,,,{Esc},{Esc},,,,,
 LibreOffice 主体,,ahk_class SALFRAME ahk_exe soffice.bin,^n,,^{F4},^{F4},,,,,
 Motrix,,ahk_exe Motrix.exe,^n,,,,,,,,
 Snipaste,,Snipaste ahk_exe Snipaste.exe,,,{Esc},{Esc},,,,,
+thunderbird 雷鸟,,ahk_exe thunderbird.exe,,,^w,^w,,,,,^{PgUp}
 WPS Office,,ahk_exe wps.exe,^n,,^{F4},^{F4},,,,,
 WPS 图片查看器,,WPS图片 ahk_exe photolaunch.exe,,,{Esc},{Esc},,,,,
 哔哩哔哩,,ahk_exe 哔哩哔哩.exe ahk_class Chrome_WidgetWin_1,,,,,{Right},],{Left},[,[
 阿里云客户端,,ahk_exe Alibaba Cloud Client.exe,^t,,^w,^w,,,,,
-雷鸟,,ahk_exe thunderbird.exe,,,^w,^w,,,,,^{PgUp}
 炉石传说,,ahk_exe Hearthstone.exe,,,{Esc},{Esc},,,,,
 腾讯QQ,,ahk_exe QQ.exe,,,{Esc},{Esc},,,,,
 稻壳阅读器,,ahk_exe DocBox.exe,,,^w,^w,,,,,

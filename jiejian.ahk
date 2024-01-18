@@ -96,9 +96,14 @@ CheckUpdate ; 检查更新
 #HotIf
 
 ; 暂停脚本 Ctrl+Alt+S
-;@Ahk2Exe-IgnoreBegin
-^!s::Suspend
-;@Ahk2Exe-IgnoreEnd
+^!s::{
+    Suspend(!A_IsSuspended)
+    if (A_IsSuspended) {
+        A_TrayMenu.Check(trayMenuDefault)
+    } else {
+        A_TrayMenu.UnCheck(trayMenuDefault)
+    }      
+}
 
 ; ctrl + alt + v 将剪贴板的内容输入到当前活动应用程序中，防止了一些网站禁止在 HTML 密码框中进行粘贴操作
 ^!v::Send A_Clipboard
@@ -133,9 +138,11 @@ SettingTray() {
         A_TrayMenu.Add("查看变量", TrayMenuHandler)
         A_TrayMenu.Add
     }
-    A_TrayMenu.Add("暂停", TrayMenuHandler)
-    A_TrayMenu.Add("重启", TrayMenuHandler)
-    A_TrayMenu.Add("搜一搜", TrayMenuHandler)
+    ; 右对齐不好使，我醉了
+    global trayMenuDefault := Format("{1:-10}", "暂停 Ctrl+Alt+S", "Ctrl+Alt+S")
+    A_TrayMenu.Add(trayMenuDefault, TrayMenuHandler)
+    A_TrayMenu.Add(Format("{1:-10}", "重启 Ctrl+Alt+R", "Ctrl+Shift+R"), TrayMenuHandler)
+    A_TrayMenu.Add(Format("{1:-10}", "搜一搜 Alt+Space", "Alt+Space"), TrayMenuHandler)
     A_TrayMenu.Add("查看窗口标识符", TrayMenuHandler)
     A_TrayMenu.Add("检查更新", TrayMenuHandler)
     A_TrayMenu.Add
@@ -145,7 +152,7 @@ SettingTray() {
     A_TrayMenu.Add
     A_TrayMenu.Add("退出", TrayMenuHandler)
 
-    A_TrayMenu.Default := "暂停"
+    A_TrayMenu.Default := trayMenuDefault
     A_TrayMenu.ClickCount := 1 ; 单击可以暂停
   
     localIsAlphaOrBeta := InStr(CodeVersion, "alpha") or InStr(CodeVersion, "beta")

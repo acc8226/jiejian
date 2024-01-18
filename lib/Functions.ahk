@@ -43,11 +43,11 @@ TrayMenuHandler(ItemName, ItemPos, MyMenu) {
       Edit
     case "查看变量":
       ListVars
-    case "暂停":
+    case trayMenuDefault:
       jiejianToggleSuspend()
-    case "重启":
+    case "重启 Ctrl+Alt+R":
       jiejianReload()
-    case "搜一搜":
+    case "搜一搜 Alt+Space":
       Anyrun()
     case "检查更新":
       checkUpdate(true)
@@ -70,10 +70,10 @@ TrayMenuHandler(ItemName, ItemPos, MyMenu) {
 jiejianToggleSuspend() {
   Suspend(!A_IsSuspended)
   if (A_IsSuspended) {
-    A_TrayMenu.Check("暂停")
+    A_TrayMenu.Check(trayMenuDefault)
     Tip("  暂停捷键  ", -500)
   } else {
-    A_TrayMenu.UnCheck("暂停")
+    A_TrayMenu.UnCheck(trayMenuDefault)
     Tip("  恢复捷键  ", -500)
   }
 }
