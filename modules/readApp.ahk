@@ -14,13 +14,13 @@ Loop appList.Length {
 
     ; 3. 关闭
     if it.close = "{Esc}"
-      GroupAdd "HL_close_esc", it.exe
+      GroupAdd "HL_close_Esc", it.exe
     else if it.close = "!{F4}"
       GroupAdd "HL_close_alt_f4", it.exe
 
     ; 4. 侧边后退键
     if it.sideBack = "{Esc}"
-      GroupAdd "HL_sideBack_esc", it.exe
+      GroupAdd "HL_sideBack_Esc", it.exe
     else if it.sideBack = "!{F4}"
       GroupAdd "HL_sideBack_alt_f4", it.exe
   } else {
@@ -59,7 +59,7 @@ Loop appList.Length {
 
     ; 3. 关闭
     if it.close = "{Esc}"
-      GroupAdd "close_esc", it.exe
+      GroupAdd "close_Esc", it.exe
     else if it.close = "!{F4}"
       GroupAdd "close_alt_f4", it.exe
     else if it.close = "{Alt Down}{F4 Down}{F4 Up}{Alt Up}"
@@ -81,7 +81,7 @@ Loop appList.Length {
 
     ; 4. 侧边后退键
     if it.sideBack = "{Esc}"
-      GroupAdd "sideBack_esc", it.exe
+      GroupAdd "sideBack_Esc", it.exe
     else if it.sideBack = "]"
       GroupAdd "sideBack_closeBracket", it.exe
     else if it.sideBack = "!{F4}"
@@ -120,6 +120,8 @@ Loop appList.Length {
       GroupAdd "next_closeBracket", it.exe
     else if it.nextTag = "n"
       GroupAdd "next_n", it.exe
+    else if it.nextTag = "{Down}"
+      GroupAdd "next_Down", it.exe
     else if it.nextTag = "^+{PgDn}"
       GroupAdd "next_ctrl_shift_pgDn", it.exe
     else if it.nextTag = "!]"
@@ -140,6 +142,8 @@ Loop appList.Length {
       GroupAdd "back_PgUp", it.exe
     else if it.back = "{Left}"
       GroupAdd "back_Left", it.exe
+    else if it.back = "{Up}"
+      GroupAdd "back_Up", it.exe
     ; 8. 上个标签
     if it.previousTag = "{Media_Prev}"
       GroupAdd "previous_mediaPrev", it.exe
@@ -147,6 +151,8 @@ Loop appList.Length {
       GroupAdd "previous_openBracket", it.exe
     else if it.previousTag = "p"
       GroupAdd "previous_p", it.exe
+    else if it.previousTag = "{Up}"
+      GroupAdd "previous_Up", it.exe
     else if it.previousTag = "!0"
       GroupAdd "previous_alt_0", it.exe
     else if it.previousTag = "!{Left}"
@@ -173,6 +179,8 @@ Loop appList.Length {
       GroupAdd "sideForward_openBracket", it.exe
     else if it.sideForward = "p"
       GroupAdd "sideForward_p", it.exe
+    else if it.sideForward = "{Up}"
+      GroupAdd "sideForward_Up", it.exe
     else if it.sideForward = "{PgUp}"
       GroupAdd "sideForward_PgUp", it.exe
     else if it.sideForward = "!{Left}"
@@ -262,13 +270,13 @@ Esc::WinClose
 ; 3. 关闭 打头
 #HotIf WinActive("ahk_group HL_close_alt_f4")
 ^F4::Send "!{F4}"
-#HotIf WinActive("ahk_group HL_close_esc")
+#HotIf WinActive("ahk_group HL_close_Esc")
 ^F4::Send "{Esc}"
 
 ; 4. 侧边后退键 打头
 #HotIf WinActive("ahk_group HL_sideBack_alt_f4")
 XButton1::Send "!{F4}"
-#HotIf WinActive("ahk_group HL_sideBack_esc")
+#HotIf WinActive("ahk_group HL_sideBack_Esc")
 XButton1::Send "{Esc}"
 
 ; 低等级
@@ -305,7 +313,7 @@ XButton1::Send "{Esc}"
 Esc::WinClose
 
 ; 3. 关闭 打头
-#HotIf WinActive("ahk_group close_esc")
+#HotIf WinActive("ahk_group close_Esc")
 ^F4::Send "{Esc}"
 #HotIf WinActive("ahk_group close_alt_f4")
 ^F4::Send "!{F4}"
@@ -328,7 +336,7 @@ Esc::WinClose
 ^F4::SmartCloseWindow ; 比 WinClose "A" 好使
 
 ; 4. 侧边后退键 打头
-#HotIf WinActive("ahk_group sideBack_esc")
+#HotIf WinActive("ahk_group sideBack_Esc")
 XButton1::Send "{Esc}"
 #HotIf WinActive("ahk_group sideBack_closeBracket")
 XButton1::Send "]"
@@ -371,6 +379,8 @@ XButton1::SmartCloseWindow ; 比 WinClose "A" 好使
 ^Tab::Send "]"
 #HotIf WinActive("ahk_group next_n")
 ^Tab::Send "n"
+#HotIf WinActive("ahk_group next_Down")
+^Tab::Send "{Down}"
 #HotIf WinActive("ahk_group next_ctrl_shift_pgDn")
 ^Tab::Send "^+{PgDn}"
 #HotIf WinActive("ahk_group next_alt_closeBracket")
@@ -391,6 +401,8 @@ XButton1::SmartCloseWindow ; 比 WinClose "A" 好使
 !Left::Send "{PgUp}"
 #HotIf WinActive("ahk_group back_Left")
 !Left::Send "{Left}"
+#HotIf WinActive("ahk_group back_Up")
+!Left::Send "{Up}"
 ; 8. 上个标签
 #HotIf WinActive("ahk_group previous_mediaPrev")
 ^+Tab::Send "{Media_Prev}" ; 上一曲
@@ -398,6 +410,8 @@ XButton1::SmartCloseWindow ; 比 WinClose "A" 好使
 ^+Tab::Send "[" ; 对 bilibili 不好用，由于会触发 ctrl + shift 切换输入法我就醉了
 #HotIf WinActive("ahk_group previous_p")
 ^+Tab::Send "p"
+#HotIf WinActive("ahk_group previous_Up")
+^+Tab::Send "{Up}"
 #HotIf WinActive("ahk_group previous_alt_0")
 ^+Tab::Send "!0"
 #HotIf WinActive("ahk_group previous_alt_left")
@@ -414,7 +428,7 @@ XButton1::SmartCloseWindow ; 比 WinClose "A" 好使
 ^+Tab::Send "{PgUp}"
 ; 9. 侧边前进键
 #HotIf WinActive("ahk_group sideForward_mediaPrev")
-XButton2::Send "{Media_Prev}" ; 上一曲
+XButton2::Send "{Media_Prev}"
 #HotIf WinActive("ahk_group sideForward_mediaPlayPause")
 XButton2::Send "{Media_Play_Pause}"
 #HotIf WinActive("ahk_group sideForward_space")
@@ -423,6 +437,8 @@ XButton2::Send "{Space}"
 XButton2::Send "["
 #HotIf WinActive("ahk_group sideForward_p")
 XButton2::Send "p"
+#HotIf WinActive("ahk_group sideForward_Up")
+XButton2::Send "{Up}"
 #HotIf WinActive("ahk_group sideForward_PgUp")
 XButton2::Send "{PgUp}"
 #HotIf WinActive("ahk_group sideForward_alt_left")
