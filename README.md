@@ -4,7 +4,7 @@
 * 为增强鼠标和键盘按键功能而生
 * 不区分鼠标厂商，选择使用带侧边按键的鼠标，体验更完善。
 * 支持自定义快捷键、快捷键改写、快捷键功能增强。提供快捷启动等功能。
-* 建议搭配 WGestures 全局鼠标手势 + [MyKeymap](https://xianyukang.com/MyKeymap.html)（完善的窗口操作 & 启动程序 & 召唤窗口）软件进行使用。
+* 建议搭配 [WGestures 1] / [WGestures 2] 全局鼠标手势 + [MyKeymap]（完善的窗口操作 & 启动程序 & 召唤窗口）软件进行使用。
 
 注意：说明书指向最新版软件，若功能有差异，请[下载并使用最新版](https://gitcode.com/acc8226/jiejian/releases)。
 
@@ -19,7 +19,7 @@
 | 鼠标右键 | - | - | - | - | - | 播放/暂停 |
 | 鼠标中键 | - | - | - | - | 静音 | 静音 |
 | 鼠标侧边前进键（XB2） | 同 alt + tab 按键 | 切换到上个标签 | 上一曲 | 上一个视频 | 上一曲 | 上一曲 |
-| 鼠标侧边后退键（XB1） | 关闭窗口 | 在多标签页则是关闭当前标签 | 关闭当前标签 | 关闭窗口 | 关闭窗口 | 下一曲 | 下一曲 |
+| 鼠标侧边后退键（XB1） | 关闭窗口 | 在多标签页则是关闭当前标签 | 关闭当前标签 | 关闭窗口 | 下一曲 | 下一曲 |
 
 ![1](https://foruda.gitee.com/images/1689318820722473769/d4f9efe3_426858.gif)
 
@@ -29,38 +29,38 @@
 
 增强已有快捷键以及新增快捷键。支持众多常用软件，详细列表见附录。
 
-| 按键 | 正常用途 | 多标签软件 | 音乐类软件 | 视频类软件 | 焦点在任务栏或左/上边界
-| ----  | ---- | ---- | ---- | ---- | ---- |
-| Esc（逃逸键）| 关闭特定窗口 | - | - | - | - |
-| Ctrl + F3 | 打开文件 或 新建文件/窗口 | 新建标签 | 打开文件 或 无操作 | 打开文件 或 无操作 | - |
-| Ctrl + F4 | 关闭窗口 | 关闭标签 | 关闭窗口 | 关闭窗口 | 关闭窗口 |
-| Alt + → | 前进 | 前进 | 下一曲 | 快进 | 下一曲 |
-| Ctrl + Tab | - | 切换下一个标签 | 下一曲 | 下一个视频 | 下一曲 |
-| Alt + ← | 后退 | 后退 | 上一曲 | 快退 | 上一曲 |
-| Ctrl + Shift + Tab | - |切换上一个标签 | 上一曲 | 上一个视频 | 上一曲 |
+| 按键 | 鼠标手势 | 正常用途 | 多标签软件 | 音乐类软件 | 视频类软件 | 焦点在任务栏或左/上边界
+| ----  | ----  | ---- | ---- | ---- | ---- | ---- |
+| Esc（逃逸键）| 无 | 关闭特定窗口 | - | - | - | - |
+| Ctrl + F3 | ↓ | 打开文件 或 新建文件/窗口 | 新建标签 | 打开文件 或 无操作 | 打开文件 或 无操作 | - |
+| Ctrl + F4 | ↑ | 关闭窗口 | 关闭标签 | 关闭窗口 | 关闭窗口 | 关闭窗口 |
+| Alt + ← | ← | 后退 | 后退 | 上一曲 | 快退 | 上一曲 |
+| Ctrl + Shift + Tab | 上左 | - |切换上一个标签 | 上一曲 | 上一个视频 | 上一曲 |
+| Alt + → | → | 前进 | 前进 | 下一曲 | 快进 | 下一曲 |
+| Ctrl + Tab | 上右 | Ctrl + Tab | 切换下一个标签 | 下一曲 | 下一个视频 | 下一曲 |
 
 注：
 
 1. 多标签软件主要为浏览器，支持多标签的文本编辑器、IDE 等。
 2. 音乐类软件如 QQ 音乐 等。其中 ctrl + f3 打开文件的功能仅适用于本地音乐播放器，在线音乐类软件可能不适用。
 3. 视频类软件如 potplayer 等。
-4. 以下部分场景使用了鼠标手势 WGestures 替代了手动键入快捷键
+4. 以下部分场景使用了鼠标手势软件 [WGestures 1] / [WGestures 2] 替代了手动键入快捷键
 
 操作资源管理器
 
-![输入图片说明](https://foruda.gitee.com/images/1689318878983165049/4f89b32d_426858.gif "动画2-3.gif")
+![输入图片说明](https://foruda.gitee.com/images/1689318878983165049/4f89b32d_426858.gif "动画.gif")
 
 操作 360 极速浏览器
 
-![输入图片说明](https://foruda.gitee.com/images/1689320148290015829/d0563e32_426858.gif "2.gif")
+![输入图片说明](https://foruda.gitee.com/images/1689320148290015829/d0563e32_426858.gif "动画.gif")
 
 操作 Jetbrains IDEA
 
-![输入图片说明](https://foruda.gitee.com/images/1689318910813101697/359f150e_426858.gif "动画2-4.gif")
+![输入图片说明](https://foruda.gitee.com/images/1689318910813101697/359f150e_426858.gif "动画.gif")
 
 操作 microsoft vscode
 
-![输入图片说明](https://foruda.gitee.com/images/1689318894573526368/39027a0d_426858.gif "动画2-2.gif")
+![输入图片说明](https://foruda.gitee.com/images/1689318894573526368/39027a0d_426858.gif "动画.gif")
 
 ## 3. 热键 之 打开网址
 
@@ -68,25 +68,25 @@
 * alt + 7 打开 IT 之家
 * alt + 8 打开 西瓜视频
 
-![打开网址](https://foruda.gitee.com/images/1689318923398248705/25b1c4c9_426858.gif "动画3.gif")
+![打开网址](https://foruda.gitee.com/images/1689318923398248705/25b1c4c9_426858.gif "动画.gif")
 
 ## 4. 热键 之 运行程序
 
 * Alt + j 打开记事本
 
-![打开记事本](https://foruda.gitee.com/images/1689318934831690368/2606bf7a_426858.gif "动画4.gif")
+![打开记事本](https://foruda.gitee.com/images/1689318934831690368/2606bf7a_426858.gif "动画.gif")
 
 ## 5. 热键 之 启动文件夹
 
 * Alt + d 打开 D 盘
 
-![打开D盘](https://foruda.gitee.com/images/1689318944226542670/0337e814_426858.gif "动画5.gif")
+![打开D盘](https://foruda.gitee.com/images/1689318944226542670/0337e814_426858.gif "动画.gif")
 
 ## 6. 热键 之 其他
 
 * Ctrl + 数字 1-5 为光标所在行添加 markdown 格式标题（目前仅开放了 vscode 和 windows 记事本的使用权限）
 
-![输入图片说明](https://foruda.gitee.com/images/1689318964909077353/0518d03d_426858.gif "动画6.gif")
+![输入图片说明](https://foruda.gitee.com/images/1689318964909077353/0518d03d_426858.gif "动画.gif")
 
 * `ctrl + alt + v` 剪贴板的内容输入到当前活动应用程序中，防止了一些网站禁止在 HTML 密码框中进行粘贴操作
 * `ctrl + alt + r` 重启脚本
@@ -115,7 +115,7 @@
 
 在框中输入 bd[空格?]{关键字} 进行百度搜索
 
-![输入图片说明](https://foruda.gitee.com/images/1689321508560702893/2457a573_426858.gif "2.gif")
+![输入图片说明](https://foruda.gitee.com/images/1689321508560702893/2457a573_426858.gif "动画.gif")
 
 ### bing 必应搜索
 
@@ -157,7 +157,7 @@ kz 打开了控制面板
 * xnow 插入当前日期时间，举例 `2023-08-27 09:10:41`
 * xdate 插入特定格式的当前日期时间，举例 `Date: 2023-12-22 21:23:30`
   
-![](https://foruda.gitee.com/images/1689259764657007580/13e4cb48_426858.gif "8.gif")
+![](https://foruda.gitee.com/images/1689259764657007580/13e4cb48_426858.gif "动画.gif")
 
 * xwx 😄 微笑
 * xlh 😊 脸红
@@ -169,7 +169,7 @@ kz 打开了控制面板
 * xsh 💩 大便
 * xgh 👻 鬼魂
 
-![](https://foruda.gitee.com/images/1689259802922906219/d546cc12_426858.gif "10.gif")
+![](https://foruda.gitee.com/images/1689259802922906219/d546cc12_426858.gif "动画.gif")
 
 ## 10. 自定义配置说明
 
@@ -224,7 +224,7 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 * 新增鼠标中间和右键的一些支持
 * 新增 按住 CapsLock 后可以用鼠标左键拖动窗口 和 兜底的关闭功能更加完善了
   
-* 添加 MyKeymap 和 wg 鼠标手势的玩法
+* 添加 [MyKeymap] 和 wg 鼠标手势的玩法
 * 新增了版本升级的功能
 * 菜单选项重新调整
 * 新增一键打包 package.ahk
@@ -234,7 +234,7 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 这是 23 年最后的一个版本。提前祝大家 2024 年元旦快乐。
 
 * 支持青鸟浏览器、小白浏览器、阿里云客户端、Spotify、CudaText、PotPlayer、Devecostudio 64位。
-* 提供了 WGestures2 预设手势方案
+* 提供了 [WGestures 2] 预设手势方案
 * bug 修复
 
 ### 捷键 2023.10
@@ -328,16 +328,12 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 
 #### 搭配 WGestures
 
-[【免费】【win】WGestures 1 鼠标手势](https://www.yingdev.com/projects/wgestures)
-
-或者
-
- [【付费】【win mac】WGestures 2 鼠标手势](https://www.yingdev.com/projects/wgestures2)
+这里我选用功能全面的 【付费】【win mac】[WGestures 2]
 
 | 方向 | 名称 | 按键/功能 |
 | ----  | ---- | ---- |
-| ↗︎ | 最小化 | 最小化 |
-| ↙︎ | 最大化 | 最大化/还原 |
+| ↗︎ | 最小化/min | 最小化 |
+| ↙︎ | 最大化/max | 最大化/还原 |
 | ↘︎ | 复制/copy | ctrl + c |
 | ↖︎ | 粘贴/paste | ctrl + v |
 | ↑ | 新建/new | ctrl + f3 |
@@ -348,10 +344,10 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 | ↪ | 关闭/close | alt + f4 |
 | 上左 | 上一个/prev | ctrl + shift + tab |
 | 上右 | 下一个/next | ctrl + tab |
-| 左上 | 剪切 | ctrl + x |
-| 左下 | 删除 | del |
+| 左上 | 剪切/cut | ctrl + x |
+| 左下 | 删除/del | del |
 | 右上 | 百度选定文字 | wg 的网址直达功能 `https://baidu.com/s?wd={WG_SELECTED_TEXT}` |
-| 右下 | 新建窗口 | ctrl + shift + n |
+| 右下 | 新建窗口/new | ctrl + shift + n |
 
 #### 搭配 [MyKeymap](https://xianyukang.com/MyKeymap.html)
 
@@ -596,4 +592,8 @@ package.ahk 的设计思路：Ahk2Exe.exe 将 ahk 转化为 exe，期间使用 /
 
 本程序编辑 csv 文件用到了开源的 LiberOffice。主要发布平台为 [GitHub](https://github.com) 和 [GitCode](https://gitcode.com)。项目主页发布在 GitHub Page。
 
-lib 下部分代码源自 [MyKeymap](https://xianyukang.com/MyKeymap.html) 项目。
+lib 下部分代码源自 [MyKeymap] 项目。
+
+[MyKeymap]: https://xianyukang.com/MyKeymap.html
+[WGestures 1]: https://www.yingdev.com/projects/wgestures
+[WGestures 2]: https://www.yingdev.com/projects/wgestures2
