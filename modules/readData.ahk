@@ -5,7 +5,7 @@
 ; 理论上兼容的浏览器（未经过完全测试）：360 安全浏览器、QQ 浏览器、傲游浏览器、猎豹浏览器、极速浏览器
 ; 目前已知对搜狗浏览器极度不兼容
 
-global dataList := parseData()
+global dataList := parseData("data.csv")
 
 ; 注册热键 和 热字符串
 Loop dataList.Length {
@@ -29,10 +29,10 @@ Loop dataList.Length {
   }
 }
 
-parseData() {
+parseData(filename) {
   dataList := []
   ; 每次从字符串中检索字符串(片段)
-  Loop Parse, FileRead("data.csv", "UTF-8"), "`n", "`r" {
+  Loop Parse, FileRead(filename, "UTF-8"), "`n", "`r" {
       ; 跳过首行
       if A_Index = 1
           continue

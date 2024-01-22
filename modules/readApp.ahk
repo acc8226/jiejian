@@ -1,4 +1,4 @@
-﻿global appList := parseApp()
+﻿global appList := parseApp('app.csv')
 
 ; 注册热键 和 热字符串
 Loop appList.Length {
@@ -198,10 +198,10 @@ Loop appList.Length {
   }  
 }
 
-parseApp() {
+parseApp(fileName) {
   appList := []
   ; 每次从字符串中检索字符串(片段)
-  Loop Parse, FileRead("app.csv", "UTF-8"), "`n", "`r" {
+  Loop Parse, FileRead(fileName, "UTF-8"), "`n", "`r" {
       ; 跳过首行
       if A_Index < 2
         continue

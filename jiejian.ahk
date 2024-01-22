@@ -14,7 +14,7 @@ https://wyagd001.github.io/v2/docs/
 ;@Ahk2Exe-SetCopyright 全民反诈 union
 ;@Ahk2Exe-SetDescription 捷键-为简化键鼠操作而生
 
-CodeVersion := "24.1.18-beta2"
+CodeVersion := "24.1.19-beta"
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
@@ -25,6 +25,8 @@ CodeVersion := "24.1.18-beta2"
 
 ; ----- 1. 热键 之 鼠标操作 -----
 CoordMode "Mouse" ; 默认坐标相对于桌面(整个屏幕)
+; 设置 WinTitle parameter 在内置函数中的匹配行为
+SetTitleMatchMode "RegEx"
 
 #Include "lib/Functions.ahk"
 #Include "lib/Actions.ahk"
