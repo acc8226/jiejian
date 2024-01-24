@@ -1,188 +1,190 @@
 软件,优先级（高或者低，默认为低）,标识符,新建 ctrl+F3,逃逸键 esc,关闭 ctrl+F4,侧边后退键 XB1,前进 alt+right,下个标签 ctrl+tab,后退 alt+left,上个标签 ctrl+shift+tab,侧边前进键 XB2
-通用窗口 1,低,ahk_class SunAwtDialog,,,{Esc},{Esc},,,,,
-通用窗口 2,低,ahk_class #32770,,,{Esc},{Esc},,,,,
-360 压缩,高,ahk_class #32770 ahk_exe 360zip.exe,,,!{F4},!{F4},,,,,
+通用窗口 1,低,ahk_class i)SunAwtDialog$,,,{Esc},{Esc},,,,,
+通用窗口 2,低,ahk_class #32770$,,,{Esc},{Esc},,,,,
+360 压缩,高,ahk_class #32770$ ahk_exe i)360zip\.exe$,,,!{F4},!{F4},,,,,
+BvSsh,高,ahk_class #32770$ ahk_exe i)BvSsh\.exe$,,WinClose,,,,,,,
+skylark 主程序,低,ahk_exe i)skylark\.exe$,^n,,^w,^w,,,,,
+【窗口】skylark,高,ahk_exe i)skylark\.exe ahk_class #32770$,,WinClose,,,,,,,
 ,,,,,,,,,,,
-BvSsh,高,ahk_class #32770 ahk_exe BvSsh.exe,,WinClose,,,,,,,
+【系统】Win11 资源管理器,,ahk_exe i)explorer\.exe$ ahk_class CabinetWClass$,^t,,^w,^w,,,,,
 ,,,,,,,,,,,
-Visual Studio,低,ahk_exe devenv.exe,^n,,^{F4},^{F4},,,,,
-【窗口】Visual Studio,高,(Microsoft Visual Studio 帐户设置)|(自定义)|(管理扩展)|(关于 Microsoft Visual Studio) ahk_exe devenv.exe,,,{Esc} ,{Esc} ,,,,,
+【系统】Win11 旧版 记事本,,ahk_exe notepad\.exe$,^t,WinClose,^w,^w,,,,,
+【系统】Win11 新版 记事本,,ahk_exe Notepad\.exe$,^t,WinClose,^w,^w,,,,,
 ,,,,,,,,,,,
-skylark,低,ahk_exe skylark.exe,^n,,^w,^w,,,,,
-【窗口】skylark,高,ahk_exe skylark.exe ahk_class #32770,,WinClose,,,,,,,
+【系统】新版 win 11 设置,,^设置$ ahk_exe i)ApplicationFrameHost\.exe$ ahk_class i)ApplicationFrameWindow$,,,,,,,,,!{Left} 
 ,,,,,,,,,,,
-【系统】Win11 资源管理器,,ahk_exe explorer.exe ahk_class CabinetWClass,^t,,^w,^w,,,,,
+【浏览器】115,,ahk_exe i)115chrome\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】123,,ahk_exe i)123browser\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】2345,,ahk_exe i)2345Explorer\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】360 极速,低,ahk_exe i)360ChromeX\.exe$,^t,,^{F4},^{F4},,,,,
+【窗口】360 极速,高,ahk_class i)Chrome_WidgetWin_2$ ahk_exe i)360ChromeX\.exe$,,,{Esc} ,{Esc},,,,,
+【浏览器】360 游戏,低,ahk_exe i)360gt\.exe$,^t,,^{F4},^{F4},,,,,
+【窗口】360 游戏,高,^下载$ ahk_exe i)360gt\.exe$,,,{Esc} ,{Esc},,,,,
+【浏览器】360 安全,,ahk_exe i)360se\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】Avast,,ahk_exe i)AvastBrowser\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】Brave,,ahk_exe i)brave\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】Chrome 谷歌 & 百分 & 小马,,ahk_exe i)chrome\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】Duck,,ahk_exe i)DuckDuckGo\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】Duoyu 多御,,ahk_exe i)duoyu\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】Edge,,ahk_exe i)msedge\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】Firefox火狐 & Tor洋葱,,ahk_exe i)firefox\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】Opera,,ahk_exe i)opera\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】QQ,,ahk_exe i)QQBrowser\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】UC,,ahk_exe i)UCBrowser\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】UU,,ahk_exe i)UUBrowser\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】Vivaldi,,ahk_exe i)vivaldi\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】Waterfox,,ahk_exe i)waterfox\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】Yandex,,ahk_exe browser\.exe$ ahk_class i)YandexBrowser_WidgetWin_1$,^t,,^{F4},^{F4},,,,,
+【浏览器】傲游,,ahk_exe i)Maxthon\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】斑斓石,,ahk_exe i)Colorfulstone\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】红芯【已过时】,,ahk_exe i)redcore\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】华为,,ahk_exe i)HuaweiBrowser\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】极速,,ahk_exe i)TSBrowser\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】联想,低,ahk_exe i)SLBrowser\.exe$,^t,,^{F4},^{F4},,,,,
+【窗口】联想,高,^下载管理$ ahk_exe i)SLBrowser\.exe$,,,{Esc},{Esc},,,,,
+【浏览器】猎豹,,ahk_exe i)liebao\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】猫眼,,ahk_exe i)catsxp\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】蚂蚁,,ahk_exe i)MyIE9\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】青鸟,,ahk_exe i)QingniaoChrome\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】搜狗,,ahk_exe i)SogouExplorer\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】双核,,ahk_exe i)ChromeCore\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】星愿,,ahk_exe i)twinkstar\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】想天,,ahk_exe 想天浏览器\.exe$,^t,,^w,^w,,^+{PgDn},,,
+【浏览器】小K,,ahk_exe i)XKBrowser\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】小白,,ahk_exe i)xbaibrowser\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】小智双核,,ahk_exe i)DCBrowser\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】一点,,ahk_exe i)Yidian\.exe$,^t,,^{F4},^{F4},,,,,
 ,,,,,,,,,,,
-【系统】Win11 旧版 记事本,,ahk_exe notepad.exe,^t,WinClose,^w,^w,,,,,
-【系统】Win11 新版 记事本,,ahk_exe Notepad.exe,^t,WinClose,^w,^w,,,,,
+【音乐类】foobar2000,,ahk_exe i)foobar2000.exe$,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+【音乐类】MusicPlayer2,,ahk_exe i)MusicPlayer2.exe$,^o,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
 ,,,,,,,,,,,
-【系统】新版 win 11 设置,,ahk_exe ApplicationFrameHost.exe ahk_class ApplicationFrameWindow,,,,,,,,,!{Left} 
+【音乐类】QQ音乐,,ahk_exe i)QQMusic\.exe$,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+【音乐类】Spotify,,ahk_exe i)Spotify\.exe$,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+【音乐类】方格音乐,,ahk_class i)Chrome_WidgetWin_1$ ahk_exe 方格音乐.exe$,,,,,,,,,{Media_Prev}
+【音乐类】酷我音乐,,ahk_exe i)kwmusic\.exe$,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+【音乐类】汽水音乐,,ahk_exe i)SodaMusic\.exe$,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+【音乐类】网易云音乐,,ahk_exe i)cloudmusic\.exe$,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+【音乐类】喜马拉雅,,ahk_exe 喜马拉雅.exe$,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+【音乐类】酷狗音乐,,ahk_exe i)KuGou\.exe$,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
 ,,,,,,,,,,,
-【浏览器】115,,ahk_exe 115chrome.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】123,,ahk_exe 123browser.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】2345,,ahk_exe 2345Explorer.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】360 极速,低,ahk_exe 360ChromeX.exe,^t,,^{F4},^{F4},,,,,
-【窗口】360 极速,高,^下载$ ahk_exe 360ChromeX.exe,,,{Esc} ,{Esc},,,,,
-【浏览器】360 游戏,低,ahk_exe 360gt.exe,^t,,^{F4},^{F4},,,,,
-【窗口】360 游戏,低,^下载$ ahk_exe 360gt.exe,,,{Esc} ,{Esc},,,,,
-【浏览器】360 安全,,ahk_exe 360se.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】Avast,,ahk_exe AvastBrowser.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】Brave,,ahk_exe brave.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】Chrome 谷歌 & 百分 & 小马,,ahk_exe chrome.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】Duck,,ahk_exe DuckDuckGo.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】Duoyu 多御,,ahk_exe duoyu.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】Edge,,ahk_exe msedge.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】Firefox火狐 & Tor洋葱,,ahk_exe firefox.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】Opera,,ahk_exe opera.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】QQ,,ahk_exe QQBrowser.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】UC,,ahk_exe UCBrowser.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】UU,,ahk_exe UUBrowser.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】Vivaldi,,ahk_exe vivaldi.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】Waterfox,,ahk_exe waterfox.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】Yandex,,ahk_exe browser.exe ahk_class YandexBrowser_WidgetWin_1,^t,,^{F4},^{F4},,,,,
-【浏览器】傲游,,ahk_exe Maxthon.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】斑斓石,,ahk_exe Colorfulstone.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】红芯【已过时】,,ahk_exe redcore.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】华为,,ahk_exe HuaweiBrowser.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】极速,,ahk_exe TSBrowser.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】联想,低,ahk_exe SLBrowser.exe,^t,,^{F4},^{F4},,,,,
-【窗口】联想,高,下载管理 ahk_exe SLBrowser.exe,,,{Esc},{Esc},,,,,
-【浏览器】猎豹,,ahk_exe liebao.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】猫眼,,ahk_exe catsxp.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】蚂蚁,,ahk_exe MyIE9.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】青鸟,,ahk_exe QingniaoChrome.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】搜狗,,ahk_exe SogouExplorer.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】双核,,ahk_exe ChromeCore.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】星愿,,ahk_exe twinkstar.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】想天,,ahk_exe 想天浏览器.exe,^t,,^w,^w,,^+{PgDn},,,
-【浏览器】小K,,ahk_exe XKBrowser.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】小白,,ahk_exe xbaibrowser.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】小智双核,,ahk_exe DCBrowser.exe,^t,,^{F4},^{F4},,,,,
-【浏览器】一点,,ahk_exe Yidian.exe,^t,,^{F4},^{F4},,,,,
+【视频类】GridPlayer【部分支持】,,ahk_exe i)GridPlayer\.exe$,,,,,{Right},,{Left},,
+【视频类】KMPlayer 64位,,ahk_exe i)KMPlayer64.exe$,^o,,,,,{PgDn},,{PgUp},{PgUp}
+【视频类】mpv【部分支持】,,ahk_class i)mpv$ ahk_exe i)mpv\.exe$,,,,,{Right},,{Left},,
+【视频类】PotPlayer 64位,,ahk_exe i)PotPlayer,{F3},,,,{Right},{PgDn},{Left},{PgUp},{PgUp}
+【视频类】vlc,,ahk_exe i)vlc\.exe$,^o,,,,,n,,p,p
+【视频类】抖音【不支持】,,ahk_exe i)douyin\.exe$,,,,,{Right},{Down},{Left},{Up},{Up}
+【视频类】恒星播放器,,恒星播放器 ahk_exe i)StellarPlayer\.exe$,,,,,{Right},{PgDn},{Left},{PgUp},{PgUp}
 ,,,,,,,,,,,
-【音乐类】foobar2000,,ahk_exe foobar2000.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
-【音乐类】MusicPlayer2,,ahk_exe MusicPlayer2.exe,^o,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+【直播类】斗鱼直播【部分支持】,,ahk_exe DouyuLive.exe,,,^w,^w,,,,,
 ,,,,,,,,,,,
-【音乐类】QQ音乐,,ahk_exe QQMusic.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
-【音乐类】Spotify,,ahk_exe Spotify.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
-【音乐类】方格音乐,,ahk_class Chrome_WidgetWin_1 ahk_exe 方格音乐.exe,,,,,,,,,{Media_Prev}
-【音乐类】酷我音乐,,ahk_exe kwmusic.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
-【音乐类】汽水音乐,,ahk_exe SodaMusic.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
-【音乐类】网易云音乐,,ahk_exe cloudmusic.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
-【音乐类】喜马拉雅,,ahk_exe 喜马拉雅.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
-【音乐类】酷狗音乐,,ahk_exe KuGou.exe,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+【sql】Beekeeper Studio,,ahk_exe i)Beekeeper Studio\.exe$,^t,,^w,^w,,,,,
+【sql】Heidisql,,ahk_exe i)heidisql\.exe$,^t,,^{F4},^{F4},,,,,
+【sql】Navicat,,ahk_exe i)navicat\.exe$,,,^w,^w,,,,,
+【sql】SQLyog,,ahk_exe i)SQLyog\.exe$,^t,,!l ,!l ,,^{PgDn},,^{PgUp},^{PgUp}
 ,,,,,,,,,,,
-【视频类】GridPlayer【部分支持】,,ahk_exe GridPlayer.exe,,,,,{Right},,{Left},,
-【视频类】KMPlayer 64位,,ahk_exe KMPlayer64.exe,^o,,,,,{PgDn},,{PgUp},{PgUp}
-【视频类】mpv【部分支持】,,ahk_class mpv ahk_exe mpv.exe,,,,,{Right},,{Left},,
-【视频类】PotPlayer 64位,,ahk_exe PotPlayerMini64.exe,{F3},,,,{Right},{PgDn},{Left},{PgUp},{PgUp}
-【视频类】vlc,,ahk_exe vlc.exe,^o,,,,,n,,p,p
-【视频类】抖音【不支持】,,ahk_exe douyin.exe,,,,,{Right},{Down},{Left},{Up},{Up}
-【视频类】恒星播放器,,恒星播放器 ahk_exe StellarPlayer.exe,,,,,{Right},{PgDn},{Left},{PgUp},{PgUp}
+【md】MarkdownPad2,,ahk_exe i)MarkdownPad2.exe$,^n,,^{F4},^{F4},,,,,
+【md】MarkText,,ahk_exe i)MarkText\.exe$,^t,,^w ,^w ,,,,,
+【md】Typora,,ahk_exe i)Typora\.exe$,^n,,^w,^w,,,,,
 ,,,,,,,,,,,
-【sql】Beekeeper Studio,,ahk_exe Beekeeper Studio.exe,^t,,^w,^w,,,,,
-【sql】Heidisql,,ahk_exe heidisql.exe,^t,,^{F4},^{F4},,,,,
-【sql】Navicat,,ahk_exe navicat.exe,,,^w,^w,,,,,
-【sql】SQLyog,,ahk_exe SQLyog.exe,^t,,!l ,!l ,,^{PgDn},,^{PgUp},^{PgUp}
+【editor】Atom【已过时】,,ahk_exe i)atom\.exe$,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
+【editor】Bracket,,ahk_exe i)Brackets\.exe$,^n,,^w,^w,,^{PgDn},,^{PgUp},^{PgUp} 
+【editor】CudaText,,ahk_exe i)cudatext\.exe$,^n,,^w,^w,,,,,
+【editor】Editplus,,ahk_exe i)editplus\.exe$,^n,,^w,^w,,,,,
+【editor】EmEditor,,ahk_exe i)EmEditor\.exe$,^n,,^{F4},^{F4},,,,,
+【editor】Everedit,,ahk_exe i)EverEdit\.exe$,^n,,^w,^w,,,,,
+【editor】Fleet,,ahk_exe i)Fleet\.exe$,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
+【editor】Geany,,ahk_exe i)geany\.exe$,^n,,^w,^w,,^{PgDn},,^{PgUp},^{PgUp}
+【editor】Kate,,ahk_exe i)kate\.exe$,^n ,,^w,^w,,!{Right},,!{Left},!{Left}
+【editor】Notepad++,,ahk_exe notepad++.exe$,^n,,^w,^w,,,,,
+【editor】NotepadNext 主窗口,低,ahk_exe i)NotepadNext\.exe$,^n,,^w,^w,,,,,
+【editor】NotepadNext 窗口,高,(^Notepad Next$)|(^About Qt - Notepad Next$) ahk_exe NotepadNext\.exe$,,,{Esc},{Esc},,,,,
+【editor】Notepad--,,ahk_exe i)Notepad--.exe$,^n,,^w,^w,,,,,
+【editor】Notepads,,.+ ‎- Notepads$ ahk_exe ApplicationFrameHost.exe$,^n,,^w,^w,,,,,
+【editor】Notepad2,,ahk_exe i)Notepad2.exe$,^n,,,,,,,,
+【editor】Notepad3,,ahk_exe i)Notepad3.exe$,^n,,,,,,,,
+【editor】Sublime,,ahk_exe i)sublime_text\.exe$,^n,,^{F4},^{F4},,,,,
+【editor】Ultraedit,,ahk_exe i)uedit$,^n,,^{F4},^{F4},,,,,
 ,,,,,,,,,,,
-【md】MarkdownPad2,,ahk_exe MarkdownPad2.exe,^n,,^{F4},^{F4},,,,,
-【md】MarkText,,ahk_exe MarkText.exe,^t,,^w ,^w ,,,,,
-【md】Typora,,ahk_exe Typora.exe,^n,,^w,^w,,,,,
+【file compare】Beyond Compare,,ahk_exe i)Bcompare\.exe$,^t,,^w,^w,,,,,
+【file compare】WinMerge,,ahk_exe i)WinMergeU\.exe$,^n,,^{F4},^{F4},,,,,
 ,,,,,,,,,,,
-【editor】Atom【已过时】,,ahk_exe atom.exe,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
-【editor】Bracket,,ahk_exe Brackets.exe,^n,,^w,^w,,^{PgDn},,^{PgUp},^{PgUp} 
-【editor】CudaText,,ahk_exe cudatext.exe,^n,,^w,^w,,,,,
-【editor】Editplus,,ahk_exe editplus.exe,^n,,^w,^w,,,,,
-【editor】Everedit,,ahk_exe EverEdit.exe,^n,,^w,^w,,,,,
-【editor】Fleet,,ahk_exe Fleet.exe,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
-【editor】Geany,,ahk_exe geany.exe,^n,,^w,^w,,^{PgDn},,^{PgUp},^{PgUp}
-【editor】Kate,,ahk_exe kate.exe,^n ,,^w,^w,,!{Right},,!{Left},!{Left}
-【editor】Notepad++,,ahk_exe notepad++.exe,^n,,^w,^w,,,,,
-【editor】NotepadNext 主窗口,低,ahk_exe NotepadNext.exe,^n,,^w,^w,,,,,
-【editor】NotepadNext 窗口,高,(^Notepad Next$)|(^About Qt - Notepad Next$) ahk_exe NotepadNext.exe,,,{Esc},{Esc},,,,,
-【editor】Notepad--,,ahk_exe Notepad--.exe,^n,,^w,^w,,,,,
-【editor】Notepad2,,ahk_exe Notepad2.exe,^n,,,,,,,,
-【editor】Notepad3,,ahk_exe Notepad3.exe,^n,,,,,,,,
-【editor】Sublime,,ahk_exe sublime_text.exe,^n,,^{F4},^{F4},,,,,
-【editor】Ultraedit,,ahk_exe uedit64.exe,^n,,^{F4},^{F4},,,,,
+【IDE】Dev C++,,ahk_exe i)devcpp\.exe$,^n,,^w,^w,,,,,
+【IDE】Eclipse,,ahk_exe i)eclipse\.exe$,^n,,,^{F4},,^{PgDn},,^{PgUp},^{PgUp}
+【IDE】HbuilderX,,ahk_exe i)HbuilderX\.exe$,^t,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
+【IDE】MyEclipse,,ahk_class i)SWT_Window0$ ahk_exe i)javaw\.exe$,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
+【IDE】Rstudio,,ahk_exe i)rstudio\.exe$,^+n,,^w,^w,,,,,
+【IDE】SpringToolSuite4,,ahk_exe i)SpringToolSuite4.exe$,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
+【IDE】VS Code,,ahk_exe i)Code\.exe ahk_class i)Chrome_WidgetWin_1$,{Control Down}n{Control Up},,^{F4},^{F4},,^{PgDn} ,,^{PgUp},^{PgUp}
+【IDE】Visual Studio,低,ahk_exe devenv\.exe$,^n,,^{F4},^{F4},,,,,
+【窗口】Visual Studio,高,Microsoft Visual Studio 帐户设置|自定义|管理扩展|关于 Microsoft Visual Studio ahk_exe devenv\.exe,,,{Esc} ,{Esc} ,,,,,
 ,,,,,,,,,,,
-【file compare】Beyond Compare,,ahk_exe Bcompare.exe,^t,,^w,^w,,,,,
-【file compare】WinMerge,,ahk_exe WinMergeU.exe,^n,,^{F4},^{F4},,,,,
+【jetbrains】Aqua,,ahk_class i)SunAwtFrame$ ahk_exe i)aqua64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+【jetbrains】Clion,,ahk_class i)SunAwtFrame$ ahk_exe i)clion64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+【jetbrains】Datagrip,,ahk_class i)SunAwtFrame$ ahk_exe i)datagrip64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+【jetbrains】Dataspell,,ahk_class i)SunAwtFrame$ ahk_exe i)dataspell64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+【jetbrains】Goland,,ahk_class i)SunAwtFrame$ ahk_exe i)goland64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+【jetbrains】Idea,,ahk_class i)SunAwtFrame$ ahk_exe i)idea64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+【jetbrains】Phpstorm,,ahk_class i)SunAwtFrame$ ahk_exe i)phpstorm64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+【jetbrains】Pycharm,,ahk_class i)SunAwtFrame$ ahk_exe i)pycharm64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+【jetbrains】Rider,,ahk_class i)SunAwtFrame$ ahk_exe i)rider64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+【jetbrains】RubyMine,,ahk_class i)SunAwtFrame$ ahk_exe i)rubymine64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+【jetbrains】RustRover,,ahk_class i)SunAwtFrame$ ahk_exe i)rustrover64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+【jetbrains】Webstorm,,ahk_class i)SunAwtFrame$ ahk_exe i)webstorm64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+【jetbrains】Writerside,,ahk_class i)SunAwtFrame$ ahk_exe i)writerside64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
 ,,,,,,,,,,,
-【IDE】Dev C++,,ahk_exe devcpp.exe,^n,,^w,^w,,,,,
-【IDE】Eclipse,,ahk_exe eclipse.exe,^n,,,^{F4},,^{PgDn},,^{PgUp},^{PgUp}
-【IDE】HbuilderX,,ahk_exe HBuilderX.exe,^t,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
-【IDE】MyEclipse,,ahk_class SWT_Window0 ahk_exe javaw.exe,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
-【IDE】Rstudio,,ahk_exe rstudio.exe,^+n,,^w,^w,,,,,
-【IDE】SpringToolSuite4,,ahk_exe SpringToolSuite4.exe,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
-【IDE】VS Code,,ahk_exe Code.exe ahk_class Chrome_WidgetWin_1,{Control Down}n{Control Up},,^{F4},^{F4},,^{PgDn} ,,^{PgUp},^{PgUp}
+【jetbrains ext】Android Studio,,ahk_class i)SunAwtFrame ahk_exe i)studio64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+【jetbrains ext】华为 DevEco Studio,,ahk_class i)SunAwtFrame ahk_exe i)devecostudio64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
 ,,,,,,,,,,,
-【jetbrains】Aqua,,ahk_class SunAwtFrame ahk_exe aqua64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-【jetbrains】Clion,,ahk_class SunAwtFrame ahk_exe clion64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-【jetbrains】Datagrip,,ahk_class SunAwtFrame ahk_exe datagrip64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-【jetbrains】Dataspell,,ahk_class SunAwtFrame ahk_exe dataspell64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-【jetbrains】Goland,,ahk_class SunAwtFrame ahk_exe goland64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-【jetbrains】Idea,,ahk_class SunAwtFrame ahk_exe idea64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-【jetbrains】Phpstorm,,ahk_class SunAwtFrame ahk_exe phpstorm64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-【jetbrains】Pycharm,,ahk_class SunAwtFrame ahk_exe pycharm64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-【jetbrains】Rider,,ahk_class SunAwtFrame ahk_exe rider64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-【jetbrains】RubyMine,,ahk_class SunAwtFrame ahk_exe rubymine64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-【jetbrains】RustRover,,ahk_class SunAwtFrame ahk_exe rustrover64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-【jetbrains】Webstorm,,ahk_class SunAwtFrame ahk_exe webstorm64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-【jetbrains】Writerside,,ahk_class SunAwtFrame ahk_exe writerside64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+Netbean 32 位 & Jmeter,,ahk_class i)SunAwtFrame ahk_exe i)javaw\.exe$,^n,,,,,^{PgDn},,^{PgUp},^{PgUp}
+Netbean 64 位,,ahk_class i)SunAwtFrame ahk_exe i)netbeans64\.exe$,^n,,,,,^{PgDn},,^{PgUp},^{PgUp}
 ,,,,,,,,,,,
-【jetbrains ext】Android Studio,,ahk_class SunAwtFrame ahk_exe studio64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-【jetbrains ext】华为 DevEco Studio,,ahk_class SunAwtFrame ahk_exe devecostudio64.exe,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+【http调试】Apifox,,ahk_exe i)Apifox\.exe$,^t,,^w,^w,,,,,
+【http调试】ApiPost,,ahk_exe i)ApiPost7\.exe$,^t,,^w,^w,,,,,
+【http调试】HTTPie,,ahk_exe i)HTTPie\.exe$,^t,,^w,^w,,,,,
+【http调试】Postman,,ahk_exe i)Postman\.exe$,^t,,^w,^w,,,,,
 ,,,,,,,,,,,
-Netbean 32 位 & Jmeter,,ahk_class SunAwtFrame ahk_exe javaw.exe,^n,,,,,^{PgDn},,^{PgUp},^{PgUp}
-Netbean 64 位,,ahk_class SunAwtFrame ahk_exe netbeans64.exe,^n,,,,,^{PgDn},,^{PgUp},^{PgUp}
+Zeal,,ahk_exe i)zeal\.exe$,^t,,^w,^w,,,,,
 ,,,,,,,,,,,
-【http调试】Apifox,,ahk_exe Apifox.exe,^t,,^w,^w,,,,,
-【http调试】ApiPost,,ahk_exe ApiPost7.exe,^t,,^w,^w,,,,,
-【http调试】HTTPie,,ahk_exe HTTPie.exe,^t,,^w,^w,,,,,
-【http调试】Postman,,ahk_exe Postman.exe,^t,,^w,^w,,,,,
+【git】GitHub 桌面版,,ahk_exe i)GitHubDesktop\.exe$,^n,,,,,,,,
+【git】GitKraken,,ahk_exe i)gitkraken\.exe$,^t,,^w,^w,,,,,
+【git】SourceTree,,ahk_exe i)SourceTree\.exe$,^t,,^w,^w,,,,,
+【git】TortoiseGitMerge 的 merge 窗口,,ahk_exe i)TortoiseGitMerge\.exe$,,,{Esc},{Esc},,,,,
 ,,,,,,,,,,,
-Zeal,,ahk_exe zeal.exe,^t,,^w,^w,,,,,
+【终端类】Finalshell,,FinalShell$ ahk_exe java\.exe ahk_class i)SunAwtFrame$,!a,,!q,!q,,!],,!0,!0
+【终端类】Hyper,,ahk_exe i)Hyper\.exe$,^+t,,^+w,^+w ,,,,,
+【终端类】MobaXterm,,ahk_exe i)MobaXterm_Personal.*\.exe ahk_class i)TmobaXtermForm$,^!t,,^!q,"^!q""",,^!{Right},,^!{Left},^!{Left}
+【终端类】SecureCRT,,ahk_exe i)SecureCRT\.exe$,,,^{F4},^{F4},,,,,
+【终端类】Tabby,,ahk_exe i)Tabby\.exe$,^+t ,,^+w ,^+w ,,,,,
+【终端类】Termius,,ahk_exe i)Termius\.exe$,^+t,,^+w ,^+w,,!{Right},,!{Left},!{Left}
+【终端类】WindTerm,,ahk_exe i)WindTerm\.exe$,^n,,^+w ,^+w,,!],,![,![
+【终端类】WindowsTerminal,,ahk_exe i)WindowsTerminal\.exe$,^+t,,^+w,^+w,,,,,
+【终端类】Xshell,,ahk_exe i)Xshell\.exe$,^n,,,,,,,,
+【终端类】zoc,,ahk_exe i)zoc\.exe$,!o,,!w,!w,,,,,
 ,,,,,,,,,,,
-【git】GitHub 桌面版,,ahk_exe GitHubDesktop.exe,^n,,,,,,,,
-【git】GitKraken,,ahk_exe gitkraken.exe,^t,,^w,^w,,,,,
-【git】SourceTree,,ahk_exe SourceTree.exe,^t,,^w,^w,,,,,
-【git】小乌龟 Git 的 merge 窗口,,ahk_exe TortoiseGitMerge.exe,,,{Esc},{Esc},,,,,
+【ftp】FlashFXP,,ahk_exe i)FlashFXP\.exe$,{F8} ,,,,,,,,
+【ftp】Xftp,,ahk_exe i)Xftp\.exe$,^n,,,,,,,,
 ,,,,,,,,,,,
-【终端类】Finalshell,,FinalShell.* ahk_exe java.exe ahk_class SunAwtFrame,!a,,!q,!q,,!],,!0,!0
-【终端类】Hyper,,ahk_exe Hyper.exe,^+t,,^+w,^+w ,,,,,
-【终端类】MobaXterm,,ahk_exe MobaXterm_Personal.*.exe ahk_class TmobaXtermForm,^!t,,^!q,"^!q""",,^!{Right},,^!{Left},^!{Left}
-【终端类】SecureCRT,,ahk_exe SecureCRT.exe,,,^{F4},^{F4},,,,,
-【终端类】Tabby,,ahk_exe Tabby.exe,^+t ,,^+w ,^+w ,,,,,
-【终端类】Termius,,ahk_exe Termius.exe ,^+t,,^+w ,^+w,,!{Right},,!{Left},!{Left}
-【终端类】WindTerm,,ahk_exe WindTerm.exe,^n,,^+w ,^+w,,!],,![,![
-【终端类】WindowsTerminal,,ahk_exe WindowsTerminal.exe,^+t,,^+w,^+w ,,,,,
-【终端类】Xshell,,ahk_exe Xshell.exe,^n,,,,,,,,
-【终端类】zoc,,ahk_exe zoc.exe,!o,,!w,!w,,,,,
+【pdf】Adobe Acrobat,,ahk_exe i)Acrobat\.exe$,^o,,^{F4},^{F4},,,,,
+【pdf】Right PDF Reader【部分支持】,,ahk_exe i)RightPDFReader\.exe$,^o,,^w,^w,,,,,
+【pdf】Sumatra PDF,,ahk_class i)SUMATRA_PDF_FRAME ahk_exe i)SumatraPDF\.exe$,^o,,^{F4},^{F4},,,,,
+【pdf】UPDF,,ahk_exe i)UPDF\.exe$,^t,,^w,^w,,,,,
+【pdf】福昕PDF编辑器,,ahk_exe i)FoxitPhantom\.exe$,^o,,^{F4},^{F4},,,,,
+【pdf】福昕阅读器,,ahk_exe i)FoxitPDFReader\.exe$,^o,,^{F4},^{F4},,,,,
+【pdf】极速 PDF,,ahk_exe i)JisuPdf\.exe$,^o,,^w,^w,,,,,
+【pdf】金山PDF独立版,,ahk_exe i)wpspdf\.exe$,^n,,^{F4},^{F4},,,,,
+【pdf】迅读 PDF,,ahk_exe i)MasterPDF\.exe ahk_class i)MASTER_PDF_FRAME$,^o,,^w,^w,,,,,
 ,,,,,,,,,,,
-【ftp】FlashFXP,,ahk_exe FlashFXP.exe,{F8} ,,,,,,,,
-【ftp】Xftp,,ahk_exe Xftp.exe,^n,,,,,,,,
-,,,,,,,,,,,
-【pdf】Right PDF Reader【部分支持】,,ahk_exe RightPDFReader.exe,^o,,^w,^w,,,,,
-【pdf】Sumatra PDF,,ahk_class SUMATRA_PDF_FRAME ahk_exe SumatraPDF.exe,^o,,^{F4},^{F4},,,,,
-【pdf】UPDF,,ahk_exe UPDF.exe,^t,,^w,^w,,,,,
-【pdf】福昕PDF编辑器,,ahk_exe FoxitPhantom.exe,^o,,^{F4},^{F4},,,,,
-【pdf】福昕阅读器,,ahk_exe FoxitPDFReader.exe,^o,,^{F4},^{F4},,,,,
-【pdf】极速 PDF,,ahk_exe JisuPdf.exe,^o,,^w,^w,,,,,
-【pdf】金山PDF独立版,,ahk_exe wpspdf.exe,^n,,^{F4},^{F4},,,,,
-【pdf】迅读 PDF,,ahk_exe MasterPDF.exe ahk_class MASTER_PDF_FRAME,^o,,^w,^w,,,,,
-,,,,,,,,,,,
-LibreOffice 窗口,,ahk_class SALSUBFRAME ahk_exe soffice.bin,,,{Esc},{Esc},,,,,
-LibreOffice 主体,,ahk_class SALFRAME ahk_exe soffice.bin,^n,,^{F4},^{F4},,,,,
-Motrix,,ahk_exe Motrix.exe,^n,,,,,,,,
-Snipaste,,Snipaste ahk_exe Snipaste.exe,,,{Esc},{Esc},,,,,
-thunderbird,,ahk_exe thunderbird.exe,,,^w,^w,,,,,^{PgUp}
-WPS Office,,ahk_exe wps.exe,^n,,^{F4},^{F4},,,,,
-WPS 图片查看器,,WPS图片 ahk_exe photolaunch.exe,,,{Esc},{Esc},,,,,
-bilibili,,ahk_exe 哔哩哔哩.exe ahk_class Chrome_WidgetWin_1,,,,,{Right},],{Left},[,[
-阿里云客户端,,ahk_exe Alibaba Cloud Client.exe,^t,,^w,^w,,,,,
-炉石传说,,ahk_exe Hearthstone.exe,,,{Esc},{Esc},,,,,
-腾讯QQ,,ahk_exe QQ.exe,,,{Esc},{Esc},,,,,
-稻壳阅读器,,ahk_exe DocBox.exe,,,^w,^w,,,,,
-微信,,ahk_exe WeChat.exe ahk_class WeChatMainWndForPC,,,{Esc},{Esc},,,,,
-微信内置浏览器,,微信 ahk_exe WeChatAppEx.exe ahk_class Chrome_WidgetWin_0,,,^w,^w,,,,,
+【窗口】LibreOffice,,ahk_class i)SALSUBFRAME$ ahk_exe i)soffice\.bin$,,,{Esc},{Esc},,,,,
+LibreOffice 主程序,,ahk_class i)SALFRAME$ ahk_exe i)soffice\.bin$,^n,,^{F4},^{F4},,,,,
+Motrix,,ahk_exe i)Motrix\.exe$,^n,,,,,,,,
+Snipaste,,^Snipaste$ ahk_exe i)Snipaste\.exe$,,,{Esc},{Esc},,,,,
+thunderbird,,ahk_exe i)thunderbird\.exe$,,,^w,^w,,,,,^{PgUp}
+WPS Office,,ahk_exe i)wps\.exe$,^n,,^{F4},^{F4},,,,,
+WPS 图片查看器,,^WPS图片$ ahk_exe i)photolaunch\.exe$,,,{Esc},{Esc},,,,,
+bilibili,,ahk_exe 哔哩哔哩\.exe$ ahk_class i)Chrome_WidgetWin_1$,,,,,{Right},],{Left},[,[
+阿里云客户端,,ahk_exe i)Alibaba Cloud Client\.exe$,^t,,^w,^w,,,,,
+炉石传说,,ahk_exe i)Hearthstone\.exe$,,,{Esc},{Esc},,,,,
+腾讯QQ,,ahk_exe i)QQ\.exe$,,,{Esc},{Esc},,,,,
+稻壳阅读器,,ahk_exe i)DocBox\.exe$,,,^w,^w,,,,,
+微信,,ahk_exe i)WeChat\.exe ahk_class i)WeChatMainWndForPC$,,,{Esc},{Esc},,,,,
+微信内置浏览器,,^微信$ ahk_exe i)WeChatAppEx\.exe ahk_class i)Chrome_WidgetWin_0$,,,^w,^w,,,,,

@@ -14,14 +14,17 @@ https://wyagd001.github.io/v2/docs/
 ;@Ahk2Exe-SetCopyright 全民反诈 union
 ;@Ahk2Exe-SetDescription 捷键-为简化键鼠操作而生
 
-CodeVersion := "24.1.19-beta"
+CodeVersion := "24.1.23-beta"
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
 ; 往对应文件写入对应版本号，只在生成 32 位 exe 的时候执行
-;@Ahk2Exe-Obey U_V, = %A_PtrSize% * 8 = 32 ? "PostExec" : "Nop"
-; 提取出 文件名 再拼接 PostExec.ahk; 版本号; 脚本所在路径
-;@Ahk2Exe-%U_V% %A_ScriptName~\.[^\.]+$~PostExec.ahk% %U_version%, , %A_ScriptDir%
+;@Ahk2Exe-Obey U_V, = %A_PtrSize% * 8 == 32 ? "PostExec" : "Nop"
+; 提取出 文件名 再拼接 PostExec.ahk; 版本号; 2 仅在指定 UPX 压缩时运行 ; 脚本所在路径
+;@Ahk2Exe-%U_V% %A_ScriptName~\.[^\.]+$~PostExec.ahk% %U_version%, 2, %A_ScriptDir%
+
+regKeyName := 'HKEY_CURRENT_USER\SOFTWARE\jiejian'
+startTime := A_NowUTC
 
 ; ----- 1. 热键 之 鼠标操作 -----
 CoordMode "Mouse" ; 默认坐标相对于桌面(整个屏幕)
@@ -146,6 +149,7 @@ SettingTray() {
     A_TrayMenu.Add(Format("{1:-10}", "重启 Ctrl+Alt+R", "Ctrl+Shift+R"), TrayMenuHandler)
     A_TrayMenu.Add(Format("{1:-10}", "搜一搜 Alt+Space", "Alt+Space"), TrayMenuHandler)
     A_TrayMenu.Add("查看窗口标识符", TrayMenuHandler)
+    A_TrayMenu.Add("使用统计", TrayMenuHandler)
     A_TrayMenu.Add("检查更新", TrayMenuHandler)
     A_TrayMenu.Add
     A_TrayMenu.Add("项目主页", TrayMenuHandler)
@@ -158,7 +162,7 @@ SettingTray() {
     A_TrayMenu.ClickCount := 1 ; 单击可以暂停
   
     localIsAlphaOrBeta := InStr(CodeVersion, "alpha") or InStr(CodeVersion, "beta")
-    A_IconTip := "捷键 " CodeVersion (A_IsCompiled ? "" : " 未编译") (localIsAlphaOrBeta ? " 测试版" : "")
+    A_IconTip := "捷键 " . CodeVersion . (A_IsCompiled ? "" : " 未编译") . (localIsAlphaOrBeta ? " 测试版" : "") . (A_PtrSize == 4 ? '32位' : '64位')
 
     if not A_IsCompiled {
         ; 建议使用 16*16 或 32*32 像素的图标，使用 Ahk2Exe-Let 提取出 favicon.ico
@@ -171,3 +175,21 @@ SettingTray() {
 
 ; 触发热键时, 热键中按键原有的功能不会被屏蔽(对操作系统隐藏).
 ; ~LButton & b::Run "https://www.baidu.com"
+
+; 注册一个当脚本退出时, 会自动调用的函数.
+OnExit ExitFunc
+ExitFunc(ExitReason, ExitCode) {
+    ; 统计软件使用总分钟数
+    minutesDiff := DateDiff(A_NowUTC, startTime, 'Minutes')
+    if minutesDiff > 0 {
+        recordMinsValueName := 'record_mins'
+        recordMins := RegRead(regKeyName, recordMinsValueName, 0) + minutesDiff
+        RegWrite recordMins, "REG_DWORD", regKeyName, recordMinsValueName
+    }
+    ; 统计软件使用次数
+    if ExitReason != "Error" and ExitReason != "Reload" and ExitReason != "Single" {
+        launchCountValueName := 'launch_count'    
+        launchCount := RegRead(regKeyName, launchCountValueName, 0) + 1
+        RegWrite launchCount, "REG_DWORD", regKeyName, launchCountValueName
+    }
+}

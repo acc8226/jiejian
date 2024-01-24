@@ -98,7 +98,7 @@
 
 启动器特点：
 
-1. 无边框设计，去除最小化和关闭按钮，界面极简。
+1. 无边框设计，界面极简。
 2. 使用普适易读的微软雅黑字体，字号设计合理，字体风格简洁大方。
 3. 支持自定义多种关键词进行应用匹配，智能识别用户的启动意图。
 4. 搜索栏设计简洁，支持模糊搜索，帮助快速定位应用。
@@ -139,7 +139,7 @@ kz 打开了控制面板
 
 ## 8. 热串 之 直达网址（Z 直达模式）
 
-* zbd 打开 百度
+* zbd 打开 百度一下
 * zbi 打开 哔哩哔哩
 * zdy 打开 电影天堂
 * zit 打开 IT 之家
@@ -175,6 +175,8 @@ kz 打开了控制面板
 
 配置文件 **app.csv**（用于配置软件的快捷键）、**data.csv**（用于配置启动器候选项以及热键、热串） 必须和 ahk 脚本文件在同一级目录，且文本编码必须为 utf-8。
 
+app.csv 使用了正则表达式，需要使用者对正则有一定了解。主要用到了 `^$` 锚和不区分大小写 `i` 选项。
+
 推荐使用 [LiberOffice](https://www.libreoffice.org/download/download-libreoffice/) 或者微软 Office utf8 模式打开。
 
 强烈不建议使用 WPS 进行打开，因为 WPS 默认使用 gbk 编码。
@@ -208,26 +210,28 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 
 ### 未来计划
 
-* 支持 尚未发布的 arc 浏览器 windows 版
-* icon 添加按下效果
+* 支持 arc 浏览器 for windows
+* icon 点击后使用新图标，而不是系统样式的图标
 * 配置文件不太易用，需要优化
+* 是否在菜单中增加开机自启
 
 ### 捷键 2024.01
 
-项目名从 shortcut 正式改名为 jiejian
+软件名从 shortcut 改为 jiejian
 
 新增：
 
 * 完善对 jetbrains 系列软件的支持，包含衍生的 Google Android Studio 和 华为 DevEco Studio。
 * 支持已过时的 Atom
-* 哔哩哔哩、GitKraken、Rstudio、foobar2000 和 方格音乐部分按键的支持
-* 新增鼠标中间和右键的一些支持
+* 完善一些文本编辑器、pdf 类、音视频类软件的支持
+* 新增鼠标中间和右键的按键支持
 * 新增 按住 CapsLock 后可以用鼠标左键拖动窗口 和 兜底的关闭功能更加完善了
   
-* 添加 [MyKeymap] 和 wg 鼠标手势的玩法
-* 新增了版本升级的功能
-* 菜单选项重新调整
-* 新增一键打包 package.ahk
+* 添加 [MyKeymap] 和 WGestures 鼠标手势的玩法
+* 新增检查版本更新的功能
+* 重新定义了一套菜单选项
+* 新增一键打包 package.ahk 脚本
+* 版本分为正式版和测试版，测试版本更新会频繁些
 
 ### 捷键 2023 年度纪念版
 
@@ -354,7 +358,7 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 CapsLock 模式
 
 | 按键 | 用途 |
-| ----  | ---- |
+| ---- | ---- |
 | W | IDEA |
 | E | VSCode |
 | R | 在当前程序的窗口间轮换 |
@@ -381,7 +385,7 @@ CapsLock 模式
 CapsLock 命令
 
 | 按键 | 参数1 | 参数2 | 参数3 |
-| ----  | ---- | ---- | ---- |
+| ---- | ---- | ---- | ---- |
 | cc | shortcuts\Visual Studio Code.lnk | -n "{selected}" | 用 VS Code 打开选中的文件，在新窗口中打开 |
 | wt | wt.exe | -d "{selected}" | 用 Windows Terminal 打开选中的文件夹 |
 
@@ -389,21 +393,11 @@ CapsLock 命令
 
 软件入选原则：主要收录热门软件，其中主要以浏览器比较全。
 
-已知 bug：
-
-* Right PDF Reader 的鼠标侧边后退键无效。
-* 适配不太好的软件：搜狗浏览器。
-* 测试关闭窗口不奏效的软件：极客卸载、windows 任务管理器（似乎屏蔽了 ctrl 键）。
-
 支持但不限于以下百余款软件，且持续更新中...
 
 * 360 压缩
 * BvSsh
-* ahk 应用程序
-* Visual Studio
 * skylark 主程序
-* 【系统】Win11 21h1 桌面
-* 【系统】Win11 22h2 桌面
 * 【系统】Win11 资源管理器
 * 【系统】Win11 旧版 记事本
 * 【系统】Win11 新版 记事本
@@ -412,10 +406,11 @@ CapsLock 命令
 * 【浏览器】123
 * 【浏览器】2345
 * 【浏览器】360 极速
+* 【浏览器】360 游戏
 * 【浏览器】360 安全
 * 【浏览器】Avast
 * 【浏览器】Brave
-* 【浏览器】Chrome 谷歌 & 百分 & 小马浏览器
+* 【浏览器】Chrome 谷歌 & 百分 & 小马
 * 【浏览器】Duck
 * 【浏览器】Duoyu 多御
 * 【浏览器】Edge
@@ -456,8 +451,8 @@ CapsLock 命令
 * 【音乐类】喜马拉雅
 * 【音乐类】酷狗音乐
 * 【视频类】GridPlayer【部分支持】
-* 【视频类】mpv【部分支持】
 * 【视频类】KMPlayer 64位
+* 【视频类】mpv【部分支持】
 * 【视频类】PotPlayer 64位
 * 【视频类】vlc
 * 【视频类】抖音【不支持】
@@ -473,12 +468,15 @@ CapsLock 命令
 * 【editor】Bracket
 * 【editor】CudaText
 * 【editor】Editplus
+* 【editor】EmEditor
 * 【editor】Everedit
 * 【editor】Fleet
 * 【editor】Geany
 * 【editor】Kate
 * 【editor】Notepad++
+* 【editor】NotepadNext
 * 【editor】Notepad--
+* 【editor】Notepads
 * 【editor】Notepad2
 * 【editor】Notepad3
 * 【editor】Sublime
@@ -492,6 +490,7 @@ CapsLock 命令
 * 【IDE】Rstudio
 * 【IDE】SpringToolSuite4
 * 【IDE】VS Code
+* 【IDE】Visual Studio
 * 【jetbrains】Aqua
 * 【jetbrains】Clion
 * 【jetbrains】Datagrip
@@ -505,8 +504,8 @@ CapsLock 命令
 * 【jetbrains】RustRover
 * 【jetbrains】Webstorm
 * 【jetbrains】Writerside
-* 【jetbrains】Android Studio
-* 【jetbrains】华为 DevEco Studio
+* 【jetbrains ext】Android Studio
+* 【jetbrains ext】华为 DevEco Studio
 * Netbean 32 位 & Jmeter
 * Netbean 64 位
 * 【http调试】Apifox
@@ -517,7 +516,7 @@ CapsLock 命令
 * 【git】GitHub 桌面版
 * 【git】GitKraken
 * 【git】SourceTree
-* 【git】小乌龟 Git 的 merge 窗口
+* 【git】TortoiseGitMerge 的 merge 窗口
 * 【终端类】Finalshell
 * 【终端类】Hyper
 * 【终端类】MobaXterm
@@ -530,6 +529,7 @@ CapsLock 命令
 * 【终端类】zoc
 * 【ftp】FlashFXP
 * 【ftp】Xftp
+* 【pdf】Adobe Acrobat
 * 【pdf】Right PDF Reader【部分支持】
 * 【pdf】Sumatra PDF
 * 【pdf】UPDF
@@ -537,21 +537,28 @@ CapsLock 命令
 * 【pdf】福昕阅读器
 * 【pdf】极速 PDF
 * 【pdf】金山PDF独立版
-* 【pdf】迅读PDF
-* LibreOffice 窗口
-* LibreOffice 主体
+* 【pdf】迅读 PDF
+* LibreOffice 主程序
 * Motrix
 * Snipaste
+* thunderbird
 * WPS Office
 * WPS 图片查看器
-* 哔哩哔哩
+* bilibili
 * 阿里云客户端
-* 雷鸟
 * 炉石传说
 * 腾讯QQ
 * 稻壳阅读器
 * 微信
-* 微信内置浏览器
+
+无需适配的软件：
+
+* 西瓜视频
+
+已知 bug：
+
+* 适配不太好的软件：搜狗浏览器、Right PDF Reader 的鼠标侧边后退键无效。
+* 测试关闭窗口不奏效的软件：极客卸载、注册表编辑器、windows 任务管理器（似乎屏蔽了 ctrl 键）。
 
 ### 打包发版目录结构
 

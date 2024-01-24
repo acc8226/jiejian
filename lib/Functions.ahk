@@ -44,15 +44,35 @@ TrayMenuHandler(ItemName, ItemPos, MyMenu) {
     case "查看变量":
       ListVars
     case trayMenuDefault:
-      jiejianToggleSuspend()
+      jiejianToggleSuspend
     case "重启 Ctrl+Alt+R":
-      jiejianReload()
+      jiejianReload
     case "搜一搜 Alt+Space":
-      Anyrun()
-    case "检查更新":
-      checkUpdate(true)
+      Anyrun
     case "查看窗口标识符":
       Run "extra/WindowSpyU32.exe"
+    case "使用统计":            
+      ; 统计软件使用次数
+      launchCountValueName := 'launch_count'    
+      launchCount := RegRead(regKeyName, launchCountValueName, 0)
+      ; 统计软件使用总分钟数
+      recordMinsValueName := 'record_mins'
+      recordMins := RegRead(regKeyName, recordMinsValueName, 0) + DateDiff(A_NowUTC, startTime, 'Minutes')
+
+      sb := '总启动次数 ' . launchCount . ' 次，您目前已使用捷键 '
+      if recordMins < 60 {
+        MsgBox sb . recordMins . ' 分钟！', '使用统计'
+      } else {
+        sb .= recordMins // 60 . ' 小时 '
+        mins := Floor(recordMins - recordMins // 60 * 60)
+        if mins !== 0 {
+          sb .= mins . ' 分钟'
+        }
+        sb .= '！'
+        MsgBox sb, '使用统计'
+      }
+    case "检查更新":
+      checkUpdate(true)
     case "项目主页":
       Run "https://gitcode.com/acc8226/jiejian"
     case "帮助文档":
@@ -60,7 +80,7 @@ TrayMenuHandler(ItemName, ItemPos, MyMenu) {
     case "关于作者":
       Run "https://gitcode.com/acc8226"
     case "退出":
-      jiejianExit()
+      jiejianExit
   }
 }
 
