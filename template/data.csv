@@ -1,42 +1,42 @@
-ç±»å‹,å¯åŠ¨è·¯å¾„,è¿è¡Œåç§°,è¿è¡Œå…³é”®å­—,çƒ­é”®å…³é”®å­—,çƒ­ä¸²å…³é”®å­— 
-app,netstat,ç½‘ç»œçŠ¶æ€,wangluozhuangtai|ç½‘ç»œçŠ¶æ€,,
-app,inetcpl.cpl,Interneté€‰é¡¹,inetcpl|Interneté€‰é¡¹,,
-app,Firewall.cpl,é˜²ç«å¢™,fanghuoqiang|é˜²ç«å¢™,,
-app,winver,å…³äºWindows,guanyuwindows|å…³äºWindows,,
-app,diskmgmt.msc,ç£ç›˜ç®¡ç†,diskmgmt|dianyuanxuanxiang|ç£ç›˜ç®¡ç†,,
-app,powercfg.cpl,ç”µæºé€‰é¡¹,dianyuanxuanxiang|ç”µæºé€‰é¡¹,,
-app,magnify,æ”¾å¤§é•œ,fangdajing|æ”¾å¤§é•œ,,
-app,mspaint,ç”»å›¾,huatu|ç”»å›¾,,
-app,osk,å±å¹•é”®ç›˜,pingmujianpan|å±å¹•é”®ç›˜,,
-app,Notepad,è®°äº‹æœ¬,notepad|jishiben|è®°äº‹æœ¬,!j,
-app,control,æ§åˆ¶é¢æ¿,kongzhimianban|æ§åˆ¶é¢æ¿,,
-app,sk.cpl,å±å¹•åˆ†è¾¨ç‡,pingmufenbianlv|å±å¹•åˆ†è¾¨ç‡,,
-app,hdwwiz.cpl ,è®¾å¤‡ç®¡ç†å™¨,hdwwiz.cpl|shebeiguanliqi|è®¾å¤‡ç®¡ç†å™¨,,
-app,main.cpl,é¼ æ ‡å±æ€§,main.cpl|shubiaoshuxing|é¼ æ ‡å±æ€§,,
-app,eventvwr ,äº‹ä»¶æŸ¥çœ‹å™¨,eventvwr|shijianchakanqi|äº‹ä»¶æŸ¥çœ‹å™¨,,
-app,mmsys.cpl,å£°éŸ³å±æ€§,mmsys.cpl|shengyinshuxing|å£°éŸ³å±æ€§,,
-app,taskmgr,ä»»åŠ¡ç®¡ç†å™¨,taskmgr|renwuguanliqi|ä»»åŠ¡ç®¡ç†å™¨,,
-app,explorer,èµ„æºç®¡ç†å™¨,explorer|ziyuanguanliqi|èµ„æºç®¡ç†å™¨,,
-app,mstsc,è¿œç¨‹ååŠ©,mstsc|yuanchengzhuomian|è¿œç¨‹ååŠ©,,
-app,write,å†™å­—æ¿,write|xieziban|å†™å­—æ¿,,
+ÀàĞÍ,Æô¶¯Â·¾¶,ÔËĞĞÃû³Æ,ÔËĞĞ¹Ø¼ü×Ö,ÈÈ¼ü¹Ø¼ü×Ö,ÈÈ´®¹Ø¼ü×Ö 
+app,netstat,ÍøÂç×´Ì¬,wangluozhuangtai|ÍøÂç×´Ì¬,,
+app,inetcpl.cpl,InternetÑ¡Ïî,inetcpl|InternetÑ¡Ïî,,
+app,Firewall.cpl,·À»ğÇ½,fanghuoqiang|·À»ğÇ½,,
+app,winver,¹ØÓÚWindows,guanyuwindows|¹ØÓÚWindows,,
+app,diskmgmt.msc,´ÅÅÌ¹ÜÀí,diskmgmt|dianyuanxuanxiang|´ÅÅÌ¹ÜÀí,,
+app,powercfg.cpl,µçÔ´Ñ¡Ïî,dianyuanxuanxiang|µçÔ´Ñ¡Ïî,,
+app,magnify,·Å´ó¾µ,fangdajing|·Å´ó¾µ,,
+app,mspaint,»­Í¼,huatu|»­Í¼,,
+app,osk,ÆÁÄ»¼üÅÌ,pingmujianpan|ÆÁÄ»¼üÅÌ,,
+app,Notepad,¼ÇÊÂ±¾,notepad|jishiben|¼ÇÊÂ±¾,!j,
+app,control,¿ØÖÆÃæ°å,kongzhimianban|¿ØÖÆÃæ°å,,
+app,sk.cpl,ÆÁÄ»·Ö±æÂÊ,pingmufenbianlv|ÆÁÄ»·Ö±æÂÊ,,
+app,hdwwiz.cpl ,Éè±¸¹ÜÀíÆ÷,hdwwiz.cpl|shebeiguanliqi|Éè±¸¹ÜÀíÆ÷,,
+app,main.cpl,Êó±êÊôĞÔ,main.cpl|shubiaoshuxing|Êó±êÊôĞÔ,,
+app,eventvwr ,ÊÂ¼ş²é¿´Æ÷,eventvwr|shijianchakanqi|ÊÂ¼ş²é¿´Æ÷,,
+app,mmsys.cpl,ÉùÒôÊôĞÔ,mmsys.cpl|shengyinshuxing|ÉùÒôÊôĞÔ,,
+app,taskmgr,ÈÎÎñ¹ÜÀíÆ÷,taskmgr|renwuguanliqi|ÈÎÎñ¹ÜÀíÆ÷,,
+app,explorer,×ÊÔ´¹ÜÀíÆ÷,explorer|ziyuanguanliqi|×ÊÔ´¹ÜÀíÆ÷,,
+app,mstsc,Ô¶³ÌĞ­Öú,mstsc|yuanchengzhuomian|Ô¶³ÌĞ­Öú,,
+app,write,Ğ´×Ö°å,write|xieziban|Ğ´×Ö°å,,
 ,,,,,
-file,D:\,Dç›˜,,!d,
+file,D:\,DÅÌ,,!d,
 ,,,,,
-text,å¾ˆç‰›å‘€,,,,xnb 
-text,ä½ å¦¹çš„,,,,xnm 
-text,ğŸ˜„,å¾®ç¬‘,,,xwx 
-text,ğŸ˜Š,è„¸çº¢,,,xlh
-text,ğŸ‘Œ,OK,,,xok
-text,â¤ï¸,çˆ±å¿ƒ,,,xax
-text,ğŸ“°,æŠ¥çº¸,,,xbz
-text,ğŸ·,æ ‡ç­¾,,,xbq
-text,ğŸ”–,ä¹¦ç­¾,,,xsq
-text,ğŸ’©,å¤§ä¾¿,,,xsh
-text,ğŸ‘»,é¬¼é­‚,,,xgh
+text,ºÜÅ£Ñ½,,,,xnb 
+text,ÄãÃÃµÄ,,,,xnm 
+text,”9ı0,Î¢Ğ¦,,,xwx 
+text,”9ı6,Á³ºì,,,xlh
+text,”9Ñ0,OK,,,xok
+text,7Å8„1‚5,°®ĞÄ,,,xax
+text,”9á4,±¨Ö½,,,xbz
+text,”9È5,±êÇ©,,,xbq
+text,”9å2,ÊéÇ©,,,xsq
+text,”9Ú3,´ó±ã,,,xsh
+text,”9Õ7,¹í»ê,,,xgh
 ,,,,,
-web,https://www.baidu.com/,ç™¾åº¦,baidu,,zbd
-web,https://www.bilibili.com/,bç«™,bilibili,!6,zbi
-web,https://www.douyin.com/,æŠ–éŸ³,douyin,,zdy
-web,https://www.ithome.com,ITä¹‹å®¶,itzhijia,!7,zit
-web,https://mail.qq.com,qqé‚®ç®±,qqyouxiang,,zma
-web,https://www.ixigua.com,è¥¿ç“œè§†é¢‘,xiguashpin,!8,zxg
+web,https://www.baidu.com/,°Ù¶È,baidu,,zbd
+web,https://www.bilibili.com/,bÕ¾,bilibili,!6,zbi
+web,https://www.douyin.com/,¶¶Òô,douyin,,zdy
+web,https://www.ithome.com,ITÖ®¼Ò,itzhijia,!7,zit
+web,https://mail.qq.com,qqÓÊÏä,qqyouxiang,,zma
+web,https://www.ixigua.com,Î÷¹ÏÊÓÆµ,xiguashpin,!8,zxg

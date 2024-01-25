@@ -9,193 +9,128 @@ Loop appList.Length {
   if it.highLevel {
     ; 高优先级
     ; 2. 逃逸
-    if it.escape = "WinClose"
-      GroupAdd "HL_esc_WinClose", it.exe
-
+    switch it.escape, 'Off' {
+      case "WinClose": GroupAdd "HL_esc_WinClose", it.exe      
+    }
     ; 3. 关闭
-    if it.close = "{Esc}"
-      GroupAdd "HL_close_Esc", it.exe
-    else if it.close = "!{F4}"
-      GroupAdd "HL_close_alt_f4", it.exe
-
+    switch it.close, 'Off' {
+      case 'Esc', "{Esc}": GroupAdd "HL_close_Esc", it.exe
+      case '!F4', "!{F4}": GroupAdd "HL_close_alt_F4", it.exe
+      case '^F4', "^{F4}": GroupAdd "HL_close_ctrl_F4", it.exe        
+    }
     ; 4. 侧边后退键
-    if it.sideBack = "{Esc}"
-      GroupAdd "HL_sideBack_Esc", it.exe
-    else if it.sideBack = "!{F4}"
-      GroupAdd "HL_sideBack_alt_f4", it.exe
+    switch it.sideBack, 'Off' {
+      case 'Esc', "{Esc}": GroupAdd "HL_sideBack_Esc", it.exe
+      case '!F4', "!{F4}": GroupAdd "HL_sideBack_alt_F4", it.exe
+      case '^F4', "^{F4}": GroupAdd "HL_sideBack_ctrl_F4", it.exe        
+    }
   } else {
     ; 低优先级
     ; 1. 新建
-    if it.new = "{F3}"
-      GroupAdd "new_F3", it.exe
-    else if it.new = "{F8}"
-      GroupAdd "new_F8", it.exe
-    else if it.new = "!a"
-      GroupAdd "new_alt_a", it.exe
-    else if it.new = "!c"
-      GroupAdd "new_alt_c", it.exe
-    else if it.new = "!n"
-      GroupAdd "new_alt_n", it.exe
-    else if it.new = "!o"
-      GroupAdd "new_alt_o", it.exe
-    else if it.new = "^n"
-      GroupAdd "new_ctrl_n", it.exe
-    else if it.new = "{Control Down}n{Control Up}"
-      GroupAdd "new_ctrl_n_2", it.exe
-    else if it.new = "^o"
-      GroupAdd "new_ctrl_o", it.exe
-    else if it.new = "^t"
-      GroupAdd "new_ctrl_t", it.exe
-    else if it.new = "^!t"
-      GroupAdd "new_ctrl_alt_t", it.exe
-    else if it.new = "^+t"
-      GroupAdd "new_ctrl_shift_t", it.exe
-    else if it.new = "^+n"
-      GroupAdd "new_ctrl_shift_n", it.exe
-
+    switch it.new, 'Off' {
+      case "F3", "{F3}": GroupAdd "new_F3", it.exe
+      case 'F8', "{F8}": GroupAdd "new_F8", it.exe
+      case "!a": GroupAdd "new_alt_a", it.exe
+      case "!c": GroupAdd "new_alt_c", it.exe
+      case "!n": GroupAdd "new_alt_n", it.exe
+      case "!o": GroupAdd "new_alt_o", it.exe
+      case "^n": GroupAdd "new_ctrl_n", it.exe
+      case "{Control Down}n{Control Up}": GroupAdd "new_ctrl_n_2", it.exe
+      case "^o": GroupAdd "new_ctrl_o", it.exe
+      case "^t": GroupAdd "new_ctrl_t", it.exe
+      case "^!t": GroupAdd "new_ctrl_alt_t", it.exe
+      case "^+t": GroupAdd "new_ctrl_shift_t", it.exe
+      case "^+n": GroupAdd "new_ctrl_shift_n", it.exe
+    }
     ; 2. 逃逸
-    if it.escape = "WinClose"
-      GroupAdd "esc_WinClose", it.exe
-
+    switch it.escape, 'Off' {
+      case "WinClose": GroupAdd "esc_WinClose", it.exe
+    }
     ; 3. 关闭
-    if it.close = "{Esc}"
-      GroupAdd "close_Esc", it.exe
-    else if it.close = "!{F4}"
-      GroupAdd "close_alt_f4", it.exe
-    else if it.close = "{Alt Down}{F4 Down}{F4 Up}{Alt Up}"
-      GroupAdd "close_alt_f4_2", it.exe
-    else if it.close = "!l"
-      GroupAdd "close_alt_l", it.exe
-    else if it.close = "!q"
-      GroupAdd "close_alt_q", it.exe
-    else if it.close = "!w"
-      GroupAdd "close_alt_w", it.exe
-    else if it.close = "^{F4}"
-      GroupAdd "close_ctrl_f4", it.exe
-    else if it.close = "^w"
-      GroupAdd "close_ctrl_w", it.exe
-    else if it.close = "^!q"
-      GroupAdd "close_ctrl_alt_q", it.exe
-    else if it.close = "^+w"
-      GroupAdd "close_ctrl_shift_w", it.exe
-
+    switch it.close, 'Off' {
+      case "Esc", "{Esc}": GroupAdd "close_Esc", it.exe
+      case '!F4', "!{F4}": GroupAdd "close_alt_F4", it.exe
+      case "{Alt Down}{F4 Down}{F4 Up}{Alt Up}": GroupAdd "close_alt_F4_2", it.exe
+      case "!l": GroupAdd "close_alt_l", it.exe
+      case "!q": GroupAdd "close_alt_q", it.exe
+      case "!w": GroupAdd "close_alt_w", it.exe
+      case "^F4", "^{F4}": GroupAdd "close_ctrl_F4", it.exe
+      case "^w": GroupAdd "close_ctrl_w", it.exe
+      case "^!q": GroupAdd "close_ctrl_alt_q", it.exe
+      case "^+w": GroupAdd "close_ctrl_shift_w", it.exe
+    }
     ; 4. 侧边后退键
-    if it.sideBack = "{Esc}"
-      GroupAdd "sideBack_Esc", it.exe
-    else if it.sideBack = "]"
-      GroupAdd "sideBack_closeBracket", it.exe
-    else if it.sideBack = "!{F4}"
-      GroupAdd "sideBack_alt_f4", it.exe
-    else if it.sideBack = "{Alt Down}{F4 Down}{F4 Up}{Alt Up}"
-      GroupAdd "sideBack_alt_f4_2", it.exe
-    else if it.sideBack = "!l"
-      GroupAdd "sideBack_alt_l", it.exe
-    else if it.sideBack = "!q"
-      GroupAdd "sideBack_alt_q", it.exe
-    else if it.sideBack = "!w"
-      GroupAdd "sideBack_alt_w", it.exe
-    else if it.sideBack = "^{F4}"
-      GroupAdd "sideBack_ctrl_f4", it.exe
-    else if it.sideBack = "^w"
-      GroupAdd "sideBack_ctrl_w", it.exe
-    else if it.close = "^!q"
-      GroupAdd "sideBack_ctrl_alt_q", it.exe
-    else if it.sideBack = "^+w"
-      GroupAdd "sideBack_ctrl_shift_w", it.exe
-
+    switch it.sideBack, 'Off' {
+      case "{Esc}": GroupAdd "sideBack_Esc", it.exe
+      case "]": GroupAdd "sideBack_closeBracket", it.exe
+      case "!{F4}": GroupAdd "sideBack_alt_F4", it.exe
+      case "{Alt Down}{F4 Down}{F4 Up}{Alt Up}": GroupAdd "sideBack_alt_F4_2", it.exe
+      case "!l": GroupAdd "sideBack_alt_l", it.exe
+      case "!q": GroupAdd "sideBack_alt_q", it.exe
+      case "!w": GroupAdd "sideBack_alt_w", it.exe
+      case "^{F4}": GroupAdd "sideBack_ctrl_F4", it.exe
+      case "^w": GroupAdd "sideBack_ctrl_w", it.exe
+      case "^!q": GroupAdd "sideBack_ctrl_alt_q", it.exe
+      case "^+w": GroupAdd "sideBack_ctrl_shift_w", it.exe
+    }
     ; 5. 前进
-    if it.forward = "{Media_Next}"
-      GroupAdd "forward_mediaNext", it.exe
-    else if it.forward = "^{Right}"
-      GroupAdd "forward_ctrl_right", it.exe
-    else if it.forward = "{PgDn}"
-      GroupAdd "forward_PgDn", it.exe
-    else if it.forward = "{Right}"
-      GroupAdd "forward_Right", it.exe
-
+    switch it.forward, 'Off' {
+      case "{Media_Next}": GroupAdd "forward_mediaNext", it.exe
+      case "^Right": GroupAdd "forward_ctrl_right", it.exe
+      case "{PgDn}": GroupAdd "forward_PgDn", it.exe
+      case "{Right}": GroupAdd "forward_Right", it.exe
+    }
     ; 6. 下个标签
-    if it.nextTag = "{Media_Next}"
-      GroupAdd "next_mediaNext", it.exe
-    else if it.nextTag = "]"
-      GroupAdd "next_closeBracket", it.exe
-    else if it.nextTag = "n"
-      GroupAdd "next_n", it.exe
-    else if it.nextTag = "{Down}"
-      GroupAdd "next_Down", it.exe
-    else if it.nextTag = "^+{PgDn}"
-      GroupAdd "next_ctrl_shift_pgDn", it.exe
-    else if it.nextTag = "!]"
-      GroupAdd "next_alt_closeBracket", it.exe
-    else if it.nextTag = "!{Right}"
-      GroupAdd "next_alt_right", it.exe
-    else if it.nextTag = "^{PgDn}"
-      GroupAdd "next_ctrl_pgDn", it.exe
-    else if it.nextTag = "^!{Right}"
-      GroupAdd "next_ctrl_alt_right", it.exe
-    else if it.nextTag = "{PgDn}"
-      GroupAdd "next_pgDn", it.exe
-
+    switch it.nextTag, 'Off' {
+      case "{Media_Next}": GroupAdd "next_mediaNext", it.exe
+      case "]": GroupAdd "next_closeBracket", it.exe
+      case "n": GroupAdd "next_n", it.exe
+      case "Down", "{Down}": GroupAdd "next_Down", it.exe
+      case "^PgDn": GroupAdd "next_ctrl_shift_pgDn", it.exe
+      case "!]": GroupAdd "next_alt_closeBracket", it.exe
+      case "!{Right}": GroupAdd "next_alt_right", it.exe
+      case "^PgDn": GroupAdd "next_ctrl_pgDn", it.exe
+      case "^!{Right}": GroupAdd "next_ctrl_alt_right", it.exe
+      case "{PgDn}": GroupAdd "next_pgDn", it.exe
+    }
     ; 7. 后退
-    if it.back = "{Media_Prev}"
-      GroupAdd "back_Media_Prev", it.exe
-    else if it.back = "{PgUp}"
-      GroupAdd "back_PgUp", it.exe
-    else if it.back = "{Left}"
-      GroupAdd "back_Left", it.exe
-    else if it.back = "{Up}"
-      GroupAdd "back_Up", it.exe
+    switch it.back, 'Off' {
+      case "{Media_Prev}": GroupAdd "back_Media_Prev", it.exe
+      case "PgUp", "{PgUp}": GroupAdd "back_PgUp", it.exe
+      case "Left", "{Left}": GroupAdd "back_Left", it.exe
+      case 'Up', "{Up}": GroupAdd "back_Up", it.exe
+    }
     ; 8. 上个标签
-    if it.previousTag = "{Media_Prev}"
-      GroupAdd "previous_mediaPrev", it.exe
-    else if it.previousTag = "["
-      GroupAdd "previous_openBracket", it.exe
-    else if it.previousTag = "p"
-      GroupAdd "previous_p", it.exe
-    else if it.previousTag = "{Up}"
-      GroupAdd "previous_Up", it.exe
-    else if it.previousTag = "!0"
-      GroupAdd "previous_alt_0", it.exe
-    else if it.previousTag = "!{Left}"
-      GroupAdd "previous_alt_left", it.exe
-    else if it.previousTag = "!["
-      GroupAdd "previous_alt_openBracket", it.exe
-    else if it.previousTag = "^{Left}"
-      GroupAdd "previous_ctrl_left", it.exe
-    else if it.previousTag = "^!{Left}"
-      GroupAdd "previous_ctrl_alt_left", it.exe
-    else if it.previousTag = "^{PgUp}"
-      GroupAdd "previous_ctrl_PgUp", it.exe
-    else if it.previousTag = "{PgUp}"
-      GroupAdd "previous_PgUp", it.exe
-
+    switch it.previousTag, 'Off' {
+      case "{Media_Prev}": GroupAdd "previous_mediaPrev", it.exe
+      case "[": GroupAdd "previous_openBracket", it.exe
+      case "p": GroupAdd "previous_p", it.exe
+      case 'Up', "{Up}": GroupAdd "previous_Up", it.exe
+      case "!0": GroupAdd "previous_alt_0", it.exe
+      case "!{Left}": GroupAdd "previous_alt_left", it.exe
+      case "![": GroupAdd "previous_alt_openBracket", it.exe
+      case "^{Left}": GroupAdd "previous_ctrl_left", it.exe
+      case "^!{Left}": GroupAdd "previous_ctrl_alt_left", it.exe
+      case "^{PgUp}": GroupAdd "previous_ctrl_PgUp", it.exe
+      case "{PgUp}": GroupAdd "previous_PgUp", it.exe
+    }
     ; 9. 侧边前进键
-    if it.sideForward = "{Media_Prev}"
-      GroupAdd "sideForward_mediaPrev", it.exe
-    else if it.sideForward = "{Media_Play_Pause}"
-      GroupAdd "sideForward_mediaPlayPause", it.exe
-    else if it.sideForward = "{Space}"
-      GroupAdd "sideForward_space", it.exe
-    else if it.sideForward = "["
-      GroupAdd "sideForward_openBracket", it.exe
-    else if it.sideForward = "p"
-      GroupAdd "sideForward_p", it.exe
-    else if it.sideForward = "{Up}"
-      GroupAdd "sideForward_Up", it.exe
-    else if it.sideForward = "{PgUp}"
-      GroupAdd "sideForward_PgUp", it.exe
-    else if it.sideForward = "!{Left}"
-      GroupAdd "sideForward_alt_left", it.exe
-    else if it.sideForward = "!0"
-      GroupAdd "sideForward_alt_0", it.exe
-    else if it.sideForward = "!["
-      GroupAdd "sideForward_alt_openBracket", it.exe
-    else if it.sideForward = "^{Left}"
-      GroupAdd "sideForward_ctrl_left", it.exe
-    else if it.sideForward = "^{PgUp}"
-      GroupAdd "sideForward_ctrl_PgUp", it.exe
-    else if it.sideForward = "^!{Left}"
-      GroupAdd "sideForward_ctrl_alt_left", it.exe
-  }  
+    switch it.sideForward, 'Off' {
+      case "{Media_Prev}": GroupAdd "sideForward_mediaPrev", it.exe
+      case "{Media_Play_Pause}": GroupAdd "sideForward_mediaPlayPause", it.exe
+      case 'Space', "{Space}": GroupAdd "sideForward_space", it.exe
+      case "[": GroupAdd "sideForward_openBracket", it.exe
+      case "p": GroupAdd "sideForward_p", it.exe
+      case "Up", "{Up}": GroupAdd "sideForward_Up", it.exe
+      case 'PgUp', "{PgUp}": GroupAdd "sideForward_PgUp", it.exe
+      case "!{Left}": GroupAdd "sideForward_alt_left", it.exe
+      case "!0": GroupAdd "sideForward_alt_0", it.exe
+      case "![": GroupAdd "sideForward_alt_openBracket", it.exe
+      case "^{Left}": GroupAdd "sideForward_ctrl_left", it.exe
+      case "^{PgUp}": GroupAdd "sideForward_ctrl_PgUp", it.exe
+      case "^!{Left}": GroupAdd "sideForward_ctrl_alt_left", it.exe
+    }
+  }
 }
 
 parseApp(fileName) {
@@ -268,16 +203,20 @@ app_hotkey2(app_title)
 Esc::WinClose
 
 ; 3. 关闭 打头
-#HotIf WinActive("ahk_group HL_close_alt_f4")
-^F4::Send "!{F4}"
 #HotIf WinActive("ahk_group HL_close_Esc")
 ^F4::Send "{Esc}"
+#HotIf WinActive("ahk_group HL_close_alt_F4")
+^F4::Send "!{F4}"
+#HotIf WinActive("ahk_group HL_close_ctrl_F4")
+^F4::Send "^{F4}"
 
 ; 4. 侧边后退键 打头
-#HotIf WinActive("ahk_group HL_sideBack_alt_f4")
-XButton1::Send "!{F4}"
 #HotIf WinActive("ahk_group HL_sideBack_Esc")
 XButton1::Send "{Esc}"
+#HotIf WinActive("ahk_group HL_sideBack_alt_F4")
+XButton1::Send "!{F4}"
+#HotIf WinActive("ahk_group HL_sideBack_ctrl_F4")
+XButton1::Send "^{F4}"
 
 ; 低等级
 ; 1. 新建
@@ -315,9 +254,9 @@ Esc::WinClose
 ; 3. 关闭 打头
 #HotIf WinActive("ahk_group close_Esc")
 ^F4::Send "{Esc}"
-#HotIf WinActive("ahk_group close_alt_f4")
+#HotIf WinActive("ahk_group close_alt_F4")
 ^F4::Send "!{F4}"
-#HotIf WinActive("ahk_group close_alt_f4_2")
+#HotIf WinActive("ahk_group close_alt_F4_2")
 ^F4::Send "{Alt Down}{F4 Down}{F4 Up}{Alt Up}"
 #HotIf WinActive("ahk_group close_alt_l")
 ^F4::Send "!l"
@@ -332,7 +271,7 @@ Esc::WinClose
 #HotIf WinActive("ahk_group close_ctrl_shift_w")
 ^F4::Send "^+w"
 ; 兜底
-#HotIf not WinActive("ahk_group close_ctrl_f4")
+#HotIf not WinActive("ahk_group close_ctrl_F4")
 ^F4::SmartCloseWindow ; 比 WinClose "A" 好使
 
 ; 4. 侧边后退键 打头
@@ -340,9 +279,9 @@ Esc::WinClose
 XButton1::Send "{Esc}"
 #HotIf WinActive("ahk_group sideBack_closeBracket")
 XButton1::Send "]"
-#HotIf WinActive("ahk_group sideBack_alt_f4")
+#HotIf WinActive("ahk_group sideBack_alt_F4")
 XButton1::Send "!{F4}"
-#HotIf WinActive("ahk_group sideBack_alt_f4_2")
+#HotIf WinActive("ahk_group sideBack_alt_F4_2")
 XButton1::Send "{Alt Down}{F4 Down}{F4 Up}{Alt Up}"
 #HotIf WinActive("ahk_group sideBack_alt_l")
 XButton1::Send "!l"
@@ -350,7 +289,7 @@ XButton1::Send "!l"
 XButton1::Send "!q"
 #HotIf WinActive("ahk_group sideBack_alt_w")
 XButton1::Send "!w"
-#HotIf WinActive("ahk_group sideBack_ctrl_f4")
+#HotIf WinActive("ahk_group sideBack_ctrl_F4")
 XButton1::Send "^{F4}"
 #HotIf WinActive("ahk_group sideBack_ctrl_w")
 XButton1::Send "^w"

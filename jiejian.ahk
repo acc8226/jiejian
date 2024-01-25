@@ -18,7 +18,7 @@ CodeVersion := "24.1.25-beta"
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
 ; 往对应文件写入对应版本号，只在生成 32 位 exe 的时候执行
-;@Ahk2Exe-Obey U_V, = %A_PtrSize% * 8 == 32 ? "PostExec" : "Nop"
+;@Ahk2Exe-Obey U_V, = %A_PtrSize% == 4 ? "PostExec" : "Nop"
 ; 提取出 文件名 再拼接 PostExec.ahk; 版本号; 2 仅在指定 UPX 压缩时运行 ; 脚本所在路径
 ;@Ahk2Exe-%U_V% %A_ScriptName~\.[^\.]+$~PostExec.ahk% %U_version%, 2, %A_ScriptDir%
 

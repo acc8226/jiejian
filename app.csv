@@ -1,10 +1,12 @@
 软件,优先级（高或者低，默认为低）,标识符,新建 ctrl+F3,逃逸键 esc,关闭 ctrl+F4,侧边后退键 XB1,前进 alt+right,下个标签 ctrl+tab,后退 alt+left,上个标签 ctrl+shift+tab,侧边前进键 XB2
 通用窗口 1,低,ahk_class i)SunAwtDialog$,,,{Esc},{Esc},,,,,
-通用窗口 2,低,ahk_class #32770$,,,{Esc},{Esc},,,,,
+,,,,,,,,,,,
 360 压缩,高,ahk_class #32770$ ahk_exe i)360zip\.exe$,,,!{F4},!{F4},,,,,
 BvSsh,高,ahk_class #32770$ ahk_exe i)BvSsh\.exe$,,WinClose,,,,,,,
-skylark 主程序,低,ahk_exe i)skylark\.exe$,^n,,^w,^w,,,,,
+通用窗口 2,低,ahk_class #32770$,,,{Esc},{Esc},,,,,
+,,,,,,,,,,,
 【窗口】skylark,高,ahk_exe i)skylark\.exe ahk_class #32770$,,WinClose,,,,,,,
+skylark 主程序,低,ahk_exe i)skylark\.exe$,^n,,^w,^w,,,,,
 ,,,,,,,,,,,
 【系统】Win11 资源管理器,,ahk_exe i)explorer\.exe$ ahk_class i)CabinetWClass$,^t,,^w,^w,,,,,
 ,,,,,,,,,,,
@@ -16,10 +18,10 @@ skylark 主程序,低,ahk_exe i)skylark\.exe$,^n,,^w,^w,,,,,
 【浏览器】115,,ahk_exe i)115chrome\.exe$,^t,,^{F4},^{F4},,,,,
 【浏览器】123,,ahk_exe i)123browser\.exe$,^t,,^{F4},^{F4},,,,,
 【浏览器】2345,,ahk_exe i)2345Explorer\.exe$,^t,,^{F4},^{F4},,,,,
-【浏览器】360 极速,低,ahk_exe i)360ChromeX\.exe$,^t,,^{F4},^{F4},,,,,
 【窗口】360 极速,高,ahk_class i)Chrome_WidgetWin_2$ ahk_exe i)360ChromeX\.exe$,,,{Esc} ,{Esc},,,,,
-【浏览器】360 游戏,低,ahk_exe i)360gt\.exe$,^t,,^{F4},^{F4},,,,,
+【浏览器】360 极速,低,ahk_exe i)360ChromeX\.exe$,^t,,^{F4},^{F4},,,,,
 【窗口】360 游戏,高,^下载$ ahk_exe i)360gt\.exe$,,,{Esc} ,{Esc},,,,,
+【浏览器】360 游戏,低,ahk_exe i)360gt\.exe$,^t,,^{F4},^{F4},,,,,
 【浏览器】360 安全,,ahk_exe i)360se\.exe$,^t,,^{F4},^{F4},,,,,
 【浏览器】Avast,,ahk_exe i)AvastBrowser\.exe$,^t,,^{F4},^{F4},,,,,
 【浏览器】Brave,,ahk_exe i)brave\.exe$,^t,,^{F4},^{F4},,,,,
@@ -40,8 +42,8 @@ skylark 主程序,低,ahk_exe i)skylark\.exe$,^n,,^w,^w,,,,,
 【浏览器】红芯【已过时】,,ahk_exe i)redcore\.exe$,^t,,^{F4},^{F4},,,,,
 【浏览器】华为,,ahk_exe i)HuaweiBrowser\.exe$,^t,,^{F4},^{F4},,,,,
 【浏览器】极速,,ahk_exe i)TSBrowser\.exe$,^t,,^{F4},^{F4},,,,,
-【浏览器】联想,低,ahk_exe i)SLBrowser\.exe$,^t,,^{F4},^{F4},,,,,
 【窗口】联想,高,^下载管理$ ahk_exe i)SLBrowser\.exe$,,,{Esc},{Esc},,,,,
+【浏览器】联想,低,ahk_exe i)SLBrowser\.exe$,^t,,^{F4},^{F4},,,,,
 【浏览器】猎豹,,ahk_exe i)liebao\.exe$,^t,,^{F4},^{F4},,,,,
 【浏览器】猫眼,,ahk_exe i)catsxp\.exe$,^t,,^{F4},^{F4},,,,,
 【浏览器】蚂蚁,,ahk_exe i)MyIE9\.exe$,^t,,^{F4},^{F4},,,,,
@@ -96,8 +98,8 @@ skylark 主程序,低,ahk_exe i)skylark\.exe$,^n,,^w,^w,,,,,
 【editor】Geany,,ahk_exe i)geany\.exe$,^n,,^w,^w,,^{PgDn},,^{PgUp},^{PgUp}
 【editor】Kate,,ahk_exe i)kate\.exe$,^n ,,^w,^w,,!{Right},,!{Left},!{Left}
 【editor】Notepad++,,ahk_exe notepad++.exe$,^n,,^w,^w,,,,,
-【editor】NotepadNext 主窗口,低,ahk_exe i)NotepadNext\.exe$,^n,,^w,^w,,,,,
 【editor】NotepadNext 窗口,高,(^Notepad Next$)|(^About Qt - Notepad Next$) ahk_exe NotepadNext\.exe$,,,{Esc},{Esc},,,,,
+【editor】NotepadNext 主窗口,低,ahk_exe i)NotepadNext\.exe$,^n,,^w,^w,,,,,
 【editor】Notepad--,,ahk_exe i)Notepad--.exe$,^n,,^w,^w,,,,,
 【editor】Notepads,,.+ ‎- Notepads$ ahk_exe ApplicationFrameHost.exe$,^n,,^w,^w,,,,,
 【editor】Notepad2,,ahk_exe i)Notepad2.exe$,^n,,,,,,,,
@@ -114,18 +116,21 @@ skylark 主程序,低,ahk_exe i)skylark\.exe$,^n,,^w,^w,,,,,
 【IDE】MyEclipse,,ahk_class i)SWT_Window0$ ahk_exe i)javaw\.exe$,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
 【IDE】Rstudio,,ahk_exe i)rstudio\.exe$,^+n,,^w,^w,,,,,
 【IDE】SpringToolSuite4,,ahk_exe i)SpringToolSuite4.exe$,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
-【IDE】VS Code,,ahk_exe i)Code\.exe ahk_class i)Chrome_WidgetWin_1$,{Control Down}n{Control Up},,^{F4},^{F4},,^{PgDn} ,,^{PgUp},^{PgUp}
-【IDE】Visual Studio,低,ahk_exe devenv\.exe$,^n,,^{F4},^{F4},,,,,
+【IDE】VS Code 标签页,高,i)- Visual Studio Code$ ahk_exe i)Code\.exe$,,,^{F4},^{F4},,,,,
+【IDE】VS Code 主页,低,ahk_exe i)Code\.exe$,{Control Down}n{Control Up},,,,,^{PgDn} ,,^{PgUp},^{PgUp}
 【窗口】Visual Studio,高,Microsoft Visual Studio 帐户设置|自定义|管理扩展|关于 Microsoft Visual Studio ahk_exe devenv\.exe,,,{Esc} ,{Esc} ,,,,,
+【IDE】Visual Studio,低,ahk_exe devenv\.exe$,^n,,^{F4},^{F4},,,,,
 ,,,,,,,,,,,
 【jetbrains】Aqua,,ahk_class i)SunAwtFrame$ ahk_exe i)aqua64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
 【jetbrains】Clion,,ahk_class i)SunAwtFrame$ ahk_exe i)clion64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
 【jetbrains】Datagrip,,ahk_class i)SunAwtFrame$ ahk_exe i)datagrip64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
 【jetbrains】Dataspell,,ahk_class i)SunAwtFrame$ ahk_exe i)dataspell64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
 【jetbrains】Goland,,ahk_class i)SunAwtFrame$ ahk_exe i)goland64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-【jetbrains】Idea,,ahk_class i)SunAwtFrame$ ahk_exe i)idea64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+【jetbrains】Idea,高,.+ – .+ ahk_class i)SunAwtFrame$ ahk_exe i)idea64\.exe$,,,^{F4},^{F4},,,,,
+【jetbrains】Idea,低,ahk_class i)SunAwtFrame$ ahk_exe i)idea64\.exe$,,,,,,!{Right},,!{Left},!{Left}
+【jetbrains】Pycharm,高,.+ – .+ ahk_class i)SunAwtFrame$ ahk_exe i)pycharm64\.exe$,,,^{F4},^{F4},,,,,
+【jetbrains】Pycharm,低,ahk_class i)SunAwtFrame$ ahk_exe i)pycharm64\.exe$,,,,,,!{Right},,!{Left},!{Left}
 【jetbrains】Phpstorm,,ahk_class i)SunAwtFrame$ ahk_exe i)phpstorm64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-【jetbrains】Pycharm,,ahk_class i)SunAwtFrame$ ahk_exe i)pycharm64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
 【jetbrains】Rider,,ahk_class i)SunAwtFrame$ ahk_exe i)rider64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
 【jetbrains】RubyMine,,ahk_class i)SunAwtFrame$ ahk_exe i)rubymine64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
 【jetbrains】RustRover,,ahk_class i)SunAwtFrame$ ahk_exe i)rustrover64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
@@ -166,7 +171,8 @@ Zeal,,ahk_exe i)zeal\.exe$,^t,,^w,^w,,,,,
 ,,,,,,,,,,,
 【pdf】Adobe Acrobat,,ahk_exe i)Acrobat\.exe$,^o,,^{F4},^{F4},,,,,
 【pdf】Right PDF Reader【部分支持】,,ahk_exe i)RightPDFReader\.exe$,^o,,^w,^w,,,,,
-【pdf】Sumatra PDF,,ahk_class i)SUMATRA_PDF_FRAME ahk_exe i)SumatraPDF\.exe$,^o,,^{F4},^{F4},,,,,
+【pdf】Sumatra PDF 标签页,高,- SumatraPDF$ ahk_class i)SUMATRA_PDF_FRAME ahk_exe i)SumatraPDF\.exe$,,,^{F4},^{F4},,,,,
+【pdf】Sumatra PDF 主页,低,ahk_class i)SUMATRA_PDF_FRAME ahk_exe i)SumatraPDF\.exe$,^o,,,,,,,,
 【pdf】UPDF,,ahk_exe i)UPDF\.exe$,^t,,^w,^w,,,,,
 【pdf】福昕PDF编辑器,,ahk_exe i)FoxitPhantom\.exe$,^o,,^{F4},^{F4},,,,,
 【pdf】福昕阅读器,,ahk_exe i)FoxitPDFReader\.exe$,^o,,^{F4},^{F4},,,,,
