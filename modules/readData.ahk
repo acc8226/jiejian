@@ -32,7 +32,7 @@ Loop dataList.Length {
 parseData(filename) {
   dataList := []
   ; 每次从字符串中检索字符串(片段)
-  Loop Parse, FileRead(filename, "UTF-8"), "`n", "`r" {
+  Loop Parse, FileRead(filename), "`n", "`r" {
       ; 跳过首行
       if A_Index = 1
           continue

@@ -173,13 +173,11 @@ kz 打开了控制面板
 
 ## 10. 自定义配置说明
 
-配置文件 **app.csv**（用于配置软件的快捷键）、**data.csv**（用于配置启动器候选项以及热键、热串） 必须和 ahk 脚本文件在同一级目录，且文本编码必须为 utf-8。
+配置文件 **app.csv**（用于配置软件的快捷键）、**data.csv**（用于配置启动器候选项以及热键、热串） 必须和 ahk 脚本文件在同一级目录，且必须使用 GB18030 字符集。
 
 app.csv 使用了正则表达式，需要使用者对正则有一定了解。主要用到了 `^$` 锚和不区分大小写 `i` 选项。
 
-推荐使用 [LiberOffice](https://www.libreoffice.org/download/download-libreoffice/) 或者微软 Office utf8 模式打开。
-
-强烈不建议使用 WPS 进行打开，因为 WPS 默认使用 gbk 编码。
+推荐使用 [LiberOffice](https://www.libreoffice.org/download/download-libreoffice/) 或微软 Office 打开。不要使用 WPS 进行打开，WPS 目前有兼容性问题。
 
 ### app.csv - 自定义快捷键
 

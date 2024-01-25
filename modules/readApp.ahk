@@ -201,7 +201,7 @@ Loop appList.Length {
 parseApp(fileName) {
   appList := []
   ; 每次从字符串中检索字符串(片段)
-  Loop Parse, FileRead(fileName, "UTF-8"), "`n", "`r" {
+  Loop Parse, FileRead(fileName), "`n", "`r" {
       ; 跳过首行
       if A_Index < 2
         continue

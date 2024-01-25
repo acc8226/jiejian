@@ -52,12 +52,12 @@ TrayMenuHandler(ItemName, ItemPos, MyMenu) {
     case "查看窗口标识符":
       Run "extra/WindowSpyU32.exe"
     case "使用统计":            
-      ; 统计软件使用次数
-      launchCountValueName := 'launch_count'    
-      launchCount := RegRead(regKeyName, launchCountValueName, 0)
       ; 统计软件使用总分钟数
       recordMinsValueName := 'record_mins'
       recordMins := RegRead(regKeyName, recordMinsValueName, 0) + DateDiff(A_NowUTC, startTime, 'Minutes')
+      ; 统计软件使用次数
+      launchCountValueName := 'launch_count'    
+      launchCount := RegRead(regKeyName, launchCountValueName, 1)
 
       sb := '总启动次数 ' . launchCount . ' 次，您目前已使用捷键 '
       if recordMins < 60 {

@@ -10,11 +10,10 @@ https://wyagd001.github.io/v2/docs/
 #SingleInstance force ; 跳过对话框并自动替换旧实例
 
 ;@Ahk2Exe-Set Language, 0x0804
-
 ;@Ahk2Exe-SetCopyright 全民反诈 union
 ;@Ahk2Exe-SetDescription 捷键-为简化键鼠操作而生
 
-CodeVersion := "24.1.23-beta"
+CodeVersion := "24.1.25-beta"
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
@@ -28,8 +27,8 @@ startTime := A_NowUTC
 
 ; ----- 1. 热键 之 鼠标操作 -----
 CoordMode "Mouse" ; 默认坐标相对于桌面(整个屏幕)
-; 设置 WinTitle parameter 在内置函数中的匹配行为
-SetTitleMatchMode "RegEx"
+FileEncoding 54936 ; Windows XP 及更高版本： GB18030 简体中文 (4 字节)
+SetTitleMatchMode "RegEx" ; 设置 WinTitle parameter 在内置函数中的匹配行为
 
 #Include "lib/Functions.ahk"
 #Include "lib/Actions.ahk"
@@ -189,7 +188,7 @@ ExitFunc(ExitReason, ExitCode) {
     ; 统计软件使用次数
     if ExitReason != "Error" and ExitReason != "Reload" and ExitReason != "Single" {
         launchCountValueName := 'launch_count'    
-        launchCount := RegRead(regKeyName, launchCountValueName, 0) + 1
+        launchCount := RegRead(regKeyName, launchCountValueName, 1) + 1
         RegWrite launchCount, "REG_DWORD", regKeyName, launchCountValueName
     }
 }

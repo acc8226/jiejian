@@ -1,190 +1,194 @@
-è½¯ä»¶,ä¼˜å…ˆçº§ï¼ˆé«˜æˆ–è€…ä½ï¼Œé»˜è®¤ä¸ºä½ï¼‰,æ ‡è¯†ç¬¦,æ–°å»º ctrl+F3,é€ƒé€¸é”® esc,å…³é—­ ctrl+F4,ä¾§è¾¹åé€€é”® XB1,å‰è¿› alt+right,ä¸‹ä¸ªæ ‡ç­¾ ctrl+tab,åé€€ alt+left,ä¸Šä¸ªæ ‡ç­¾ ctrl+shift+tab,ä¾§è¾¹å‰è¿›é”® XB2
-é€šç”¨çª—å£ 1,ä½,ahk_class i)SunAwtDialog$,,,{Esc},{Esc},,,,,
-é€šç”¨çª—å£ 2,ä½,ahk_class #32770$,,,{Esc},{Esc},,,,,
-360 å‹ç¼©,é«˜,ahk_class #32770$ ahk_exe i)360zip\.exe$,,,!{F4},!{F4},,,,,
-BvSsh,é«˜,ahk_class #32770$ ahk_exe i)BvSsh\.exe$,,WinClose,,,,,,,
-skylark ä¸»ç¨‹åº,ä½,ahk_exe i)skylark\.exe$,^n,,^w,^w,,,,,
-ã€çª—å£ã€‘skylark,é«˜,ahk_exe i)skylark\.exe ahk_class #32770$,,WinClose,,,,,,,
+Èí¼ş,ÓÅÏÈ¼¶£¨¸ß»òÕßµÍ£¬Ä¬ÈÏÎªµÍ£©,±êÊ¶·û,ĞÂ½¨ ctrl+F3,ÌÓÒİ¼ü esc,¹Ø±Õ ctrl+F4,²à±ßºóÍË¼ü XB1,Ç°½ø alt+right,ÏÂ¸ö±êÇ© ctrl+tab,ºóÍË alt+left,ÉÏ¸ö±êÇ© ctrl+shift+tab,²à±ßÇ°½ø¼ü XB2
+Í¨ÓÃ´°¿Ú 1,µÍ,ahk_class i)SunAwtDialog$,,,{Esc},{Esc},,,,,
+Í¨ÓÃ´°¿Ú 2,µÍ,ahk_class #32770$,,,{Esc},{Esc},,,,,
+360 Ñ¹Ëõ,¸ß,ahk_class #32770$ ahk_exe i)360zip\.exe$,,,!{F4},!{F4},,,,,
+BvSsh,¸ß,ahk_class #32770$ ahk_exe i)BvSsh\.exe$,,WinClose,,,,,,,
+skylark Ö÷³ÌĞò,µÍ,ahk_exe i)skylark\.exe$,^n,,^w,^w,,,,,
+¡¾´°¿Ú¡¿skylark,¸ß,ahk_exe i)skylark\.exe ahk_class #32770$,,WinClose,,,,,,,
 ,,,,,,,,,,,
-ã€ç³»ç»Ÿã€‘Win11 èµ„æºç®¡ç†å™¨,,ahk_exe i)explorer\.exe$ ahk_class CabinetWClass$,^t,,^w,^w,,,,,
+¡¾ÏµÍ³¡¿Win11 ×ÊÔ´¹ÜÀíÆ÷,,ahk_exe i)explorer\.exe$ ahk_class i)CabinetWClass$,^t,,^w,^w,,,,,
 ,,,,,,,,,,,
-ã€ç³»ç»Ÿã€‘Win11 æ—§ç‰ˆ è®°äº‹æœ¬,,ahk_exe notepad\.exe$,^t,WinClose,^w,^w,,,,,
-ã€ç³»ç»Ÿã€‘Win11 æ–°ç‰ˆ è®°äº‹æœ¬,,ahk_exe Notepad\.exe$,^t,WinClose,^w,^w,,,,,
+¡¾ÏµÍ³¡¿Win11 ¾É°æ ¼ÇÊÂ±¾,,ahk_exe notepad\.exe$,^t,WinClose,^w,^w,,,,,
+¡¾ÏµÍ³¡¿Win11 ĞÂ°æ ¼ÇÊÂ±¾,,ahk_exe Notepad\.exe$,^t,WinClose,^w,^w,,,,,
 ,,,,,,,,,,,
-ã€ç³»ç»Ÿã€‘æ–°ç‰ˆ win 11 è®¾ç½®,,^è®¾ç½®$ ahk_exe i)ApplicationFrameHost\.exe$ ahk_class i)ApplicationFrameWindow$,,,,,,,,,!{Left} 
+¡¾ÏµÍ³¡¿ĞÂ°æ win 11 ÉèÖÃ,,^ÉèÖÃ$ ahk_exe i)ApplicationFrameHost\.exe$ ahk_class i)ApplicationFrameWindow$,,,,,,,,,!{Left} 
 ,,,,,,,,,,,
-ã€æµè§ˆå™¨ã€‘115,,ahk_exe i)115chrome\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘123,,ahk_exe i)123browser\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘2345,,ahk_exe i)2345Explorer\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘360 æé€Ÿ,ä½,ahk_exe i)360ChromeX\.exe$,^t,,^{F4},^{F4},,,,,
-ã€çª—å£ã€‘360 æé€Ÿ,é«˜,ahk_class i)Chrome_WidgetWin_2$ ahk_exe i)360ChromeX\.exe$,,,{Esc} ,{Esc},,,,,
-ã€æµè§ˆå™¨ã€‘360 æ¸¸æˆ,ä½,ahk_exe i)360gt\.exe$,^t,,^{F4},^{F4},,,,,
-ã€çª—å£ã€‘360 æ¸¸æˆ,é«˜,^ä¸‹è½½$ ahk_exe i)360gt\.exe$,,,{Esc} ,{Esc},,,,,
-ã€æµè§ˆå™¨ã€‘360 å®‰å…¨,,ahk_exe i)360se\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘Avast,,ahk_exe i)AvastBrowser\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘Brave,,ahk_exe i)brave\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘Chrome è°·æ­Œ & ç™¾åˆ† & å°é©¬,,ahk_exe i)chrome\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘Duck,,ahk_exe i)DuckDuckGo\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘Duoyu å¤šå¾¡,,ahk_exe i)duoyu\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘Edge,,ahk_exe i)msedge\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘Firefoxç«ç‹ & Toræ´‹è‘±,,ahk_exe i)firefox\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘Opera,,ahk_exe i)opera\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘QQ,,ahk_exe i)QQBrowser\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘UC,,ahk_exe i)UCBrowser\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘UU,,ahk_exe i)UUBrowser\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘Vivaldi,,ahk_exe i)vivaldi\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘Waterfox,,ahk_exe i)waterfox\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘Yandex,,ahk_exe browser\.exe$ ahk_class i)YandexBrowser_WidgetWin_1$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘å‚²æ¸¸,,ahk_exe i)Maxthon\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘æ–‘æ–“çŸ³,,ahk_exe i)Colorfulstone\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘çº¢èŠ¯ã€å·²è¿‡æ—¶ã€‘,,ahk_exe i)redcore\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘åä¸º,,ahk_exe i)HuaweiBrowser\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘æé€Ÿ,,ahk_exe i)TSBrowser\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘è”æƒ³,ä½,ahk_exe i)SLBrowser\.exe$,^t,,^{F4},^{F4},,,,,
-ã€çª—å£ã€‘è”æƒ³,é«˜,^ä¸‹è½½ç®¡ç†$ ahk_exe i)SLBrowser\.exe$,,,{Esc},{Esc},,,,,
-ã€æµè§ˆå™¨ã€‘çŒè±¹,,ahk_exe i)liebao\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘çŒ«çœ¼,,ahk_exe i)catsxp\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘èš‚èš,,ahk_exe i)MyIE9\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘é’é¸Ÿ,,ahk_exe i)QingniaoChrome\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘æœç‹—,,ahk_exe i)SogouExplorer\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘åŒæ ¸,,ahk_exe i)ChromeCore\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘æ˜Ÿæ„¿,,ahk_exe i)twinkstar\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘æƒ³å¤©,,ahk_exe æƒ³å¤©æµè§ˆå™¨\.exe$,^t,,^w,^w,,^+{PgDn},,,
-ã€æµè§ˆå™¨ã€‘å°K,,ahk_exe i)XKBrowser\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘å°ç™½,,ahk_exe i)xbaibrowser\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘å°æ™ºåŒæ ¸,,ahk_exe i)DCBrowser\.exe$,^t,,^{F4},^{F4},,,,,
-ã€æµè§ˆå™¨ã€‘ä¸€ç‚¹,,ahk_exe i)Yidian\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿115,,ahk_exe i)115chrome\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿123,,ahk_exe i)123browser\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿2345,,ahk_exe i)2345Explorer\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿360 ¼«ËÙ,µÍ,ahk_exe i)360ChromeX\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾´°¿Ú¡¿360 ¼«ËÙ,¸ß,ahk_class i)Chrome_WidgetWin_2$ ahk_exe i)360ChromeX\.exe$,,,{Esc} ,{Esc},,,,,
+¡¾ä¯ÀÀÆ÷¡¿360 ÓÎÏ·,µÍ,ahk_exe i)360gt\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾´°¿Ú¡¿360 ÓÎÏ·,¸ß,^ÏÂÔØ$ ahk_exe i)360gt\.exe$,,,{Esc} ,{Esc},,,,,
+¡¾ä¯ÀÀÆ÷¡¿360 °²È«,,ahk_exe i)360se\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿Avast,,ahk_exe i)AvastBrowser\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿Brave,,ahk_exe i)brave\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿Chrome ¹È¸è & °Ù·Ö & Ğ¡Âí,,ahk_exe i)chrome\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿Duck,,ahk_exe i)DuckDuckGo\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿Duoyu ¶àÓù,,ahk_exe i)duoyu\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿Edge,,ahk_exe i)msedge\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿Firefox»ğºü & TorÑó´Ğ,,ahk_exe i)firefox\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿Opera,,ahk_exe i)opera\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿QQ,,ahk_exe i)QQBrowser\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿UC,,ahk_exe i)UCBrowser\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿UU,,ahk_exe i)UUBrowser\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿Vivaldi,,ahk_exe i)vivaldi\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿Waterfox,,ahk_exe i)waterfox\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿Yandex,,ahk_exe browser\.exe$ ahk_class i)YandexBrowser_WidgetWin_1$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿°ÁÓÎ,,ahk_exe i)Maxthon\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿°ßìµÊ¯,,ahk_exe i)Colorfulstone\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿ºìĞ¾¡¾ÒÑ¹ıÊ±¡¿,,ahk_exe i)redcore\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿»ªÎª,,ahk_exe i)HuaweiBrowser\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿¼«ËÙ,,ahk_exe i)TSBrowser\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿ÁªÏë,µÍ,ahk_exe i)SLBrowser\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾´°¿Ú¡¿ÁªÏë,¸ß,^ÏÂÔØ¹ÜÀí$ ahk_exe i)SLBrowser\.exe$,,,{Esc},{Esc},,,,,
+¡¾ä¯ÀÀÆ÷¡¿ÁÔ±ª,,ahk_exe i)liebao\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿Ã¨ÑÛ,,ahk_exe i)catsxp\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿ÂìÒÏ,,ahk_exe i)MyIE9\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿ÇàÄñ,,ahk_exe i)QingniaoChrome\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿ËÑ¹·,,ahk_exe i)SogouExplorer\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿Ë«ºË,,ahk_exe i)ChromeCore\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿ĞÇÔ¸,,ahk_exe i)twinkstar\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿ÏëÌì,,ahk_exe ÏëÌìä¯ÀÀÆ÷\.exe$,^t,,^w,^w,,^+{PgDn},,,
+¡¾ä¯ÀÀÆ÷¡¿Ğ¡K,,ahk_exe i)XKBrowser\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿Ğ¡°×,,ahk_exe i)xbaibrowser\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿Ğ¡ÖÇË«ºË,,ahk_exe i)DCBrowser\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾ä¯ÀÀÆ÷¡¿Ò»µã,,ahk_exe i)Yidian\.exe$,^t,,^{F4},^{F4},,,,,
 ,,,,,,,,,,,
-ã€éŸ³ä¹ç±»ã€‘foobar2000,,ahk_exe i)foobar2000.exe$,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
-ã€éŸ³ä¹ç±»ã€‘MusicPlayer2,,ahk_exe i)MusicPlayer2.exe$,^o,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+¡¾ÒôÀÖÀà¡¿foobar2000,,ahk_exe i)foobar2000.exe$,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+¡¾ÒôÀÖÀà¡¿MusicPlayer2,,ahk_exe i)MusicPlayer2.exe$,^o,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
 ,,,,,,,,,,,
-ã€éŸ³ä¹ç±»ã€‘QQéŸ³ä¹,,ahk_exe i)QQMusic\.exe$,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
-ã€éŸ³ä¹ç±»ã€‘Spotify,,ahk_exe i)Spotify\.exe$,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
-ã€éŸ³ä¹ç±»ã€‘æ–¹æ ¼éŸ³ä¹,,ahk_class i)Chrome_WidgetWin_1$ ahk_exe æ–¹æ ¼éŸ³ä¹.exe$,,,,,,,,,{Media_Prev}
-ã€éŸ³ä¹ç±»ã€‘é…·æˆ‘éŸ³ä¹,,ahk_exe i)kwmusic\.exe$,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
-ã€éŸ³ä¹ç±»ã€‘æ±½æ°´éŸ³ä¹,,ahk_exe i)SodaMusic\.exe$,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
-ã€éŸ³ä¹ç±»ã€‘ç½‘æ˜“äº‘éŸ³ä¹,,ahk_exe i)cloudmusic\.exe$,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
-ã€éŸ³ä¹ç±»ã€‘å–œé©¬æ‹‰é›…,,ahk_exe å–œé©¬æ‹‰é›….exe$,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
-ã€éŸ³ä¹ç±»ã€‘é…·ç‹—éŸ³ä¹,,ahk_exe i)KuGou\.exe$,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+¡¾ÒôÀÖÀà¡¿QQÒôÀÖ,,ahk_exe i)QQMusic\.exe$,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+¡¾ÒôÀÖÀà¡¿Spotify,,ahk_exe i)Spotify\.exe$,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+¡¾ÒôÀÖÀà¡¿·½¸ñÒôÀÖ,,ahk_class i)Chrome_WidgetWin_1$ ahk_exe ·½¸ñÒôÀÖ.exe$,,,,,,,,,{Media_Prev}
+¡¾ÒôÀÖÀà¡¿¿áÎÒÒôÀÖ,,ahk_exe i)kwmusic\.exe$,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+¡¾ÒôÀÖÀà¡¿ÆûË®ÒôÀÖ,,ahk_exe i)SodaMusic\.exe$,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+¡¾ÒôÀÖÀà¡¿ÍøÒ×ÔÆÒôÀÖ,,ahk_exe i)cloudmusic\.exe$,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+¡¾ÒôÀÖÀà¡¿Ï²ÂíÀ­ÑÅ,,ahk_exe Ï²ÂíÀ­ÑÅ.exe$,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
+¡¾ÒôÀÖÀà¡¿¿á¹·ÒôÀÖ,,ahk_exe i)KuGou\.exe$,,,,,{Media_Next},{Media_Next},{Media_Prev},{Media_Prev},{Media_Prev}
 ,,,,,,,,,,,
-ã€è§†é¢‘ç±»ã€‘GridPlayerã€éƒ¨åˆ†æ”¯æŒã€‘,,ahk_exe i)GridPlayer\.exe$,,,,,{Right},,{Left},,
-ã€è§†é¢‘ç±»ã€‘KMPlayer 64ä½,,ahk_exe i)KMPlayer64.exe$,^o,,,,,{PgDn},,{PgUp},{PgUp}
-ã€è§†é¢‘ç±»ã€‘mpvã€éƒ¨åˆ†æ”¯æŒã€‘,,ahk_class i)mpv$ ahk_exe i)mpv\.exe$,,,,,{Right},,{Left},,
-ã€è§†é¢‘ç±»ã€‘PotPlayer 64ä½,,ahk_exe i)PotPlayer,{F3},,,,{Right},{PgDn},{Left},{PgUp},{PgUp}
-ã€è§†é¢‘ç±»ã€‘vlc,,ahk_exe i)vlc\.exe$,^o,,,,,n,,p,p
-ã€è§†é¢‘ç±»ã€‘æŠ–éŸ³ã€ä¸æ”¯æŒã€‘,,ahk_exe i)douyin\.exe$,,,,,{Right},{Down},{Left},{Up},{Up}
-ã€è§†é¢‘ç±»ã€‘æ’æ˜Ÿæ’­æ”¾å™¨,,æ’æ˜Ÿæ’­æ”¾å™¨ ahk_exe i)StellarPlayer\.exe$,,,,,{Right},{PgDn},{Left},{PgUp},{PgUp}
+¡¾ÊÓÆµÀà¡¿GridPlayer¡¾²¿·ÖÖ§³Ö¡¿,,ahk_exe i)GridPlayer\.exe$,,,,,{Right},,{Left},,
+¡¾ÊÓÆµÀà¡¿KMPlayer 64Î»,,ahk_exe i)KMPlayer64.exe$,^o,,,,,{PgDn},,{PgUp},{PgUp}
+¡¾ÊÓÆµÀà¡¿mpv¡¾²¿·ÖÖ§³Ö¡¿,,ahk_class i)mpv$ ahk_exe i)mpv\.exe$,,,,,{Right},,{Left},,
+¡¾ÊÓÆµÀà¡¿PotPlayer 64Î»,,ahk_exe i)PotPlayer,{F3},,,,{Right},{PgDn},{Left},{PgUp},{PgUp}
+¡¾ÊÓÆµÀà¡¿vlc,,ahk_exe i)vlc\.exe$,^o,,,,,n,,p,p
+¡¾ÊÓÆµÀà¡¿¶¶Òô¡¾²»Ö§³Ö¡¿,,ahk_exe i)douyin\.exe$,,,,,{Right},{Down},{Left},{Up},{Up}
+¡¾ÊÓÆµÀà¡¿ºãĞÇ²¥·ÅÆ÷,,ºãĞÇ²¥·ÅÆ÷ ahk_exe i)StellarPlayer\.exe$,,,,,{Right},{PgDn},{Left},{PgUp},{PgUp}
 ,,,,,,,,,,,
-ã€ç›´æ’­ç±»ã€‘æ–—é±¼ç›´æ’­ã€éƒ¨åˆ†æ”¯æŒã€‘,,ahk_exe DouyuLive.exe,,,^w,^w,,,,,
+¡¾Ö±²¥Àà¡¿¶·ÓãÖ±²¥¡¾²¿·ÖÖ§³Ö¡¿,,ahk_exe DouyuLive.exe,,,^w,^w,,,,,
 ,,,,,,,,,,,
-ã€sqlã€‘Beekeeper Studio,,ahk_exe i)Beekeeper Studio\.exe$,^t,,^w,^w,,,,,
-ã€sqlã€‘Heidisql,,ahk_exe i)heidisql\.exe$,^t,,^{F4},^{F4},,,,,
-ã€sqlã€‘Navicat,,ahk_exe i)navicat\.exe$,,,^w,^w,,,,,
-ã€sqlã€‘SQLyog,,ahk_exe i)SQLyog\.exe$,^t,,!l ,!l ,,^{PgDn},,^{PgUp},^{PgUp}
+¡¾sql¡¿Beekeeper Studio,,ahk_exe i)Beekeeper Studio\.exe$,^t,,^w,^w,,,,,
+¡¾sql¡¿Heidisql,,ahk_exe i)heidisql\.exe$,^t,,^{F4},^{F4},,,,,
+¡¾sql¡¿Navicat,,ahk_exe i)navicat\.exe$,,,^w,^w,,,,,
+¡¾sql¡¿SQLyog,,ahk_exe i)SQLyog\.exe$,^t,,!l ,!l ,,^{PgDn},,^{PgUp},^{PgUp}
 ,,,,,,,,,,,
-ã€mdã€‘MarkdownPad2,,ahk_exe i)MarkdownPad2.exe$,^n,,^{F4},^{F4},,,,,
-ã€mdã€‘MarkText,,ahk_exe i)MarkText\.exe$,^t,,^w ,^w ,,,,,
-ã€mdã€‘Typora,,ahk_exe i)Typora\.exe$,^n,,^w,^w,,,,,
+¡¾md¡¿MarkdownPad2,,ahk_exe i)MarkdownPad2.exe$,^n,,^{F4},^{F4},,,,,
+¡¾md¡¿MarkText,,ahk_exe i)MarkText\.exe$,^t,,^w ,^w ,,,,,
+¡¾md¡¿Typora,,ahk_exe i)Typora\.exe$,^n,,^w,^w,,,,,
 ,,,,,,,,,,,
-ã€editorã€‘Atomã€å·²è¿‡æ—¶ã€‘,,ahk_exe i)atom\.exe$,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
-ã€editorã€‘Bracket,,ahk_exe i)Brackets\.exe$,^n,,^w,^w,,^{PgDn},,^{PgUp},^{PgUp} 
-ã€editorã€‘CudaText,,ahk_exe i)cudatext\.exe$,^n,,^w,^w,,,,,
-ã€editorã€‘Editplus,,ahk_exe i)editplus\.exe$,^n,,^w,^w,,,,,
-ã€editorã€‘EmEditor,,ahk_exe i)EmEditor\.exe$,^n,,^{F4},^{F4},,,,,
-ã€editorã€‘Everedit,,ahk_exe i)EverEdit\.exe$,^n,,^w,^w,,,,,
-ã€editorã€‘Fleet,,ahk_exe i)Fleet\.exe$,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
-ã€editorã€‘Geany,,ahk_exe i)geany\.exe$,^n,,^w,^w,,^{PgDn},,^{PgUp},^{PgUp}
-ã€editorã€‘Kate,,ahk_exe i)kate\.exe$,^n ,,^w,^w,,!{Right},,!{Left},!{Left}
-ã€editorã€‘Notepad++,,ahk_exe notepad++.exe$,^n,,^w,^w,,,,,
-ã€editorã€‘NotepadNext ä¸»çª—å£,ä½,ahk_exe i)NotepadNext\.exe$,^n,,^w,^w,,,,,
-ã€editorã€‘NotepadNext çª—å£,é«˜,(^Notepad Next$)|(^About Qt - Notepad Next$) ahk_exe NotepadNext\.exe$,,,{Esc},{Esc},,,,,
-ã€editorã€‘Notepad--,,ahk_exe i)Notepad--.exe$,^n,,^w,^w,,,,,
-ã€editorã€‘Notepads,,.+ â€- Notepads$ ahk_exe ApplicationFrameHost.exe$,^n,,^w,^w,,,,,
-ã€editorã€‘Notepad2,,ahk_exe i)Notepad2.exe$,^n,,,,,,,,
-ã€editorã€‘Notepad3,,ahk_exe i)Notepad3.exe$,^n,,,,,,,,
-ã€editorã€‘Sublime,,ahk_exe i)sublime_text\.exe$,^n,,^{F4},^{F4},,,,,
-ã€editorã€‘Ultraedit,,ahk_exe i)uedit$,^n,,^{F4},^{F4},,,,,
+¡¾editor¡¿Atom¡¾ÒÑ¹ıÊ±¡¿,,ahk_exe i)atom\.exe$,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
+¡¾editor¡¿Bracket,,ahk_exe i)Brackets\.exe$,^n,,^w,^w,,^{PgDn},,^{PgUp},^{PgUp} 
+¡¾editor¡¿CudaText,,ahk_exe i)cudatext\.exe$,^n,,^w,^w,,,,,
+¡¾editor¡¿Editplus,,ahk_exe i)editplus\.exe$,^n,,^w,^w,,,,,
+¡¾editor¡¿EmEditor,,ahk_exe i)EmEditor\.exe$,^n,,^{F4},^{F4},,,,,
+¡¾editor¡¿Everedit,,ahk_exe i)EverEdit\.exe$,^n,,^w,^w,,,,,
+¡¾editor¡¿Fleet,,ahk_exe i)Fleet\.exe$,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
+¡¾editor¡¿Geany,,ahk_exe i)geany\.exe$,^n,,^w,^w,,^{PgDn},,^{PgUp},^{PgUp}
+¡¾editor¡¿Kate,,ahk_exe i)kate\.exe$,^n ,,^w,^w,,!{Right},,!{Left},!{Left}
+¡¾editor¡¿Notepad++,,ahk_exe notepad++.exe$,^n,,^w,^w,,,,,
+¡¾editor¡¿NotepadNext Ö÷´°¿Ú,µÍ,ahk_exe i)NotepadNext\.exe$,^n,,^w,^w,,,,,
+¡¾editor¡¿NotepadNext ´°¿Ú,¸ß,(^Notepad Next$)|(^About Qt - Notepad Next$) ahk_exe NotepadNext\.exe$,,,{Esc},{Esc},,,,,
+¡¾editor¡¿Notepad--,,ahk_exe i)Notepad--.exe$,^n,,^w,^w,,,,,
+¡¾editor¡¿Notepads,,.+ 6¥0- Notepads$ ahk_exe ApplicationFrameHost.exe$,^n,,^w,^w,,,,,
+¡¾editor¡¿Notepad2,,ahk_exe i)Notepad2.exe$,^n,,,,,,,,
+¡¾editor¡¿Notepad3,,ahk_exe i)Notepad3.exe$,^n,,,,,,,,
+¡¾editor¡¿Sublime,,ahk_exe i)sublime_text\.exe$,^n,,^{F4},^{F4},,,,,
+¡¾editor¡¿Ultraedit,,ahk_exe i)uedit$,^n,,^{F4},^{F4},,,,,
 ,,,,,,,,,,,
-ã€file compareã€‘Beyond Compare,,ahk_exe i)Bcompare\.exe$,^t,,^w,^w,,,,,
-ã€file compareã€‘WinMerge,,ahk_exe i)WinMergeU\.exe$,^n,,^{F4},^{F4},,,,,
+¡¾file compare¡¿Beyond Compare,,ahk_exe i)Bcompare\.exe$,^t,,^w,^w,,,,,
+¡¾file compare¡¿WinMerge,,ahk_exe i)WinMergeU\.exe$,^n,,^{F4},^{F4},,,,,
 ,,,,,,,,,,,
-ã€IDEã€‘Dev C++,,ahk_exe i)devcpp\.exe$,^n,,^w,^w,,,,,
-ã€IDEã€‘Eclipse,,ahk_exe i)eclipse\.exe$,^n,,,^{F4},,^{PgDn},,^{PgUp},^{PgUp}
-ã€IDEã€‘HbuilderX,,ahk_exe i)HbuilderX\.exe$,^t,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
-ã€IDEã€‘MyEclipse,,ahk_class i)SWT_Window0$ ahk_exe i)javaw\.exe$,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
-ã€IDEã€‘Rstudio,,ahk_exe i)rstudio\.exe$,^+n,,^w,^w,,,,,
-ã€IDEã€‘SpringToolSuite4,,ahk_exe i)SpringToolSuite4.exe$,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
-ã€IDEã€‘VS Code,,ahk_exe i)Code\.exe ahk_class i)Chrome_WidgetWin_1$,{Control Down}n{Control Up},,^{F4},^{F4},,^{PgDn} ,,^{PgUp},^{PgUp}
-ã€IDEã€‘Visual Studio,ä½,ahk_exe devenv\.exe$,^n,,^{F4},^{F4},,,,,
-ã€çª—å£ã€‘Visual Studio,é«˜,Microsoft Visual Studio å¸æˆ·è®¾ç½®|è‡ªå®šä¹‰|ç®¡ç†æ‰©å±•|å…³äº Microsoft Visual Studio ahk_exe devenv\.exe,,,{Esc} ,{Esc} ,,,,,
+¡¾IDE¡¿Dev C++,,ahk_exe i)devcpp\.exe$,^n,,^w,^w,,,,,
+¡¾IDE¡¿Eclipse,,ahk_exe i)eclipse\.exe$,^n,,,^{F4},,^{PgDn},,^{PgUp},^{PgUp}
+¡¾IDE¡¿HbuilderX,,ahk_exe i)HbuilderX\.exe$,^t,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
+¡¾IDE¡¿MyEclipse,,ahk_class i)SWT_Window0$ ahk_exe i)javaw\.exe$,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
+¡¾IDE¡¿Rstudio,,ahk_exe i)rstudio\.exe$,^+n,,^w,^w,,,,,
+¡¾IDE¡¿SpringToolSuite4,,ahk_exe i)SpringToolSuite4.exe$,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
+¡¾IDE¡¿VS Code,,ahk_exe i)Code\.exe ahk_class i)Chrome_WidgetWin_1$,{Control Down}n{Control Up},,^{F4},^{F4},,^{PgDn} ,,^{PgUp},^{PgUp}
+¡¾IDE¡¿Visual Studio,µÍ,ahk_exe devenv\.exe$,^n,,^{F4},^{F4},,,,,
+¡¾´°¿Ú¡¿Visual Studio,¸ß,Microsoft Visual Studio ÕÊ»§ÉèÖÃ|×Ô¶¨Òå|¹ÜÀíÀ©Õ¹|¹ØÓÚ Microsoft Visual Studio ahk_exe devenv\.exe,,,{Esc} ,{Esc} ,,,,,
 ,,,,,,,,,,,
-ã€jetbrainsã€‘Aqua,,ahk_class i)SunAwtFrame$ ahk_exe i)aqua64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-ã€jetbrainsã€‘Clion,,ahk_class i)SunAwtFrame$ ahk_exe i)clion64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-ã€jetbrainsã€‘Datagrip,,ahk_class i)SunAwtFrame$ ahk_exe i)datagrip64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-ã€jetbrainsã€‘Dataspell,,ahk_class i)SunAwtFrame$ ahk_exe i)dataspell64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-ã€jetbrainsã€‘Goland,,ahk_class i)SunAwtFrame$ ahk_exe i)goland64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-ã€jetbrainsã€‘Idea,,ahk_class i)SunAwtFrame$ ahk_exe i)idea64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-ã€jetbrainsã€‘Phpstorm,,ahk_class i)SunAwtFrame$ ahk_exe i)phpstorm64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-ã€jetbrainsã€‘Pycharm,,ahk_class i)SunAwtFrame$ ahk_exe i)pycharm64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-ã€jetbrainsã€‘Rider,,ahk_class i)SunAwtFrame$ ahk_exe i)rider64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-ã€jetbrainsã€‘RubyMine,,ahk_class i)SunAwtFrame$ ahk_exe i)rubymine64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-ã€jetbrainsã€‘RustRover,,ahk_class i)SunAwtFrame$ ahk_exe i)rustrover64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-ã€jetbrainsã€‘Webstorm,,ahk_class i)SunAwtFrame$ ahk_exe i)webstorm64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-ã€jetbrainsã€‘Writerside,,ahk_class i)SunAwtFrame$ ahk_exe i)writerside64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+¡¾jetbrains¡¿Aqua,,ahk_class i)SunAwtFrame$ ahk_exe i)aqua64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+¡¾jetbrains¡¿Clion,,ahk_class i)SunAwtFrame$ ahk_exe i)clion64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+¡¾jetbrains¡¿Datagrip,,ahk_class i)SunAwtFrame$ ahk_exe i)datagrip64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+¡¾jetbrains¡¿Dataspell,,ahk_class i)SunAwtFrame$ ahk_exe i)dataspell64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+¡¾jetbrains¡¿Goland,,ahk_class i)SunAwtFrame$ ahk_exe i)goland64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+¡¾jetbrains¡¿Idea,,ahk_class i)SunAwtFrame$ ahk_exe i)idea64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+¡¾jetbrains¡¿Phpstorm,,ahk_class i)SunAwtFrame$ ahk_exe i)phpstorm64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+¡¾jetbrains¡¿Pycharm,,ahk_class i)SunAwtFrame$ ahk_exe i)pycharm64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+¡¾jetbrains¡¿Rider,,ahk_class i)SunAwtFrame$ ahk_exe i)rider64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+¡¾jetbrains¡¿RubyMine,,ahk_class i)SunAwtFrame$ ahk_exe i)rubymine64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+¡¾jetbrains¡¿RustRover,,ahk_class i)SunAwtFrame$ ahk_exe i)rustrover64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+¡¾jetbrains¡¿Webstorm,,ahk_class i)SunAwtFrame$ ahk_exe i)webstorm64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+¡¾jetbrains¡¿Writerside,,ahk_class i)SunAwtFrame$ ahk_exe i)writerside64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
 ,,,,,,,,,,,
-ã€jetbrains extã€‘Android Studio,,ahk_class i)SunAwtFrame ahk_exe i)studio64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-ã€jetbrains extã€‘åä¸º DevEco Studio,,ahk_class i)SunAwtFrame ahk_exe i)devecostudio64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+¡¾jetbrains ext¡¿Android Studio,,ahk_class i)SunAwtFrame ahk_exe i)studio64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+¡¾jetbrains ext¡¿»ªÎª DevEco Studio,,ahk_class i)SunAwtFrame ahk_exe i)devecostudio64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
 ,,,,,,,,,,,
-Netbean 32 ä½ & Jmeter,,ahk_class i)SunAwtFrame ahk_exe i)javaw\.exe$,^n,,,,,^{PgDn},,^{PgUp},^{PgUp}
-Netbean 64 ä½,,ahk_class i)SunAwtFrame ahk_exe i)netbeans64\.exe$,^n,,,,,^{PgDn},,^{PgUp},^{PgUp}
+Netbean 32 Î» & Jmeter,,ahk_class i)SunAwtFrame ahk_exe i)javaw\.exe$,^n,,,,,^{PgDn},,^{PgUp},^{PgUp}
+Netbean 64 Î»,,ahk_class i)SunAwtFrame ahk_exe i)netbeans64\.exe$,^n,,,,,^{PgDn},,^{PgUp},^{PgUp}
 ,,,,,,,,,,,
-ã€httpè°ƒè¯•ã€‘Apifox,,ahk_exe i)Apifox\.exe$,^t,,^w,^w,,,,,
-ã€httpè°ƒè¯•ã€‘ApiPost,,ahk_exe i)ApiPost7\.exe$,^t,,^w,^w,,,,,
-ã€httpè°ƒè¯•ã€‘HTTPie,,ahk_exe i)HTTPie\.exe$,^t,,^w,^w,,,,,
-ã€httpè°ƒè¯•ã€‘Postman,,ahk_exe i)Postman\.exe$,^t,,^w,^w,,,,,
+¡¾httpµ÷ÊÔ¡¿Apifox,,ahk_exe i)Apifox\.exe$,^t,,^w,^w,,,,,
+¡¾httpµ÷ÊÔ¡¿ApiPost,,ahk_exe i)ApiPost7\.exe$,^t,,^w,^w,,,,,
+¡¾httpµ÷ÊÔ¡¿HTTPie,,ahk_exe i)HTTPie\.exe$,^t,,^w,^w,,,,,
+¡¾httpµ÷ÊÔ¡¿Postman,,ahk_exe i)Postman\.exe$,^t,,^w,^w,,,,,
 ,,,,,,,,,,,
 Zeal,,ahk_exe i)zeal\.exe$,^t,,^w,^w,,,,,
 ,,,,,,,,,,,
-ã€gitã€‘GitHub æ¡Œé¢ç‰ˆ,,ahk_exe i)GitHubDesktop\.exe$,^n,,,,,,,,
-ã€gitã€‘GitKraken,,ahk_exe i)gitkraken\.exe$,^t,,^w,^w,,,,,
-ã€gitã€‘SourceTree,,ahk_exe i)SourceTree\.exe$,^t,,^w,^w,,,,,
-ã€gitã€‘TortoiseGitMerge çš„ merge çª—å£,,ahk_exe i)TortoiseGitMerge\.exe$,,,{Esc},{Esc},,,,,
+¡¾git¡¿GitHub ×ÀÃæ°æ,,ahk_exe i)GitHubDesktop\.exe$,^n,,,,,,,,
+¡¾git¡¿GitKraken,,ahk_exe i)gitkraken\.exe$,^t,,^w,^w,,,,,
+¡¾git¡¿SourceTree,,ahk_exe i)SourceTree\.exe$,^t,,^w,^w,,,,,
+¡¾git¡¿TortoiseGitMerge µÄ merge ´°¿Ú,,ahk_exe i)TortoiseGitMerge\.exe$,,,{Esc},{Esc},,,,,
 ,,,,,,,,,,,
-ã€ç»ˆç«¯ç±»ã€‘Finalshell,,FinalShell$ ahk_exe java\.exe ahk_class i)SunAwtFrame$,!a,,!q,!q,,!],,!0,!0
-ã€ç»ˆç«¯ç±»ã€‘Hyper,,ahk_exe i)Hyper\.exe$,^+t,,^+w,^+w ,,,,,
-ã€ç»ˆç«¯ç±»ã€‘MobaXterm,,ahk_exe i)MobaXterm_Personal.*\.exe ahk_class i)TmobaXtermForm$,^!t,,^!q,"^!q""",,^!{Right},,^!{Left},^!{Left}
-ã€ç»ˆç«¯ç±»ã€‘SecureCRT,,ahk_exe i)SecureCRT\.exe$,,,^{F4},^{F4},,,,,
-ã€ç»ˆç«¯ç±»ã€‘Tabby,,ahk_exe i)Tabby\.exe$,^+t ,,^+w ,^+w ,,,,,
-ã€ç»ˆç«¯ç±»ã€‘Termius,,ahk_exe i)Termius\.exe$,^+t,,^+w ,^+w,,!{Right},,!{Left},!{Left}
-ã€ç»ˆç«¯ç±»ã€‘WindTerm,,ahk_exe i)WindTerm\.exe$,^n,,^+w ,^+w,,!],,![,![
-ã€ç»ˆç«¯ç±»ã€‘WindowsTerminal,,ahk_exe i)WindowsTerminal\.exe$,^+t,,^+w,^+w,,,,,
-ã€ç»ˆç«¯ç±»ã€‘Xshell,,ahk_exe i)Xshell\.exe$,^n,,,,,,,,
-ã€ç»ˆç«¯ç±»ã€‘zoc,,ahk_exe i)zoc\.exe$,!o,,!w,!w,,,,,
+¡¾ÖÕ¶ËÀà¡¿Finalshell,,FinalShell$ ahk_exe java\.exe ahk_class i)SunAwtFrame$,!a,,!q,!q,,!],,!0,!0
+¡¾ÖÕ¶ËÀà¡¿Hyper,,ahk_exe i)Hyper\.exe$,^+t,,^+w,^+w ,,,,,
+¡¾ÖÕ¶ËÀà¡¿MobaXterm,,ahk_exe i)MobaXterm_Personal.*\.exe ahk_class i)TmobaXtermForm$,^!t,,^!q,"^!q""",,^!{Right},,^!{Left},^!{Left}
+¡¾ÖÕ¶ËÀà¡¿SecureCRT,,ahk_exe i)SecureCRT\.exe$,,,^{F4},^{F4},,,,,
+¡¾ÖÕ¶ËÀà¡¿Tabby,,ahk_exe i)Tabby\.exe$,^+t ,,^+w ,^+w ,,,,,
+¡¾ÖÕ¶ËÀà¡¿Termius,,ahk_exe i)Termius\.exe$,^+t,,^+w ,^+w,,!{Right},,!{Left},!{Left}
+¡¾ÖÕ¶ËÀà¡¿WindTerm,,ahk_exe i)WindTerm\.exe$,^n,,^+w ,^+w,,!],,![,![
+¡¾ÖÕ¶ËÀà¡¿WindowsTerminal,,ahk_exe i)WindowsTerminal\.exe$,^+t,,^+w,^+w,,,,,
+¡¾ÖÕ¶ËÀà¡¿Xshell,,ahk_exe i)Xshell\.exe$,^n,,,,,,,,
+¡¾ÖÕ¶ËÀà¡¿zoc,,ahk_exe i)zoc\.exe$,!o,,!w,!w,,,,,
 ,,,,,,,,,,,
-ã€ftpã€‘FlashFXP,,ahk_exe i)FlashFXP\.exe$,{F8} ,,,,,,,,
-ã€ftpã€‘Xftp,,ahk_exe i)Xftp\.exe$,^n,,,,,,,,
+¡¾ftp¡¿FlashFXP,,ahk_exe i)FlashFXP\.exe$,{F8} ,,,,,,,,
+¡¾ftp¡¿Xftp,,ahk_exe i)Xftp\.exe$,^n,,,,,,,,
 ,,,,,,,,,,,
-ã€pdfã€‘Adobe Acrobat,,ahk_exe i)Acrobat\.exe$,^o,,^{F4},^{F4},,,,,
-ã€pdfã€‘Right PDF Readerã€éƒ¨åˆ†æ”¯æŒã€‘,,ahk_exe i)RightPDFReader\.exe$,^o,,^w,^w,,,,,
-ã€pdfã€‘Sumatra PDF,,ahk_class i)SUMATRA_PDF_FRAME ahk_exe i)SumatraPDF\.exe$,^o,,^{F4},^{F4},,,,,
-ã€pdfã€‘UPDF,,ahk_exe i)UPDF\.exe$,^t,,^w,^w,,,,,
-ã€pdfã€‘ç¦æ˜•PDFç¼–è¾‘å™¨,,ahk_exe i)FoxitPhantom\.exe$,^o,,^{F4},^{F4},,,,,
-ã€pdfã€‘ç¦æ˜•é˜…è¯»å™¨,,ahk_exe i)FoxitPDFReader\.exe$,^o,,^{F4},^{F4},,,,,
-ã€pdfã€‘æé€Ÿ PDF,,ahk_exe i)JisuPdf\.exe$,^o,,^w,^w,,,,,
-ã€pdfã€‘é‡‘å±±PDFç‹¬ç«‹ç‰ˆ,,ahk_exe i)wpspdf\.exe$,^n,,^{F4},^{F4},,,,,
-ã€pdfã€‘è¿…è¯» PDF,,ahk_exe i)MasterPDF\.exe ahk_class i)MASTER_PDF_FRAME$,^o,,^w,^w,,,,,
+¡¾pdf¡¿Adobe Acrobat,,ahk_exe i)Acrobat\.exe$,^o,,^{F4},^{F4},,,,,
+¡¾pdf¡¿Right PDF Reader¡¾²¿·ÖÖ§³Ö¡¿,,ahk_exe i)RightPDFReader\.exe$,^o,,^w,^w,,,,,
+¡¾pdf¡¿Sumatra PDF,,ahk_class i)SUMATRA_PDF_FRAME ahk_exe i)SumatraPDF\.exe$,^o,,^{F4},^{F4},,,,,
+¡¾pdf¡¿UPDF,,ahk_exe i)UPDF\.exe$,^t,,^w,^w,,,,,
+¡¾pdf¡¿¸£ê¿PDF±à¼­Æ÷,,ahk_exe i)FoxitPhantom\.exe$,^o,,^{F4},^{F4},,,,,
+¡¾pdf¡¿¸£ê¿ÔÄ¶ÁÆ÷,,ahk_exe i)FoxitPDFReader\.exe$,^o,,^{F4},^{F4},,,,,
+¡¾pdf¡¿¼«ËÙ PDF,,ahk_exe i)JisuPdf\.exe$,^o,,^w,^w,,,,,
+¡¾pdf¡¿½ğÉ½PDF¶ÀÁ¢°æ,,ahk_exe i)wpspdf\.exe$,^n,,^{F4},^{F4},,,,,
+¡¾pdf¡¿Ñ¸¶Á PDF,,ahk_exe i)MasterPDF\.exe ahk_class i)MASTER_PDF_FRAME$,^o,,^w,^w,,,,,
 ,,,,,,,,,,,
-ã€çª—å£ã€‘LibreOffice,,ahk_class i)SALSUBFRAME$ ahk_exe i)soffice\.bin$,,,{Esc},{Esc},,,,,
-LibreOffice ä¸»ç¨‹åº,,ahk_class i)SALFRAME$ ahk_exe i)soffice\.bin$,^n,,^{F4},^{F4},,,,,
+Ms Word 2021¡¾²¿·ÖÖ§³Ö¡¿,,ahk_exe i)WINWORD\.EXE$,^o,,,,,,,,
+Ms Excel 2021¡¾²¿·ÖÖ§³Ö¡¿,,ahk_exe i)EXCEL\.EXE$,^o,,,,,,,,
+Ms PPT 2021¡¾²¿·ÖÖ§³Ö¡¿,,ahk_exe i)POWERPNT\.EXE$,^o,,,,,,,,
+,,,,,,,,,,,
+¡¾´°¿Ú¡¿LibreOffice,,ahk_class i)SALSUBFRAME$ ahk_exe i)soffice\.bin$,,,{Esc},{Esc},,,,,
+LibreOffice Ö÷³ÌĞò,,ahk_class i)SALFRAME$ ahk_exe i)soffice\.bin$,^n,,^{F4},^{F4},,,,,
 Motrix,,ahk_exe i)Motrix\.exe$,^n,,,,,,,,
 Snipaste,,^Snipaste$ ahk_exe i)Snipaste\.exe$,,,{Esc},{Esc},,,,,
 thunderbird,,ahk_exe i)thunderbird\.exe$,,,^w,^w,,,,,^{PgUp}
 WPS Office,,ahk_exe i)wps\.exe$,^n,,^{F4},^{F4},,,,,
-WPS å›¾ç‰‡æŸ¥çœ‹å™¨,,^WPSå›¾ç‰‡$ ahk_exe i)photolaunch\.exe$,,,{Esc},{Esc},,,,,
-bilibili,,ahk_exe å“”å“©å“”å“©\.exe$ ahk_class i)Chrome_WidgetWin_1$,,,,,{Right},],{Left},[,[
-é˜¿é‡Œäº‘å®¢æˆ·ç«¯,,ahk_exe i)Alibaba Cloud Client\.exe$,^t,,^w,^w,,,,,
-ç‚‰çŸ³ä¼ è¯´,,ahk_exe i)Hearthstone\.exe$,,,{Esc},{Esc},,,,,
-è…¾è®¯QQ,,ahk_exe i)QQ\.exe$,,,{Esc},{Esc},,,,,
-ç¨»å£³é˜…è¯»å™¨,,ahk_exe i)DocBox\.exe$,,,^w,^w,,,,,
-å¾®ä¿¡,,ahk_exe i)WeChat\.exe ahk_class i)WeChatMainWndForPC$,,,{Esc},{Esc},,,,,
-å¾®ä¿¡å†…ç½®æµè§ˆå™¨,,^å¾®ä¿¡$ ahk_exe i)WeChatAppEx\.exe ahk_class i)Chrome_WidgetWin_0$,,,^w,^w,,,,,
+WPS Í¼Æ¬²é¿´Æ÷,,^WPSÍ¼Æ¬$ ahk_exe i)photolaunch\.exe$,,,{Esc},{Esc},,,,,
+bilibili,,ahk_exe ßÙÁ¨ßÙÁ¨\.exe$ ahk_class i)Chrome_WidgetWin_1$,,,,,{Right},],{Left},[,[
+°¢ÀïÔÆ¿Í»§¶Ë,,ahk_exe i)Alibaba Cloud Client\.exe$,^t,,^w,^w,,,,,
+Â¯Ê¯´«Ëµ,,ahk_exe i)Hearthstone\.exe$,,,{Esc},{Esc},,,,,
+ÌÚÑ¶QQ,,ahk_exe i)QQ\.exe$,,,{Esc},{Esc},,,,,
+µ¾¿ÇÔÄ¶ÁÆ÷,,ahk_exe i)DocBox\.exe$,,,^w,^w,,,,,
+Î¢ĞÅ,,ahk_exe i)WeChat\.exe ahk_class i)WeChatMainWndForPC$,,,{Esc},{Esc},,,,,
+Î¢ĞÅÄÚÖÃä¯ÀÀÆ÷,,^Î¢ĞÅ$ ahk_exe i)WeChatAppEx\.exe ahk_class i)Chrome_WidgetWin_0$,,,^w,^w,,,,,

@@ -1,71 +1,71 @@
-ç±»å‹,å¯åŠ¨è·¯å¾„,è¿è¡Œåç§°,è¿è¡Œå…³é”®å­—,çƒ­é”®å…³é”®å­—,çƒ­ä¸²å…³é”®å­—
-app,netstat,ç½‘ç»œçŠ¶æ€,wangluozhuangtai|ç½‘ç»œçŠ¶æ€,,
-app,inetcpl.cpl,Interneté€‰é¡¹,inetcpl|Interneté€‰é¡¹,,
-app,Firewall.cpl,é˜²ç«å¢™,fanghuoqiang|é˜²ç«å¢™,,
-app,winver,å…³äºWindows,guanyuwindows|å…³äºWindows,,
-app,diskmgmt.msc,ç£ç›˜ç®¡ç†,diskmgmt|dianyuanxuanxiang|ç£ç›˜ç®¡ç†,,
-app,powercfg.cpl,ç”µæºé€‰é¡¹,dianyuanxuanxiang|ç”µæºé€‰é¡¹,,
-app,magnify,æ”¾å¤§é•œ,fangdajing|æ”¾å¤§é•œ,,
-app,mspaint,ç”»å›¾,huatu|ç”»å›¾,,
-app,osk,å±å¹•é”®ç›˜,pingmujianpan|å±å¹•é”®ç›˜,,
-app,Notepad,è®°äº‹æœ¬,notepad|jishiben|è®°äº‹æœ¬,!j,
-app,control,æ§åˆ¶é¢æ¿,kongzhimianban|æ§åˆ¶é¢æ¿,,
-app,sk.cpl,å±å¹•åˆ†è¾¨ç‡,pingmufenbianlv|å±å¹•åˆ†è¾¨ç‡,,
-app,hdwwiz.cpl ,è®¾å¤‡ç®¡ç†å™¨,hdwwiz.cpl|shebeiguanliqi|è®¾å¤‡ç®¡ç†å™¨,,
-app,main.cpl,é¼ æ ‡å±æ€§,main.cpl|shubiaoshuxing|é¼ æ ‡å±æ€§,,
-app,eventvwr ,äº‹ä»¶æŸ¥çœ‹å™¨,eventvwr|shijianchakanqi|äº‹ä»¶æŸ¥çœ‹å™¨,,
-app,mmsys.cpl,å£°éŸ³å±æ€§,mmsys.cpl|shengyinshuxing|å£°éŸ³å±æ€§,,
-app,taskmgr,ä»»åŠ¡ç®¡ç†å™¨,taskmgr|renwuguanliqi|ä»»åŠ¡ç®¡ç†å™¨,,
-app,explorer,èµ„æºç®¡ç†å™¨,explorer|ziyuanguanliqi|èµ„æºç®¡ç†å™¨,,
-app,mstsc,è¿œç¨‹ååŠ©,mstsc|yuanchengzhuomian|è¿œç¨‹ååŠ©,,
-app,write,å†™å­—æ¿,write|xieziban|å†™å­—æ¿,,
-app,C:\Users\ferder\AppData\Local\360ChromeX\Chrome\Application\360ChromeX.exe,360æé€Ÿæµè§ˆå™¨,jisuliulanqi|360æé€Ÿæµè§ˆå™¨,!2,
-app,C:\Program Files (x86)\Battle.net\Battle.net Launcher.exe,æˆ˜ç½‘/ç‚‰çŸ³,lushichuanshuo|hs|battle|æˆ˜ç½‘|ç‚‰çŸ³,,
+ÀàĞÍ,Æô¶¯Â·¾¶,ÔËĞĞÃû³Æ,ÔËĞĞ¹Ø¼ü×Ö,ÈÈ¼ü¹Ø¼ü×Ö,ÈÈ´®¹Ø¼ü×Ö
+app,netstat,ÍøÂç×´Ì¬,wangluozhuangtai|ÍøÂç×´Ì¬,,
+app,inetcpl.cpl,InternetÑ¡Ïî,inetcpl|InternetÑ¡Ïî,,
+app,Firewall.cpl,·À»ğÇ½,fanghuoqiang|·À»ğÇ½,,
+app,winver,¹ØÓÚWindows,guanyuwindows|¹ØÓÚWindows,,
+app,diskmgmt.msc,´ÅÅÌ¹ÜÀí,diskmgmt|dianyuanxuanxiang|´ÅÅÌ¹ÜÀí,,
+app,powercfg.cpl,µçÔ´Ñ¡Ïî,dianyuanxuanxiang|µçÔ´Ñ¡Ïî,,
+app,magnify,·Å´ó¾µ,fangdajing|·Å´ó¾µ,,
+app,mspaint,»­Í¼,huatu|»­Í¼,,
+app,osk,ÆÁÄ»¼üÅÌ,pingmujianpan|ÆÁÄ»¼üÅÌ,,
+app,Notepad,¼ÇÊÂ±¾,notepad|jishiben|¼ÇÊÂ±¾,!j,
+app,control,¿ØÖÆÃæ°å,kongzhimianban|¿ØÖÆÃæ°å,,
+app,sk.cpl,ÆÁÄ»·Ö±æÂÊ,pingmufenbianlv|ÆÁÄ»·Ö±æÂÊ,,
+app,hdwwiz.cpl ,Éè±¸¹ÜÀíÆ÷,hdwwiz.cpl|shebeiguanliqi|Éè±¸¹ÜÀíÆ÷,,
+app,main.cpl,Êó±êÊôĞÔ,main.cpl|shubiaoshuxing|Êó±êÊôĞÔ,,
+app,eventvwr ,ÊÂ¼ş²é¿´Æ÷,eventvwr|shijianchakanqi|ÊÂ¼ş²é¿´Æ÷,,
+app,mmsys.cpl,ÉùÒôÊôĞÔ,mmsys.cpl|shengyinshuxing|ÉùÒôÊôĞÔ,,
+app,taskmgr,ÈÎÎñ¹ÜÀíÆ÷,taskmgr|renwuguanliqi|ÈÎÎñ¹ÜÀíÆ÷,,
+app,explorer,×ÊÔ´¹ÜÀíÆ÷,explorer|ziyuanguanliqi|×ÊÔ´¹ÜÀíÆ÷,,
+app,mstsc,Ô¶³ÌĞ­Öú,mstsc|yuanchengzhuomian|Ô¶³ÌĞ­Öú,,
+app,write,Ğ´×Ö°å,write|xieziban|Ğ´×Ö°å,,
+app,C:\Users\ferder\AppData\Local\360ChromeX\Chrome\Application\360ChromeX.exe,360¼«ËÙä¯ÀÀÆ÷,jisuliulanqi|360¼«ËÙä¯ÀÀÆ÷,!2,
+app,C:\Program Files (x86)\Battle.net\Battle.net Launcher.exe,Õ½Íø/Â¯Ê¯,lushichuanshuo|hs|battle|Õ½Íø|Â¯Ê¯,,
 ,,,,,
-app,C:\Program Files\Nutstore\Nutstore.exe,åšæœäº‘,jianguoyun|åšæœäº‘,,
-app,C:\Users\ferder\AppData\Local\Programs\aDrive\aDrive.exe,é˜¿é‡Œäº‘ç›˜,aliyunpan|aDrive|é˜¿é‡Œäº‘ç›˜,,
-app,C:\Program Files (x86)\ecloud\eCloud.exe,å¤©ç¿¼äº‘ç›˜,tianyiyunpan|eCloud|å¤©ç¿¼äº‘ç›˜,,
+app,C:\Program Files\Nutstore\Nutstore.exe,¼á¹ûÔÆ,jianguoyun|¼á¹ûÔÆ,,
+app,C:\Users\ferder\AppData\Local\Programs\aDrive\aDrive.exe,°¢ÀïÔÆÅÌ,aliyunpan|aDrive|°¢ÀïÔÆÅÌ,,
+app,C:\Program Files (x86)\ecloud\eCloud.exe,ÌìÒíÔÆÅÌ,tianyiyunpan|eCloud|ÌìÒíÔÆÅÌ,,
 ,,,,,
 app,C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe,edge,edge,,
 app,D:\Program Files\Foxmail 7.2\Foxmail.exe,foxmail,foxmail,,
 app,C:\Program Files\Tencent\QQNT\QQ.exe,qq,qq,,
 app,C:\Program Files (x86)\ToDesk\ToDesk.exe,ToDesk,ToDesk,,
 app,C:\Users\ferder\AppData\Local\Programs\Microsoft VS Code\Code.exe,vscode,vscode,!5,
-app,C:\Program Files\bilibili\å“”å“©å“”å“©.exe,bç«™,bilibili|å“”å“©å“”å“©|bç«™,,
-app,C:\Program Files (x86)\Tencent\QQMusic\QQMusic.exe,QQéŸ³ä¹,qqmusic,,
+app,C:\Program Files\bilibili\ßÙÁ¨ßÙÁ¨.exe,bÕ¾,bilibili|ßÙÁ¨ßÙÁ¨|bÕ¾,,
+app,C:\Program Files (x86)\Tencent\QQMusic\QQMusic.exe,QQÒôÀÖ,qqmusic,,
 ,,,,,
 app,C:\Users\ferder\AppData\Local\Programs\AutoHotkey\UX\AutoHotkeyUX.exe C:\Users\ferder\AppData\Local\Programs\AutoHotkey\UX\ui-dash.ahk,ahkdash,ahkdash,,
 app,C:\Users\ferder\AppData\Local\JetBrains\PyCharm Community Edition 2021.3.3\bin\pycharm64.exe,PyCharm,PyCharm,,
-app,C:\Program Files (x86)\EVAVEdit\EVAVEdit.exe,EVå‰ªè¾‘,Evjianji,,
-app,C:\Program Files (x86)\EVCapture\EVCapture.exe,EVå½•å±,Evluping,,
-app,C:\Program Files (x86)\Thunder Network\Thunder\Program\ThunderStart.exe,è¿…é›·,thunder|xunlei,,
+app,C:\Program Files (x86)\EVAVEdit\EVAVEdit.exe,EV¼ô¼­,Evjianji,,
+app,C:\Program Files (x86)\EVCapture\EVCapture.exe,EVÂ¼ÆÁ,Evluping,,
+app,C:\Program Files (x86)\Thunder Network\Thunder\Program\ThunderStart.exe,Ñ¸À×,thunder|xunlei,,
 app,C:\Users\ferder\AppData\Local\Programs\AutoHotkey\UX\AutoHotkeyUX.exe C:\Users\ferder\AppData\Local\Programs\AutoHotkey\UX\WindowSpy.ahk,Spy,Spy,,
 app,C:\Users\ferder\AppData\Local\Programs\tts-vue\tts-vue.exe,tts,tts,,
 app,C:\Users\ferder\AppData\Local\Kingsoft\WPS Office\ksolaunch.exe,WPS Office,WPS,,
 ,,,,,
-file,D:\,Dç›˜,,!d,
-file,D:\alee\git-repos-mfoxLocal,å…¬å¸ä»“åº“,,!k,
-file,D:\alee\exec,å¿«æ·è½¯ä»¶,,,
-file,D:\alee\git-repos-gitee,ç äº‘,,!e,
+file,D:\,DÅÌ,,!d,
+file,D:\alee\git-repos-mfoxLocal,¹«Ë¾²Ö¿â,,!k,
+file,D:\alee\exec,¿ì½İÈí¼ş,,,
+file,D:\alee\git-repos-gitee,ÂëÔÆ,,!e,
 file,D:\alee\git-repos-github,github,,!h,
 ,,,,,
-text,å¾ˆç‰›å‘€,,,,xnb 
-text,ä½ å¦¹çš„,,,,xnm 
-text,acc8226,æˆ‘çš„ç”¨æˆ·å,,,xac 
-text,åŒ—äº¬å¸‚ é€šå·åŒº å°æ¹–é•‡ é¸¿å¤äº‘æ—¶ä»£ b2 åº§åœ°ä¸‹ä¸€å±‚ç”µæ¢¯é—´ä¸œä¾§ä¸°å·¢æŸœ,æˆ‘çš„æ”¶è´§åœ°å€,,,xad 
-text,17090412860,æˆ‘çš„è”ç³»æ–¹å¼,,,xmo 
-text,acc8226@qq.com,æˆ‘çš„é‚®ç®±,,,xem 
-text,1334598467,æˆ‘çš„qqå·,,,xqq 
+text,ºÜÅ£Ñ½,,,,xnb 
+text,ÄãÃÃµÄ,,,,xnm 
+text,acc8226,ÎÒµÄÓÃ»§Ãû,,,xac 
+text,±±¾©ÊĞ Í¨ÖİÇø Ì¨ºşÕò ºèÀ¤ÔÆÊ±´ú b2 ×ùµØÏÂÒ»²ãµçÌİ¼ä¶«²à·á³²¹ñ,ÎÒµÄÊÕ»õµØÖ·,,,xad 
+text,17090412860,ÎÒµÄÁªÏµ·½Ê½,,,xmo 
+text,acc8226@qq.com,ÎÒµÄÓÊÏä,,,xem 
+text,1334598467,ÎÒµÄqqºÅ,,,xqq 
 ,,,,,
-text,ğŸ˜„,å¾®ç¬‘,,,xwx 
-text,ğŸ˜Š,è„¸çº¢,,,xlh
-text,ğŸ‘Œ,OK,,,xok
-text,â¤ï¸,çˆ±å¿ƒ,,,xax
-text,ğŸ“°,æŠ¥çº¸,,,xbz
-text,ğŸ·,æ ‡ç­¾,,,xbq
-text,ğŸ”–,ä¹¦ç­¾,,,xsq
-text,ğŸ’©,å¤§ä¾¿,,,xsh
-text,ğŸ‘»,é¬¼é­‚,,,xgh
+text,”9ı0,Î¢Ğ¦,,,xwx 
+text,”9ı6,Á³ºì,,,xlh
+text,”9Ñ0,OK,,,xok
+text,7Å8„1‚5,°®ĞÄ,,,xax
+text,”9á4,±¨Ö½,,,xbz
+text,”9È5,±êÇ©,,,xbq
+text,”9å2,ÊéÇ©,,,xsq
+text,”9Ú3,´ó±ã,,,xsh
+text,”9Õ7,¹í»ê,,,xgh
 ,,,,,
 text,```json{Enter}{Enter}```{Up},,,,xjson
 text,```yml{Enter}{Enter}```{Up},,,,xyml
@@ -75,52 +75,52 @@ text,```js{Enter}{Enter}```{Up},,,,xjs
 text,```xml{Enter}{Enter}```{Up},,,,xxml
 text,```py{Enter}{Enter}```{Up},,,,xpy
 ,,,,,
-web,https://www.baidu.com,ç™¾åº¦,baidu,,
-web,https://www.doubao.com/,è±†åŒ…,doubao,,zdb
-web,https://www.cnblogs.com,åšå®¢å›­,bokeyuan|cnblogs|åšå®¢å›­,,zcn
-web,https://www.bilibili.com,bç«™,bilibili|å“”å“©å“”å“©|bç«™,!6,zbi
-web,https://fanyi.caiyunapp.com/#,å½©äº‘å°è¯‘,fanyi|å½©äº‘å°è¯‘,,zfan
-web,https://www.douyin.com/,æŠ–éŸ³,douyin|æŠ–éŸ³,,
-web,https://www.dytt8.net/index2.htm,ç”µå½±å¤©å ‚,dianyingtiantang|ç”µå½±å¤©å ‚,,zdy
-web,https://www.jianshu.com/,ç®€ä¹¦ç½‘,jianshu|ç®€ä¹¦ç½‘,,
-web,https://www.landiannews.com,è“ç‚¹ç½‘,landian|è“ç‚¹ç½‘,,zld
-web,https://gitee.com/,ç äº‘,gitee|ç äº‘,,zge
-web,https://nav.feipig.fun/ ,ç½‘å€å¯¼èˆª,wangzhidaohang|ç½‘å€å¯¼èˆª,,zna
-web,https://www.ixigua.com,è¥¿ç“œè§†é¢‘,xiguashpin|è¥¿ç“œè§†é¢‘,!8,zxg
-web,https://www.iplaysoft.com,å¼‚æ¬¡å…ƒè½¯ä»¶,yiciyuan|å¼‚æ¬¡å…ƒè½¯ä»¶,,zyc
-web,https://www.zhihu.com,çŸ¥ä¹,zhihu|çŸ¥ä¹,,
+web,https://www.baidu.com,°Ù¶È,baidu,,
+web,https://www.doubao.com/,¶¹°ü,doubao,,zdb
+web,https://www.cnblogs.com,²©¿ÍÔ°,bokeyuan|cnblogs|²©¿ÍÔ°,,zcn
+web,https://www.bilibili.com,bÕ¾,bilibili|ßÙÁ¨ßÙÁ¨|bÕ¾,!6,zbi
+web,https://fanyi.caiyunapp.com/#,²ÊÔÆĞ¡Òë,fanyi|²ÊÔÆĞ¡Òë,,zfan
+web,https://www.douyin.com/,¶¶Òô,douyin|¶¶Òô,,
+web,https://www.dytt8.net/index2.htm,µçÓ°ÌìÌÃ,dianyingtiantang|µçÓ°ÌìÌÃ,,zdy
+web,https://www.jianshu.com/,¼òÊéÍø,jianshu|¼òÊéÍø,,
+web,https://www.landiannews.com,À¶µãÍø,landian|À¶µãÍø,,zld
+web,https://gitee.com/,ÂëÔÆ,gitee|ÂëÔÆ,,zge
+web,https://nav.feipig.fun/ ,ÍøÖ·µ¼º½,wangzhidaohang|ÍøÖ·µ¼º½,,zna
+web,https://www.ixigua.com,Î÷¹ÏÊÓÆµ,xiguashpin|Î÷¹ÏÊÓÆµ,!8,zxg
+web,https://www.iplaysoft.com,Òì´ÎÔªÈí¼ş,yiciyuan|Òì´ÎÔªÈí¼ş,,zyc
+web,https://www.zhihu.com,Öªºõ,zhihu|Öªºõ,,
 web,https://www.csdn.net,csdn,csdn,,
 web,https://github.com,github,github,,zgh
-web,https://www.ithome.com,ITä¹‹å®¶,itzhijia|ITä¹‹å®¶,!7,zit
+web,https://www.ithome.com,ITÖ®¼Ò,itzhijia|ITÖ®¼Ò,!7,zit
 web,https://www.json.cn/#,json,json,,zjs
-web,https://mail.qq.com,qqé‚®ç®±,qqyouxiang|qqé‚®ç®±,,zma
+web,https://mail.qq.com,qqÓÊÏä,qqyouxiang|qqÓÊÏä,,zma
 web,https://start.spring.io/,SpringInitializr,SpringInitializr,,
-web,https://juejin.cn/,æ˜é‡‘,juejin|æ˜é‡‘,,
-web,https://www.mgtv.com/,èŠ’æœTV,mangguotv|èŠ’æœTV,,
+web,https://juejin.cn/,¾ò½ğ,juejin|¾ò½ğ,,
+web,https://www.mgtv.com/,Ã¢¹ûTV,mangguotv|Ã¢¹ûTV,,
 ,,,,,
-app,D:\alee\exec\daily\0.æ—¥å¸¸\0. å¿…å¤‡\bitwarden\Bitwarden.exe,bitwarden,bitwarden,,
+app,D:\alee\exec\daily\0.ÈÕ³£\0. ±Ø±¸\bitwarden\Bitwarden.exe,bitwarden,bitwarden,,
 app,C:\Program Files (x86)\PixPin\PixPin.exe,PixPin,PixPin,,
-app,D:\alee\exec\daily\0.æ—¥å¸¸\1. å·¥å…·ç±»\filecxx_1.9_win_x64\fileu.exe,æ–‡ä»¶èœˆèš£,wjww,,
-app,D:\alee\exec\daily\0.æ—¥å¸¸\1. å·¥å…·ç±»\Motrix-1.8.19-win\Motrix.exe,Motrix,Motrix,,
-app,D:\alee\exec\daily\0.æ—¥å¸¸\2. åŠå…¬ç±»\SumatraPDF\SumatraPDF.exe,pdf,pdf,,
-app,D:\alee\exec\daily\0.æ—¥å¸¸\3. éŸ³é¢‘ç±»\MusicPlayer2_x64\MusicPlayer2.exe,MusicPlayer2,MusicPlayer2,,
-app,C:\Users\ferder\AppData\Local\Programs\fonger\æ–¹æ ¼éŸ³ä¹.exe,æ–¹æ ¼éŸ³ä¹,fangge,,
-app,D:\alee\exec\daily\0.æ—¥å¸¸\4. è§†é¢‘ç±»\Pot_Player64\PotPlayerMini64.exe,PotPlayer,PotPlayer,,
-app,C:\Program Files (x86)\Tencent\WeChat\WeChat.exe,å¾®ä¿¡,wechat|weixin|å¾®ä¿¡,!3,
+app,D:\alee\exec\daily\0.ÈÕ³£\1. ¹¤¾ßÀà\filecxx_1.9_win_x64\fileu.exe,ÎÄ¼şòÚò¼,wjww,,
+app,D:\alee\exec\daily\0.ÈÕ³£\1. ¹¤¾ßÀà\Motrix-1.8.19-win\Motrix.exe,Motrix,Motrix,,
+app,D:\alee\exec\daily\0.ÈÕ³£\2. °ì¹«Àà\SumatraPDF\SumatraPDF.exe,pdf,pdf,,
+app,D:\alee\exec\daily\0.ÈÕ³£\3. ÒôÆµÀà\MusicPlayer2_x64\MusicPlayer2.exe,MusicPlayer2,MusicPlayer2,,
+app,C:\Users\ferder\AppData\Local\Programs\fonger\·½¸ñÒôÀÖ.exe,·½¸ñÒôÀÖ,fangge,,
+app,D:\alee\exec\daily\0.ÈÕ³£\4. ÊÓÆµÀà\Pot_Player64\PotPlayerMini64.exe,PotPlayer,PotPlayer,,
+app,C:\Program Files (x86)\Tencent\WeChat\WeChat.exe,Î¢ĞÅ,wechat|weixin|Î¢ĞÅ,!3,
 ,,,,,
-app,D:\alee\exec\daily\1.æ‹“å±•\02. OCRè½¯ä»¶\Umi-OCR æ–‡å­—è¯†åˆ«.exe,OCR,OCR,,
-app,D:\alee\exec\daily\1.æ‹“å±•\03. å½•å±è½¯ä»¶\é”®ç›˜æŒ‰é”®æ˜¾ç¤º KeyCastOW\é”®ç›˜æŒ‰é”®æ˜¾ç¤º KeyCastOW.exe,KeyCastOW,KeyCastOW,,
-app,D:\alee\exec\daily\1.æ‹“å±•\05. æ–‡ä»¶æœç´¢\å·¥å…· æ–‡ä»¶ Everything\Everything.exe,Everything,Everything,,
-app,D:\alee\exec\daily\1.æ‹“å±•\06. æ˜¾ç¤ºç½‘é€Ÿ TrafficMonitor\TrafficMonitor.exe,TrafficMonitor,TrafficMonitor,,
-app,D:\alee\exec\daily\1.æ‹“å±•\08. Markdown ç¼–è¾‘\å·¥å…· æ–‡æ¡£ marktext\MarkText.exe,MarkText,MarkText,,
-app,D:\alee\exec\daily\1.æ‹“å±•\09. å¤§æ–‡ä»¶åˆ†æ wiztree\WizTree64.exe,WizTree,WizTree,,
-app,D:\alee\exec\daily\1.æ‹“å±•\10. å¸è½½å·¥å…·\å·¥å…· ç³»ç»Ÿ æå®¢å¸è½½.exe,æå®¢å¸è½½,geek|uninstall,,
+app,D:\alee\exec\daily\1.ÍØÕ¹\02. OCRÈí¼ş\Umi-OCR ÎÄ×ÖÊ¶±ğ.exe,OCR,OCR,,
+app,D:\alee\exec\daily\1.ÍØÕ¹\03. Â¼ÆÁÈí¼ş\¼üÅÌ°´¼üÏÔÊ¾ KeyCastOW\¼üÅÌ°´¼üÏÔÊ¾ KeyCastOW.exe,KeyCastOW,KeyCastOW,,
+app,D:\alee\exec\daily\1.ÍØÕ¹\05. ÎÄ¼şËÑË÷\¹¤¾ß ÎÄ¼ş Everything\Everything.exe,Everything,Everything,,
+app,D:\alee\exec\daily\1.ÍØÕ¹\06. ÏÔÊ¾ÍøËÙ TrafficMonitor\TrafficMonitor.exe,TrafficMonitor,TrafficMonitor,,
+app,D:\alee\exec\daily\1.ÍØÕ¹\08. Markdown ±à¼­\¹¤¾ß ÎÄµµ marktext\MarkText.exe,MarkText,MarkText,,
+app,D:\alee\exec\daily\1.ÍØÕ¹\09. ´óÎÄ¼ş·ÖÎö wiztree\WizTree64.exe,WizTree,WizTree,,
+app,D:\alee\exec\daily\1.ÍØÕ¹\10. Ğ¶ÔØ¹¤¾ß\¹¤¾ß ÏµÍ³ ¼«¿ÍĞ¶ÔØ.exe,¼«¿ÍĞ¶ÔØ,geek|uninstall,,
 ,,,,,
-app,D:\alee\exec\daily\2.ä¸“ä¸š\2. ç½‘ç»œä»£ç†\Shadowsocks-4.4.1.0\Shadowsocks.exe,Shadowsocks,Shadowsocks,,
+app,D:\alee\exec\daily\2.×¨Òµ\2. ÍøÂç´úÀí\Shadowsocks-4.4.1.0\Shadowsocks.exe,Shadowsocks,Shadowsocks,,
 ,,,,,
-app,D:\alee\exec\dev\DB\æ•°æ®åº“ç®¡ç†\Beekeeper-Studio\Beekeeper-Studio-4.0.3-portable.exe,BeekeeperStudio,BeekeeperStudio,,
-app,D:\alee\exec\dev\DB\æ•°æ®åº“ç®¡ç†\HeidiSQL\heidisql.exe,heidisql,heidisql,,
-app,D:\alee\exec\dev\DB\æ•°æ®åº“è®¾è®¡\PDManer-win\PDManer.exe,PDManer,PDManer,,
+app,D:\alee\exec\dev\DB\Êı¾İ¿â¹ÜÀí\Beekeeper-Studio\Beekeeper-Studio-4.0.3-portable.exe,BeekeeperStudio,BeekeeperStudio,,
+app,D:\alee\exec\dev\DB\Êı¾İ¿â¹ÜÀí\HeidiSQL\heidisql.exe,Heidisql,heidisql,,
+app,D:\alee\exec\dev\DB\Êı¾İ¿âÉè¼Æ\PDManer-win\PDManer.exe,PDManer,PDManer,,
 app,D:\alee\exec\dev\File compare\WinMerge\WinMergeU.exe,WinMerge,WinMerge,,
 app,D:\alee\exec\dev\IDE\HBuilderX\HBuilderX.exe,HBuilderX,HBuilderX,,
 app,D:\alee\exec\dev\IDE\ideaIC-2022.3.3.win\bin\idea64.exe,ideaC,ideaC,,
@@ -130,4 +130,4 @@ app,D:\alee\exec\dev\Ref\zeal-0.7.0-portable-windows-x64\zeal.exe,zeal,zeal,,
 app,C:\Users\ferder\AppData\Local\Programs\redisinsight\RedisInsight-v2.exe,RedisInsight,RedisInsight,,
 app,C:\Users\ferder\AppData\Local\Programs\HTTPie\HTTPie.exe,HTTPie,HTTPie,,
 app,C:\Users\ferder\AppData\Local\Programs\Termius\Termius.exe,Termius,Termius,,
-app,C:\Program Files (x86)\Tencent\å¾®ä¿¡webå¼€å‘è€…å·¥å…·\å¾®ä¿¡å¼€å‘è€…å·¥å…·.exe,å¾®ä¿¡å¼€å‘è€…å·¥å…·,å¾®ä¿¡å¼€å‘è€…,,
+app,C:\Program Files (x86)\Tencent\Î¢ĞÅweb¿ª·¢Õß¹¤¾ß\Î¢ĞÅ¿ª·¢Õß¹¤¾ß.exe,Î¢ĞÅ¿ª·¢Õß¹¤¾ß,Î¢ĞÅ¿ª·¢Õß,,
