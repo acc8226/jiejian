@@ -102,29 +102,29 @@ Loop appList.Length {
     }
     ; 8. 上个标签
     switch it.previousTag, 'Off' {
-      case "{Media_Prev}": GroupAdd "previous_mediaPrev", it.exe
-      case "[": GroupAdd "previous_openBracket", it.exe
       case "p": GroupAdd "previous_p", it.exe
+      case "[": GroupAdd "previous_openBracket", it.exe
+      case "{Media_Prev}": GroupAdd "previous_mediaPrev", it.exe
       case 'Up', "{Up}": GroupAdd "previous_Up", it.exe
+      case "{PgUp}": GroupAdd "previous_PgUp", it.exe
       case "!0": GroupAdd "previous_alt_0", it.exe
       case "!{Left}": GroupAdd "previous_alt_left", it.exe
       case "![": GroupAdd "previous_alt_openBracket", it.exe
       case "^{Left}": GroupAdd "previous_ctrl_left", it.exe
-      case "^!{Left}": GroupAdd "previous_ctrl_alt_left", it.exe
       case "^{PgUp}": GroupAdd "previous_ctrl_PgUp", it.exe
-      case "{PgUp}": GroupAdd "previous_PgUp", it.exe
+      case "^!{Left}": GroupAdd "previous_ctrl_alt_left", it.exe
     }
     ; 9. 侧边前进键
     switch it.sideForward, 'Off' {
+      case "p": GroupAdd "sideForward_p", it.exe
+      case "[": GroupAdd "sideForward_openBracket", it.exe
       case "{Media_Prev}": GroupAdd "sideForward_mediaPrev", it.exe
       case "{Media_Play_Pause}": GroupAdd "sideForward_mediaPlayPause", it.exe
       case 'Space', "{Space}": GroupAdd "sideForward_space", it.exe
-      case "[": GroupAdd "sideForward_openBracket", it.exe
-      case "p": GroupAdd "sideForward_p", it.exe
       case "Up", "{Up}": GroupAdd "sideForward_Up", it.exe
       case 'PgUp', "{PgUp}": GroupAdd "sideForward_PgUp", it.exe
-      case "!{Left}": GroupAdd "sideForward_alt_left", it.exe
       case "!0": GroupAdd "sideForward_alt_0", it.exe
+      case "!{Left}": GroupAdd "sideForward_alt_left", it.exe
       case "![": GroupAdd "sideForward_alt_openBracket", it.exe
       case "^{Left}": GroupAdd "sideForward_ctrl_left", it.exe
       case "^{PgUp}": GroupAdd "sideForward_ctrl_PgUp", it.exe
@@ -138,9 +138,7 @@ parseApp(fileName) {
   ; 每次从字符串中检索字符串(片段)
   Loop Parse, FileRead(fileName), "`n", "`r" {
       ; 跳过首行
-      if A_Index < 2
-        continue
-      else {
+      if A_Index >= 2 {
         appInfo := parseDataLine(A_LoopField)
         if appInfo
             appList.Push(appInfo)

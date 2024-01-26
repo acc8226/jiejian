@@ -116,29 +116,16 @@ skylark 主程序,低,ahk_exe i)skylark\.exe$,^n,,^w,^w,,,,,
 【IDE】MyEclipse,,ahk_class i)SWT_Window0$ ahk_exe i)javaw\.exe$,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
 【IDE】Rstudio,,ahk_exe i)rstudio\.exe$,^+n,,^w,^w,,,,,
 【IDE】SpringToolSuite4,,ahk_exe i)SpringToolSuite4.exe$,^n,,^{F4},^{F4},,^{PgDn},,^{PgUp},^{PgUp}
-【IDE】VS Code 标签页,高,i)- Visual Studio Code$ ahk_exe i)Code\.exe$,,,^{F4},^{F4},,,,,
-【IDE】VS Code 主页,低,ahk_exe i)Code\.exe$,{Control Down}n{Control Up},,,,,^{PgDn} ,,^{PgUp},^{PgUp}
-【窗口】Visual Studio,高,Microsoft Visual Studio 帐户设置|自定义|管理扩展|关于 Microsoft Visual Studio ahk_exe devenv\.exe,,,{Esc} ,{Esc} ,,,,,
+【IDE】VS Code 标签页,高,i)- Visual Studio Code$ ahk_exe i)Code\.exe$ ahk_class i)Chrome,,,^{F4},^{F4},,,,,
+【IDE】VS Code 主页,低,ahk_exe i)Code\.exe$ ahk_class i)Chrome,{Control Down}n{Control Up},,,,,^{PgDn} ,,^{PgUp},^{PgUp}
+【窗口】Visual Studio,高,Microsoft Visual Studio 帐户设置|自定义|管理扩展|关于 Microsoft Visual Studio ahk_exe devenv\.exe$,,,{Esc} ,{Esc} ,,,,,
 【IDE】Visual Studio,低,ahk_exe devenv\.exe$,^n,,^{F4},^{F4},,,,,
 ,,,,,,,,,,,
-【jetbrains】Aqua,,ahk_class i)SunAwtFrame$ ahk_exe i)aqua64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-【jetbrains】Clion,,ahk_class i)SunAwtFrame$ ahk_exe i)clion64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-【jetbrains】Datagrip,,ahk_class i)SunAwtFrame$ ahk_exe i)datagrip64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-【jetbrains】Dataspell,,ahk_class i)SunAwtFrame$ ahk_exe i)dataspell64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-【jetbrains】Goland,,ahk_class i)SunAwtFrame$ ahk_exe i)goland64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-【jetbrains】Idea,高,.+ – .+ ahk_class i)SunAwtFrame$ ahk_exe i)idea64\.exe$,,,^{F4},^{F4},,,,,
-【jetbrains】Idea,低,ahk_class i)SunAwtFrame$ ahk_exe i)idea64\.exe$,,,,,,!{Right},,!{Left},!{Left}
-【jetbrains】Pycharm,高,.+ – .+ ahk_class i)SunAwtFrame$ ahk_exe i)pycharm64\.exe$,,,^{F4},^{F4},,,,,
-【jetbrains】Pycharm,低,ahk_class i)SunAwtFrame$ ahk_exe i)pycharm64\.exe$,,,,,,!{Right},,!{Left},!{Left}
-【jetbrains】Phpstorm,,ahk_class i)SunAwtFrame$ ahk_exe i)phpstorm64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-【jetbrains】Rider,,ahk_class i)SunAwtFrame$ ahk_exe i)rider64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-【jetbrains】RubyMine,,ahk_class i)SunAwtFrame$ ahk_exe i)rubymine64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-【jetbrains】RustRover,,ahk_class i)SunAwtFrame$ ahk_exe i)rustrover64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-【jetbrains】Webstorm,,ahk_class i)SunAwtFrame$ ahk_exe i)webstorm64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-【jetbrains】Writerside,,ahk_class i)SunAwtFrame$ ahk_exe i)writerside64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+【jetbrains】系列的窗口,高,.+ – .+ ahk_class i)SunAwtFrame$ ahk_exe i)(aqua|clion|datagrip|dataspell|goland|idea|pycharm|phpstorm|rider|rubymine|rustrover|webstorm|writerside)64\.exe$,,,^{F4},^{F4},,,,,
+【jetbrains】Aqua、Clion、Datagrip、Dataspell、Goland、Idea、Pycharm、Phpstorm、Rider、RubyMine、RustRover、Webstorm、Writerside,,ahk_class i)SunAwtFrame$ ahk_exe i)(aqua|clion|datagrip|dataspell|goland|idea|pycharm|phpstorm|rider|rubymine|rustrover|webstorm|writerside)64\.exe$,,,,,,!{Right},,!{Left},!{Left}
 ,,,,,,,,,,,
-【jetbrains ext】Android Studio,,ahk_class i)SunAwtFrame ahk_exe i)studio64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
-【jetbrains ext】华为 DevEco Studio,,ahk_class i)SunAwtFrame ahk_exe i)devecostudio64\.exe$,,,^{F4},^{F4},,!{Right},,!{Left},!{Left}
+【jetbrains ext】系列的窗口,高,.+ – .+ ahk_class i)SunAwtFrame ahk_exe i)(studio|devecostudio)64\.exe$,,,^{F4},^{F4},,,,,
+【jetbrains ext】Android Studio、华为 DevEco Studio,,ahk_class i)SunAwtFrame ahk_exe i)(studio|devecostudio)64\.exe$,,,,,,!{Right},,!{Left},!{Left}
 ,,,,,,,,,,,
 Netbean 32 位 & Jmeter,,ahk_class i)SunAwtFrame ahk_exe i)javaw\.exe$,^n,,,,,^{PgDn},,^{PgUp},^{PgUp}
 Netbean 64 位,,ahk_class i)SunAwtFrame ahk_exe i)netbeans64\.exe$,^n,,,,,^{PgDn},,^{PgUp},^{PgUp}
