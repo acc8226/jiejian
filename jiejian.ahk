@@ -13,7 +13,7 @@ https://wyagd001.github.io/v2/docs/
 ;@Ahk2Exe-SetCopyright 全民反诈 union
 ;@Ahk2Exe-SetDescription 捷键-为简化键鼠操作而生
 
-CodeVersion := "24.1.25-beta"
+CodeVersion := "24.1.28"
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
@@ -161,7 +161,7 @@ SettingTray() {
     A_TrayMenu.ClickCount := 1 ; 单击可以暂停
   
     localIsAlphaOrBeta := InStr(CodeVersion, "alpha") or InStr(CodeVersion, "beta")
-    A_IconTip := "捷键 " . CodeVersion . (A_IsCompiled ? "" : " 未编译") . (localIsAlphaOrBeta ? " 测试版" : "") . (A_PtrSize == 4 ? '32位' : '64位')
+    A_IconTip := "捷键 " . CodeVersion . (A_IsCompiled ? "" : " 未编译") . (localIsAlphaOrBeta ? " 测试版" : " ") . (A_PtrSize == 4 ? '32位' : '64位')
 
     if not A_IsCompiled {
         ; 建议使用 16*16 或 32*32 像素的图标，使用 Ahk2Exe-Let 提取出 favicon.ico
