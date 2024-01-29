@@ -84,7 +84,7 @@
 
 ## 6. 热键 之 其他
 
-* Ctrl + 数字 1-5 为光标所在行添加 markdown 格式标题（目前仅开放了 vscode 和 windows 记事本的使用权限）
+* Ctrl + 数字 1-5 为光标所在行添加 markdown 格式标题（目前仅放开了 vscode 和 windows 记事本的使用权限）
 
 ![输入图片说明](https://foruda.gitee.com/images/1689318964909077353/0518d03d_426858.gif "动画.gif")
 
@@ -98,12 +98,10 @@
 
 启动器特点：
 
-1. 无边框设计，界面极简。
+1. 无边框设计，界面极简。搜索栏设计简洁，支持模糊搜索，帮助快速定位应用。
 2. 使用普适易读的微软雅黑字体，字号设计合理，字体风格简洁大方。
 3. 支持自定义多种关键词进行应用匹配，智能识别用户的启动意图。
-4. 搜索栏设计简洁，支持模糊搜索，帮助快速定位应用。
-5. 系统资源占用少，启动迅速，可靠性高，全天候支持用户的应用启动需求。
-6. 支持自定义配置。
+4. 系统资源占用少，启动迅速，可靠性高，全天候支持用户的应用启动需求。
 
 使用说明：
 
@@ -211,25 +209,27 @@ B列（标识符）为必须项。其余皆为可选项。只需填写需要变�
 * 支持 arc 浏览器 for windows
 * icon 点击后使用新图标，而不是系统样式的图标
 * 配置文件不太易用，需要优化
-* 是否在菜单中增加开机自启
+* 在菜单中增加开机自启选项
 
 ### 捷键 2024.01
 
+2024 年 1 月 29 上午 于北京
+
 软件名从 shortcut 改为 jiejian
+
+这是 24 年的第一个版本，可能也是今年的最后一个版本。
 
 新增：
 
-* 完善对 jetbrains 系列软件的支持，包含衍生的 Google Android Studio 和 华为 DevEco Studio。
-* 支持已过时的 Atom
-* 完善一些文本编辑器、pdf 类、音视频类软件的支持
+* 完善对 jetbrains 系列软件的支持，包含衍生的 Google Android Studio 和 华为 DevEco Studio。完善 jetbrains 系列的关闭键的功能，区分关闭标签和窗口了。
+* 完善一些 office、文本编辑器、pdf 类、音视频类软件的支持
 * 新增鼠标中间和右键的按键支持
-* 新增 按住 CapsLock 后可以用鼠标左键拖动窗口 和 兜底的关闭功能更加完善了
-  
+* 新增 按住 CapsLock 后可以用鼠标左键拖动窗口 和 兜底的关闭功能更加完善了  
 * 添加 [MyKeymap] 和 WGestures 鼠标手势的玩法
-* 新增检查版本更新的功能
-* 重新定义了一套菜单选项
+* 重新定义了一套菜单选项，增加软件使用统计 和 bug 修复。新增检查版本更新的功能
 * 新增一键打包 package.ahk 脚本
-* 版本分为正式版和测试版，测试版本更新会频繁些
+* 版本分为正式版和测试版
+* csv 配置文件字符集改为适合本土体质的的 GB18030
 
 ### 捷键 2023 年度纪念版
 
@@ -397,8 +397,7 @@ CapsLock 命令
 * BvSsh
 * skylark 主程序
 * 【系统】Win11 资源管理器
-* 【系统】Win11 旧版 记事本
-* 【系统】Win11 新版 记事本
+* 【系统】Win11 记事本
 * 【系统】新版 win 11 设置
 * 【浏览器】115
 * 【浏览器】123
@@ -412,17 +411,15 @@ CapsLock 命令
 * 【浏览器】Duck
 * 【浏览器】Duoyu 多御
 * 【浏览器】Edge
-* 【浏览器】Firefox火狐 & Tor洋葱
+* 【浏览器】(Firefox火狐 & Tor洋葱) & Waterfox
 * 【浏览器】Opera
 * 【浏览器】QQ
 * 【浏览器】UC
 * 【浏览器】UU
 * 【浏览器】Vivaldi
-* 【浏览器】Waterfox
 * 【浏览器】Yandex
 * 【浏览器】傲游
 * 【浏览器】斑斓石
-* 【浏览器】红芯【已过时】
 * 【浏览器】华为
 * 【浏览器】极速
 * 【浏览器】联想
@@ -438,7 +435,10 @@ CapsLock 命令
 * 【浏览器】小白
 * 【浏览器】小智双核
 * 【浏览器】一点
+* 【浏览器】红芯【已过时】
 * 【音乐类】foobar2000
+* 【音乐类】iTunes
+* 【音乐类】MusicBee
 * 【音乐类】MusicPlayer2
 * 【音乐类】QQ音乐
 * 【音乐类】Spotify
@@ -453,8 +453,11 @@ CapsLock 命令
 * 【视频类】mpv【部分支持】
 * 【视频类】PotPlayer 64位
 * 【视频类】vlc
+* 【视频类】暴风影音 5
 * 【视频类】抖音【不支持】
 * 【视频类】恒星播放器
+* 【视频类】迅雷影音
+* 【直播类】斗鱼直播【部分支持】
 * 【sql】Beekeeper Studio
 * 【sql】Heidisql
 * 【sql】Navicat
@@ -472,7 +475,8 @@ CapsLock 命令
 * 【editor】Geany
 * 【editor】Kate
 * 【editor】Notepad++
-* 【editor】NotepadNext
+* 【editor】NotepadNext 窗口
+* 【editor】NotepadNext 主窗口
 * 【editor】Notepad--
 * 【editor】Notepads
 * 【editor】Notepad2
@@ -487,23 +491,11 @@ CapsLock 命令
 * 【IDE】MyEclipse
 * 【IDE】Rstudio
 * 【IDE】SpringToolSuite4
-* 【IDE】VS Code
+* 【IDE】VS Code 标签页
+* 【IDE】VS Code 主页
 * 【IDE】Visual Studio
-* 【jetbrains】Aqua
-* 【jetbrains】Clion
-* 【jetbrains】Datagrip
-* 【jetbrains】Dataspell
-* 【jetbrains】Goland
-* 【jetbrains】Idea
-* 【jetbrains】Phpstorm
-* 【jetbrains】Pycharm
-* 【jetbrains】Rider
-* 【jetbrains】RubyMine
-* 【jetbrains】RustRover
-* 【jetbrains】Webstorm
-* 【jetbrains】Writerside
-* 【jetbrains ext】Android Studio
-* 【jetbrains ext】华为 DevEco Studio
+* 【jetbrains】Aqua、Clion、Datagrip、Dataspell、Goland、Idea、Pycharm、Phpstorm、Rider、RubyMine、RustRover、Webstorm、Writerside
+* 【jetbrains ext】Android Studio、华为 DevEco Studio
 * Netbean 32 位 & Jmeter
 * Netbean 64 位
 * 【http调试】Apifox
@@ -529,14 +521,25 @@ CapsLock 命令
 * 【ftp】Xftp
 * 【pdf】Adobe Acrobat
 * 【pdf】Right PDF Reader【部分支持】
-* 【pdf】Sumatra PDF
+* 【pdf】Sumatra PDF 标签页
+* 【pdf】Sumatra PDF 主页
 * 【pdf】UPDF
 * 【pdf】福昕PDF编辑器
 * 【pdf】福昕阅读器
 * 【pdf】极速 PDF
 * 【pdf】金山PDF独立版
 * 【pdf】迅读 PDF
-* LibreOffice 主程序
+* 【pdf】永中Office 版式阅读器
+* 【office】Word 2021【部分支持】
+* 【office】Excel 2021【部分支持】
+* 【office】PPT 2021【部分支持】
+* 【office】LibreOffice 主程序【部分支持】
+* 【office】永中简报 2024
+* 【office】永中简报 2024 首页
+* 【office】永中表格 2024
+* 【office】永中表格 2024 首页
+* 【office】永中文字
+* 【office】ONLYOFFICE
 * Motrix
 * Snipaste
 * thunderbird
@@ -595,13 +598,11 @@ jiejian.exe 的文件版本为当前四位版本号，产品版本为当前编�
 
 ## 软件构建
 
-建议在 64 为环境编译和打包该软件。32 位平台我就没试过。
+必须是 ahk2 + upx 4 的组合。
 
-测试平台：win11 22H2 64 位系统 + ahk 2.0.11 64 位主程序 + UPX 压缩
+我目前使用了 win11 64 位系统 + ahk 2.0.11 64 位 + UPX 的组合。（建议在 64 为环境编译和打包该软件。32 位平台我就没试过）
 
-在安装 ahk 之后，双击 jiejian.ahk 即可运行
-
-打包则双击 package.ahk 即可。
+在安装 ahk 之后，双击 jiejian.ahk 即可运行打包程序。
 
 package.ahk 的设计思路：Ahk2Exe.exe 将 ahk 转化为 exe，期间使用 /compress 制定了压缩方式。ahk 编译会触发 jiejianPostExec.ahk。jiejianPostExec.ahk 做了两件事：写入版本信息 和 将文件夹命名为 jiejian-版本。
 
