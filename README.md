@@ -4,6 +4,8 @@
 
 注意：说明书指向最新版软件，若功能有差异，请[下载并使用最新版](https://gitcode.com/acc8226/jiejian/releases)。
 
+[bilibili 视频演示](https://www.bilibili.com/video/BV19H4y1e7hJ?vd_source=54168537affc2c02555097cb26797d99)
+
 ## 0. 发版目录结构
 
 每次打包都会输出到 out 目录。
@@ -43,7 +45,7 @@
 | - | Alt + → | → |  前进/next |前进 | 前进 | 下一曲 | 快进 | 下一曲 | 下一曲 |
 | 鼠标侧边前进键(XB2) | ctrl + shift + tab | 上左 | 上一个/prev | - | 切换到上个标签 | 上一曲 | 上一个视频 | 上一曲 | 上一曲 |
 | - | Ctrl + Tab | 上右 | 下一个/next | - | 切换下一个标签 | 下一曲 | 下一个视频 | 下一曲 | 下一曲 |
-| - | ctrl + f7 | 图形z | 置顶/zhiding | 置顶 | | | | | |
+| - | Ctrl + F7 | 图形z | 置顶/zhiding | 置顶 | | | | | |
 | - | F11 | 图形f | 全屏/fullscreen | 全屏 | | | | | |
 
 注：
@@ -242,7 +244,7 @@ app.csv 使用了正则表达式，需要使用者对正则有一定了解。主
 
 ### 捷键 2023 年度纪念版
 
-这是 23 年最后的一个版本。提前祝大家 2024 年元旦快乐。
+这是 23 年最后的一个版本，在这里提前祝大家元旦快乐
 
 * 支持青鸟浏览器、小白浏览器、阿里云客户端、Spotify、CudaText、PotPlayer、Devecostudio 64位。
 * 提供了 [WGestures 2] 预设手势方案
