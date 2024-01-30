@@ -75,7 +75,7 @@ text,```js{Enter}{Enter}```{Up},,,,xjs
 text,```xml{Enter}{Enter}```{Up},,,,xxml
 text,```py{Enter}{Enter}```{Up},,,,xpy
 ,,,,,
-web,https://www.baidu.com,百度,baidu,,
+web,https://www.baidu.com,百度,baidu,,zbd
 web,https://www.doubao.com/,豆包,doubao,,zdb
 web,https://www.cnblogs.com,博客园,bokeyuan|cnblogs|博客园,,zcn
 web,https://www.bilibili.com,b站,bilibili|哔哩哔哩|b站,!6,zbi

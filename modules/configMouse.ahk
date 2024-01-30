@@ -2,10 +2,17 @@
 MButton::Send "{Volume_Mute}"
 WheelUp::Send "{Volume_Up}"
 WheelDown::Send "{Volume_Down}"
-XButton1::Send "{Media_Next}"
-XButton2::Send "{Media_Prev}"
-!Left::Send "{Media_Prev}"
-!Right::Send "{Media_Next}"
+
+; 下一曲
+XButton1::
+^F4::
+!Right::
+^Tab::Send "{Media_Next}"
+
+; 上一曲
+XButton2::
+!Left::
+^+Tab::Send "{Media_Prev}"
 
 #HotIf mouseIsOnEdge()
 RButton::Send "{Media_Play_Pause}"

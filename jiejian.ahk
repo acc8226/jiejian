@@ -1,10 +1,6 @@
 ﻿/*
-捷键-为简化 windows 操作。可自定义快捷键、快捷键改写、快捷键功能增强。提供快捷启动等功能。可搭配契合鼠标手势软件。
-
 快速参考 | AutoHotkey v2
 https://wyagd001.github.io/v2/docs/
-
-考虑到快捷键的方便性，原则上只使用和改写现有快捷键，但是如果原有快捷键已经占用则会考虑新造快捷键
 */
 #Requires AutoHotkey >=v2.0
 #SingleInstance force ; 跳过对话框并自动替换旧实例
@@ -13,7 +9,7 @@ https://wyagd001.github.io/v2/docs/
 ;@Ahk2Exe-SetCopyright 全民反诈 union
 ;@Ahk2Exe-SetDescription 捷键-为简化键鼠操作而生
 
-CodeVersion := "24.1.28-beta"
+CodeVersion := "24.1.30-beta"
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%

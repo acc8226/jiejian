@@ -44,3 +44,16 @@ ActivateOrRun(winTitle := "", target := "", args := "", workingDir := "", admin 
   workingDir := workingDir ? workingDir : A_WorkingDir
   RunPrograms(target, args, workingDir, admin, runInBackground)
 }
+
+/**
+ * 窗口置顶
+ */
+ToggleWindowTopMost() {
+  value := !(WinGetExStyle("A") & 0x8)
+  WinSetAlwaysOnTop(value, "A")
+  if value {
+    Tip("已置顶当前窗口")
+  } else {
+    Tip("取消置顶")
+  }
+}
