@@ -82,7 +82,7 @@
 * alt + 7 打开 IT 之家
 * alt + 8 打开 西瓜视频
 
-已知 vscode、win 11 记事本、IDEA 会匹配 alt + 系列的快捷键。
+已知问题：vscode、win 11 记事本、IDEA 会自行匹配 alt + 系列的快捷键导致跳转网址失效。
 
 ![打开网址](https://foruda.gitee.com/images/1689318923398248705/25b1c4c9_426858.gif "动画.gif")
 
@@ -237,7 +237,7 @@ app.csv 使用了正则表达式，需要使用者对正则有一定了解。主
 
 ### 捷键 2024.01
 
-2024 年 1 月 29 上午 于北京
+2024 年 1 月 31 下午 于北京
 
 软件名从 shortcut 改为 jiejian
 
@@ -428,7 +428,8 @@ CapsLock 命令
 * skylark 主程序
 * 【系统】Win11 资源管理器
 * 【系统】Win11 记事本
-* 【系统】新版 win 11 设置
+* 【系统】win 11 设置
+* 【浏览器】飞牛浏览器
 * 【浏览器】115
 * 【浏览器】123
 * 【浏览器】2345
@@ -466,6 +467,7 @@ CapsLock 命令
 * 【浏览器】小智双核
 * 【浏览器】一点
 * 【浏览器】红芯【已过时】
+* 【浏览器】猎鹰浏览器
 * 【音乐类】foobar2000
 * 【音乐类】iTunes
 * 【音乐类】MusicBee
@@ -478,6 +480,7 @@ CapsLock 命令
 * 【音乐类】网易云音乐
 * 【音乐类】喜马拉雅
 * 【音乐类】酷狗音乐
+* 【视频类】bilibili
 * 【视频类】GridPlayer【部分支持】
 * 【视频类】KMPlayer 64位
 * 【视频类】mpv【部分支持】
@@ -487,6 +490,7 @@ CapsLock 命令
 * 【视频类】抖音【不支持】
 * 【视频类】恒星播放器
 * 【视频类】迅雷影音
+* 【视频类】影音先锋
 * 【直播类】斗鱼直播【部分支持】
 * 【sql】Beekeeper Studio
 * 【sql】Heidisql
@@ -505,8 +509,7 @@ CapsLock 命令
 * 【editor】Geany
 * 【editor】Kate
 * 【editor】Notepad++
-* 【editor】NotepadNext 窗口
-* 【editor】NotepadNext 主窗口
+* 【editor】NotepadNext
 * 【editor】Notepad--
 * 【editor】Notepads
 * 【editor】Notepad2
@@ -518,14 +521,13 @@ CapsLock 命令
 * 【IDE】Dev C++
 * 【IDE】Eclipse
 * 【IDE】HbuilderX
+* 【IDE】Aqua、Clion、Datagrip、Dataspell、Goland、Idea、Pycharm、Phpstorm、Rider、RubyMine、RustRover、Webstorm、Writerside
+* 【IDE】Android Studio、华为 DevEco Studio
 * 【IDE】MyEclipse
 * 【IDE】Rstudio
 * 【IDE】SpringToolSuite4
-* 【IDE】VS Code 标签页
-* 【IDE】VS Code 主页
+* 【IDE】VS Code
 * 【IDE】Visual Studio
-* 【jetbrains】Aqua、Clion、Datagrip、Dataspell、Goland、Idea、Pycharm、Phpstorm、Rider、RubyMine、RustRover、Webstorm、Writerside
-* 【jetbrains ext】Android Studio、华为 DevEco Studio
 * Netbean 32 位 & Jmeter
 * Netbean 64 位
 * 【http调试】Apifox
@@ -560,14 +562,12 @@ CapsLock 命令
 * 【pdf】金山PDF独立版
 * 【pdf】迅读 PDF
 * 【pdf】永中Office 版式阅读器
+* 【office】Word 2021【部分支持】
 * 【office】Excel 2021【部分支持】
 * 【office】PPT 2021【部分支持】
-* 【office】Word 2021【部分支持】
 * 【office】LibreOffice 主程序【部分支持】
 * 【office】永中简报 2024
-* 【office】永中简报 2024 首页
 * 【office】永中表格 2024
-* 【office】永中表格 2024 首页
 * 【office】永中文字
 * 【office】ONLYOFFICE
 * Motrix
@@ -575,11 +575,10 @@ CapsLock 命令
 * thunderbird
 * WPS Office
 * WPS 图片查看器
-* bilibili
 * 阿里云客户端
+* 稻壳阅读器
 * 炉石传说
 * 腾讯QQ
-* 稻壳阅读器
 * 微信
 
 无需适配的软件：
