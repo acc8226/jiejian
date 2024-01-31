@@ -107,6 +107,8 @@ Loop appList.Length {
     ; k 列 全屏
     switch it.fs, 'Off' {
       case "^+F12", "^+{F12}": GroupAdd "fullscreen_c_s_f12", it.exe
+      case "回车": GroupAdd "fullscreen_enter", it.exe
+      case "f": GroupAdd "fullscreen_f", it.exe
     }    
   }
 }
@@ -158,8 +160,19 @@ parseDataLine(line) {
     and info.back = ''
     and info.previousTag = ''
     and info.fs = ''
-    )  
-    return  
+    ) {
+      return
+    }
+
+    name := Trim(split[1])
+    if name !== '' and info.exe !== '' {
+      if InStr(name, "【浏览器】")
+        GroupAdd "browser_group", info.exe
+      else if InStr(name, "【editor】")
+        GroupAdd "editor_group", info.exe
+      else if InStr(name, "【IDE】")
+        GroupAdd "IDE_group", info.exe
+    }
   return info
 }
 
@@ -355,8 +368,16 @@ XButton2::Send "{Space}"
 XButton2::Send "^+{Tab}"
 
 ; k 列：F11 功能键增强 全屏
+; 如果是浏览器 且 打开的是 bilibili 则将 f11 转成按键 f
+#HotIf WinActive("哔哩哔哩_bilibili ahk_group browser_group")
+F11::Send "f"
+
 #HotIf WinActive("ahk_group fullscreen_c_s_f12")
 F11::Send "^+{F12}"
+#HotIf WinActive("ahk_group fullscreen_enter")
+F11::Send "Enter"
+#HotIf WinActive("ahk_group fullscreen_f")
+F11::Send "f"
 #HotIf
 
 ; ctrl + F7 通用操作：置顶/取消置顶

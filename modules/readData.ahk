@@ -16,14 +16,10 @@ Loop dataList.Length {
   ; 热串
   if StrLen(it.hs) > 0 {
       if it.type == "web" {
-          ; 排除 vscode 和 【浏览器中鼠标处于光标形状，由于 CaretGetPos() 目前不太完美】
-          HotIf (*) => not (WinActive("ahk_exe Code.exe")
-                            or WinActive("ahk_group browser_group") and A_Cursor == 'IBeam'
-                       )
+          ; 排除在文本编辑器中打开网址
+          HotIf (*) => not (WinActive("ahk_group editor_group") or WinActive("ahk_group IDE_group"))
           Hotstring ":C*:" it.hs, openUrl
       } else if it.type == "text" {
-          ; 由于 CaretGetPos() 目前不太完美，目前只排除 vscode
-          HotIf (*) => not WinActive("ahk_exe Code.exe")
           Hotstring ":C*:" it.hs, it.path
       }
   }

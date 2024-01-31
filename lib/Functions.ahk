@@ -76,7 +76,7 @@ TrayMenuHandler(ItemName, ItemPos, MyMenu) {
     case "项目主页":
       Run "https://gitcode.com/acc8226/jiejian"
     case "帮助文档":
-      Run "https://gitcode.com/acc8226/jiejian/blob/main/README.md"
+      Run "https://gitcode.com/acc8226/jiejian/overview"
     case "关于作者":
       Run "https://gitcode.com/acc8226"
     case "退出":

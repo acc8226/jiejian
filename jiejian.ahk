@@ -9,7 +9,7 @@ https://wyagd001.github.io/v2/docs/
 ;@Ahk2Exe-SetCopyright 全民反诈 union
 ;@Ahk2Exe-SetDescription 捷键-为简化键鼠操作而生
 
-CodeVersion := "24.1.30-beta"
+CodeVersion := "24.1.31-beta"
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
@@ -72,7 +72,7 @@ CheckUpdate ; 检查更新
 ; ----- 6. 热键 之 其他 -----
 ; 文本类 为了 md 增强 记事本 & vscode
 ; ctrl + 数字 1-5 为光标所在行添加 markdown 格式标题
-#HotIf WinActive("ahk_exe notepad.exe") or WinActive("ahk_exe Notepad.exe") or WinActive("ahk_class Chrome_WidgetWin_1 ahk_exe Code.exe") 
+#HotIf WinActive("ahk_exe i)notepad.exe") or WinActive("ahk_class Chrome_WidgetWin_1 ahk_exe Code.exe") 
 ^1::
 ^2::
 ^3::
@@ -95,8 +95,8 @@ CheckUpdate ; 检查更新
 }
 #HotIf
 
-; 暂停脚本 Ctrl+Alt+S
-^!s::{
+^!r::Reload ; Ctrl + Alt + R 重启脚本
+^!s::{ ; 暂停脚本 Ctrl+Alt+S
     Suspend(!A_IsSuspended)
     if (A_IsSuspended) {
         A_TrayMenu.Check(trayMenuDefault)
@@ -104,11 +104,9 @@ CheckUpdate ; 检查更新
         A_TrayMenu.UnCheck(trayMenuDefault)
     }      
 }
-
-; ctrl + alt + v 将剪贴板的内容输入到当前活动应用程序中，防止了一些网站禁止在 HTML 密码框中进行粘贴操作
-^!v::Send A_Clipboard
+^!v::Send A_Clipboard ; ctrl + alt + v 将剪贴板的内容输入到当前活动应用程序中，防止了一些网站禁止在 HTML 密码框中进行粘贴操作
 ^+"::Send '""{Left}' ; ctrl + shift + " 快捷操作-插入双引号
-^!r::Reload ; Ctrl + Alt + R 重启脚本
+
 !Space::Anyrun ; 启动窗口
 
 ; ----- 7. 热串 之 打开网址。选择 z 而非 q，因为 q 的距离在第一行太远了，我称之为 Z 模式，用于全局跳转网址 -----
@@ -147,7 +145,6 @@ SettingTray() {
     A_TrayMenu.Add("使用统计", TrayMenuHandler)
     A_TrayMenu.Add("检查更新", TrayMenuHandler)
     A_TrayMenu.Add
-    A_TrayMenu.Add("项目主页", TrayMenuHandler)
     A_TrayMenu.Add("帮助文档", TrayMenuHandler)
     A_TrayMenu.Add("关于作者", TrayMenuHandler)
     A_TrayMenu.Add
