@@ -1,12 +1,12 @@
 # 捷键 for win 使用说明
 
-捷键-为简化 windows 操作。可自定义快捷键、快捷键改写、快捷键功能增强。提供快捷启动等功能。可搭配契合鼠标手势软件
+捷键-为简化 windows 键鼠操作而生。可自定义快捷键，做到按键功能改写和增强。自带高度可自定义启动器，可搭配全局鼠标手势软件。
 
 注：本程序开放源码，无毒无任何后门也不收集任何信息。如被误报病毒查杀，可尝试自行恢复
 
 说明书指向最新版软件，若功能有差异，请[下载并使用最新版](https://gitcode.com/acc8226/jiejian/releases)
 
-[---视频演示在此---](https://www.bilibili.com/video/BV19H4y1e7hJ?vd_source=54168537affc2c02555097cb26797d99)
+[---视频演示---](https://www.bilibili.com/video/BV19H4y1e7hJ?vd_source=54168537affc2c02555097cb26797d99)
 
 ## 0. 发版目录结构
 
@@ -47,6 +47,7 @@
 | - | Alt + → | → |  前进/next |前进 | 前进 | 下一曲 | 快进 | 下一曲 | 下一曲 |
 | 鼠标侧边前进键(XB2) | ctrl + shift + tab | 上左 | 上一个/prev | - | 切换到上个标签 | 上一曲 | 上一个视频 | 上一曲 | 上一曲 |
 | - | Ctrl + Tab | 上右 | 下一个/next | - | 切换下一个标签 | 下一曲 | 下一个视频 | 下一曲 | 下一曲 |
+| - | Ctrl + n | 右下 | 新建窗口/new| 新建窗口 | | | | | |
 | - | Ctrl + F7 | 图形z | 置顶/zhiding | 置顶 | | | | | |
 | - | F11 | 图形f | 全屏/fullscreen | 全屏/取消全屏 | | | | | |
 
@@ -254,7 +255,7 @@ app.csv 使用了正则表达式，需要使用者对正则有一定了解。主
 * 新增一键打包 package.ahk 脚本
 * 版本分为正式版和测试版
 * csv 文件的字符集改为更适合本土体质的 GB18030
-* 添加了 ctrl + f7 置顶功能 和 f11 全屏/取消全屏
+* 添加了 ctrl + F7 置顶功能 和 f11 全屏/取消全屏
 
 ### 捷键 2023 年度纪念版
 
@@ -357,27 +358,30 @@ app.csv 使用了正则表达式，需要使用者对正则有一定了解。主
 
 由于 WGestures 1 由于不支持字母手势。这里我选用的是【付费】【win mac】WGestures 2。它是一款跨平台全局鼠标手势，且完美契合本软件。目前售价 35 米，优惠的[购买地址](https://store.lizhi.io/site/products/id/523?cid=46jjayiu)我也放这儿了。
 
-| 方向 | 名称 | 按键/功能 |
-| ----  | ---- | ---- |
-| ↗︎ | 最大化/max | 最大化/还原 |
-| ↙︎ | 最小化/min | 最小化 |
-| ↘︎ | 复制/copy | ctrl + c |
-| ↖︎ | 粘贴/paste | ctrl + v |
-| ↑ | 新建/new | ctrl + f8 |
-| ↓ | 关闭/close | ctrl + f4 |
-| ← | 后退/prev | alt ← |
-| → | 前进/next | alt → |
-| ↩ | 重新打开/reopen | ctrl + shift + t |
-| ↪ | 关闭/close | alt + f4 |
-| 上左 | 上一个/prev | ctrl + shift + tab |
-| 上右 | 下一个/next | ctrl + tab |
-| 左上 | 剪切/cut | ctrl + x |
-| 左下 | 删除/del | del |
-| 右上 | 百度选定文字 | wg 的网址直达功能 `https://baidu.com/s?wd={WG_SELECTED_TEXT}` |
-| 右下 | 新建窗口/new | ctrl + shift + n |
-| s | save | ctrl+s |
-| f | 全屏/fullscreen | f11 |
-| z | 置顶/zhiding | ctrl + f7 |
+| 方向 | 名称 | 按键/功能 | 是否可被捷键增强 |
+| ----  | ---- | ---- | ---- |
+| ↗︎ | 最大化/max | 最大化/还原 | - |
+| ↙︎ | 最小化/min | 最小化 | - |
+| ↘︎ | 复制/copy | ctrl + c | - |
+| ↖︎ | 粘贴/paste | ctrl + v | - |
+| ↑ | 新建/new | ctrl + f8 | 是 |
+| ↓ | 关闭/close | ctrl + f4 | 是 |
+| ← | 后退/prev | alt ← | 是 |
+| → | 前进/next | alt → | 是 |
+| ↩ | 重新打开/reopen | ctrl + shift + t | - |
+| ↪ | 关闭/close | alt + f4 | - |
+| 上左 | 上一个/prev | ctrl + shift + tab | 是 |
+| 上右 | 下一个/next | ctrl + tab | 是 |
+| 左上 | 剪切/cut | ctrl + x | - |
+| 左下 | 删除/del | del | - |
+| 右上 | 百度选定文字 | wg 的网址直达功能 `https://baidu.com/s?wd={WG_SELECTED_TEXT}` | - |
+| 右下 | 新建窗口/new | ctrl + n | 是 |
+| z / wg1 只能使用右左 | 置顶/zhiding | ctrl + F7 | 是 |
+| f | 全屏/fullscreen | f11 | 是 |
+| r | 刷新/refresh | ctrl + r | - |
+| s | 保存/save | ctrl+s | - |
+| e | 退出/esc | esc | - |
+| ↗︎↘︎ | 全选/all | ctrl + a | - |
 
 槽点：win 11 资源管理器的新建窗口，不过这样会使得新建文件夹失效，或许得鼠标手势进行区分了，但这就不简洁了。
 

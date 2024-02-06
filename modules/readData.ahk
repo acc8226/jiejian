@@ -42,7 +42,8 @@ parseData(filename) {
 
 parseAppLine(line) {  
   split := StrSplit(line, ",")
-  if split.Length != 6
+  ; 过滤不启用的行
+  if split.Length != 7 or Trim(split[7]) == 'n' or Trim(split[7]) == 'N'
     return 
   
   info := {}

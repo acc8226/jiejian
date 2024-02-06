@@ -2,24 +2,20 @@
  * 智能的关闭窗口
  */
 SmartCloseWindow() {
-  if NotActiveWin() {
-    return
-  }
-
-  if (WinActive("- Microsoft Visual Studio ahk_exe devenv.exe")) {
-    Send("^{F4}")
-  } else {
-    if (WinGetClass("A") == "ApplicationFrameWindow" || GetProcessName() == "explorer.exe") {
-      Send("!{F4}")
-    } else {
+  if WinExist('A') {
+    if IsDesktop()
+      return
+    if (WinGetClass("A") == "ApplicationFrameWindow" || GetProcessName() == "explorer.exe")
+      Send "!{F4}"
+    else
       PostMessage(0x112, 0xF060, , , "A")
-    }
-  }
+  } else
+    MsgBox '活动窗口未找到，请重试，3 秒后弹窗将自动关闭', , 'T3'
 }
 
 /**
  * 启动程序或切换到程序
- * @param {string} winTitle AHK中的WinTitle
+ * @param {string} winTitle AHK 中的 WinTitle
  * @param {string} target 程序的路径
  * @param {string} args 参数
  * @param {string} workingDir 工作文件夹

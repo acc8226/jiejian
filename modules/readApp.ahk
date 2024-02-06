@@ -104,12 +104,16 @@ Loop appList.Length {
       case "Media_Play_Pause", "{Media_Play_Pause}": GroupAdd "previous_mediaPlayPause", it.exe
       case 'Space', "{Space}": GroupAdd "previous_space", it.exe
     }
-    ; k 列 全屏
+    ; k 列 新建窗口
+    switch it.newWin, 'Off' {
+      case "^+n": GroupAdd "newWin_c_s_n", it.exe
+    }
+    ; l 列 全屏
     switch it.fs, 'Off' {
       case "^+F12", "^+{F12}": GroupAdd "fullscreen_c_s_f12", it.exe
       case "回车": GroupAdd "fullscreen_enter", it.exe
       case "f": GroupAdd "fullscreen_f", it.exe
-    }    
+    }
   }
 }
 
@@ -130,7 +134,7 @@ parseApp(fileName) {
 parseDataLine(line) {
   split := StrSplit(line, ",")
   ; 跳过不符合条件的行
-  if split.Length < 11
+  if split.Length < 13 or Trim(split[13]) == 'n' or Trim(split[13]) == 'N'
     return 
   info := {}
   ; 跳过 exe 为空的行
@@ -138,7 +142,7 @@ parseDataLine(line) {
   if info.exe = ''
     return
   ; 判断是否是高等级
-  info.highLevel := split[2] = "高"
+  info.highLevel := split[2] == "高"
 
   info.new := Trim(split[4])
   info.escape := Trim(split[5])
@@ -148,7 +152,9 @@ parseDataLine(line) {
   info.nextTag := Trim(split[8])
   info.back := Trim(split[9])
   info.previousTag := Trim(split[10])  
-  info.fs := Trim(split[11])
+  info.newWin := Trim(split[11])
+
+  info.fs := Trim(split[12])
 
   ; 过滤空行
   if (info.new = ''
@@ -160,6 +166,8 @@ parseDataLine(line) {
     and info.back = ''
     and info.previousTag = ''
     and info.fs = ''
+
+    and info.newWin = ''
     ) {
       return
     }
@@ -276,7 +284,7 @@ XButton1::Send "^+w"
 XButton1::Send "^{F4}"
 ; 兜底2
 #HotIf
-XButton1::SmartCloseWindow ; 比 WinClose "A" 好使
+XButton1::SmartCloseWindow
 
 ; g. 前进键
 #HotIf WinActive("ahk_group forward_mediaNext")
@@ -382,3 +390,7 @@ F11::Send "f"
 
 ; ctrl + F7 通用操作：置顶/取消置顶
 ^F7::ToggleWindowTopMost
+
+#HotIf WinActive("ahk_group newWin_c_s_n")
+^n::Send "^+n"
+#HotIf

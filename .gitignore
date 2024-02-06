@@ -4,3 +4,5 @@
 /out
 jiejian*.exe
 log.txt
+
+*.db
