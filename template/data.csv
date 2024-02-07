@@ -1,42 +1,42 @@
-类型,启动路径,运行名称,运行关键字,热键关键字,热串关键字 
-app,netstat,网络状态,wangluozhuangtai|网络状态,,
-app,inetcpl.cpl,Internet选项,inetcpl|Internet选项,,
-app,Firewall.cpl,防火墙,fanghuoqiang|防火墙,,
-app,winver,关于Windows,guanyuwindows|关于Windows,,
-app,diskmgmt.msc,磁盘管理,diskmgmt|dianyuanxuanxiang|磁盘管理,,
-app,powercfg.cpl,电源选项,dianyuanxuanxiang|电源选项,,
-app,magnify,放大镜,fangdajing|放大镜,,
-app,mspaint,画图,huatu|画图,,
-app,osk,屏幕键盘,pingmujianpan|屏幕键盘,,
-app,Notepad,记事本,notepad|jishiben|记事本,!j,
-app,control,控制面板,kongzhimianban|控制面板,,
-app,sk.cpl,屏幕分辨率,pingmufenbianlv|屏幕分辨率,,
-app,hdwwiz.cpl ,设备管理器,hdwwiz.cpl|shebeiguanliqi|设备管理器,,
-app,main.cpl,鼠标属性,main.cpl|shubiaoshuxing|鼠标属性,,
-app,eventvwr ,事件查看器,eventvwr|shijianchakanqi|事件查看器,,
-app,mmsys.cpl,声音属性,mmsys.cpl|shengyinshuxing|声音属性,,
-app,taskmgr,任务管理器,taskmgr|renwuguanliqi|任务管理器,,
-app,explorer,资源管理器,explorer|ziyuanguanliqi|资源管理器,,
-app,mstsc,远程协助,mstsc|yuanchengzhuomian|远程协助,,
-app,write,写字板,write|xieziban|写字板,,
-,,,,,
-file,D:\,D盘,,!d,
-,,,,,
-text,很牛呀,,,,xnb 
-text,你妹的,,,,xnm 
-text,😄,微笑,,,xwx 
-text,😊,脸红,,,xlh
-text,👌,OK,,,xok
-text,❤️,爱心,,,xax
-text,📰,报纸,,,xbz
-text,🏷,标签,,,xbq
-text,🔖,书签,,,xsq
-text,💩,大便,,,xsh
-text,👻,鬼魂,,,xgh
-,,,,,
-web,https://www.baidu.com/,百度,baidu,,zbd
-web,https://www.bilibili.com/,b站,bilibili,!6,zbi
-web,https://www.douyin.com/,抖音,douyin,,zdy
-web,https://www.ithome.com,IT之家,itzhijia,!7,zit
-web,https://mail.qq.com,qq邮箱,qqyouxiang,,zma
-web,https://www.ixigua.com,西瓜视频,xiguashpin,!8,zxg
+类型,启动路径,运行名称,运行关键字,热键关键字,热串关键字,是否启用 y/n
+app,netstat,网络状态,wangluozhuangtai|网络状态,,,
+app,inetcpl.cpl,Internet选项,inetcpl|Internet选项,,,
+app,Firewall.cpl,防火墙,fanghuoqiang|防火墙,,,
+app,winver,关于Windows,guanyuwindows|关于Windows,,,
+app,diskmgmt.msc,磁盘管理,diskmgmt|dianyuanxuanxiang|磁盘管理,,,
+app,powercfg.cpl,电源选项,dianyuanxuanxiang|电源选项,,,
+app,magnify,放大镜,fangdajing|放大镜,,,
+app,mspaint,画图,huatu|画图,,,
+app,osk,屏幕键盘,pingmujianpan|屏幕键盘,,,
+app,Notepad,记事本,notepad|jishiben|记事本,!j,,
+app,control,控制面板,kongzhimianban|控制面板,,,
+app,sk.cpl,屏幕分辨率,pingmufenbianlv|屏幕分辨率,,,
+app,hdwwiz.cpl ,设备管理器,hdwwiz.cpl|shebeiguanliqi|设备管理器,,,
+app,main.cpl,鼠标属性,main.cpl|shubiaoshuxing|鼠标属性,,,
+app,eventvwr ,事件查看器,eventvwr|shijianchakanqi|事件查看器,,,
+app,mmsys.cpl,声音属性,mmsys.cpl|shengyinshuxing|声音属性,,,
+app,taskmgr,任务管理器,taskmgr|renwuguanliqi|任务管理器,,,
+app,explorer,资源管理器,explorer|ziyuanguanliqi|资源管理器,,,
+app,mstsc,远程协助,mstsc|yuanchengzhuomian|远程协助,,,
+app,write,写字板,write|xieziban|写字板,,,
+,,,,,,
+file,D:\,D盘,,!d,,
+,,,,,,
+text,很牛呀,,,,xnb ,
+text,你妹的,,,,xnm ,
+text,😄,微笑,,,xwx ,
+text,😊,脸红,,,xlh,
+text,👌,OK,,,xok,
+text,❤️,爱心,,,xax,
+text,📰,报纸,,,xbz,
+text,🏷,标签,,,xbq,
+text,🔖,书签,,,xsq,
+text,💩,大便,,,xsh,
+text,👻,鬼魂,,,xgh,
+,,,,,,
+web,https://www.baidu.com/,百度,baidu,,zbd,
+web,https://www.bilibili.com/,b站,bilibili,!6,zbi,
+web,https://www.douyin.com/,抖音,douyin,,zdy,
+web,https://www.ithome.com,IT之家,itzhijia,!7,zit,
+web,https://mail.qq.com,qq邮箱,qqyouxiang,,zma,
+web,https://www.ixigua.com,西瓜视频,xiguashpin,!8,zxg,

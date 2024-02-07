@@ -1,4 +1,4 @@
-﻿#Include "sort.ahk"
+﻿#Include "Sort.ahk"
 
 Anyrun() {
     guiTitle := "快捷启动"
@@ -75,9 +75,21 @@ Anyrun() {
         listbox.OnEvent("DoubleClick", listBoxOnDoubleClick)
         listBoxOnDoubleClick(thisGui, *) {
             ; 此时 listbox 必定有焦点，则根据 title 反查 path
-            try Run appFindPathByListBoxText(dataList, listBox.Text)
-            catch {
-                MsgBox "找不到目标应用"
+            it := appFindPathByListBoxText(dataList, listBox.Text)
+            if it.title == '微信' {
+                try {
+                    Run it.path,,, &pid
+                    WinWaitActive "ahk_pid " pid
+                    Send "{Space}"
+                } catch {
+                    MsgBox "找不到目标应用"
+                }
+            } else {
+                try {
+                    Run it.path
+                } catch {
+                    MsgBox "找不到目标应用"
+                }
             }
             MyGui.Destroy()
         }

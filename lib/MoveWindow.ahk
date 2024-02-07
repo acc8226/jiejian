@@ -1,5 +1,4 @@
-EWD_MoveWindow(*)
-{
+EWD_MoveWindow(*) {
     CoordMode "Mouse"  ; Switch to screen/absolute coordinates.
     MouseGetPos &EWD_MouseStartX, &EWD_MouseStartY, &EWD_MouseWin
     WinGetPos &EWD_OriginalPosX, &EWD_OriginalPosY,,, EWD_MouseWin

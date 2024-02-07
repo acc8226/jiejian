@@ -9,12 +9,12 @@ https://wyagd001.github.io/v2/docs/
 ;@Ahk2Exe-SetCopyright 全民反诈 union
 ;@Ahk2Exe-SetDescription 捷键-为简化键鼠操作而生
 
-CodeVersion := "24.2.6-beta"
+CodeVersion := '24.2.7-beta'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
 ; 往对应文件写入对应版本号，只在生成 32 位 exe 的时候执行
-;@Ahk2Exe-Obey U_V, = %A_PtrSize% == 4 ? "PostExec" : "Nop"
+;@Ahk2Exe-Obey U_V, = %A_PtrSize% == 4 ? 'PostExec' : 'Nop'
 ; 提取出 文件名 再拼接 PostExec.ahk; 版本号; 2 仅在指定 UPX 压缩时运行 ; 脚本所在路径
 ;@Ahk2Exe-%U_V% %A_ScriptName~\.[^\.]+$~PostExec.ahk% %U_version%, 2, %A_ScriptDir%
 
@@ -22,7 +22,7 @@ regKeyName := 'HKEY_CURRENT_USER\SOFTWARE\jiejian'
 startTime := A_NowUTC
 
 ; ----- 1. 热键 之 鼠标操作 -----
-CoordMode "Mouse" ; 默认坐标相对于桌面(整个屏幕)
+CoordMode 'Mouse' ; 默认坐标相对于桌面(整个屏幕)
 FileEncoding 54936 ; Windows XP 及更高版本： GB18030 简体中文 (4 字节)
 SetTitleMatchMode "RegEx" ; 设置 WinTitle parameter 在内置函数中的匹配行为
 
@@ -31,11 +31,11 @@ SetTitleMatchMode "RegEx" ; 设置 WinTitle parameter 在内置函数中的匹�
 #Include "lib/MoveWindow.ahk"
 #Include "lib/Utils.ahk"
 
-#Include "modules/configMouse.ahk"
-#Include "modules/utils.ahk"
-#Include "modules/anyrun.ahk"
-#Include "modules/readApp.ahk"
-#Include "modules/readData.ahk"
+#Include "modules/ConfigMouse.ahk"
+#Include "modules/Utils.ahk"
+#Include "modules/Anyrun.ahk"
+#Include "modules/ReadApp.ahk"
+#Include "modules/ReadData.ahk"
 #Include "modules/CheckUpdate.ahk"
 
 SettingTray ; 设置托盘图标和菜单
@@ -49,7 +49,7 @@ CheckUpdate ; 检查更新
 ; 仅是实验，使用 Alt 则怕和编辑器冲突，能鼠标手势还是鼠标手势靠谱，跳过了快捷键，实现效果更好
 ; ; alt + m Minimize 最小化当前活动窗口
 ; !m::WinMinimize "A"
-; ; alt + f fullscreen 最大化或还原
+; ; alt + f fullscreen 最大化或还
 ; !f::{
 ;     minMax := WinGetMinMax("A")
 ;     if minMax = 1
@@ -72,7 +72,7 @@ CheckUpdate ; 检查更新
 ; ----- 6. 热键 之 其他 -----
 ; 文本类 为了 md 增强 记事本 & vscode
 ; ctrl + 数字 1-5 为光标所在行添加 markdown 格式标题
-#HotIf WinActive("ahk_exe i)notepad.exe") or WinActive("ahk_class Chrome_WidgetWin_1 ahk_exe Code.exe") 
+#HotIf WinActive("ahk_exe i)notepad.exe") or WinActive("ahk_class i)Chrome_WidgetWin_1 ahk_exe i)Code.exe") 
 ^1::
 ^2::
 ^3::
@@ -96,7 +96,7 @@ CheckUpdate ; 检查更新
 #HotIf
 
 ^!r::Reload ; Ctrl + Alt + R 重启脚本
-^!s::{ ; 暂停脚本 Ctrl+Alt+S
+^!s::{ ; Ctrl + Alt + S 暂停脚本
     Suspend(!A_IsSuspended)
     if (A_IsSuspended) {
         A_TrayMenu.Check(trayMenuDefault)
@@ -165,7 +165,7 @@ SettingTray() {
     }        
 }
 
-; 触发热键时, 热键中按键原有的功能不会被屏蔽(对操作系统隐藏).
+; 触发热键时, 热键中按键原有的功能不会被屏蔽(对操作系统隐藏)
 ; ~LButton & b::Run "https://www.baidu.com"
 
 ; 注册一个当脚本退出时, 会自动调用的函数.

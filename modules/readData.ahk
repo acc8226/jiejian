@@ -43,7 +43,7 @@ parseData(filename) {
 parseAppLine(line) {  
   split := StrSplit(line, ",")
   ; 过滤不启用的行
-  if split.Length != 7 or Trim(split[7]) == 'n' or Trim(split[7]) == 'N'
+  if split.Length < 7 or Trim(split[7]) == 'n' or Trim(split[7]) == 'N'
     return 
   
   info := {}
@@ -54,10 +54,16 @@ parseAppLine(line) {
   if StrLen(info.path) > 1 and '"""' == SubStr(info.path, 1, 3) and '"""' == SubStr(info.path, -3)
     info.path := SubStr(info.path, 4, -3)
 
-  info.title := Trim(split[3])  
-  aliases := StrSplit(Trim(split[4]), "|")
+  ; 过滤空行
+  if (info.type == '' and info.path == '') {
+    return
+  }
+
+  info.title := Trim(split[3])
+  split4 := Trim(split[4])
+  aliases := StrSplit(split4, "|")
   ; 如果数组长度 > 1 则存成数组
-  info.alias := (aliases.Length > 1) ? aliases : Trim(split[4])
+  info.alias := (aliases.Length > 1) ? aliases : split4
   info.hk := Trim(split[5])
   info.hs := Trim(split[6])
 
@@ -65,5 +71,9 @@ parseAppLine(line) {
 }
 
 openUrl(hs) {
-  Run webFindPathByHs(dataList, StrReplace(hs, ":C*:"))
+  it := webFindPathByHs(dataList, StrReplace(hs, ":C*:"))
+  Run it.path
+  
+  ToolTip "打开 " . it.title
+  SetTimer () => ToolTip(), -2000
 }

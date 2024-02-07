@@ -157,30 +157,30 @@ parseDataLine(line) {
   info.fs := Trim(split[12])
 
   ; 过滤空行
-  if (info.new = ''
-    and info.escape = ''
-    and info.close = ''
+  if (info.new == ''
+    and info.escape == ''
+    and info.close == ''
 
-    and info.forward = ''
-    and info.nextTag = ''
-    and info.back = ''
-    and info.previousTag = ''
-    and info.fs = ''
+    and info.forward == ''
+    and info.nextTag == ''
+    and info.back == ''
+    and info.previousTag == ''
+    and info.fs == ''
 
-    and info.newWin = ''
-    ) {
-      return
-    }
+    and info.newWin == ''
+  ) {
+    return
+  }
 
-    name := Trim(split[1])
-    if name !== '' and info.exe !== '' {
-      if InStr(name, "【浏览器】")
-        GroupAdd "browser_group", info.exe
-      else if InStr(name, "【editor】")
-        GroupAdd "editor_group", info.exe
-      else if InStr(name, "【IDE】")
-        GroupAdd "IDE_group", info.exe
-    }
+  name := Trim(split[1])
+  if name !== '' and info.exe !== '' {
+    if InStr(name, "【浏览器】")
+      GroupAdd "browser_group", info.exe
+    else if InStr(name, "【editor】")
+      GroupAdd "editor_group", info.exe
+    else if InStr(name, "【IDE】")
+      GroupAdd "IDE_group", info.exe
+  }
   return info
 }
 

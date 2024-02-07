@@ -7,7 +7,7 @@
 
 ; 根据 title 添加 “-类型” 的后缀
 quickTitle(value) {
-    return  value.title "-" value.type
+    return value.title "-" value.type
 }
 
 ; 根据显示内容反向查询路径
@@ -19,8 +19,8 @@ appFindPathByListBoxText(dataList, listBoxText) {
             if type == 'app' or type == 'web' {
                 title := split[1]
                 for value in dataList {
-                    if StrLen(value.title) > 0 and title == value.title and type == value.type                            
-                        return value.path                    
+                    if StrLen(value.title) > 0 and title == value.title and type == value.type
+                        return value
                 }
             }
         }
@@ -28,9 +28,9 @@ appFindPathByListBoxText(dataList, listBoxText) {
 }
 
 webFindPathByHs(dataList, hs) {
-    for value in dataList {
-        if value.type == 'web' and value.hs == hs
-            return value.path
+    for it in dataList {
+        if it.type == 'web' and it.hs == hs
+            return it
     }
 }
 
@@ -52,7 +52,7 @@ appStartByHk(hk) {
                 }
             }
             return
-        }            
+        }
     }
 }
 

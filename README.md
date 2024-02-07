@@ -246,14 +246,14 @@ app.csv 使用了正则表达式，需要使用者对正则有一定了解。主
 
 新增：
 
-* 完善对 jetbrains 系列软件的支持，包含衍生的 Google Android Studio 和 华为 DevEco Studio。完善 jetbrains 系列的关闭键的功能，可以智能关闭标签和窗口了
-* 完善一些 office、文本编辑器、pdf 类、音视频类软件的支持
+* 完善对 JetBrains 系列软件的支持，包含衍生的 Google Android Studio 和 华为 DevEco Studio。完善 JetBrains 系列的关闭键的功能，可以智能关闭标签和窗口了
+* 完善一些对微软 office、文本编辑器、pdf 类、音视频类软件的支持
 * 新增鼠标中间和右键的按键支持
-* 新增 按住 CapsLock 后可以用鼠标左键拖动窗口 和 兜底的关闭功能更加完善了  
+* 新增 按住 CapsLock 后可以用鼠标左键拖动窗口 和 兜底的关闭功能更加完善了
 * 添加 MyKeymap 和 WGestures 2 的鼠标手势的玩法
 * 重新定义了一套菜单选项，增加软件使用统计 和 bug 修复。新增检查版本更新的功能
-* 新增一键打包 package.ahk 脚本
-* 版本分为正式版和测试版
+* 新增 一键打包 package.ahk 脚本
+* 版本划分为正式版和测试版
 * csv 文件的字符集改为更适合本土体质的 GB18030
 * 添加了 ctrl + F7 置顶功能 和 f11 全屏/取消全屏
 
@@ -261,7 +261,7 @@ app.csv 使用了正则表达式，需要使用者对正则有一定了解。主
 
 这是 23 年最后的一个版本，在这里提前祝大家元旦快乐
 
-* 支持青鸟浏览器、小白浏览器、阿里云客户端、Spotify、CudaText、PotPlayer、Devecostudio 64位。
+* 支持青鸟浏览器、小白浏览器、阿里云客户端、Spotify、CudaText、PotPlayer、Devecostudio 64 位。
 * 提供了 WGestures 2 预设手势方案
 * bug 修复
 
@@ -349,6 +349,10 @@ app.csv 使用了正则表达式，需要使用者对正则有一定了解。主
 ### 如何将捷键设置为开机自启
 
 在运行窗口中运行 `shell:startup`，根据自己是 32 还是 64 位系统，按住 alt 键将 `jiejian32.exe` 或 `jiejian64.exe` 拖入 Startup 文件夹内即可。
+
+### 启动 zeal.exe 发现加载目录为空
+
+使用 zeal.lnk 这种形式进行启动
 
 ## 附录
 
@@ -591,7 +595,7 @@ CapsLock 命令
 
 已知 bug：
 
-* 适配不太好的软件：搜狗浏览器、Right PDF Reader 的鼠标侧边后退键无效。
+* 适配不太好的软件：Right PDF Reader 的鼠标侧边后退键无效。
 * 测试关闭窗口不奏效的软件：极客卸载、注册表编辑器、windows 任务管理器（似乎屏蔽了 ctrl 键）。 WGestures 的导入导出窗口。
 
 ### 设计思路
