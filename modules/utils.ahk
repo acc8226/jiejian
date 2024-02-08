@@ -1,11 +1,4 @@
-﻿findPathByHk(dataList, hk) {
-    for value in dataList {
-        if value.hk == hk
-            return value.path
-    }
-}
-
-; 根据 title 添加 “-类型” 的后缀
+﻿; 根据 title 添加 “-类型” 的后缀
 quickTitle(value) {
     return value.title "-" value.type
 }
@@ -16,42 +9,55 @@ appFindPathByListBoxText(dataList, listBoxText) {
         split := StrSplit(listBoxText, '-')
         if split.Length == 2 {
             type := split[2]
-            if type == 'app' or type == 'web' {
+            if type = 'app' or type = 'web' {
                 title := split[1]
-                for value in dataList {
-                    if StrLen(value.title) > 0 and title == value.title and type == value.type
-                        return value
+                if StrLen(title) > 0 {
+                    for it in dataList {
+                        if title = it.title and type = it.type
+                            return it
+                    }
                 }
             }
         }
     }
 }
 
-webFindPathByHs(dataList, hs) {
+; 热键启动
+startByHotKey(hk) {
     for it in dataList {
-        if it.type == 'web' and it.hs == hs
-            return it
+        if it.hk == hk {
+            if it.type = 'web' or it.type = 'file' {
+                Run it.path
+                Tip("打开 " . it.title)
+            } else if it.type = 'app' {
+                ActivateOrRun(it.winTitle, it.path)
+                ; ; 如果未启动则启动,否则激活
+                ; if WinExist("ahk_exe " it.path)
+                ;     WinActivate
+                ; else {
+                ;     try {
+                ;         Run it.path
+                ;         Tip("打开 " . it.title)
+                ;     } catch {
+                ;         MsgBox "程序启动失败，请确认 " it.path " 是否存在？"
+                ;     }
+                ; }
+            }
+            break
+        }
     }
 }
 
-; 复杂启动
-appStartByHk(hk) {
-    for value in dataList {
-        if value.hk == hk {
-            if value.type == 'web' or value.type == 'file' {
-                Run value.path
-            } else if value.type == 'app' {
-                ; 如果未启动则启动,否则激活
-                if WinExist("ahk_exe " value.path)
-                    WinActivate
-                else {
-                    try Run value.path
-                    catch {
-                        MsgBox "程序启动失败，请确认 " value.path " 是否存在？"
-                    }
-                }
+; 热串启动
+startByHotString(hs) {
+    myHs := StrReplace(hs, ":C*:")
+    for it in dataList {
+        if it.hs == myHs {
+            if it.type = 'web' {
+                Run it.path
+                Tip("打开 " . it.title)
             }
-            return
+            break
         }
     }
 }

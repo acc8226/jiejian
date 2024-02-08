@@ -9,8 +9,9 @@ SmartCloseWindow() {
       Send "!{F4}"
     else
       PostMessage(0x112, 0xF060, , , "A")
-  } else
-    MsgBox '活动窗口未找到，请重试，3 秒后弹窗将自动关闭', , 'T3'
+  } else {
+    MsgBox '无活动窗口，2 秒后弹窗自动关闭后请重试', , 'T2'
+  }
 }
 
 /**

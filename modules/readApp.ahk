@@ -8,15 +8,15 @@ Loop appList.Length {
   it := appList[A_Index]
   if it.highLevel {
     ; 高优先级
-    ; e 列
+    ; e 列 esc
     switch it.escape, 'Off' {
-      case "WinClose": GroupAdd "HL_esc_WinClose", it.exe      
+      case "WinClose": GroupAdd "HL_esc_WinClose", it.exe
     }
-    ; f 列
+    ; f 列 关闭
     switch it.close, 'Off' {
-      case 'Esc', "{Esc}": GroupAdd "HL_close_Esc", it.exe
-      case '!F4', "!{F4}": GroupAdd "HL_close_alt_F4", it.exe
-      case '^F4', "^{F4}": GroupAdd "HL_close_ctrl_F4", it.exe        
+      case "Esc", "{Esc}": GroupAdd "HL_close_Esc", it.exe
+      case "!F4", "!{F4}": GroupAdd "HL_close_alt_F4", it.exe
+      case "^F4", "^{F4}": GroupAdd "HL_close_ctrl_F4", it.exe
     }
   } else {
     ; 低优先级
@@ -30,73 +30,72 @@ Loop appList.Length {
 
       case "!o": GroupAdd "new_alt_o", it.exe
       case "^n": GroupAdd "new_ctrl_n", it.exe
-      case "{Control Down}n{Control Up}": GroupAdd "new_ctrl_n_2", it.exe
       case "^o": GroupAdd "new_ctrl_o", it.exe
       case "^t": GroupAdd "new_ctrl_t", it.exe
-
       case "^!t": GroupAdd "new_ctrl_alt_t", it.exe
+
       case "^+t": GroupAdd "new_ctrl_shift_t", it.exe
       case "^+n": GroupAdd "new_ctrl_shift_n", it.exe
     }
-    ; e 列
+    ; e 列 esc
     switch it.escape, 'Off' {
       case "WinClose": GroupAdd "esc_WinClose", it.exe
     }
-    ; f 列
+    ; f 列 关闭
     switch it.close, 'Off' {
-      case "]": GroupAdd "close_closeBracket", it.exe
       case "Esc", "{Esc}": GroupAdd "close_Esc", it.exe
       case '!F4', "!{F4}": GroupAdd "close_alt_F4", it.exe
-      case "{Alt Down}{F4 Down}{F4 Up}{Alt Up}": GroupAdd "close_alt_F4_2", it.exe
+      case "]": GroupAdd "close_closeBracket", it.exe
       case "!l": GroupAdd "close_alt_l", it.exe
-
       case "!q": GroupAdd "close_alt_q", it.exe
+
       case "!w": GroupAdd "close_alt_w", it.exe
+      case "^F4", "^{F4}": GroupAdd "close_ctrl_F4", it.exe
       case "^w": GroupAdd "close_ctrl_w", it.exe
       case "^!q": GroupAdd "close_ctrl_alt_q", it.exe
       case "^+w": GroupAdd "close_ctrl_shift_w", it.exe
-      
-      case "^F4", "^{F4}": GroupAdd "close_ctrl_F4", it.exe
     }
     ; g 列 前进
     switch it.forward, 'Off' {
-      case "Media_Next", "{Media_Next}": GroupAdd "forward_mediaNext", it.exe
-      case "^Right", "^{Right}": GroupAdd "forward_ctrl_Right", it.exe
+      case "Media_Next", "{Media_Next}": GroupAdd "forward_MediaNext", it.exe
       case "PgDn", "{PgDn}": GroupAdd "forward_PgDn", it.exe
       case "Right", "{Right}": GroupAdd "forward_Right", it.exe
+      case "^Right", "^{Right}": GroupAdd "forward_ctrl_Right", it.exe
+      case "^Tab", "^{Tab}": GroupAdd "forward_ctrl_Tab", it.exe
     }
     ; h 列 下个标签
     switch it.nextTag, 'Off' {
-      case "{Media_Next}": GroupAdd "next_mediaNext", it.exe
-      case "]": GroupAdd "next_closeBracket", it.exe
       case "n": GroupAdd "next_n", it.exe
+      case "]": GroupAdd "next_closeBracket", it.exe
+      case "Media_Next", "{Media_Next}": GroupAdd "next_MediaNext", it.exe
       case "Down", "{Down}": GroupAdd "next_Down", it.exe
-      case "^PgDn": GroupAdd "next_ctrl_shift_PgDn", it.exe
+      case "PgDn", "{PgDn}": GroupAdd "next_PgDn", it.exe
 
       case "!]": GroupAdd "next_alt_closeBracket", it.exe
-      case "!{Right}": GroupAdd "next_alt_Right", it.exe
-      case "^PgDn": GroupAdd "next_ctrl_PgDn", it.exe
-      case "^!{Right}": GroupAdd "next_ctrl_alt_Right", it.exe
-      case "{PgDn}": GroupAdd "next_PgDn", it.exe
+      case "!Right", "!{Right}": GroupAdd "next_alt_Right", it.exe
+      case "^PgDn", "^{PgDn}": GroupAdd "next_ctrl_PgDn", it.exe
+      case "^!PgDn": GroupAdd "next_ctrl_shift_PgDn", it.exe
+      case "^!Right", "^!{Right}": GroupAdd "next_ctrl_alt_Right", it.exe
     }
     ; I 列 后退
     switch it.back, 'Off' {
-      case "{Media_Prev}": GroupAdd "back_Media_Prev", it.exe
-      case "PgUp", "{PgUp}": GroupAdd "back_PgUp", it.exe
       case "Left", "{Left}": GroupAdd "back_Left", it.exe
+      case "Media_Prev", "{Media_Prev}": GroupAdd "back_MediaPrev", it.exe
+      case "PgUp", "{PgUp}": GroupAdd "back_PgUp", it.exe
       case 'Up', "{Up}": GroupAdd "back_Up", it.exe
+      case "^+Tab", "^+{Tab}": GroupAdd "back_ctrl_shift_Tab", it.exe
     }
     ; J 列 上个标签
     switch it.previousTag, 'Off' {
       case "p": GroupAdd "previous_p", it.exe
       case "[": GroupAdd "previous_openBracket", it.exe
-      case "Media_Prev", "{Media_Prev}": GroupAdd "previous_mediaPrev", it.exe
+      case "Media_Prev", "{Media_Prev}": GroupAdd "previous_MediaPrev", it.exe
       case 'Up', "{Up}": GroupAdd "previous_Up", it.exe
       case "PgUp", "{PgUp}": GroupAdd "previous_PgUp", it.exe
 
       case "!0": GroupAdd "previous_alt_0", it.exe
-      case "!Left", "!{Left}": GroupAdd "previous_alt_Left", it.exe
       case "![": GroupAdd "previous_alt_openBracket", it.exe
+      case "!Left", "!{Left}": GroupAdd "previous_alt_Left", it.exe
       case "^Left", "^{Left}": GroupAdd "previous_ctrl_Left", it.exe
       case "^PgUp", "^{PgUp}": GroupAdd "previous_ctrl_PgUp", it.exe
 
@@ -106,35 +105,36 @@ Loop appList.Length {
     }
     ; k 列 新建窗口
     switch it.newWin, 'Off' {
-      case "^+n": GroupAdd "newWin_c_s_n", it.exe
+      case "^+n": GroupAdd "newWin_ctrl_shift_n", it.exe
     }
     ; l 列 全屏
     switch it.fs, 'Off' {
-      case "^+F12", "^+{F12}": GroupAdd "fullscreen_c_s_f12", it.exe
-      case "回车": GroupAdd "fullscreen_enter", it.exe
       case "f": GroupAdd "fullscreen_f", it.exe
+      case "Enter", "{Enter}", "回车": GroupAdd "fullscreen_enter", it.exe
+      case "^+F12", "^+{F12}": GroupAdd "fullscreen_ctrl_shift_F12", it.exe
     }
   }
 }
 
 parseApp(fileName) {
   appList := []
+  eachLineLen := 13
   ; 每次从字符串中检索字符串(片段)
   Loop Parse, FileRead(fileName), "`n", "`r" {
       ; 跳过首行
       if A_Index >= 2 {
-        appInfo := parseDataLine(A_LoopField)
+        appInfo := parseAppLine(A_LoopField, eachLineLen)
         if appInfo
-            appList.Push(appInfo)
+          appList.Push(appInfo)
       }
   }
   return appList  
 }
 
-parseDataLine(line) {
+parseAppLine(line, eachLineLen) {
   split := StrSplit(line, ",")
   ; 跳过不符合条件的行
-  if split.Length < 13 or Trim(split[13]) == 'n' or Trim(split[13]) == 'N'
+  if split.Length < eachLineLen or Trim(split[eachLineLen]) = 'n'
     return 
   info := {}
   ; 跳过 exe 为空的行
@@ -226,15 +226,13 @@ XButton1::Send "^{F4}"
 ^F8::Send "!o"
 #HotIf WinActive("ahk_group new_ctrl_n")
 ^F8::Send "^n"
-#HotIf WinActive("ahk_group new_ctrl_n_2")
-^F8::Send "{Control Down}n{Control Up}"
 #HotIf WinActive("ahk_group new_ctrl_o")
 ^F8::Send "^o"
 #HotIf WinActive("ahk_group new_ctrl_t")
 ^F8::Send "^t"
-
 #HotIf WinActive("ahk_group new_ctrl_alt_t")
 ^F8::Send "^!t"
+
 #HotIf WinActive("ahk_group new_ctrl_shift_t")
 ^F8::Send "^+t"
 #HotIf WinActive("ahk_group new_ctrl_shift_n")
@@ -245,25 +243,22 @@ XButton1::Send "^{F4}"
 Esc::WinClose
 
 ; f. 关闭 打头
-#HotIf WinActive("ahk_group close_closeBracket")
-^F4::
-XButton1::Send "]"
 #HotIf WinActive("ahk_group close_Esc")
 ^F4::
 XButton1::Send "{Esc}"
 #HotIf WinActive("ahk_group close_alt_F4")
 ^F4::
 XButton1::Send "!{F4}"
-#HotIf WinActive("ahk_group close_alt_F4_2")
+#HotIf WinActive("ahk_group close_closeBracket")
 ^F4::
-XButton1::Send "{Alt Down}{F4 Down}{F4 Up}{Alt Up}"
+XButton1::Send "]"
 #HotIf WinActive("ahk_group close_alt_l")
 ^F4::
 XButton1::Send "!l"
-
 #HotIf WinActive("ahk_group close_alt_q")
 ^F4::
 XButton1::Send "!q"
+
 #HotIf WinActive("ahk_group close_alt_w")
 ^F4::
 XButton1::Send "!w"
@@ -287,39 +282,42 @@ XButton1::Send "^{F4}"
 XButton1::SmartCloseWindow
 
 ; g. 前进键
-#HotIf WinActive("ahk_group forward_mediaNext")
+#HotIf WinActive("ahk_group forward_MediaNext")
 !Right::Send "{Media_Next}" ; 下一曲
-#HotIf WinActive("ahk_group forward_ctrl_Right")
-!Right::Send "^{Right}"
 #HotIf WinActive("ahk_group forward_PgDn")
 !Right::Send "{PgDn}"
 #HotIf WinActive("ahk_group forward_Right")
 !Right::Send "{Right}"
+#HotIf WinActive("ahk_group forward_ctrl_Right")
+!Right::Send "^{Right}"
+#HotIf WinActive("ahk_group forward_ctrl_Tab")
+!Right::Send "^{Tab}"
 
 ; h. 下个标签
-#HotIf WinActive("ahk_group next_mediaNext")
-^Tab::Send "{Media_Next}" ; 下一曲
-#HotIf WinActive("ahk_group next_closeBracket")
-^Tab::Send "]"
 #HotIf WinActive("ahk_group next_n")
 ^Tab::Send "n"
-#HotIf WinActive("ahk_group next_Down")
-^Tab::Send "{Down}"
-#HotIf WinActive("ahk_group next_ctrl_shift_PgDn")
-^Tab::Send "^+{PgDn}"
-#HotIf WinActive("ahk_group next_alt_closeBracket")
-^Tab::Send "!]"
-#HotIf WinActive("ahk_group next_alt_Right")
-^Tab::Send "!{Right}"
-#HotIf WinActive("ahk_group next_ctrl_PgDn")
-^Tab::Send "^{PgDn}"
-#HotIf WinActive("ahk_group next_ctrl_alt_Right")
-^Tab::Send "^!{Right}"
+#HotIf WinActive("ahk_group next_closeBracket")
+^Tab::Send "]"
+#HotIf WinActive("ahk_group next_MediaNext")
+^Tab::Send "{Media_Next}"
 #HotIf WinActive("ahk_group next_PgDn")
 ^Tab::Send "{PgDn}"
+#HotIf WinActive("ahk_group next_Down")
+^Tab::Send "{Down}"
+
+#HotIf WinActive("ahk_group next_alt_closeBracket")
+^Tab::Send "!]"
+#HotIf WinActive("ahk_group next_ctrl_PgDn")
+^Tab::Send "^{PgDn}"
+#HotIf WinActive("ahk_group next_alt_Right")
+^Tab::Send "!{Right}"
+#HotIf WinActive("ahk_group next_ctrl_alt_Right")
+^Tab::Send "^!{Right}"
+#HotIf WinActive("ahk_group next_ctrl_shift_PgDn")
+^Tab::Send "^+{PgDn}"
 
 ; I. 后退
-#HotIf WinActive("ahk_group back_Media_Prev")
+#HotIf WinActive("ahk_group back_MediaPrev")
 !Left::Send "{Media_Prev}" ; 上一曲
 #HotIf WinActive("ahk_group back_PgUp")
 !Left::Send "{PgUp}"
@@ -327,6 +325,8 @@ XButton1::SmartCloseWindow
 !Left::Send "{Left}"
 #HotIf WinActive("ahk_group back_Up")
 !Left::Send "{Up}"
+#HotIf WinActive("ahk_group back_ctrl_shift_Tab")
+!Left::Send "^+{Tab}"
 
 ; j 列：上个标签
 #HotIf WinActive("ahk_group previous_p")
@@ -335,7 +335,7 @@ XButton2::Send "p"
 #HotIf WinActive("ahk_group previous_openBracket")
 ^+Tab::
 XButton2::Send "[" ; 对 bilibili 不好用，由于会触发 ctrl + shift 切换输入法我就醉了
-#HotIf WinActive("ahk_group previous_mediaPrev")
+#HotIf WinActive("ahk_group previous_MediaPrev")
 ^+Tab::
 XButton2::Send "{Media_Prev}"
 #HotIf WinActive("ahk_group previous_Up")
@@ -376,21 +376,21 @@ XButton2::Send "{Space}"
 XButton2::Send "^+{Tab}"
 
 ; k 列：F11 功能键增强 全屏
-; 如果是浏览器 且 打开的是 bilibili 则将 f11 转成按键 f
+; 如果是浏览器 且 打开的是 bilibili 则特殊处理，将 f11 转成按键 f
 #HotIf WinActive("哔哩哔哩_bilibili ahk_group browser_group")
 F11::Send "f"
 
-#HotIf WinActive("ahk_group fullscreen_c_s_f12")
-F11::Send "^+{F12}"
-#HotIf WinActive("ahk_group fullscreen_enter")
-F11::Send "Enter"
 #HotIf WinActive("ahk_group fullscreen_f")
 F11::Send "f"
+#HotIf WinActive("ahk_group fullscreen_enter")
+F11::Send "Enter"
+#HotIf WinActive("ahk_group fullscreen_ctrl_shift_F12")
+F11::Send "^+{F12}"
 #HotIf
 
 ; ctrl + F7 通用操作：置顶/取消置顶
 ^F7::ToggleWindowTopMost
 
-#HotIf WinActive("ahk_group newWin_c_s_n")
+#HotIf WinActive("ahk_group newWin_ctrl_shift_n")
 ^n::Send "^+n"
 #HotIf

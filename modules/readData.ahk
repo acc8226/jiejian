@@ -3,7 +3,6 @@
 ; 标签类：浏览器大类 使用了 标准的 ctrl + t 新建标签 ctrl + f4 关闭标签 ctrl + tab 进行翻页
 ; 测试通过过的浏览器：360极速浏览器、Chrome 谷歌浏览器、DuckDuckGo 浏览器、Firefox 火狐系浏览器
 ; 理论上兼容的浏览器（未经过完全测试）：360 安全浏览器、QQ 浏览器、傲游浏览器、猎豹浏览器、极速浏览器
-; 目前已知对搜狗浏览器极度不兼容
 
 global dataList := parseData("data.csv")
 
@@ -12,14 +11,14 @@ Loop dataList.Length {
   it := dataList[A_Index]
   ; 热键
   if StrLen(it.hk) > 0 and StrLen(it.path) > 0
-      Hotkey it.hk, appStartByHk
+      Hotkey it.hk, startByHotKey
   ; 热串
   if StrLen(it.hs) > 0 {
-      if it.type == "web" {
+      if it.type = "web" {
           ; 排除在文本编辑器中打开网址
           HotIf (*) => not (WinActive("ahk_group editor_group") or WinActive("ahk_group IDE_group"))
-          Hotstring ":C*:" it.hs, openUrl
-      } else if it.type == "text" {
+          Hotstring ":C*:" it.hs, startByHotString
+      } else if it.type = "text" {
           Hotstring ":C*:" it.hs, it.path
       }
   }
@@ -27,23 +26,24 @@ Loop dataList.Length {
 
 parseData(filename) {
   dataList := []
+  eachLineLen := 8
   ; 每次从字符串中检索字符串(片段)
   Loop Parse, FileRead(filename), "`n", "`r" {
       ; 跳过首行
       if A_Index = 1
           continue
 
-      appInfo := parseAppLine(A_LoopField)    
+      appInfo := parseDataLine(A_LoopField, eachLineLen)
       if appInfo
           dataList.Push(appInfo)
   }
   return dataList  
 }
 
-parseAppLine(line) {  
+parseDataLine(line, eachLineLen) {  
   split := StrSplit(line, ",")
   ; 过滤不启用的行
-  if split.Length < 7 or Trim(split[7]) == 'n' or Trim(split[7]) == 'N'
+  if split.Length < eachLineLen or Trim(split[eachLineLen]) = 'n'
     return 
   
   info := {}
@@ -58,22 +58,17 @@ parseAppLine(line) {
   if (info.type == '' and info.path == '') {
     return
   }
-
-  info.title := Trim(split[3])
-  split4 := Trim(split[4])
+  ; 要激活的窗口
+  info.winTitle := Trim(split[3])
+  ; 运行名称
+  info.title := Trim(split[4])
+  split4 := Trim(split[5])
+  
   aliases := StrSplit(split4, "|")
   ; 如果数组长度 > 1 则存成数组
   info.alias := (aliases.Length > 1) ? aliases : split4
-  info.hk := Trim(split[5])
-  info.hs := Trim(split[6])
+  info.hk := Trim(split[6])
+  info.hs := Trim(split[7])
 
   return info
-}
-
-openUrl(hs) {
-  it := webFindPathByHs(dataList, StrReplace(hs, ":C*:"))
-  Run it.path
-  
-  ToolTip "打开 " . it.title
-  SetTimer () => ToolTip(), -2000
 }

@@ -47,13 +47,13 @@ Anyrun() {
                 if Type(value.alias) == "Array" {
                     Loop value.alias.Length
                         if RegExMatch(value.alias[A_Index], needleRegEx, &OutputVar) {
-                            if value.type == 'app' or value.type == 'web'
+                            if value.type = 'app' or value.type = 'web'
                                 ; du 是匹配度的意思，使用简易的优先级排序 匹配位置 + 字符串长度 + 字母排序（还未实现）
                                 dataArray.Push({name: quickTitle(value), du: OutputVar.Pos * 32 + StrLen(value.title)})
                             break
                         }
                 } else if RegExMatch(value.alias, needleRegEx, &OutputVar) {
-                    if value.type == 'app' or value.type == 'web'
+                    if value.type = 'app' or value.type = 'web'
                         dataArray.Push({name: quickTitle(value), du: OutputVar.Pos * 32 + StrLen(value.title)})
                 }                
             }
@@ -76,20 +76,23 @@ Anyrun() {
         listBoxOnDoubleClick(thisGui, *) {
             ; 此时 listbox 必定有焦点，则根据 title 反查 path
             it := appFindPathByListBoxText(dataList, listBox.Text)
-            if it.title == '微信' {
-                try {
-                    Run it.path,,, &pid
-                    WinWaitActive "ahk_pid " pid
-                    Send "{Space}"
-                } catch {
-                    MsgBox "找不到目标应用"
-                }
+            if it.type = 'app' {
+                ; 自动登录微信
+                if it.title == '微信' {
+                    try {
+                        Run it.path,,, &pid
+                        WinWaitActive "ahk_pid " pid
+                        ; 手动等待 1.1 秒，否则可能会跳到扫码页
+                        Sleep 1100
+                        Send "{Space}"
+                    } catch {
+                        MsgBox "找不到目标应用"
+                    }
+                } else {                
+                    ActivateOrRun(it.winTitle, it.path)
+                }                
             } else {
-                try {
-                    Run it.path
-                } catch {
-                    MsgBox "找不到目标应用"
-                }
+                Run it.path
             }
             MyGui.Destroy()
         }

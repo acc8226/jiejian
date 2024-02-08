@@ -6,3 +6,5 @@ jiejian*.exe
 log.txt
 
 *.db
+
+.~lock.*

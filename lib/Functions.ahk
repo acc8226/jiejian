@@ -199,7 +199,7 @@ ActivateWindow(winTitle := "", isHide := false) {
 
   ; 如果匹配到则跳转，匹配不到返回0
   if (!hwnds.Length) {
-    return true
+    return false
   }
 
   ; 只有一个窗口为最小化则切换否则最小化
