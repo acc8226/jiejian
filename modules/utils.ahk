@@ -23,25 +23,14 @@ appFindPathByListBoxText(dataList, listBoxText) {
 }
 
 ; 热键启动
-startByHotKey(hk) {
+startByHotKey(hotkey) {
     for it in dataList {
-        if it.hk == hk {
+        if it.hk == hotkey {
             if it.type = 'web' or it.type = 'file' {
                 Run it.path
                 Tip("打开 " . it.title)
             } else if it.type = 'app' {
                 ActivateOrRun(it.winTitle, it.path)
-                ; ; 如果未启动则启动,否则激活
-                ; if WinExist("ahk_exe " it.path)
-                ;     WinActivate
-                ; else {
-                ;     try {
-                ;         Run it.path
-                ;         Tip("打开 " . it.title)
-                ;     } catch {
-                ;         MsgBox "程序启动失败，请确认 " it.path " 是否存在？"
-                ;     }
-                ; }
             }
             break
         }
@@ -49,8 +38,8 @@ startByHotKey(hk) {
 }
 
 ; 热串启动
-startByHotString(hs) {
-    myHs := StrReplace(hs, ":C*:")
+startByHotString(hotstring) {
+    myHs := StrReplace(hotstring, ":C*:")
     for it in dataList {
         if it.hs == myHs {
             if it.type = 'web' {

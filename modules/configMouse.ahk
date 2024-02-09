@@ -27,7 +27,8 @@ XButton2::
   Tip('上一曲', -399)
 }
 
-#HotIf mouseIsOnTaskBar()
+; 鼠标移动到任务栏上
+#HotIf MouseIsOver('ahk_class Shell_TrayWnd')
 MButton::Send "{Volume_Mute}"
 WheelUp::Send "{Volume_Up}"
 WheelDown::Send "{Volume_Down}"
@@ -47,11 +48,10 @@ XButton2::
 mouseIsOnEdge() {
   MouseGetPos &OutputVarX, &OutputVarY
   return (OutputVarX >= 0 and OutputVarX <= 2)
-  or (OutputVarY >= 0 and OutputVarY <= 2)
+    or (OutputVarY >= 0 and OutputVarY <= 2)
 }
 
-; 鼠标移动到任务栏上
-mouseIsOnTaskBar() {
-  MouseGetPos ,, &OutputVarWin
-  return WinExist("ahk_class Shell_TrayWnd ahk_id " OutputVarWin)
+MouseIsOver(WinTitle) {
+  MouseGetPos ,, &Win
+  return WinExist(WinTitle " ahk_id " Win)
 }

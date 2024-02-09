@@ -15,12 +15,12 @@ Loop dataList.Length {
   ; 热串
   if StrLen(it.hs) > 0 {
       if it.type = "web" {
-          ; 排除在文本编辑器中打开网址
-          HotIf (*) => not (WinActive("ahk_group editor_group") or WinActive("ahk_group IDE_group"))
-          Hotstring ":C*:" it.hs, startByHotString
-      } else if it.type = "text" {
-          Hotstring ":C*:" it.hs, it.path
-      }
+          ; 排除在 编辑器中 可跳转网址
+          HotIfWinNotactive 'ahk_group text_group'
+          Hotstring ":C*:" . it.hs, startByHotString
+          HotIfWinNotactive
+      } else if it.type = "text"
+          Hotstring ":C*:" . it.hs, it.path
   }
 }
 
