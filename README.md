@@ -1,12 +1,14 @@
 # 捷键 for win 使用说明
 
-捷键-为简化 windows 键鼠操作而生。可自定义快捷键，做到按键功能改写和增强。自带高度可自定义启动器，可搭配全局鼠标手势软件。
+捷键
 
-注：本程序开放源码，无毒无任何后门也不收集任何信息。如被误报病毒查杀，可尝试自行恢复
+为简化 windows 键鼠操作而生。可自定义快捷键，做到按键功能改写和增强。自带高度可自定义启动器，可搭配全局鼠标手势软件。且尽量做到开箱即用。
 
-说明书指向最新版软件，若功能有差异，请[下载并使用最新版](https://gitcode.com/acc8226/jiejian/releases)
+注：
 
-[---视频演示---](https://www.bilibili.com/video/BV19H4y1e7hJ?vd_source=54168537affc2c02555097cb26797d99)
+1. 本程序开放源码，无毒无任何后门也不收集任何信息。如被误报病毒查杀，可尝试自行恢复
+2. 说明书指向最新版软件，若功能有差异，请[下载并使用最新版](https://gitcode.com/acc8226/jiejian/releases)
+3. [---视频演示---](https://www.bilibili.com/video/BV19H4y1e7hJ?vd_source=54168537affc2c02555097cb26797d99)
 
 ## 0. 发版目录结构
 
@@ -47,7 +49,7 @@
 | - | Alt + → | → |  前进/next |前进 | 前进 | 下一曲 | 快进 | 下一张 | 下一曲 | 下一曲 |
 | 鼠标侧边前进键(XB2) | Ctrl + Shift + Tab | 上左 | 上一个/prev | - | 上一页 | 上一曲 | 上个视频 | - | 上一曲 | 上一曲 |
 | - | Ctrl + Tab | 上右 | 下一个/next | - | 下一页 | 下一曲 | 下个视频 | - | 下一曲 | 下一曲 |
-| - | Ctrl + n | 右下 | 新建窗口/new| 新建窗口 | | | | | | |
+| - | Ctrl + Shift + n | 右下 | 新建窗口/new| 新建窗口 | | | | | | |
 | - | Ctrl + F7 | 图形z | 置顶/zhiding | 置顶 | | | | | | |
 | - | F11 | 图形f | 全屏/fullscreen | 全屏/取消全屏 | | | | | | |
 
@@ -55,9 +57,9 @@
 
 1. 能用鼠标按键尽量用按键，因此最好买一个带侧边按键的鼠标。其次才考虑使用鼠标手势，最后考虑使用快捷键。
 2. 多标签软件主要为浏览器，支持多标签的文本编辑器、IDE 等。
-3. 音乐类软件如 spotify、QQ 音乐等。其中 Ctrl + F3 打开文件的功能仅适用于本地音乐播放器，在线音乐类软件可能不适用。
-4. 视频类软件如 potplayer、vlc 等。
-5. 看图软件如 2345 看图王等。
+3. 音乐类软件如 spotify、QQ 音乐。其中 Ctrl + F3 打开文件的功能仅适用于本地音乐播放器，在线音乐类软件可能不适用。
+4. 视频类软件如 potplayer、vlc。
+5. 看图软件如 2345 看图王、Bandiview。
 6. F11 特别适配了 b 站。
 
 以下部分场景使用了鼠标手势软件 [WGestures 1] / [WGestures 2] 替代了手动键入快捷键
@@ -383,7 +385,7 @@ app.csv 使用了正则表达式，需要使用者对正则有一定了解。主
 | 左上 | 剪切/cut | Ctrl + x | - |
 | 左下 | 删除/del | del | - |
 | 右上 | 百度选定文字 | wg 的网址直达功能 `https://baidu.com/s?wd={WG_SELECTED_TEXT}` | - |
-| 右下 | 新建窗口/new | Ctrl + n | 是 |
+| 右下 | 新建窗口/new | Ctrl + Shift + n | 是 |
 | z / wg1 只能使用右左 | 置顶/zhiding | Ctrl + F7 | 是 |
 | f | 全屏/fullscreen | f11 | 是 |
 | r | 刷新/refresh | Ctrl + r | - |
@@ -435,13 +437,15 @@ CapsLock 命令
 
 支持但不限于以下百余款软件，且持续更新中...
 
-* 360 压缩
-* BvSsh
-* skylark 主程序
-* 【系统】Win11 资源管理器
-* 【系统】Win11 记事本
+* Bitvise SSH Client
+* skylark
+* 【压缩】360 压缩 4.0【部分支持】
+* 【压缩】7zip 24.01【部分支持】
+* 【压缩】Bandizip 7.32【部分支持】
+* 【压缩】WinRAR 6.24【部分支持】
+* 【系统】Win 11 资源管理器
+* 【系统】Win 11 记事本
 * 【系统】win 11 设置
-* 【浏览器】飞牛浏览器
 * 【浏览器】115
 * 【浏览器】123
 * 【浏览器】2345
@@ -450,6 +454,7 @@ CapsLock 命令
 * 【浏览器】360 安全
 * 【浏览器】Avast
 * 【浏览器】Brave
+* 【浏览器】CCleaner Browser
 * 【浏览器】Chrome 谷歌 & 百分 & 小马
 * 【浏览器】Duck
 * 【浏览器】Duoyu 多御
@@ -463,6 +468,7 @@ CapsLock 命令
 * 【浏览器】Yandex
 * 【浏览器】傲游
 * 【浏览器】斑斓石
+* 【浏览器】飞牛浏览器
 * 【浏览器】华为
 * 【浏览器】极速
 * 【浏览器】联想
@@ -484,7 +490,8 @@ CapsLock 命令
 * 【音乐类】iTunes
 * 【音乐类】MusicBee
 * 【音乐类】MusicPlayer2
-* 【音乐类】QQ音乐
+* 【音乐类】Winamp 5.9.2
+* 【音乐类】QQ 音乐
 * 【音乐类】Spotify
 * 【音乐类】方格音乐
 * 【音乐类】酷我音乐
@@ -508,9 +515,9 @@ CapsLock 命令
 * 【sql】Heidisql
 * 【sql】Navicat
 * 【sql】SQLyog
-* 【md】MarkdownPad2
-* 【md】MarkText
-* 【md】Typora
+* 【markdown】MarkdownPad2
+* 【markdown】MarkText
+* 【markdown】Typora
 * 【editor】Atom【已过时】
 * 【editor】Bracket
 * 【editor】CudaText
@@ -540,8 +547,8 @@ CapsLock 命令
 * 【IDE】SpringToolSuite4
 * 【IDE】VS Code
 * 【IDE】Visual Studio
-* Netbean 32 位 & Jmeter
-* Netbean 64 位
+* 【IDE】Netbean 32 位 & Jmeter
+* 【IDE】Netbean 64 位
 * 【http调试】Apifox
 * 【http调试】ApiPost
 * 【http调试】HTTPie
@@ -561,36 +568,45 @@ CapsLock 命令
 * 【终端类】WindowsTerminal
 * 【终端类】Xshell
 * 【终端类】zoc
+* 【ftp】Filezilla
 * 【ftp】FlashFXP
 * 【ftp】Xftp
 * 【pdf】Adobe Acrobat
-* 【pdf】Right PDF Reader【部分支持】
+* 【pdf】Right PDF Reader
 * 【pdf】Sumatra PDF 标签页
 * 【pdf】Sumatra PDF 主页
 * 【pdf】UPDF
 * 【pdf】福昕 PDF 编辑器
 * 【pdf】福昕阅读器
 * 【pdf】极速 PDF
-* 【pdf】金山PDF独立版
+* 【pdf】金山 PDF 独立版
 * 【pdf】迅读 PDF
-* 【pdf】永中Office 版式阅读器
-* 【office】Word 2021【部分支持】
-* 【office】Excel 2021【部分支持】
-* 【office】PPT 2021【部分支持】
-* 【office】LibreOffice 主程序【部分支持】
+* 【pdf】永中 Office 版式阅读器
+* 【office】Excel 2021
+* 【office】LibreOffice 主程序
+* 【office】PPT 2021
+* 【office】Word 2021
+* 【office】ONLYOFFICE
+* 【office】WPS Office
 * 【office】永中简报 2024
 * 【office】永中表格 2024
 * 【office】永中文字
-* 【office】ONLYOFFICE
+* 【看图】Windows 照片查看器
+* 【看图】2345 看图王
+* 【看图】FSViewer
+* 【看图】Honeyview or BandiView
+* 【看图】ImageGlass
+* 【看图】JPEGView
+* 【看图】WPS 图片查看器
+* 【看图】xnview
+* 【看图】菠萝看图 pineapple-pictures
 * Motrix
 * Snipaste
-* thunderbird
-* WPS Office
-* WPS 图片查看器
+* Thunderbird 雷鸟
 * 阿里云客户端
 * 稻壳阅读器
 * 炉石传说
-* 腾讯QQ
+* 腾讯 QQ
 * 微信
 
 无需适配的软件：
@@ -602,7 +618,7 @@ CapsLock 命令
 * 适配不太好的软件：Right PDF Reader 的鼠标侧边后退键无效。
 * 测试关闭窗口不奏效的软件：极客卸载、注册表编辑器、windows 任务管理器（似乎屏蔽了 Ctrl 键）。 WGestures 的导入导出窗口。
 
-### 设计思路
+### 开发思路
 
 已知
 
@@ -631,7 +647,10 @@ CapsLock 命令
 * 后退 默认 Alt + 左
 * app.csv 中先后顺序关系通过优先级进行定义
 
-适配视频类软件：分别找出打开、快进、快退、切换上一个视频、切换下一个视频的快捷键。
+* 压缩软件：分别找出打开、前进和后退的快捷键。
+* 视频类软件：分别找出打开、快进、快退、切换上一个视频、切换下一个视频的快捷键。
+
+在考虑窗口匹配的规则中，ahk_exe 和 ahk_class 两者中，我一般会优先考虑 exe，但是如果 class 特别能表示出该软件则以它为准，必要时会考虑组合 exe 和 class。
 
 ### 软件升级
 
@@ -647,13 +666,13 @@ jiejian.exe 的文件版本为当前四位版本号，产品版本为当前编�
 
 ## 软件构建
 
-必须是 ahk2 + upx 4 的组合。
+由于 Ahk2Exe 可以选择使用 MPRESS 或 UPX 这两款免费软件来压缩编译后的脚本。如果 MPRESS.exe 或 UPX.exe 已被复制到安装 AutoHotkey 的 "Compiler" 子文件夹中, 则可以通过 /compress 参数（1 = 使用 MPRESS, 2 = 使用 UPX）或 GUI 设置来压缩 .exe 文件。
 
-我目前使用了 win11 64 位系统 + ahk 2.0.11 64 位 + UPX 的组合。（建议在 64 为环境编译和打包该软件。32 位平台我就没试过）
+因此我目前使用了 win11 64 位系统 + ahk 2.0.11 64 位 + [UPX 4.2.2](https://github.com/upx/upx/releases/download/v4.2.2/upx-4.2.2-win64.zip) 的组合。（建议在 64 为环境编译和打包该软件。32 位平台我就没试过）
 
-在安装 ahk 之后，双击 jiejian.ahk 即可运行打包程序。
+在安装 ahk 环境之后，双击 jiejian.ahk 即可运行打包程序。
 
-package.ahk 的设计思路：Ahk2Exe.exe 将 ahk 转化为 exe，期间使用 /compress 制定了压缩方式。ahk 编译会触发 jiejianPostExec.ahk。jiejianPostExec.ahk 做了两件事：写入版本信息 和 将文件夹命名为 jiejian-版本。
+package.ahk 的设计思路：Ahk2Exe.exe 将 ahk 转化为 exe，期间使用 `/compress 2` 指定了压缩方式。ahk 编译会触发 jiejianPostExec.ahk。jiejianPostExec.ahk 做了两件事：写入版本信息 和 将文件夹命名为 jiejian-版本。
 
 ## 鸣谢
 

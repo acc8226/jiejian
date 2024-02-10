@@ -9,8 +9,8 @@ https://wyagd001.github.io/v2/docs/
 ;@Ahk2Exe-SetCopyright 全民反诈 union
 ;@Ahk2Exe-SetDescription 捷键-为简化键鼠操作而生
 
-CodeVersion := '24.2.9-beta'
-;@Ahk2Exe-Let U_version = %A_PriorLine~U)^.+['"](.+)['"].*$~$1%
+CodeVersion := '24.2.10'
+;@Ahk2Exe-Let U_version = %A_PriorLine~U)^.+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
 ; 往对应文件写入对应版本号，只在生成 32 位 exe 的时候执行
@@ -158,8 +158,8 @@ SettingTray() {
 
     if not A_IsCompiled {
         ; 建议使用 16*16 或 32*32 像素的图标，使用 Ahk2Exe-Let 提取出 favicon.ico
-        faviconIco := "favicon.ico"
-        ;@Ahk2Exe-Let U_faviconIco = %A_PriorLine~U)^(.+"){1}(.+)".*$~$2%
+        faviconIco := 'favicon.ico'
+        ;@Ahk2Exe-Let U_faviconIco = %A_PriorLine~U)^.+['"](.+)['"]~$1%
         ;@Ahk2Exe-SetMainIcon %U_faviconIco%
         TraySetIcon faviconIco
     }        
@@ -170,6 +170,7 @@ SettingTray() {
 
 ; 注册一个当脚本退出时, 会自动调用的函数.
 OnExit ExitFunc
+
 ExitFunc(ExitReason, ExitCode) {
     ; 统计软件使用总分钟数
     minutesDiff := DateDiff(A_NowUTC, startTime, 'Minutes')

@@ -82,7 +82,7 @@ Loop appList.Length {
       case "^PgDn", "^{PgDn}": GroupAdd "next_ctrl_PgDn", it.exe
       case "^!Right", "^!{Right}": GroupAdd "next_ctrl_alt_Right", it.exe
 
-      case "^!PgDn": GroupAdd "next_ctrl_alt_PgDn", it.exe
+      case "^!PgDn", "^!{PgDn}": GroupAdd "next_ctrl_alt_PgDn", it.exe
     }
     ; I 列 后退
     switch it.back, 'Off' {
@@ -116,7 +116,7 @@ Loop appList.Length {
     }
     ; k 列 新建窗口
     switch it.newWin, 'Off' {
-      case "^+n": GroupAdd "newWin_ctrl_shift_n", it.exe
+      case "^n": GroupAdd "newWin_ctrl_n", it.exe
     }
     ; l 列 全屏
     switch it.fs, 'Off' {
@@ -187,11 +187,13 @@ parseAppLine(line, eachLineLen) {
   if name !== '' and info.exe !== '' {
     if 1 == InStr(name, "【浏览器】")
       GroupAdd "browser_group", info.exe
-    else if (1 == InStr(name, "【editor】") 
-          or 1 == InStr(name, "【IDE】")
-          or 1 == InStr(name, "【ftp】")
-          or 1 == InStr(name, "【office】")
-          or 1 == InStr(name, "【sql】")
+    else if (1 == InStr(name, "【editor】")
+        or 1 == InStr(name, "【ftp】")
+        or 1 == InStr(name, "【git】")
+        or 1 == InStr(name, "【IDE】")
+        or 1 == InStr(name, "【office】")
+        or 1 == InStr(name, "【sql】")
+        or 1 == InStr(name, "【窗口】")
       ) {
       GroupAdd "text_group", info.exe
     }
@@ -410,22 +412,21 @@ XButton2::Send "^!{Left}"
 #HotIf
 XButton2::Send "^+{Tab}"
 
-; k 列：F11 功能键增强 全屏
+; k 列 新建窗口
+#HotIf WinActive("ahk_group newWin_ctrl_n")
+^+n::Send "^n"
+
+; L 列 F11 功能键增强 全屏
 ; 如果是浏览器 且 打开的是 bilibili 则特殊处理，将 f11 转成按键 f
 #HotIf WinActive("哔哩哔哩_bilibili ahk_group browser_group")
 F11::Send "f"
-
 #HotIf WinActive("ahk_group fullscreen_Enter")
-F11::Send "Enter"
+F11::Send "{Enter}"
 #HotIf WinActive("ahk_group fullscreen_f")
 F11::Send "f"
 #HotIf WinActive("ahk_group fullscreen_ctrl_shift_F12")
 F11::Send "^+{F12}"
-#HotIf
 
 ; ctrl + F7 通用：置顶/取消置顶
-^F7::ToggleWindowTopMost
-
-#HotIf WinActive("ahk_group newWin_ctrl_shift_n")
-^n::Send "^+n"
 #HotIf
+^F7::ToggleWindowTopMost
