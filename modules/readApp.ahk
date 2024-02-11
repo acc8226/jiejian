@@ -34,9 +34,9 @@ Loop appList.Length {
       case "^o": GroupAdd "new_ctrl_o", it.exe
       case "^t": GroupAdd "new_ctrl_t", it.exe
 
-      case "^!t": GroupAdd "new_ctrl_alt_t", it.exe
-      case "^+t": GroupAdd "new_ctrl_shift_t", it.exe
-      case "^+n": GroupAdd "new_ctrl_shift_n", it.exe
+      case "^!t", "!^t": GroupAdd "new_ctrl_alt_t", it.exe
+      case "^+t", "+^t": GroupAdd "new_ctrl_shift_t", it.exe
+      case "^+n", "+^n": GroupAdd "new_ctrl_shift_n", it.exe
     }
     ; e 列 esc
     switch it.escape, 'Off' {
@@ -53,8 +53,8 @@ Loop appList.Length {
       case "!w": GroupAdd "close_alt_w", it.exe
       case "^F4", "^{F4}": GroupAdd "close_ctrl_F4", it.exe
       case "^w": GroupAdd "close_ctrl_w", it.exe
-      case "^!q": GroupAdd "close_ctrl_alt_q", it.exe
-      case "^+w": GroupAdd "close_ctrl_shift_w", it.exe
+      case "^!q", "!^q": GroupAdd "close_ctrl_alt_q", it.exe
+      case "^+w", "+^w": GroupAdd "close_ctrl_shift_w", it.exe
     }
     ; g 列 前进
     switch it.forward, 'Off' {
@@ -66,6 +66,9 @@ Loop appList.Length {
       case "^Right", "^{Right}": GroupAdd "forward_ctrl_Right", it.exe
 
       case "^Tab", "^{Tab}": GroupAdd "forward_ctrl_Tab", it.exe
+      case "^]" : GroupAdd "forward_ctrl_closeBracket", it.exe
+      case "^n" : GroupAdd "forward_ctrl_n", it.exe
+      case "^!Right", "^!{Right}": GroupAdd "forward_ctrl_alt_Right", it.exe
     }
     ; h 列 下个标签
     switch it.nextTag, 'Off' {
@@ -74,15 +77,18 @@ Loop appList.Length {
       case "Media_Next", "{Media_Next}": GroupAdd "next_MediaNext", it.exe
       case "PgDn", "{PgDn}": GroupAdd "next_PgDn", it.exe
       case "b": GroupAdd "next_b", it.exe
-      case "n": GroupAdd "next_n", it.exe
 
+      case "n": GroupAdd "next_n", it.exe
       case "z": GroupAdd "next_z", it.exe
       case "!]": GroupAdd "next_alt_closeBracket", it.exe
+      case "^]": GroupAdd "next_ctrl_closeBracket", it.exe
       case "!Right", "!{Right}": GroupAdd "next_alt_Right", it.exe
-      case "^PgDn", "^{PgDn}": GroupAdd "next_ctrl_PgDn", it.exe
-      case "^!Right", "^!{Right}": GroupAdd "next_ctrl_alt_Right", it.exe
 
-      case "^!PgDn", "^!{PgDn}": GroupAdd "next_ctrl_alt_PgDn", it.exe
+      case "^PgDn", "^{PgDn}": GroupAdd "next_ctrl_PgDn", it.exe
+      case "^Right", "^{Right}": GroupAdd "next_ctrl_Right", it.exe
+      case "^n": GroupAdd "next_ctrl_n", it.exe
+      case "^!PgDn", "^!{PgDn}", "!^PgDn": GroupAdd "next_ctrl_alt_PgDn", it.exe
+      case "^!Right", "^!{Right}", "!^Right": GroupAdd "next_ctrl_alt_Right", it.exe
     }
     ; I 列 后退
     switch it.back, 'Off' {
@@ -93,7 +99,13 @@ Loop appList.Length {
       case 'Up', "{Up}": GroupAdd "back_Up", it.exe
 
       case "z": GroupAdd "back_z", it.exe
-      case "^+Tab", "^+{Tab}": GroupAdd "back_ctrl_shift_Tab", it.exe
+      case "^[": GroupAdd "back_ctrl_openBracket", it.exe
+      case "^Left", "^{Left}": GroupAdd "back_ctrl_Left", it.exe
+      case "^b": GroupAdd "back_ctrl_b", it.exe
+      case "^!Left", "^!{Left}", "!^Left": GroupAdd "back_ctrl_alt_Left", it.exe
+
+      case "^+Tab", "^+{Tab}", "+^Tab": GroupAdd "back_ctrl_shift_Tab", it.exe
+      case "^+Left", "^+{Left}", "+^Left": GroupAdd "back_ctrl_shift_Left", it.exe
     }
     ; J 列 上个标签
     switch it.previousTag, 'Off' {
@@ -102,17 +114,19 @@ Loop appList.Length {
       case "[": GroupAdd "previous_openBracket", it.exe
       case "Media_Play_Pause", "{Media_Play_Pause}": GroupAdd "previous_MediaPlayPause", it.exe
       case "Media_Prev", "{Media_Prev}": GroupAdd "previous_MediaPrev", it.exe
-      case "PgUp", "{PgUp}": GroupAdd "previous_PgUp", it.exe
 
+      case "PgUp", "{PgUp}": GroupAdd "previous_PgUp", it.exe
       case 'Space', "{Space}": GroupAdd "previous_Space", it.exe
       case 'Up', "{Up}": GroupAdd "previous_Up", it.exe
       case "!0": GroupAdd "previous_alt_0", it.exe
       case "![": GroupAdd "previous_alt_openBracket", it.exe
-      case "!Left", "!{Left}": GroupAdd "previous_alt_Left", it.exe
 
+      case "!Left", "!{Left}": GroupAdd "previous_alt_Left", it.exe
+      case "^[": GroupAdd "previous_ctrl_openBracket", it.exe
       case "^Left", "^{Left}": GroupAdd "previous_ctrl_Left", it.exe
       case "^PgUp", "^{PgUp}": GroupAdd "previous_ctrl_PgUp", it.exe
-      case "^!Left", "^!{Left}": GroupAdd "previous_ctrl_alt_Left", it.exe
+      case "^b": GroupAdd "previous_ctrl_b", it.exe
+      case "^!Left", "^!{Left}", "!^Left": GroupAdd "previous_ctrl_alt_Left", it.exe
     }
     ; k 列 新建窗口
     switch it.newWin, 'Off' {
@@ -122,7 +136,7 @@ Loop appList.Length {
     switch it.fs, 'Off' {
       case "Enter", "{Enter}", "回车": GroupAdd "fullscreen_Enter", it.exe
       case "f": GroupAdd "fullscreen_f", it.exe
-      case "^+F12", "^+{F12}": GroupAdd "fullscreen_ctrl_shift_F12", it.exe
+      case "^+F12", "^+{F12}", "+^F12": GroupAdd "fullscreen_ctrl_shift_F12", it.exe
     }
   }
 }
@@ -139,7 +153,7 @@ parseApp(fileName) {
           appList.Push(appInfo)
       }
   }
-  return appList  
+  return appList
 }
 
 parseAppLine(line, eachLineLen) {
@@ -162,7 +176,7 @@ parseAppLine(line, eachLineLen) {
   info.forward := Trim(split[7])
   info.nextTag := Trim(split[8])
   info.back := Trim(split[9])
-  info.previousTag := Trim(split[10])  
+  info.previousTag := Trim(split[10])
   info.newWin := Trim(split[11])
 
   info.fs := Trim(split[12])
@@ -316,6 +330,12 @@ XButton1::SmartCloseWindow
 
 #HotIf WinActive("ahk_group forward_ctrl_Tab")
 !Right::Send "^{Tab}"
+#HotIf WinActive("ahk_group forward_ctrl_closeBracket")
+!Right::Send "^]"
+#HotIf WinActive("ahk_group forward_ctrl_n")
+!Right::Send "^n"
+#HotIf WinActive("ahk_group forward_ctrl_alt_Right")
+!Right::Send "^!{Right}"
 
 ; h. 下个标签
 #HotIf WinActive("ahk_group next_b")
@@ -335,15 +355,21 @@ XButton1::SmartCloseWindow
 ^Tab::Send "{Down}"
 #HotIf WinActive("ahk_group next_alt_closeBracket")
 ^Tab::Send "!]"
+#HotIf WinActive("ahk_group next_ctrl_closeBracket")
+^Tab::Send "^]"
 #HotIf WinActive("ahk_group next_ctrl_PgDn")
 ^Tab::Send "^{PgDn}"
+#HotIf WinActive("ahk_group next_ctrl_Right")
+^Tab::Send "^{Right}"
+#HotIf WinActive("ahk_group next_ctrl_n")
+^Tab::Send "^n"
 #HotIf WinActive("ahk_group next_alt_Right")
 ^Tab::Send "!{Right}"
-#HotIf WinActive("ahk_group next_ctrl_alt_Right")
-^Tab::Send "^!{Right}"
 
 #HotIf WinActive("ahk_group next_ctrl_alt_PgDn")
-^Tab::Send "^+{PgDn}"
+^Tab::Send "^!{PgDn}"
+#HotIf WinActive("ahk_group next_ctrl_alt_Right")
+^Tab::Send "^!{Right}"
 
 ; I. 后退
 #HotIf WinActive("ahk_group back_BackSpace")
@@ -359,8 +385,18 @@ XButton1::SmartCloseWindow
 
 #HotIf WinActive("ahk_group back_z")
 !Left::Send "z"
+#HotIf WinActive("ahk_group back_ctrl_openBracket")
+!Left::Send "^["
+#HotIf WinActive("ahk_group back_ctrl_Left")
+!Left::Send "^{Left}"
+#HotIf WinActive("ahk_group back_ctrl_b")
+!Left::Send "^b"
+#HotIf WinActive("ahk_group back_ctrl_alt_Left")
+!Left::Send "^!{Left}"
 #HotIf WinActive("ahk_group back_ctrl_shift_Tab")
 !Left::Send "^+{Tab}"
+#HotIf WinActive("ahk_group back_ctrl_shift_Left")
+!Left::Send "^+{Left}"
 
 ; j 列：上个标签
 #HotIf WinActive("ahk_group previous_p")
@@ -397,6 +433,9 @@ XButton2::Send "!["
 #HotIf WinActive("ahk_group previous_alt_Left")
 ^+Tab::
 XButton2::Send "!{Left}"
+#HotIf WinActive("ahk_group previous_ctrl_openBracket")
+^+Tab::
+XButton2::Send "^["
 
 #HotIf WinActive("ahk_group previous_ctrl_Left")
 ^+Tab::
@@ -404,6 +443,9 @@ XButton2::Send "^{Left}"
 #HotIf WinActive("ahk_group previous_ctrl_PgUp")
 ^+Tab::
 XButton2::Send "^{PgUp}"
+#HotIf WinActive("ahk_group previous_ctrl_b")
+^+Tab::
+XButton2::Send "^b"
 #HotIf WinActive("ahk_group previous_ctrl_alt_Left")
 ^+Tab::
 XButton2::Send "^!{Left}"
