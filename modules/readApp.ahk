@@ -62,6 +62,7 @@ Loop appList.Length {
       case "PgDn", "{PgDn}": GroupAdd "forward_PgDn", it.exe
       case "Right", "{Right}": GroupAdd "forward_Right", it.exe
       case "b": GroupAdd "forward_b", it.exe
+      case "n": GroupAdd "forward_n", it.exe
       case "z": GroupAdd "forward_z", it.exe
       case "^Right", "^{Right}": GroupAdd "forward_ctrl_Right", it.exe
 
@@ -98,6 +99,7 @@ Loop appList.Length {
       case "PgUp", "{PgUp}": GroupAdd "back_PgUp", it.exe
       case 'Up', "{Up}": GroupAdd "back_Up", it.exe
 
+      case "v": GroupAdd "back_v", it.exe
       case "z": GroupAdd "back_z", it.exe
       case "^[": GroupAdd "back_ctrl_openBracket", it.exe
       case "^Left", "^{Left}": GroupAdd "back_ctrl_Left", it.exe
@@ -118,6 +120,7 @@ Loop appList.Length {
       case "PgUp", "{PgUp}": GroupAdd "previous_PgUp", it.exe
       case 'Space', "{Space}": GroupAdd "previous_Space", it.exe
       case 'Up', "{Up}": GroupAdd "previous_Up", it.exe
+      case "v": GroupAdd "previous_v", it.exe
       case "!0": GroupAdd "previous_alt_0", it.exe
       case "![": GroupAdd "previous_alt_openBracket", it.exe
 
@@ -323,6 +326,8 @@ XButton1::SmartCloseWindow
 !Right::Send "{Right}"
 #HotIf WinActive("ahk_group forward_b")
 !Right::Send "b"
+#HotIf WinActive("ahk_group forward_n")
+!Right::Send "n"
 #HotIf WinActive("ahk_group forward_z")
 !Right::Send "z"
 #HotIf WinActive("ahk_group forward_ctrl_Right")
@@ -383,6 +388,8 @@ XButton1::SmartCloseWindow
 #HotIf WinActive("ahk_group back_Up")
 !Left::Send "{Up}"
 
+#HotIf WinActive("ahk_group back_v")
+!Left::Send "v"
 #HotIf WinActive("ahk_group back_z")
 !Left::Send "z"
 #HotIf WinActive("ahk_group back_ctrl_openBracket")
@@ -424,6 +431,9 @@ XButton2::Send "{Space}"
 #HotIf WinActive("ahk_group previous_Up")
 ^+Tab::
 XButton2::Send "{Up}"
+#HotIf WinActive("ahk_group previous_v")
+^+Tab::
+XButton2::Send "v"
 #HotIf WinActive("ahk_group previous_alt_0")
 ^+Tab::
 XButton2::Send "!0"

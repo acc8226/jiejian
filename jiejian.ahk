@@ -9,7 +9,7 @@ https://wyagd001.github.io/v2/docs/
 ;@Ahk2Exe-SetCopyright 全民反诈 union
 ;@Ahk2Exe-SetDescription 捷键-为简化键鼠操作而生
 
-CodeVersion := '24.2.11-beta'
+CodeVersion := '24.2.12-beta'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
