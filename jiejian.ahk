@@ -9,7 +9,7 @@ https://wyagd001.github.io/v2/docs/
 ;@Ahk2Exe-SetCopyright 全民反诈 union
 ;@Ahk2Exe-SetDescription 捷键-为简化键鼠操作而生
 
-CodeVersion := '24.2.12-beta'
+CodeVersion := '24.2.13-beta'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
@@ -22,7 +22,7 @@ regKeyName := 'HKEY_CURRENT_USER\SOFTWARE\jiejian'
 startTime := A_NowUTC
 
 ; ----- 1. 热键 之 鼠标操作 -----
-CoordMode 'Mouse' ; 默认坐标相对于桌面(整个屏幕)
+CoordMode 'Mouse' ; RelativeTo 如果省略, 默认为 Screen
 FileEncoding 54936 ; Windows XP 及更高版本： GB18030 简体中文 (4 字节)
 SetTitleMatchMode "RegEx" ; 设置 WinTitle parameter 在内置函数中的匹配行为
 
@@ -42,7 +42,6 @@ SettingTray ; 设置托盘图标和菜单
 CheckUpdate ; 检查更新
 
 ; ----- 2. 热键 之 快捷键重写和增强 -----
-
 ; 禁用快捷键
 ;^v::return
 
@@ -180,8 +179,8 @@ ExitFunc(ExitReason, ExitCode) {
         RegWrite recordMins, "REG_DWORD", regKeyName, recordMinsValueName
     }
     ; 统计软件使用次数
-    if ExitReason != "Error" and ExitReason != "Reload" and ExitReason != "Single" {
-        launchCountValueName := 'launch_count'    
+    if not ExitReason ~= "i)^(?:Error|Reload|Single)$" {
+        launchCountValueName := 'launch_count'
         launchCount := RegRead(regKeyName, launchCountValueName, 1) + 1
         RegWrite launchCount, "REG_DWORD", regKeyName, launchCountValueName
     }

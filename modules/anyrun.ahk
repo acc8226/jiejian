@@ -26,6 +26,7 @@ Anyrun() {
         button := myGui.Add("Button", "default X0 Y0 Hidden", "OK")
 
         myEdit.OnEvent("Change", editOnChange)
+
         editOnChange(thisGui, *) {  ; 声明中 this 参数是可选的.
             input := thisGui.Value
             if input == "" {
@@ -65,15 +66,29 @@ Anyrun() {
             listBox.Visible := dataArray.Length > 0
             myGui.Show("AutoSize")
         }
-        ; 如果两个关键控件都遗失了焦点则关闭窗口
-        myEdit.OnEvent("LoseFocus", editOnLoseFocus)
-        editOnLoseFocus(thisGui, *) {
+        ; 若两个关键控件都失去焦点则关闭窗口
+        myEdit.OnEvent("LoseFocus", onEditLoseFocus)
+        listbox.OnEvent("LoseFocus", onListboxLoseFocus)
+
+        listbox.OnEvent("DoubleClick", onListBoxDoubleClick)
+        button.OnEvent("Click", onButtonClick)
+        ; 按住 esc 销毁 窗口
+        myGui.OnEvent("Escape", (*) => myGui.Destroy())
+
+        ; 居中但是稍微往上偏移些
+        myGui.Show(Format("xCenter y{1} AutoSize", A_ScreenHeight / 2 - 300))
+
+        onEditLoseFocus(*) {
             if not listBox.Focused
                 myGui.Destroy()
         }
 
-        listbox.OnEvent("DoubleClick", listBoxOnDoubleClick)
-        listBoxOnDoubleClick(thisGui, *) {
+        onListboxLoseFocus(*) {
+            if not myEdit.Focused
+                myGui.Destroy()
+        }
+
+        onListBoxDoubleClick(*) {
             ; 此时 listbox 必定有焦点，则根据 title 反查 path
             it := appFindPathByListBoxText(dataList, listBox.Text)
             if it.type = 'app' {
@@ -88,69 +103,67 @@ Anyrun() {
                     } catch {
                         MsgBox "找不到目标应用"
                     }
-                } else {                
-                    ActivateOrRun(it.winTitle, it.path)
-                }                
-            } else {
+                } else
+                    ActivateOrRun(it.winTitle, it.path)           
+            } else
                 Run it.path
-            }
             MyGui.Destroy()
         }
-        ; 如果两个关键控件都遗失了焦点则关闭窗口
-        listbox.OnEvent("LoseFocus", listboxOnLoseFocus)
-        listboxOnLoseFocus(thisGui, *) {
-            if not myEdit.Focused
-                myGui.Destroy()
-        }
 
-        button.OnEvent("Click", OnButtonClick)
-        OnButtonClick(thisGui, *) {
-            ; 如果 edit 有焦点 如果为空则啥都不干 否则就查询
-            ; 如果 listbox 有焦点 则无话可说
+        onButtonClick(*) {
+            ; 如果 listbox 有焦点
             if listBox.Focused
-                listBoxOnDoubleClick(listBox)
+                onListBoxDoubleClick()
             else {
-                ; 获取编辑框文本内容
+                ; 焦点在 edit，则获取编辑框文本内容，如果为空则啥都不干
+                ; 匹配的时候用的是 全拼 ,显示的是真实名称
                 editValue := Trim(myEdit.Value)
                 if editValue == '' {
                     MsgBox('输入内容不能为空')
                     return
                 }
-                ; bd 进行百度搜索
-                RegExMatch(editValue, "i)^bd(.+)", &SubPat)
-                ; IsObject 可以判断非空
-                if IsObject(SubPat) and SubPat.Count == 1 {
-                    Run "https://www.baidu.com/s?wd=" . Trim(SubPat[1])
+
+                ; 打开网址 
+                if editValue ~= "i)^(?:https?://)?([\w-]+\.)+[\w-]+(/[\w-./?%&=]*)?$" {
+                    if not InStr(editValue, 'http') {
+                        editValue := "http://" . editValue
+                    }
+                    Tip "打开网址 " . editValue
+                    Run editValue
                     MyGui.Destroy()
                     return
                 }
-                ; bing 搜索
-                RegExMatch(editValue, "i)^bing(.+)", &SubPat)
-                if IsObject(SubPat) and SubPat.Count == 1 {
-                    Run "https://cn.bing.com/search?q=" . Trim(SubPat[1])
+                ; 打开文件/程序
+                if FileExist(editValue) {
+                    Tip "打开 " . editValue
+                    Run editValue
                     MyGui.Destroy()
                     return
                 }
-                ; ip 进行 IP 归属地查询
-                RegExMatch(editValue, "i)^ip(.+)", &SubPat)
-                if IsObject(SubPat) and SubPat.Count == 1 {
-                    Run "https://www.ip138.com/iplookup.php?ip=" . Trim(SubPat[1])
+                ; 打开搜索
+                RegExMatch(editValue, "i)^(bd|bi|bing|ip|bl)(.+)", &regExMatchInfo)
+                ; IsObject 可判断非空
+                if IsObject(regExMatchInfo) and regExMatchInfo.Count == 2 {
+                    switch regExMatchInfo[1], 'Off' {
+                        case 'bd':
+                            Tip('百度 ' . regExMatchInfo[2])
+                            Run "https://www.baidu.com/s?wd=" . Trim(regExMatchInfo[2])
+                        case 'bi', 'bing': ; bing 搜索
+                            Tip('必应 ' . regExMatchInfo[2])
+                            Run "https://cn.bing.com/search?q=" . Trim(regExMatchInfo[2])
+                        case 'ip': ; IP 归属地查询
+                            Tip('IP 查询 ' . regExMatchInfo[2])
+                            Run "https://www.ip138.com/iplookup.php?ip=" . Trim(regExMatchInfo[1])
+                        case 'bl': ; bilibili
+                            Tip('b 站 ' . regExMatchInfo[2])
+                            Run "https://search.bilibili.com/all?keyword=" . Trim(regExMatchInfo[1])
+                    }
                     MyGui.Destroy()
                     return
-                }                    
-                ; 匹配的时候用的是 全拼 ,显示的是真实名称,然后启动用到的路径
-                if listBox.Value > 0 
-                    listBoxOnDoubleClick(listBox)
-                else                
-                    MsgBox('匹配失败')
+                }
+                ; 最后 的 兜底处理
+                (listBox.Value > 0) ? onListBoxDoubleClick() : MsgBox('匹配失败')
             }
         }
-        ; 按住 esc 销毁 窗口
-        myGui.OnEvent("Escape", onEscape)
-        onEscape(*) {
-            myGui.Destroy()
-        }
-        ; 居中但是稍微往上偏移些
-        myGui.Show(Format("xCenter y{1} AutoSize", A_ScreenHeight / 2 - 300))
     }
 }
