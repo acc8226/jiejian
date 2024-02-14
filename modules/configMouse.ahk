@@ -53,5 +53,5 @@ mouseIsOnEdge() {
 
 MouseIsOver(WinTitle) {
   MouseGetPos ,, &Win
-  return WinExist(WinTitle " ahk_id " Win)
+  return WinExist(WinTitle . " ahk_id " . Win)
 }

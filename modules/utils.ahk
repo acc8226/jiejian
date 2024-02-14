@@ -1,9 +1,4 @@
-﻿; 根据 title 添加 “-类型” 的后缀
-quickTitle(value) {
-    return value.title "-" value.type
-}
-
-; 根据显示内容反向查询路径
+﻿; 根据显示内容反向查询路径
 appFindPathByListBoxText(dataList, listBoxText) {
     if StrLen(listBoxText) > 0 {
         split := StrSplit(listBoxText, '-')

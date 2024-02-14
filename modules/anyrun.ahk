@@ -1,5 +1,8 @@
 ﻿#Include "Sort.ahk"
 
+; 正则匹配最大支持长度默认为 32 位
+Support_Length := 32
+
 Anyrun() {
     guiTitle := "快捷启动"
     ; 检查窗口是否已经存在，如果窗口已经存在，如果窗口不存在，则创建新窗口 
@@ -27,40 +30,59 @@ Anyrun() {
 
         myEdit.OnEvent("Change", editOnChange)
 
-        editOnChange(thisGui, *) {  ; 声明中 this 参数是可选的.
+        editOnChange(thisGui, *) {  ; 声明中 this 参数是可选的
+            ; 获取输入内容
             input := thisGui.Value
-            if input == "" {
+            ; 若为空则清空列表 或 大于设定长度 或 非字母和数字组合则退出
+            if input == "" OR StrLen(input) > Support_Length
+                  OR (NOT RegExMatch(input, '^[a-zA-Z0-9一-龥]+$') ; \u4e00-\u9fa5 可以表示为 一-龥
+            ) {
                 listBox.Delete()
                 listBox.Visible := false
                 myGui.Show("AutoSize")
                 return
             }
             ; 精确匹配失败则转到模糊匹配
-            needleRegEx := ""
-            Loop Parse, input{
-                needleRegEx .= A_LoopField . ".*"
+            needleRegEx := ''
+            Loop Parse, input {
+                needleRegEx .= '(' . A_LoopField . ").*"
             }
-            needleRegEx := 'i)' . SubStr(needleRegEx, 1, -2) ; 首部忽略大小写，尾部去掉多余的 ".*"
+            needleRegEx := 'i)' . needleRegEx
             
             listBox.Delete()
             dataArray := Array()
-            for value in dataList {
-                if Type(value.alias) == "Array" {
-                    Loop value.alias.Length
-                        if RegExMatch(value.alias[A_Index], needleRegEx, &OutputVar) {
-                            if value.type = 'app' or value.type = 'web'
-                                ; du 是匹配度的意思，使用简易的优先级排序 匹配位置 + 字符串长度 + 字母排序（还未实现）
-                                dataArray.Push({name: quickTitle(value), du: OutputVar.Pos * 32 + StrLen(value.title)})
-                            break
+            for it in dataList {
+                ; 只处理 app 和 web 这两种类型
+                if it.type = 'app' or it.type = 'web' {
+                    if Type(it.alias) == "Array" {
+                        ; 如果有则选出最匹配的 array
+                        ; 最佳匹配对象
+                        maxData := unset
+                        Loop it.alias.Length {
+                            if RegExMatch(it.alias[A_Index], needleRegEx, &regExMatchInfo) {
+                                data := {degree: computeDegree(regExMatchInfo) ; 匹配度
+                                        , title: it.title ; 标题
+                                        , type: it.type ; 类型
+                                }
+                                if !IsSet(maxData)
+                                    maxData := data
+                                else if dataArrayCompare(maxData, data) < 0
+                                    maxData := data
+                            }
                         }
-                } else if RegExMatch(value.alias, needleRegEx, &OutputVar) {
-                    if value.type = 'app' or value.type = 'web'
-                        dataArray.Push({name: quickTitle(value), du: OutputVar.Pos * 32 + StrLen(value.title)})
+                        if IsSet(maxData)
+                            dataArray.Push(maxData)
+                    } else if RegExMatch(it.alias, needleRegEx, &regExMatchInfo) {
+                        dataArray.Push({degree: computeDegree(regExMatchInfo)
+                                        , title: it.title
+                                        , type: it.type
+                        })
+                    }
                 }                
             }
             if dataArray.Length > 0 {
-                listBoxDataSort(dataArray)
-                listBox.Add(map2Items(dataArray))
+                dataArraySort(dataArray)
+                listBox.Add(listBoxData(dataArray))
                 listBox.Choose(1)
             } 
             listBox.Visible := dataArray.Length > 0
@@ -122,48 +144,79 @@ Anyrun() {
                     MsgBox('输入内容不能为空')
                     return
                 }
-
-                ; 打开网址 
-                if editValue ~= "i)^(?:https?://)?([\w-]+\.)+[\w-]+(/[\w-./?%&=]*)?$" {
-                    if not InStr(editValue, 'http') {
-                        editValue := "http://" . editValue
+                ; 如果列表有匹配项
+                if listBox.Value > 0 {
+                    onListBoxDoubleClick()
+                } else {
+                    ; 动作
+                    switch editValue, 'Off' {
+                        case 'IP': ; 查看 本机 IP
+                            addresses := SysGetIPAddresses()
+                            msg := "IP 地址:`n"
+                            for address in addresses
+                                msg .= address "`n"
+                            MsgBox msg
+                            MyGui.Destroy()
+                            return
                     }
-                    Tip "打开网址 " . editValue
-                    Run editValue
-                    MyGui.Destroy()
-                    return
-                }
-                ; 打开文件/程序
-                if FileExist(editValue) {
-                    Tip "打开 " . editValue
-                    Run editValue
-                    MyGui.Destroy()
-                    return
-                }
-                ; 打开搜索
-                RegExMatch(editValue, "i)^(bd|bi|bing|ip|bl)(.+)", &regExMatchInfo)
-                ; IsObject 可判断非空
-                if IsObject(regExMatchInfo) and regExMatchInfo.Count == 2 {
-                    switch regExMatchInfo[1], 'Off' {
-                        case 'bd':
-                            Tip('百度 ' . regExMatchInfo[2])
-                            Run "https://www.baidu.com/s?wd=" . Trim(regExMatchInfo[2])
-                        case 'bi', 'bing': ; bing 搜索
-                            Tip('必应 ' . regExMatchInfo[2])
-                            Run "https://cn.bing.com/search?q=" . Trim(regExMatchInfo[2])
-                        case 'ip': ; IP 归属地查询
-                            Tip('IP 查询 ' . regExMatchInfo[2])
-                            Run "https://www.ip138.com/iplookup.php?ip=" . Trim(regExMatchInfo[1])
-                        case 'bl': ; bilibili
-                            Tip('b 站 ' . regExMatchInfo[2])
-                            Run "https://search.bilibili.com/all?keyword=" . Trim(regExMatchInfo[1])
+                    ; 打开搜索
+                    RegExMatch(editValue, "i)^(bd|bi|ip|bl)(.*)", &regExMatchInfo)
+                    ; IsObject 可判断非空
+                    if IsObject(regExMatchInfo) and regExMatchInfo.Count == 2 {
+                        switch regExMatchInfo[1], 'Off' {
+                            case 'bd':
+                                Tip('百度 ' . regExMatchInfo[2])
+                                Run "https://www.baidu.com/s?wd=" . Trim(regExMatchInfo[2])
+                            case 'bi': ; bing 搜索
+                                Tip('必应 ' . regExMatchInfo[2])
+                                Run "https://cn.bing.com/search?q=" . Trim(regExMatchInfo[2])
+                            case 'ip': ; IP 归属地查询
+                                Tip('IP 查询 ' . regExMatchInfo[2])
+                                Run "https://www.ip138.com/iplookup.php?ip=" . Trim(regExMatchInfo[2])
+                            case 'bl': ; bilibili
+                                Tip('b 站 ' . regExMatchInfo[2])
+                                Run "https://search.bilibili.com/all?keyword=" . Trim(regExMatchInfo[2])
+                        }
+                        MyGui.Destroy()
+                        return
                     }
-                    MyGui.Destroy()
-                    return
+                    ; 打开网址 
+                    if editValue ~= "i)^(?:https?://)?([\w-]+\.)+[\w-]+(/[\w-./?%&=]*)?$" {
+                        if not InStr(editValue, 'http') {
+                            editValue := "http://" . editValue
+                        }
+                        Tip "打开网址 " . editValue
+                        Run editValue
+                        MyGui.Destroy()
+                        return
+                    }
+                    ; 打开文件/程序
+                    if FileExist(editValue) {
+                        Tip "打开 " . editValue
+                        Run editValue
+                        MyGui.Destroy()
+                        return
+                    }
+                    MsgBox('匹配失败')
                 }
-                ; 最后 的 兜底处理
-                (listBox.Value > 0) ? onListBoxDoubleClick() : MsgBox('匹配失败')
             }
         }
     }
+}
+
+/**
+ * 计算匹配度
+ * 
+ * @param regExMatchInfo
+ * @returns {number} 
+ */
+computeDegree(regExMatchInfo) {
+    degree := 0
+    loop regExMatchInfo.Count {
+        item := Support_Length - regExMatchInfo.Pos[A_Index]
+        if item < 0
+            break
+        degree += 2 ** item
+    }
+    return degree
 }

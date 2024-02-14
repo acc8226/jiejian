@@ -1,4 +1,9 @@
-﻿global appList := parseApp('app.csv')
+﻿Text_Group := 'text_group'
+
+global appList := parseApp('app.csv')
+
+; 完善 text_group 组信息
+GroupAdd Text_Group, 'ahk_class ^AutoHotkeyGUI$'
 
 ; 注册热键 和 热字符串
 Loop appList.Length {
@@ -10,6 +15,7 @@ Loop appList.Length {
     ; 高优先级
     ; e 列 esc
     switch it.escape, 'Off' {
+      ; 窗口组可以为一组窗口执行统一操作
       case "WinClose": GroupAdd "HL_esc_WinClose", it.exe
     }
     ; f 列 关闭
@@ -218,7 +224,7 @@ parseAppLine(line, eachLineLen) {
         or 1 == InStr(name, "【sql】")
         or 1 == InStr(name, "【窗口】")
       ) {
-      GroupAdd "text_group", info.exe
+      GroupAdd Text_Group, info.exe
     }
   }
   return info

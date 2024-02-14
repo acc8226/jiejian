@@ -1,10 +1,4 @@
-﻿; 窗口组可以用来使热键为一组窗口执行
-
-; 标签类：浏览器大类 使用了 标准的 ctrl + t 新建标签 ctrl + f4 关闭标签 ctrl + tab 进行翻页
-; 测试通过过的浏览器：360极速浏览器、Chrome 谷歌浏览器、DuckDuckGo 浏览器、Firefox 火狐系浏览器
-; 理论上兼容的浏览器（未经过完全测试）：360 安全浏览器、QQ 浏览器、傲游浏览器、猎豹浏览器、极速浏览器
-
-global dataList := parseData("data.csv")
+﻿global dataList := parseData("data.csv")
 
 ; 注册热键 和 热字符串
 Loop dataList.Length {
@@ -16,7 +10,7 @@ Loop dataList.Length {
   if StrLen(it.hs) > 0 {
       if it.type = "web" {
           ; 排除在 编辑器中 可跳转网址
-          HotIfWinNotactive 'ahk_group text_group'
+          HotIfWinNotactive 'ahk_group ' . Text_Group
           Hotstring ":C*:" . it.hs, startByHotString
           HotIfWinNotactive
       } else if it.type = "text"
