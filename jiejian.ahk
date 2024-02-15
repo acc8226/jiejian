@@ -185,3 +185,21 @@ ExitFunc(ExitReason, ExitCode) {
         RegWrite launchCount, "REG_DWORD", regKeyName, launchCountValueName
     }
 }
+
+; 在鼠标左键按下的情况在 再按下 a 键
+#HotIf GetKeyState("LButton", "P")
+a::{
+    ; 没有获取到文字直接返回,否则若选中的是网址则打开，否则进行百度搜索
+    text := GetSelectedText()
+    if text {
+        if text ~= "i)^(?:https?://)?([\w-]+\.)+[\w-]+(/[\w-./?%&=]*)?$" {
+            if not InStr(text, 'http') {
+                text := "http://" . text
+            }
+            Run text
+        } else {
+            Run "https://www.baidu.com/s?wd=" . text
+        }
+    }
+}
+#HotIf

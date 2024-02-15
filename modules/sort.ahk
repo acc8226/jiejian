@@ -33,10 +33,10 @@ dataArraySort(dataArray) {
  * @returns {number}
  */
 dataArrayCompare(it1, it2) {
-    ; 按照 degree、title、type 进行排序
+    ; 按照 degree 降序、title 升序、type 升序 进行排序
     result := it1.degree - it2.degree
     if result == 0 {
-        result := StrCompare(it1.title, it2.title)
+        result := StrCompare(it2.title, it1.title)
         if result == 0
             result := StrCompare(it2.type, it1.type)
     }

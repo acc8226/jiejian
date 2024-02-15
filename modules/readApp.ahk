@@ -71,13 +71,15 @@ Loop appList.Length {
       case "Right", "{Right}": GroupAdd "forward_Right", it.exe
       case "b": GroupAdd "forward_b", it.exe
       case "n": GroupAdd "forward_n", it.exe
-      case "z": GroupAdd "forward_z", it.exe
 
+      case "z": GroupAdd "forward_z", it.exe
       case "^Right", "^{Right}": GroupAdd "forward_ctrl_Right", it.exe
       case "^Tab", "^{Tab}": GroupAdd "forward_ctrl_Tab", it.exe
       case "^]" : GroupAdd "forward_ctrl_closeBracket", it.exe
       case "^n" : GroupAdd "forward_ctrl_n", it.exe
-      case "^!Right", "^!{Right}": GroupAdd "forward_ctrl_alt_Right", it.exe
+
+      case "^!Right", "^!{Right}", "!^Right", "!^{Right}": GroupAdd "forward_ctrl_alt_Right", it.exe
+      case "^+Right", "^+{Right}", "+^Right", "+^{Right}": GroupAdd "forward_ctrl_shift_Right", it.exe
     }
     ; h 列 下个标签
     switch it.nextTag, 'Off' {
@@ -98,6 +100,8 @@ Loop appList.Length {
       case "^n": GroupAdd "next_ctrl_n", it.exe
       case "^!PgDn", "^!{PgDn}", "!^PgDn", "!^{PgDn}": GroupAdd "next_ctrl_alt_PgDn", it.exe
       case "^!Right", "^!{Right}", "!^Right", "!^{Right}": GroupAdd "next_ctrl_alt_Right", it.exe
+
+      case "^+Right", "^+{Right}", "+^Right", "+^{Right}": GroupAdd "next_ctrl_shift_Right", it.exe
     }
     ; I 列 后退
     switch it.back, 'Off' {
@@ -139,6 +143,7 @@ Loop appList.Length {
 
       case "^b": GroupAdd "previous_ctrl_b", it.exe
       case "^!Left", "^!{Left}", "!^Left", "!^{Left}": GroupAdd "previous_ctrl_alt_Left", it.exe
+      case "^+Left", "^+{Left}", "+^Left", "+^{Left}": GroupAdd "previous_ctrl_shift_Left", it.exe
     }
     ; k 列 新建窗口
     switch it.newWin, 'Off' {
@@ -343,19 +348,22 @@ XButton1::SmartCloseWindow
 !Right::Send "b"
 #HotIf WinActive("ahk_group forward_n")
 !Right::Send "n"
+
 #HotIf WinActive("ahk_group forward_z")
 !Right::Send "z"
 #HotIf WinActive("ahk_group forward_ctrl_Right")
 !Right::Send "^{Right}"
-
 #HotIf WinActive("ahk_group forward_ctrl_Tab")
 !Right::Send "^{Tab}"
 #HotIf WinActive("ahk_group forward_ctrl_closeBracket")
 !Right::Send "^]"
 #HotIf WinActive("ahk_group forward_ctrl_n")
 !Right::Send "^n"
+
 #HotIf WinActive("ahk_group forward_ctrl_alt_Right")
 !Right::Send "^!{Right}"
+#HotIf WinActive("ahk_group forward_ctrl_shift_Right")
+!Right::Send "^+{Right}"
 
 ; h. 下个标签
 #HotIf WinActive("ahk_group next_b")
@@ -390,6 +398,8 @@ XButton1::SmartCloseWindow
 ^Tab::Send "^!{PgDn}"
 #HotIf WinActive("ahk_group next_ctrl_alt_Right")
 ^Tab::Send "^!{Right}"
+#HotIf WinActive("ahk_group next_ctrl_shift_Right")
+^Tab::Send "^+{Right}"
 
 ; I. 后退
 #HotIf WinActive("ahk_group back_BackSpace")
@@ -475,6 +485,9 @@ XButton2::Send "^b"
 #HotIf WinActive("ahk_group previous_ctrl_alt_Left")
 ^+Tab::
 XButton2::Send "^!{Left}"
+#HotIf WinActive("ahk_group previous_ctrl_shift_Left")
+^+Tab::
+XButton2::Send "^+{Left}"
 
 ; 兜底
 #HotIf

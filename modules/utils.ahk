@@ -1,18 +1,10 @@
 ﻿; 根据显示内容反向查询路径
-appFindPathByListBoxText(dataList, listBoxText) {
-    if StrLen(listBoxText) > 0 {
-        split := StrSplit(listBoxText, '-')
-        if split.Length == 2 {
-            type := split[2]
-            if type = 'app' or type = 'web' {
-                title := split[1]
-                if StrLen(title) > 0 {
-                    for it in dataList {
-                        if title = it.title and type = it.type
-                            return it
-                    }
-                }
-            }
+appFindPathByListBoxText(title, type) {
+    if StrLen(title) > 0 {
+        for it in dataList {
+            ; 两个条件的匹配更精确
+            if title = it.title and type = it.type
+                return it
         }
     }
 }
