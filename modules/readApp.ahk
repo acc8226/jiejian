@@ -16,13 +16,13 @@ Loop appList.Length {
     ; e 列 esc
     switch it.escape, 'Off' {
       ; 窗口组可以为一组窗口执行统一操作
-      case "WinClose": GroupAdd "HL_esc_WinClose", it.exe
+      case "WinClose": GroupAdd 'HL_esc_WinClose', it.exe
     }
     ; f 列 关闭
     switch it.close, 'Off' {
-      case "Esc", "{Esc}": GroupAdd "HL_close_Esc", it.exe
-      case "!F4", "!{F4}": GroupAdd "HL_close_alt_F4", it.exe
-      case "^F4", "^{F4}": GroupAdd "HL_close_ctrl_F4", it.exe
+      case "Esc", "{Esc}": GroupAdd 'HL_close_Esc', it.exe
+      case "!F4", "!{F4}": GroupAdd 'HL_close_alt_F4', it.exe
+      case "^F4", "^{F4}": GroupAdd 'HL_close_ctrl_F4', it.exe
     }
   } else {
     ; 低优先级
@@ -167,9 +167,9 @@ parseApp(fileName) {
   ; 每次从字符串中检索字符串(片段)
   Loop Parse, FileRead(fileName), "`n", "`r" {
       ; 跳过首行
-      if A_Index >= 2 {
+      if (A_Index >= 2) {
         appInfo := parseAppLine(A_LoopField, eachLineLen)
-        if appInfo
+        if (appInfo)
           appList.Push(appInfo)
       }
   }
@@ -179,8 +179,13 @@ parseApp(fileName) {
 parseAppLine(line, eachLineLen) {
   split := StrSplit(line, ",")
   ; 跳过不符合条件的行
-  if split.Length < eachLineLen or Trim(split[eachLineLen]) = 'n'
-    return 
+  if split.Length < eachLineLen
+    return
+  splitEachLineLen := Trim(split[eachLineLen])
+  ; 过滤不启用的行
+  if NOT (splitEachLineLen = '' OR splitEachLineLen = 'y')
+    return
+
   info := {}
   ; 跳过 exe 为空的行
   info.exe := Trim(split[3])
@@ -229,7 +234,7 @@ parseAppLine(line, eachLineLen) {
         or 1 == InStr(name, "【sql】")
         or 1 == InStr(name, "【窗口】")
       ) {
-      GroupAdd Text_Group, info.exe
+      GroupAdd(Text_Group, info.exe)
     }
   }
   return info
@@ -479,13 +484,13 @@ XButton2::Send "^{Left}"
 ^+Tab::
 XButton2::Send "^{PgUp}"
 
-#HotIf WinActive("ahk_group previous_ctrl_b")
+#HotIf WinActive('ahk_group previous_ctrl_b')
 ^+Tab::
 XButton2::Send "^b"
-#HotIf WinActive("ahk_group previous_ctrl_alt_Left")
+#HotIf WinActive('ahk_group previous_ctrl_alt_Left')
 ^+Tab::
 XButton2::Send "^!{Left}"
-#HotIf WinActive("ahk_group previous_ctrl_shift_Left")
+#HotIf WinActive('ahk_group previous_ctrl_shift_Left')
 ^+Tab::
 XButton2::Send "^+{Left}"
 
@@ -494,7 +499,7 @@ XButton2::Send "^+{Left}"
 XButton2::Send "^+{Tab}"
 
 ; k 列 新建窗口
-#HotIf WinActive("ahk_group newWin_ctrl_n")
+#HotIf WinActive('ahk_group newWin_ctrl_n')
 ^+n::Send "^n"
 
 ; L 列 F11 功能键增强 全屏
@@ -502,17 +507,17 @@ XButton2::Send "^+{Tab}"
 #HotIf WinActive("哔哩哔哩_bilibili ahk_group browser_group")
 F11::Send "f"
 
-#HotIf WinActive("ahk_group fullscreen_DoubleClick")
+#HotIf WinActive('ahk_group fullscreen_DoubleClick')
 F11::MouseClick "left", , , 2
-#HotIf WinActive("ahk_group fullscreen_Enter")
+#HotIf WinActive('ahk_group fullscreen_Enter')
 F11::Send "{Enter}"
-#HotIf WinActive("ahk_group fullscreen_f")
+#HotIf WinActive('ahk_group fullscreen_f')
 F11::Send "f"
-#HotIf WinActive("ahk_group fullscreen_alt_f")
+#HotIf WinActive('ahk_group fullscreen_alt_f')
 F11::Send "!f"
-#HotIf WinActive("ahk_group fullscreen_alt_Enter")
+#HotIf WinActive('ahk_group fullscreen_alt_Enter')
 F11::Send "!{Enter}"
-#HotIf WinActive("ahk_group fullscreen_ctrl_shift_F12")
+#HotIf WinActive('ahk_group fullscreen_ctrl_shift_F12')
 F11::Send "^+{F12}"
 
 ; ctrl + F7 通用：置顶/取消置顶

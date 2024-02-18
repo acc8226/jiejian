@@ -9,7 +9,7 @@ https://wyagd001.github.io/v2/docs/
 ;@Ahk2Exe-SetCopyright 全民反诈 union
 ;@Ahk2Exe-SetDescription 捷键-为简化键鼠操作而生
 
-CodeVersion := '24.2.13-beta'
+CodeVersion := '24.2.18-beta'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
@@ -18,25 +18,30 @@ CodeVersion := '24.2.13-beta'
 ; 提取出 文件名 再拼接 PostExec.ahk; 版本号; 2 仅在指定 UPX 压缩时运行 ; 脚本所在路径
 ;@Ahk2Exe-%U_V% %A_ScriptName~\.[^\.]+$~PostExec.ahk% %U_version%, 2, %A_ScriptDir%
 
-regKeyName := 'HKEY_CURRENT_USER\SOFTWARE\jiejian'
-startTime := A_NowUTC
+global regKeyName := 'HKEY_CURRENT_USER\SOFTWARE\jiejian'
+global startTime := A_NowUTC
+global IS_AUTO_START_UP := false
+global APP_NAME := '捷键'
 
 ; ----- 1. 热键 之 鼠标操作 -----
 CoordMode 'Mouse' ; RelativeTo 如果省略, 默认为 Screen
 FileEncoding 54936 ; Windows XP 及更高版本： GB18030 简体中文 (4 字节)
-SetTitleMatchMode "RegEx" ; 设置 WinTitle parameter 在内置函数中的匹配行为
+SetTitleMatchMode 'RegEx' ; 设置 WinTitle parameter 在内置函数中的匹配行为
 
-#Include "lib/Functions.ahk"
-#Include "lib/Actions.ahk"
-#Include "lib/MoveWindow.ahk"
-#Include "lib/Utils.ahk"
+#Include 'lib/Functions.ahk'
+#Include 'lib/Actions.ahk'
+#Include 'lib/MoveWindow.ahk'
+#Include 'lib/Utils.ahk'
 
-#Include "modules/ConfigMouse.ahk"
-#Include "modules/Utils.ahk"
-#Include "modules/Anyrun.ahk"
-#Include "modules/ReadApp.ahk"
-#Include "modules/ReadData.ahk"
-#Include "modules/CheckUpdate.ahk"
+#Include 'modules/ConfigMouse.ahk'
+#Include 'modules/Utils.ahk'
+#Include 'modules/Anyrun.ahk'
+#Include 'modules/ReadApp.ahk'
+#Include 'modules/ReadData.ahk'
+#Include 'modules/CheckUpdate.ahk'
+#Include 'modules/MyTrayMenu.ahk'
+
+global aTrayMenu
 
 SettingTray ; 设置托盘图标和菜单
 CheckUpdate ; 检查更新
@@ -71,38 +76,31 @@ CheckUpdate ; 检查更新
 ; ----- 6. 热键 之 其他 -----
 ; 文本类 为了 md 增强 记事本 & vscode
 ; ctrl + 数字 1-5 为光标所在行添加 markdown 格式标题
-#HotIf WinActive("ahk_exe i)notepad.exe") or WinActive("ahk_class i)Chrome_WidgetWin_1 ahk_exe i)Code.exe") 
+#HotIf WinActive('ahk_exe i)notepad.exe') or WinActive('ahk_class i)Chrome_WidgetWin_1 ahk_exe i)Code.exe') 
 ^1::
 ^2::
 ^3::
 ^4::
 ^5::{
     oldText := A_Clipboard
-    A_Clipboard := ""
-    Send "{Home}{Shift Down}{End}{Shift Up}" ; 切到首部然后选中到尾部
+    A_Clipboard := ''
+    Send '{Home}{Shift Down}{End}{Shift Up}' ; 切到首部然后选中到尾部
     Sleep 100
-    Send "^x"
+    Send '^x'
     ClipWait ; 等待剪贴板中出现文本.
     newText := RegExReplace(A_Clipboard, "\s*$", "") ; 去掉尾部空格
     newText := RegExReplace(newText, "^#{1,6}\s+(.*)", "$1")
     nums := SubStr(A_ThisHotkey, 2)
-    Send "{Home}{# " . nums . "}" . " "
+    Send "{Home}{# " . nums . "}" . ' '
     ; 之所以拆开是为防止被中文输入法影响
     SendText newText
-    Send "{End}"
+    Send '{End}'
     A_Clipboard := oldText
 }
 #HotIf
 
 ^!r::Reload ; Ctrl + Alt + R 重启脚本
-^!s::{ ; Ctrl + Alt + S 暂停脚本
-    Suspend(!A_IsSuspended)
-    if (A_IsSuspended) {
-        A_TrayMenu.Check(trayMenuDefault)
-    } else {
-        A_TrayMenu.UnCheck(trayMenuDefault)
-    }      
-}
+^!s::aTrayMenu.mySuspend() ; Ctrl + Alt + S 暂停脚本
 ^!v::Send A_Clipboard ; ctrl + alt + v 将剪贴板的内容输入到当前活动应用程序中，防止了一些网站禁止在 HTML 密码框中进行粘贴操作
 ^+"::Send '""{Left}' ; ctrl + shift + " 快捷操作-插入双引号
 
@@ -112,7 +110,7 @@ CheckUpdate ; 检查更新
 ; ----- 8. 热串之 缩写扩展：将短缩词自动扩展为长词或长句（英文单词中哪个字母开头的单词数最少，我称之为 X 模式）-----
 ; :C*:xnb::很牛呀
 :C*:xnow::{
-    SendText FormatTime(, "yyyy-MM-dd HH:mm:ss")
+    SendText FormatTime(, 'yyyy-MM-dd HH:mm:ss')
 }
 :C*:xdate::{
     SendText FormatTime(, "'date:' yyyy-MM-dd HH:mm:ss")
@@ -130,76 +128,73 @@ CapsLock & LButton::EWD_MoveWindow
 ; 设置托盘图标和菜单
 SettingTray() {
     A_TrayMenu.Delete()
-    if not A_IsCompiled {
-        A_TrayMenu.Add("编辑脚本", TrayMenuHandler)
-        A_TrayMenu.Add("查看变量", TrayMenuHandler)
-        A_TrayMenu.Add
-    }
-    ; 右对齐不好使，我醉了
-    global trayMenuDefault := Format("{1:-10}", "暂停 Ctrl+Alt+S", "Ctrl+Alt+S")
-    A_TrayMenu.Add(trayMenuDefault, TrayMenuHandler)
-    A_TrayMenu.Add(Format("{1:-10}", "重启 Ctrl+Alt+R", "Ctrl+Shift+R"), TrayMenuHandler)
-    A_TrayMenu.Add(Format("{1:-10}", "搜一搜 Alt+Space", "Alt+Space"), TrayMenuHandler)
-    A_TrayMenu.Add("查看窗口标识符", TrayMenuHandler)
-    A_TrayMenu.Add("使用统计", TrayMenuHandler)
-    A_TrayMenu.Add("检查更新", TrayMenuHandler)
-    A_TrayMenu.Add
-    A_TrayMenu.Add("帮助文档", TrayMenuHandler)
-    A_TrayMenu.Add("关于作者", TrayMenuHandler)
-    A_TrayMenu.Add
-    A_TrayMenu.Add("退出", TrayMenuHandler)
+    global aTrayMenu := MyTrayMenu()
 
-    A_TrayMenu.Default := trayMenuDefault
-    A_TrayMenu.ClickCount := 1 ; 单击可以暂停
-  
     localIsAlphaOrBeta := InStr(CodeVersion, "alpha") or InStr(CodeVersion, "beta")
     A_IconTip := "捷键 " . CodeVersion . (A_IsCompiled ? "" : " 未编译") . (localIsAlphaOrBeta ? " 测试版" : " ") . (A_PtrSize == 4 ? '32位' : '64位')
 
-    if not A_IsCompiled {
+    if (NOT A_IsCompiled) {
         ; 建议使用 16*16 或 32*32 像素的图标，使用 Ahk2Exe-Let 提取出 favicon.ico
         faviconIco := 'favicon.ico'
         ;@Ahk2Exe-Let U_faviconIco = %A_PriorLine~U).+['"](.+)['"]~$1%
         ;@Ahk2Exe-SetMainIcon %U_faviconIco%
         TraySetIcon faviconIco
-    }        
+    }
 }
 
-; 触发热键时, 热键中按键原有的功能不会被屏蔽(对操作系统隐藏)
-; ~LButton & b::Run "https://www.baidu.com"
-
-; 注册一个当脚本退出时, 会自动调用的函数.
+; 注册一个当脚本退出时, 会自动调用的函数
 OnExit ExitFunc
 
-ExitFunc(ExitReason, ExitCode) {
+ExitFunc(exitReason, exitCode) {
     ; 统计软件使用总分钟数
     minutesDiff := DateDiff(A_NowUTC, startTime, 'Minutes')
-    if minutesDiff > 0 {
+    if (minutesDiff > 0) {
         recordMinsValueName := 'record_mins'
         recordMins := RegRead(regKeyName, recordMinsValueName, 0) + minutesDiff
         RegWrite recordMins, "REG_DWORD", regKeyName, recordMinsValueName
     }
     ; 统计软件使用次数
-    if not ExitReason ~= "i)^(?:Error|Reload|Single)$" {
+    if (not exitReason ~= "i)^(?:Error|Reload|Single)$") {
         launchCountValueName := 'launch_count'
         launchCount := RegRead(regKeyName, launchCountValueName, 1) + 1
         RegWrite launchCount, "REG_DWORD", regKeyName, launchCountValueName
     }
 }
 
-; 在鼠标左键按下的情况在 再按下 a 键
-#HotIf GetKeyState("LButton", "P")
-a::{
+; 触发热键时, 热键中按键原有的功能不会被屏蔽(对操作系统隐藏)
+~LButton & a::
+^!1::{
     ; 没有获取到文字直接返回,否则若选中的是网址则打开，否则进行百度搜索
     text := GetSelectedText()
-    if text {
-        if text ~= "i)^(?:https?://)?([\w-]+\.)+[\w-]+(/[\w-./?%&=]*)?$" {
+    if (text) {        
+        if (RegExMatch(text, "i)^\s*((?:https?://)?(?:[\w-]+\.)+[\w-]+(?:/[\w-./?%&=]*)?\s*)$", &regExMatchInfo)) {
+            text := regExMatchInfo.1
             if not InStr(text, 'http') {
                 text := "http://" . text
             }
             Run text
         } else {
-            Run "https://www.baidu.com/s?wd=" . text
+            Run 'https://www.baidu.com/s?wd=' . text
         }
     }
 }
-#HotIf
+
+; 在鼠标左键按下的情况在 再按下 a 键
+; #HotIf GetKeyState("LButton", "P")
+; a::{
+;     ; 没有获取到文字直接返回,否则若选中的是网址则打开，否则进行百度搜索
+;     text := GetSelectedText()
+;     if (text) {
+;         if (text ~= "i)^(?:https?://)?([\w-]+\.)+[\w-]+(/[\w-./?%&=]*)?$") {
+;             if not InStr(text, 'http') {
+;                 text := "http://" . text
+;             }
+;             Run text
+;         } else {
+;             Run "https://www.baidu.com/s?wd=" . text
+;         }
+;     }
+; }
+; #HotIf
+
+; Run('jiejian64.exe /script lib\ChangeBrightness.ahk')

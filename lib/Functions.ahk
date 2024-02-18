@@ -16,86 +16,18 @@ IsDesktop() {
  * 获取当前程序名称
  * 自带的 WinGetProcessName 无法获取到 uwp 应用的名称
  * 来源：https://www.autohotkey.com/boards/viewtopic.php?style=7&t=112906
+ * 
  * @returns {string} 
  */
 GetProcessName() {
   fn := (winTitle) => (WinGetProcessName(winTitle) == 'ApplicationFrameHost.exe')
-
   winTitle := "A"
   if fn(winTitle) {
     for hCtrl in WinGetControlsHwnd(winTitle)
       bool := fn(hCtrl)
     until !bool && winTitle := hCtrl
   }
-
   return WinGetProcessName(winTitle)
-}
-
-/**
- * 托盘菜单被点击
- * @param ItemName 
- * @param ItemPos 
- * @param MyMenu 
- */
-TrayMenuHandler(ItemName, ItemPos, MyMenu) {
-  switch ItemName {
-    case "编辑脚本":
-      Edit
-    case "查看变量":
-      ListVars
-    case trayMenuDefault:
-      jiejianToggleSuspend
-    case "重启 Ctrl+Alt+R":
-      jiejianReload
-    case "搜一搜 Alt+Space":
-      Anyrun
-    case "查看窗口标识符":
-      Run "extra/WindowSpyU32.exe"
-    case "使用统计":            
-      ; 统计软件使用总分钟数
-      recordMinsValueName := 'record_mins'
-      recordMins := RegRead(regKeyName, recordMinsValueName, 0) + DateDiff(A_NowUTC, startTime, 'Minutes')
-      ; 统计软件使用次数
-      launchCountValueName := 'launch_count'    
-      launchCount := RegRead(regKeyName, launchCountValueName, 1)
-
-      sb := '总启动次数 ' . launchCount . ' 次，您目前已使用捷键 '
-      if recordMins < 60 {
-        MsgBox sb . recordMins . ' 分钟！', '使用统计'
-      } else {
-        sb .= recordMins // 60 . ' 小时 '
-        mins := Floor(recordMins - recordMins // 60 * 60)
-        if mins !== 0 {
-          sb .= mins . ' 分钟'
-        }
-        sb .= '！'
-        MsgBox sb, '使用统计'
-      }
-    case "检查更新":
-      checkUpdate(true)
-    case "项目主页":
-      Run "https://gitcode.com/acc8226/jiejian"
-    case "帮助文档":
-      Run "https://gitcode.com/acc8226/jiejian/overview"
-    case "关于作者":
-      Run "https://gitcode.com/acc8226"
-    case "退出":
-      jiejianExit
-  }
-}
-
-/**
- * 暂停
- */
-jiejianToggleSuspend() {
-  Suspend(!A_IsSuspended)
-  if (A_IsSuspended) {
-    A_TrayMenu.Check(trayMenuDefault)
-    Tip("  暂停捷键  ", -500)
-  } else {
-    A_TrayMenu.UnCheck(trayMenuDefault)
-    Tip("  恢复捷键  ", -500)
-  }
 }
 
 /**

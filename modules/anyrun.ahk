@@ -20,8 +20,8 @@ Anyrun() {
         ; 横向窄边框 纵向无边框
         myGui.MarginX := 1
         myGui.MarginY := 0
-        myGui.SetFont(fontSize, "Consolas") ; 设置字体(24 磅) 和 Consolas
-        myGui.SetFont(fontSize, "Microsoft YaHei") ; 设置优先字体(24 磅) 和 微软雅黑
+        myGui.SetFont(fontSize, "Consolas") ; 设置兜底字体(24 磅) Consolas
+        myGui.SetFont(fontSize, "Microsoft YaHei") ; 设置优先字体(24 磅) 微软雅黑
         myEdit := myGui.AddEdit(Format("vMyEdit w{1}", width))
         ; listBox 做到贴边 默认只显示 5 行、宽度 400 位置
         ; Hidden: 让控件初始为隐藏状态
@@ -103,7 +103,7 @@ Anyrun() {
                 listBoxDataArray := []
             }
 
-            if editValue ~= "i)^(?:https?://)?([\w-]+\.)+[\w-]+(/[\w-./?%&=]*)?$"
+            if editValue ~= "i)^(?:https?://)?(?:[\w-]+\.)+[\w-]+(?:/[\w-./?%&=]*)?\s*$"
                 listBoxDataArray.push MyActionArray[7].title
 
             if DirExist(editValue) {
