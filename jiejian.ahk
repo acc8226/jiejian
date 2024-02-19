@@ -46,34 +46,12 @@ global aTrayMenu
 SettingTray ; 设置托盘图标和菜单
 CheckUpdate ; 检查更新
 
-; ----- 2. 热键 之 快捷键重写和增强 -----
-; 禁用快捷键
-;^v::return
+; ----- 热键 之 快捷键重写和增强 -----
+; ----- 热键 之 打开网址 -----
+; ----- 热键 之 运行程序 ;问题是怎么添加应用商店的路径-----
+; ----- 热键 之 启动文件夹 -----
+; ----- 热键 之 其他 -----
 
-; 仅是实验，使用 Alt 则怕和编辑器冲突，能鼠标手势还是鼠标手势靠谱，跳过了快捷键，实现效果更好
-; ; alt + m Minimize 最小化当前活动窗口
-; !m::WinMinimize "A"
-; ; alt + f fullscreen 最大化或还
-; !f::{
-;     minMax := WinGetMinMax("A")
-;     if minMax = 1
-;         WinRestore "A"
-;     else
-;         WinMaximize "A"
-; }
-; ; alt + q quit 关闭窗口/不一定会退出程序
-; !q::WinClose "A" ; 否则统一为关闭
-
-; ----- 3. 热键 之 打开网址 -----
-; !6::Run url_bilibili
-
-; ----- 4. 热键 之 运行程序 ;问题是怎么添加应用商店的路径-----
-; !1::Run "explorer"
-
-; ----- 5. 热键 之 启动文件夹 -----
-; !d::Run "D:"
-
-; ----- 6. 热键 之 其他 -----
 ; 文本类 为了 md 增强 记事本 & vscode
 ; ctrl + 数字 1-5 为光标所在行添加 markdown 格式标题
 #HotIf WinActive('ahk_exe i)notepad.exe') or WinActive('ahk_class i)Chrome_WidgetWin_1 ahk_exe i)Code.exe') 
@@ -106,22 +84,20 @@ CheckUpdate ; 检查更新
 
 !Space::Anyrun ; 启动窗口
 
-; ----- 7. 热串 之 打开网址。选择 z 而非 q，因为 q 的距离在第一行太远了，我称之为 Z 模式，用于全局跳转网址 -----
-; ----- 8. 热串之 缩写扩展：将短缩词自动扩展为长词或长句（英文单词中哪个字母开头的单词数最少，我称之为 X 模式）-----
-; :C*:xnb::很牛呀
+; ----- 热串 之 打开网址。选择 z 而非 q，因为 q 的距离在第一行太远了，我称之为 Z 模式，用于全局跳转网址 -----
+; ----- 热串 之 缩写扩展：将短缩词自动扩展为长词或长句（英文单词中哪个字母开头的单词数最少，我称之为 X 模式）-----
+; ----- 热串 之 片段展开-----
+; ----- 热串 之 自定义表情符号：将输入的特定字符串替换为自定义的表情符号或 Emoji -----
+
 :C*:xnow::{
     SendText FormatTime(, 'yyyy-MM-dd HH:mm:ss')
 }
 :C*:xdate::{
     SendText FormatTime(, "'date:' yyyy-MM-dd HH:mm:ss")
 }
-; ----- 9. 热串之 片段展开-----
-; C 区分大小写  * 不需要额外键入终止符
 
-; ----- 10. 热串之 自定义表情符号：将输入的特定字符串替换为自定义的表情符号或 Emoji -----
-; :C*:xwx::😄 ; 微笑
+; ----- 其他-----
 
-; ----- 11. 其他-----
 ; 按住 CapsLock 后可以用鼠标左键拖动窗口
 CapsLock & LButton::EWD_MoveWindow
 
@@ -178,23 +154,3 @@ ExitFunc(exitReason, exitCode) {
         }
     }
 }
-
-; 在鼠标左键按下的情况在 再按下 a 键
-; #HotIf GetKeyState("LButton", "P")
-; a::{
-;     ; 没有获取到文字直接返回,否则若选中的是网址则打开，否则进行百度搜索
-;     text := GetSelectedText()
-;     if (text) {
-;         if (text ~= "i)^(?:https?://)?([\w-]+\.)+[\w-]+(/[\w-./?%&=]*)?$") {
-;             if not InStr(text, 'http') {
-;                 text := "http://" . text
-;             }
-;             Run text
-;         } else {
-;             Run "https://www.baidu.com/s?wd=" . text
-;         }
-;     }
-; }
-; #HotIf
-
-; Run('jiejian64.exe /script lib\ChangeBrightness.ahk')

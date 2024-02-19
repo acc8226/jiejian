@@ -10,7 +10,7 @@
 2. app.csv 配置文件
 3. data.csv 配置文件
 4. help.url 在线帮助文档
-5. **jiejian32/64.exe** 分别为 32/64 位主程序。无需安装，双击即用，建议将捷键设置为开机自启
+5. **jiejian32/64.exe** 分别为 32/64 位主程序。无需安装，双击即用，但更建议设置为开机自启
 
 ## 1. 特点
 
@@ -122,25 +122,30 @@
 
 只要输入对应启动程序/网址的全拼或首字母简拼这种模糊搜索，如果候选词有多个，可以先按下 tab 键切换到列表框，再上下键选中后回车或直接鼠标双击。
 
-### bd 百度搜索
+### 快速搜索
 
-在框中输入 bd[空格?]{关键字}
+* bd 百度搜索：在框中输入 bd[空格?]{关键字}
+* bi 必应搜索
+* ip 归属地查询
+* bi 搜索 b 站视频
+
+### 打开 网址/文件/程序
+
+例如在输入框中输入内容后按下回车
+
+* `163.com` 打开网易网
+* `https://www.soso.com` 打开搜搜网
+* `D:\alee\git-repos-gitee\jiejian` 打开文件夹
+* `D:\alee\git-repos-gitee\my-cmd\README.md` 打开文件
+* `C:\Users\ferder\Desktop\Listary.lnk` 打开快捷方式
 
 ![](https://foruda.gitee.com/images/1689321508560702893/2457a573_426858.gif "动画.gif")
 
-### bing 必应搜索
+### 网址直达 和 软件直达
 
-在框中输入 bing[空格?]{关键字}
+支持模糊输入
 
-### ip 归属地查询
-
-在框中输入 ip[空格?]{关键字}
-
-### 快速打开网址和软件
-
-支持模糊拼写
-
-bd 打开百度网
+例如 bd 打开百度网
 
 ![](https://gitee.com/acc8226/shortcut-key/raw/main/imgs/7%20%E6%89%93%E5%BC%80%E7%99%BE%E5%BA%A6.apng)
 
@@ -188,7 +193,11 @@ data.csv 动态配置
 
 ![](https://foruda.gitee.com/images/1689259802922906219/d546cc12_426858.gif "动画.gif")
 
-## 10. 自定义配置说明
+## 10. 左键辅助
+
+在鼠标左键按下的同时按下 a 键：打开选定网址，否则表示百度搜索选定文本。
+
+## 11. 自定义配置说明
 
 配置文件 **app.csv**（用于配置软件的快捷键）、**data.csv**（用于配置启动器候选项以及热键、热串） 必须和 ahk 脚本文件在同一级目录，且必须使用 GB18030 字符集。
 
@@ -232,23 +241,27 @@ app.csv 使用了正则表达式，需要使用者对正则有一定了解。主
 * 支持 arc 浏览器 for windows
 * icon 点击后使用新图标，而不是系统样式的图标
 * 配置文件不太易用，需要优化
-* 在菜单中增加开机自启选项
 
 ### 捷键 2024.02
 
 2024 年 2 月 12 于 祁阳
 
-* csv 文件增加是否启用列 以及 bug 修复
-* 新增一些看图、视频播放软件的支持
-* 鼠标在左或者上边缘的按键操作添加短暂提示
-* 使用热串若匹配则会有短暂提示
-* 热串启动添加短暂提示
+日益完善，可能真是今年的最后一个版本
+
 * app.csv 新增 ctrl + shift + n 作为新建窗口的默认标识
-* 音乐播放软件优先使用软件的快捷键，而非媒体的快捷键
+* csv 文件增加是否启用列
+* 重新设计了一版菜单，并增加开机自启选项
+* 新增一些看图、压缩、视频播放软件的支持
+* 增强搜一搜组件，现在支持录入文件/网址/程序后支持跳转了
+* 热键、热串若匹配则会有短暂提示
+* 音乐播放软件优先使用软件的快捷键，而非媒体快捷键
+* 鼠标在左或者上边缘的按键操作添加短暂提示
+* 试验性的增加左键辅助功能
+* 修复一些已知 bug
 
 ### 捷键 2024.01
 
-2024 年 1 月 31 下午 于北京
+2024 年 1 月 31 下午 于 北京
 
 软件名从 shortcut 改为 jiejian
 
@@ -362,7 +375,7 @@ app.csv 使用了正则表达式，需要使用者对正则有一定了解。主
 
 ### 启动 zeal.exe 发现加载目录为空
 
-使用 zeal.lnk 这种形式进行启动
+使用 zeal.lnk 这种形式进行启动。汽水音乐使用 `C:\Users\zhangsan\AppData\Local\Programs\Soda Music\SodaMusic.lnk` 也是同理，因为直接用 exe 也起不来。
 
 ## 附录
 
@@ -388,13 +401,14 @@ app.csv 使用了正则表达式，需要使用者对正则有一定了解。主
 | 上右 | 下一个/next | Ctrl + tab | 是 |
 | 左上 | 剪切/cut | Ctrl + x | - |
 | 左下 | 删除/del | del | - |
-| 右上 | 百度选定文字 | wg 的网址直达功能 `https://baidu.com/s?wd={WG_SELECTED_TEXT}` | - |
+| 右上 | 跳转/jump | 跳转或搜索选定内容 | - |
 | 右下 | 新建窗口/new | Ctrl + Shift + n | 是 |
-| z / wg1 只能使用右左 | 置顶/zhiding | Ctrl + F7 | 是 |
-| f | 全屏/fullscreen | f11 | 是 |
-| r | 刷新/refresh | Ctrl + r | - |
-| s | 保存/save | Ctrl+s | - |
+| z （wg1 可使用右左代替） | 置顶/zhiding | Ctrl + F7 | 是 |
+| f （wg1 可使用下上代替）| 全屏/fullscreen | f11 | 是 |
+| p（wg1 可使用上下代替） | 暂停/pause | 空格 | - |
+| s（wg1 可使用左右代替） | 保存/save | Ctrl+s | - |
 | e | 退出/esc | esc | - |
+| r | 刷新/refresh | Ctrl + r | - |
 | ↗︎↘︎ | 全选/all | Ctrl + a | - |
 
 槽点：win 11 资源管理器的新建窗口，不过这样会使得新建文件夹失效，或许得鼠标手势进行区分了，但这就不简洁了。
@@ -414,18 +428,18 @@ CapsLock 模式
 | Z | 复制文件路径或纯文本 |
 | C | musicplayer2 |
 
-| 窗口标识符 | 当窗口不在时启动 | 备注 和 短语 和 key |
+| 窗口标识符 | 当窗口不在时启动 | 备注 和 key |
 | ---- | ---- | ---- |
-| ahk_exe SumatraPDF.exe | D:\alee\exec\daily\0.日常\2.办公类\SumatraPDF\SumatraPDF.exe | SumatraPDF【pd】 |
-| ahk_exe PotPlayerMini64.exe | D:\alee\exec\daily\0.日常\4.视频类\Pot_Player64\PotPlayerMini64.exe | PotPlayer【vi】 |
-| ahk_class Chrome_WidgetWin_1 ahk_exe Termius.exe | C:\Users\ferder\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Termius.lnk | Termius【tm】【t】 |
-| ahk_exe MusicPlayer2.exe | D:\alee\exec\daily\0.日常\3.音频类\MusicPlayer2_x64\MusicPlayer2.exe | MusicPlayer2【mu】 |
-| ahk_exe 360ChromeX.exe | shortcuts\360 极速浏览器X.lnk | 360极速浏览器【ch】【a】|
-| ahk_class CabinetWClass ahk_exe Explorer.EXE | D:\ | 资源管理器【ex】【s】|
-| ahk_exe WeChat.exe | shortcuts\微信.lnk | 微信【we】【d】|
-| ahk_exe WindowsTerminal.exe | wt.exe | WindowsTerminal【te】【g】 |
-| ahk_exe Code.exe | shortcuts\Visual Studio Code.lnk | vscode【co】【c】|
-| ahk_exe idea64.exe | D:\alee\exec\dev\IDE\ideaIC-2022.3.3.win\bin\idea64.exe | IntelliJ IDEA【id】【v】|
+| ahk_exe SumatraPDF.exe | D:\alee\exec\daily\0.日常\2.办公类\SumatraPDF\SumatraPDF.exe | SumatraPDF|
+| ahk_exe PotPlayerMini64.exe | D:\alee\exec\daily\0.日常\4.视频类\Pot_Player64\PotPlayerMini64.exe | PotPlayer|
+| ahk_class Chrome_WidgetWin_1 ahk_exe Termius.exe | C:\Users\ferder\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Termius.lnk | Termius【t】 |
+| ahk_exe MusicPlayer2.exe | D:\alee\exec\daily\0.日常\3.音频类\MusicPlayer2_x64\MusicPlayer2.exe | MusicPlayer2 |
+| ahk_exe 360ChromeX.exe | shortcuts\360 极速浏览器X.lnk | 360极速浏览器【a】|
+| ahk_class CabinetWClass ahk_exe Explorer.EXE | D:\ | 资源管理器【s】|
+| ahk_exe WeChat.exe | shortcuts\微信.lnk | 微信【d】|
+| ahk_exe WindowsTerminal.exe | wt.exe | WindowsTerminal【g】 |
+| ahk_exe Code.exe | shortcuts\Visual Studio Code.lnk | vscode【c】|
+| ahk_exe idea64.exe | D:\alee\exec\dev\IDE\ideaIC-2022.3.3.win\bin\idea64.exe | IntelliJ IDEA【v】|
 | 一些内置函数 | ProcessExistSendKeyOrRun("TIM.exe", "^!z", "shortcuts\TIM.lnk") | 如果 TIM.exe 进程存在则输入 Ctrl+Alt+Z 热键激活 TIM，否则启动 TIM |
 
 CapsLock 命令
@@ -447,6 +461,8 @@ CapsLock 命令
 * 【压缩】7zip 24.01【部分支持】
 * 【压缩】Bandizip 7.32【部分支持】
 * 【压缩】WinRAR 6.24【部分支持】
+* 【压缩】WinZip 【部分支持】
+* 【压缩】好压 【部分支持】
 * 【系统】Win 11 资源管理器
 * 【系统】Win 11 记事本
 * 【系统】win 11 设置
@@ -472,7 +488,7 @@ CapsLock 命令
 * 【浏览器】Yandex
 * 【浏览器】傲游
 * 【浏览器】斑斓石
-* 【浏览器】飞牛浏览器
+* 【浏览器】飞牛
 * 【浏览器】华为
 * 【浏览器】极速
 * 【浏览器】联想
@@ -488,8 +504,8 @@ CapsLock 命令
 * 【浏览器】小白
 * 【浏览器】小智双核
 * 【浏览器】一点
+* 【浏览器】猎鹰
 * 【浏览器】红芯【已过时】
-* 【浏览器】猎鹰浏览器
 * 【音乐类】foobar2000
 * 【音乐类】iTunes
 * 【音乐类】MusicBee
@@ -497,13 +513,13 @@ CapsLock 命令
 * 【音乐类】Winamp 5.9.2
 * 【音乐类】QQ 音乐
 * 【音乐类】Spotify
-* 【音乐类】方格音乐
+* 【音乐类】方格音乐【部分支持】
 * 【音乐类】酷我音乐
 * 【音乐类】汽水音乐
 * 【音乐类】网易云音乐
 * 【音乐类】喜马拉雅
 * 【音乐类】酷狗音乐
-* 【视频类】bilibili
+* 【音乐类】lx-music-desktop 洛雪音乐助手
 * 【视频类】GridPlayer【部分支持】
 * 【视频类】KMPlayer 64位
 * 【视频类】mpv【部分支持】
@@ -513,7 +529,12 @@ CapsLock 命令
 * 【视频类】恒星播放器
 * 【视频类】迅雷影音
 * 【视频类】影音先锋
-* 【直播类】斗鱼直播【部分支持】
+* 【视频类】荐片播放器
+* 【视频类】bilibili 哔哩哔哩
+* 【视频类】爱奇艺
+* 【视频类】优酷
+* 【视频类】腾讯视频
+* 【视频类】斗鱼直播【部分支持】
 * 【sql】Beekeeper Studio
 * 【sql】Heidisql
 * 【sql】Navicat
@@ -521,7 +542,6 @@ CapsLock 命令
 * 【markdown】MarkdownPad2
 * 【markdown】MarkText
 * 【markdown】Typora
-* 【editor】Atom【已过时】
 * 【editor】Bracket
 * 【editor】CudaText
 * 【editor】Editplus
@@ -538,6 +558,7 @@ CapsLock 命令
 * 【editor】Notepad3
 * 【editor】Sublime
 * 【editor】Ultraedit
+* 【editor】Atom【已过时】
 * 【file compare】Beyond Compare
 * 【file compare】WinMerge
 * 【IDE】Dev C++
@@ -560,7 +581,7 @@ CapsLock 命令
 * 【git】GitHub 桌面版
 * 【git】GitKraken
 * 【git】SourceTree
-* 【git】TortoiseGitMerge 的 merge 窗口
+* 【git】小乌龟 git 合并程序
 * 【终端类】Finalshell
 * 【终端类】Hyper
 * 【终端类】MobaXterm
@@ -585,15 +606,16 @@ CapsLock 命令
 * 【pdf】金山 PDF 独立版
 * 【pdf】迅读 PDF
 * 【pdf】永中 Office 版式阅读器
+* 【pdf】可牛 PDF
 * 【office】Excel 2021
-* 【office】LibreOffice 主程序
+* 【office】LibreOffice
 * 【office】PPT 2021
 * 【office】Word 2021
 * 【office】ONLYOFFICE
 * 【office】WPS Office
 * 【office】永中简报 2024
 * 【office】永中表格 2024
-* 【office】永中文字
+* 【office】永中文字 2024
 * 【看图】Windows 照片查看器
 * 【看图】2345 看图王
 * 【看图】FSViewer
@@ -679,18 +701,21 @@ jiejian.exe 的文件版本为当前四位版本号，产品版本为当前编�
 
 由于 Ahk2Exe 可以选择使用 MPRESS 或 UPX 这两款免费软件来压缩编译后的脚本。如果 MPRESS.exe 或 UPX.exe 已被复制到安装 AutoHotkey 的 "Compiler" 子文件夹中, 则可以通过 /compress 参数（1 = 使用 MPRESS, 2 = 使用 UPX）或 GUI 设置来压缩 .exe 文件。
 
-因此我目前使用了 win11 64 位系统 + ahk 2.0.11 64 位 + [UPX 4.2.2](https://github.com/upx/upx/releases/download/v4.2.2/upx-4.2.2-win64.zip) 的组合。（建议在 64 为环境编译和打包该软件。32 位平台我就没试过）
+我目前使用了 win11 64 位系统 + ahk 2.0.11 64 位 + [UPX 4.2.2](https://github.com/upx/upx/releases/download/v4.2.2/upx-4.2.2-win64.zip) 的组合。（建议在 64 为环境编译和打包该软件。32 位平台我就没试过）
 
 在安装 ahk 环境之后，双击 jiejian.ahk 即可运行打包程序。
 
 package.ahk 的设计思路：Ahk2Exe.exe 将 ahk 转化为 exe，期间使用 `/compress 2` 指定了压缩方式。ahk 编译会触发 jiejianPostExec.ahk。jiejianPostExec.ahk 做了两件事：写入版本信息 和 将文件夹命名为 jiejian-版本。
 
-## 鸣谢
+## 写在最后
 
 本程序编辑 csv 文件用到了开源的 LiberOffice。主要发布平台为 [GitHub](https://github.com) 和 [GitCode](https://gitcode.com)。项目主页发布在 GitHub Page。
 
-lib 下部分代码源自 [MyKeymap] 项目。
+lib 下部分函数参考了 [MyKeymap Github repo] 项目。
+
+由于 ahk V2 这门语言真的很易学。再加之我之前程序设计的功底，产品从设计到开发以及 UI 设计都由我一人单独完成。其中很多思路从 quicker、MyKeymap、capslock+、uTools 中得到了启发。在此默默表示感谢。
 
 [MyKeymap]: https://xianyukang.com/MyKeymap.html
+[MyKeymap Github repo]: https://github.com/xianyukang/MyKeymap
 [WGestures 1]: https://www.yingdev.com/projects/wgestures
 [WGestures 2]: https://www.yingdev.com/projects/wgestures2

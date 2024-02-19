@@ -240,15 +240,6 @@ parseAppLine(line, eachLineLen) {
   return info
 }
 
-; 闭包的使用
-app_hotkey2(app_title) {
-    isActivate()  ; 这是 app_title 和 app_path 的闭包.
-    {
-      return WinActive(app_title)
-    }
-    return isActivate
-}
-
 ; 高等级
 ; e. 逃逸
 #HotIf WinActive("ahk_group HL_esc_WinClose")
