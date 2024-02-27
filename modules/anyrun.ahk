@@ -11,36 +11,36 @@ Anyrun() {
     } else {
         width := 430
         ; S: 尺寸(单位为磅)
-        fontSize := "s21"
+        fontSize := 's21'
         ; AlwaysOnTop 使窗口保持在所有其他窗口的顶部
         ; Owner 可以让当前窗口从属于另一个窗口. 从属的窗口默认不显示在任务栏, 并且它总是显示在其父窗口的上面. 当其父窗口销毁时它也被自动销毁
         ; -Caption 移除背景透明的窗口的边框和标题栏
         ; -Resize 禁止用户重新调整窗口的大小
-        myGui := Gui("AlwaysOnTop Owner -Caption -Resize", guiTitle)
+        myGui := Gui('AlwaysOnTop Owner -Caption -Resize', guiTitle)
         ; 横向窄边框 纵向无边框
         myGui.MarginX := 1
         myGui.MarginY := 0
-        myGui.SetFont(fontSize, "Consolas") ; 设置兜底字体(24 磅) Consolas
-        myGui.SetFont(fontSize, "Microsoft YaHei") ; 设置优先字体(24 磅) 微软雅黑
+        myGui.SetFont(fontSize, 'Consolas') ; 设置兜底字体(24 磅) Consolas
+        myGui.SetFont(fontSize, 'Microsoft YaHei') ; 设置优先字体(24 磅) 微软雅黑
         myEdit := myGui.AddEdit(Format("vMyEdit w{1}", width))
         ; listBox 做到贴边 默认只显示 5 行、宽度 400 位置
         ; Hidden: 让控件初始为隐藏状态
         listBox := myGui.AddListBox(Format("R5 vMyChoice w{1} XM+0 Y+0 BackgroundF0F0F0 Hidden", width), [])
-        button := myGui.Add("Button", "default X0 Y0 Hidden", "OK")
+        button := myGui.Add('Button', "default X0 Y0 Hidden", 'OK')
 
-        myEdit.OnEvent("Change", onEditChange)
+        myEdit.OnEvent('Change', onEditChange)
 
         ; 若两个关键控件都失去焦点则关闭窗口
-        myEdit.OnEvent("LoseFocus", onEditLoseFocus)
-        listbox.OnEvent("LoseFocus", onListboxLoseFocus)
+        myEdit.OnEvent('LoseFocus', onEditLoseFocus)
+        listbox.OnEvent('LoseFocus', onListboxLoseFocus)
 
         ; 两个点击事件
-        listbox.OnEvent("DoubleClick", onListBoxDoubleClick)
+        listbox.OnEvent('DoubleClick', onListBoxDoubleClick)
         ; 按回车会触发该 click 事件
-        button.OnEvent("Click", onButtonClick)
+        button.OnEvent('Click', onButtonClick)
 
         ; 按住 esc 销毁 窗口
-        myGui.OnEvent("Escape", (*) => myGui.Destroy())
+        myGui.OnEvent('Escape', (*) => myGui.Destroy())
 
         ; 居中但是稍微往上偏移些
         myGui.Show(Format("xCenter y{1} AutoSize", A_ScreenHeight / 2 - 300))
@@ -51,7 +51,7 @@ Anyrun() {
             if (editValue == '') {
                 listBox.Delete()
                 listBox.Visible := false
-                myGui.Show("AutoSize")
+                myGui.Show('AutoSize')
                 return
             }
             listBoxDataArray := unset
@@ -68,26 +68,26 @@ Anyrun() {
                 dataArray := Array()
                 for it in dataList {
                     ; 只处理 app 和 web 这两种类型
-                    if (it.type ~= "i)^(?:app|web|file)$") {
-                        if (Type(it.alias) == "Array") {
+                    if (it.type ~= 'i)^(?:app|web|file)$') {
+                        if (Type(it.alias) == 'Array') {
                             ; 如果有则选出最匹配的 array
                             ; 最佳匹配对象
                             maxData := unset
                             Loop it.alias.Length {
-                                if (RegExMatch(it.alias[A_Index], needleRegEx, &regExMatchInfo)) {
+                                if RegExMatch(it.alias[A_Index], needleRegEx, &regExMatchInfo) {
                                     data := {degree: computeDegree(regExMatchInfo) ; 匹配度
                                             , title: it.title ; 标题
                                             , type: it.type ; 类型
                                     }
-                                    if !IsSet(maxData)
+                                    if !IsSet(maxData) {
                                         maxData := data
-                                    else if dataArrayCompare(maxData, data) < 0
+                                    } else if (dataArrayCompare(maxData, data) < 0)
                                         maxData := data
                                 }
                             }
                             if IsSet(maxData)
                                 dataArray.Push(maxData)
-                        } else if (RegExMatch(it.alias, needleRegEx, &regExMatchInfo)) {
+                        } else if RegExMatch(it.alias, needleRegEx, &regExMatchInfo) {
                             dataArray.Push({degree: computeDegree(regExMatchInfo)
                                             , title: it.title
                                             , type: it.type
@@ -103,25 +103,59 @@ Anyrun() {
                 listBoxDataArray := []
             }
 
-            if editValue ~= "i)^(?:https?://)?(?:[\w-]+\.)+[\w-]+(?:/[\w-./?%&=]*)?\s*$"
-                listBoxDataArray.push MyActionArray[7].title
+            ; 打开网址
+            if (editValue ~= 'i)^(?:https?://)?(?:[\w-]+\.)+[\w-]+(?:/[\w-./?%&=]*)?\s*$') {
+                ; 从 dava.csv 中抽取符合条件的 b 列 (http 网址)，若满足则赋值 d 列
+                match := ''
+                for it in dataList {
+                    if (it.type == 'web' and (editValue == it.path 
+                                               or editValue == SubStr(it.path, InStr(it.path, '://') + StrLen('://'))
+                                               or editValue == SubStr(it.path, InStr(it.path, '://www.') + StrLen('://www.'))  
+                                            )
+                        ) {
+                        match .= '-' . it.title
+                        break
+                    }
+                }
+                if (match == '') {
+                    if (editValue ~= 'i)^(?:https?://)?im.qq.com') {
+                        match .= '-' . 'QQ-轻松做自己'
+                    }
+                    else if (editValue ~= 'i)^(?:https?://)?(?:www.)?zhihu.com') {
+                        match .= '-' . '知乎'
+                    }
+                    else if (editValue ~= 'i)^(?:https?://)?(?:www.)?zhipin.com') {
+                        match .= '-' . 'BOSS直聘'
+                    }
+                }
+                listBoxDataArray.push(MyActionArray[7].title . match)
+            }
 
+            if MyActionArray[1].fuhe.Call(editValue) {
+                listBoxDataArray.push MyActionArray[1].title
+            }
+            if MyActionArray[2].fuhe.Call(editValue) {
+                listBoxDataArray.push MyActionArray[2].title
+            }
+            if MyActionArray[3].fuhe.Call(editValue) {
+                listBoxDataArray.push MyActionArray[3].title
+            }
+            if MyActionArray[4].fuhe.Call(editValue) {
+                listBoxDataArray.push MyActionArray[4].title
+            }
+            if MyActionArray[5].fuhe.Call(editValue) {
+                listBoxDataArray.push MyActionArray[5].title
+            }
+
+            ; 前往文件夹
             if DirExist(editValue) {
                 listBoxDataArray.push MyActionArray[6].title
-            } else if FileExist(editValue) {
-                listBoxDataArray.push MyActionArray[5].title
+            }
+            else if FileExist(editValue) {
+                ; 抽出文件夹
                 RegExMatch(editValue, '(.*[\\/]).*', &regExMatchInfo)
                 if DirExist(regExMatchInfo.1)
                     listBoxDataArray.push MyActionArray[6].title
-            }
-            
-            if RegExMatch(editValue, "i)^(bd|bi|ip|bl)", &regExMatchInfo) {
-                switch regExMatchInfo[1], 'Off' {
-                    case 'bd': listBoxDataArray.push MyActionArray[1].title
-                    case 'bi': listBoxDataArray.push MyActionArray[2].title
-                    case 'ip': listBoxDataArray.push MyActionArray[3].title
-                    case 'bl': listBoxDataArray.push MyActionArray[4].title
-                }
             }
 
             ; 显示出来
@@ -158,46 +192,39 @@ Anyrun() {
             editValue := myEdit.Value
             ; 如果 条目 未匹配 则啥事都不做
             if (!IsSet(item) OR item == '') {
-                switch listBox.Text, 'Off' {
-                    case MyActionArray[1].title:
-                        RegExMatch(editValue, "i)^bd(.*)", &regExMatchInfo)
-                        Run "https://www.baidu.com/s?wd=" . Trim(regExMatchInfo[1])
-                    case MyActionArray[2].title:
+                switch {
+                    case listBox.Text = MyActionArray[1].title: ; 百度搜索
+                        RegExMatch(editValue, 'i)^bd(.*)', &regExMatchInfo)
+                        Run 'https://www.baidu.com/s?wd=' . Trim(regExMatchInfo[1])
+                    case listBox.Text = MyActionArray[2].title: ; bing 搜索
                         RegExMatch(editValue, "i)^bi(.*)", &regExMatchInfo)
-                        Run "https://cn.bing.com/search?q=" . Trim(regExMatchInfo[1])
-                    case MyActionArray[3].title:
+                        Run 'https://cn.bing.com/search?q=' . Trim(regExMatchInfo[1])
+                    case listBox.Text = MyActionArray[3].title: ; IP 搜索
                         RegExMatch(editValue, "i)^ip(.*)", &regExMatchInfo)
-                        Run "https://www.ip138.com/iplookup.php?ip=" . Trim(regExMatchInfo[1])
-                    case MyActionArray[4].title:
-                        RegExMatch(editValue, "i)^bl(.*)", &regExMatchInfo)
-                        Run "https://search.bilibili.com/all?keyword=" . Trim(regExMatchInfo[1])
-                    case MyActionArray[5].title:
+                        Run 'https://www.ip138.com/iplookup.php?ip=' . Trim(regExMatchInfo[1])
+                    case listBox.Text = MyActionArray[4].title: ; b 站搜索
+                        RegExMatch(editValue, 'i)^bl(.*)', &regExMatchInfo)
+                        Run 'https://search.bilibili.com/all?keyword=' . Trim(regExMatchInfo[1])
+                    case listBox.Text = MyActionArray[5].title: ; 打开文件
                         Run editValue
-                    case MyActionArray[6].title:
+                    case listBox.Text = MyActionArray[6].title: ; 前往文件夹
                         if DirExist(editValue) {
                             Run editValue
                         } else {
                             RegExMatch(editValue, '(.*[\\/]).*', &regExMatchInfo)
                             Run regExMatchInfo.1
                         }
-                    case MyActionArray[7].title:
+                    case 1 == InStr(listBox.Text, MyActionArray[7].title): ; 打开网址
                         if not InStr(editValue, 'http')
                             editValue := "http://" . editValue
                         Run editValue
-                    case MyActionArray[8].title: ; 障眼法 假的 彩蛋
+                    case MyActionArray[8].title = editValue: ; 如果输入的是 本机IP 则弹窗
                         addresses := SysGetIPAddresses()
-                        msg := "IP 地址:`n"
-                        for address in addresses
-                            msg .= address "`n"
-                        MsgBox msg
-                }
-                if (MyActionArray[8].title = editValue) { ; 这才是真 彩蛋
-                    addresses := SysGetIPAddresses()
-                        msg := "IP 地址:`n"
-                        for address in addresses
-                            msg .= address "`n"
-                        MsgBox msg
-                }
+                            msg := "IP 地址:`n"
+                            for address in addresses
+                                msg .= address "`n"
+                            MsgBox msg
+                }                
             } else if (item.type = 'app') {
                 ; 微信的特殊处理：自动登录微信
                 if (item.title == '微信') {
@@ -208,13 +235,13 @@ Anyrun() {
                         Sleep 1100
                         Send "{Space}"
                     } catch {
-                        MsgBox "找不到目标应用"
+                        MsgBox("找不到目标应用")
                     }
                 } else {
-                    ActivateOrRun item.winTitle, item.path
+                    ActivateOrRun(item.winTitle, item.path)
                 }
             } else {
-                Run item.path
+                Run(item.path)
             }
             MyGui.Destroy()
         }
@@ -241,7 +268,7 @@ computeDegree(regExMatchInfo) {
     degree := 0
     loop regExMatchInfo.Count {
         item := Support_Length - regExMatchInfo.Pos[A_Index]
-        if item < 0
+        if (item < 0)
             break
         degree += 2 ** item
     }
@@ -249,18 +276,21 @@ computeDegree(regExMatchInfo) {
 }
 
 class MyAction {
-    __new(title, regex) {
+    __new(title, regex, fuhe?) {
         this.title := title
         this.regex := regex
+        if IsSet(fuhe) {
+            this.fuhe := fuhe
+        }
     }
 }
 
 MyActionArray := [
-    MyAction('百度搜索', '我')
-    , MyAction('bing搜索', '人')
-    , MyAction('IP搜索', '性')
-    , MyAction('b站搜索', '防诈')
-    , MyAction('打开文件', '不要')
+    MyAction('百度搜索', '我', k => k ~= 'i)^bd')
+    , MyAction('bing搜索', '人', k => k ~= 'i)^bi')
+    , MyAction('IP搜索', '性', k => k ~= 'i)^ip')
+    , MyAction('b站搜索', '防诈', k => k ~= 'i)^bl')
+    , MyAction('打开文件', '不要', k => FileExist(k) and not DirExist(k))
 
     , MyAction('前往文件夹', '骗人')
     , MyAction('打开网址', '防着')
