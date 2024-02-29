@@ -4,7 +4,7 @@
 Loop dataList.Length {
   it := dataList[A_Index]
   ; 热键
-  if (StrLen(it.hk) > 0 and StrLen(it.path) > 0)
+  if (StrLen(it.hk) > 0 AND StrLen(it.path) > 0)
       Hotkey it.hk, startByHotKey
   ; 热串
   if (StrLen(it.hs) > 0) {
@@ -53,19 +53,26 @@ parseDataLine(line, eachLineLen) {
     info.path := SubStr(info.path, 4, -3)
 
   ; 过滤空行
-  if (info.type == '' and info.path == '') {
+  if (info.type == '' AND info.path == '') {
     return
   }
+  ; 过滤无效路径
+  if ((info.type == 'app' OR info.type == 'file') AND !FileExist(info.path)) {
+    return
+  }
+  
   ; 要激活的窗口
   info.winTitle := Trim(split[3])
   ; 运行名称
   info.title := Trim(split[4])
+  ; 运行关键字
   split4 := Trim(split[5])
-  
   aliases := StrSplit(split4, "|")
   ; 如果数组长度 > 1 则存成数组
   info.alias := (aliases.Length > 1) ? aliases : split4
+  ; 热键关键字
   info.hk := Trim(split[6])
+  ; 热串关键字
   info.hs := Trim(split[7])
 
   return info

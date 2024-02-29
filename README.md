@@ -417,34 +417,25 @@ app.csv 使用了正则表达式，需要使用者对正则有一定了解。主
 
 CapsLock 模式
 
-| 按键 | 用途 |
-| ---- | ---- |
-| W | IDEA |
-| E | VSCode |
-| R | 在当前程序的窗口间轮换 |
-| A | 360 极速浏览器 |
-| S | 资源管理器 |
-| D | 微信 |
-| Z | 复制文件路径或纯文本 |
-| C | musicplayer2 |
-
-| 窗口标识符 | 当窗口不在时启动 | 备注 和 key |
+| 按键 | 用途 | 当窗口不在时启动 |
 | ---- | ---- | ---- |
-| ahk_exe SumatraPDF.exe | D:\alee\exec\daily\0.日常\2.办公类\SumatraPDF\SumatraPDF.exe | SumatraPDF|
-| ahk_exe PotPlayerMini64.exe | D:\alee\exec\daily\0.日常\4.视频类\Pot_Player64\PotPlayerMini64.exe | PotPlayer|
-| ahk_class Chrome_WidgetWin_1 ahk_exe Termius.exe | C:\Users\ferder\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Termius.lnk | Termius【t】 |
-| ahk_exe MusicPlayer2.exe | D:\alee\exec\daily\0.日常\3.音频类\MusicPlayer2_x64\MusicPlayer2.exe | MusicPlayer2 |
-| ahk_exe 360ChromeX.exe | shortcuts\360 极速浏览器X.lnk | 360极速浏览器【a】|
-| ahk_class CabinetWClass ahk_exe Explorer.EXE | D:\ | 资源管理器【s】|
-| ahk_exe WeChat.exe | shortcuts\微信.lnk | 微信【d】|
-| ahk_exe WindowsTerminal.exe | wt.exe | WindowsTerminal【g】 |
-| ahk_exe Code.exe | shortcuts\Visual Studio Code.lnk | vscode【c】|
-| ahk_exe idea64.exe | D:\alee\exec\dev\IDE\ideaIC-2022.3.3.win\bin\idea64.exe | IntelliJ IDEA【v】|
-| 一些内置函数 | ProcessExistSendKeyOrRun("TIM.exe", "^!z", "shortcuts\TIM.lnk") | 如果 TIM.exe 进程存在则输入 Ctrl+Alt+Z 热键激活 TIM，否则启动 TIM |
+| W | IDEA | |
+| E | VSCode | |
+| R | 在当前程序的窗口间轮换 | |
+| T | Termius | ahk_class Chrome_WidgetWin_1 ahk_exe Termius.exe |
+| A | 360 极速浏览器 | ahk_exe 360ChromeX.exe |
+| S | 资源管理器 | ahk_class CabinetWClass ahk_exe Explorer.EXE|
+| D | 微信 | ahk_exe WeChat.exe |
+| Z | 复制文件路径或纯文本 | |
+| X | 关闭窗口 | |
+| C | musicplayer2 | ahk_exe MusicPlayer2.exe |
+| V | 窗口最大化或还原 | |
+| N | 记事本 | ahk_exe Notepad.exe |
+| M | 窗口最小化 | |
 
 CapsLock 命令
 
-| 按键 | 参数1 | 参数2 | 参数3 |
+| 按键 | 要启动的程序 | 命令行参数 | 说明 |
 | ---- | ---- | ---- | ---- |
 | cc | shortcuts\Visual Studio Code.lnk | -n "{selected}" | 用 VS Code 打开选中的文件，在新窗口中打开 |
 | wt | wt.exe | -d "{selected}" | 用 Windows Terminal 打开选中的文件夹 |
@@ -636,7 +627,7 @@ CapsLock 命令
 
 不支持的软件：
 
-抖音
+抖音、快压
 
 无需适配的软件：
 
@@ -645,7 +636,7 @@ CapsLock 命令
 已知 bug：
 
 * 适配不太好的软件：Right PDF Reader 的鼠标侧边后退键无效。
-* 测试关闭窗口不奏效的软件：极客卸载、注册表编辑器、windows 任务管理器（似乎屏蔽了 Ctrl 键）。 WGestures 的导入导出窗口。
+* 测试关闭窗口不奏效的软件：极客卸载、注册表编辑器、windows 任务管理器（似乎屏蔽了 Ctrl 键）、 WGestures 的导入导出窗口。
 
 ### 开发思路
 
@@ -713,7 +704,7 @@ package.ahk 的设计思路：Ahk2Exe.exe 将 ahk 转化为 exe，期间使用 `
 
 lib 下部分函数参考了 [MyKeymap Github repo] 项目。
 
-由于 ahk V2 这门语言真的很易学。再加之我之前程序设计的功底，产品从设计到开发以及 UI 设计都由我一人单独完成。其中很多思路从 quicker、MyKeymap、capslock+、uTools 中得到了启发。在此默默表示感谢。
+由于 ahk V2 这门语言真的很易学。再加之我之前的编程功底，从设计到开发均由我一人完成。并从 quicker、MyKeymap、capslock+、uTools 软件中得到启发。在此默默表示感谢。
 
 [MyKeymap]: https://xianyukang.com/MyKeymap.html
 [MyKeymap Github repo]: https://github.com/xianyukang/MyKeymap

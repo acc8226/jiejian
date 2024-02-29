@@ -3,9 +3,9 @@
     __new() {
         this.editScript:= '编辑脚本(&E)'
         this.ListVars:= '查看变量(&L)'
-        this.pause := Format("{1:-10}", "暂停 Ctrl+Alt+(&S)")
-        this.restart:= '重启 Ctrl+Alt+(&R)'
-        this.sou:= '搜一搜 Alt+Space(&S)'
+        this.pause := Format("{1:-10}", "暂停 Ctrl+Alt+S")
+        this.restart:= '重启 Ctrl+Alt+R'
+        this.sou:= '搜一搜 Alt+空格'
         this.biaozhifu:= '查看窗口标识符(&V)'
         this.tongji:= '使用统计(&S)'
         this.kaijiziqi:= '开机自启(&A)'
@@ -13,12 +13,14 @@
         this.help:= '帮助(&H)'
         this.document:= '文档(&D)'
         this.video:= '视频教程(&V)'
-        this.guanzhuwo:= '在 CSDN 上关注我(&F)'
+        this.followMeCSDN:= '在 CSDN 上关注我(&F)'
+        this.followMeGH:= '在 Github 上关注我(&F)'
         this.update:= '检查更新(&U)...'
-        this.about:= '关于(&A)'
+        this.about:= '关于(&A)...'
 
         this.exit:= '退出(&X)'
 
+        ; 快捷方式以 lnk 结尾
         this.linkFile := A_Startup "\jiejian.lnk"
 
         this.shortcut := unset
@@ -29,40 +31,39 @@
         }
         this.shortcut := A_WorkingDir . '\' . this.shortcut
 
-        MyTrayMenuHandler := this.TrayMenuHandler.Bind(this)
-
-        ; this.regex := regex        
+        myTrayMenuHandler := this.TrayMenuHandler.Bind(this)
         if (NOT A_IsCompiled) {
-            A_TrayMenu.Add(this.editScript, MyTrayMenuHandler)
-            A_TrayMenu.Add(this.ListVars, MyTrayMenuHandler)
+            A_TrayMenu.Add(this.editScript, myTrayMenuHandler)
+            A_TrayMenu.Add(this.ListVars, myTrayMenuHandler)
             A_TrayMenu.Add
         }
         ; 右对齐不好使，我醉了
-        A_TrayMenu.Add(this.pause, MyTrayMenuHandler)
-        A_TrayMenu.Add(Format("{1:-10}", this.restart), MyTrayMenuHandler)
-        A_TrayMenu.Add(Format("{1:-10}", this.sou), MyTrayMenuHandler)
-        A_TrayMenu.Add(this.biaozhifu, MyTrayMenuHandler)
-        A_TrayMenu.Add(this.tongji, MyTrayMenuHandler)
-        A_TrayMenu.Add(this.kaijiziqi, MyTrayMenuHandler)
+        A_TrayMenu.Add(this.pause, myTrayMenuHandler)
+        A_TrayMenu.Add(Format("{1:-10}", this.restart), myTrayMenuHandler)
+        A_TrayMenu.Add(Format("{1:-10}", this.sou), myTrayMenuHandler)
+        A_TrayMenu.Add(this.biaozhifu, myTrayMenuHandler)
+        A_TrayMenu.Add(this.tongji, myTrayMenuHandler)
+        A_TrayMenu.Add(this.kaijiziqi, myTrayMenuHandler)
         A_TrayMenu.Add
 
         ; 添加子菜单到上面的菜单中
         helpMenu := Menu()
-        helpMenu.Add(this.document, MyTrayMenuHandler)
-        helpMenu.Add(this.video, MyTrayMenuHandler)
-        helpMenu.Add(this.guanzhuwo, MyTrayMenuHandler)
-        helpMenu.Add(this.update, MyTrayMenuHandler)
-        helpMenu.Add(this.about, MyTrayMenuHandler)
+        helpMenu.Add(this.document, myTrayMenuHandler)
+        helpMenu.Add(this.video, myTrayMenuHandler)
+        helpMenu.Add(this.followMeCSDN, myTrayMenuHandler)
+        helpMenu.Add(this.followMeGH, myTrayMenuHandler)
+        helpMenu.Add(this.update, myTrayMenuHandler)
+        helpMenu.Add(this.about, myTrayMenuHandler)
         A_TrayMenu.Add(this.help, helpMenu)
 
-        A_TrayMenu.Add(this.exit, MyTrayMenuHandler)
+        A_TrayMenu.Add(this.exit, myTrayMenuHandler)
 
         ; 检查是否是自启状态
         global IS_AUTO_START_UP
         isLinkFileExist := FileExist(this.LinkFile)
         if (isLinkFileExist) {
             ; 获取快捷方式(.lnk) 文件的信息, 例如其目标文件
-            FileGetShortcut this.LinkFile, &OutTarget
+            FileGetShortcut(this.LinkFile, &OutTarget)
             if (OutTarget !== this.shortcut) {
                 IS_AUTO_START_UP := false
                 A_TrayMenu.UnCheck(this.kaijiziqi)
@@ -80,6 +81,7 @@
 
     /**
      * 托盘菜单被点击
+     * 
      * @param ItemName 
      * @param ItemPos 
      * @param MyMenu 
@@ -95,23 +97,30 @@
         case this.tongji:
             ; 统计软件使用总分钟数
             recordMinsValueName := 'record_mins'
-            recordMins := RegRead(regKeyName, recordMinsValueName, 0) + DateDiff(A_NowUTC, startTime, 'Minutes')
+            recordMins := RegRead(REG_KEY_NAME, recordMinsValueName, 0) + DateDiff(A_NowUTC, START_TIME, 'Minutes')
             ; 统计软件使用次数
             launchCountValueName := 'launch_count'
-            launchCount := RegRead(regKeyName, launchCountValueName, 1)
+            launchCount := RegRead(REG_KEY_NAME, launchCountValueName, 1)
     
-            sb := '总启动次数 ' . launchCount . ' 次，您目前已使用捷键 '
-            if (recordMins < 60) {
-                MsgBox(sb . recordMins . ' 分钟！', '使用统计')
-            } else {
-                sb .= recordMins // 60 . ' 小时 '
-                mins := Floor(recordMins - recordMins // 60 * 60)
-                if mins !== 0 {
-                    sb .= mins . ' 分钟'
-                }
-                sb .= '！'
-                MsgBox(sb, '使用统计')
+            sb := '总启动次数 ' . launchCount . ' 次，您目前已使用捷键 ' . recordMins . ' 分钟（大约 '
+            recordYears := recordMins // (365 * 24 * 60)
+            if (recordYears > 0) {
+                sb .= recordYears . ' 年 '
             }
+            recordDays := recordMins // (24 * 60) - recordYears * 365
+            if (recordDays >= 1) {
+                sb .= recordDays . ' 天 '
+            }
+            recordHours := recordMins // 60 - recordYears * 365 * 24 - recordDays * 24
+            if (recordHours >= 1) {
+                sb .= recordHours . ' 小时 '
+            }
+            mins := recordMins - recordMins // 60 * 60
+            if (mins >= 1) {
+                sb .= mins . ' 分钟'
+            }
+            sb .= ' ）'            
+            MsgBox(sb, '使用统计')
         case this.kaijiziqi:
             ; 当前是否是选中状态
             global IS_AUTO_START_UP
@@ -126,21 +135,22 @@
             A_TrayMenu.ToggleCheck(this.kaijiziqi)
             IS_AUTO_START_UP := !IS_AUTO_START_UP
     
-            case this.document: Run "https://gitcode.com/acc8226/jiejian/overview"
-            case this.video: Run "https://www.bilibili.com/video/BV19H4y1e7hJ/"
-            case this.guanzhuwo: Run "https://blog.csdn.net/acc8226"
+            case this.document: Run("https://gitcode.com/acc8226/jiejian/overview")
+            case this.video: Run('https://www.bilibili.com/video/BV19H4y1e7hJ')
+            case this.followMeCSDN: Run('https://blog.csdn.net/acc8226')
+            case this.followMeGH: Run('https://github.com/acc8226')
             case this.update: checkUpdate(true)
             case this.about: MsgBox(      
-            "版本: " CodeVersion
-            "`n发布日期: 2024-2-18"
+            '版本: ' CodeVersion
+            '`n日期: 2024-2-22'
             "`nAHK 主程序版本: " A_AhkVersion
-            "`n操作系统版本号: " A_OSVersion
+            "`nWindows 版本号: " A_OSVersion
             "`n计算机名: " A_ComputerName
             "`n用户登录名: " A_UserName
-            "`n是否有管理员权限: " (A_IsAdmin ? '是' : '否')
-            "`n系统是否 64 位: " (A_Is64bitOS ? '是' : '否')
+            "`n是否管理员权限运行: " (A_IsAdmin ? '是' : '否')
+            "`n是否 64 位系统: " (A_Is64bitOS ? '是' : '否')
             , APP_NAME, 'Iconi')
-        case '退出(&X)': jiejianExit
+        case this.exit: jiejianExit
         }
     }
 
@@ -150,11 +160,11 @@
     jiejianToggleSuspend() {
         Suspend(!A_IsSuspended)
         if (A_IsSuspended) {
-        A_TrayMenu.Check(this.pause)
-        Tip("  暂停捷键  ", -500)
+            A_TrayMenu.Check(this.pause)
+            Tip('  暂停捷键  ', -500)
         } else {
-        A_TrayMenu.UnCheck(this.pause)
-        Tip("  恢复捷键  ", -500)
+            A_TrayMenu.UnCheck(this.pause)
+            Tip('  恢复捷键  ', -500)
         }
     }
 

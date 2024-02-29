@@ -54,3 +54,35 @@ ToggleWindowTopMost() {
     Tip("取消置顶")
   }
 }
+
+/**
+ * 锁屏
+ */
+SystemLockScreen(*) {
+  Sleep 300
+  DllCall("LockWorkStation")
+}
+
+/**
+ * 关机
+ */
+SystemShutdown(*) {
+  Run("SlideToShutDown.exe")
+  sleep(1300)
+  CoordMode("Mouse", "Screen")
+  MouseClick("Left", 100, 100)
+}
+
+/**
+ * 重启
+ */
+SystemReboot(*) {
+  Shutdown(2)
+}
+
+/**
+ * 睡眠
+ */
+SystemSleep(*) {
+  DllCall("PowrProf\SetSuspendState")
+}

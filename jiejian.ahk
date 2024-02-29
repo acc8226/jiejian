@@ -9,7 +9,7 @@ https://wyagd001.github.io/v2/docs/
 ;@Ahk2Exe-SetCopyright 全民反诈 union
 ;@Ahk2Exe-SetDescription 捷键-为简化键鼠操作而生
 
-CodeVersion := '24.2.18-beta'
+CodeVersion := '24.2.29-beta'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
@@ -18,13 +18,13 @@ CodeVersion := '24.2.18-beta'
 ; 提取出 文件名 再拼接 PostExec.ahk; 版本号; 2 仅在指定 UPX 压缩时运行 ; 脚本所在路径
 ;@Ahk2Exe-%U_V% %A_ScriptName~\.[^\.]+$~PostExec.ahk% %U_version%, 2, %A_ScriptDir%
 
-global regKeyName := 'HKEY_CURRENT_USER\SOFTWARE\jiejian'
-global startTime := A_NowUTC
+global REG_KEY_NAME := 'HKEY_CURRENT_USER\SOFTWARE\jiejian'
+global START_TIME := A_NowUTC
 global IS_AUTO_START_UP := false
 global APP_NAME := '捷键'
 
 ; ----- 1. 热键 之 鼠标操作 -----
-CoordMode 'Mouse' ; RelativeTo 如果省略, 默认为 Screen
+CoordMode('Mouse', 'Screen') ; RelativeTo 如果省略, 默认为 Screen
 FileEncoding 54936 ; Windows XP 及更高版本： GB18030 简体中文 (4 字节)
 SetTitleMatchMode 'RegEx' ; 设置 WinTitle parameter 在内置函数中的匹配行为
 
@@ -54,7 +54,7 @@ CheckUpdate ; 检查更新
 
 ; 文本类 为了 md 增强 记事本 & vscode
 ; ctrl + 数字 1-5 为光标所在行添加 markdown 格式标题
-#HotIf WinActive('ahk_exe i)notepad.exe') or WinActive('ahk_class i)Chrome_WidgetWin_1 ahk_exe i)Code.exe') 
+#HotIf WinActive('ahk_exe i)notepad.exe') OR WinActive('ahk_class i)Chrome_WidgetWin_1 ahk_exe i)Code.exe') 
 ^1::
 ^2::
 ^3::
@@ -62,9 +62,9 @@ CheckUpdate ; 检查更新
 ^5::{
     oldText := A_Clipboard
     A_Clipboard := ''
-    Send '{Home}{Shift Down}{End}{Shift Up}' ; 切到首部然后选中到尾部
-    Sleep 100
-    Send '^x'
+    Send('{Home}{Shift Down}{End}{Shift Up}') ; 切到首部然后选中到尾部
+    Sleep(100)
+    Send('^x')
     ClipWait ; 等待剪贴板中出现文本.
     newText := RegExReplace(A_Clipboard, "\s*$", "") ; 去掉尾部空格
     newText := RegExReplace(newText, "^#{1,6}\s+(.*)", "$1")
@@ -79,8 +79,8 @@ CheckUpdate ; 检查更新
 
 ^!r::Reload ; Ctrl + Alt + R 重启脚本
 ^!s::aTrayMenu.mySuspend() ; Ctrl + Alt + S 暂停脚本
-^!v::Send A_Clipboard ; ctrl + alt + v 将剪贴板的内容输入到当前活动应用程序中，防止了一些网站禁止在 HTML 密码框中进行粘贴操作
-^+"::Send '""{Left}' ; ctrl + shift + " 快捷操作-插入双引号
+^!v::Send A_Clipboard ; Ctrl + Alt + V 将剪贴板的内容输入到当前活动应用程序中，防止了一些网站禁止在 HTML 密码框中进行粘贴操作
+^+"::Send '""{Left}' ; Ctrl + Shift + " 快捷操作-插入双引号
 
 !Space::Anyrun ; 启动窗口
 
@@ -106,7 +106,7 @@ SettingTray() {
     A_TrayMenu.Delete()
     global aTrayMenu := MyTrayMenu()
 
-    localIsAlphaOrBeta := InStr(CodeVersion, "alpha") or InStr(CodeVersion, "beta")
+    localIsAlphaOrBeta := InStr(CodeVersion, "alpha") OR InStr(CodeVersion, "beta")
     A_IconTip := "捷键 " . CodeVersion . (A_IsCompiled ? "" : " 未编译") . (localIsAlphaOrBeta ? " 测试版" : " ") . (A_PtrSize == 4 ? '32位' : '64位')
 
     if (NOT A_IsCompiled) {
@@ -114,7 +114,7 @@ SettingTray() {
         faviconIco := 'favicon.ico'
         ;@Ahk2Exe-Let U_faviconIco = %A_PriorLine~U).+['"](.+)['"]~$1%
         ;@Ahk2Exe-SetMainIcon %U_faviconIco%
-        TraySetIcon faviconIco
+        TraySetIcon(faviconIco)
     }
 }
 
@@ -123,17 +123,17 @@ OnExit ExitFunc
 
 ExitFunc(exitReason, exitCode) {
     ; 统计软件使用总分钟数
-    minutesDiff := DateDiff(A_NowUTC, startTime, 'Minutes')
+    minutesDiff := DateDiff(A_NowUTC, START_TIME, 'Minutes')
     if (minutesDiff > 0) {
         recordMinsValueName := 'record_mins'
-        recordMins := RegRead(regKeyName, recordMinsValueName, 0) + minutesDiff
-        RegWrite recordMins, "REG_DWORD", regKeyName, recordMinsValueName
+        recordMins := RegRead(REG_KEY_NAME, recordMinsValueName, 0) + minutesDiff
+        RegWrite(recordMins, "REG_DWORD", REG_KEY_NAME, recordMinsValueName)
     }
     ; 统计软件使用次数
     if (not exitReason ~= "i)^(?:Error|Reload|Single)$") {
         launchCountValueName := 'launch_count'
-        launchCount := RegRead(regKeyName, launchCountValueName, 1) + 1
-        RegWrite launchCount, "REG_DWORD", regKeyName, launchCountValueName
+        launchCount := RegRead(REG_KEY_NAME, launchCountValueName, 1) + 1
+        RegWrite(launchCount, "REG_DWORD", REG_KEY_NAME, launchCountValueName)
     }
 }
 
@@ -142,15 +142,13 @@ ExitFunc(exitReason, exitCode) {
 ^!1::{
     ; 没有获取到文字直接返回,否则若选中的是网址则打开，否则进行百度搜索
     text := GetSelectedText()
-    if (text) {        
-        if (RegExMatch(text, "i)^\s*((?:https?://)?(?:[\w-]+\.)+[\w-]+(?:/[\w-./?%&=]*)?\s*)$", &regExMatchInfo)) {
+    if (text) {
+        if RegExMatch(text, "i)^\s*((?:https?://)?(?:[\w-]+\.)+[\w-]+(?:/[\w-./?%&=]*)?\s*)$", &regExMatchInfo) {
             text := regExMatchInfo.1
             if not InStr(text, 'http') {
                 text := "http://" . text
             }
-            Run text
-        } else {
-            Run 'https://www.baidu.com/s?wd=' . text
-        }
+            Run(text)
+        } else Run('https://www.baidu.com/s?wd=' . text)
     }
 }

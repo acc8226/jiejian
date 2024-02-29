@@ -57,7 +57,7 @@ Anyrun() {
             listBoxDataArray := unset
             dataArray := unset
             ; 若为空则清空列表 或 大于设定长度 或 非字母和数字汉子和空格的组合则退出 \u4e00-\u9fa5 可以表示为 一-龥
-            if (StrLen(editValue) <= Support_Length AND RegExMatch(editValue, '^[a-zA-Z一-龥\d]+$')) {
+            if StrLen(editValue) <= Support_Length AND RegExMatch(editValue, '^[a-zA-Z一-龥\d]+$') {
                 ; 精确匹配失败则转到模糊匹配
                 needleRegEx := ''
                 Loop Parse, editValue {
@@ -69,7 +69,7 @@ Anyrun() {
                 for it in dataList {
                     ; 只处理 app 和 web 这两种类型
                     if (it.type ~= 'i)^(?:app|web|file)$') {
-                        if (Type(it.alias) == 'Array') {
+                        if 'Array' == Type(it.alias) {
                             ; 如果有则选出最匹配的 array
                             ; 最佳匹配对象
                             maxData := unset
@@ -99,65 +99,15 @@ Anyrun() {
             if (IsSet(dataArray) AND dataArray.Length > 0) {
                 dataArraySort(dataArray)
                 listBoxDataArray := listBoxData(dataArray)
-            } else {
-                listBoxDataArray := []
-            }
+            } else listBoxDataArray := []
 
-            ; 打开网址
-            if (editValue ~= 'i)^(?:https?://)?(?:[\w-]+\.)+[\w-]+(?:/[\w-./?%&=]*)?\s*$') {
-                ; 从 dava.csv 中抽取符合条件的 b 列 (http 网址)，若满足则赋值 d 列
-                match := ''
-                for it in dataList {
-                    if (it.type == 'web' and (editValue == it.path 
-                                               or editValue == SubStr(it.path, InStr(it.path, '://') + StrLen('://'))
-                                               or editValue == SubStr(it.path, InStr(it.path, '://www.') + StrLen('://www.'))  
-                                            )
-                        ) {
-                        match .= '-' . it.title
-                        break
-                    }
+            for action in MyActionArray {
+                if (action.type == 'list' and action.fuhe.Call(editValue)) {
+                    if action.HasOwnProp('fuheThen')
+                        listBoxDataArray.push(action.title . action.fuheThen.Call(editValue))
+                    else listBoxDataArray.push(action.title)
                 }
-                if (match == '') {
-                    if (editValue ~= 'i)^(?:https?://)?im.qq.com') {
-                        match .= '-' . 'QQ-轻松做自己'
-                    }
-                    else if (editValue ~= 'i)^(?:https?://)?(?:www.)?zhihu.com') {
-                        match .= '-' . '知乎'
-                    }
-                    else if (editValue ~= 'i)^(?:https?://)?(?:www.)?zhipin.com') {
-                        match .= '-' . 'BOSS直聘'
-                    }
-                }
-                listBoxDataArray.push(MyActionArray[7].title . match)
             }
-
-            if MyActionArray[1].fuhe.Call(editValue) {
-                listBoxDataArray.push MyActionArray[1].title
-            }
-            if MyActionArray[2].fuhe.Call(editValue) {
-                listBoxDataArray.push MyActionArray[2].title
-            }
-            if MyActionArray[3].fuhe.Call(editValue) {
-                listBoxDataArray.push MyActionArray[3].title
-            }
-            if MyActionArray[4].fuhe.Call(editValue) {
-                listBoxDataArray.push MyActionArray[4].title
-            }
-            if MyActionArray[5].fuhe.Call(editValue) {
-                listBoxDataArray.push MyActionArray[5].title
-            }
-
-            ; 前往文件夹
-            if DirExist(editValue) {
-                listBoxDataArray.push MyActionArray[6].title
-            }
-            else if FileExist(editValue) {
-                ; 抽出文件夹
-                RegExMatch(editValue, '(.*[\\/]).*', &regExMatchInfo)
-                if DirExist(regExMatchInfo.1)
-                    listBoxDataArray.push MyActionArray[6].title
-            }
-
             ; 显示出来
             listBox.Delete()
             listBox.Visible := listBoxDataArray.Length > 0
@@ -169,12 +119,12 @@ Anyrun() {
         }
 
         onEditLoseFocus(*) {
-            if not listBox.Focused
+            if (not listBox.Focused)
                 myGui.Destroy()
         }
 
         onListboxLoseFocus(*) {
-            if not myEdit.Focused
+            if (not myEdit.Focused)
                 myGui.Destroy()
         }
 
@@ -192,39 +142,19 @@ Anyrun() {
             editValue := myEdit.Value
             ; 如果 条目 未匹配 则啥事都不做
             if (!IsSet(item) OR item == '') {
-                switch {
-                    case listBox.Text = MyActionArray[1].title: ; 百度搜索
-                        RegExMatch(editValue, 'i)^bd(.*)', &regExMatchInfo)
-                        Run 'https://www.baidu.com/s?wd=' . Trim(regExMatchInfo[1])
-                    case listBox.Text = MyActionArray[2].title: ; bing 搜索
-                        RegExMatch(editValue, "i)^bi(.*)", &regExMatchInfo)
-                        Run 'https://cn.bing.com/search?q=' . Trim(regExMatchInfo[1])
-                    case listBox.Text = MyActionArray[3].title: ; IP 搜索
-                        RegExMatch(editValue, "i)^ip(.*)", &regExMatchInfo)
-                        Run 'https://www.ip138.com/iplookup.php?ip=' . Trim(regExMatchInfo[1])
-                    case listBox.Text = MyActionArray[4].title: ; b 站搜索
-                        RegExMatch(editValue, 'i)^bl(.*)', &regExMatchInfo)
-                        Run 'https://search.bilibili.com/all?keyword=' . Trim(regExMatchInfo[1])
-                    case listBox.Text = MyActionArray[5].title: ; 打开文件
-                        Run editValue
-                    case listBox.Text = MyActionArray[6].title: ; 前往文件夹
-                        if DirExist(editValue) {
-                            Run editValue
-                        } else {
-                            RegExMatch(editValue, '(.*[\\/]).*', &regExMatchInfo)
-                            Run regExMatchInfo.1
+                for action in MyActionArray {
+                    if (action.type == 'list') {
+                        if 1 == InStr(listBox.Text, action.title) {
+                            action.pao.Call(editValue)
+                            break
                         }
-                    case 1 == InStr(listBox.Text, MyActionArray[7].title): ; 打开网址
-                        if not InStr(editValue, 'http')
-                            editValue := "http://" . editValue
-                        Run editValue
-                    case MyActionArray[8].title = editValue: ; 如果输入的是 本机IP 则弹窗
-                        addresses := SysGetIPAddresses()
-                            msg := "IP 地址:`n"
-                            for address in addresses
-                                msg .= address "`n"
-                            MsgBox msg
-                }                
+                    } else if (action.type == 'edit') {
+                        if (editValue = action.title) {
+                            action.pao.Call()
+                            break
+                        }
+                    }
+                }
             } else if (item.type = 'app') {
                 ; 微信的特殊处理：自动登录微信
                 if (item.title == '微信') {
@@ -232,28 +162,21 @@ Anyrun() {
                         Run item.path,,, &pid
                         WinWaitActive "ahk_pid " pid
                         ; 手动等待 1.1 秒，否则可能会跳到扫码页
-                        Sleep 1100
+                        Sleep(1100)
                         Send "{Space}"
                     } catch {
                         MsgBox("找不到目标应用")
                     }
-                } else {
-                    ActivateOrRun(item.winTitle, item.path)
-                }
-            } else {
-                Run(item.path)
-            }
+                } else ActivateOrRun(item.winTitle, item.path)
+            } else Run(item.path)
             MyGui.Destroy()
         }
 
         onButtonClick(*) {
             ; 如果 listbox 有焦点
-            if (listBox.Focused) {
+            if (listBox.Focused)
                 onListBoxDoubleClick()
-            } else {
-                ; 焦点在 edit，如果列表有匹配项 则获取编辑框文本内容
-                Trim(myEdit.Value) == '' ? MsgBox('输入内容不能为空') : onListBoxDoubleClick()
-            }
+            else Trim(myEdit.Value) == '' ? MsgBox('输入内容不能为空') : onListBoxDoubleClick() ; 焦点在 edit，如果列表有匹配项 则获取编辑框文本内容
         }
     }
 }
@@ -276,23 +199,172 @@ computeDegree(regExMatchInfo) {
 }
 
 class MyAction {
-    __new(title, regex, fuhe?) {
+    __new(title, type, fuhe?, fuheThen?, pao?) {
         this.title := title
-        this.regex := regex
+        this.type := type
+        ; 是否符合匹配
         if IsSet(fuhe) {
             this.fuhe := fuhe
+        }
+        ; 匹配后对 title 的增强
+        if IsSet(fuheThen) {
+            this.fuheThen := fuheThen
+        }
+        ; 匹配后选定的行为
+        if IsSet(pao) {
+            this.pao := pao
         }
     }
 }
 
 MyActionArray := [
-    MyAction('百度搜索', '我', k => k ~= 'i)^bd')
-    , MyAction('bing搜索', '人', k => k ~= 'i)^bi')
-    , MyAction('IP搜索', '性', k => k ~= 'i)^ip')
-    , MyAction('b站搜索', '防诈', k => k ~= 'i)^bl')
-    , MyAction('打开文件', '不要', k => FileExist(k) and not DirExist(k))
+    MyAction('打开网址', 'list', k => k ~= 'i)^(?:https?://)?(?:[\w-]+\.)+[\w-]+(?:/[\w-./?%&=]*)?\s*$', titleTrans7, pao7) ; 是否提前些比较好
+    , MyAction('百度搜索', 'list', k => k ~= 'i)^bd',, pao1)
+    , MyAction('bing搜索', 'list', k => k ~= 'i)^bi',, pao2) 
+    , MyAction('IP搜索', 'list', k => k ~= 'i)^ip',, pao3)
+    , MyAction('b站搜索', 'list', k => k ~= 'i)^bl',, pao4)
+    
+    , MyAction('打开文件', 'list', k => FileExist(k) and not DirExist(k),, input => Run(input)) 
+    , MyAction('前往文件夹', 'list', fuhe6,, pao6)
+    , MyAction('睡眠', 'list', k => k == '睡' or k == '睡眠',, SystemSleep)
+    , MyAction('锁屏', 'list', k => k == '锁' or k == '锁屏',, SystemLockScreen)
+    , MyAction('关机', 'list', k => k == '关' or k == '关机',, SystemShutdown)
 
-    , MyAction('前往文件夹', '骗人')
-    , MyAction('打开网址', '防着')
-    , MyAction('本机IP', '别有目的')
+    , MyAction('本机IP', 'edit', ,, pao8)
+    ; , MyAction('关机', 'edit', ,, () => Run('shutdown -s -t 0'))
 ]
+
+fuhe6(key) {
+    isMatch := unset
+    if DirExist(key) {
+        isMatch := true
+    } else if FileExist(key) {
+        ; 抽出文件夹
+        RegExMatch(key, '(.*[\\/]).*', &regExMatchInfo)
+        isMatch := DirExist(regExMatchInfo.1)
+    } else {
+        isMatch := false
+    }
+    return isMatch
+}
+
+titleTrans7(editValue) {
+    ; 对网址进行细化处理
+    ; 从 dava.csv 中抽取符合条件的 b 列 (http 网址)，若满足则赋值 d 列
+    match := ''
+    for (it in dataList) {
+        if (it.type == 'web') {
+            if (editValue == it.path) {
+                match := '-' . it.title
+            } else if (SubStr(editValue, -1) == '/') {
+                if (editValue == SubStr(it.path, InStr(it.path, '://') + StrLen('://')) . '/' ; 匹配 www.soso.com/
+                    OR editValue == SubStr(it.path, InStr(it.path, '://www.') + StrLen('://www.')) . '/' ; 匹配 soso.com/
+                )
+                    match := '-' . it.title
+            } else {
+                if (editValue == SubStr(it.path, InStr(it.path, '://') + StrLen('://')) ; 匹配 www.soso.com
+                    OR editValue == SubStr(it.path, InStr(it.path, '://www.') + StrLen('://www.')) ; 匹配 soso.com
+                )
+                    match := '-' . it.title
+            }
+            if (match !== '') {
+                break
+            }
+        }        
+    }
+    ; 预设匹配
+    if (match == '') {
+        if (editValue ~= 'i)^(?:https?://)?im.qq.com/?$') {
+            match := '-QQ-轻松做自己'
+        } else if (editValue ~= 'i)^(?:https?://)?(?:www.)?zhihu.com/?$') {
+            match := '-知乎'
+        } else if (editValue ~= 'i)^(?:https?://)?(?:www.)?zhipin.com/?$')
+            match := '-BOSS直聘'
+        ; 旅游
+        else if (editValue ~= 'i)^(?:https?://)?(?:www.)?ctrip.com/?$')
+            match := '-携程网'
+        else if (editValue ~= 'i)^(?:https?://)?(?:www.)?mafengwo.cn/?$')
+            match := '-马蜂窝'
+        else if (editValue ~= 'i)^(?:https?://)?(?:www.)?cncn.com/?$')
+            match := '-欣欣旅游'
+        ; 小说
+        else if (editValue ~= 'i)^(?:https?://)?book.qq.com/?$')
+            match := '-QQ阅读'
+        else if (editValue ~= 'i)^(?:https?://)?(?:www.)?jjwxc.net/?$')
+            match := '-晋江文学城'
+        else if (editValue ~= 'i)^(?:https?://)?(?:www.)?qidian.com/?$')
+            match := '-起点中文网'
+        ; 购物
+        else if (editValue ~= 'i)^(?:https?://)?(?:www.)?apple.com.cn/?$')
+            match := '-Apple (中国大陆) '
+        ; 其他
+        else if (editValue ~= 'i)^(?:https?://)?(?:www.)?doubao.com/?$')
+            match := '-豆包 - 抖音旗下 AI 智能助手'
+        else if (editValue ~= 'i)^(?:https?://)?(?:www.)?ithome.com/?$')
+            match := '-IT之家'
+        else if (editValue ~= 'i)^(?:https?://)?(?:www.)?ixigua.com/?$')
+            match := '-西瓜视频'
+        else if (editValue ~= 'i)^(?:https?://)?nav.feipig.fun/?$')
+            match := '-ac网址导航'
+        else if (editValue ~= 'i)^(?:https?://)?(?:www.)?iplaysoft.com/?$')
+            match := '-异次元软件世界-软件改变生活！'
+        else if (editValue ~= 'i)^(?:https?://)?(?:www.)?appinn.com/?$')
+            match := '-小众软件 - 分享免费、小巧、实用、有趣、绿色的软件'
+        else if (editValue ~= 'i)^(?:https?://)?(?:www.)?sspai.com/?$')
+            match := '-少数派-高效工作，品质生活'
+        else if (editValue ~= 'i)^(?:https?://)?(?:www.)?ruancan.com/?$')
+            match := '-软餐-新鲜软件资讯'
+        else if (editValue ~= 'i)^(?:https?://)?y.qq.com/?$')
+            match := '-QQ音乐'
+        else if (editValue ~= 'i)^(?:https?://)?filehelper.weixin.qq.com/?$')
+            match := '-微信文件传输助手网页版'
+        else if (editValue ~= 'i)^(?:https?://)?sj.qq.com/?$')
+            match := '-应用宝'
+        else if (editValue ~= 'i)^(?:https?://)?(?:www.)?wenshushu.com/?$')
+            match := '-文叔叔-传文件，找文叔叔（大文件、永不限速）'    
+    }
+    return match
+}
+
+pao1(input) {
+    RegExMatch(input, 'i)^bd(.*)', &regExMatchInfo)
+    Run('https://www.baidu.com/s?wd=' . Trim(regExMatchInfo[1]))
+}
+
+pao2(input) {
+    RegExMatch(input, "i)^bi(.*)", &regExMatchInfo)
+    Run 'https://cn.bing.com/search?q=' . Trim(regExMatchInfo[1])
+}
+
+pao3(input) {
+    RegExMatch(input, "i)^ip(.*)", &regExMatchInfo)
+    Run 'https://www.ip138.com/iplookup.php?ip=' . Trim(regExMatchInfo[1])
+}
+
+pao4(input) {
+    RegExMatch(input, 'i)^bl(.*)', &regExMatchInfo)
+    Run('https://search.bilibili.com/all?keyword=' . Trim(regExMatchInfo[1]))
+}
+
+pao6(input) {
+    if DirExist(input) {
+        Run(input)
+    } else {
+        RegExMatch(input, '(.*[\\/]).*', &regExMatchInfo)
+        Run(regExMatchInfo.1)
+    }
+}
+
+pao7(input) {
+    if not InStr(input, 'http')
+        input := "http://" . input
+    Run(input)
+}
+
+pao8() {
+    addresses := SysGetIPAddresses()
+    msg := "IP 地址:`n"
+    for address in addresses
+        msg .= address "`n"
+    MsgBox(msg)
+}
