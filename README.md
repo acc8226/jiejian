@@ -1,17 +1,31 @@
 # 捷键 for win 使用说明
 
-基于 [Autohotkey2](https://www.autohotkey.com/) 开发的按键映射 / 快捷键增强工具。为简化 Windows 键鼠操作而生。
+基于 [Autohotkey2](https://www.autohotkey.com/) 开发，为简化 Windows 键鼠操作而的按键映射 / 快捷键增强工具。既可当作一个传统启动器，又对鼠标🖱侧边按键和热字符支持良好。
 
-[软件下载](https://gitcode.com/acc8226/jiejian/releases) | [视频演示](https://www.bilibili.com/video/BV19H4y1e7hJ?vd_source=54168537affc2c02555097cb26797d99)
+强烈建议所有人都搭配一个全局鼠标手势软件 + 带侧边按键的鼠标。
+
+[视频演示](https://www.bilibili.com/video/BV19H4y1e7hJ?vd_source=54168537affc2c02555097cb26797d99) ｜ [软件下载](https://gitcode.com/acc8226/jiejian/releases)
 
 注意事项：
 
 1. 若软件功能有差异，以最新版为准。
 2. 本程序开源，无毒无后门不收集任何信息。如被误报错杀，可加入安全类软件排除清单。
 
+## 和一些软件对比
+
+当我断断续续开发几个月，发现市场上早就有了此类大厂软件根本比不了。我可能连其中任一软件的百分之十的完成度都达不到。
+
+| 功能 |  mac 平台 | windows 系统 |
+| ---- | ---- | ---- |
+| 侧边按键支持 | BetterAndBetter【免费】 | 捷键【免费】 |
+| 热字符串 | espanso【免费】 | 捷键【免费】 |
+| 启动器 | raycast【免费】 | 捷键【免费】 |
+
+所以指导了我下一个工作，我的优点只剩下功能强大和足够小巧了，下一步就是提升交互和方便使用了。追求尽量做到开箱即用。
+
 ## 0. 程序目录结构
 
-1. extra/ 【增强体验】MyKeymap2/data/config.json 为 MyKeymap （免费）预设配置。WGestures V1（免费） 和 V2（付费但更推荐使用） 为预设手势模版。WindowSpyU32.exe 用于查看窗口标识符。
+1. extra/【增强体验】MyKeymap2/data/config.json 为 MyKeymap （免费）预设配置。WGestures V1（免费） 和 V2（付费但更推荐使用）为预设手势模版。WindowSpyU32.exe 用于查看窗口标识符。
 2. app.csv 配置文件
 3. data.csv 配置文件
 4. help.url 在线帮助文档
@@ -19,10 +33,13 @@
 
 ## 1. 特点
 
-* 开箱即用，推荐搭配带侧边键的鼠标（不区分鼠标厂商） + 全局鼠标手势软件 [WGestures 1][] 或者 [WGestures 2][]
-* 支持自定义快捷键，专注按键改写和增强
-* 自带定制化程度高的启动器，提供快捷启动和内置系统命令（锁屏、睡眠、关机等）
-* 可选搭配 [MyKeymap][]（完善的窗口操作 & 启动程序 & 召唤窗口）
+* 开箱即用，支持自定义快捷键，专注按键改写和增强
+* 侧边按键支持，推荐搭配带侧边键的鼠标（不区分鼠标厂商）
+* 热字符串支持
+* 可作为启动器使用，定制化程度高甚至太过灵活导致难上手，提供快捷启动和内置系统命令（锁屏、睡眠、关机等）
+* 试验性的加入左键辅助功能
+* 建议搭配 全局鼠标手势软件 [WGestures 1][] 或者 [WGestures 2][]
+* 建议搭配 [MyKeymap][]（完善的窗口操作 & 启动程序 & 召唤窗口）
 
 ## 2. 热键 之 键鼠操作
 
@@ -196,7 +213,9 @@ data.csv 动态配置
 
 ## 10. 左键辅助
 
-在鼠标左键按下的同时按下 a 键：打开选定网址，否则表示百度搜索选定文本。
+收到 quicker 影响，试验性的加入左键辅助功能。
+
+在鼠标左键按下的同时按下 a 键时，若选中为网址则打开网址，否则百度搜索选中内容。
 
 ## 11. 自定义配置说明
 
@@ -239,7 +258,7 @@ app.csv 使用了正则表达式，需要使用者对正则有一定了解。主
 
 ### 未来计划
 
-* 支持 Arc 浏览器 for windows、[360AI浏览器](https://browser.360.cn/ai/)
+* 支持 Arc 浏览器 for windows、[360 AI 浏览器](https://browser.360.cn/ai/)
 * icon 点击后使用新图标，而不是系统样式的图标
 * 配置文件不太易用，需要优化
 
@@ -370,9 +389,21 @@ app.csv 使用了正则表达式，需要使用者对正则有一定了解。主
 
 ## 常见问题
 
+### macOS 系统如何实现类似效果
+
+| 功能 |  mac 平台 | windows 系统 |
+| ---- | ---- | ---- |
+| 侧边按键支持 | BetterAndBetter【免费】 | 捷键【免费】 |
+| 鼠标手势 | BetterAndBetter【免费】 | wg2【付费】 |
+| 热字符串 | espanso【免费】 | 捷键【免费】 |
+| 启动器 | raycast【免费】 | 捷键【免费】 |
+| 程序切换 | hammerspoon【免费】 | mykeymap【免费】 |
+
 ### 如何将捷键设置为开机自启
 
-在运行窗口中运行 `shell:startup`，根据自己是 32 还是 64 位系统，按住 Alt 键将 `jiejian32.exe` 或 `jiejian64.exe` 拖入 Startup 文件夹内即可。
+在系统管理栏中找到捷键，右键设置开机自启即可。
+
+也可手动开启。运行 `shell:startup`，根据自己是 32 还是 64 位系统，按住 Alt 键后将 `jiejian32.exe` 或 `jiejian64.exe` 拖入 Startup 文件夹内即可。
 
 ### 启动 zeal.exe 发现加载目录为空
 
@@ -705,13 +736,12 @@ package.ahk 的设计思路：Ahk2Exe.exe 将 ahk 转化为 exe，期间使用 `
 
 lib 下部分函数参考了 [MyKeymap Github repo] 项目。
 
-由于 ahk V2 这门语言真的很易学。再加之我之前的编程功底，从设计到开发均由我一人完成。并从 quicker、MyKeymap、capslock+、uTools 软件中得到启发。在此默默表示感谢。
+由于 ahk V2 这门语言真的很易学。再加上我之前的编程基础，从设计到开发均由我一人完成。并从 Windows 软件 quicker、MyKeymap、capslock+、uTools 以及 macOS 软件 BetterAndBetter、HapiGo 和 Raycast 中得到启发。在此默默感谢。
 
   [MyKeymap]: https://xianyukang.com/MyKeymap.html '很屌的软件'
   [MyKeymap Github repo]: https://github.com/xianyukang/MyKeymap "感谢作者"
   [WGestures 1]: https://www.yingdev.com/projects/wgestures '一款很屌的免费鼠标手势'
   [WGestures 2]: https://www.yingdev.com/projects/wgestures2 "一款很屌的付费鼠标手势"
 
-  [bilibili 哔哩哔哩]: https://www.bilibili.com/ "哔哩哔哩"
-  [汽水音乐]: https://www.douyin.com/qishui "汽水音乐"
-  
+  [bilibili 哔哩哔哩]: https://www.bilibili.com/ '哔哩哔哩'
+  [汽水音乐]: https://www.douyin.com/qishui '汽水音乐'
