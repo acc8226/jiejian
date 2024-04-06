@@ -707,7 +707,7 @@ lib 下部分函数参考了 [MyKeymap Github repo] 项目。
 
 由于 ahk V2 这门语言真的很易学。再加之我之前的编程功底，从设计到开发均由我一人完成。并从 quicker、MyKeymap、capslock+、uTools 软件中得到启发。在此默默表示感谢。
 
-[MyKeymap]: https://xianyukang.com/MyKeymap.html
-[MyKeymap Github repo]: https://github.com/xianyukang/MyKeymap
-[WGestures 1]: https://www.yingdev.com/projects/wgestures
-[WGestures 2]: https://www.yingdev.com/projects/wgestures2
+  [MyKeymap]: https://xianyukang.com/MyKeymap.html '很屌的软件'
+  [MyKeymap Github repo]: https://github.com/xianyukang/MyKeymap "感谢作者"
+  [WGestures 1]: https://www.yingdev.com/projects/wgestures '一款很屌的免费鼠标手势'
+  [WGestures 2]: https://www.yingdev.com/projects/wgestures2 "一款很屌的付费软件"
