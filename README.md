@@ -1,6 +1,6 @@
 # 捷键 for win 使用说明
 
-基于 Autohotkey2 开发的按键映射 / 快捷键增强工具。为简化 windows 键鼠操作而生。
+基于 [Autohotkey2](https://www.autohotkey.com/) 开发的按键映射 / 快捷键增强工具。为简化 Windows 键鼠操作而生。
 
 [软件下载](https://gitcode.com/acc8226/jiejian/releases) | [视频演示](https://www.bilibili.com/video/BV19H4y1e7hJ?vd_source=54168537affc2c02555097cb26797d99)
 
@@ -239,7 +239,7 @@ app.csv 使用了正则表达式，需要使用者对正则有一定了解。主
 
 ### 未来计划
 
-* 支持 arc 浏览器 for windows
+* 支持 Arc 浏览器 for windows、[360AI浏览器](https://browser.360.cn/ai/)
 * icon 点击后使用新图标，而不是系统样式的图标
 * 配置文件不太易用，需要优化
 
@@ -249,7 +249,7 @@ app.csv 使用了正则表达式，需要使用者对正则有一定了解。主
 
 日益完善，可能真是今年的最后一个版本
 
-* app.csv 新增 ctrl + shift + n 作为新建窗口的默认标识
+* app.csv 新增 Ctrl + Shift + n 作为新建窗口的默认标识
 * csv 文件增加是否启用列
 * 重新设计了一版菜单，并增加开机自启选项
 * 新增一些看图、压缩、视频播放软件的支持
@@ -330,7 +330,7 @@ app.csv 使用了正则表达式，需要使用者对正则有一定了解。主
 * 启用自定义系统栏图标，更有辨识度
 * 优化找不到目标应用的错误提示
 * 新增和关闭标签 适配 win11 新版 记事本
-* 新建标签/窗口 改为使用 Ctrl + f3
+* 新建标签/窗口 改为使用 Ctrl + F3
 * 删除用的不多的禁用脚本快捷键 Ctrl + Alt + s
 
 ### 捷键 v1.0.2 2023-08-17
@@ -507,7 +507,7 @@ CapsLock 命令
 * 【音乐类】Spotify
 * 【音乐类】方格音乐【部分支持】
 * 【音乐类】酷我音乐
-* 【音乐类】汽水音乐
+* 【音乐类】[汽水音乐]
 * 【音乐类】网易云音乐
 * 【音乐类】喜马拉雅
 * 【音乐类】酷狗音乐
@@ -522,7 +522,7 @@ CapsLock 命令
 * 【视频类】迅雷影音
 * 【视频类】影音先锋
 * 【视频类】荐片播放器
-* 【视频类】bilibili 哔哩哔哩
+* 【视频类】[bilibili 哔哩哔哩]
 * 【视频类】爱奇艺
 * 【视频类】优酷
 * 【视频类】腾讯视频
@@ -710,4 +710,8 @@ lib 下部分函数参考了 [MyKeymap Github repo] 项目。
   [MyKeymap]: https://xianyukang.com/MyKeymap.html '很屌的软件'
   [MyKeymap Github repo]: https://github.com/xianyukang/MyKeymap "感谢作者"
   [WGestures 1]: https://www.yingdev.com/projects/wgestures '一款很屌的免费鼠标手势'
-  [WGestures 2]: https://www.yingdev.com/projects/wgestures2 "一款很屌的付费软件"
+  [WGestures 2]: https://www.yingdev.com/projects/wgestures2 "一款很屌的付费鼠标手势"
+
+  [bilibili 哔哩哔哩]: https://www.bilibili.com/ "哔哩哔哩"
+  [汽水音乐]: https://www.douyin.com/qishui "汽水音乐"
+  
