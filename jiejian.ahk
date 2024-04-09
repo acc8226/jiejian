@@ -15,8 +15,8 @@ CodeVersion := '24.2.29-beta'
 ;@Ahk2Exe-Set FileVersion, %U_version%
 ; 往对应文件写入对应版本号，只在生成 32 位 exe 的时候执行
 ;@Ahk2Exe-Obey U_V, = %A_PtrSize% == 4 ? 'PostExec' : 'Nop'
-; 提取出 文件名 再拼接 PostExec.ahk; 版本号; 2 仅在指定 UPX 压缩时运行 ; 脚本所在路径
-;@Ahk2Exe-%U_V% %A_ScriptName~\.[^\.]+$~PostExec.ahk% %U_version%, 2, %A_ScriptDir%
+; 提取出 文件名 再拼接 PostExec.ahk; 版本号; When: 2 仅在指定 UPX 压缩时运行 ; WorkingDir: 脚本所在路径
+;@Ahk2Exe-%U_V% %A_ScriptName~\.[^\.]+$~PostExec.exe% %U_version%, 2, %A_ScriptDir%
 
 global REG_KEY_NAME := 'HKEY_CURRENT_USER\SOFTWARE\jiejian'
 global START_TIME := A_NowUTC
