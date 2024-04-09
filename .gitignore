@@ -1,7 +1,8 @@
 .idea
 .vscode/
 
-/out
+/out/
+/shortcuts/
 
 jiejian*.exe
 !jiejianPostExec.exe

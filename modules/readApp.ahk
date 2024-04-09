@@ -16,7 +16,7 @@ Loop appList.Length {
     ; e 列 esc
     switch it.escape, 'Off' {
       ; 窗口组可以为一组窗口执行统一操作
-      case "WinClose": GroupAdd('HL_esc_WinClose', it.exe)
+      case "WinClose", '关闭': GroupAdd('HL_esc_WinClose', it.exe)
     }
     ; f 列 关闭
     switch it.close, 'Off' {
@@ -46,11 +46,11 @@ Loop appList.Length {
     }
     ; e 列 esc
     switch it.escape, 'Off' {
-      case "WinClose": GroupAdd("esc_WinClose", it.exe)
+      case "WinClose", '关闭': GroupAdd("esc_WinClose", it.exe)
     }
     ; f 列 关闭
     switch it.close, 'Off' {
-      case "WinClose": GroupAdd("close_WinClose", it.exe)
+      case "WinClose", '关闭': GroupAdd("close_WinClose", it.exe)
       case "Esc", "{Esc}": GroupAdd("close_Esc", it.exe)
       case "]": GroupAdd("close_closeBracket", it.exe)
       case '!F4', "!{F4}": GroupAdd("close_alt_F4", it.exe)
@@ -86,7 +86,7 @@ Loop appList.Length {
       case ']': GroupAdd("next_closeBracket", it.exe)
       case 'Down', "{Down}": GroupAdd("next_Down", it.exe)
       case 'Media_Next', "{Media_Next}": GroupAdd("next_MediaNext", it.exe)
-      case 'PgDn', "{PgDn}": GroupAdd("next_PgDn", it.exe)
+      case 'PgDn', '{PgDn}': GroupAdd("next_PgDn", it.exe)
       case "b": GroupAdd("next_b", it.exe)
 
       case "n": GroupAdd('next_n', it.exe)
@@ -327,12 +327,13 @@ XButton1::Send "^!q"
 ^F4::
 XButton1::Send "^+w"
 
-; 兜底1
+; ^F4 兜底
 #HotIf not WinActive("ahk_group close_ctrl_F4")
 ^F4::SmartCloseWindow ; 比 WinClose "A" 好使
+
+; XButton1 兜底
 #HotIf WinActive("ahk_group close_ctrl_F4")
 XButton1::Send "^{F4}"
-; 兜底2
 #HotIf
 XButton1::SmartCloseWindow
 
@@ -488,7 +489,7 @@ XButton2::Send '^!{Left}'
 ^+Tab::
 XButton2::Send '^+{Left}'
 
-; 兜底
+; XButton2 兜底
 #HotIf
 XButton2::Send '^+{Tab}'
 

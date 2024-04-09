@@ -102,24 +102,27 @@
             launchCountValueName := 'launch_count'
             launchCount := RegRead(REG_KEY_NAME, launchCountValueName, 1)
     
-            sb := '总启动次数 ' . launchCount . ' 次，您目前已使用捷键 ' . recordMins . ' 分钟（大约 '
-            recordYears := recordMins // (365 * 24 * 60)
-            if (recordYears > 0) {
-                sb .= recordYears . ' 年 '
-            }
-            recordDays := recordMins // (24 * 60) - recordYears * 365
-            if (recordDays >= 1) {
-                sb .= recordDays . ' 天 '
-            }
-            recordHours := recordMins // 60 - recordYears * 365 * 24 - recordDays * 24
-            if (recordHours >= 1) {
-                sb .= recordHours . ' 小时 '
-            }
-            mins := recordMins - recordMins // 60 * 60
-            if (mins >= 1) {
-                sb .= mins . ' 分钟'
-            }
-            sb .= ' ）'            
+            sb := '总启动次数 ' . launchCount . ' 次，您目前已使用捷键 ' . recordMins . ' 分钟'
+            if (recordMins >= 60) {
+                sb .= '（约 '
+                recordYears := recordMins // (365 * 24 * 60)
+                if (recordYears > 0) {
+                    sb .= recordYears . ' 年 '
+                }
+                recordDays := recordMins // (24 * 60) - recordYears * 365
+                if (recordDays >= 1) {
+                    sb .= recordDays . ' 天 '
+                }
+                recordHours := recordMins // 60 - recordYears * 365 * 24 - recordDays * 24
+                if (recordHours >= 1) {
+                    sb .= recordHours . ' 小时 '
+                }
+                mins := recordMins - recordMins // 60 * 60
+                if (mins >= 1) {
+                    sb .= mins . ' 分钟'
+                }
+                sb .= '）'
+            }                     
             MsgBox(sb, '使用统计')
         case this.kaijiziqi:
             ; 当前是否是选中状态
@@ -142,11 +145,10 @@
             case this.update: checkUpdate(true)
             case this.about: MsgBox(      
             '版本: ' CodeVersion
-            '`n日期: 2024-2-22'
             "`nAHK 主程序版本: " A_AhkVersion
             "`nWindows 版本号: " A_OSVersion
             "`n计算机名: " A_ComputerName
-            "`n用户登录名: " A_UserName
+            "`n当前用户: " A_UserName
             "`n是否管理员权限运行: " (A_IsAdmin ? '是' : '否')
             "`n是否 64 位系统: " (A_Is64bitOS ? '是' : '否')
             , APP_NAME, 'Iconi')
