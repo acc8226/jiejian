@@ -5,9 +5,10 @@
 echo %1
 rd /S /Q out\%1\
 MKDIR out\%1\extra\
-xcopy /s  extra        out\%1\extra\
+MKDIR out\%1\custom\
+XCOPY extra            out\%1\extra\ /S
+XCOPY custom           out\%1\custom\ /S
 copy app.csv           out\%1\
 copy template\data.csv out\%1\
-copy *.url             out\%1\
-copy jiejian3*.exe     out\%1\
-copy jiejian6*.exe     out\%1\
+move jiejian32.exe out\%1\
+move jiejian64.exe out\%1\

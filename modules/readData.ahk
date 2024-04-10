@@ -57,8 +57,32 @@ parseDataLine(line, eachLineLen) {
     return
   }
   ; 过滤无效路径
-  if ((info.type == 'app' OR info.type == 'file') AND !FileExist(info.path)) {
-    return
+  if (info.type == 'file') {
+    if (NOT FileExist(info.path)) {
+      return
+    }
+  }
+  else if (info.type == 'app') {
+    ; 如果是绝对路径
+    if InStr(info.path, ':') {
+      if NOT FileExist(info.path)
+        return
+    } else {
+      ; 如果是相对路径
+      if NOT FileExist(info.path) {
+        ; 以 exe 结尾
+        if SubStr(info.path, -4)  = '.exe' {
+          if NOT FileExist(A_WinDir "\System32\" info.path)
+            return
+        } 
+        ; 非 exe 结尾
+        else {
+          if NOT (FileExist(A_WinDir "\System32\" info.path) OR FileExist(A_WinDir "\System32\" info.path '.exe')) {
+            return
+          }
+        }
+      }
+    }
   }
   
   ; 要激活的窗口

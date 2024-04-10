@@ -180,11 +180,11 @@ parseApp(fileName) {
 parseAppLine(line, eachLineLen) {
   split := StrSplit(line, ",")
   ; 跳过不符合条件的行
-  if split.Length < eachLineLen
+  if (split.Length < eachLineLen)
     return
   splitEachLineLen := Trim(split[eachLineLen])
   ; 过滤不启用的行
-  if NOT (splitEachLineLen = '' OR splitEachLineLen = 'y')
+  if NOT (splitEachLineLen == '' OR splitEachLineLen = 'y' OR splitEachLineLen == '是')
     return
 
   info := {}
@@ -403,7 +403,7 @@ XButton1::SmartCloseWindow
 
 ; I. 后退
 #HotIf WinActive("ahk_group back_BackSpace")
-!Left::Send "^{BackSpace}"
+!Left::Send "{BackSpace}"
 #HotIf WinActive("ahk_group back_MediaPrev")
 !Left::Send "{Media_Prev}" ; 上一曲
 #HotIf WinActive("ahk_group back_PgUp")

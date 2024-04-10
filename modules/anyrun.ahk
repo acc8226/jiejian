@@ -34,9 +34,9 @@ Anyrun() {
         myEdit.OnEvent('LoseFocus', onEditLoseFocus)
         listbox.OnEvent('LoseFocus', onListboxLoseFocus)
 
-        ; 两个点击事件
+        ; 双击列表条目 触发事件
         listbox.OnEvent('DoubleClick', onListBoxDoubleClick)
-        ; 按回车会触发该 click 事件
+        ; 按回车触发 点击事件
         button.OnEvent('Click', onButtonClick)
 
         ; 按住 esc 销毁 窗口
@@ -56,9 +56,9 @@ Anyrun() {
             }
             listBoxDataArray := unset
             dataArray := unset
+            ; 精确匹配失败 将 转到模糊匹配
             ; 若为空则清空列表 或 大于设定长度 或 非字母和数字汉子和空格的组合则退出 \u4e00-\u9fa5 可以表示为 一-龥
             if StrLen(editValue) <= Support_Length AND RegExMatch(editValue, '^[a-zA-Z一-龥\d]+$') {
-                ; 精确匹配失败则转到模糊匹配
                 needleRegEx := ''
                 Loop Parse, editValue {
                     needleRegEx .= '(' . A_LoopField . ").*"
@@ -67,7 +67,7 @@ Anyrun() {
                 
                 dataArray := Array()
                 for it in dataList {
-                    ; 只处理 app 和 web 这两种类型
+                    ; 只处理 app 和 web 、file
                     if (it.type ~= 'i)^(?:app|web|file)$') {
                         if 'Array' == Type(it.alias) {
                             ; 如果有则选出最匹配的 array
@@ -99,13 +99,16 @@ Anyrun() {
             if (IsSet(dataArray) AND dataArray.Length > 0) {
                 dataArraySort(dataArray)
                 listBoxDataArray := listBoxData(dataArray)
-            } else listBoxDataArray := []
+            } else
+                listBoxDataArray := []
 
+            ; 模糊匹配 按照顺序
             for action in MyActionArray {
                 if (action.type == 'list' and action.fuhe.Call(editValue)) {
                     if action.HasOwnProp('fuheThen')
                         listBoxDataArray.push(action.title . action.fuheThen.Call(editValue))
-                    else listBoxDataArray.push(action.title)
+                    else
+                        listBoxDataArray.push(action.title)
                 }
             }
             ; 显示出来
@@ -133,6 +136,7 @@ Anyrun() {
             item := unset
             if (StrLen(listBox.Text) > 0) {
                 split := StrSplit(listBox.Text, '-')
+                ; 分离出类型 和 名称
                 if split.Length == 2 {
                     title := split[1]
                     type := split[2]
@@ -140,22 +144,30 @@ Anyrun() {
                 }
             }
             editValue := myEdit.Value
-            ; 如果 条目 未匹配 则啥事都不做
+
+            ; 模糊匹配：如果 条目 未匹配 则啥事都不做
             if (!IsSet(item) OR item == '') {
                 for action in MyActionArray {
-                    if (action.type == 'list') {
+                    ; 如果是 list 则表示必须在列表中存在
+                    if (action.type = 'list') {
+                        ; 必须满足匹配规则
                         if 1 == InStr(listBox.Text, action.title) {
                             action.pao.Call(editValue)
                             break
                         }
-                    } else if (action.type == 'edit') {
+                    }
+                    ; 不在列表中显示，但是依旧有作用
+                    else if (action.type = 'edit') {
+                        ; 没有匹配规则
                         if (editValue = action.title) {
                             action.pao.Call()
                             break
                         }
                     }
                 }
-            } else if (item.type = 'app') {
+            }
+            ; 精确处理：app 类型
+            else if (item.type = 'app') {
                 ; 微信的特殊处理：自动登录微信
                 if (item.title == '微信') {
                     try {
@@ -164,11 +176,14 @@ Anyrun() {
                         ; 手动等待 1.1 秒，否则可能会跳到扫码页
                         Sleep(1100)
                         Send "{Space}"
-                    } catch {
+                    } catch
                         MsgBox("找不到目标应用")
-                    }
-                } else ActivateOrRun(item.winTitle, item.path)
-            } else Run(item.path)
+                } else
+                    ActivateOrRun(item.winTitle, item.path)
+            } 
+            ; 精确处理：file 和 web 类型
+            else
+                Run(item.path)
             MyGui.Destroy()
         }
 
@@ -176,7 +191,9 @@ Anyrun() {
             ; 如果 listbox 有焦点
             if (listBox.Focused)
                 onListBoxDoubleClick()
-            else Trim(myEdit.Value) == '' ? MsgBox('输入内容不能为空') : onListBoxDoubleClick() ; 焦点在 edit，如果列表有匹配项 则获取编辑框文本内容
+            else
+                ; 如果焦点在 编辑框 且按下回车则会触发弹窗提示；否则表示焦点在 edit，如果列表有匹配项 则获取编辑框文本内容
+                Trim(myEdit.Value) == '' ? MsgBox('输入内容不能为空') : onListBoxDoubleClick()
         }
     }
 }
@@ -199,21 +216,25 @@ computeDegree(regExMatchInfo) {
 }
 
 class MyAction {
+    ; 显示标题
+    ; 类型 edit or list
+    ; 过滤条件
+    ; 拼接到栏目上
+    ; 执行动作
     __new(title, type, fuhe?, fuheThen?, pao?) {
         this.title := title
         this.type := type
         ; 是否符合匹配
-        if IsSet(fuhe) {
+        if IsSet(fuhe)
             this.fuhe := fuhe
-        }
+
         ; 匹配后对 title 的增强
-        if IsSet(fuheThen) {
+        if IsSet(fuheThen)
             this.fuheThen := fuheThen
-        }
+
         ; 匹配后选定的行为
-        if IsSet(pao) {
+        if IsSet(pao)
             this.pao := pao
-        }
     }
 }
 
@@ -224,8 +245,9 @@ MyActionArray := [
     , MyAction('IP搜索', 'list', k => k ~= 'i)^ip',, pao3)
     , MyAction('b站搜索', 'list', k => k ~= 'i)^bl',, pao4)
     
-    , MyAction('打开文件', 'list', k => FileExist(k) and not DirExist(k),, input => Run(input)) 
+    , MyAction('打开文件', 'list', k => FileExist(k) AND NOT DirExist(k),, input => Run(input)) 
     , MyAction('前往文件夹', 'list', fuhe6,, pao6)
+
     , MyAction('睡眠', 'list', k => k == '睡' or k == '睡眠',, SystemSleep)
     , MyAction('锁屏', 'list', k => k == '锁' or k == '锁屏',, SystemLockScreen)
     , MyAction('关机', 'list', k => k == '关' or k == '关机',, SystemShutdown)
@@ -240,8 +262,10 @@ fuhe6(key) {
         isMatch := true
     } else if FileExist(key) {
         ; 抽出文件夹
-        RegExMatch(key, '(.*[\\/]).*', &regExMatchInfo)
-        isMatch := DirExist(regExMatchInfo.1)
+        if RegExMatch(key, '(.*[\\/]).*', &regExMatchInfo) {
+            isMatch := DirExist(regExMatchInfo.1)
+        } else 
+            isMatch := false
     } else {
         isMatch := false
     }
@@ -259,13 +283,15 @@ titleTrans7(editValue) {
             } else if (SubStr(editValue, -1) == '/') {
                 if (editValue == SubStr(it.path, InStr(it.path, '://') + StrLen('://')) . '/' ; 匹配 www.soso.com/
                     OR editValue == SubStr(it.path, InStr(it.path, '://www.') + StrLen('://www.')) . '/' ; 匹配 soso.com/
-                )
+                ) {
                     match := '-' . it.title
+                }
             } else {
                 if (editValue == SubStr(it.path, InStr(it.path, '://') + StrLen('://')) ; 匹配 www.soso.com
                     OR editValue == SubStr(it.path, InStr(it.path, '://www.') + StrLen('://www.')) ; 匹配 soso.com
-                )
+                ) {
                     match := '-' . it.title
+                }
             }
             if (match !== '') {
                 break

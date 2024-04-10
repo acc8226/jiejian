@@ -9,7 +9,7 @@ https://wyagd001.github.io/v2/docs/
 ;@Ahk2Exe-SetCopyright 全民反诈 union
 ;@Ahk2Exe-SetDescription 捷键-为简化键鼠操作而生
 
-CodeVersion := '24.2.29-beta'
+CodeVersion := '24.4.9-beta'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
@@ -40,6 +40,8 @@ SetTitleMatchMode 'RegEx' ; 设置 WinTitle parameter 在内置函数中的匹�
 #Include 'modules/ReadData.ahk'
 #Include 'modules/CheckUpdate.ahk'
 #Include 'modules/MyTrayMenu.ahk'
+
+#Include 'custom/customFunctions.ahk'
 
 global aTrayMenu
 
@@ -130,7 +132,7 @@ ExitFunc(exitReason, exitCode) {
         RegWrite(recordMins, "REG_DWORD", REG_KEY_NAME, recordMinsValueName)
     }
     ; 统计软件使用次数
-    if (not exitReason ~= "i)^(?:Error|Reload|Single)$") {
+    if (NOT exitReason ~= "i)^(?:Error|Reload|Single)$") {
         launchCountValueName := 'launch_count'
         launchCount := RegRead(REG_KEY_NAME, launchCountValueName, 1) + 1
         RegWrite(launchCount, "REG_DWORD", REG_KEY_NAME, launchCountValueName)
@@ -145,10 +147,10 @@ ExitFunc(exitReason, exitCode) {
     if (text) {
         if RegExMatch(text, "i)^\s*((?:https?://)?(?:[\w-]+\.)+[\w-]+(?:/[\w-./?%&=]*)?\s*)$", &regExMatchInfo) {
             text := regExMatchInfo.1
-            if not InStr(text, 'http') {
+            if NOT InStr(text, 'http')
                 text := "http://" . text
-            }
             Run(text)
         } else Run('https://www.baidu.com/s?wd=' . text)
     }
 }
+
