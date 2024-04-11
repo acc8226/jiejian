@@ -57,12 +57,12 @@ parseDataLine(line, eachLineLen) {
     return
   }
   ; 过滤无效路径
-  if (info.type == 'file') {
+  if (info.type = 'file') {
     if (NOT FileExist(info.path)) {
       return
     }
   }
-  else if (info.type == 'app') {
+  else if (info.type = 'app') {
     ; 如果是绝对路径
     if InStr(info.path, ':') {
       if NOT FileExist(info.path)

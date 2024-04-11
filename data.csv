@@ -6,10 +6,10 @@ app,winver,,关于Windows,guanyuwindows|关于Windows,,,,
 app,diskmgmt.msc,,磁盘管理,diskmgmt|dianyuanxuanxiang|磁盘管理,,,,
 app,powercfg.cpl,,电源选项,dianyuanxuanxiang|电源选项,,,,
 app,magnify,,放大镜,fangdajing|放大镜,,,,
-app,mspaint,ahk_exe i)mspaint.exe$,画图,huatu|画图,,,,
+app,mspaint,ahk_exe i)mspaint.exe$,画图,mspaint|huatu|画图,,,,
 app,osk,,屏幕键盘,pingmujianpan|屏幕键盘,,,,
 app,notepad,ahk_exe i)Notepad.exe$,记事本,notepad|jishiben|记事本,!j,,,记事本
-app,control,,控制面板,kongzhimianban|控制面板,,,,
+app,control,,控制面板,control|kongzhimianban|控制面板,,,,
 app,sk.cpl,,屏幕分辨率,pingmufenbianlv|屏幕分辨率,,,,
 app,hdwwiz.cpl ,,设备管理器,hdwwiz.cpl|shebeiguanliqi|设备管理器,,,,
 app,main.cpl,,鼠标属性,main.cpl|shubiaoshuxing|鼠标属性,,,,
@@ -19,8 +19,6 @@ app,taskmgr,,任务管理器,taskmgr|renwuguanliqi|任务管理器,,,,
 app,explorer,,资源管理器,explorer|ziyuanguanliqi|资源管理器,,,,
 app,mstsc,,远程协助,mstsc|yuanchengzhuomian|远程协助,,,,
 app,write,,写字板,write|xieziban|写字板,,,,
-app,shortcuts\360 极速浏览器X.lnk,ahk_exe 360ChromeX.exe$,360极速浏览器,jisuliulanqi|360极速浏览器,!k,,,
-app,C:\Program Files (x86)\Battle.net\Battle.net Launcher.exe,,战网,lushichuanshuo|hs|battle|战网|炉石,,,,
 ,,,,,,,,
 file,D:\,,D盘,dpan|D盘,!d,,,
 ,,,,,,,,
@@ -44,78 +42,78 @@ text,```js{Enter}{Enter}```{Up},,,,,xjs,,
 text,```xml{Enter}{Enter}```{Up},,,,,xxml,,
 text,```py{Enter}{Enter}```{Up},,,,,xpy,,
 ,,,,,,,,
-web,https://www.baidu.com/,,百度,baidu|百度,,zbd,,
-web,https://www.bilibili.com/,,b站,bilibili|b站|哔哩哔哩,!6,zbi,,
-web,https://www.ithome.com/,,IT之家,ithome|itzhijia|IT之家,!7,zit,,
-web,https://www.ixigua.com/,,西瓜视频,xiguashipin|西瓜视频,!8,zxg,,
+web,https://www.baidu.com,,百度,baidu|百度,,zbd,,
+web,https://www.bilibili.com,,b站,bilibili|b站|哔哩哔哩,!6,zbi,,
+web,https://www.ithome.com,,IT之家,ithome|itzhijia|IT之家,!7,zit,,
+web,https://www.ixigua.com,,西瓜视频,xiguashipin|西瓜视频,!8,zxg,,
 ,,,,,,,,
-,,,,,,,,
-app,C:\Program Files\Nutstore\Nutstore.exe,,坚果云,jianguoyun|坚果云,,,,
-app,C:\Users\ferder\AppData\Local\Programs\aDrive\aDrive.exe,,阿里云盘,aliyunpan|阿里云盘,,,,
-app,C:\Program Files (x86)\ecloud\eCloud.exe,,天翼云盘,tianyiyunpan|天翼云盘,,,,
-,,,,,,,,
-app,C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe,,edge,edge,,,,
-app,D:\Program Files\Foxmail 7.2\Foxmail.exe,,foxmail,foxmail,,,,
-app,C:\Program Files\Tencent\QQNT\QQ.exe,,qq,qq,,,,
-app,C:\Program Files (x86)\ToDesk\ToDesk.exe,,ToDesk,ToDesk,,,,
-app,C:\Users\ferder\AppData\Local\Programs\Microsoft VS Code\Code.exe,,vscode,vscode,,,,
-app,shortcuts\哔哩哔哩.lnk,,b站,bilibili|b站|哔哩哔哩,,,,
-app,C:\Program Files (x86)\Tencent\QQMusic\QQMusic.exe,,QQ 音乐,qqmusic|QQ音乐,,,,
-app,C:\Users\ferder\AppData\Local\Programs\Soda Music\SodaMusic.lnk,,汽水音乐,qishuiyinyue|汽水音乐,,,,
-app,C:\Program Files (x86)\NetEase\CloudMusic\cloudmusic.exe,ahk_exe i)cloudmusic.exe$,网易云音乐,wangyiyunyinyue|网易云音乐,,,,
-app,C:\Program Files (x86)\Tencent\TIM\Bin\QQScLauncher.exe,,TIM,TIM,,,,
-app,C:\Users\ferder\AppData\Roaming\Spotify\Spotify.exe,ahk_exe i)Spotify.exe$,Spotify,Spotify,,,,
-app,C:\Program Files (x86)\Tencent\WeMeet\wemeetapp.exe,,腾讯会议,tenxunhuiyi|腾讯会议,,,,
-,,,,,,,,
-app,C:\Users\ferder\AppData\Local\JetBrains\PyCharm Community Edition 2021.3.3\bin\pycharm64.exe,,PyCharm,PyCharm,,,,
-app,C:\Program Files (x86)\EVAVEdit\EVAVEdit.exe,,EV 剪辑,Evjianji|EV剪辑,,,,
-app,C:\Program Files (x86)\EVCapture\EVCapture.exe,,EV 录屏,Evluping|EV录屏,,,,
-app,C:\Program Files (x86)\Thunder Network\Thunder\Program\ThunderStart.exe,,迅雷,thunder|xunlei|迅雷,,,,
-app,extra\WindowSpyU32.exe,,Spy,Spy,,,,
-app,C:\Users\ferder\AppData\Local\Programs\tts-vue\tts-vue.exe,,tts,TTS,,,,
-app,C:\Users\ferder\AppData\Local\Kingsoft\WPS Office\ksolaunch.exe,ahk_exe i)wps.exe$,WPS Office,WPS,,,,
-,,,,,,,,
-app,D:\alee\exec\daily\0.日常\0. 必备\bitwarden\Bitwarden.exe,,bitwarden,bitwarden,,,,https://bitwarden.com/download
-app,C:\Program Files (x86)\PixPin\PixPin.exe,,PixPin,PixPin,,,,https://pixpinapp.com
-app,D:\alee\exec\daily\0.日常\1. 工具类\filecxx_1.9_win_x64\fileu.exe,,文件蜈蚣,wenjianwugong|文件蜈蚣,,,,http://www.filecxx.com/zh_CN/index.html
-app,D:\alee\exec\daily\0.日常\1. 工具类\Motrix-1.8.19-win\Motrix.exe,ahk_exe i)Motrix.exe$,Motrix,Motrix,,,,https://motrix.app/zh-CN
-app,D:\alee\exec\daily\0.日常\2. 办公类\SumatraPDF\SumatraPDF.exe,,pdf,pdf,,,,https://www.sumatrapdfreader.org/free-pdf-reader
-app,D:\alee\exec\daily\0.日常\3. 音频类\MusicPlayer2_x64\MusicPlayer2.exe,ahk_exe i)MusicPlayer2.exe$,MusicPlayer2,MusicPlayer2,,,,https://github.com/zhongyang219/MusicPlayer2
-app,C:\Users\ferder\AppData\Local\Programs\fonger\方格音乐.exe,,方格音乐,fanggeyinyue|方格音乐,,,,http://morin.vin
-app,D:\alee\exec\daily\0.日常\4. 视频类\Pot_Player64\PotPlayerMini64.exe,ahk_exe i)PotPlayer,PotPlayer,PotPlayer,,,,https://potplayer.org
-app,C:\Program Files (x86)\jianpian\jianpian.exe,ahk_exe i)jianpian.exe$,荐片,jianpian|荐片,,,,https://www.jianpian9.com 
-app,C:\Program Files (x86)\Tencent\WeChat\WeChat.exe,,微信,wechat|weixin|微信,!3,,,https://weixin.qq.com
+app,shortcuts\360安全卫士.lnk,,360安全卫士,360安全卫士,,,,
+app,shortcuts\360 极速浏览器X.lnk,ahk_exe i)360ChromeX.exe$,360极速浏览器,jisuliulanqi|360极速浏览器,!2,,,
+app,shortcuts\360软件管家.lnk,,360软件管家,360软件管家,,,,
 app,C:\Program Files\Bandizip\Bandizip.exe,,Bandizip,Bandizip,,,,
-,,,,,,,,
-app,D:\alee\exec\daily\1.拓展\02. OCR软件\Umi-OCR 文字识别.exe,,OCR,OCR,,,,https://github.com/hiroi-sora/Umi-OCR
-app,D:\alee\exec\daily\1.拓展\05. 文件搜索\工具 文件 Everything\Everything.exe,,Everything,Everything,,,,https://www.voidtools.com/zh-cn/downloads
-app,D:\alee\exec\daily\1.拓展\06. 显示网速 TrafficMonitor\TrafficMonitor.exe,,TrafficMonitor,TrafficMonitor,,,,https://github.com/zhongyang219/TrafficMonitor
-app,D:\alee\exec\daily\1.拓展\08. Markdown 编辑\工具 文档 marktext\MarkText.exe,ahk_exe i)MarkText.exe$,MarkText,MarkText,,,,https://github.com/marktext/marktext/releases
-app,D:\alee\exec\daily\1.拓展\09. 大文件分析 wiztree\WizTree64.exe,,WizTree,WizTree,,,,https://www.diskanalyzer.com
-app,D:\alee\exec\daily\1.拓展\10. 卸载工具\工具 系统 极客卸载.exe,,极客卸载,uninstall|极客卸载,,,,https://geekuninstaller.com/download
-,,,,,,,,
-app,D:\alee\exec\daily\2.专业\2. 网络代理\Shadowsocks-4.4.1.0\Shadowsocks.exe,,Shadowsocks,Shadowsocks,,,,https://github.com/shadowsocks/shadowsocks-windows
-,,,,,,,,
 app,D:\alee\exec\dev\DB\数据库管理\Beekeeper-Studio\Beekeeper-Studio-4.0.3-portable.exe,ahk_exe i)Beekeeper Studio.exe$,BeekeeperStudio,BeekeeperStudio,,,,https://github.com/beekeeper-studio/beekeeper-studio/releases
-app,D:\alee\exec\dev\DB\数据库管理\HeidiSQL\heidisql.exe,ahk_exe i)heidisql.exe$,Heidisql,heidisql,,,,https://www.heidisql.com/download.php?download=portable-64
-app,D:\alee\exec\dev\DB\数据库设计\PDManer-win\PDManer.exe,ahk_exe PDManer.exe,PDManer,PDManer,,,,https://gitee.com/robergroup/pdmaner/releases
-app,D:\alee\exec\dev\File compare\WinMerge\WinMergeU.exe,ahk_exe i)WinMerge,WinMerge,WinMerge,,,,tps://winmerge.org/downloads/?lang=en
+app,D:\alee\exec\daily\0.日常\0. 必备\bitwarden\Bitwarden.exe,,Bitwarden,Bitwarden,,,,https://bitwarden.com/download
+app,C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe,,Edge,Edge,,,,
+app,D:\alee\exec\daily\1.拓展\05. 文件搜索\工具 文件 Everything\Everything.exe,,Everything,Everything,,,,https://www.voidtools.com/zh-cn/downloads
+app,C:\Program Files (x86)\EVCapture\EVCapture.exe,,EV 录屏,Evluping|EV录屏,,,,
+app,C:\Program Files (x86)\EVAVEdit\EVAVEdit.exe,,EV 剪辑,Evjianji|EV剪辑,,,,
+app,D:\Program Files\Foxmail 7.2\Foxmail.exe,,Foxmail,Foxmail,,,,
 app,D:\alee\exec\dev\IDE\HBuilderX\HBuilderX.exe,ahk_exe i)HbuilderX.exe$,HBuilderX,HBuilderX,,,,https://www.dcloud.io/hbuilderx.html
+app,D:\alee\exec\dev\DB\数据库管理\HeidiSQL\heidisql.exe,ahk_exe i)heidisql.exe$,Heidisql,Heidisql,,,,https://www.heidisql.com/download.php?download=portable-64
+app,C:\Users\ferder\AppData\Local\Programs\HTTPie\HTTPie.exe,ahk_exe i)HTTPie.exe$,HTTPie,HTTPie,,,,https://httpie.io/download
 app,D:\alee\exec\dev\IDE\ideaIC-2022.3.3.win\bin\idea64.exe,,ideaC,ideaC,,,,
 app,D:\alee\exec\dev\IDE\ideaIU-2023.3.2.win\bin\idea64.exe,,ideaU,ideaU,,,,
-app,D:\alee\exec\dev\Ref\zeal-0.7.0-portable-windows-x64\zeal.lnk,ahk_exe i)zeal.exe$,zeal,zeal,,,,https://zealdocs.org
-,,,,,,,,
-app,C:\Users\ferder\AppData\Local\Programs\redisinsight\RedisInsight-v2.exe,,RedisInsight,RedisInsight,,,,
-app,C:\Users\ferder\AppData\Local\Programs\HTTPie\HTTPie.exe,ahk_exe i)HTTPie.exe$,HTTPie,HTTPie,,,,https://httpie.io/download
-app,C:\Users\ferder\AppData\Local\Programs\Termius\Termius.exe,,Termius,Termius,,,,https://www.termius.com
-app,C:\Program Files (x86)\Tencent\微信web开发者工具\微信开发者工具.exe,,微信开发者工具,微信开发者,,,,https://developers.weixin.qq.com/miniprogram/dev/devtools/devtools.html
-,,,,,,,,
+app,D:\alee\exec\daily\0.日常\1. 工具类\Motrix-1.8.19-win\Motrix.exe,ahk_exe i)Motrix.exe$,Motrix,Motrix,,,,https://motrix.app/zh-CN
 app,C:\Users\ferder\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\MQTTX.lnk,,MQTTX,MQTTX,,,,
+app,D:\alee\exec\daily\1.拓展\08. Markdown 编辑\工具 文档 marktext\MarkText.exe,ahk_exe i)MarkText.exe$,MarkText,MarkText,,,,https://github.com/marktext/marktext/releases
+app,D:\alee\exec\daily\0.日常\3. 音频类\MusicPlayer2_x64\MusicPlayer2.exe,ahk_exe i)MusicPlayer2.exe$,MusicPlayer2,MusicPlayer2,,,,https://github.com/zhongyang219/MusicPlayer2
+app,D:\alee\exec\dev\DB\数据库设计\PDManer-win\PDManer.exe,ahk_exe PDManer.exe,PDManer,PDManer,,,,https://gitee.com/robergroup/pdmaner/releases
+app,shortcuts\PixPin.lnk,,PixPin,PixPin,,,,https://pixpinapp.com
+app,D:\alee\exec\daily\0.日常\4. 视频类\Pot_Player64\PotPlayerMini64.exe,ahk_exe i)PotPlayer,PotPlayer,PotPlayer,,,,https://potplayer.org
+app,C:\Users\ferder\AppData\Local\JetBrains\PyCharm Community Edition 2021.3.3\bin\pycharm64.exe,,PyCharm,PyCharm,,,,
+app,C:\Program Files\Tencent\QQNT\QQ.exe,,QQ,QQ ,,,,
+app,C:\Program Files (x86)\Tencent\QQMusic\QQMusic.exe,,QQ 音乐,qqmusic|QQ音乐,,,,
+app,C:\Users\ferder\AppData\Local\Programs\redisinsight\RedisInsight-v2.exe,,RedisInsight,RedisInsight,,,,
+app,D:\alee\exec\daily\2.专业\2. 网络代理\Shadowsocks-4.4.1.0\Shadowsocks.exe,,Shadowsocks,Shadowsocks,,,,https://github.com/shadowsocks/shadowsocks-windows
+app,C:\Users\ferder\AppData\Roaming\Spotify\Spotify.exe,ahk_exe i)Spotify.exe$,Spotify,Spotify,,,,
+app,D:\alee\exec\daily\0.日常\2. 办公类\SumatraPDF\SumatraPDF.exe,,SumatraPDF,SumatraPDF,,,,https://www.sumatrapdfreader.org/free-pdf-reader
+app,extra\WindowSpyU32.exe,,Spy,WindowSpy,,,,
+app,C:\Program Files (x86)\Tencent\TIM\Bin\QQScLauncher.exe,,TIM,TIM,,,,
+app,C:\Program Files (x86)\ToDesk\ToDesk.exe,,ToDesk,ToDesk,,,,
+app,C:\Users\ferder\AppData\Local\Programs\tts-vue\tts-vue.exe,,tts,tts,,,,
+app,C:\Users\ferder\AppData\Local\Programs\Termius\Termius.exe,,Termius,Termius,,,,https://www.termius.com
+app,D:\alee\TrafficMonitor.exe,,TrafficMonitor,TrafficMonitor,,,,https://github.com/zhongyang219/TrafficMonitor
+app,D:\alee\Umi-OCR 文字识别.exe,,OCR,OCR,,,,https://github.com/hiroi-sora/Umi-OCR
+app,D:\alee\exec\dev\File compare\WinMerge\WinMergeU.exe,ahk_exe i)WinMerge,WinMerge,WinMerge,,,,tps://winmerge.org/downloads/?lang=en
+app,C:\Users\ferder\AppData\Local\Kingsoft\WPS Office\ksolaunch.exe,ahk_exe i)wps.exe$,WPS Office,WPS,,,,
+app,D:\alee\exec\daily\1.拓展\09. 大文件分析 wiztree\WizTree64.exe,,WizTree,WizTree,,,,https://www.diskanalyzer.com
+app,C:\Users\ferder\AppData\Local\Programs\Microsoft VS Code\Code.exe,,VSCode,VSCode,,,,
+app,D:\zeal.lnk,ahk_exe i)zeal.exe$,zeal,zeal,,,,https://zealdocs.org
+app,shortcuts\阿里云盘.lnk,,阿里云盘,aliyunpan|阿里云盘,,,,
+app,shortcuts\哔哩哔哩.lnk,,哔哩哔哩,bilibili|b站|哔哩哔哩,,,,
+app,shortcuts\方格音乐.lnk,,方格音乐,fanggeyinyue|方格音乐,,,,http://morin.vin
+app,D:\极客卸载.exe,,极客卸载,jikexiezai|uninstall|极客卸载,,,,https://geekuninstaller.com/download
+app,C:\Nutstore.exe,,坚果云,jianguoyun|坚果云,,,,
+app,shortcuts\荐片高清影音.lnk,ahk_exe i)jianpian.exe$,荐片,jianpian|荐片,,,,https://www.jianpian9.com 
+app,shortcuts\洛雪音乐助手.lnk,,洛雪音乐助手,luoxueyinyuezhushou|洛雪音乐助手,,,,
+app,shortcuts\驱动精灵.lnk,,驱动精灵,qudongjingling|驱动精灵,,,,
+app,shortcuts\驱动人生.lnk,,驱动人生,qudongrensheng|驱动人生,,,,
+app,C:\Soda Music\SodaMusic.lnk,,汽水音乐,qishuiyinyue|汽水音乐,,,,
+app,shortcuts\天翼云盘.lnk,,天翼云盘,tianyiyun|天翼云盘,,,,
+app,C:\wemeetapp.exe,,腾讯会议,tenxunhuiyi|腾讯会议,,,,
+app,C:\cloudmusic.exe,ahk_exe i)cloudmusic.exe$,网易云音乐,wangyiyunyinyue|网易云音乐,,,,
+app,shortcuts\文件蜈蚣.lnk,,文件蜈蚣,wenjianwugong|文件蜈蚣,,,,http://www.filecxx.com/zh_CN/index.html
+app,C:\Program Files (x86)\Tencent\WeChat\WeChat.exe,,微信,weixin|wechat|微信,!3,,,https://weixin.qq.com
+app,shortcuts\微信开发者工具.exe,,微信开发者工具,weixinkaifazhe|微信开发者,,,,https://developers.weixin.qq.com/miniprogram/dev/devtools/devtools.html
+app,C:\ThunderStart.exe,,迅雷,xunlei|thunder|迅雷,,,,
+app,shortcuts\battle.net.lnk,,战网,zhanwang|battle|lushi|战网,,,,
 ,,,,,,,,
 file,D:\alee\git-repos-mfoxLocal,,公司仓库,,!k,,,
 file,D:\alee\exec,,快捷软件,,,,,
-file,D:\alee\git-repos-gitee,,码云,,!e,,,
-file,D:\alee\git-repos-github,,github,,!h,,,
+file,D:\alee\git-repos-gitee,,码云,,,,,
+file,D:\alee\git-repos-github,,github,,,,,
+file,D:\alee\git-repos-gitcode,,gitcode,,,,,
+file,D:\alee\git-repos-atomgit,,atomgit,,,,,
 ,,,,,,,,
 text,acc8226,,我的用户名,,,xac,,
 text,北京市 通州区 台湖镇 鸿坤云时代 b2 座地下一层电梯间东侧丰巢柜,,我的收货地址,,,xad,,
@@ -130,9 +128,9 @@ web,https://gitcode.com,,Gitcode,gitcode,,zco,,
 web,https://gitee.com,,码云,gitee|码云,,zge,n,
 web,https://github.com,,Github,github,,zgh,,
 web,https://juejin.cn,,掘金,juejin|掘金,,,,
-web,https://mail.qq.com,,qq 邮箱,qqmail|qq邮箱,,zma,,
-web,https://nav.feipig.fun,,网址导航,wangzhidaohang,,zna,,
-web,https://start.spring.io,,SpringInitializr,SpringInitializr,,,,
+web,https://mail.qq.com,,QQ邮箱,qqmail|QQ邮箱,,zma,,
+web,https://nav.feipig.fun,,ac网址导航 ,wangzhidaohang,,zna,,
+web,https://start.spring.io,,SpringInitializr,SpringInitializr,,,n,
 web,https://www.cnblogs.com,,博客园,bokeyuan|cnblogs|博客园,,zcn,,
 web,https://www.csdn.net,,csdn,csdn,,,,
 web,https://www.doubao.com,,豆包,doubao|豆包,,zdb,,
@@ -144,3 +142,48 @@ web,https://www.json.cn,,json,json,,zjs,,
 web,https://www.landiannews.com,,蓝点网,landian|蓝点网,,zld,,
 web,https://www.mgtv.com,,芒果TV,mangguotv|芒果TV,,,,
 web,https://www.zhihu.com,,知乎,zhihu|知乎,,zzh,,
+web,https://im.qq.com,,QQ下载,,,,,
+web,https://www.zhipin.com,,BOSS直聘,bosszhipin,,,,
+web,https://www.ctrip.com,,携程网 ,携程网 ,,,,
+web,https://www.mafengwo.cn/,,马蜂窝 ,马蜂窝 ,,,,
+web,https://www.cncn.com,,欣欣旅游 ,欣欣旅游 ,,,,
+web,book.qq.com ,,QQ阅读 ,QQ阅读 ,,,,
+web,jjwxc.net ,,晋江文学城 ,晋江文学城 ,,,,
+web,qidian.com ,,起点中文网 ,起点中文网 ,,,,
+web,apple.com.cn ,,Apple ,Apple ,,,,
+web,doubao.com ,,豆包 ,豆包 ,,,,
+web,wenshushu.com ,,文叔叔,文叔叔,,,,
+web,sj.qq.com ,,应用宝 ,应用宝 ,,,,
+web,filehelper.weixin.qq.com ,,微信文件传输助手网页版 ,,,,,
+web,y.qq.com ,,QQ音乐 ,QQ音乐 ,,,,
+web,ruancan.com ,,软餐 ,软餐 ,,,,
+web,sspai.com ,,少数派 ,少数派 ,,,,
+web,appinn.com ,,小众软件 ,小众软件 ,,,,
+,,,,,,,,
+系统,::{20D04FE0-3AEA-1069-A2D8-08002B30309D},,我的电脑,wodediannao|我的电脑,,,,
+系统,::{21EC2020-3AEA-1069-A2DD-08002B30309D},,控制面板,control|kongzhimianban|控制面板,,,,
+系统,::{2227A280-3AEA-1069-A2DE-08002B30309D},,打印机和传真,fax|打印机和传真,,,,
+系统,::{645FF040-5081-101B-9F08-00AA002F954E},,回收站,huishouzhan|回收站,,,,
+系统,::{450D8FBA-AD25-11D0-98A8-0800361B1103},,我的文档,wodewendang|我的文档,,,,
+系统,::{7007ACC7-3202-11D1-AAD2-00805FC1270E},,网络连接,wangluolianjie|网络连接,,,,
+,,,,,,,,
+动作,,,锁屏 ,suopin|锁屏 ,,,,
+动作,,,睡眠 ,shuimian|sleep|睡眠,,,,
+动作,,,关机,guanji|关机,,,,
+动作,,,息屏 ,xiping|息屏,,,,
+动作,,,重启,chongqi|重启,,,,
+动作,,,激活屏幕保护程序,pingmubaohuchengxu|激活屏幕保护程序,,,,
+动作,,,清空回收站,qingkonghuishouzhan|清空回收站,,,,
+动作,,,注销,zhuxiao|注销,,,,
+,,,,,,,,
+多媒体,,,静音 ,jingyin|静音 ,,,,
+多媒体,,,暂停播放,zantingbofang|暂停播放,,,,
+多媒体,,,上一曲 ,shangyiqu|上一曲 ,,,,
+多媒体,,,下一曲 ,xiayiqu|下一曲 ,,,,
+,,,,,,,,
+搜索,https://www.baidu.com/s?wd= ,,百度,bd,,,,
+搜索,https://cn.bing.com/search?q= ,,必应,by,,,,
+搜索,https://www.ip138.com/iplookup.php?ip= ,,ip,ip,,,,
+搜索,https://search.bilibili.com/all?keyword= ,,哔哩哔哩,bi,,,,
+搜索,https://www.so.com/s?q=,,360搜索,so,,,,
+搜索,https://www.sogou.com/web?query=,,搜狗,sg,,,,

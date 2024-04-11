@@ -17,6 +17,7 @@ SmartCloseWindow() {
 /**
  * 启动程序或切换到程序
  * @param {string} winTitle AHK 中的 WinTitle
+ * 
  * @param {string} target 程序的路径
  * @param {string} args 参数
  * @param {string} workingDir 工作文件夹
@@ -55,34 +56,57 @@ ToggleWindowTopMost() {
   }
 }
 
+; 关闭显示器:
+SystemSleepScreen() {
+  Sleep 1000  ; 让用户有机会释放按键(以防释放它们时再次唤醒显视器).
+  ; 关闭显示器:
+  SendMessage 0x0112, 0xF170, 2,, "Program Manager"  ; 0x0112 is WM_SYSCOMMAND, 0xF170 is SC_MONITORPOWER.
+}
+
 /**
  * 锁屏
  */
-SystemLockScreen(*) {
+SystemLockScreen() {
   Sleep 300
   DllCall("LockWorkStation")
 }
 
 /**
+ * 注销
+ */
+ SystemLogoff() {
+  Shutdown(0)
+}
+
+/**
  * 关机
  */
-SystemShutdown(*) {
-  Run("SlideToShutDown.exe")
-  sleep(1300)
-  CoordMode("Mouse", "Screen")
-  MouseClick("Left", 100, 100)
+ SystemShutdown() {
+  ; 如果存在 SlideToShutDown.exe 则使用滑动关机，否则使用普通关机
+  if FileExist(A_WinDir "\System32\SlideToShutDown.exe") {
+    Run("SlideToShutDown.exe")
+    sleep(1300)
+    CoordMode("Mouse", "Screen")
+    MouseClick("Left", 100, 100)
+  } else {
+    Shutdown(1)
+  }
 }
 
 /**
  * 重启
  */
-SystemReboot(*) {
+ SystemReboot() {
   Shutdown(2)
 }
 
 /**
  * 睡眠
  */
-SystemSleep(*) {
-  DllCall("PowrProf\SetSuspendState")
+SystemSleep() {
+  ; 调用 Windows API 函数 "SetSuspendState" 来让系统挂起或休眠. 注意, 第二个参数对较新的系统可能没有任何影响
+  ; 参数 #1: 使用 1 代替 0 来进行休眠而不是挂起
+  ; 参数 #2: 使用 1 代替 0 来立即挂起而不询问每个应用程序以获得许可
+  ; 参数 #3: 使用 1 而不是 0 来禁止所有的唤醒事件
+  DllCall("PowrProf\SetSuspendState", "Int", 0, "Int", 0, "Int", 0)
 }
