@@ -63,23 +63,34 @@ parseDataLine(line, eachLineLen) {
     }
   }
   else if (info.type = 'app') {
-    ; 如果是绝对路径
-    if InStr(info.path, ':') {
-      if NOT FileExist(info.path)
-        return
-    } else {
-      ; 如果是相对路径
-      if NOT FileExist(info.path) {
-        ; 以 exe 结尾
-        if SubStr(info.path, -4)  = '.exe' {
-          if NOT FileExist(A_WinDir "\System32\" info.path)
-            return
-        } 
-        ; 非 exe 结尾
-        else {
-          if NOT (FileExist(A_WinDir "\System32\" info.path) OR FileExist(A_WinDir "\System32\" info.path '.exe')) {
-            return
-          }
+    ; 如果是以字母开头 and 不是 shell: 开头
+    if IsAlpha(SubStr(info.path, 1, 1)) AND 1 !== InStr(info.path, 'shell:', 0) {
+      ; 如果是绝对路径
+      if InStr(info.path, ':') {
+        if NOT FileExist(info.path)
+          return
+      } else {
+        ; 如果是相对路径
+        if NOT FileExist(info.path) {
+            exeExist := false           
+            ; 从环境变量 PATH 中获取
+            DosPath := EnvGet("PATH")
+            isEndsWithExe := '.exe' = SubStr(info.path, StrLen(info.path) - 3)  
+            loop parse DosPath, "`;" {
+              if A_LoopField == ""
+                continue
+              if FileExist(A_LoopField "\" info.path) {
+                exeExist := true
+                break
+              }
+              ; 如果不以 exe 结尾则拼接 exe 继续尝试
+              if NOT isEndsWithExe AND FileExist(A_LoopField "\" info.path . '.exe') {
+                exeExist := true
+                break
+              }
+            }
+            if (!exeExist)
+              return
         }
       }
     }

@@ -68,7 +68,7 @@ Anyrun() {
                 dataArray := Array()
                 for it in dataList {
                     ; 只处理 app 和 web 、file
-                    if (it.type ~= 'i)^(?:app|web|file|系统|动作|多媒体)$') {
+                    if (it.type ~= 'i)^(?:app|web|file|动作|多媒体|外部)$') {
                         if 'Array' == Type(it.alias) {
                             ; 如果有则选出最匹配的 array
                             ; maxData 为 最佳匹配对象
@@ -115,12 +115,8 @@ Anyrun() {
                 
             ; 模糊匹配 按照顺序
             for action in MyActionArray {
-                if (action.type == 'list' and action.fuhe.Call(editValue)) {
-                    if action.HasOwnProp('fuheThen')
-                        listBoxDataArray.push(action.title . action.fuheThen.Call(editValue))
-                    else
-                        listBoxDataArray.push(action.title)
-                }
+                if (action.type == 'list' and action.fuhe.Call(editValue))
+                    action.HasOwnProp('fuheThen') ? listBoxDataArray.push(action.title . action.fuheThen.Call(editValue)) : listBoxDataArray.push(action.title)
             }
             ; 显示出来
             listBox.Delete()
@@ -153,7 +149,7 @@ Anyrun() {
                     title := split[1]
                     type := split[2]
                     item := appFindPathByListBoxText(title, type)
-                    ; 能否根据序号直接找到 item 呢，而不是通过反查，综合评估感觉也不高效
+                    ; 能否根据序号直接找到 item 呢，而不是通过反查，综合评估感觉不高效所以不采用
                 }
             }
             editValue := myEdit.Value
@@ -202,12 +198,12 @@ Anyrun() {
                     case '锁屏': SystemLockScreen()
                     case '睡眠': SystemSleep()
                     case '关机': 
-                        Result := MsgBox("请确认是否关机? ",, "YesNo")
+                        Result := MsgBox("是否现在关机? ",, "YesNo")
                         if Result = "Yes"
                             SystemShutdown()
                     case '息屏': SystemSleepScreen()
                     case '重启': 
-                        Result := MsgBox("请确认是否重启电脑? ",, "YesNo")
+                        Result := MsgBox("是否现在重启? ",, "YesNo")
                         if Result = "Yes"
                             SystemReboot()
                     case '屏幕保护程序': SendMessage 0x0112, 0xF140, 0,, "Program Manager" ; 0x0112 为 WM_SYSCOMMAND, 而 0xF140 为 SC_SCREENSAVE.
@@ -226,11 +222,14 @@ Anyrun() {
             }
             ; 模糊处理：搜索
             else if (item.type = '搜索') {
-                ; 拿到 alias 例如为 bd,
+                ; 拿到 alias 例如为 bd
                 ; 取出除 bd 开头的字符串
                 ; 进行拼接
                 Run(item.path . SubStr(editValue, StrLen(item.alias) + 1))
             }
+            ; 精确处理：外部
+            else if (item.type = '外部')
+                Run('jiejian' . (A_PtrSize == 4 ? '32' : '64') . '.exe /script ' . item.path)
             ; 兜底 精确处理：file 和 web 类型
             else
                 Run(item.path)
