@@ -2,7 +2,7 @@
 
 基于 [Autohotkey2](https://www.autohotkey.com/) 开发，为简化 Windows 键鼠操作而的按键映射/快捷键增强工具。既可当作一个传统启动器，又对鼠标🖱侧边按键和热字符支持良好。
 
-强烈建议所有人都搭配一个全局鼠标手势软件 + 带侧边按键的鼠标。
+强烈建议每人都搭配一个全局鼠标手势软件 + 带侧边按键的鼠标。
 
 [视频演示](https://www.bilibili.com/video/BV19H4y1e7hJ?vd_source=54168537affc2c02555097cb26797d99) ｜ [软件下载](https://gitcode.com/acc8226/jiejian/releases)
 
@@ -19,17 +19,16 @@
 | ---- | ---- | ---- |
 | 侧边按键支持 | BetterAndBetter【免费】 | 捷键【免费】 |
 | 热字符串 | espanso【免费】 | 捷键【免费】 |
-| 启动器 | raycast【免费】 | 捷键【免费】 |
+| 启动器 | Raycast【免费】/ Alfred 【付费】| 捷键【免费】 |
 
-所以指导了我的下一步工作，毕竟我业余摸鱼节假日一个人开发，我的优点只剩下功能强大和足够小巧了，下一步将提升交互和方便使用。追求尽量做到开箱即用。
+既然比不了，毕竟这是我业余摸鱼节假日一个人开发，我的优点只剩下功能强大和足够小巧了。同时指导了我的下一步工作，将逐渐提升交互和方便使用。尽量做到开箱即用。
 
 ## 0. 程序目录结构
 
 1. extra/【增强体验】MyKeymap2/data/config.json 为 MyKeymap （免费）预设配置。WGestures V1（免费） 和 V2（付费但更推荐使用）为预设手势模版。WindowSpyU32.exe 用于查看窗口标识符。
 2. app.csv 配置文件
 3. data.csv 配置文件
-4. help.url 在线帮助文档
-5. **jiejian32/64.exe** 分别为 32/64 位主程序。无需安装，双击即用，强烈建议设置为为开机自启
+4. **jiejian32/64.exe** 分别为 32/64 位主程序。无需安装，双击即用，强烈建议设置为为开机自启
 
 ## 1. 特点
 
@@ -213,7 +212,7 @@ data.csv 动态配置
 
 ## 10. 左键辅助
 
-收到 quicker 影响，试验性的加入左键辅助功能。
+受到 quicker 影响，试验性的加入左键辅助功能。
 
 在鼠标左键按下的同时按下 a 键时，若选中为网址则打开网址，否则百度搜索选中内容。
 
@@ -258,9 +257,19 @@ app.csv 使用了正则表达式，需要使用者对正则有一定了解。主
 
 ### 未来计划
 
-* 支持 Arc 浏览器 for windows、[360 AI 浏览器](https://browser.360.cn/ai/)
+* 支持 Arc 浏览器 for windows
 * icon 点击后使用新图标，而不是系统样式的图标
 * 配置文件不太易用，需要优化
+
+### 捷键 2024.04
+
+逾期美邦游湖和。
+
+* 支持 win 7 的记事本和 IE 11
+* 首次运行会生成快捷方式供启动程序用
+* 快捷启动器 anyrun 增强，优化搜索命令、新增支持内置命令（关机、注销、锁屏、重启等）、多媒体命令（上下一曲、暂停播放等）、外部命令（支持运行外部 ahk 脚本）
+* 增加打包 和 clean 脚本，双击 package.ahk 可以打包 7z 压缩包
+* 新增 fg 鼠标手势支持
 
 ### 捷键 2024.02
 
@@ -283,7 +292,7 @@ app.csv 使用了正则表达式，需要使用者对正则有一定了解。主
 
 2024 年 1 月 31 下午 于北京
 
-软件名从 shortcut 改为 jiejian
+软件名由英文 shortcut 改为 jiejian
 
 这是 24 年的第一个版本，可能也是今年的最后一个版本。
 
@@ -478,20 +487,20 @@ CapsLock 命令
 
 支持但不限于以下百余款软件，且持续更新中...
 
-* Bitvise SSH Client
-* skylark
 * 【压缩】360 压缩 4.0【部分支持】
-* 【压缩】7zip 24.01【部分支持】
-* 【压缩】Bandizip 7.32【部分支持】
-* 【压缩】WinRAR 6.24【部分支持】
-* 【压缩】WinZip 【部分支持】
-* 【压缩】好压 【部分支持】
-* 【系统】Win 11 资源管理器
-* 【系统】Win 11 记事本
-* 【系统】win 11 设置
+* 【压缩】7zip 24.01
+* 【压缩】Bandizip 7.32
+* 【压缩】WinRAR 6.24
+* 【压缩】WinZip
+* 【压缩】好压【部分支持】
+* 【系统】Win 7~11 资源管理器
+* 【系统】Win 7 记事本
+* 【系统】Win 11 新版记事本
+* 【系统】Win 11 设置
 * 【浏览器】115
 * 【浏览器】123
 * 【浏览器】2345
+* 【浏览器】360 AI
 * 【浏览器】360 极速
 * 【浏览器】360 游戏
 * 【浏览器】360 安全
@@ -502,7 +511,7 @@ CapsLock 命令
 * 【浏览器】Duck
 * 【浏览器】Duoyu 多御
 * 【浏览器】Edge
-* 【浏览器】(Firefox火狐 & Tor洋葱) & Waterfox
+* 【浏览器】Firefox火狐 & Tor洋葱 & Waterfox
 * 【浏览器】Opera
 * 【浏览器】QQ
 * 【浏览器】UC
@@ -528,21 +537,22 @@ CapsLock 命令
 * 【浏览器】小智双核
 * 【浏览器】一点
 * 【浏览器】猎鹰
+* 【浏览器】IE 11【已过时】
 * 【浏览器】红芯【已过时】
 * 【音乐类】foobar2000
 * 【音乐类】iTunes
 * 【音乐类】MusicBee
 * 【音乐类】MusicPlayer2
 * 【音乐类】Winamp 5.9.2
+* 【音乐类】洛雪音乐助手
 * 【音乐类】QQ 音乐
 * 【音乐类】Spotify
 * 【音乐类】方格音乐【部分支持】
 * 【音乐类】酷我音乐
-* 【音乐类】[汽水音乐]
+* 【音乐类】汽水音乐
 * 【音乐类】网易云音乐
 * 【音乐类】喜马拉雅
 * 【音乐类】酷狗音乐
-* 【音乐类】lx-music-desktop 洛雪音乐助手
 * 【视频类】GridPlayer【部分支持】
 * 【视频类】KMPlayer 64位
 * 【视频类】mpv【部分支持】
@@ -553,7 +563,7 @@ CapsLock 命令
 * 【视频类】迅雷影音
 * 【视频类】影音先锋
 * 【视频类】荐片播放器
-* 【视频类】[bilibili 哔哩哔哩]
+* 【视频类】哔哩哔哩
 * 【视频类】爱奇艺
 * 【视频类】优酷
 * 【视频类】腾讯视频
@@ -579,6 +589,8 @@ CapsLock 命令
 * 【editor】Notepads
 * 【editor】Notepad2
 * 【editor】Notepad3
+* 【editor】SciTE
+* 【editor】skylark
 * 【editor】Sublime
 * 【editor】Ultraedit
 * 【editor】Atom【已过时】
@@ -605,6 +617,7 @@ CapsLock 命令
 * 【git】GitKraken
 * 【git】SourceTree
 * 【git】小乌龟 git 合并程序
+* 【终端类】Bitvise SSH Client
 * 【终端类】Finalshell
 * 【终端类】Hyper
 * 【终端类】MobaXterm
@@ -629,25 +642,25 @@ CapsLock 命令
 * 【pdf】金山 PDF 独立版
 * 【pdf】迅读 PDF
 * 【pdf】永中 Office 版式阅读器
-* 【pdf】可牛 PDF
-* 【office】Excel 2021
+* 【pdf】可牛PDF
 * 【office】LibreOffice
-* 【office】PPT 2021
-* 【office】Word 2021
+* 【office】MS Excel 2021
+* 【office】MS PPT 2021
+* 【office】MS Word 2021
 * 【office】ONLYOFFICE
 * 【office】WPS Office
 * 【office】永中简报 2024
 * 【office】永中表格 2024
 * 【office】永中文字 2024
-* 【看图】Windows 照片查看器
 * 【看图】2345 看图王
 * 【看图】FSViewer
 * 【看图】Honeyview or BandiView
 * 【看图】ImageGlass
 * 【看图】JPEGView
+* 【看图】Windows 照片查看器
 * 【看图】WPS 图片查看器
 * 【看图】xnview
-* 【看图】菠萝看图 pineapple-pictures
+* 【看图】pineapple pictures 菠萝看图
 * Motrix
 * Snipaste
 * Thunderbird 雷鸟
@@ -720,15 +733,18 @@ jiejian.exe 的文件版本为当前四位版本号，产品版本为当前编�
 
 另外 app.csv 和 data.csv 可按需覆盖。一般情况下建议 app.csv 和 data.csv 自定义内容追加在尾部，方便迁移数据。
 
-## 软件构建
+## 软件打包构建
 
 由于 Ahk2Exe 可以选择使用 MPRESS 或 UPX 这两款免费软件来压缩编译后的脚本。如果 MPRESS.exe 或 UPX.exe 已被复制到安装 AutoHotkey 的 "Compiler" 子文件夹中，则可以通过 /compress 参数（1 = 使用 MPRESS，2 = 使用 UPX）或 GUI 设置来压缩 .exe 文件。
 
 我目前使用了 win11 64 位系统 + ahk 2.0.11 64 位 + [UPX 4.2.2](https://github.com/upx/upx/releases/download/v4.2.2/upx-4.2.2-win64.zip) 的组合。（建议在 64 为环境编译和打包该软件。32 位平台我就没试过）
 
-在安装 ahk 环境之后，双击 jiejian.ahk 即可运行打包程序。
+在安装 ahk 环境之后，双击 package.bat 即可运行打包程序。
 
-package.ahk 的设计思路：Ahk2Exe.exe 将 ahk 转化为 exe，期间使用 `/compress 2` 指定了压缩方式。ahk 编译会触发 jiejianPostExec.ahk。jiejianPostExec.ahk 做了两件事：写入版本信息 和 将文件夹命名为 jiejian-版本。
+package.bat 的设计思路：Ahk2Exe.exe 将 ahk 转化为 exe，期间使用 `/compress 2` 指定了压缩方式。ahk 编译会触发 jiejianPostExec.ahk。
+jiejianPostExec.ahk 完成了写入版本信息、文件夹命名为 jiejian-版本，并使用 7z 压缩打包文件。
+
+但目前有个问题，jiejian32.exe 如果只打包一次无法拷贝到 out 目录下，所以每次打包都得点击 2 次。
 
 ## 写在最后
 
@@ -736,9 +752,9 @@ package.ahk 的设计思路：Ahk2Exe.exe 将 ahk 转化为 exe，期间使用 `
 
 lib 下部分函数参考了 [MyKeymap Github repo] 项目。
 
-由于 ahk V2 这门语言真的很易学。再加上我之前的编程基础，从设计到开发均由我一人完成。并从 Windows 软件 quicker、MyKeymap、capslock+、uTools 以及 macOS 软件 BetterAndBetter、HapiGo 和 Raycast 中得到启发。在此默默感谢。
+由于 autohotkey 这门语言容易学习。再加上我之前编程功底，从设计到开发均由我一人完成。并从 Windows 软件 quicker、MyKeymap、capslock+、uTools 以及 macOS 软件 BetterAndBetter、HapiGo 和 Raycast 中得到启发。在此默默感谢。
 
-  [MyKeymap]: https://xianyukang.com/MyKeymap.html '很屌的软件'
+  [MyKeymap]: https://xianyukang.com/MyKeymap.html '很多代码都参考借鉴了它'
   [MyKeymap Github repo]: https://github.com/xianyukang/MyKeymap "感谢作者"
   [WGestures 1]: https://www.yingdev.com/projects/wgestures '一款很屌的免费鼠标手势'
   [WGestures 2]: https://www.yingdev.com/projects/wgestures2 "一款很屌的付费鼠标手势"
