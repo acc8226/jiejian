@@ -146,11 +146,11 @@
             case this.about: MsgBox(      
             '版本: ' CodeVersion
             "`nAHK 主程序版本: " A_AhkVersion
-            "`nWindows 版本号: " A_OSVersion
+            "`nWindows " A_OSVersion . (A_Is64bitOS ? ' x64' : '')
             "`n计算机名: " A_ComputerName
             "`n当前用户: " A_UserName
             "`n是否管理员权限运行: " (A_IsAdmin ? '是' : '否')
-            "`n是否 64 位系统: " (A_Is64bitOS ? '是' : '否')
+            "`n是否 64 位程式: " (A_PtrSize == 8 ? '是' : '否')
             , APP_NAME, 'Iconi')
         case this.exit: jiejianExit
         }

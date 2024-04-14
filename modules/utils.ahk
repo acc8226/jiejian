@@ -13,10 +13,10 @@ appFindPathByListBoxText(title, type) {
 startByHotKey(hotkey) {
     for (it in dataList) {
         if (it.hk == hotkey) {
-            if (it.type = 'web' or it.type = 'file') {
+            if (it.type = DataType.web or it.type = DataType.file) {
                 Run it.path
                 Tip("打开 " . it.title)
-            } else if (it.type = 'app') {
+            } else if (it.type = DataType.app) {
                 ActivateOrRun(it.winTitle, it.path)
             }
             break
@@ -29,7 +29,7 @@ startByHotString(hotstring) {
     myHs := StrReplace(hotstring, ":C*:")
     for (it in dataList) {
         if (it.hs == myHs) {
-            if (it.type = 'web') {
+            if (it.type = DataType.web) {
                 Run it.path
                 Tip("打开 " . it.title)
             }

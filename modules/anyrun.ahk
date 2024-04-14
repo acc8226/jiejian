@@ -66,9 +66,9 @@ Anyrun() {
                 needleRegEx := 'i)' . needleRegEx
                 
                 dataArray := Array()
+                matchReg := 'i)^(?:' . DataType.app . '|' . DataType.file . '|' . DataType.web . '|' . DataType.inner . '|' . DataType.ext . ')$'
                 for it in dataList {
-                    ; 只处理 app 和 web 、file
-                    if (it.type ~= 'i)^(?:app|web|file|动作|多媒体|外部)$') {
+                    if (it.type ~= matchReg) {
                         if 'Array' == Type(it.alias) {
                             ; 如果有则选出最匹配的 array
                             ; maxData 为 最佳匹配对象
@@ -154,7 +154,7 @@ Anyrun() {
             }
             editValue := myEdit.Value
 
-            ; 模糊匹配：如果 条目 不匹配 则啥事都不做
+            ; 模糊匹配：（打开网址 打开文件 前往文件夹 等）如果 条目 不匹配 则啥事都不做
             if (!IsSet(item) OR item == '') {
                 for action in MyActionArray {
                     ; 如果是 list 则表示必须在列表中存在
@@ -175,25 +175,15 @@ Anyrun() {
                     }
                 }
             }
-            ; 精确处理：app 类型
-            else if (item.type = 'app') {
-                ; 微信的特殊处理：自动登录微信
-                if (item.title == '微信') {
-                    try {
-                        Run item.path,,, &pid
-                        WinWaitActive "ahk_pid " pid
-                        ; 手动等待 1.1 秒，否则可能会跳到扫码页
-                        Sleep(1100)
-                        Send "{Space}"
-                    } catch
-                        MsgBox("找不到目标应用")
-                } else {
-                    ; 启动逻辑为每次都 新建应用，而非打开已有应用
-                    ActivateOrRun('', item.path)
-                }
+            ; 模糊处理：搜索
+            else if (item.type = DataType.search) {
+                ; 拿到 alias 例如为 bd
+                ; 取出除 bd 开头的字符串
+                ; 进行拼接
+                Run(item.path . SubStr(editValue, StrLen(item.alias) + 1))
             }
-            ; 精确处理：动作
-            else if (item.type = '动作') {
+            ; 精确处理：内部
+            else if (item.type = DataType.inner) {
                 switch item.title {
                     case '锁屏': SystemLockScreen()
                     case '睡眠': SystemSleep()
@@ -209,40 +199,43 @@ Anyrun() {
                     case '屏幕保护程序': SendMessage 0x0112, 0xF140, 0,, "Program Manager" ; 0x0112 为 WM_SYSCOMMAND, 而 0xF140 为 SC_SCREENSAVE.
                     case '清空回收站': FileRecycleEmpty()
                     case '注销': SystemLogoff()
+
+                    case '静音': Send '{Volume_Mute}'
+                    case '暂停': Send '{Media_Play_Pause}'
+                    case '上一曲': Send '{Media_Prev}'
+                    case '下一曲 ': Send '{Media_Next}'
                 }
-            }
-            ; 精确处理：多媒体
-            else if (item.type = '多媒体') {
-                switch item.title {
-                    case '静音': Send "{Volume_Mute}"
-                    case '暂停': Send "{Media_Play_Pause}"
-                    case '上一曲': Send "{Media_Prev}"
-                    case '下一曲 ': Send "{Media_Next}"
-                }
-            }
-            ; 模糊处理：搜索
-            else if (item.type = '搜索') {
-                ; 拿到 alias 例如为 bd
-                ; 取出除 bd 开头的字符串
-                ; 进行拼接
-                Run(item.path . SubStr(editValue, StrLen(item.alias) + 1))
             }
             ; 精确处理：外部
-            else if (item.type = '外部')
+            else if (item.type = DataType.ext)
                 Run('jiejian' . (A_PtrSize == 4 ? '32' : '64') . '.exe /script ' . item.path)
-            ; 兜底 精确处理：file 和 web 类型
-            else
-                Run(item.path)
+            ; 兜底 精确处理：app file web 程序文件网址类型
+            else {
+                ; 微信的特殊处理：自动登录微信
+                if (item.type = DataType.app and item.title == '微信') {
+                    try {
+                        Run item.path,,, &pid
+                        WinWaitActive "ahk_pid " pid
+                        ; 手动等待 1.1 秒，否则可能会跳到扫码页
+                        Sleep(1100)
+                        Send "{Space}"
+                    } catch
+                        MsgBox("找不到目标应用")
+                } else
+                    ; 启动逻辑为每次都新建应用，而非打开已有应用
+                    ; ActivateOrRun('', item.path)
+                    Run(item.path)
+            }
             MyGui.Destroy()
         }
 
         onButtonClick(*) {
             ; 如果 listbox 有焦点
             if (listBox.Focused)
-                onListBoxDoubleClick(listBox)
+              onListBoxDoubleClick(listBox)
             else
-                ; 如果焦点在 编辑框 且按下回车则会触发弹窗提示；否则表示焦点在 edit，如果列表有匹配项 则获取编辑框文本内容
-                Trim(myEdit.Value) == '' ? MsgBox('输入内容不能为空') : onListBoxDoubleClick(listBox)
+              ; 如果焦点在 编辑框 且按下回车则会触发弹窗提示；否则表示焦点在 edit，如果列表有匹配项 则获取编辑框文本内容
+              Trim(myEdit.Value) == '' ? MsgBox('输入内容不能为空') : onListBoxDoubleClick(listBox)
         }
     }
 }
@@ -317,14 +310,18 @@ titleTrans7(editValue) {
     ; 从 dava.csv 中抽取符合条件的 b 列 (http 网址)，若满足则赋值 d 列
     match := ''
     for (it in dataList) {
-        if (it.type == 'web') {
+        if (it.type == DataType.web) {
             ; 完全匹配
             if (editValue == it.path) {
                 match := '-' . it.title
                 break
             } else {
                 ; 提取关键部位
-                uri := SubStr(it.path, InStr(it.path, '://') + StrLen('://'))
+                if InStr(it.path, '://') {
+                    uri := SubStr(it.path, InStr(it.path, '://') + StrLen('://'))
+                } else {
+                    uri := it.path
+                }
                 newUri := 'i)^(?:https?://)?' . StrReplace(uri, '.', "\.") . '(?:/.*)?$'
                 if RegExMatch(editValue, newUri) {
                     match := '-' . it.title

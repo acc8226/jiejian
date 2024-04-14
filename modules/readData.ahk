@@ -1,5 +1,15 @@
 ﻿global dataList := parseData("data.csv")
 
+class DataType {
+  static app := '程序'
+  static file := '文件'
+  static text := '文本'
+  static web := '网址'
+  static search := '搜索'
+  static inner := '内部'
+  static ext := '外部'
+}
+
 ; 注册热键 和 热字符串
 Loop dataList.Length {
   it := dataList[A_Index]
@@ -8,12 +18,12 @@ Loop dataList.Length {
       Hotkey it.hk, startByHotKey
   ; 热串
   if (StrLen(it.hs) > 0) {
-      if (it.type = "web") {
+      if (it.type = DataType.web) {
           ; 排除在 编辑器中 可跳转网址
           HotIfWinNotactive 'ahk_group ' . Text_Group
           Hotstring ":C*:" . it.hs, startByHotString
           HotIfWinNotactive
-      } else if (it.type = "text")
+      } else if (it.type = DataType.text)
           Hotstring ":C*:" . it.hs, it.path
   }
 }
@@ -57,12 +67,12 @@ parseDataLine(line, eachLineLen) {
     return
   }
   ; 过滤无效路径
-  if (info.type = 'file') {
+  if (info.type = DataType.file) {
     if (NOT FileExist(info.path)) {
       return
     }
   }
-  else if (info.type = 'app') {
+  else if (info.type  = DataType.app) {
     ; 如果是以字母开头 and 不是 shell: 开头
     if IsAlpha(SubStr(info.path, 1, 1)) AND 1 !== InStr(info.path, 'shell:', 0) {
       ; 如果是绝对路径

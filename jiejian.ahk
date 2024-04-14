@@ -15,7 +15,7 @@ CodeVersion := '24.4.12-beta'
 ;@Ahk2Exe-Set FileVersion, %U_version%
 ; 往对应文件写入对应版本号，只在生成 32 位 exe 的时候执行
 ;@Ahk2Exe-Obey U_V, = %A_PtrSize% == 4 ? 'PostExec' : 'Nop'
-; 提取出 文件名 再拼接 PostExec.ahk; 版本号; When: 2 仅在指定 UPX 压缩时运行 ; WorkingDir: 脚本所在路径
+; 提取出 文件名 再拼接 PostExec.exe; 版本号; When: 2 仅在指定 UPX 压缩时运行 ; WorkingDir: 脚本所在路径
 ;@Ahk2Exe-%U_V% %A_ScriptName~\.[^\.]+$~PostExec.exe% %U_version%, 2, %A_ScriptDir%
 
 global REG_KEY_NAME := 'HKEY_CURRENT_USER\SOFTWARE\jiejian'
@@ -25,7 +25,7 @@ global APP_NAME := '捷键'
 
 ; ----- 1. 热键 之 鼠标操作 -----
 CoordMode('Mouse', 'Screen') ; RelativeTo 如果省略, 默认为 Screen
-FileEncoding 54936 ; Windows XP 及更高版本： GB18030 简体中文 (4 字节)
+FileEncoding 54936 ; Windows XP 及更高版本：GB18030 简体中文 (4 字节)
 SetTitleMatchMode 'RegEx' ; 设置 WinTitle parameter 在内置函数中的匹配行为
 
 #Include 'lib/Functions.ahk'
@@ -43,6 +43,7 @@ SetTitleMatchMode 'RegEx' ; 设置 WinTitle parameter 在内置函数中的匹�
 
 global aTrayMenu
 
+GenerateShortcuts ; 生成快捷方式
 SettingTray ; 设置托盘图标和菜单
 CheckUpdate ; 检查更新
 
@@ -150,4 +151,11 @@ ExitFunc(exitReason, exitCode) {
             Run(text)
         } else Run('https://www.baidu.com/s?wd=' . text)
     }
+}
+
+GenerateShortcuts() {
+  ; 每次运行检测如果 shortcuts 里的文件为空则重新生成一次快捷方式，要想重新生成可以双击 GenerateShortcuts.ahk 脚本或者清空或删除该文件夹
+  if !FileExist(A_WorkingDir "\shortcuts\*") {
+    Run('extra/GenerateShortcuts.exe')
+  }
 }
