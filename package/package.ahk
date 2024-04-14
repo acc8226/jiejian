@@ -1,4 +1,10 @@
-base := ".\compiler\"
+#Requires AutoHotkey v2.0
+#SingleInstance Force
+#NoTrayIcon
+
+SetWorkingDir A_ScriptDir "\.."
+
+base := "compiler\"
 Ahk2Exe := base . "Ahk2Exe.exe"
 
 jiejian := "jiejian"
@@ -24,4 +30,4 @@ RunWait Ahk2Exe
  . ' /base ' . base . aAutoHotkey . a32exe
  . ' /compress 2'
 
-MsgBox '打包完成'
+MsgBox '打包完成', , 'T3'
