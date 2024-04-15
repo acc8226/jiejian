@@ -10,5 +10,5 @@ XCOPY extra            out\%1\extra\ /S
 XCOPY custom           out\%1\custom\ /S
 copy app.csv           out\%1\
 copy template\data.csv out\%1\
-move jiejian32.exe out\%1\
-move jiejian64.exe out\%1\
+copy jiejian32.exe out\%1\
+copy jiejian64.exe out\%1\

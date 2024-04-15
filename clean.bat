@@ -1,2 +1,1 @@
-del jiejian32.exe 
-del jiejian64.exe
+DEL /Q jiejian32.exe jiejian64.exe out

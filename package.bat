@@ -1,1 +1,1 @@
-package\package.ahk
+compiler\AutoHotkey32.exe package\package.ahk

@@ -30,4 +30,11 @@ RunWait Ahk2Exe
  . ' /base ' . base . aAutoHotkey . a32exe
  . ' /compress 2'
 
+ ; 由于打包 和 构建不知为何发生在 生成exe之前，所以再次构建一次
+RunWait Ahk2Exe
+. ' /in ' . jiejianAhk
+. ' /out ' . jiejian . a32exe
+. ' /base ' . base . aAutoHotkey . a32exe
+. ' /compress 2'
+
 MsgBox '打包完成', , 'T3'

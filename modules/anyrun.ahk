@@ -211,8 +211,11 @@ Anyrun() {
                 Run('jiejian' . (A_PtrSize == 4 ? '32' : '64') . '.exe /script ' . item.path)
             ; 兜底 精确处理：app file web 程序文件网址类型
             else {
+                if (item.type = DataType.web) {
+                    jumpURL(item.path)
+                }
                 ; 微信的特殊处理：自动登录微信
-                if (item.type = DataType.app and item.title == '微信') {
+                else if (item.type = DataType.app and item.title == '微信') {
                     try {
                         Run item.path,,, &pid
                         WinWaitActive "ahk_pid " pid
@@ -281,31 +284,30 @@ class MyAction {
 }
 
 MyActionArray := [
-    MyAction('打开网址', 'list', k => k ~= 'i)^(?:https?://)?(?:[\w-]+\.)+[\w-]+(?:/[\w-./?%&=]*)?\s*$', titleTrans7, pao7) ; 是否提前些比较好，不用了，兜底挺好
+    MyAction('打开网址', 'list', k => k ~= 'i)^(?:https?://)?(?:[\w-]+\.)+[\w-]+(?:/[\w-./?%&=]*)?\s*$', getWebsiteName, jumpURL) ; 是否提前些比较好，不用了，兜底挺好
     , MyAction('打开文件', 'list', k => FileExist(k) AND NOT DirExist(k),, input => Run(input)) 
-    , MyAction('前往文件夹', 'list', fuhe6,, pao6)
+    , MyAction('前往文件夹', 'list', isDir,, openDir)
     ; 彩蛋 
-    , MyAction('bjip', 'edit', ,, pao8) ; 本机 IP
+    , MyAction('bjip', 'edit',,, getIPAddresses) ; 本机 IP
 ]
 
 ; 是否是文件夹，如果当前是文件则提取
-fuhe6(key) {
+isDir(key) {
     isMatch := unset
     if DirExist(key) {
         isMatch := true
     } else if FileExist(key) {
         ; 抽出文件夹
-        if RegExMatch(key, '.*[\\/]', &regExMatchInfo) {
+        if RegExMatch(key, '.*[\\/]', &regExMatchInfo)
             isMatch := DirExist(regExMatchInfo.0)
-        } else 
+        else 
             isMatch := false
-    } else {
+    } else
         isMatch := false
-    }
     return isMatch
 }
 
-titleTrans7(editValue) {
+getWebsiteName(editValue) {
     ; 对网址进行细化处理
     ; 从 dava.csv 中抽取符合条件的 b 列 (http 网址)，若满足则赋值 d 列
     match := ''
@@ -317,13 +319,12 @@ titleTrans7(editValue) {
                 break
             } else {
                 ; 提取关键部位
-                if InStr(it.path, '://') {
+                if InStr(it.path, '://')
                     uri := SubStr(it.path, InStr(it.path, '://') + StrLen('://'))
-                } else {
+                else
                     uri := it.path
-                }
                 newUri := 'i)^(?:https?://)?' . StrReplace(uri, '.', "\.") . '(?:/.*)?$'
-                if RegExMatch(editValue, newUri) {
+                if (editValue ~= newUri) {
                     match := '-' . it.title
                     break
                 }
@@ -333,7 +334,7 @@ titleTrans7(editValue) {
     return match
 }
 
-pao6(input) {
+openDir(input) {
     if DirExist(input) {
         Run(input)
     } else {
@@ -342,13 +343,13 @@ pao6(input) {
     }
 }
 
-pao7(input) {
+jumpURL(input) {
     if NOT InStr(input, 'http')
         input := "http://" . input
     Run(input)
 }
 
-pao8() {
+getIPAddresses() {
     addresses := SysGetIPAddresses()
     msg := "IP 地址:`n"
     for address in addresses
