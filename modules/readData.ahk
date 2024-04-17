@@ -44,7 +44,9 @@ parseData(filename) {
   return dataList  
 }
 
-parseDataLine(line, eachLineLen) {  
+parseDataLine(line, eachLineLen) {
+  global MY_BASH
+
   split := StrSplit(line, ",")
   ; 跳过不符合条件的行
   if split.Length < eachLineLen
@@ -122,5 +124,13 @@ parseDataLine(line, eachLineLen) {
   ; 热串关键字
   info.hs := Trim(split[7])
 
+  ; 设置 bash 全局变量，如果存在的话，最终会供给启动器使用
+  if info.type = DataType.app AND info.title = 'bash' {
+    if InStr(info.path, '.lnk') {
+      FileGetShortcut(info.path, &OutTarget)
+      MY_BASH := OutTarget
+    } else
+      MY_BASH := info.path
+  }
   return info
 }

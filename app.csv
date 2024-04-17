@@ -8,6 +8,7 @@
 ,,,,,,,,,,,,
 【系统】Win 7~11 资源管理器,,ahk_exe i)explorer.exe ahk_class i)^CabinetWClass$,^t,,^w,,,,,,,
 【系统】Win 7 记事本,,ahk_exe notepad.exe,,WinClose,,,,,,^n,,
+【系统】Win 7 桌面,,ahk_exe i)explorer.exe ahk_class ^WorkerW$,,,,Media_Next,Media_Next,Media_Prev,Media_Prev,,,
 【系统】Win 11 新版记事本,,ahk_exe Notepad.exe,^t,WinClose,^w,^Tab,,^+Tab,,,,
 【系统】Win 11 设置,,^设置$ ahk_exe i)ApplicationFrameHost.exe$ ahk_class i)^ApplicationFrameWindow$,,,,,,,!Left,,,
 ,,,,,,,,,,,,
