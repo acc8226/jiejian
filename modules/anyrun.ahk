@@ -2,6 +2,7 @@
 
 ; 正则匹配最大支持长度默认为 32 位
 Support_Length := 32
+DataFilterReg := 'i)^(?:' . DataType.app . '|' . DataType.file . '|' . DataType.web . '|' . DataType.inner . '|' . DataType.ext . ')$'
 
 Anyrun() {
     guiTitle := "快捷启动"
@@ -11,19 +12,19 @@ Anyrun() {
     } else {
         width := 432
         ; S: 尺寸(单位为磅)
-        fontSize := 's21'
         ; AlwaysOnTop 使窗口保持在所有其他窗口的顶部
-        ; Owner 可以让当前窗口从属于另一个窗口. 从属的窗口默认不显示在任务栏, 并且它总是显示在其父窗口的上面. 当其父窗口销毁时它也被自动销毁
+        ; Owner 可以让当前窗口从属于另一个窗口。从属的窗口默认不显示在任务栏, 并且它总是显示在其父窗口的上面. 当其父窗口销毁时它也被自动销毁
         ; -Caption 移除背景透明的窗口的边框和标题栏
         ; -Resize 禁止用户重新调整窗口的大小
         myGui := Gui('AlwaysOnTop Owner -Caption -Resize', guiTitle)
         ; 横向和纵向边框收窄
         myGui.MarginX := 3.9
         myGui.MarginY := 3.2
-        myGui.SetFont(fontSize, 'Consolas') ; 设置兜底字体(24 磅) Consolas
-        myGui.SetFont(fontSize, 'Microsoft YaHei') ; 设置优先字体(24 磅) 微软雅黑
+        fontSize := 's21'
+        myGui.SetFont(fontSize, 'Consolas') ; 设置兜底字体(21 磅) Consolas
+        myGui.SetFont(fontSize, 'Microsoft YaHei') ; 设置优先字体(21 磅) 微软雅黑
         myEdit := myGui.AddEdit(Format("vMyEdit w{1}", width))
-        ; listBox 做到贴边 默认只显示 5 行
+        ; R5 做到贴边 默认只显示 5 行
         ; Hidden: 让控件初始为隐藏状态
         listBox := myGui.AddListBox(Format("R5 vMyChoice w{1} XM+0 Y+0 BackgroundF0F0F0 Hidden", width), [])
         button := myGui.Add('Button', "default X0 Y0 Hidden", 'OK')
@@ -66,9 +67,8 @@ Anyrun() {
                 needleRegEx := 'i)' . needleRegEx
                 
                 dataArray := Array()
-                matchReg := 'i)^(?:' . DataType.app . '|' . DataType.file . '|' . DataType.web . '|' . DataType.inner . '|' . DataType.ext . ')$'
                 for it in dataList {
-                    if (it.type ~= matchReg) {
+                    if (it.type ~= DataFilterReg) {
                         if 'Array' == Type(it.alias) {
                             ; 如果有则选出最匹配的 array
                             ; maxData 为 最佳匹配对象
@@ -106,12 +106,10 @@ Anyrun() {
 
             ; 搜索匹配
             ; 查询出所有搜索，如果前缀满足则添加到列表
-            for it in dataList {
-                if (it.type == '搜索') {
+            for it in dataList
+                if (it.type == '搜索')
                     if 1 = InStr(editValue, it.alias)
                         listBoxDataArray.push(it.title . '-' . it.type)
-                }
-            }
                 
             ; 模糊匹配 按照顺序
             for action in MyActionArray {
@@ -318,12 +316,24 @@ getWebsiteName(editValue) {
                 match := '-' . it.title
                 break
             } else {
+                ; 可以匹配 www.doubao.com doubao.com https://www.doubao.com http://www.doubao.com https://www.doubao.com/ http://www.doubao.com/a/b.html 但不能匹配 abc.doubao.com https://edf.doubao.com http://ghi.doubao.com
                 ; 提取关键部位
-                if InStr(it.path, '://')
-                    uri := SubStr(it.path, InStr(it.path, '://') + StrLen('://'))
-                else
-                    uri := it.path
-                newUri := 'i)^(?:https?://)?' . StrReplace(uri, '.', "\.") . '(?:/.*)?$'
+                ; 去掉 www
+                newUri := unset
+                if 1 == InStr(it.path, 'http://www.') OR 1 == InStr(it.path, 'https://www.') OR 1 == InStr(it.path, 'www.') {
+                    uri := SubStr(it.path, InStr(it.path, 'www.') + StrLen('www.'))
+                    newUri := 'i)^(?:https?://)?(?:www\.)?' . StrReplace(uri, '.', "\.") . '(?:/.*)?$'
+                }
+                ; 去掉 ://
+                else {
+                    if InStr(it.path, '://')
+                        uri := SubStr(it.path, InStr(it.path, '://') + StrLen('://'))
+                    else
+                        uri := it.path
+                    ; 如果是顶级域名（简单认为分段数为 2）则加上 www
+                    is_top_level_domain := 2 == StrSplit(uri, '.').Length
+                    newUri := 'i)^(?:https?://)?' . (is_top_level_domain ? '(?:www\.)?' : '') . StrReplace(uri, '.', "\.") . '(?:/.*)?$'
+                } 
                 if (editValue ~= newUri) {
                     match := '-' . it.title
                     break
@@ -345,7 +355,8 @@ openDir(input) {
 
 jumpURL(input) {
     if NOT InStr(input, 'http')
-        input := "http://" . input
+        ; https 将逐渐替代 http
+        input := "https://" . input
     Run(input)
 }
 

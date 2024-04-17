@@ -1,11 +1,10 @@
 ﻿; 根据显示内容反向查询路径
 appFindPathByListBoxText(title, type) {
     if (StrLen(title) > 0) {
-        for (it in dataList) {
+        for (it in dataList)
             ; 两个条件的匹配更精确
             if (title = it.title and type = it.type)
                 return it
-        }
     }
 }
 
@@ -13,12 +12,13 @@ appFindPathByListBoxText(title, type) {
 startByHotKey(hotkey) {
     for (it in dataList) {
         if (it.hk == hotkey) {
-            if (it.type = DataType.web or it.type = DataType.file) {
+            ; 如果是打开 web 或者 file 类型则会有友好提示
+            if (it.type = DataType.web OR it.type = DataType.file) {
                 Run it.path
                 Tip("打开 " . it.title)
-            } else if (it.type = DataType.app) {
+            } else if (it.type = DataType.app)
+                ; 如果是 app 类型会频繁唤醒则不加提示
                 ActivateOrRun(it.winTitle, it.path)
-            }
             break
         }
     }

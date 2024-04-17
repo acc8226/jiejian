@@ -63,14 +63,12 @@ parseDataLine(line, eachLineLen) {
     info.path := SubStr(info.path, 4, -3)
 
   ; 过滤空行
-  if (info.type == '' AND info.path == '') {
+  if (info.type == '' AND info.path == '')
     return
-  }
   ; 过滤无效路径
   if (info.type = DataType.file) {
-    if (NOT FileExist(info.path)) {
+    if NOT FileExist(info.path)
       return
-    }
   }
   else if (info.type  = DataType.app) {
     ; 如果是以字母开头 and 不是 shell: 开头
@@ -104,6 +102,10 @@ parseDataLine(line, eachLineLen) {
         }
       }
     }
+  } else if (info.type  = DataType.web) {
+    ; 为节约内存。如果 https 开头则默认去掉
+    if InStr(info.path, "https://")
+      info.path := SubStr(info.path, StrLen("https://") + 1)
   }
   
   ; 要激活的窗口
