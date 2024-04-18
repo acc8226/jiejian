@@ -203,11 +203,11 @@ Anyrun() {
                     case '锁屏': SystemLockScreen()
                     case '睡眠': SystemSleep()
                     case '关机': 
-                        if MsgBox("是否现在关机?",, "YesNo") = "Yes"
+                        if MsgBox("立即" . item.title . "?",, "YesNo") = "Yes"
                             SystemShutdown()
                     case '息屏': SystemSleepScreen()
                     case '重启': 
-                        if MsgBox("是否现在重启?",, "YesNo") = "Yes"
+                        if MsgBox("立即" . item.title . "?",, "YesNo") = "Yes"
                             SystemReboot()
                     case '屏幕保护程序': SendMessage 0x0112, 0xF140, 0,, "Program Manager" ; 0x0112 为 WM_SYSCOMMAND, 而 0xF140 为 SC_SCREENSAVE.
                     case '清空回收站': FileRecycleEmpty()

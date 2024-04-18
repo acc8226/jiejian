@@ -100,7 +100,7 @@ CheckUpdate ; 检查更新
 ; ----- 其他-----
 
 ; 按住 CapsLock 后可以用鼠标左键拖动窗口
-CapsLock & LButton::EWD_MoveWindow
+; CapsLock & LButton::EWD_MoveWindow
 
 ; 设置托盘图标和菜单
 SettingTray() {
@@ -155,7 +155,71 @@ ExitFunc(exitReason, exitCode) {
 
 GenerateShortcuts() {
   ; 每次运行检测如果 shortcuts 里的文件为空则重新生成一次快捷方式，要想重新生成可以双击 GenerateShortcuts.ahk 脚本或者清空或删除该文件夹
-  if !FileExist(A_WorkingDir "\shortcuts\*") {
+  if !FileExist(A_WorkingDir . "\shortcuts\*")
     Run('extra/GenerateShortcuts.exe')
-  }
+}
+ 
+; 双击模式我比较推荐 双击 alt 和 双击 Alt，因为 shift 可能会影响到输入法中英文切换
+~Ctrl::{ ; 用得很少
+    if (ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey > 50 && A_TimeSincePriorHotkey < 320 AND MsgBox("立即关机?",, "YesNo") = "Yes")            
+        SystemShutdown()
+}
+
+~Alt::{ ; 用得很少
+    if (ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey > 50 && A_TimeSincePriorHotkey < 320 AND MsgBox("立即睡眠?",, "YesNo") = "Yes")
+        SystemSleep()
+}
+
+~Shift::{ ; 用得很少
+    if ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey > 50 && A_TimeSincePriorHotkey < 320
+        SystemSleepScreen()
+}
+
+; CapsLock 模式
+; 短按依旧有用，但是 CapsLock + 其他键有自己的用法，且确保了 CapsLock 灯不会闪
+
+global CapsLock := ""
+global CapsLock2 := ""
+
+Capslock::{
+    global CapsLock, CapsLock2
+    ;Capslock:  Capslock 键状态标记，按下是 1，松开是 0
+    ;Capslock2: 是否使用过 Capslock+ 功能标记，使用过会清除这个变量
+    CapsLock := CapsLock2 := 1
+
+    SetTimer(setCapsLock2, -300) ; 300ms 犹豫操作时间
+
+    KeyWait "CapsLock" ; 等待用户物理释放按键
+    CapsLock := "" ; Capslock 先置空，来关闭 Capslock+ 功能的触发
+    ; 松开的时候才切换大小写
+    if CapsLock2
+        SetCapsLockState !GetKeyState("CapsLock", "T")
+    CapsLock2 := ""
+}
+
+; 需要按一次按键才会生效，先这样。。。
+#HotIf CapsLock
+; 相当于 CapsLock + t ttt
+t::{
+    MsgBox 'if'
+    WinSetTransparent 210, 'A'
+}
+; 相当于 CapsLock + Z
+z::{
+    A_Clipboard := ""
+    Send "^c"
+    if !ClipWait(1) {
+        Tip("复制失败")
+    } else {
+        A_Clipboard := A_Clipboard
+        Tip("路径已复制")
+    }
+}
+x::{
+    WinSetTransparent "Off", 'A'
+}
+#HotIf
+
+setCapsLock2() {
+    global CapsLock2 := ""
 }

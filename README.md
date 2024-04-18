@@ -17,9 +17,9 @@
 
 | 功能 |  mac 平台 | win 平台 |
 | ---- | ---- | ---- |
-| 侧边按键支持 | BetterAndBetter【免费】 | 捷键【免费】 |
-| 热字符串 | espanso【免费】 | 捷键【免费】 |
-| 启动器 | Raycast【免费】/ Alfred 【付费】| 捷键【免费】 |
+| 侧边按键支持 | BetterAndBetter【免费】 | [捷键][]【免费】 |
+| 热字符串 | espanso【免费】 | [捷键][]【免费】 |
+| 启动器 | Raycast【免费】/ Alfred 【付费】| [捷键][]【免费】 |
 
 既然比不了，毕竟这是我业余摸鱼节假日一个人开发，我的优点只剩下功能强大和足够小巧了。同时指导了我的下一步工作，将逐渐提升交互和方便使用。尽量做到开箱即用。
 
@@ -38,7 +38,7 @@
 * 热字符串支持
 * 可作为启动器使用，由于定制化程度太高甚至会导致难以上手，提供快捷启动和内置系统命令（锁屏、睡眠、关机等）
 * 试验性的加入左键辅助功能
-* 建议搭配全局鼠标手势软件和 [MyKeymap][]
+* 建议搭配免费的全局鼠标手势软件和 [MyKeymap][]
 
 ## 2. 热键 之 键鼠操作
 
@@ -47,20 +47,20 @@
 
 ![](https://foruda.gitee.com/images/1689318820722473769/d4f9efe3_426858.gif)
 
-| 鼠标 | 按键 | 建议映射手势 | 名称 | 默认用途 | 多标签软件 | 音乐类软件 | 视频类软件 | 看图软件 | 焦点在任务栏 | 焦点在左或上边界 |
-| ---- | ---- | ---- |---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
-| - | Esc | - | 逃逸/esc | 退出窗口 | - | - | - | - | - | - |
-| 鼠标右键 | - | - | - | - | - | - | - | - | - | 播放/暂停 |
-| 鼠标中键 | - | - | - | - | - | - | - | - | 静音 | 静音 |
-| 鼠标侧边后退键(XB1) | Ctrl + F4 | ↑ | 关闭/close | 关闭窗口 | 关闭标签 | 关闭窗口 | 关闭窗口 | 关闭窗口 | 下一曲 | 下一曲 |
-| - | Ctrl + F8 | ↓ | 新建/new | 打开或新建文件 | 新建标签 | 打开文件 或 无操作 | 打开文件 或 无操作 | 打开文件 或 无操作 | - | - |
-| - | Alt + ← | ← | 后退/prev | 后退 | 后退 | 上一曲 | 快退 | 上一张 | 上一曲 | 上一曲 |
-| - | Alt + → | → |  前进/next |前进 | 前进 | 下一曲 | 快进 | 下一张 | 下一曲 | 下一曲 |
-| 鼠标侧边前进键(XB2) | Ctrl + Shift + Tab | 上左 | 上一个/prev | - | 上一页 | 上一曲 | 上个视频 | - | 上一曲 | 上一曲 |
-| - | Ctrl + Tab | 上右 | 下一个/next | - | 下一页 | 下一曲 | 下个视频 | - | 下一曲 | 下一曲 |
-| - | Ctrl + Shift + n | 右下 | 新建窗口/new| 新建窗口 | | | | | | |
-| - | Ctrl + F7 | 图形z | 置顶/zhiding | 置顶 | | | | | | |
-| - | F11 | 图形f | 全屏/fullscreen | 全屏/取消全屏 | | | | | | |
+| 鼠标 | 按键 | 建议映射手势 | 名称 | 默认用途 | 多标签软件 | 音乐类软件 | 视频类软件 | 看图软件 | 焦点在任务栏 | 焦点在左或上边界 | 焦点在桌面 |
+| ---- | ---- | ---- |---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| - | Esc | - | 逃逸/esc | 退出窗口 | - | - | - | - | - | - | - |
+| 鼠标右键 | - | - | - | - | - | - | - | - | - | 播放/暂停 | - |
+| 鼠标中键 | - | - | - | - | - | - | - | - | 静音 | 静音 | - |
+| 鼠标侧边后退键(XB1) | Ctrl + F4 | ↑ | 关闭/close | 关闭窗口 | 关闭标签 | 关闭窗口 | 关闭窗口 | 关闭窗口 | 下一曲 | 下一曲 | - |
+| - | Ctrl + F8 | ↓ | 新建/new | 打开或新建文件 | 新建标签 | 打开文件 或 无操作 | 打开文件 或 无操作 | 打开文件 或 无操作 | - | - | - |
+| - | Alt + ← | ← | 后退/prev | 后退 | 后退 | 上一曲 | 快退 | 上一张 | 上一曲 | 上一曲 | 上一曲 |
+| - | Alt + → | → | 前进/next | 前进 | 前进 | 下一曲 | 快进 | 下一张 | 下一曲 | 下一曲 | 下一曲 |
+| 鼠标侧边前进键(XB2) | Ctrl + Shift + Tab | 上左 | 上一个/prev | - | 上一页 | 上一曲 | 上个视频 | - | 上一曲 | 上一曲 | 上一曲 |
+| - | Ctrl + Tab | 上右 | 下一个/next | - | 下一页 | 下一曲 | 下个视频 | - | 下一曲 | 下一曲 | 下一曲 |
+| - | Ctrl + Shift + n | 右下 | 新建窗口/new| 新建窗口 | | | | | | | |
+| - | Ctrl + F7 | 图形z | 置顶/zhiding | 置顶 | | | | | | | |
+| - | F11 | 图形f | 全屏/fullscreen | 全屏/取消全屏 | | | | | | | |
 
 注：
 
@@ -321,7 +321,7 @@ app.csv 使用了正则表达式，需要使用者对正则有一定了解。主
 * 完善一些对微软 office、文本编辑器、pdf 类、音视频类软件的支持
 * 新增鼠标中间和右键的按键支持
 * 新增 按住 CapsLock 后可以用鼠标左键拖动窗口 和 兜底的关闭功能更加完善了
-* 添加 MyKeymap 和 WGestures 2 的鼠标手势的玩法
+* 添加 MyKeymap 和 [WGestures 2][WGestures 2付费链接] 的鼠标手势的玩法
 * 重新定义了一套菜单选项，增加软件使用统计 和 bug 修复。新增检查版本更新的功能
 * 新增 一键打包 package.ahk 脚本
 * 版本划分为正式版和测试版
@@ -333,7 +333,7 @@ app.csv 使用了正则表达式，需要使用者对正则有一定了解。主
 这是 23 年最后的一个版本，在这里提前祝大家元旦快乐
 
 * 支持青鸟浏览器、小白浏览器、阿里云客户端、Spotify、CudaText、PotPlayer、Devecostudio 64 位。
-* 提供了 WGestures 2 预设手势方案
+* 提供了 [WGestures 2][WGestures 2付费链接] 预设手势方案
 * bug 修复
 
 ### 捷键 2023.10
@@ -421,10 +421,10 @@ app.csv 使用了正则表达式，需要使用者对正则有一定了解。主
 
 | 功能 |  mac 平台 | windows 系统 |
 | ---- | ---- | ---- |
-| 侧边按键支持 | BetterAndBetter【免费】 | 捷键【免费】 |
-| 热字符串 | espanso【免费】 | 捷键【免费】 |
-| 启动器 | raycast【免费】 | 捷键【免费】 |
-| 鼠标手势 | BetterAndBetter【免费】 | WGestures 1【免费】 或 WGestures 2【付费】 |
+| 侧边按键支持 | BetterAndBetter【免费】 | [捷键][]【免费】 |
+| 热字符串 | espanso【免费】 | [捷键][]【免费】 |
+| 启动器 | raycast【免费】 | [捷键][]【免费】 |
+| 鼠标手势 | BetterAndBetter【免费】 | WGestures 1【免费】、 FastGestures【免费】 或  [WGestures 2【付费】][WGestures 2付费链接] |
 | 程序切换 | hammerspoon【免费】 | mykeymap【免费】 |
 
 ### 如何将捷键设置为开机自启
@@ -443,7 +443,7 @@ app.csv 使用了正则表达式，需要使用者对正则有一定了解。主
 
 #### 搭配 WGestures 2
 
-由于 WGestures 1 由于不支持字母手势。这里我选用的是【付费】【win mac】WGestures 2。它是一款跨平台全局鼠标手势，且完美契合本软件。目前售价 35 米，优惠的[购买地址](https://store.lizhi.io/site/products/id/523?cid=46jjayiu)我也放这儿了。
+由于 WGestures 1 由于不支持字母手势。这里我选用的是【付费】【win mac】[WGestures 2][WGestures 2付费链接]。它是一款跨平台全局鼠标手势，且完美契合本软件。目前售价 35 米，优惠的[购买地址][WGestures 2付费链接]我也放这儿了。
 
 | 方向 | 名称 | 按键/功能 | 是否可被捷键增强 |
 | ----  | ---- | ---- | ---- |
@@ -755,27 +755,37 @@ jiejian.exe 的文件版本为当前四位版本号，产品版本为当前编�
 
 由于 Ahk2Exe 可以选择使用 MPRESS 或 UPX 这两款免费软件来压缩编译后的脚本。如果 MPRESS.exe 或 UPX.exe 已被复制到安装 AutoHotkey 的 "Compiler" 子文件夹中，则可以通过 /compress 参数（1 = 使用 MPRESS，2 = 使用 UPX）或 GUI 设置来压缩 .exe 文件。
 
-我目前使用了 win11 64 位系统 + ahk 2.0.11 64 位 + [UPX 4.2.2](https://github.com/upx/upx/releases/download/v4.2.2/upx-4.2.2-win64.zip) 的组合。（建议在 64 为环境编译和打包该软件。32 位平台我就没试过）
+建议在 64 为环境编译和打包该软件。32 位平台我就没试过。
+
+* win7 SP1 64 位系统 + ahk 2.0.12 64 位 + UPX 4.2 的组合 测试通过
+* win11 64 位系统 + ahk 2.0.11 64 位 + [UPX 4.2.2](https://github.com/upx/upx/releases/download/v4.2.2/upx-4.2.2-win64.zip) 的组合 测试通过
 
 在安装 ahk 环境之后，双击 package.bat 即可运行打包程序。
 
 package.bat 的设计思路：Ahk2Exe.exe 将 ahk 转化为 exe，期间使用 `/compress 2` 指定了压缩方式。ahk 编译会触发 jiejianPostExec.ahk。
 jiejianPostExec.ahk 完成了写入版本信息、文件夹命名为 jiejian-版本，并使用 7z 压缩打包文件。
 
-但目前有个问题，jiejian32.exe 如果只打包一次无法拷贝到 out 目录下，所以每次打包都得点击 2 次。
+但目前有个问题，jiejian32.exe 如果只打包一次无法拷贝到 out 目录下，目前是使用 ahk2exe 对 32 位 ahk 脚本连续打包 2 次去解决的。
 
 ## 写在最后
 
 本程序编辑 csv 文件用到了开源的 LiberOffice。主要发布平台为 [GitHub](https://github.com) 和 [GitCode](https://gitcode.com)。项目主页发布在 GitHub Page。
 
-lib 下部分函数参考了 [MyKeymap Github repo] 项目。
-
-由于 autohotkey 这门语言容易学习。再加上我之前编程功底，从设计到开发均由我一人完成。并从 Windows 软件 quicker、MyKeymap、capslock+、uTools 以及 macOS 软件 BetterAndBetter、HapiGo 和 Raycast 中得到启发。在此默默感谢。
+由于 autohotkey 这门语言容易学习。再加上我之前编程功底，从设计到开发均由我一人完成。部分功能以及代码参考自 Windows 软件 [MyKeymap][] | [源码][MyKeymap Github repo]、[Capslock+][]，并从 Win 软件 [Quicker][]、[uTools][] 以及 macOS 软件 [BetterAndBetter][]、[HapiGo][] 和 [Raycast][] 中受到启发。在此默默感谢。
 
   [MyKeymap]: https://xianyukang.com/MyKeymap.html '很多代码都参考借鉴了它'
   [MyKeymap Github repo]: https://github.com/xianyukang/MyKeymap "感谢作者"
   [WGestures 1]: https://www.yingdev.com/projects/wgestures '一款很屌的免费鼠标手势'
   [WGestures 2]: https://www.yingdev.com/projects/wgestures2 "一款很屌的付费鼠标手势"
+  [WGestures 2付费链接]: https://store.lizhi.io/site/products/id/523?cid=46jjayiu "一款很屌的付费鼠标手势"
+  [Capslock+]: https://capslox.com/capslock-plus ""
+  [Raycast]: https://www.raycast.com ""
+  [HapiGo]: https://www.hapigo.com ""
+  [BetterAndBetter]: https://www.better365.cn/bab2.html ""
+  [Quicker]: https://getquicker.net/ ""
+  [uTools]: https://www.u.tools/ ""
+
+  [捷键]: https://gitcode.com/acc8226/jiejian/releases "我的诚意之作" 
 
   [bilibili 哔哩哔哩]: https://www.bilibili.com/ '哔哩哔哩'
   [汽水音乐]: https://www.douyin.com/qishui '汽水音乐'
