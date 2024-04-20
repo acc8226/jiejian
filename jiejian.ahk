@@ -161,17 +161,17 @@ GenerateShortcuts() {
  
 ; 双击模式我比较推荐 双击 alt 和 双击 Alt，因为 shift 可能会影响到输入法中英文切换
 ~Ctrl::{ ; 用得很少
-    if (ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey > 50 && A_TimeSincePriorHotkey < 320 AND MsgBox("立即关机?",, "YesNo") = "Yes")            
+    if (ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey > 60 && A_TimeSincePriorHotkey < 320 AND MsgBox("立即关机?",, "YesNo") = "Yes")            
         SystemShutdown()
 }
 
 ~Alt::{ ; 用得很少
-    if (ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey > 50 && A_TimeSincePriorHotkey < 320 AND MsgBox("立即睡眠?",, "YesNo") = "Yes")
+    if (ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey > 60 && A_TimeSincePriorHotkey < 320 AND MsgBox("立即睡眠?",, "YesNo") = "Yes")
         SystemSleep()
 }
 
 ~Shift::{ ; 用得很少
-    if ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey > 50 && A_TimeSincePriorHotkey < 320
+    if ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey > 60 && A_TimeSincePriorHotkey < 320
         SystemSleepScreen()
 }
 
