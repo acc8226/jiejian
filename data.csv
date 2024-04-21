@@ -88,7 +88,7 @@
 程序,shortcuts\坚果云.lnk,,坚果云,jianguoyun|坚果云,,,,https://www.jianguoyun.com/s/downloads
 程序,shortcuts\荐片高清影音.lnk,,荐片,jianpian|荐片,,,,https://www.jianpian9.com 
 程序,shortcuts\极客卸载.lnk,,极客卸载,jikexiezai|uninstall|极客卸载,,,,https://geekuninstaller.com/download
-程序,shortcuts\洛雪音乐助手.lnk,,洛雪音乐助手,luoxueyinyuezhushou|洛雪音乐助手,,,,https://github.com/lyswhut/lx-music-desktop/releases
+程序,shortcuts\lx-music-desktop.lnk,,洛雪音乐助手,luoxueyinyuezhushou|洛雪音乐助手,,,,https://github.com/lyswhut/lx-music-desktop/releases
 程序,shortcuts\驱动精灵.lnk,,驱动精灵,qudongjingling|驱动精灵,,,,
 程序,shortcuts\驱动人生.lnk,,驱动人生,qudongrensheng|驱动人生,,,,
 程序,shortcuts\汽水音乐.lnk,,汽水音乐,qishuiyinyue|汽水音乐,,,,https://music.douyin.com/qishui
@@ -115,7 +115,7 @@
 文本,👌,,OK,,,xok,,
 文本,❤️,,爱心,,,xax,,
 文本,📰,,报纸,,,xbz,,
-文本,🏷️ ,,标签,,,xbq,,
+文本,🏷️,,标签,,,xbq,,
 文本,🔖,,书签,,,xsq,,
 文本,💩,,大便,,,xsh,,
 ,,,,,,,,

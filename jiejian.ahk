@@ -1,6 +1,6 @@
 ﻿/*
-快速参考 | AutoHotkey v2
-https://wyagd001.github.io/v2/docs/
+快速参考 | AutoHotkey v2 https://wyagd001.github.io/v2/docs/
+vscode 插件安装 https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp
 */
 #Requires AutoHotkey >=v2.0
 #SingleInstance force ; 跳过对话框并自动替换旧实例
@@ -9,7 +9,7 @@ https://wyagd001.github.io/v2/docs/
 ;@Ahk2Exe-SetCopyright 全民反诈 union
 ;@Ahk2Exe-SetDescription 捷键-为简化键鼠操作而生
 
-CodeVersion := '24.4.14-beta'
+CodeVersion := '24.4.21-beta'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
@@ -171,7 +171,7 @@ GenerateShortcuts() {
 }
 
 ~Shift::{ ; 用得很少
-    if ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey > 60 && A_TimeSincePriorHotkey < 320
+    if (ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey > 60 && A_TimeSincePriorHotkey < 320 AND MsgBox("立即锁屏?",, "YesNo") = "Yes")
         SystemSleepScreen()
 }
 
@@ -197,14 +197,13 @@ Capslock::{
     CapsLock2 := ""
 }
 
-; 需要按一次按键才会生效，先这样。。。
+; 需要按一次按键才会生效，时好时坏
 #HotIf CapsLock
-; 相当于 CapsLock + t ttt
+; 相当于 CapsLock + t
 t::{
-    MsgBox 'if'
     WinSetTransparent 210, 'A'
 }
-; 相当于 CapsLock + Z
+; 相当于 CapsLock + Z 复制路径
 z::{
     A_Clipboard := ""
     Send "^c"
@@ -215,6 +214,7 @@ z::{
         Tip("路径已复制")
     }
 }
+; 恢复不透明
 x::{
     WinSetTransparent "Off", 'A'
 }
