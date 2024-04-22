@@ -21,7 +21,8 @@ CodeVersion := '24.4.21-beta'
 global REG_KEY_NAME := 'HKEY_CURRENT_USER\SOFTWARE\jiejian'
 global START_TIME := A_NowUTC
 global IS_AUTO_START_UP := false
-global APP_NAME := '捷键'
+global APP_NAME := '捷键' ; 用于 msgbox 标题展示
+global ctrlTimeStamp := A_NowUTC ; 记录 ctrl + c/x 最新时间戳
 
 ; ----- 1. 热键 之 鼠标操作 -----
 CoordMode('Mouse', 'Screen') ; RelativeTo 如果省略, 默认为 Screen
@@ -160,19 +161,29 @@ GenerateShortcuts() {
 }
  
 ; 双击模式我比较推荐 双击 alt 和 双击 Alt，因为 shift 可能会影响到输入法中英文切换
-~Ctrl::{ ; 用得很少
-    if (ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey > 60 && A_TimeSincePriorHotkey < 320 AND MsgBox("立即关机?",, "YesNo") = "Yes")            
+~Ctrl::{
+    if (ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey > 60 && A_TimeSincePriorHotkey < 210 AND MsgBox("立即关机?", APP_NAME, "YesNo") = "Yes")            
         SystemShutdown()
 }
 
-~Alt::{ ; 用得很少
-    if (ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey > 60 && A_TimeSincePriorHotkey < 320 AND MsgBox("立即睡眠?",, "YesNo") = "Yes")
+~Alt::{
+    if (ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey > 60 && A_TimeSincePriorHotkey < 210 AND MsgBox("立即睡眠?", APP_NAME, "YesNo") = "Yes")
         SystemSleep()
 }
 
-~Shift::{ ; 用得很少
-    if (ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey > 60 && A_TimeSincePriorHotkey < 320 AND MsgBox("立即锁屏?",, "YesNo") = "Yes")
+~Shift::{ ; Shift 键一般用得很少
+    if (A_PriorHotkey != "~Shift" or A_TimeSincePriorHotkey > 210) {
+        KeyWait "Shift"
+        return
+    }
+    if (MsgBox("立即锁屏?", APP_NAME, "YesNo") = "Yes")
         SystemSleepScreen()
+}
+~^c::{ ; 监控 ctrl + 按键
+    global ctrlTimeStamp := A_NowUTC
+}
+~^v::{ ; 监控 ctrl + 按键
+    global ctrlTimeStamp := A_NowUTC
 }
 
 ; CapsLock 模式
@@ -200,9 +211,8 @@ Capslock::{
 ; 需要按一次按键才会生效，时好时坏
 #HotIf CapsLock
 ; 相当于 CapsLock + t
-t::{
-    WinSetTransparent 210, 'A'
-}
+t::WinSetTransparent 210, 'A'
+
 ; 相当于 CapsLock + Z 复制路径
 z::{
     A_Clipboard := ""
@@ -215,9 +225,7 @@ z::{
     }
 }
 ; 恢复不透明
-x::{
-    WinSetTransparent "Off", 'A'
-}
+x::WinSetTransparent "Off", 'A'
 #HotIf
 
 setCapsLock2() {

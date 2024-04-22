@@ -36,7 +36,6 @@ parseData(filename) {
       ; 跳过首行
       if (A_Index = 1)
           continue
-
       appInfo := parseDataLine(A_LoopField, eachLineLen)
       if (appInfo)
           dataList.Push(appInfo)
@@ -45,7 +44,7 @@ parseData(filename) {
 }
 
 parseDataLine(line, eachLineLen) {
-  global MY_BASH
+  global MY_BASH, MY_VSCode, MY_IDEA
 
   split := StrSplit(line, ",")
   ; 跳过不符合条件的行
@@ -125,12 +124,26 @@ parseDataLine(line, eachLineLen) {
   info.hs := Trim(split[7])
 
   ; 设置 bash 全局变量，如果存在的话，最终会供给启动器使用
-  if info.type = DataType.app AND info.title = 'bash' {
-    if InStr(info.path, '.lnk') {
-      FileGetShortcut(info.path, &OutTarget)
-      MY_BASH := OutTarget
-    } else
-      MY_BASH := info.path
+  if info.type = DataType.app {
+    if info.title = 'bash' {
+      if InStr(info.path, '.lnk') {
+        FileGetShortcut(info.path, &OutTarget)
+        MY_BASH := OutTarget
+      } else
+        MY_BASH := info.path
+    } else if info.title = 'vscode' {
+      if InStr(info.path, '.lnk') {
+        FileGetShortcut(info.path, &OutTarget)
+        MY_VSCode := OutTarget
+      } else
+        MY_VSCode := info.path
+    } else if info.title = 'idea' {
+      if InStr(info.path, '.lnk') {
+        FileGetShortcut(info.path, &OutTarget)
+        MY_IDEA := OutTarget
+      } else
+        MY_IDEA := info.path
+    }
   }
   return info
 }

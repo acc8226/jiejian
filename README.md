@@ -60,7 +60,7 @@
 | - | Alt + ← | ← | 后退/prev | 后退 | 后退 | 上一曲 | 快退 | 上一张 | - | - | - | 上一曲 |
 | - | Alt + → | → | 前进/next | 前进 | 前进 | 下一曲 | 快进 | 下一张 | - | - | - | 下一曲 |
 | 鼠标侧边前进键(XB2) | - | - | 上一个/prev | - | 上一页 | 上一曲 | 上个视频 | - | 上一曲 | 上一曲 | - | 上一曲 |
-| - | Ctrl + Shift + Tab | 上左 | 上一个/prev | - | 上一页 | 上一曲 | 上个视频 | - | - | - | - | 上一曲 |
+| - | Ctrl + Shift + Tab | 上左 | 上一个/prev | - | 上一页 | 上一曲 | 上个视频 | - | - | - | - | - |
 | - | Ctrl + Tab | 上右 | 下一个/next | - | 下一页 | 下一曲 | 下个视频 | - | - | - | - | - |
 | - | Ctrl + Shift + n | 右下 | 新建窗口/new| 新建窗口 | | | | | | | | |
 | - | Ctrl + F7 | 图形z | 置顶/zhiding | 置顶 | | | | | | | | |
@@ -241,9 +241,9 @@ data.csv 动态配置
 
 ## 11. CapsLock 模式
 
-CapsLock + z 复制路径
-CapsLock + t 当前窗口调成半透明
-CapsLock + z 当前窗口恢复不透明
+* CapsLock + t 当前窗口调成半透明(Translucent)
+* CapsLock + z 复制路径
+* CapsLock + x 当前窗口恢复不透明
 
 ## 12. 双击 shift、 ctrl、alt 模式
 

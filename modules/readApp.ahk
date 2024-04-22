@@ -328,6 +328,8 @@ XButton1::Send "^!q"
 XButton1::Send "^+w"
 
 ; ^F4 兜底
+; #HotIf WinActive("ahk_class #32770")
+; ^F4::Send '{Esc}'
 #HotIf not WinActive("ahk_group close_ctrl_F4")
 ^F4::SmartCloseWindow ; 比 WinClose "A" 好使
 

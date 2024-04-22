@@ -82,7 +82,7 @@
     /**
      * 托盘菜单被点击
      * 
-     * @param ItemName 
+     * @param ItemName
      * @param ItemPos 
      * @param MyMenu 
      */
@@ -93,7 +93,7 @@
         case this.pause: this.jiejianToggleSuspend
         case this.restart: jiejianReload
         case this.sou: Anyrun
-        case this.biaozhifu: Run "./extra/WindowSpyU32.exe"
+        case this.biaozhifu: Run "extra/WindowSpyU32.exe"
         case this.tongji:
             ; 统计软件使用总分钟数
             recordMinsValueName := 'record_mins'
@@ -138,19 +138,19 @@
             A_TrayMenu.ToggleCheck(this.kaijiziqi)
             IS_AUTO_START_UP := !IS_AUTO_START_UP
     
-            case this.document: Run("https://gitcode.com/acc8226/jiejian/overview")
+            case this.document: Run('https://atomgit.com/acc8226/jiejian/blob/main/README.md')
             case this.video: Run('https://www.bilibili.com/video/BV19H4y1e7hJ')
             case this.followMeCSDN: Run('https://blog.csdn.net/acc8226')
             case this.followMeGH: Run('https://github.com/acc8226')
             case this.update: checkUpdate(true)
             case this.about: MsgBox(      
-            '版本: ' CodeVersion
-            "`nAHK 主程序版本: " A_AhkVersion
-            "`nWindows " A_OSVersion . (A_Is64bitOS ? ' x64' : '')
-            "`n计算机名: " A_ComputerName
-            "`n当前用户: " A_UserName
-            "`n是否管理员权限运行: " (A_IsAdmin ? '是' : '否')
-            "`n是否 64 位程式: " (A_PtrSize == 8 ? '是' : '否')
+            '版本: ' . CodeVersion
+            "`nAHK 主程序版本: " . A_AhkVersion
+            "`nWindows " . A_OSVersion . (A_Is64bitOS ? ' x64' : '')
+            "`n计算机名: " . A_ComputerName
+            "`n当前用户: " . A_UserName
+            "`n是否管理员权限运行: " . (A_IsAdmin ? '是' : '否')
+            "`n是否 64 位程式: " . (A_PtrSize == 8 ? '是' : '否')
             , APP_NAME, 'Iconi')
         case this.exit: jiejianExit
         }

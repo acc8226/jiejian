@@ -3,25 +3,22 @@
 ; 正则匹配最大支持长度默认为 32 位
 Support_Length := 32
 DataFilterReg := 'i)^(?:' . DataType.app . '|' . DataType.file . '|' . DataType.web . '|' . DataType.inner . '|' . DataType.ext . ')$'
+IS_HTTP_Reg := 'i)^(?:https?://)?(?:[\w-]+\.)+[\w-]+(?:/[\w-./?%&=]*)?\s*$'
 
 ; 设置监听
 #HotIf WinActive("快捷启动 ahk_class AutoHotkeyGUI")
 ~Down::{
     ; 当前焦点在 edit 上
-    if myGui.FocusedCtrl.type = 'Edit' {
+    if myGui.FocusedCtrl.type = 'Edit'
         ; 且如果 listbox 有东西 则 焦点移动到 listbox
-        if (StrLen(myGui['listbox1'].Text) > 0) {
+        if (StrLen(myGui['listbox1'].Text) > 0)
             ControlFocus 'listbox1'
-        }
-    }
 }
 ~UP::{
     ; 如果焦点在 listbox 首项 再向上则焦点移动到 edit
-    if myGui.FocusedCtrl.type = 'ListBox' {
-        if (myGui['listbox1'].value) == 1 {
+    if (myGui.FocusedCtrl.type = 'ListBox')
+        if (myGui['listbox1'].value) == 1
             ControlFocus 'Edit1'
-        }
-    }
 }
 #HotIf
 
@@ -29,9 +26,9 @@ Anyrun() {
     global myGui
 
     guiTitle := "快捷启动"
-    ; 检查窗口是否已经存在，如果窗口已经存在，如果窗口不存在，则创建新窗口 
+    ; 检查窗口是否已经存在，如果窗口已经存在，如果窗口不存在，则创建新窗口
     if WinExist(guiTitle)
-        WinClose ; 使用由 WinExist 找到的窗口
+        WinClose ; 使用由上一句 WinExist 找到的窗口
     else {
         width := 432
         ; S: 尺寸(单位为磅)
@@ -41,14 +38,14 @@ Anyrun() {
         ; -Resize 禁止用户重新调整窗口的大小
         myGui := Gui('AlwaysOnTop Owner -Caption -Resize', guiTitle)
         ; 横向和纵向边框收窄
-        myGui.MarginX := 3.9
-        myGui.MarginY := 3.2
+        myGui.MarginX := 3.7
+        myGui.MarginY := 3.1
         fontSize := 's21'
         myGui.SetFont(fontSize, 'Consolas') ; 设置兜底字体(21 磅) Consolas
         myGui.SetFont(fontSize, 'Microsoft YaHei') ; 设置优先字体(21 磅) 微软雅黑
         myEdit := myGui.AddEdit(Format("w{1}", width))
-        ; R5 做到贴边 默认只显示 5 行
-        ; Hidden: 让控件初始为隐藏状态
+        ; R5：做到贴边 默认只显示 5 行
+        ; Hidden：让控件初始为隐藏状态
         listBox := myGui.AddListBox(Format("R5 w{1} XM+0 Y+0 BackgroundF0F0F0 Hidden", width))
         button := myGui.Add('Button', "default X0 Y0 Hidden", 'OK')
 
@@ -69,10 +66,15 @@ Anyrun() {
         ; 居中但是稍微往上偏移些
         myGui.Show(Format("xCenter y{1} AutoSize", A_ScreenHeight / 2 - 300))
 
+        ; 判断剪切板有木有内容 且输入内容是文件或者网址 且离最后一次 ctrl + c/x 操作小于 22 秒则打开 anyrun 组件 这样给用户的自主性更大
+        if (A_Clipboard != '' AND (A_Clipboard ~= IS_HTTP_Reg OR FileExist(A_Clipboard))
+                              AND DateDiff(A_NowUTC, ctrlTimeStamp, 'Seconds') < 22)
+            Send "^v"
+
         onEditChange(thisGui, *) {
             ; 一旦文本框有变化立即清空
             listBox.Delete()
-            ; 获取输入内容
+            ; 获取文本框输入内容
             editValue := thisGui.Value
             if (editValue == '') {
                 listBox.Visible := false
@@ -305,16 +307,18 @@ class MyAction {
 }
 
 MyActionArray := [
-    MyAction('在 bash 中打开', 'list', path => IsSet(MY_BASH) and FileExist(path),, openInBash)
-    , MyAction('打开网址', 'list', path => path ~= 'i)^(?:https?://)?(?:[\w-]+\.)+[\w-]+(?:/[\w-./?%&=]*)?\s*$', getWebsiteName, jumpURL) ; 是否提前些比较好，不用了，兜底挺好
-    , MyAction('打开文件', 'list', path => FileExist(path) AND NOT DirExist(path),, path => Run(path)) 
-    , MyAction('前往文件夹', 'list', isDir,, openDir)
-    , MyAction('查看属性', 'list', path => FileExist(path),, path => Run('properties "' . path . '"'))
-    , MyAction('打印文件', 'list', path => FileExist(path) AND NOT DirExist(path) And path ~= 'i).+\.(?:BMP|GIF|png|jpe?g|pdf|docx?|pptx?|xlsx?)$',, path => Run('print "' . path . '"'))
-    , MyAction('删除文件', 'list', path => FileExist(path),, delFileOrDir)
-    , MyAction('在终端中打开', 'list', path => FileExist(path),, openInTerminal)
+    MyAction('打开网址', 'list', path => path ~= IS_HTTP_Reg, getWebsiteName, jumpURL), ; 是否提前些比较好，不用了，兜底挺好
+    MyAction('打开文件', 'list', path => FileExist(path) AND NOT DirExist(path),, path => Run(path)) ,
+    MyAction('前往文件夹', 'list', isDir,, openDir),
+    MyAction('查看属性', 'list', path => FileExist(path),, path => Run('properties "' . path . '"')),
+    MyAction('打印文件', 'list', path => FileExist(path) AND NOT DirExist(path) And path ~= 'i).+\.(?:BMP|GIF|png|jpe?g|pdf|docx?|pptx?|xlsx?)$',, path => Run('print "' . path . '"')),
+    MyAction('删除文件', 'list', path => FileExist(path),, delFileOrDir),
+    MyAction('在 Bash 中打开', 'list', path => IsSet(MY_BASH) and FileExist(path),, openInBash),
+    MyAction('在终端中打开', 'list', path => FileExist(path),, openInTerminal),
+    MyAction('在 VSCode 中打开', 'list', path => IsSet(MY_VSCode) and FileExist(path),, openInVSCode),
+    MyAction('在 IDEA 中打开', 'list', path => IsSet(MY_IDEA) and FileExist(path),, openInIDEA),
     ; 彩蛋 
-    , MyAction('bjip', 'edit',,, getIPAddresses) ; 本机 IP
+    MyAction('bjip', 'edit',,, getIPAddresses) ; 本机 IP
 ]
 
 ; 是否是文件夹，如果当前是文件则提取
@@ -334,6 +338,7 @@ isDir(key) {
 }
 
 getWebsiteName(editValue) {
+    global dataList
     ; 对网址进行细化处理
     ; 从 dava.csv 中抽取符合条件的 b 列 (http 网址)，若满足则赋值 d 列
     match := ''
@@ -402,11 +407,9 @@ openInTerminal(path) {
 }
 
 openInBash(path) {
-    global MY_BASH
-
     ; 在 bash 中打开所在文件夹
     if DirExist(path) {
-        ; 盘符根目录需要以 \ 结尾才生效
+        ; 盘符根目录需要以 \ 结尾才生效，所以都统一加上
         endChar := SubStr(path, StrLen(path))
         addSomething := (endChar = '\' OR endChar = '/') ? "" : "\"
         Run(MY_BASH, path . addSomething)
@@ -414,6 +417,14 @@ openInBash(path) {
         RegExMatch(path, '.*[\\/]', &regExMatchInfo)
         Run(MY_BASH, regExMatchInfo.0)
     }
+}
+
+openInVSCode(path) {
+    Run(MY_VSCode . ' ' . path)
+}
+
+openInIDEA(path) {
+    Run(MY_IDEA . ' ' . path)
 }
 
 getIPAddresses() {

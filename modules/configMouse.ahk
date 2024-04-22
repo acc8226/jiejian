@@ -23,6 +23,15 @@ XButton1::{
 }
 
 #HotIf mouseIsOnTopEdge()
+MButton::{
+  Send "{Volume_Mute}"
+  Tip('静音/恢复', -399)
+}
+RButton::{
+  Send "{Media_Play_Pause}"
+  Tip('暂停/恢复', -399)
+}
+
 WheelUp::{
   Send "{Media_Next}"
   Tip('下一曲', -399)
