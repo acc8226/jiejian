@@ -38,7 +38,7 @@ copyFiles(A_Programs "\*.lnk", "shortcuts\", useless)
 oFolder := ComObject("Shell.Application").NameSpace("shell:AppsFolder")
 if Type(oFolder) = 'ComObject'
     for item in oFolder.Items
-        if NOT(FileExist("shortcuts\" item.Name ".lnk") OR item.Name . '.lnk' ~= useless)
+        if NOT(FileExist("shortcuts\" item.Name ".lnk") || item.Name . '.lnk' ~= useless)
             try FileCreateShortcut("shell:appsfolder\" item.Path, "shortcuts\" item.Name ".lnk")
 
 copyFiles(pattern, dest, ignore := "") {

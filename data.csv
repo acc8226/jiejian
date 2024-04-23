@@ -1,4 +1,4 @@
-类型,启动路径,要激活的窗口(仅app 热串用),运行名称,运行关键字,热键关键字,热串关键字,是否启用 y/n,备注
+类型,启动路径,要激活的窗口(仅app 热串用),运行名称,anyrun 匹配关键字,热键关键字,热串关键字,是否启用 y/n,备注
 程序,diskmgmt.msc,,磁盘管理,cipanguanli|diskmgmt|磁盘管理,,,,
 程序,powercfg.cpl,,电源选项,dianyuanxuanxiang|电源选项,,,,
 程序,magnify,,放大镜,fangdajing|放大镜,,,,
@@ -21,18 +21,6 @@
 程序,regedit,,注册表,zhucebiao|regedit|注册表,,,,
 程序,::{20D04FE0-3AEA-1069-A2D8-08002B30309D},ahk_exe explorer.exe ahk_class CabinetWClass,我的电脑,wodediannao|wodejisuanji|ziyuanguanliqi|explorer|我的电脑|资源管理器,!1,,,
 ,,,,,,,,
-内部,,,终端,zhongduan|cmd|终端,,,,
-内部,,,网络连接,wangluolianjie|网络连接,,,,
-内部,,,我的下载,wodexiazai|我的下载,,,,
-内部,,,收藏夹,shoucangjia|收藏夹,,,,
-内部,,,字体,ziti|font|字体,,,,
-内部,,,打印机,dayinji|fax|打印机,,,,
-内部,,,我的文档,wodewendang|我的文档,,,,
-内部,,,回收站,huishouzhan|回收站,,,,
-内部,,,我的图片,wodetupian|我的图片 ,,,,
-内部,,,我的视频,wodeshipin|我的视频 ,,,,
-内部,,,我的音乐,wodeyinyue|我的音乐 ,,,,
-,,,,,,,,
 程序,extra\WindowSpyU32.exe,,Spy,WindowSpy,,,,
 程序,shortcuts\360 安全卫士.lnk,,360 安全卫士,Anquanweishi|360安全卫士,,,,https://weishi.360.cn/
 程序,shortcuts\360 极速浏览器X.lnk,ahk_exe i)360ChromeX.exe,360 极速浏览器,jisuliulanqi|360极速浏览器,!2,,,https://browser.360.cn/ee/
@@ -53,7 +41,7 @@
 程序,shortcuts\HBuilderX.lnk,,HBuilderX,HBuilderX,,,,https://www.dcloud.io/hbuilderx.html
 程序,shortcuts\heidisql.lnk,,Heidisql,Heidisql,,,,https://www.heidisql.com/download.php?download=portable-64
 程序,shortcuts\HTTPie.lnk,,HTTPie,HTTPie,,,,https://httpie.io/download
-程序,shortcuts\idea64.lnk,,idea,idea,,,,
+程序,shortcuts\idea64.lnk,,IDEA,IDEA,,,,
 程序,shortcuts\MarkText.lnk,,MarkText,MarkText,,,,https://github.com/marktext/marktext/releases
 程序,shortcuts\Motrix.lnk,,Motrix,Motrix,,,,https://motrix.app/zh-CN
 程序,shortcuts\msedge.lnk,,Edge,Edge,,,,
@@ -100,7 +88,12 @@
 ,,,,,,,,
 文件,D:\,,D盘,dpan|D盘,!d,,,
 文件,E:\,,E盘,epan|E盘,,,,
-文件,Fi,,F盘,fpan|F盘,,,,
+文件,F:\,,F盘,fpan|F盘,,,,
+文件,G:\,,G盘,gpan|G盘,,,,
+文件,H:\,,H盘,hpan|H盘,,,,
+文件,x:\,,X盘,xpan|X盘,,,,
+文件,y:\,,Y盘,ypan|Y盘,,,,
+文件,z:\,,Z盘,zpan|Z盘,,,,
 文件,D:\ac86\exec,,我的软件,exec,,,,
 文件,D:\ac86\code,,我的代码,code,,,,
 文件,D:\ac86\doc,,我的文档,doc,,,,
@@ -109,14 +102,14 @@
 文本,很牛呀,,,,,xnb,,
 文本,你妹的,,,,,xnm,,
 ,,,,,,,,
-文本,😄,,微笑,,,xwx ,,
-文本,😊,,脸红,,,xlh,,
-文本,👌,,OK,,,xok,,
-文本,❤️,,爱心,,,xax,,
-文本,📰,,报纸,,,xbz,,
-文本,🏷️,,标签,,,xbq,,
-文本,🔖,,书签,,,xsq,,
-文本,💩,,大便,,,xsh,,
+文本,😄,,,,,xwx ,,微笑
+文本,😊,,,,,xlh,,脸红
+文本,👌,,,,,xok,,OK
+文本,❤️,,,,,xax,,爱心
+文本,📰,,,,,xbz,,报纸
+文本,🏷️,,,,,xbq,,标签
+文本,🔖,,,,,xsq,,书签
+文本,💩,,,,,xsh,,大便
 ,,,,,,,,
 文本,```java{Enter}{Enter}```{Up},,,,,xjava,,
 文本,```js{Enter}{Enter}```{Up},,,,,xjs,,
@@ -132,9 +125,11 @@
 文本,acc8226@qq.com,,我的邮箱,,,xem,,
 文本,1334598467,,我的 qq 号,,,xqq,,
 ,,,,,,,,
+网址,163.com ,,网易网 ,,,,,
 网址,https://apple.com.cn,,苹果官网,Apple,,,,
-网址,https://appinn.com,,小众软件,xiaozhongruanjian|小众软件,,,,
-网址,https://book.qq.com,,QQ阅读,QQ阅读,,,,
+网址,appinn.com,,小众软件,xiaozhongruanjian|小众软件,,,,
+网址,atomgit.com,,atomgit,atomgit,,,,
+网址,book.qq.com,,QQ阅读,QQ阅读,,,,
 网址,qq.com,,腾讯网,tengxunwang|腾讯网,,,,
 网址,doubao.com,,豆包,doubao|豆包,,zdb,,
 网址,fanyi.caiyunapp.com,,彩云小译,fanyi|彩云小译,,zfan,,
@@ -170,12 +165,13 @@
 网址,www.landiannews.com,,蓝点网,landian|蓝点网,,zld,,
 网址,www.mafengwo.cn,,马蜂窝,mafengwo|马蜂窝,,,,
 网址,www.mgtv.com,,芒果TV,mangguotv|芒果TV,,,,
+网址,https://www.soso.com ,,搜搜网 ,,,,,
 网址,www.speedtest.cn,,网速测试,wangsuceshi|网速测试,,,,
 网址,www.zhihu.com,,知乎,zhihu|知乎,,zzh,,
 网址,www.zhipin.com,,BOSS直聘,bosszhipin|BOSS直聘,,,,
 网址,y.qq.com,,QQ音乐,QQ音乐|qqmusic,,,,
 网址,yiyan.baidu.com,,文心一言,wenxinyiyan,,,,
-网址,atomgit.com,,atomgit,atomgit,,,,
+,,,,,,,,
 ,,,,,,,,
 搜索,https://cn.bing.com/search?q=,,必应,by,,,,
 搜索,https://search.bilibili.com/all?keyword=,,哔哩哔哩,bi,,,,
@@ -187,6 +183,18 @@
 搜索,https://www.ixigua.com/search/,,西瓜视频,xg,,,,
 搜索,https://www.iplaysoft.com/?s=,,异次元软件,yc,,,,
 搜索,https://github.com/search?q=,,Github,gh,,,,
+,,,,,,,,
+内部,,,终端,zhongduan|cmd|终端,,,,
+内部,,,网络连接,wangluolianjie|网络连接,,,,
+内部,,,我的下载,wodexiazai|我的下载,,,,
+内部,,,收藏夹,shoucangjia|收藏夹,,,,
+内部,,,字体,ziti|font|字体,,,,
+内部,,,打印机,dayinji|fax|打印机,,,,
+内部,,,我的文档,wodewendang|我的文档,,,,
+内部,,,回收站,huishouzhan|回收站,,,,
+内部,,,我的图片,wodetupian|我的图片 ,,,,
+内部,,,我的视频,wodeshipin|我的视频 ,,,,
+内部,,,我的音乐,wodeyinyue|我的音乐 ,,,,
 ,,,,,,,,
 内部,,,重启,chongqi|重启,,,,
 内部,,,关机,guanji|关机,,,,
@@ -200,6 +208,10 @@
 内部,,,静音,jingyin|静音 ,,,,
 内部,,,上一曲,shangyiqu|上一曲 ,,,,
 内部,,,下一曲,xiayiqu|下一曲 ,,,,
-内部,,,暂停播放,zantingbofang|暂停播放,,,,
+内部,,,暂停,zantingbofang|暂停播放,,,,
+,,,,,,,,
+双击Alt,,,睡眠 ,,,,,
+双击Ctrl,,,关机,,,,,
+双击Shift,,,锁屏 ,,,,,
 ,,,,,,,,
 外部,custom\customAhkFile1.ahk,,hello,hello|哈喽,,,,

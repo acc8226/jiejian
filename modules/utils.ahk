@@ -1,15 +1,15 @@
 ﻿; 根据显示内容反向查询路径
 findPathByListBoxText(title, type) {
     if (StrLen(title) > 0)
-        for (it in dataList)
+        for (it in DATA_LIST)
             ; 两个条件的匹配更精确
-            if (title = it.title and type = it.type)
+            if (title = it.title && type = it.type)
                 return it
 }
 
 ; 热键启动
 startByHotKey(hotkey) {
-    for (it in dataList)
+    for (it in DATA_LIST)
         if (it.hk == hotkey) {
             ; 如果是打开 web 或者 file 类型则会有友好提示
             if (it.type = DataType.web) {
@@ -28,7 +28,7 @@ startByHotKey(hotkey) {
 ; 热串启动
 startByHotString(hotstring) {
     myHs := StrReplace(hotstring, ":C*:")
-    for (it in dataList)
+    for (it in DATA_LIST)
         if (it.hs == myHs) {
             if (it.type = DataType.web) {
                 jumpURL(it.path)

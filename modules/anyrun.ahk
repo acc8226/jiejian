@@ -1,29 +1,48 @@
 ﻿#Include "Sort.ahk"
 
 ; 正则匹配最大支持长度默认为 32 位
-Support_Length := 32
-DataFilterReg := 'i)^(?:' . DataType.app . '|' . DataType.file . '|' . DataType.web . '|' . DataType.inner . '|' . DataType.ext . ')$'
-IS_HTTP_Reg := 'i)^(?:https?://)?(?:[\w-]+\.)+[\w-]+(?:/[\w-./?%&=]*)?\s*$'
+global SUPPORT_LEN := 32
+global DATA_FILTER_REG := 'i)^(?:' . DataType.app . '|' . DataType.file . '|' . DataType.web . '|' . DataType.inner . '|' . DataType.ext . ')$'
+global IS_HTTP_Reg := 'i)^(?:https?://)?(?:[\w-]+\.)+[\w-]+(?:/[\w-./?%&=]*)?\s*$'
+global MY_GUI
+
+global MyActionArray := [
+    MyAction('打开网址', 'list', path => path ~= IS_HTTP_Reg, appendWebsiteName, jumpURL), ; 是否提前些比较好，不用了，兜底挺好
+    ; 打开（文件，可能是 mp3 或者 mp4 或者 mov）
+    MyAction('打开', 'list', path => path != '*' && path != '/' && FileExist(path) && NOT DirExist(path), appendFileType, path => Run(path)) ,
+    MyAction('前往文件夹', 'list', isDir,, openDir),
+    MyAction('查看属性', 'list', path => path !== '*' && path !== '/' && FileExist(path),, path => Run('properties "' . path . '"')),
+    MyAction('打印文件', 'list', path => path !== '*' && path !== '/' && FileExist(path) && NOT DirExist(path) && path ~= 'i).+\.(?:BMP|GIF|png|jpe?g|pdf|docx?|pptx?|xlsx?)$',, path => Run('print "' . path . '"')),
+    
+    MyAction('删除文件', 'list', path => path !== '*' && path !== '/' && FileExist(path),, delFileOrDir),
+    MyAction('在 Bash 中打开', 'list', path => IsSet(MY_BASH) && path != '*' && path != '/' && FileExist(path),, openInBash),
+    MyAction('在终端中打开', 'list', path => path !== '*' && path !== '/' && FileExist(path),, openInTerminal),
+    MyAction('在 VSCode 中打开', 'list', path => IsSet(MY_VSCode) && path !== '*' && path !== '/' && FileExist(path),, openInVSCode),
+    MyAction('在 IDEA 中打开', 'list', path => IsSet(MY_IDEA) && path !== '*' && path !== '/' && FileExist(path),, openInIDEA),
+    
+    ; 彩蛋 
+    MyAction('bjip', 'edit',,, getIPAddresses) ; 本机 IP
+]
 
 ; 设置监听
 #HotIf WinActive("快捷启动 ahk_class AutoHotkeyGUI")
 ~Down::{
     ; 当前焦点在 edit 上
-    if myGui.FocusedCtrl.type = 'Edit'
+    if MY_GUI.FocusedCtrl.type = 'Edit'
         ; 且如果 listbox 有东西 则 焦点移动到 listbox
-        if (StrLen(myGui['listbox1'].Text) > 0)
+        if (StrLen(MY_GUI['listbox1'].Text) > 0)
             ControlFocus 'listbox1'
 }
 ~UP::{
     ; 如果焦点在 listbox 首项 再向上则焦点移动到 edit
-    if (myGui.FocusedCtrl.type = 'ListBox')
-        if (myGui['listbox1'].value) == 1
+    if (MY_GUI.FocusedCtrl.type = 'ListBox')
+        if (MY_GUI['listbox1'].value) == 1
             ControlFocus 'Edit1'
 }
 #HotIf
 
-Anyrun() {
-    global myGui
+anyrun() {
+    global MY_GUI
 
     guiTitle := "快捷启动"
     ; 检查窗口是否已经存在，如果窗口已经存在，如果窗口不存在，则创建新窗口
@@ -36,18 +55,18 @@ Anyrun() {
         ; Owner 可以让当前窗口从属于另一个窗口。从属的窗口默认不显示在任务栏, 并且它总是显示在其父窗口的上面. 当其父窗口销毁时它也被自动销毁
         ; -Caption 移除背景透明的窗口的边框和标题栏
         ; -Resize 禁止用户重新调整窗口的大小
-        myGui := Gui('AlwaysOnTop Owner -Caption -Resize', guiTitle)
+        MY_GUI := Gui('AlwaysOnTop Owner -Caption -Resize', guiTitle)
         ; 横向和纵向边框收窄
-        myGui.MarginX := 3.7
-        myGui.MarginY := 3.1
+        MY_GUI.MarginX := 3.7
+        MY_GUI.MarginY := 3.1
         fontSize := 's21'
-        myGui.SetFont(fontSize, 'Consolas') ; 设置兜底字体(21 磅) Consolas
-        myGui.SetFont(fontSize, 'Microsoft YaHei') ; 设置优先字体(21 磅) 微软雅黑
-        myEdit := myGui.AddEdit(Format("w{1}", width))
+        MY_GUI.SetFont(fontSize, 'Consolas') ; 设置兜底字体(21 磅) Consolas
+        MY_GUI.SetFont(fontSize, 'Microsoft YaHei') ; 设置优先字体(21 磅) 微软雅黑
+        myEdit := MY_GUI.AddEdit(Format("w{1}", width))
         ; R5：做到贴边 默认只显示 5 行
         ; Hidden：让控件初始为隐藏状态
-        listBox := myGui.AddListBox(Format("R5 w{1} XM+0 Y+0 BackgroundF0F0F0 Hidden", width))
-        button := myGui.Add('Button', "default X0 Y0 Hidden", 'OK')
+        listBox := MY_GUI.AddListBox(Format("R5 w{1} XM+0 Y+0 BackgroundF0F0F0 Hidden", width))
+        button := MY_GUI.Add('Button', "default X0 Y0 Hidden", 'OK')
 
         myEdit.OnEvent('Change', onEditChange)
 
@@ -61,15 +80,24 @@ Anyrun() {
         button.OnEvent('Click', onButtonClick)
 
         ; 按住 esc 销毁 窗口
-        myGui.OnEvent('Escape', (*) => myGui.Destroy())
+        MY_GUI.OnEvent('Escape', onEscape)
 
         ; 居中但是稍微往上偏移些
-        myGui.Show(Format("xCenter y{1} AutoSize", A_ScreenHeight / 2 - 300))
+        MY_GUI.Show(Format("xCenter y{1} AutoSize", A_ScreenHeight / 2 - 300))
 
-        ; 判断剪切板有木有内容 且输入内容是文件或者网址 且离最后一次 ctrl + c/x 操作小于 22 秒则打开 anyrun 组件 这样给用户的自主性更大
-        if (A_Clipboard != '' AND (A_Clipboard ~= IS_HTTP_Reg OR FileExist(A_Clipboard))
-                              AND DateDiff(A_NowUTC, ctrlTimeStamp, 'Seconds') < 22)
-            Send "^v"
+        ; 判断剪切板有木有内容 且输入内容是文件或者网址 且离最后一次 ctrl + c/x 操作小于 22 秒则打开 anyrun 组件 这样给用户的自主性更大           
+        if (A_Clipboard != '' && DateDiff(A_NowUTC, CTRL_TIMESTAMP, 'Seconds') < 22) {
+            pasteText := Trim(A_Clipboard, ' `t`r`n')
+            if (pasteText ~= IS_HTTP_Reg || FileExist(pasteText))
+                Send "^v"
+        }
+
+        onEscape(*) {
+            if IsSet(MY_GUI) {
+                MY_GUI.Destroy()
+                MY_GUI := unset
+            }
+        }
 
         onEditChange(thisGui, *) {
             ; 一旦文本框有变化立即清空
@@ -78,22 +106,22 @@ Anyrun() {
             editValue := thisGui.Value
             if (editValue == '') {
                 listBox.Visible := false
-                myGui.Show('AutoSize')
+                MY_GUI.Show('AutoSize')
                 return
             }
             listBoxDataArray := unset
             dataArray := unset
             ; 精确匹配失败 将 转到模糊匹配
             ; 若为空则清空列表 或 大于设定长度 或 非字母和数字汉子和空格的组合则退出 \u4e00-\u9fa5 可以表示为 一-龥
-            if (StrLen(editValue) <= Support_Length AND editValue ~= '^[a-zA-Z一-龥\d]+$') {
+            if (StrLen(editValue) <= SUPPORT_LEN && editValue ~= '^[a-zA-Z一-龥\d]+$') {
                 needleRegEx := ''
                 Loop Parse, editValue
                     needleRegEx .= '(' . A_LoopField . ").*"
                 needleRegEx := 'i)' . needleRegEx
                 
                 dataArray := Array()
-                for it in dataList {
-                    if (it.type ~= DataFilterReg) {
+                for it in DATA_LIST {
+                    if (it.type ~= DATA_FILTER_REG) {
                         if 'Array' == Type(it.alias) {
                             ; 如果有则选出最匹配的 array
                             ; maxData 为 最佳匹配对象
@@ -122,7 +150,7 @@ Anyrun() {
                     }
                 }
             }
-            if (IsSet(dataArray) AND dataArray.Length > 0) {
+            if (IsSet(dataArray) && dataArray.Length > 0) {
                 dataArraySort(dataArray)
                 listBoxDataArray := listBoxData(dataArray)
             } else
@@ -130,33 +158,50 @@ Anyrun() {
 
             ; 搜索匹配
             ; 查询出所有搜索，如果前缀满足则添加到列表
-            for it in dataList
+            for it in DATA_LIST
                 if (it.type == '搜索')
                     if 1 = InStr(editValue, it.alias)
                         listBoxDataArray.push(it.title . '-' . it.type)
                 
             ; 模糊匹配 按照顺序
             for action in MyActionArray {
-                if (action.type == 'list' and action.fuhe.Call(editValue))
-                    action.HasOwnProp('fuheThen') ? listBoxDataArray.push(action.title . action.fuheThen.Call(editValue)) : listBoxDataArray.push(action.title)
+                ; 如果是 list 类型 且 符合条件
+                if (action.type == 'list' && action.isMatch.Call(editValue))
+                    if action.HasOwnProp('appendTitle') {
+                        ; 最终的标题
+                        listBoxDataArray.push(action.title . action.appendTitle.Call(editValue))
+                    } else {
+                        listBoxDataArray.push(action.title)
+                    }
             }
-            ; 显示出来
-            listBox.Visible := listBoxDataArray.Length > 0
-            if (listBox.Visible) { 
-                listBox.Add(listBoxDataArray)
-                listBox.Choose(1)
-            }
-            myGui.Show("AutoSize")
+            if IsSet(MY_GUI) {
+                ; 显示出来
+                listBox.Visible := listBoxDataArray.Length > 0
+                if (listBox.Visible) { 
+                    listBox.Add(listBoxDataArray)
+                    listBox.Choose(1)
+                }
+                MY_GUI.Show("AutoSize")
+            } else
+                MsgBox 'anyrun 组件异常销毁'
         }
 
         onEditLoseFocus(*) {
-            if (not listBox.Focused)
-                myGui.Destroy()
+            if (not listBox.Focused) {
+                if IsSet(MY_GUI) {
+                    MY_GUI.Destroy()
+                    MY_GUI := unset
+                }
+            }
         }
 
         onListboxLoseFocus(*) {
-            if (not myEdit.Focused)
-                myGui.Destroy()
+            if (not myEdit.Focused) {
+                if IsSet(MY_GUI) {
+                    MY_GUI.Destroy()
+                    MY_GUI := unset
+                }
+            }
         }
 
         ; listbox 和 序号（从 1 开始）
@@ -176,13 +221,13 @@ Anyrun() {
             editValue := myEdit.Value
 
             ; 模糊匹配：（打开网址 打开文件 前往文件夹 等）如果 条目 不匹配 则啥事都不做
-            if (!IsSet(item) OR item == '') {
+            if (!IsSet(item) || item == '') {
                 for action in MyActionArray {
                     ; 如果是 list 则表示必须在列表中存在
                     if (action.type = 'list') {
-                        ; 必须满足匹配规则
+                        ; 必须满足匹配规则：action.title 在 listBox.Text 首部
                         if 1 == InStr(listBox.Text, action.title) {
-                            action.pao.Call(editValue)
+                            action.run.Call(editValue)
                             break
                         }
                     }
@@ -190,7 +235,7 @@ Anyrun() {
                     else if (action.type = 'edit') {
                         ; 没有匹配规则
                         if (editValue = action.title) {
-                            action.pao.Call()
+                            action.run.Call()
                             break
                         }
                     }
@@ -200,46 +245,15 @@ Anyrun() {
                 ; 取出除 bd 开头的字符串
                 ; 进行拼接
                 Run(item.path . SubStr(editValue, StrLen(item.alias) + 1))
-            } else if (item.type = DataType.inner) { ; 精确处理：内部
-                switch item.title {
-                    case '锁屏': SystemLockScreen()
-                    case '睡眠': SystemSleep()
-                    case '关机': 
-                        if MsgBox("立即" . item.title . "?",, "YesNo") = "Yes"
-                            SystemShutdown()
-                    case '息屏': SystemSleepScreen()
-                    case '重启': 
-                        if MsgBox("立即" . item.title . "?",, "YesNo") = "Yes"
-                            SystemReboot()
-                    case '屏幕保护程序': SendMessage 0x0112, 0xF140, 0,, "Program Manager" ; 0x0112 为 WM_SYSCOMMAND, 而 0xF140 为 SC_SCREENSAVE.
-                    case '清空回收站': FileRecycleEmpty()
-                    case '注销': SystemLogoff()
-
-                    case '静音': Send '{Volume_Mute}'
-                    case '暂停': Send '{Media_Play_Pause}'
-                    case '上一曲': Send '{Media_Prev}'
-                    case '下一曲': Send '{Media_Next}'
-
-                    case '终端': Run(A_ComSpec) ; 在用户根目录打开文件夹
-                    case '网络连接': Run("shell:ConnectionsFolder")
-                    case '我的下载': Run("shell:downloads")
-                    case '收藏夹': Run("shell:Favorites")
-                    case '字体': Run("shell:Fonts")
-                    case '打印机': Run("shell:PrintersFolder")
-                    case '我的文档': Run("shell:Personal")
-                    case '回收站': Run("shell:RecycleBinFolder")
-                    case '我的图片': Run("shell:My Pictures")
-                    case '我的视频': Run("shell:My Video")
-                    case '我的音乐': Run("shell:My Music")
-                    
-                }
+            } else if (item.type = DataType.inner) { ; 精确处理：内部               
+                openInnerCommand(item.title, True)
             } else if (item.type = DataType.ext) ; 精确处理：外部
                 Run('jiejian' . (A_PtrSize == 4 ? '32' : '64') . '.exe /script ' . item.path)
             ; 兜底 精确处理：app file web 程序文件网址类型
             else {
                 if (item.type = DataType.web)
                     jumpURL(item.path)
-                else if (item.type = DataType.app and item.title == '微信') { ; 对微信特殊处理：自动登录微信
+                else if (item.type = DataType.app && item.title == '微信') { ; 对微信特殊处理：自动登录微信
                     try {
                         Run item.path,,, &pid
                         WinWaitActive "ahk_pid " pid
@@ -252,7 +266,10 @@ Anyrun() {
                     ; 启动逻辑为每次都新建应用，而非打开已有应用 ActivateOrRun('', item.path)
                     Run(item.path)
             }
-            MyGui.Destroy()
+            if IsSet(MY_GUI) {
+                MY_GUI.Destroy()
+                MY_GUI := unset
+            }
         }
 
         onButtonClick(*) {
@@ -275,7 +292,7 @@ Anyrun() {
 computeDegree(regExMatchInfo) {
     degree := 0
     loop regExMatchInfo.Count {
-        item := Support_Length - regExMatchInfo.Pos[A_Index]
+        item := SUPPORT_LEN - regExMatchInfo.Pos[A_Index]
         if (item < 0)
             break
         degree += 2 ** item
@@ -284,51 +301,36 @@ computeDegree(regExMatchInfo) {
 }
 
 class MyAction {
-    ; 显示标题
-    ; 类型 edit or list
-    ; 过滤条件
-    ; 拼接到栏目上
-    ; 执行动作
-    __new(title, type, fuhe?, fuheThen?, pao?) {
+    __new(title, type, isMatch?, appendTitle?, run?) {
+        ; 显示标题
         this.title := title
+        ; 类型 edit or list
         this.type := type
-        ; 是否符合匹配
-        if IsSet(fuhe)
-            this.fuhe := fuhe
+        ; 过滤条件 是否符合匹配
+        if IsSet(isMatch)
+            this.isMatch := isMatch
 
-        ; 匹配后对 title 的增强
-        if IsSet(fuheThen)
-            this.fuheThen := fuheThen
+        ; 拼接到 title 后面，意为进一步的描述
+        if IsSet(appendTitle)
+            this.appendTitle := appendTitle
 
-        ; 匹配后选定的行为
-        if IsSet(pao)
-            this.pao := pao
+        ; 执行动作 匹配后选定的行为
+        if IsSet(run)
+            this.run := run
     }
 }
 
-MyActionArray := [
-    MyAction('打开网址', 'list', path => path ~= IS_HTTP_Reg, getWebsiteName, jumpURL), ; 是否提前些比较好，不用了，兜底挺好
-    MyAction('打开文件', 'list', path => FileExist(path) AND NOT DirExist(path),, path => Run(path)) ,
-    MyAction('前往文件夹', 'list', isDir,, openDir),
-    MyAction('查看属性', 'list', path => FileExist(path),, path => Run('properties "' . path . '"')),
-    MyAction('打印文件', 'list', path => FileExist(path) AND NOT DirExist(path) And path ~= 'i).+\.(?:BMP|GIF|png|jpe?g|pdf|docx?|pptx?|xlsx?)$',, path => Run('print "' . path . '"')),
-    MyAction('删除文件', 'list', path => FileExist(path),, delFileOrDir),
-    MyAction('在 Bash 中打开', 'list', path => IsSet(MY_BASH) and FileExist(path),, openInBash),
-    MyAction('在终端中打开', 'list', path => FileExist(path),, openInTerminal),
-    MyAction('在 VSCode 中打开', 'list', path => IsSet(MY_VSCode) and FileExist(path),, openInVSCode),
-    MyAction('在 IDEA 中打开', 'list', path => IsSet(MY_IDEA) and FileExist(path),, openInIDEA),
-    ; 彩蛋 
-    MyAction('bjip', 'edit',,, getIPAddresses) ; 本机 IP
-]
-
 ; 是否是文件夹，如果当前是文件则提取
-isDir(key) {
+isDir(path) {
+    if (path == '*' || path == '/')
+        return False
+
     isMatch := unset
-    if DirExist(key) {
+    if DirExist(path) {
         isMatch := true
-    } else if FileExist(key) {
+    } else if FileExist(path) {
         ; 抽出文件夹
-        if RegExMatch(key, '.*[\\/]', &regExMatchInfo)
+        if RegExMatch(path, '.*[\\/]', &regExMatchInfo)
             isMatch := DirExist(regExMatchInfo.0)
         else 
             isMatch := false
@@ -337,15 +339,14 @@ isDir(key) {
     return isMatch
 }
 
-getWebsiteName(editValue) {
-    global dataList
+appendWebsiteName(path) {
     ; 对网址进行细化处理
     ; 从 dava.csv 中抽取符合条件的 b 列 (http 网址)，若满足则赋值 d 列
     match := ''
-    for (it in dataList) {
+    for (it in DATA_LIST) {
         if (it.type == DataType.web) {
             ; 完全匹配
-            if (editValue == it.path) {
+            if (path == it.path) {
                 match := '-' . it.title
                 break
             } else {
@@ -353,7 +354,7 @@ getWebsiteName(editValue) {
                 ; 提取关键部位
                 ; 去掉 www
                 newUri := unset
-                if 1 == InStr(it.path, 'http://www.') OR 1 == InStr(it.path, 'https://www.') OR 1 == InStr(it.path, 'www.') {
+                if 1 == InStr(it.path, 'http://www.') || 1 == InStr(it.path, 'https://www.') || 1 == InStr(it.path, 'www.') {
                     uri := SubStr(it.path, InStr(it.path, 'www.') + StrLen('www.'))
                     newUri := 'i)^(?:https?://)?(?:www\.)?' . StrReplace(uri, '.', "\.") . '(?:/.*)?$'
                 }
@@ -367,7 +368,7 @@ getWebsiteName(editValue) {
                     is_top_level_domain := 2 == StrSplit(uri, '.').Length
                     newUri := 'i)^(?:https?://)?' . (is_top_level_domain ? '(?:www\.)?' : '') . StrReplace(uri, '.', "\.") . '(?:/.*)?$'
                 } 
-                if (editValue ~= newUri) {
+                if (path ~= newUri) {
                     match := '-' . it.title
                     break
                 }
@@ -375,6 +376,60 @@ getWebsiteName(editValue) {
         }
     }
     return match
+}
+
+appendFileType(path) {
+    ; 取出文件后缀名
+    RegExMatch(path, '\.([^.]*$)', &regExMatchInfo)
+    extension := regExMatchInfo.1
+
+    switch extension, false {
+        case '7z', 'zip', 'rar', 'tar', 'gz', 'bz2': return "压缩包"
+        case 'apk': return " Android 应用安装包"
+        case 'bat', 'cmd': return " Windows 批处理文件"
+        case 'bmp', 'jpeg', 'jpg', 'png', 'gif', 'webp', 'tiff', 'ico': return "图像文件"
+        case 'css': return " CSS 样式表"
+        case 'csv': return "逗号分隔值文件（表格数据）"
+        case 'cer', 'crt': return "安全证书文件"
+        case 'doc': return " Word 文档（旧版）"
+        case 'docx': return " Word 文档"
+        case 'dps': return " WPS 演示文件"
+        case 'dwg': return " AutoCAD 绘图文件"
+        case 'epub': return "开放式电子书"
+        case 'et': return " WPS 表格文件"
+        case 'exe', 'msi': return "可执行文件"
+        case 'htm', 'html': return "HTML 文件"
+        case 'ipa': return " iOS 应用安装包"
+        case 'iso': return "光盘映像文件"
+        case 'lnk': return "快捷方式"
+        case 'log': return "日志文件"
+        case 'json': return " JSON 数据文件"
+        case 'md', 'markdown': return " markdown 文档"
+        case 'mp3', 'wav', 'wma', 'png', 'flac', 'ogg', 'aac': return "音频"
+        case 'mp4', 'avi', 'mov', 'wmv', 'flv', 'mkv', '3gp': return "视频"
+        case 'mobi': return " Kindle 电子书格式"
+        case 'js': return " JavaScript 脚本"
+        case 'torrent': return "种子文件"
+        case 'odf': return "电子表格"
+        case 'ofd': return "国产 OFD 文档"
+        case 'pdf': return " PDF 文档"
+        case 'php': return " PHP 脚本文件"
+        case 'ppt': return " PowerPoint 演示文稿（旧版）"
+        case 'pptx': return " PowerPoint 演示文稿"
+        case 'psd': return " Microsoft Visio 文件"
+        case 'ps1': return " PowerShell 脚本文件"
+        case 'py': return " python 脚本文件"
+        case 'rtf': return "富文本文档"
+        case 'svg': return "可缩放矢量图形文件"
+        case 'txt': return "纯文本"
+        case 'url' : return "网络书签"
+        case 'vsd': return " Adobe Photoshop 文件"
+        case 'wps': return " WPS 文档"
+        case 'xls': return " Excel 表格（旧版）"
+        case 'xlsx': return " Excel 表格"
+        case 'xml': return "可扩展标记语言文件"
+        default: return "文件"            
+    }
 }
 
 openDir(path) {
@@ -398,7 +453,7 @@ openInTerminal(path) {
     if DirExist(path) {
         ; 盘符根目录需要以 \ 结尾才生效
         endChar := SubStr(path, StrLen(path))
-        addSomething := (endChar = '\' OR endChar = '/') ? "" : "\"
+        addSomething := (endChar = '\' || endChar = '/') ? "" : "\"
         Run(A_ComSpec, path . addSomething)
     } else {
         RegExMatch(path, '.*[\\/]', &regExMatchInfo)
@@ -411,7 +466,7 @@ openInBash(path) {
     if DirExist(path) {
         ; 盘符根目录需要以 \ 结尾才生效，所以都统一加上
         endChar := SubStr(path, StrLen(path))
-        addSomething := (endChar = '\' OR endChar = '/') ? "" : "\"
+        addSomething := (endChar = '\' || endChar = '/') ? "" : "\"
         Run(MY_BASH, path . addSomething)
     } else {
         RegExMatch(path, '.*[\\/]', &regExMatchInfo)
@@ -425,6 +480,41 @@ openInVSCode(path) {
 
 openInIDEA(path) {
     Run(MY_IDEA . ' ' . path)
+}
+
+openInnerCommand(title, isConfirm := False) {
+    switch title {
+        case '重启': 
+            if isConfirm && MsgBox("立即" . title . "?", APP_NAME, "YesNo") = "Yes"
+                SystemReboot()
+        case '关机': 
+            if isConfirm && MsgBox("立即" . title . "?", APP_NAME, "YesNo") = "Yes"
+                SystemShutdown()
+        case '锁屏': SystemLockScreen()
+        case '睡眠': SystemSleep()
+        case '屏幕保护程序': SendMessage 0x0112, 0xF140, 0,, "Program Manager" ; 0x0112 为 WM_SYSCOMMAND, 而 0xF140 为 SC_SCREENSAVE.
+        case '清空回收站': FileRecycleEmpty()
+        case '息屏': SystemSleepScreen()
+        case '注销': SystemLogoff()
+        ; 媒体类
+        case '静音': Send '{Volume_Mute}'
+        case '上一曲': Send '{Media_Prev}'
+        case '下一曲': Send '{Media_Next}'
+        case '暂停': Send '{Media_Play_Pause}'
+        ; shell
+        case '终端': Run(A_ComSpec) ; 在用户根目录打开文件夹
+        case '网络连接': Run("shell:ConnectionsFolder")
+        case '我的下载': Run("shell:downloads")
+        case '收藏夹': Run("shell:Favorites")
+        case '字体': Run("shell:Fonts")
+        case '打印机': Run("shell:PrintersFolder")
+        case '我的文档': Run("shell:Personal")
+        case '回收站': Run("shell:RecycleBinFolder")
+        case '我的图片': Run("shell:My Pictures")
+        case '我的视频': Run("shell:My Video")
+        case '我的音乐': Run("shell:My Music")
+        default: MsgBox '非系统内置命令！'
+    }
 }
 
 getIPAddresses() {

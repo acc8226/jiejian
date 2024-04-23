@@ -110,3 +110,24 @@ SystemSleep() {
   ; 参数 #3: 使用 1 而不是 0 来禁止所有的唤醒事件
   DllCall("PowrProf\SetSuspendState", "Int", 0, "Int", 0, "Int", 0)
 }
+
+copySelectedAsPlainText() {
+  A_Clipboard := ""
+  Send "^c"
+  if !ClipWait(1) {
+    Tip("复制失败")
+    return
+  }
+  A_Clipboard := A_Clipboard
+  Tip("路径已复制")
+}
+
+copySelectedAsPlainTextQuiet() {
+  A_Clipboard := ""
+  Send "^c"
+  if !ClipWait(1) {
+    Tip("复制失败")
+    return
+  }
+  A_Clipboard := A_Clipboard
+}

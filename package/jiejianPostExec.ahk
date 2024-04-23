@@ -5,7 +5,7 @@ if (A_Args.Length = 0) {
 }
 
 version := A_Args[1]
-localIsAlphaOrBeta := InStr(version, "alpha") or InStr(version, "beta")
+localIsAlphaOrBeta := InStr(version, "alpha") || InStr(version, "beta")
 fileObj := localIsAlphaOrBeta ? FileOpen("SNAPSHOT", "w") : FileOpen("RELEASE", "w")
 fileObj.Write(version)
 fileObj.Close()

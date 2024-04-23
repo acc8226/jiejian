@@ -1,4 +1,4 @@
-﻿global dataList := parseData("data.csv")
+﻿global DATA_LIST := parseData("data.csv")
 
 class DataType {
   static app := '程序'
@@ -11,28 +11,29 @@ class DataType {
 }
 
 ; 注册热键 和 热字符串
-Loop dataList.Length {
-  it := dataList[A_Index]
-  ; 热键
-  if (StrLen(it.hk) > 0 AND StrLen(it.path) > 0)
-      Hotkey it.hk, startByHotKey
-  ; 热串
-  if (StrLen(it.hs) > 0) {
-      if (it.type = DataType.web) {
-          ; 排除在 编辑器中 可跳转网址
-          HotIfWinNotactive 'ahk_group ' . Text_Group
-          Hotstring ":C*:" . it.hs, startByHotString
-          HotIfWinNotactive
-      } else if (it.type = DataType.text)
-          Hotstring ":C*:" . it.hs, it.path
+regMyHotKey()
+
+regMyHotKey() {
+  Loop DATA_LIST.Length {
+    it := DATA_LIST[A_Index]
+    ; 热键：：目前仅作用于程序、文本 和 网址跳转
+    if (StrLen(it.hk) > 0 && StrLen(it.path) > 0)
+        Hotkey it.hk, startByHotKey
+    ; 热串：目前仅作用于网址跳转
+    if (StrLen(it.hs) > 0 && it.type = DataType.web) {
+        ; 排除在 编辑器中 可跳转网址
+        HotIfWinNotactive 'ahk_group ' . TEXT_GROUP
+        Hotstring ":C*:" . it.hs, startByHotString
+        HotIfWinNotactive
+    }
   }
 }
 
-parseData(filename) {
+parseData(fileName) {
   dataList := []
   eachLineLen := 8
   ; 每次从字符串中检索字符串(片段)
-  Loop Parse, FileRead(filename), "`n", "`r" {
+  Loop Parse, FileRead(fileName), "`n", "`r" {
       ; 跳过首行
       if (A_Index = 1)
           continue
@@ -45,6 +46,7 @@ parseData(filename) {
 
 parseDataLine(line, eachLineLen) {
   global MY_BASH, MY_VSCode, MY_IDEA
+  global MY_DOUBLE_SHIFT, MY_DOUBLE_CTRL, MY_DOUBLE_ALT
 
   split := StrSplit(line, ",")
   ; 跳过不符合条件的行
@@ -52,7 +54,7 @@ parseDataLine(line, eachLineLen) {
     return
   splitEachLineLen := Trim(split[eachLineLen])
   ; 过滤不启用的行
-  if NOT (splitEachLineLen = '' OR splitEachLineLen = 'y')
+  if NOT (splitEachLineLen = '' || splitEachLineLen = 'y')
     return
   
   info := {}
@@ -60,20 +62,19 @@ parseDataLine(line, eachLineLen) {
 
   ; 去掉首尾的双引号，但不知为何首尾的一对双引号会转义为三对
   info.path := Trim(split[2])
-  if (StrLen(info.path) > 1 AND '"""' == SubStr(info.path, 1, 3) AND '"""' == SubStr(info.path, -3))
+  if (StrLen(info.path) > 1 && '"""' == SubStr(info.path, 1, 3) && '"""' == SubStr(info.path, -3))
     info.path := SubStr(info.path, 4, -3)
 
   ; 过滤空行
-  if (info.type == '' AND info.path == '')
+  if (info.type == '' && info.path == '')
     return
   ; 过滤无效路径
   if (info.type = DataType.file) {
     if NOT FileExist(info.path)
       return
-  }
-  else if (info.type  = DataType.app) {
+  } else if (info.type  = DataType.app) {
     ; 如果是以字母开头 and 不是 shell: 开头
-    if IsAlpha(SubStr(info.path, 1, 1)) AND 1 !== InStr(info.path, 'shell:', 0) {
+    if IsAlpha(SubStr(info.path, 1, 1)) && 1 !== InStr(info.path, 'shell:', 0) {
       ; 如果是绝对路径
       if InStr(info.path, ':') {
         if NOT FileExist(info.path)
@@ -93,7 +94,7 @@ parseDataLine(line, eachLineLen) {
                 break
               }
               ; 如果不以 exe 结尾则拼接 exe 继续尝试
-              if NOT isEndsWithExe AND FileExist(A_LoopField "\" info.path . '.exe') {
+              if NOT isEndsWithExe && FileExist(A_LoopField "\" info.path . '.exe') {
                 exeExist := true
                 break
               }
@@ -109,35 +110,57 @@ parseDataLine(line, eachLineLen) {
       info.path := SubStr(info.path, StrLen("https://") + 1)
   }
   
-  ; 要激活的窗口
-  info.winTitle := Trim(split[3])
+  ; 热串关键字
+  info.hs := Trim(split[7])
+  if info.type = DataType.text {
+    ; text 类型用完即走 而 不加入 array 中
+    if (StrLen(info.hs) > 0) {
+        Hotstring ":C*:" . info.hs, info.path
+    }
+    return
+  }
+
   ; 运行名称
   info.title := Trim(split[4])
+  if info.type = '双击Shift' {
+    MY_DOUBLE_SHIFT := info.title
+    return
+  }
+  if info.type = '双击Ctrl' {
+    MY_DOUBLE_CTRL := info.title
+    return
+  }
+  if info.type = '双击Alt' {
+    MY_DOUBLE_ALT := info.title
+    return
+  }
+
+  ; 要激活的窗口
+  info.winTitle := Trim(split[3])
   ; 运行关键字
   split4 := Trim(split[5])
+
   aliases := StrSplit(split4, "|")
   ; 如果数组长度 > 1 则存成数组
   info.alias := (aliases.Length > 1) ? aliases : split4
   ; 热键关键字
   info.hk := Trim(split[6])
-  ; 热串关键字
-  info.hs := Trim(split[7])
 
   ; 设置 bash 全局变量，如果存在的话，最终会供给启动器使用
   if info.type = DataType.app {
-    if info.title = 'bash' {
+    if info.title = 'Bash' {
       if InStr(info.path, '.lnk') {
         FileGetShortcut(info.path, &OutTarget)
         MY_BASH := OutTarget
       } else
         MY_BASH := info.path
-    } else if info.title = 'vscode' {
+    } else if info.title = 'VSCode' {
       if InStr(info.path, '.lnk') {
         FileGetShortcut(info.path, &OutTarget)
         MY_VSCode := OutTarget
       } else
         MY_VSCode := info.path
-    } else if info.title = 'idea' {
+    } else if info.title = 'IDEA' {
       if InStr(info.path, '.lnk') {
         FileGetShortcut(info.path, &OutTarget)
         MY_IDEA := OutTarget

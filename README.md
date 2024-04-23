@@ -21,11 +21,11 @@
 | 热字符串 | espanso【免费】 | [捷键][]【免费】 |
 | 启动器 | Raycast【免费】/ Alfred 【付费】| [捷键][]【免费】 |
 
-既然比不了，毕竟这是我业余摸鱼节假日一个人开发，我的优点只剩下功能强大和足够小巧了。同时指导了我的下一步工作，将逐渐提升交互和方便使用。尽量做到开箱即用。
+既然比不了，毕竟这是我业余摸鱼节假日其他时间个人开发维护，优点怕只剩下功能较多和足够小巧了。这同时指导了我的下一步工作，将逐渐提升交互。尽量做到开箱即用。
 
 ## 0. 程序目录结构
 
-1. custom/ 自定义 ahk 函数
+1. custom/ 自定义 ahk 函数，用于自定义外部命令
 2. extra/【增强体验】 MyKeymap （免费）预设配置。WGestures 和 FastGestures 预设手势模版。WindowSpyU32.exe 用于查看窗口标识符。GenerateShortcuts.exe 用于生成快捷方式文件夹 shortcuts。
 3. app.csv 配置文件
 4. data.csv 配置文件
@@ -103,10 +103,10 @@
 
 ## 4. 热键 之 运行程序
 
-* Alt + 1 打开 我的电脑
-* Alt + 2 打开 360 极速浏览器【若有】
-* Alt + 3 打开 VSCode【若有】
-* Alt + j 打开记事本
+* Alt + 1 打开/切换窗口 资源管理器
+* Alt + 2 打开/切换窗口 360 极速浏览器【若程序路径存在 data.csv 中】
+* Alt + 3 打开/切换窗口 VSCode【若程序路径存在 data.csv 中】
+* Alt + j 打开/切换窗口 记事本
 
 ![打开记事本](https://foruda.gitee.com/images/1689318934831690368/2606bf7a_426858.gif "动画.gif")
 
@@ -129,9 +129,9 @@
 * `Ctrl + Alt + v` 剪贴板的内容输入到当前活动应用程序中，防止了一些网站禁止在 HTML 密码框中进行粘贴操作
 * `Ctrl + Shift + "`  插入一对双引号
 
-## 7. 应用启动器
+## 7. Anyrun 应用启动器
 
-一款简洁、高效并在持续优化中的应用启动器。
+争做一款简洁、高效的应用启动器。
 
 特点：
 
@@ -142,45 +142,54 @@
 
 使用说明：
 
-`Alt + 空格` 开启快捷启动器。若再次按下 / 鼠标在启动器外点击 / esc 键则关闭
+`Alt + 空格` 开启快捷启动器。若再次按下 空格/esc键/鼠标在启动器外点击 则关闭该组件。
 
-只要输入对应启动程序/网址的全拼或首字母简拼这种模糊搜索，如果候选词有多个，可以先按下 tab 键切换到列表框，再上下键选中后回车或直接鼠标双击。
+支持全拼甚至首字母简拼模糊搜索，上下键切换选中项，回车或直接鼠标双击进行确认。
 
 ### 打开程序/文件/网址
 
 在输入框中输入内容后按下回车
 
-* `163.com` 打开网易网
-* `https://www.soso.com` 打开搜搜网
-* `D:\alee\git-repos-gitee\jiejian` 打开文件夹
-* `D:\alee\git-repos-gitee\my-cmd\README.md` 打开文件
-* `C:\Users\ferder\Desktop\Listary.lnk` 打开快捷方式
-
-![](https://foruda.gitee.com/images/1689321508560702893/2457a573_426858.gif "动画.gif")
-
-同时支持模糊输入
-
-例如 bd 打开百度网
-
-![](https://gitee.com/acc8226/shortcut-key/raw/main/imgs/7%20%E6%89%93%E5%BC%80%E7%99%BE%E5%BA%A6.apng)
-
-kz 打开控制面板
-
-![](https://gitee.com/acc8226/shortcut-key/raw/main/imgs/7%20%E6%89%93%E5%BC%80%E6%8E%A7%E5%88%B6%E9%9D%A2%E6%9D%BF.apng)
+* guanyu 打开关于 windows 程序
+* fdj 打开放大镜程序
+* `163.com` 打开网址-网易网
+* `https://www.soso.com` 打开网址-搜搜网
+* `D:\code\atomgit\jiejian` 前往文件夹
+* `D:\code\atomgit\jiejian\README.md` 打开 markdown 文档
+* `D:\code\atomgit\jiejian\shortcuts\File Explorer.lnk` 打开快捷方式
+* `xg/xigua` 打开西瓜视频
 
 ### 打开搜索
 
-* by 必应搜索：在框中输入 by[空格?]{关键字}
-* bi 哔哩哔哩搜索
-* bd 百度搜索
-* ip 归属地查询
-* so 360 搜索
-* sg 搜狗搜索
-* wz 无追搜索
+* `by` 必应搜索：在框中输入 by[空格?]{关键字}
+* `bi` 哔哩哔哩搜索
+* `bd` 百度搜索
+* `ip` 归属地查询
+* `so` 360 搜索
+* `sg` 搜狗搜索
+* `wz` 无追搜索
+* `xg` 西瓜视频
+* `yc` 异次元软件
+* `gh` Github
+
+![](https://foruda.gitee.com/images/1689321508560702893/2457a573_426858.gif "动画.gif")
 
 ### 打开内部/外部命令
 
-* 重启 输入全拼或者模糊拼音都行 chongqi 或者 汉字重启
+内部命令
+
+* `zhongduan/cmd/终端` 终端
+* `wangluolianjie|网络连接` 网络连接
+* `wodexiazai|我的下载` 我的下载
+* 收藏夹
+* 字体
+* 打印机
+* 我的文档
+* 回收站
+* 我的图片
+* 我的视频
+* 我的音乐
+* 重启
 * 关机
 * 锁屏
 * 睡眠
@@ -191,11 +200,26 @@ kz 打开控制面板
 * 静音
 * 上一曲
 * 下一曲
-* 暂停播放
+* 暂停
+
+### 增强的操作文件和网址的能力
+
+当在 anyrun 编辑框中输入文件路径/网址可以获得以下能力：
+
+* 打开网址
+* 打开文件
+* 前往文件夹
+* 查看属性
+* 打印文件
+* 删除文件
+* 在 Bash 中打开（若 data.csv 中 d 列 bash 对应的 b 列路径存即启用）
+* 在终端中打开
+* 在 VSCode 中打开（若 data.csv 中 d 列 VSCode 对应的 b 列路径存即启用）
+* 在 IDEA 中打开（若 data.csv 中 d 列 IDEA 对应的 b 列路径存即启用）
 
 ## 8. 热串 之 直达网址（Z 直达模式）
 
-为避免误触，排除了在非文本编辑器/ftp/git/IDE/office/sql/窗口软件中激活 z 模式。
+为避免误触，排除了在文本编辑器/ftp/git/IDE/office/sql/窗口软件中激活 z 模式。
 
 * zbd 打开 百度一下
 * zbi 打开 哔哩哔哩
@@ -204,7 +228,11 @@ kz 打开控制面板
 * zma 打开 QQ 邮箱
 * zxg 打开 西瓜视频
 
+zbd 示例
+
 ![](https://foruda.gitee.com/images/1689318989538537685/7b71d232_426858.gif)
+
+zbi 示例
 
 ![](https://foruda.gitee.com/images/1689319007424875617/4934e693_426858.gif)
 
@@ -215,7 +243,7 @@ kz 打开控制面板
 * xnow 插入当前日期时间，举例 `2023-08-27 09:10:41`
 * xdate 插入特定格式的当前日期时间，举例 `Date: 2023-12-22 21:23:30`
 
-data.csv 动态配置
+data.csv 可自由配置
 
 * xnb 很牛呀
 * xnm 你妹的
@@ -241,17 +269,22 @@ data.csv 动态配置
 
 ## 11. CapsLock 模式
 
-* CapsLock + t 当前窗口调成半透明(Translucent)
-* CapsLock + z 复制路径
-* CapsLock + x 当前窗口恢复不透明
+* CapsLock + t：当前窗口调成半透明(Translucent)
+* CapsLock + z：复制路径
+* CapsLock + x：当前窗口恢复不透明
+* CapsLock + 空格：复制路径 并打开 Anyrun 应用启动器
 
-## 12. 双击 shift、 ctrl、alt 模式
+## 12. 双击 shift、ctrl、alt 模式
 
-目前 beta 阶段，偶有 bug，谨慎升级
+试验性的引入双击模式，若 2 次双击小于 210 毫秒则触发，Shift 由于中英文切换经常用到，调至 170 毫秒。
 
-* 双击 Ctrl 关机
-* 双击 Alt 睡眠
-* 双击 Shift 锁屏
+预设动作如下，可以手动去 data.csv 中进行修改。
+
+* 双击 Alt：睡眠
+* 双击 Ctrl：关机
+* 双击 Shift：锁屏
+
+注：目前仅支持上述第 7 小节列出的所有内部命令。
 
 ## 13. 自定义配置说明
 
@@ -263,15 +296,18 @@ app.csv 使用了正则表达式，需要使用者对正则有一定了解。主
 
 ### app.csv 配置
 
-用于增强和自定义快捷键
+用于增强和改写快捷键
 
-* C 列（标识符）为必须项。其余皆为可选项。只需填写需要变更的快捷键即可，否则可留空。
-* F 列可留空，否则默认触发关闭窗口功能。
-* 其他列可参考案例，不做过多介绍了。
+* C 列（标识符）为必填项。其余皆为可选项。只需填写需要变更的快捷键即可，否则可留空。
+* F 列可留空，否则默认触发关闭窗口动作。
+
+其他列可参考已有写法。
+
+* M 列 是否启用列，默认启用，不启用请填写 n 或者 N。
 
 ### data.csv 配置
 
-自定义快捷启动项
+anyrun 启动器用
 
 * A列 类型：app / web
 * B列 启动路径：实际运行的网址或程序路径
@@ -288,7 +324,13 @@ app.csv 使用了正则表达式，需要使用者对正则有一定了解。主
 
 * A列 类型：app / web / file / text
 * B列 启动路径：实际运行的网址或程序路径
+* C列 要激活的窗口(仅app 热串用)
 * G列 热串关键字：例如 zbd 表示打开百度网
+
+其他列可参考已有写法。
+
+* H列 是否启用列，默认启用，不启用请填写 n 或者 N。
+* I列 备注列，改列不会被解析
 
 ## 版本发布
 
@@ -300,13 +342,13 @@ app.csv 使用了正则表达式，需要使用者对正则有一定了解。主
 
 ### 捷键 2024.04
 
-逾期美邦游湖和。
-
-* 支持 win 7 的记事本和 IE 11
-* 首次运行会生成快捷方式供启动程序用
-* 快捷启动器 anyrun 增强，优化搜索命令、新增支持内置命令（关机、注销、锁屏、重启等）、多媒体命令（上下一曲、暂停播放等）、外部命令（支持运行外部 ahk 脚本）
-* 增加打包 和 clean 脚本，双击 package.ahk 可以打包 7z 压缩包
-* 新增 fg 鼠标手势支持
+* 支持 win 7 记事本和 IE 11 程式
+* 首次运行会生成快捷方式文件夹 shortcuts/ 供启动程序用
+* 快捷启动器 anyrun 增强，增强操作文件和网址的能力，搜索命令可去 data.csv 自定义、新增内部命令（关机、注销、锁屏、重启、上下一曲、暂停...）、外部命令（支持运行外部 ahk 脚本）
+* 增加打包 和 clean 脚本，双击 package.ahk 可方便打成7z 压缩包
+* 新增 FastGestures 鼠标手势支持
+* 新增 CapsLock 模式
+* 新增 双击 shift、ctrl、alt 模式
 
 ### 捷键 2024.02
 
@@ -773,17 +815,11 @@ jiejian.exe 的文件版本为当前四位版本号，产品版本为当前编�
 
 由于 Ahk2Exe 可以选择使用 MPRESS 或 UPX 这两款免费软件来压缩编译后的脚本。如果 MPRESS.exe 或 UPX.exe 已被复制到安装 AutoHotkey 的 "Compiler" 子文件夹中，则可以通过 /compress 参数（1 = 使用 MPRESS，2 = 使用 UPX）或 GUI 设置来压缩 .exe 文件。
 
-建议在 64 为环境编译和打包该软件。32 位平台我就没试过。
+32 位平台我没试过，建议在 win 7 及其以上 64 位系统 + ahk2 + [UPX 4.2.2](https://github.com/upx/upx/releases/download/v4.2.2/upx-4.2.2-win64.zip) 及其以上的组合双击 package.bat 即可打包。
 
-* win7 SP1 64 位系统 + ahk 2.0.12 64 位 + UPX 4.2 的组合 测试通过
-* win11 64 位系统 + ahk 2.0.11 64 位 + [UPX 4.2.2](https://github.com/upx/upx/releases/download/v4.2.2/upx-4.2.2-win64.zip) 的组合 测试通过
+package.bat 的设计思路：Ahk2Exe.exe 将 ahk 转化为 exe，期间使用 `/compress 2` 指定了压缩方式。ahk 编译会触发 jiejianPostExec.ahk。jiejianPostExec.ahk 则完成了写入版本信息、文件夹命名为 jiejian-版本，并使用 7z 压缩打包文件。
 
-在安装 ahk 环境之后，双击 package.bat 即可运行打包程序。
-
-package.bat 的设计思路：Ahk2Exe.exe 将 ahk 转化为 exe，期间使用 `/compress 2` 指定了压缩方式。ahk 编译会触发 jiejianPostExec.ahk。
-jiejianPostExec.ahk 完成了写入版本信息、文件夹命名为 jiejian-版本，并使用 7z 压缩打包文件。
-
-但目前有个问题，jiejian32.exe 如果只打包一次无法拷贝到 out 目录下，目前是使用 ahk2exe 对 32 位 ahk 脚本连续打包 2 次去解决的。
+但目前有个问题，jiejian32.exe 如果只打包一次无法拷贝到 out 目录下，目前我是修改脚本连续打包 2 次去解决的。
 
 ## 写在最后
 

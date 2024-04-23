@@ -9,7 +9,7 @@ vscode 插件安装 https://marketplace.visualstudio.com/items?itemName=thqby.vs
 ;@Ahk2Exe-SetCopyright 全民反诈 union
 ;@Ahk2Exe-SetDescription 捷键-为简化键鼠操作而生
 
-CodeVersion := '24.4.21-beta'
+global CODE_VERSION := '24.4.23-beta'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
@@ -20,9 +20,8 @@ CodeVersion := '24.4.21-beta'
 
 global REG_KEY_NAME := 'HKEY_CURRENT_USER\SOFTWARE\jiejian'
 global START_TIME := A_NowUTC
-global IS_AUTO_START_UP := false
 global APP_NAME := '捷键' ; 用于 msgbox 标题展示
-global ctrlTimeStamp := A_NowUTC ; 记录 ctrl + c/x 最新时间戳
+global CTRL_TIMESTAMP := A_NowUTC ; 记录 ctrl + c/x 最新时间戳
 
 ; ----- 1. 热键 之 鼠标操作 -----
 CoordMode('Mouse', 'Screen') ; RelativeTo 如果省略, 默认为 Screen
@@ -42,11 +41,11 @@ SetTitleMatchMode 'RegEx' ; 设置 WinTitle parameter 在内置函数中的匹�
 #Include 'modules/CheckUpdate.ahk'
 #Include 'modules/MyTrayMenu.ahk'
 
-global aTrayMenu
+global MY_TRAY_MENU
 
-GenerateShortcuts ; 生成快捷方式
-SettingTray ; 设置托盘图标和菜单
-CheckUpdate ; 检查更新
+generateShortcuts() ; 生成快捷方式
+settingTray() ; 设置托盘图标和菜单
+CheckUpdate() ; 检查更新
 
 ; ----- 热键 之 快捷键重写和增强 -----
 ; ----- 热键 之 打开网址 -----
@@ -56,7 +55,7 @@ CheckUpdate ; 检查更新
 
 ; 文本类 为了 md 增强 记事本 & vscode
 ; ctrl + 数字 1-5 为光标所在行添加 markdown 格式标题
-#HotIf WinActive('ahk_exe i)notepad.exe') OR WinActive('ahk_class i)Chrome_WidgetWin_1 ahk_exe i)Code.exe') 
+#HotIf WinActive('ahk_exe i)notepad.exe') || WinActive('ahk_class i)Chrome_WidgetWin_1 ahk_exe i)Code.exe') 
 ^1::
 ^2::
 ^3::
@@ -80,11 +79,11 @@ CheckUpdate ; 检查更新
 #HotIf
 
 ^!r::Reload ; Ctrl + Alt + R 重启脚本
-^!s::aTrayMenu.mySuspend() ; Ctrl + Alt + S 暂停脚本
+^!s::MY_TRAY_MENU.mySuspend() ; Ctrl + Alt + S 暂停脚本
 ^!v::Send A_Clipboard ; Ctrl + Alt + V 将剪贴板的内容输入到当前活动应用程序中，防止了一些网站禁止在 HTML 密码框中进行粘贴操作
 ^+"::Send '""{Left}' ; Ctrl + Shift + " 快捷操作-插入双引号
 
-!Space::Anyrun ; 启动窗口
+!Space::anyrun() ; 启动窗口
 
 ; ----- 热串 之 打开网址。选择 z 而非 q，因为 q 的距离在第一行太远了，我称之为 Z 模式，用于全局跳转网址 -----
 ; ----- 热串 之 缩写扩展：将短缩词自动扩展为长词或长句（英文单词中哪个字母开头的单词数最少，我称之为 X 模式）-----
@@ -104,12 +103,14 @@ CheckUpdate ; 检查更新
 ; CapsLock & LButton::EWD_MoveWindow
 
 ; 设置托盘图标和菜单
-SettingTray() {
-    A_TrayMenu.Delete()
-    global aTrayMenu := MyTrayMenu()
+settingTray() {
+    global MY_TRAY_MENU
 
-    localIsAlphaOrBeta := InStr(CodeVersion, "alpha") OR InStr(CodeVersion, "beta")
-    A_IconTip := "捷键 " . CodeVersion . (A_IsCompiled ? "" : " 未编译") . (localIsAlphaOrBeta ? " 测试版" : " ") . (A_PtrSize == 4 ? '32位' : '64位')
+    A_TrayMenu.Delete()
+    MY_TRAY_MENU := MyTrayMenu()
+
+    localIsAlphaOrBeta := InStr(CODE_VERSION, "alpha") || InStr(CODE_VERSION, "beta")
+    A_IconTip := "捷键 " . CODE_VERSION . (A_IsCompiled ? "" : " 未编译") . (localIsAlphaOrBeta ? " 测试版" : " ") . (A_PtrSize == 4 ? '32位' : '64位')
 
     if (NOT A_IsCompiled) {
         ; 建议使用 16*16 或 32*32 像素的图标，使用 Ahk2Exe-Let 提取出 favicon.ico
@@ -154,80 +155,90 @@ ExitFunc(exitReason, exitCode) {
     }
 }
 
-GenerateShortcuts() {
+generateShortcuts() {
   ; 每次运行检测如果 shortcuts 里的文件为空则重新生成一次快捷方式，要想重新生成可以双击 GenerateShortcuts.ahk 脚本或者清空或删除该文件夹
-  if !FileExist(A_WorkingDir . "\shortcuts\*")
+  if NOT FileExist(A_WorkingDir . "\shortcuts\*")
     Run('extra/GenerateShortcuts.exe')
 }
  
 ; 双击模式我比较推荐 双击 alt 和 双击 Alt，因为 shift 可能会影响到输入法中英文切换
-~Ctrl::{
-    if (ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey > 60 && A_TimeSincePriorHotkey < 210 AND MsgBox("立即关机?", APP_NAME, "YesNo") = "Yes")            
-        SystemShutdown()
-}
-
 ~Alt::{
-    if (ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey > 60 && A_TimeSincePriorHotkey < 210 AND MsgBox("立即睡眠?", APP_NAME, "YesNo") = "Yes")
-        SystemSleep()
+    if (ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey > 60 && A_TimeSincePriorHotkey < 210) {
+        if (MsgBox("打开/运行" . MY_DOUBLE_ALT . "?", APP_NAME, "YesNo") = "Yes") {
+            openInnerCommand(MY_DOUBLE_ALT)
+        }
+    }
 }
 
-~Shift::{ ; Shift 键一般用得很少
-    if (A_PriorHotkey != "~Shift" or A_TimeSincePriorHotkey > 210) {
+~Ctrl::{
+    if (ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey > 60 && A_TimeSincePriorHotkey < 210) {
+        if (MY_DOUBLE_CTRL != '' && MsgBox("打开/运行" . MY_DOUBLE_CTRL . "?", APP_NAME, "YesNo") = "Yes") {
+            openInnerCommand(MY_DOUBLE_CTRL)
+        }
+    }           
+}
+
+~Shift::{ ; Shift 键用得少
+    if (A_PriorHotkey != "~Shift" || A_TimeSincePriorHotkey > 170) {
         KeyWait "Shift"
         return
     }
-    if (MsgBox("立即锁屏?", APP_NAME, "YesNo") = "Yes")
-        SystemSleepScreen()
+    if (MsgBox("打开/运行" . MY_DOUBLE_SHIFT . "?", APP_NAME, "YesNo") = "Yes") {
+        openInnerCommand(MY_DOUBLE_SHIFT)
+    }
 }
+
 ~^c::{ ; 监控 ctrl + 按键
-    global ctrlTimeStamp := A_NowUTC
+    global CTRL_TIMESTAMP := A_NowUTC
 }
 ~^v::{ ; 监控 ctrl + 按键
-    global ctrlTimeStamp := A_NowUTC
+    global CTRL_TIMESTAMP := A_NowUTC
 }
 
 ; CapsLock 模式
 ; 短按依旧有用，但是 CapsLock + 其他键有自己的用法，且确保了 CapsLock 灯不会闪
 
-global CapsLock := ""
-global CapsLock2 := ""
+global IS_CAPS_PRESSED := False
+;Capslock2: 是否使用过 Capslock+ 功能标记，使用过会清除这个变量
+global ENABLE_CHANGE_CAPS_STATE := False
 
 Capslock::{
-    global CapsLock, CapsLock2
-    ;Capslock:  Capslock 键状态标记，按下是 1，松开是 0
-    ;Capslock2: 是否使用过 Capslock+ 功能标记，使用过会清除这个变量
-    CapsLock := CapsLock2 := 1
+    global IS_CAPS_PRESSED, ENABLE_CHANGE_CAPS_STATE
 
-    SetTimer(setCapsLock2, -300) ; 300ms 犹豫操作时间
-
+    IS_CAPS_PRESSED := ENABLE_CHANGE_CAPS_STATE := True
+    
+    SetTimer(disableCapsChange, -300) ; 300ms 犹豫操作时间
     KeyWait "CapsLock" ; 等待用户物理释放按键
-    CapsLock := "" ; Capslock 先置空，来关闭 Capslock+ 功能的触发
+    IS_CAPS_PRESSED := False ; Capslock 先置空，来关闭 Capslock+ 功能的触发
     ; 松开的时候才切换大小写
-    if CapsLock2
-        SetCapsLockState !GetKeyState("CapsLock", "T")
-    CapsLock2 := ""
+    if (ENABLE_CHANGE_CAPS_STATE) {
+        ; 切换 CapsLock 到相反的状态
+        SetCapsLockState(!GetKeyState("CapsLock", "T"))
+    }
+    disableCapsChange()
 }
 
 ; 需要按一次按键才会生效，时好时坏
-#HotIf CapsLock
+#HotIf IS_CAPS_PRESSED
+
 ; 相当于 CapsLock + t
-t::WinSetTransparent 210, 'A'
+t::WinSetTransparent(210, 'A')
 
 ; 相当于 CapsLock + Z 复制路径
-z::{
-    A_Clipboard := ""
-    Send "^c"
-    if !ClipWait(1) {
-        Tip("复制失败")
-    } else {
-        A_Clipboard := A_Clipboard
-        Tip("路径已复制")
-    }
-}
+z::copySelectedAsPlainText()
+
 ; 恢复不透明
-x::WinSetTransparent "Off", 'A'
+x::WinSetTransparent("Off", 'A')
+
+; 复制选中文件路径并打开 anyrun 组件
+Space::{
+    global CTRL_TIMESTAMP := A_NowUTC
+    copySelectedAsPlainTextQuiet()
+    ; 由于命令发送 ctrl + c 不会触发监听则手动更新
+    anyrun()
+}
 #HotIf
 
-setCapsLock2() {
-    global CapsLock2 := ""
+disableCapsChange() {
+    global ENABLE_CHANGE_CAPS_STATE := False
 }

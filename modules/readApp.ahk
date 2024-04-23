@@ -1,163 +1,165 @@
-﻿Text_Group := 'text_group'
+﻿global TEXT_GROUP := 'text_group'
+; 完善 TEXT_GROUP 组信息
+GroupAdd TEXT_GROUP, 'ahk_class ^AutoHotkeyGUI$'
 
-global appList := parseApp('app.csv')
+parseAppCSV()
 
-; 完善 text_group 组信息
-GroupAdd Text_Group, 'ahk_class ^AutoHotkeyGUI$'
-
-; 注册热键 和 热字符串
-Loop appList.Length {
-  if A_Index <= 1
-    continue
-
-  it := appList[A_Index]
-  if it.highLevel {
-    ; 高优先级
-    ; e 列 esc
-    switch it.escape, 'Off' {
-      ; 窗口组可以为一组窗口执行统一操作
-      case "WinClose", '关闭': GroupAdd('HL_esc_WinClose', it.exe)
-    }
-    ; f 列 关闭
-    switch it.close, 'Off' {
-      case "Esc", "{Esc}": GroupAdd('HL_close_Esc', it.exe)
-      case "!F4", "!{F4}": GroupAdd('HL_close_alt_F4', it.exe)
-      case "^F4", "^{F4}": GroupAdd('HL_close_ctrl_F4', it.exe)
-    }
-  } else {
-    ; 低优先级
-    ; d 列 新建
-    switch it.new, 'Off' {
-      case "F3", "{F3}": GroupAdd("new_F3", it.exe)
-      case 'F8', "{F8}": GroupAdd("new_F8", it.exe)
-      case 'L', : GroupAdd("new_L", it.exe)
-      case "!a": GroupAdd("new_alt_a", it.exe)
-      case "!c": GroupAdd("new_alt_c", it.exe)
-
-      case "!n": GroupAdd("new_alt_n", it.exe)
-      case "!o": GroupAdd("new_alt_o", it.exe)
-      case "^n": GroupAdd("new_ctrl_n", it.exe)
-      case "^o": GroupAdd("new_ctrl_o", it.exe)
-      case "^t": GroupAdd("new_ctrl_t", it.exe)
-
-      case "^!t", "!^t": GroupAdd('new_ctrl_alt_t', it.exe)
-      case "^+t", "+^t": GroupAdd('new_ctrl_shift_t', it.exe)
-      case "^+n", "+^n": GroupAdd('new_ctrl_shift_n', it.exe)
-    }
-    ; e 列 esc
-    switch it.escape, 'Off' {
-      case "WinClose", '关闭': GroupAdd("esc_WinClose", it.exe)
-    }
-    ; f 列 关闭
-    switch it.close, 'Off' {
-      case "WinClose", '关闭': GroupAdd("close_WinClose", it.exe)
-      case "Esc", "{Esc}": GroupAdd("close_Esc", it.exe)
-      case "]": GroupAdd("close_closeBracket", it.exe)
-      case '!F4', "!{F4}": GroupAdd("close_alt_F4", it.exe)
-      case "!l": GroupAdd("close_alt_L", it.exe)
-
-      case "!q": GroupAdd("close_alt_q", it.exe)
-      case "!w": GroupAdd("close_alt_w", it.exe)
-      case "^F4", "^{F4}": GroupAdd("close_ctrl_F4", it.exe)
-      case "^w": GroupAdd("close_ctrl_w", it.exe)
-      case "^!q", "!^q": GroupAdd("close_ctrl_alt_q", it.exe)
-
-      case "^+w", "+^w": GroupAdd("close_ctrl_shift_w", it.exe)
-    }
-    ; g 列 前进
-    switch it.forward, 'Off' {
-      case "Media_Next", "{Media_Next}": GroupAdd "forward_MediaNext", it.exe
-      case "PgDn", "{PgDn}": GroupAdd "forward_PgDn", it.exe
-      case "Right", "{Right}": GroupAdd "forward_Right", it.exe
-      case "b": GroupAdd "forward_b", it.exe
-      case "n": GroupAdd "forward_n", it.exe
-
-      case "z": GroupAdd("forward_z", it.exe)
-      case "^Right", "^{Right}": GroupAdd("forward_ctrl_Right", it.exe)
-      case "^Tab", "^{Tab}": GroupAdd("forward_ctrl_Tab", it.exe)
-      case '^]': GroupAdd("forward_ctrl_closeBracket", it.exe)
-      case "^n" : GroupAdd("forward_ctrl_n", it.exe)
-
-      case "^!Right", "^!{Right}", "!^Right", "!^{Right}": GroupAdd("forward_ctrl_alt_Right", it.exe)
-      case "^+Right", "^+{Right}", "+^Right", "+^{Right}": GroupAdd("forward_ctrl_shift_Right", it.exe)
-    }
-    ; h 列 下个标签
-    switch it.nextTag, 'Off' {
-      case ']': GroupAdd("next_closeBracket", it.exe)
-      case 'Down', "{Down}": GroupAdd("next_Down", it.exe)
-      case 'Media_Next', "{Media_Next}": GroupAdd("next_MediaNext", it.exe)
-      case 'PgDn', '{PgDn}': GroupAdd("next_PgDn", it.exe)
-      case "b": GroupAdd("next_b", it.exe)
-
-      case "n": GroupAdd('next_n', it.exe)
-      case "z": GroupAdd('next_z', it.exe)
-      case "!]": GroupAdd('next_alt_closeBracket', it.exe)
-      case "^]": GroupAdd('next_ctrl_closeBracket', it.exe)
-      case "!Right", "!{Right}": GroupAdd('next_alt_Right', it.exe)
-
-      case "^PgDn", "^{PgDn}": GroupAdd('next_ctrl_PgDn', it.exe)
-      case "^Right", "^{Right}": GroupAdd("next_ctrl_Right", it.exe)
-      case "^n": GroupAdd("next_ctrl_n", it.exe)
-      case "^!PgDn", "^!{PgDn}", "!^PgDn", "!^{PgDn}": GroupAdd("next_ctrl_alt_PgDn", it.exe)
-      case "^!Right", "^!{Right}", "!^Right", "!^{Right}": GroupAdd("next_ctrl_alt_Right", it.exe)
-
-      case "^+Right", "^+{Right}", "+^Right", "+^{Right}": GroupAdd("next_ctrl_shift_Right", it.exe)
-    }
-    ; I 列 后退
-    switch it.back, 'Off' {
-      case 'BackSpace', "{BackSpace}", "退格": GroupAdd("back_BackSpace", it.exe)
-      case 'Left', "{Left}": GroupAdd("back_Left", it.exe)
-      case 'Media_Prev', "{Media_Prev}": GroupAdd("back_MediaPrev", it.exe)
-      case 'PgUp', "{PgUp}": GroupAdd("back_PgUp", it.exe)
-      case 'Up', "{Up}": GroupAdd("back_Up", it.exe)
-
-      case "v": GroupAdd('back_v', it.exe)
-      case "z": GroupAdd('back_z', it.exe)
-      case "^[": GroupAdd('back_ctrl_openBracket', it.exe)
-      case "^Left", "^{Left}": GroupAdd('back_ctrl_Left', it.exe)
-      case "^b": GroupAdd('back_ctrl_b', it.exe)
-
-      case "^!Left", "^!{Left}", "!^Left", "!^{Left}": GroupAdd "back_ctrl_alt_Left", it.exe
-      case "^+Tab", "^+{Tab}", "+^Tab", "+^{Tab}": GroupAdd "back_ctrl_shift_Tab", it.exe
-      case "^+Left", "^+{Left}", "+^Left", "+^{Left}": GroupAdd "back_ctrl_shift_Left", it.exe
-    }
-    ; J 列 上个标签
-    switch it.previousTag, 'Off' {
-      case "p": GroupAdd('previous_p', it.exe)
-      case "z": GroupAdd('previous_z', it.exe)
-      case "[": GroupAdd('previous_openBracket', it.exe)
-      case 'Media_Play_Pause', "{Media_Play_Pause}": GroupAdd("previous_MediaPlayPause", it.exe)
-      case 'Media_Prev', "{Media_Prev}": GroupAdd("previous_MediaPrev", it.exe)
-
-      case 'PgUp', "{PgUp}": GroupAdd('previous_PgUp', it.exe)
-      case 'Space', "{Space}", "空格": GroupAdd('previous_Space', it.exe)
-      case 'Up', "{Up}": GroupAdd('previous_Up', it.exe)
-      case "v": GroupAdd('previous_v', it.exe)
-      case "!0": GroupAdd('previous_alt_0', it.exe)
-
-      case "![": GroupAdd('previous_alt_openBracket', it.exe)
-      case "!Left", "!{Left}": GroupAdd('previous_alt_Left', it.exe)
-      case "^[": GroupAdd('previous_ctrl_openBracket', it.exe)
-      case "^Left", "^{Left}": GroupAdd('previous_ctrl_Left', it.exe)
-      case "^PgUp", "^{PgUp}": GroupAdd('previous_ctrl_PgUp', it.exe)
-
-      case "^b": GroupAdd('previous_ctrl_b', it.exe)
-      case "^!Left", "^!{Left}", "!^Left", "!^{Left}": GroupAdd("previous_ctrl_alt_Left", it.exe)
-      case "^+Left", "^+{Left}", "+^Left", "+^{Left}": GroupAdd("previous_ctrl_shift_Left", it.exe)
-    }
-    ; k 列 新建窗口
-    switch it.newWin, 'Off' {
-      case "^n": GroupAdd("newWin_ctrl_n", it.exe)
-    }
-    ; l 列 全屏
-    switch it.fs, 'Off' {
-      case "DoubleClick", "双击": GroupAdd("fullscreen_DoubleClick", it.exe)
-      case "Enter", "{Enter}", "回车": GroupAdd("fullscreen_Enter", it.exe)
-      case "f": GroupAdd("fullscreen_f", it.exe)
-      case "!f": GroupAdd("fullscreen_alt_f", it.exe)
-      case "!Enter", "!{Enter}": GroupAdd("fullscreen_alt_Enter", it.exe)
-
-      case "^+F12", "^+{F12}", "+^F12", "+^{F12}": GroupAdd("fullscreen_ctrl_shift_F12", it.exe)
+parseAppCSV() {
+  applist := parseApp('app.csv')
+  ; 注册热键 和 热字符串
+  Loop applist.Length {
+    if A_Index <= 1
+      continue
+  
+    it := applist[A_Index]
+    if it.highLevel {
+      ; 高优先级
+      ; e 列 esc
+      switch it.escape, 'Off' {
+        ; 窗口组可以为一组窗口执行统一操作
+        case "WinClose", '关闭': GroupAdd('HL_esc_WinClose', it.exe)
+      }
+      ; f 列 关闭
+      switch it.close, 'Off' {
+        case "Esc", "{Esc}": GroupAdd('HL_close_Esc', it.exe)
+        case "!F4", "!{F4}": GroupAdd('HL_close_alt_F4', it.exe)
+        case "^F4", "^{F4}": GroupAdd('HL_close_ctrl_F4', it.exe)
+      }
+    } else {
+      ; 低优先级
+      ; d 列 新建
+      switch it.new, 'Off' {
+        case "F3", "{F3}": GroupAdd("new_F3", it.exe)
+        case 'F8', "{F8}": GroupAdd("new_F8", it.exe)
+        case 'L', : GroupAdd("new_L", it.exe)
+        case "!a": GroupAdd("new_alt_a", it.exe)
+        case "!c": GroupAdd("new_alt_c", it.exe)
+  
+        case "!n": GroupAdd("new_alt_n", it.exe)
+        case "!o": GroupAdd("new_alt_o", it.exe)
+        case "^n": GroupAdd("new_ctrl_n", it.exe)
+        case "^o": GroupAdd("new_ctrl_o", it.exe)
+        case "^t": GroupAdd("new_ctrl_t", it.exe)
+  
+        case "^!t", "!^t": GroupAdd('new_ctrl_alt_t', it.exe)
+        case "^+t", "+^t": GroupAdd('new_ctrl_shift_t', it.exe)
+        case "^+n", "+^n": GroupAdd('new_ctrl_shift_n', it.exe)
+      }
+      ; e 列 esc
+      switch it.escape, 'Off' {
+        case "WinClose", '关闭': GroupAdd("esc_WinClose", it.exe)
+      }
+      ; f 列 关闭
+      switch it.close, 'Off' {
+        case "WinClose", '关闭': GroupAdd("close_WinClose", it.exe)
+        case "Esc", "{Esc}": GroupAdd("close_Esc", it.exe)
+        case "]": GroupAdd("close_closeBracket", it.exe)
+        case '!F4', "!{F4}": GroupAdd("close_alt_F4", it.exe)
+        case "!l": GroupAdd("close_alt_L", it.exe)
+  
+        case "!q": GroupAdd("close_alt_q", it.exe)
+        case "!w": GroupAdd("close_alt_w", it.exe)
+        case "^F4", "^{F4}": GroupAdd("close_ctrl_F4", it.exe)
+        case "^w": GroupAdd("close_ctrl_w", it.exe)
+        case "^!q", "!^q": GroupAdd("close_ctrl_alt_q", it.exe)
+  
+        case "^+w", "+^w": GroupAdd("close_ctrl_shift_w", it.exe)
+      }
+      ; g 列 前进
+      switch it.forward, 'Off' {
+        case "Media_Next", "{Media_Next}": GroupAdd "forward_MediaNext", it.exe
+        case "PgDn", "{PgDn}": GroupAdd "forward_PgDn", it.exe
+        case "Right", "{Right}": GroupAdd "forward_Right", it.exe
+        case "b": GroupAdd "forward_b", it.exe
+        case "n": GroupAdd "forward_n", it.exe
+  
+        case "z": GroupAdd("forward_z", it.exe)
+        case "^Right", "^{Right}": GroupAdd("forward_ctrl_Right", it.exe)
+        case "^Tab", "^{Tab}": GroupAdd("forward_ctrl_Tab", it.exe)
+        case '^]': GroupAdd("forward_ctrl_closeBracket", it.exe)
+        case "^n" : GroupAdd("forward_ctrl_n", it.exe)
+  
+        case "^!Right", "^!{Right}", "!^Right", "!^{Right}": GroupAdd("forward_ctrl_alt_Right", it.exe)
+        case "^+Right", "^+{Right}", "+^Right", "+^{Right}": GroupAdd("forward_ctrl_shift_Right", it.exe)
+      }
+      ; h 列 下个标签
+      switch it.nextTag, 'Off' {
+        case ']': GroupAdd("next_closeBracket", it.exe)
+        case 'Down', "{Down}": GroupAdd("next_Down", it.exe)
+        case 'Media_Next', "{Media_Next}": GroupAdd("next_MediaNext", it.exe)
+        case 'PgDn', '{PgDn}': GroupAdd("next_PgDn", it.exe)
+        case "b": GroupAdd("next_b", it.exe)
+  
+        case "n": GroupAdd('next_n', it.exe)
+        case "z": GroupAdd('next_z', it.exe)
+        case "!]": GroupAdd('next_alt_closeBracket', it.exe)
+        case "^]": GroupAdd('next_ctrl_closeBracket', it.exe)
+        case "!Right", "!{Right}": GroupAdd('next_alt_Right', it.exe)
+  
+        case "^PgDn", "^{PgDn}": GroupAdd('next_ctrl_PgDn', it.exe)
+        case "^Right", "^{Right}": GroupAdd("next_ctrl_Right", it.exe)
+        case "^n": GroupAdd("next_ctrl_n", it.exe)
+        case "^!PgDn", "^!{PgDn}", "!^PgDn", "!^{PgDn}": GroupAdd("next_ctrl_alt_PgDn", it.exe)
+        case "^!Right", "^!{Right}", "!^Right", "!^{Right}": GroupAdd("next_ctrl_alt_Right", it.exe)
+  
+        case "^+Right", "^+{Right}", "+^Right", "+^{Right}": GroupAdd("next_ctrl_shift_Right", it.exe)
+      }
+      ; I 列 后退
+      switch it.back, 'Off' {
+        case 'BackSpace', "{BackSpace}", "退格": GroupAdd("back_BackSpace", it.exe)
+        case 'Left', "{Left}": GroupAdd("back_Left", it.exe)
+        case 'Media_Prev', "{Media_Prev}": GroupAdd("back_MediaPrev", it.exe)
+        case 'PgUp', "{PgUp}": GroupAdd("back_PgUp", it.exe)
+        case 'Up', "{Up}": GroupAdd("back_Up", it.exe)
+  
+        case "v": GroupAdd('back_v', it.exe)
+        case "z": GroupAdd('back_z', it.exe)
+        case "^[": GroupAdd('back_ctrl_openBracket', it.exe)
+        case "^Left", "^{Left}": GroupAdd('back_ctrl_Left', it.exe)
+        case "^b": GroupAdd('back_ctrl_b', it.exe)
+  
+        case "^!Left", "^!{Left}", "!^Left", "!^{Left}": GroupAdd "back_ctrl_alt_Left", it.exe
+        case "^+Tab", "^+{Tab}", "+^Tab", "+^{Tab}": GroupAdd "back_ctrl_shift_Tab", it.exe
+        case "^+Left", "^+{Left}", "+^Left", "+^{Left}": GroupAdd "back_ctrl_shift_Left", it.exe
+      }
+      ; J 列 上个标签
+      switch it.previousTag, 'Off' {
+        case "p": GroupAdd('previous_p', it.exe)
+        case "z": GroupAdd('previous_z', it.exe)
+        case "[": GroupAdd('previous_openBracket', it.exe)
+        case 'Media_Play_Pause', "{Media_Play_Pause}": GroupAdd("previous_MediaPlayPause", it.exe)
+        case 'Media_Prev', "{Media_Prev}": GroupAdd("previous_MediaPrev", it.exe)
+  
+        case 'PgUp', "{PgUp}": GroupAdd('previous_PgUp', it.exe)
+        case 'Space', "{Space}", "空格": GroupAdd('previous_Space', it.exe)
+        case 'Up', "{Up}": GroupAdd('previous_Up', it.exe)
+        case "v": GroupAdd('previous_v', it.exe)
+        case "!0": GroupAdd('previous_alt_0', it.exe)
+  
+        case "![": GroupAdd('previous_alt_openBracket', it.exe)
+        case "!Left", "!{Left}": GroupAdd('previous_alt_Left', it.exe)
+        case "^[": GroupAdd('previous_ctrl_openBracket', it.exe)
+        case "^Left", "^{Left}": GroupAdd('previous_ctrl_Left', it.exe)
+        case "^PgUp", "^{PgUp}": GroupAdd('previous_ctrl_PgUp', it.exe)
+  
+        case "^b": GroupAdd('previous_ctrl_b', it.exe)
+        case "^!Left", "^!{Left}", "!^Left", "!^{Left}": GroupAdd("previous_ctrl_alt_Left", it.exe)
+        case "^+Left", "^+{Left}", "+^Left", "+^{Left}": GroupAdd("previous_ctrl_shift_Left", it.exe)
+      }
+      ; k 列 新建窗口
+      switch it.newWin, 'Off' {
+        case "^n": GroupAdd("newWin_ctrl_n", it.exe)
+      }
+      ; l 列 全屏
+      switch it.fs, 'Off' {
+        case "DoubleClick", "双击": GroupAdd("fullscreen_DoubleClick", it.exe)
+        case "Enter", "{Enter}", "回车": GroupAdd("fullscreen_Enter", it.exe)
+        case "f": GroupAdd("fullscreen_f", it.exe)
+        case "!f": GroupAdd("fullscreen_alt_f", it.exe)
+        case "!Enter", "!{Enter}": GroupAdd("fullscreen_alt_Enter", it.exe)
+  
+        case "^+F12", "^+{F12}", "+^F12", "+^{F12}": GroupAdd("fullscreen_ctrl_shift_F12", it.exe)
+      }
     }
   }
 }
@@ -184,7 +186,7 @@ parseAppLine(line, eachLineLen) {
     return
   splitEachLineLen := Trim(split[eachLineLen])
   ; 过滤不启用的行
-  if NOT (splitEachLineLen == '' OR splitEachLineLen = 'y' OR splitEachLineLen == '是')
+  if NOT (splitEachLineLen == '' || splitEachLineLen = 'y' || splitEachLineLen == '是')
     return
 
   info := {}
@@ -209,35 +211,35 @@ parseAppLine(line, eachLineLen) {
 
   ; 过滤空行
   if (info.new == ''
-    AND info.escape == ''
-    AND info.close == ''
+    && info.escape == ''
+    && info.close == ''
 
-    AND info.forward == ''
-    AND info.nextTag == ''
-    AND info.back == ''
-    AND info.previousTag == ''
-    AND info.fs == ''
+    && info.forward == ''
+    && info.nextTag == ''
+    && info.back == ''
+    && info.previousTag == ''
+    && info.fs == ''
 
-    AND info.newWin == ''
+    && info.newWin == ''
   ) {
     return
   }
 
   name := Trim(split[1])
-  if name !== '' AND info.exe !== '' {
+  if name !== '' && info.exe !== '' {
     if 1 == InStr(name, "【浏览器】")
       GroupAdd "browser_group", info.exe
     else if (1 == InStr(name, "【editor】")
-        OR 1 == InStr(name, "【ftp】")
-        OR 1 == InStr(name, "【git】")
-        OR 1 == InStr(name, "【IDE】")
-        OR 1 == InStr(name, "【office】")
-        OR 1 == InStr(name, "【sql】")
-        OR 1 == InStr(name, "【窗口】")
-        OR '微信' = name
-        OR '腾讯 QQ' = name
+        || 1 == InStr(name, "【ftp】")
+        || 1 == InStr(name, "【git】")
+        || 1 == InStr(name, "【IDE】")
+        || 1 == InStr(name, "【office】")
+        || 1 == InStr(name, "【sql】")
+        || 1 == InStr(name, "【窗口】")
+        || '微信' = name
+        || '腾讯 QQ' = name
       ) {
-      GroupAdd(Text_Group, info.exe)
+      GroupAdd(TEXT_GROUP, info.exe)
     }
   }
   return info

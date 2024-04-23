@@ -1,6 +1,9 @@
 ﻿class MyTrayMenu {
-
+    
     __new() {
+        ; 当前是否是选中状态
+        global IS_AUTO_START_UP
+
         this.editScript:= '编辑脚本(&E)'
         this.ListVars:= '查看变量(&L)'
         this.pause := Format("{1:-10}", "暂停 Ctrl+Alt+S")
@@ -24,11 +27,10 @@
         this.linkFile := A_Startup "\jiejian.lnk"
 
         this.shortcut := unset
-        if (A_IsCompiled) {
+        if (A_IsCompiled)
             this.shortcut := 'jiejian' . (A_Is64bitOS ? '64' : '32' ) . '.exe'
-        } else {
+        else
             this.shortcut := 'jiejian.ahk'
-        }
         this.shortcut := A_WorkingDir . '\' . this.shortcut
 
         myTrayMenuHandler := this.TrayMenuHandler.Bind(this)
@@ -59,9 +61,7 @@
         A_TrayMenu.Add(this.exit, myTrayMenuHandler)
 
         ; 检查是否是自启状态
-        global IS_AUTO_START_UP
-        isLinkFileExist := FileExist(this.LinkFile)
-        if (isLinkFileExist) {
+        if FileExist(this.LinkFile) {
             ; 获取快捷方式(.lnk) 文件的信息, 例如其目标文件
             FileGetShortcut(this.LinkFile, &OutTarget)
             if (OutTarget !== this.shortcut) {
@@ -84,16 +84,18 @@
      * 
      * @param ItemName
      * @param ItemPos 
-     * @param MyMenu 
+     * @param MyMenu
      */
-    TrayMenuHandler(ItemName, ItemPos, MyMenu) {
+    TrayMenuHandler(ItemName, ItemPos, MyMenu) {        
+        global IS_AUTO_START_UP
+
         switch ItemName, 'off' {
         case this.editScript: Edit
         case this.ListVars: ListVars
         case this.pause: this.jiejianToggleSuspend
-        case this.restart: jiejianReload
-        case this.sou: Anyrun
-        case this.biaozhifu: Run "extra/WindowSpyU32.exe"
+        case this.restart: jiejianReload()
+        case this.sou: anyrun()
+        case this.biaozhifu: Run("extra/WindowSpyU32.exe")
         case this.tongji:
             ; 统计软件使用总分钟数
             recordMinsValueName := 'record_mins'
@@ -125,8 +127,6 @@
             }                     
             MsgBox(sb, '使用统计')
         case this.kaijiziqi:
-            ; 当前是否是选中状态
-            global IS_AUTO_START_UP
             ; 当前是开机自启
             if (IS_AUTO_START_UP) {
                 ; 设置为开机不自启
@@ -144,14 +144,14 @@
             case this.followMeGH: Run('https://github.com/acc8226')
             case this.update: checkUpdate(true)
             case this.about: MsgBox(      
-            '版本: ' . CodeVersion
-            "`nAHK 主程序版本: " . A_AhkVersion
-            "`nWindows " . A_OSVersion . (A_Is64bitOS ? ' x64' : '')
-            "`n计算机名: " . A_ComputerName
-            "`n当前用户: " . A_UserName
-            "`n是否管理员权限运行: " . (A_IsAdmin ? '是' : '否')
-            "`n是否 64 位程式: " . (A_PtrSize == 8 ? '是' : '否')
-            , APP_NAME, 'Iconi')
+                '版本: ' . CODE_VERSION
+                "`nAHK 主程序版本: " . A_AhkVersion
+                "`nWindows " . A_OSVersion . (A_Is64bitOS ? ' x64' : '')
+                "`n计算机名: " . A_ComputerName
+                "`n当前用户: " . A_UserName
+                "`n是否管理员权限运行: " . (A_IsAdmin ? '是' : '否')
+                "`n是否 64 位程式: " . (A_PtrSize == 8 ? '是' : '否')
+                , APP_NAME, 'Iconi')
         case this.exit: jiejianExit
         }
     }

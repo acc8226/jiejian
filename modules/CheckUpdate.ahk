@@ -1,8 +1,8 @@
 ﻿CheckUpdate(isNeedCallback := false) {
-    localIsAlphaOrBeta := InStr(CodeVersion, "alpha") or InStr(CodeVersion, "beta")
+    localIsAlphaOrBeta := InStr(CODE_VERSION, "alpha") || InStr(CODE_VERSION, "beta")
     regValueName := 'last_check_date'
     ; 手动检查更新 或 本地为调试版本 或 正式版的检查间隔需大于 24 小时
-    if (isNeedCallback or localIsAlphaOrBeta or DateDiff(A_NowUTC, RegRead(REG_KEY_NAME, regValueName, '20000101000000'), "days") >= 1) {
+    if (isNeedCallback || localIsAlphaOrBeta || DateDiff(A_NowUTC, RegRead(REG_KEY_NAME, regValueName, '20000101000000'), "days") >= 1) {
         req := ComObject("Msxml2.XMLHTTP")
         ; 打开启用异步的请求.
         checkUrl := 'https://acc8226.atomgit.net/jiejian/' . (localIsAlphaOrBeta ? "SNAPSHOT" : "RELEASE")
@@ -21,14 +21,14 @@
                 ; 正式版需要写入当前日期信息
                 if (not localIsAlphaOrBeta)
                     RegWrite(A_NowUTC, "REG_SZ", REG_KEY_NAME, regValueName)
-                if VerCompare(CodeVersion, serverVersion) < 0 {
-                    if MsgBox("捷键 " CodeVersion " 非最新，去下载最新版 " serverVersion "？", "检查更新", "YesNo") = "Yes"
+                if VerCompare(CODE_VERSION, serverVersion) < 0 {
+                    if MsgBox("捷键 " CODE_VERSION " 非最新，去下载最新版 " serverVersion "？", "检查更新", "YesNo") = "Yes"
                         Run('https://gitcode.com/acc8226/jiejian/releases/')
                 } else if (isNeedCallback)
                     MsgBox('当前已是最新版本', '检查更新-捷键')
             } else if (isNeedCallback) {
                 ; 0 表示安全证书的吊销信息不可用， 12007 表示没有网
-                if (req.status = 0 or req.status = 12007) {
+                if (req.status = 0 || req.status = 12007) {
                     MsgBox("请连接网络后重试", '检查更新-捷键')
                     SetTimer CheckUpdate, -60 * 60 * 1000 ; 无网络则 60 分钟后重试
                 } else if (req.status = 404) {

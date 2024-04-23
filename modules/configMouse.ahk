@@ -55,13 +55,13 @@ XButton2::Send "{Media_Prev}"
 ; 鼠标移动到屏幕左边缘
 mouseIsOnLeftEdge() {
   MouseGetPos &OutputVarX
-  return OutputVarX >= 0 and OutputVarX <= 2
+  return OutputVarX >= 0 && OutputVarX <= 2
 }
 
 ; 鼠标移动到屏幕上边缘
 mouseIsOnTopEdge() {
   MouseGetPos , &OutputVarY
-  return OutputVarY >= 0 and OutputVarY <= 2
+  return OutputVarY >= 0 && OutputVarY <= 2
 }
 
 MouseIsOver(WinTitle) {
