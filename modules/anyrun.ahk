@@ -42,8 +42,6 @@ global MyActionArray := [
 #HotIf
 
 anyrun() {
-    global MY_GUI
-
     guiTitle := "快捷启动"
     ; 检查窗口是否已经存在，如果窗口已经存在，如果窗口不存在，则创建新窗口
     if WinExist(guiTitle)
@@ -55,7 +53,7 @@ anyrun() {
         ; Owner 可以让当前窗口从属于另一个窗口。从属的窗口默认不显示在任务栏, 并且它总是显示在其父窗口的上面. 当其父窗口销毁时它也被自动销毁
         ; -Caption 移除背景透明的窗口的边框和标题栏
         ; -Resize 禁止用户重新调整窗口的大小
-        MY_GUI := Gui('AlwaysOnTop Owner -Caption -Resize', guiTitle)
+        global MY_GUI := Gui('AlwaysOnTop Owner -Caption -Resize', guiTitle)
         ; 横向和纵向边框收窄
         MY_GUI.MarginX := 3.7
         MY_GUI.MarginY := 3.1
@@ -109,7 +107,6 @@ anyrun() {
                 MY_GUI.Show('AutoSize')
                 return
             }
-            listBoxDataArray := unset
             dataArray := unset
             ; 精确匹配失败 将 转到模糊匹配
             ; 若为空则清空列表 或 大于设定长度 或 非字母和数字汉子和空格的组合则退出 \u4e00-\u9fa5 可以表示为 一-龥
@@ -150,11 +147,15 @@ anyrun() {
                     }
                 }
             }
-            if (IsSet(dataArray) && dataArray.Length > 0) {
+            listBoxDataArray := unset
+            if (NOT IsSet(dataArray) || dataArray.Length == 0)
+                listBoxDataArray := []
+
+
+            else {
                 dataArraySort(dataArray)
                 listBoxDataArray := listBoxData(dataArray)
-            } else
-                listBoxDataArray := []
+            }
 
             ; 搜索匹配
             ; 查询出所有搜索，如果前缀满足则添加到列表
@@ -170,9 +171,8 @@ anyrun() {
                     if action.HasOwnProp('appendTitle') {
                         ; 最终的标题
                         listBoxDataArray.push(action.title . action.appendTitle.Call(editValue))
-                    } else {
+                    } else
                         listBoxDataArray.push(action.title)
-                    }
             }
             if IsSet(MY_GUI) {
                 ; 显示出来
@@ -183,24 +183,20 @@ anyrun() {
                 }
                 MY_GUI.Show("AutoSize")
             } else
-                MsgBox 'anyrun 组件异常销毁'
+                MsgBox('anyrun 组件异常销毁', APP_NAME)
         }
 
         onEditLoseFocus(*) {
-            if (not listBox.Focused) {
-                if IsSet(MY_GUI) {
-                    MY_GUI.Destroy()
-                    MY_GUI := unset
-                }
+            if (NOT listBox.Focused && IsSet(MY_GUI)) {
+                MY_GUI.Destroy()
+                MY_GUI := unset
             }
         }
 
         onListboxLoseFocus(*) {
-            if (not myEdit.Focused) {
-                if IsSet(MY_GUI) {
-                    MY_GUI.Destroy()
-                    MY_GUI := unset
-                }
+            if (NOT myEdit.Focused && IsSet(MY_GUI)) {
+                MY_GUI.Destroy()
+                MY_GUI := unset                
             }
         }
 
@@ -442,10 +438,7 @@ openDir(path) {
 }
 
 delFileOrDir(path) {
-    if DirExist(path)
-        DirDelete(path)
-    else
-        FileDelete (path)
+    DirExist(path) ? DirDelete(path) : FileDelete(path)
 }
 
 openInTerminal(path) {
@@ -485,10 +478,16 @@ openInIDEA(path) {
 openInnerCommand(title, isConfirm := False) {
     switch title {
         case '重启': 
-            if isConfirm && MsgBox("立即" . title . "?", APP_NAME, "YesNo") = "Yes"
+            if (isConfirm) {
+                if (MsgBox("立即" . title . "?", APP_NAME, "YesNo") = "Yes")
+                    SystemReboot()
+            } else
                 SystemReboot()
         case '关机': 
-            if isConfirm && MsgBox("立即" . title . "?", APP_NAME, "YesNo") = "Yes"
+            if (isConfirm) {
+                if (MsgBox("立即" . title . "?", APP_NAME, "YesNo") = "Yes")
+                    SystemShutdown()
+            } else
                 SystemShutdown()
         case '锁屏': SystemLockScreen()
         case '睡眠': SystemSleep()
@@ -513,7 +512,7 @@ openInnerCommand(title, isConfirm := False) {
         case '我的图片': Run("shell:My Pictures")
         case '我的视频': Run("shell:My Video")
         case '我的音乐': Run("shell:My Music")
-        default: MsgBox '非系统内置命令！'
+        default: MsgBox('非系统内置命令！', APP_NAME)
     }
 }
 
@@ -522,5 +521,5 @@ getIPAddresses() {
     msg := "IP 地址:`n"
     for address in addresses
         msg .= address "`n"
-    MsgBox(msg)
+    MsgBox(msg, APP_NAME)
 }

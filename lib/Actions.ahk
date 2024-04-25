@@ -131,3 +131,39 @@ copySelectedAsPlainTextQuiet() {
   }
   A_Clipboard := A_Clipboard
 }
+
+/**
+ * 窗口最大化
+ */
+MaximizeWindow() {
+  if NotActiveWin()
+    return
+
+  if WindowMaxOrMin() {
+    WinRestore("A")
+  } else
+    WinMaximize("A")
+}
+
+/**
+ * 窗口最小化
+ */
+MinimizeWindow() {
+  if (NotActiveWin() || WinGetProcessName("A") == "Rainmeter.exe")
+    return
+
+  WinMinimize("A")
+}
+
+/**
+ * 移动活动窗口位置
+ */
+MakeWindowDraggable() {
+  hwnd := WinExist("A")
+  if (WindowMaxOrMin())
+    WinRestore("A")
+
+  PostMessage("0x0112", "0xF010", 0)
+  Sleep 50
+  SendInput("{Right}")
+}

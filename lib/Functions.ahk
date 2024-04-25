@@ -384,3 +384,12 @@ ShellRun(target, arguments?, directory?, operation?, show?) {
   ComObject("Shell.Application").Windows.Item(SWC_DESKTOP).Document.Application
     .ShellExecute(target, arguments?, directory?, operation?, show?)
 }
+
+/**
+ * 当前窗口是最大化还是最小化
+ * @param {string} winTitle AHK中的WinTitle
+ * @returns {number} 
+ */
+WindowMaxOrMin(winTitle := "A") {
+  return WinGetMinMax(winTitle)
+}

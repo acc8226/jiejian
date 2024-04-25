@@ -521,4 +521,4 @@ F11::Send '^+{F12}'
 
 ; ctrl + F7 通用：置顶/取消置顶
 #HotIf
-^F7::ToggleWindowTopMost
+^F7::ToggleWindowTopMost()
