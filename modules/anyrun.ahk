@@ -55,8 +55,8 @@ anyrun() {
         ; -Resize 禁止用户重新调整窗口的大小
         global MY_GUI := Gui('AlwaysOnTop Owner -Caption -Resize', guiTitle)
         ; 横向和纵向边框收窄
-        MY_GUI.MarginX := 3.7
-        MY_GUI.MarginY := 3.1
+        MY_GUI.MarginX := 3.6
+        MY_GUI.MarginY := MY_GUI.MarginX
         fontSize := 's21'
         MY_GUI.SetFont(fontSize, 'Consolas') ; 设置兜底字体(21 磅) Consolas
         MY_GUI.SetFont(fontSize, 'Microsoft YaHei') ; 设置优先字体(21 磅) 微软雅黑
@@ -187,14 +187,14 @@ anyrun() {
         }
 
         onEditLoseFocus(*) {
-            if (NOT listBox.Focused && IsSet(MY_GUI)) {
+            if (IsSet(MY_GUI) && !listBox.Focused) {
                 MY_GUI.Destroy()
                 MY_GUI := unset
             }
         }
 
         onListboxLoseFocus(*) {
-            if (NOT myEdit.Focused && IsSet(MY_GUI)) {
+            if (IsSet(MY_GUI) && !myEdit.Focused) {
                 MY_GUI.Destroy()
                 MY_GUI := unset                
             }
@@ -291,7 +291,7 @@ computeDegree(regExMatchInfo) {
         item := SUPPORT_LEN - regExMatchInfo.Pos[A_Index]
         if (item < 0)
             break
-        degree += 2 ** item
+        degree += (2 ** item)
     }
     return degree
 }
@@ -381,7 +381,7 @@ appendFileType(path) {
 
     switch extension, false {
         case '7z', 'zip', 'rar', 'tar', 'gz', 'bz2': return "压缩包"
-        case 'apk': return " Android 应用安装包"
+        case 'apk': return " Android 安装包"
         case 'bat', 'cmd': return " Windows 批处理文件"
         case 'bmp', 'jpeg', 'jpg', 'png', 'gif', 'webp', 'tiff', 'ico': return "图像文件"
         case 'css': return " CSS 样式表"
@@ -414,7 +414,7 @@ appendFileType(path) {
         case 'pptx': return " PowerPoint 演示文稿"
         case 'psd': return " Microsoft Visio 文件"
         case 'ps1': return " PowerShell 脚本文件"
-        case 'py': return " python 脚本文件"
+        case 'py': return " Python 脚本文件"
         case 'rtf': return "富文本文档"
         case 'svg': return "可缩放矢量图形文件"
         case 'txt': return "纯文本"
@@ -491,7 +491,7 @@ openInnerCommand(title, isConfirm := False) {
                 SystemShutdown()
         case '锁屏': SystemLockScreen()
         case '睡眠': SystemSleep()
-        case '屏幕保护程序': SendMessage 0x0112, 0xF140, 0,, "Program Manager" ; 0x0112 为 WM_SYSCOMMAND, 而 0xF140 为 SC_SCREENSAVE.
+        case '激活屏幕保护程序': SendMessage(0x0112, 0xF140, 0,, "Program Manager") ; 0x0112 为 WM_SYSCOMMAND, 而 0xF140 为 SC_SCREENSAVE.
         case '清空回收站': FileRecycleEmpty()
         case '息屏': SystemSleepScreen()
         case '注销': SystemLogoff()

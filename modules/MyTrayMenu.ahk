@@ -6,9 +6,9 @@
 
         this.editScript:= '编辑脚本(&E)'
         this.ListVars:= '查看变量(&L)'
-        this.pause := Format("{1:-10}", "暂停 Ctrl+Alt+S")
-        this.restart:= '重启 Ctrl+Alt+R'
-        this.sou:= '搜一搜 Alt+空格'
+        this.pause := Format("{1:-10}", "暂停(Ctrl+Alt+S)")
+        this.restart:= '重启(Ctrl+Alt+R)'
+        this.sou:= '搜一搜(Alt+空格)'
         this.biaozhifu:= '查看窗口标识符(&V)'
         this.tongji:= '使用统计(&S)'
         this.kaijiziqi:= '开机自启(&A)'
@@ -16,10 +16,10 @@
         this.help:= '帮助(&H)'
         this.document:= '文档(&D)'
         this.video:= '视频教程(&V)'
-        this.followMeCSDN:= '在 CSDN 上关注我(&F)'
+        ; this.followMeCSDN:= '在 CSDN 上关注我(&F)'
         this.followMeGH:= '在 Github 上关注我(&F)'
         this.update:= '检查更新(&U)...'
-        this.about:= '关于(&A)...'
+        this.about:= '关于(&A)'
 
         this.exit:= '退出(&X)'
 
@@ -34,6 +34,9 @@
         this.shortcut := A_WorkingDir . '\' . this.shortcut
 
         myTrayMenuHandler := this.TrayMenuHandler.Bind(this)
+
+        ; 删除原有的 菜单项
+        A_TrayMenu.Delete()
         if (NOT A_IsCompiled) {
             A_TrayMenu.Add(this.editScript, myTrayMenuHandler)
             A_TrayMenu.Add(this.ListVars, myTrayMenuHandler)
@@ -52,7 +55,7 @@
         helpMenu := Menu()
         helpMenu.Add(this.document, myTrayMenuHandler)
         helpMenu.Add(this.video, myTrayMenuHandler)
-        helpMenu.Add(this.followMeCSDN, myTrayMenuHandler)
+        ; helpMenu.Add(this.followMeCSDN, myTrayMenuHandler)
         helpMenu.Add(this.followMeGH, myTrayMenuHandler)
         helpMenu.Add(this.update, myTrayMenuHandler)
         helpMenu.Add(this.about, myTrayMenuHandler)
@@ -140,17 +143,17 @@
     
             case this.document: Run('https://atomgit.com/acc8226/jiejian/blob/main/README.md')
             case this.video: Run('https://www.bilibili.com/video/BV19H4y1e7hJ')
-            case this.followMeCSDN: Run('https://blog.csdn.net/acc8226')
+            ; case this.followMeCSDN: Run('https://blog.csdn.net/acc8226')
             case this.followMeGH: Run('https://github.com/acc8226')
             case this.update: checkUpdate(true)
             case this.about: MsgBox(      
                 '版本: ' . CODE_VERSION
-                "`nAHK 主程序版本: " . A_AhkVersion
-                "`nWindows " . A_OSVersion . (A_Is64bitOS ? ' x64' : '')
-                "`n计算机名: " . A_ComputerName
-                "`n当前用户: " . A_UserName
-                "`n是否管理员权限运行: " . (A_IsAdmin ? '是' : '否')
-                "`n是否 64 位程式: " . (A_PtrSize == 8 ? '是' : '否')
+                . "`nAHK 主程序版本: " . A_AhkVersion
+                . "`nWindows " . A_OSVersion . (A_Is64bitOS ? ' x64' : '')
+                . "`n计算机名: " . A_ComputerName
+                . "`n当前用户: " . A_UserName
+                . "`n是否管理员权限运行: " . (A_IsAdmin ? '是' : '否')
+                . "`n是否 64 位程式: " . (A_PtrSize == 8 ? '是' : '否')
                 , APP_NAME, 'Iconi')
         case this.exit: jiejianExit
         }

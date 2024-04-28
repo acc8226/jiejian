@@ -1,32 +1,33 @@
 # 捷键 for win 使用说明
 
-基于 [Autohotkey2](https://www.autohotkey.com/) 开发，为简化 Windows 键鼠操作而生的按键映射/快捷键增强工具。既可当作一个传统启动器，又对鼠标🖱侧边按键和热字符支持良好。
+基于 [Autohotkey2](https://www.autohotkey.com/) 开发，为简化 Windows 键鼠操作而生的按键映射/快捷键增强工具。既可当作一个传统启动器，又对鼠标侧边按键和热字符支持良好。
 
 强烈建议搭配全局鼠标手势软件 + 带侧边按键的鼠标。
 
 [视频演示](https://www.bilibili.com/video/BV19H4y1e7hJ?vd_source=54168537affc2c02555097cb26797d99) ｜ [软件下载](https://atomgit.com/acc8226/jiejian/tags?tab=release)
 
-注意事项：
+**注意事项：**
 
 1. 若软件功能有差异，以最新版为准。
 2. 本程序开源，无毒无后门不收集任何信息。如被误报错杀，可加入安全类软件排除清单。
 
-## 和一些软件对比
+**和一些软件对比**
 
-当我断断续续开发几个月，发现市场上早就有了此类大厂软件根本比不了。我可能连其中任一软件的百分之十的完成度都达不到。
+当我开发几个月后，发现市场上早就有了此类成熟软件，根本比不了。我可能连其中任一软件的百分之十的完成度都达不到。
 
-| 功能 |  mac 平台 | win 平台 |
+| 功能 |  macOS 平台 | Windows 系统 |
 | ---- | ---- | ---- |
 | 侧边按键支持 | BetterAndBetter【免费】 | [捷键][]【免费】 |
-| 热字符串 | espanso【免费】 | [捷键][]【免费】 |
-| 启动器 | Raycast【免费】/ Alfred 【付费】| [捷键][]【免费】 |
+| 热字符串 | Espanso【免费】 | [捷键][]【免费】 |
+| 启动器 | Raycast【免费】 | [捷键][]【免费】 |
+| 程序窗口间切换 | hammerspoon【免费】 | [捷键][]【免费】 |
 
-既然比不了，毕竟这是我业余摸鱼节假日其他时间个人开发维护，优点怕只剩下功能较多和足够小巧了。这同时指导了我的下一步工作，将逐渐提升交互。尽量做到开箱即用。
+但这毕竟这是我业余摸鱼节假日其他时间个人开发维护，优点怕只剩下功能较多和足够小巧了。这同时指导了我的下一步工作，将逐渐提升交互。尽量做到开箱即用。
 
 ## 0. 程序目录结构
 
 1. custom/ 自定义 ahk 函数，用于自定义外部命令
-2. extra/【增强体验】 MyKeymap （免费）预设配置。WGestures 和 FastGestures 预设手势模版。WindowSpyU32.exe 用于查看窗口标识符。GenerateShortcuts.exe 用于生成快捷方式文件夹 shortcuts。
+2. extra/【增强体验】WGestures 和 FastGestures 预设手势模版。WindowSpyU32.exe 用于查看窗口标识符。GenerateShortcuts.exe 用于生成快捷方式文件夹 shortcuts。
 3. app.csv 配置文件
 4. data.csv 配置文件
 5. **jiejian32/64.exe** 分别为 32/64 位主程序。无需安装，双击即用，强烈建议设置为开机自启
@@ -38,12 +39,13 @@
 * 热字符串支持
 * 可作为启动器使用，由于定制化程度太高甚至会导致难以上手，提供快捷启动和内置系统命令（锁屏、睡眠、关机等）
 * 试验性的加入左键辅助功能
-* 建议搭配免费的全局鼠标手势软件和 [MyKeymap][]
+
+建议搭配免费的全局鼠标手势软件 WGestures 1【免费】/FastGestures【免费】/[WGestures 2【付费】][WGestures 2付费链接]，再说说题外话 mac 平台我觉得 BetterAndBetter【免费】做得很好。
 
 ## 2. 热键 之 键鼠操作
 
-~~1. 按住 CapsLock 后可以用鼠标左键拖动窗口~~
-2. 当鼠标移动到屏幕左边缘或者上边缘以及停留在任务栏时，鼠标滑轮滚动可以调节音量。
+1. 按住 CapsLock 后可以用鼠标左键拖动窗口
+2. 当鼠标移动到屏幕左边缘或者停留在任务栏时，鼠标滑轮滚动可以调节音量。
 
 ![](https://foruda.gitee.com/images/1689318820722473769/d4f9efe3_426858.gif)
 
@@ -63,8 +65,8 @@
 | - | Ctrl + Shift + Tab | 上左 | 上一个/prev | - | 上一页 | 上一曲 | 上个视频 | - | - | - | - | - |
 | - | Ctrl + Tab | 上右 | 下一个/next | - | 下一页 | 下一曲 | 下个视频 | - | - | - | - | - |
 | - | Ctrl + Shift + n | 右下 | 新建窗口/new| 新建窗口 | | | | | | | | |
-| - | Ctrl + F7 | 图形z | 置顶/zhiding | 置顶 | | | | | | | | |
-| - | F11 | 图形f | 全屏/fullscreen | 全屏/取消全屏 | | | | | | | | |
+| - | Ctrl + F7 | 右左 | 置顶/zhiding | 置顶 | | | | | | | | |
+| - | F11 | ↓↑ | 全屏/fullscreen | 全屏/取消全屏 | | | | | | | | |
 
 注：
 
@@ -269,22 +271,34 @@ data.csv 可自由配置
 
 ## 11. CapsLock 模式
 
-* CapsLock + t：当前窗口调成半透明(Translucent)
-* CapsLock + z：复制路径
-* CapsLock + x：当前窗口恢复不透明
-* CapsLock + 空格：复制路径 并打开 Anyrun 应用启动器
+在按下 CapsLock 键的同时再按下以下键，其中大部分按键习惯同 [MyKeymap][]。
 
-## 12. 双击 shift、ctrl、alt 模式
+| 按键 | 用途 |
+| ---- | ---- |
+| Q | 最大化或还原 |
+| W | 切换到上个窗口 |
+| E | 当前窗口恢复不透明 |
+| R | 在当前程序的窗口间轮换 |
+| T | 当前窗口调成半透明(Translucent) |
+| Y | 切换到上一个虚拟桌面 |
+| P | 切换到下一个虚拟桌面 |
+| Z | 复制文件路径或纯文本 |
+| X | 关闭窗口 |
+| V | 窗口移到下一个显示器 |
+| B | 窗口最小化 |
+| 空格 | 复制文件路径并打开 Anyrun 应用启动器 |
 
-试验性的引入双击模式，若 2 次双击小于 210 毫秒则触发，Shift 由于中英文切换经常用到，调至 170 毫秒。
+## 12. 双击模式
 
-预设动作如下，可以手动去 data.csv 中进行修改。
+预设动作如下，若 2 次双击小于 239 毫秒则触发
 
 * 双击 Alt：睡眠
-* 双击 Ctrl：关机
-* 双击 Shift：锁屏
+* 双击 Home：息屏
+* 双击 End：关机
 
-注：目前仅支持上述第 7 小节列出的所有内部命令。
+可以手动去 data.csv 中进行修改。
+由于中英文切换经常用到 Shift，日常快捷键常用到 ctrl，所以这两个按键不提供作为前置键的选项。
+d 列置空 或者 删除该列可以屏蔽该命令。目前仅支持上述第 7 小节列出的所有内部命令。
 
 ## 13. 自定义配置说明
 
@@ -332,164 +346,17 @@ anyrun 启动器用
 * H列 是否启用列，默认启用，不启用请填写 n 或者 N。
 * I列 备注列，改列不会被解析
 
-## 版本发布
-
-### 未来计划
+## 未来计划
 
 * 支持 Arc 浏览器 for windows
 * icon 点击后使用新图标，而不是系统样式的图标
 * 配置文件不太易用，需要优化
 
-### 捷键 2024.04
-
-* 支持 win 7 记事本和 IE 11 程式
-* 首次运行会生成快捷方式文件夹 shortcuts/ 供启动程序用
-* 快捷启动器 anyrun 增强，增强操作文件和网址的能力，搜索命令可去 data.csv 自定义、新增内部命令（关机、注销、锁屏、重启、上下一曲、暂停...）、外部命令（支持运行外部 ahk 脚本）
-* 增加打包 和 clean 脚本，双击 package.ahk 可方便打成7z 压缩包
-* 新增 FastGestures 鼠标手势支持
-* 新增 CapsLock 模式
-* 新增 双击 shift、ctrl、alt 模式
-
-### 捷键 2024.02
-
-2024 年 2 月 于祁阳
-
-日益完善，可能真是今年的最后一个版本
-
-* app.csv 新增 Ctrl + Shift + n 作为新建窗口的默认标识
-* csv 文件增加是否启用列
-* 重新设计了一版菜单，并增加开机自启选项
-* 新增一些看图、压缩、视频播放软件的支持
-* 增强搜一搜组件，现在支持录入文件/网址/程序后支持跳转了
-* 热键、热串若匹配则会有短暂提示
-* 音乐播放软件优先使用软件的快捷键，而非媒体快捷键
-* 鼠标在左或者上边缘的按键操作添加短暂提示
-* 试验性的增加左键辅助功能
-* 修复一些已知 bug
-
-### 捷键 2024.01
-
-2024 年 1 月 31 下午 于北京
-
-软件名由英文 shortcut 改为 jiejian
-
-这是 24 年的第一个版本，可能也是今年的最后一个版本。
-
-新增：
-
-* 完善对 JetBrains 系列软件的支持，包含衍生的 Google Android Studio 和 华为 DevEco Studio。完善 JetBrains 系列的关闭键的功能，可以智能关闭标签和窗口了
-* 完善一些对微软 office、文本编辑器、pdf 类、音视频类软件的支持
-* 新增鼠标中间和右键的按键支持
-* 新增 按住 CapsLock 后可以用鼠标左键拖动窗口 和 兜底的关闭功能更加完善了
-* 添加 MyKeymap 和 [WGestures 2][WGestures 2付费链接] 的鼠标手势的玩法
-* 重新定义了一套菜单选项，增加软件使用统计 和 bug 修复。新增检查版本更新的功能
-* 新增 一键打包 package.ahk 脚本
-* 版本划分为正式版和测试版
-* csv 文件的字符集改为更适合本土体质的 GB18030
-* 添加了 Ctrl + F7 置顶功能 和 f11 全屏/取消全屏
-
-### 捷键 2023 年度纪念版
-
-这是 23 年最后的一个版本，在这里提前祝大家元旦快乐
-
-* 支持青鸟浏览器、小白浏览器、阿里云客户端、Spotify、CudaText、PotPlayer、Devecostudio 64 位。
-* 提供了 [WGestures 2][WGestures 2付费链接] 预设手势方案
-* bug 修复
-
-### 捷键 2023.10
-
-2023 年 10 月 30 晚 于北京
-
-新增：
-
-* 当鼠标在任务栏上定义左滑为上一首，右滑为下一首
-* 支持 稻壳阅读器、汽水音乐、navicat
-* 快速启动 新增 bing 搜索
-
-优化：
-
-* 当程序启动失败，添加了友好提示
-
-### 捷键 2023.09
-
-2023 年 9 月 29 晚 于北京
-
-新增
-
-* 支持 netbean、editplus、JB fleet、eclipse、myeclipse、Notepad--、Notepad++、SpringToolSuite4、sublime、ultraedit 64 位、HBuilderX
-
-优化
-
-* 导入 csv 的 path 支持首尾都包含双引号
-* 调整 x 模式的激活条件，使更合理
-
-### 捷键 v1.0.3 2023-8-27
-
-新增：
-
-* 热串 xnow 用于输出当前日期时间时间
-* 热串 xdate 用于 markdown 版输出当前日期时间时间
-
-优化：
-
-* 热串 x 模式主要用于拓展文本，限定范围为只在文本编辑框可编辑
-* 热串 z 模式主要用于打开网页，限定范围为排除在 vscode 和 浏览器中鼠标处于非光标形状下使用
-* 启用自定义系统栏图标，更有辨识度
-* 优化找不到目标应用的错误提示
-* 新增和关闭标签 适配 win11 新版 记事本
-* 新建标签/窗口 改为使用 Ctrl + F3
-* 删除用的不多的禁用脚本快捷键 Ctrl + Alt + s
-
-### 捷键 v1.0.2 2023-08-17
-
-优化：
-
-* 优先使用 WinClose "A" 去关闭窗口
-* anyrun 组件优先使用微软雅黑字体，匹配按照优先级排序：匹配位置 + 字符串长度
-* 关闭标签从 Ctrl + w 改为了 Ctrl + F4
-
-### 捷键 v1.0.1 2023-08-07
-
-新增：
-
-* 添加 ip 查询
-
-优化：
-
-* 捷键输入框不再区分大小写，具体规则是搜索按照匹配位置进行排序，首字母越先匹配到的越靠前
-
-### 捷键 v1.0.0 for windows 2023-07-22
-
-第一个正式版本
-
-* 代码注释调整 和 丰富数据源
-* 修复 bug
-* anyrun 组件完善当鼠标在窗口外点击后关闭窗口
-
-### 捷键 v0.0.2 for windows 2023-07-20
-
-* 运行框支持英文大小写混写
-* 创建 anyrun 组件以及其他优化
-
-### 捷键 v0.0.1 for windows 2023-07-13
-
-一个伟大的里程碑
-
 ## 常见问题
-
-### macOS 系统如何实现类似效果
-
-| 功能 |  mac 平台 | windows 系统 |
-| ---- | ---- | ---- |
-| 侧边按键支持 | BetterAndBetter【免费】 | [捷键][]【免费】 |
-| 热字符串 | espanso【免费】 | [捷键][]【免费】 |
-| 启动器 | raycast【免费】 | [捷键][]【免费】 |
-| 鼠标手势 | BetterAndBetter【免费】 | WGestures 1【免费】、 FastGestures【免费】 或  [WGestures 2【付费】][WGestures 2付费链接] |
-| 程序切换 | hammerspoon【免费】 | mykeymap【免费】 |
 
 ### 如何将捷键设置为开机自启
 
-在系统管理栏中找到捷键，右键设置开机自启即可。
+在系统栏中找到捷键，勾选开机自启即可。
 
 也可手动开启。运行 `shell:startup`，根据自己是 32 还是 64 位系统，按住 Alt 键后将 `jiejian32.exe` 或 `jiejian64.exe` 拖入 Startup 文件夹内即可。
 
@@ -501,64 +368,9 @@ anyrun 启动器用
 
 ### 软件搭配玩法
 
-#### 搭配 WGestures 2
+可搭配 WGestures 2
 
 由于 WGestures 1 由于不支持字母手势。这里我选用的是【付费】【win mac】[WGestures 2][WGestures 2付费链接]。它是一款跨平台全局鼠标手势，且完美契合本软件。目前售价 35 米，优惠的[购买地址][WGestures 2付费链接]我也放这儿了。
-
-| 方向 | 名称 | 按键/功能 | 是否可被捷键增强 |
-| ----  | ---- | ---- | ---- |
-| ↗︎ | 最大化/max | 最大化/还原 | - |
-| ↙︎ | 最小化/min | 最小化 | - |
-| ↘︎ | 复制/copy | Ctrl + c | - |
-| ↖︎ | 粘贴/paste | Ctrl + v | - |
-| ↑ | 新建/new | Ctrl + F8 | 是 |
-| ↓ | 关闭/close | Ctrl + F4 | 是 |
-| ← | 后退/prev | Alt ← | 是 |
-| → | 前进/next | Alt → | 是 |
-| ↩ | 重新打开/reopen | Ctrl + Shift + t | - |
-| ↪ | 关闭/close | Alt + F4 | - |
-| 上左 | 上一个/prev | Ctrl + Shift + tab | 是 |
-| 上右 | 下一个/next | Ctrl + tab | 是 |
-| 左上 | 剪切/cut | Ctrl + x | - |
-| 左下 | 删除/del | del | - |
-| 右上 | 跳转/jump | 跳转或搜索选定内容 | - |
-| 右下 | 新建窗口/new | Ctrl + Shift + n | 是 |
-| z （wg1 可使用右左代替） | 置顶/zhiding | Ctrl + F7 | 是 |
-| f （wg1 可使用下上代替）| 全屏/fullscreen | f11 | 是 |
-| p（wg1 可使用上下代替） | 暂停/pause | 空格 | - |
-| s（wg1 可使用左右代替） | 保存/save | Ctrl+s | - |
-| e | 退出/esc | esc | - |
-| r | 刷新/refresh | Ctrl + r | - |
-| ↗︎↘︎ | 全选/all | Ctrl + a | - |
-
-槽点：win 11 资源管理器的新建窗口，不过这样会使得新建文件夹失效，或许得鼠标手势进行区分了，但这就不简洁了。
-
-#### 搭配 MyKeymap
-
-CapsLock 模式
-
-| 按键 | 用途 | 当窗口不在时启动 |
-| ---- | ---- | ---- |
-| W | IDEA | |
-| E | VSCode | |
-| R | 在当前程序的窗口间轮换 | |
-| T | Termius | ahk_class Chrome_WidgetWin_1 ahk_exe Termius.exe |
-| A | 360 极速浏览器 | ahk_exe 360ChromeX.exe |
-| S | 资源管理器 | ahk_class CabinetWClass ahk_exe Explorer.EXE|
-| D | 微信 | ahk_exe WeChat.exe |
-| Z | 复制文件路径或纯文本 | |
-| X | 关闭窗口 | |
-| C | musicplayer2 | ahk_exe MusicPlayer2.exe |
-| V | 窗口最大化或还原 | |
-| N | 记事本 | ahk_exe Notepad.exe |
-| M | 窗口最小化 | |
-
-CapsLock 命令
-
-| 按键 | 要启动的程序 | 命令行参数 | 说明 |
-| ---- | ---- | ---- | ---- |
-| cc | shortcuts\Visual Studio Code.lnk | -n "{selected}" | 用 VS Code 打开选中的文件，在新窗口中打开 |
-| wt | wt.exe | -d "{selected}" | 用 Windows Terminal 打开选中的文件夹 |
 
 ### 已适配软件
 
@@ -750,54 +562,18 @@ CapsLock 命令
 
 不支持的软件：
 
-抖音、快压
+* 抖音
+* 快压
 
 无需适配的软件：
 
 * 西瓜视频
 
-已知 bug：
+### 已知 bug
 
 * 适配不太好的软件：Right PDF Reader 的鼠标侧边后退键无效。
-* 测试关闭窗口不奏效的软件：极客卸载、注册表编辑器、windows 任务管理器（似乎屏蔽了 Ctrl 键）、 WGestures 的导入导出窗口。
-
-### 开发思路
-
-遵从已有 windows 使用习惯，若非大改动，尽量增强已有快捷键。其他情况下则会考虑新造快捷键。
-
-每次打包都会输出到 out 目录。
-
-已知
-
-* F1 显示帮助
-* F2 重命名选定项
-* F3 搜索文件或文件夹
-* F4 在 Windows 资源管理器中显示地址栏列表
-* F5（或 Ctrl + R）刷新活动窗口
-* F6 循环浏览窗口中或桌面上的屏幕元素
-* F7：调用任务管理器。
-* F8：启动高级启动选项。
-* F9：在Windows Media Center中暂停或播放媒体。
-* F10 激活活动程序中的菜单栏/显示“选项”菜单，在Windows Media Center中向前或向后跳过媒体。
-* F11：在全屏模式下显示浏览器。 选用 作为万能全屏键
-* F12：在浏览器中打开开发人员工具。
-
-所以选用 Ctrl + F4 作为万能关闭键， 选用 Ctrl + F8 作为万能新建键。
-另外 Ctrl + F7 作为窗口置顶键。F11 依旧用于全屏和取消全屏。
-
-* 严格按照 ahk 中的 hotIf 的优先匹配原则。一般 esc 会在前。由于考虑到 Esc 逃逸键 用于关闭窗口，目前支持记事本中使用。
-* Ctrl + F8 为新建标签/窗口 避免和已有 Ctrl + t 冲突
-* Ctrl + Shift + Tab / Ctrl + Tab 切换到上/下个标签 默认不需要重写
-* Ctrl + F4 为关闭标签/窗口，避免和常见的 Ctrl + w 冲突
-* Ctrl + Shift + t 撤销关闭标签 默认不需要重写
-* Alt + 左方向键 比 backspace 更加通用
-* 后退 默认 Alt + 左
-* app.csv 中先后顺序关系通过优先级进行定义
-
-* 压缩软件：分别找出打开、前进和后退的快捷键。
-* 视频类软件：分别找出打开、快进、快退、切换上一个视频、切换下一个视频的快捷键。
-
-在考虑窗口匹配的规则中，ahk_exe 和 ahk_class 两者中，我一般会优先考虑 exe，但是如果 class 特别能表示出该软件则以它为准，必要时会考虑组合 exe 和 class。
+* Caps + x / ctrl + f4 关闭窗口对一些软件不奏效：极客卸载、注册表编辑器、windows 任务管理器（似乎屏蔽了 Ctrl 键）、高级系统设置等窗口、WGestures 的导入导出窗口。
+* 当任务管理器或者高级系统设置等窗口激活时鼠标滚轮捕捉不到，会导致鼠标靠在边界调节音量功能失效
 
 ### 软件升级
 
@@ -811,19 +587,9 @@ jiejian.exe 的文件版本为当前四位版本号，产品版本为当前编�
 
 另外 app.csv 和 data.csv 可按需覆盖。一般情况下建议 app.csv 和 data.csv 自定义内容追加在尾部，方便迁移数据。
 
-## 软件打包构建
-
-由于 Ahk2Exe 可以选择使用 MPRESS 或 UPX 这两款免费软件来压缩编译后的脚本。如果 MPRESS.exe 或 UPX.exe 已被复制到安装 AutoHotkey 的 "Compiler" 子文件夹中，则可以通过 /compress 参数（1 = 使用 MPRESS，2 = 使用 UPX）或 GUI 设置来压缩 .exe 文件。
-
-32 位平台我没试过，建议在 win 7 及其以上 64 位系统 + ahk2 + [UPX 4.2.2](https://github.com/upx/upx/releases/download/v4.2.2/upx-4.2.2-win64.zip) 及其以上的组合双击 package.bat 即可打包。
-
-package.bat 的设计思路：Ahk2Exe.exe 将 ahk 转化为 exe，期间使用 `/compress 2` 指定了压缩方式。ahk 编译会触发 jiejianPostExec.ahk。jiejianPostExec.ahk 则完成了写入版本信息、文件夹命名为 jiejian-版本，并使用 7z 压缩打包文件。
-
-但目前有个问题，jiejian32.exe 如果只打包一次无法拷贝到 out 目录下，目前我是修改脚本连续打包 2 次去解决的。
-
 ## 写在最后
 
-本程序编辑 csv 文件用到了开源的 LiberOffice。主要发布平台为 [GitHub](https://github.com) 和 [GitCode](https://gitcode.com)。项目主页发布在 GitHub Page。
+本程序编辑 csv 文件用到了开源软件 LiberOffice。主要发布平台为 [GitHub](https://github.com) 和 [AtomGit](https://atomgit.com)。
 
 由于 autohotkey 这门语言容易学习。再加上我之前编程功底，从设计到开发均由我一人完成。部分功能以及代码参考自 Windows 软件 [MyKeymap][] | [源码][MyKeymap Github repo]、[Capslock+][]，并从 Win 软件 [Quicker][]、[uTools][] 以及 macOS 软件 [BetterAndBetter][]、[HapiGo][] 和 [Raycast][] 中受到启发。在此默默感谢。
 

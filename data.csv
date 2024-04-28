@@ -25,7 +25,7 @@
 程序,shortcuts\360 安全卫士.lnk,,360 安全卫士,Anquanweishi|360安全卫士,,,,https://weishi.360.cn/
 程序,shortcuts\360 极速浏览器X.lnk,ahk_exe i)360ChromeX.exe,360 极速浏览器,jisuliulanqi|360极速浏览器,!2,,,https://browser.360.cn/ee/
 程序,shortcuts\360 软件管家.lnk,,360 软件管家,Ruanjianguanjia|360软件管家,,,,
-程序,shortcuts\Bandizip.lnk,,Bandizip,Bandizip,,,,https://www.bandisoft.com/bandizip/
+程序,C:\Program Files\Bandizip\Bandizip.exe,,Bandizip,Bandizip,,,,https://www.bandisoft.com/bandizip/
 程序,shortcuts\battle.net.lnk,,战网,zhanwang|battle|战网,,,,
 程序,shortcuts\Beekeeper-Studio.lnk,,BeekeeperStudio,BeekeeperStudio,,,,https://github.com/beekeeper-studio/beekeeper-studio/releases
 程序,shortcuts\Bitwarden.lnk,,Bitwarden,Bitwarden,,,,https://bitwarden.com/download
@@ -49,7 +49,7 @@
 程序,shortcuts\MQTTX.lnk,,MQTTX,MQTTX,,,,
 程序,shortcuts\PDManer.lnk,,PDManer,PDManer,,,,https://gitee.com/robergroup/pdmaner/releases
 程序,shortcuts\PixPin.lnk,,PixPin,PixPin,,,,https://pixpinapp.com
-程序,shortcuts\PotPlayerMini64.lnk,,PotPlayer,PotPlayer,,,,https://potplayer.org
+程序,C:\Program Files\DAUM\PotPlayer\PotPlayerMini64.exe,,PotPlayer,PotPlayer,,,,https://potplayer.org
 程序,shortcuts\pycharm64.lnk,,PyCharm,PyCharm,,,,https://www.jetbrains.com/zh-cn/pycharm/
 程序,shortcuts\QQ.lnk,,QQ,QQ ,,,,
 程序,shortcuts\QQMusic.lnk,,QQ 音乐,qqmusic|QQ音乐,,,,https://y.qq.com/download/index.html
@@ -74,7 +74,7 @@
 程序,shortcuts\方格音乐.lnk,,方格音乐,fanggeyinyue|方格音乐,,,,http://morin.vin
 程序,shortcuts\坚果云.lnk,,坚果云,jianguoyun|坚果云,,,,https://www.jianguoyun.com/s/downloads
 程序,shortcuts\荐片高清影音.lnk,,荐片,jianpian|荐片,,,,https://www.jianpian9.com 
-程序,shortcuts\极客卸载.lnk,,极客卸载,jikexiezai|uninstall|极客卸载,,,,https://geekuninstaller.com/download
+程序,shortcuts\geek.lnk,,极客卸载,jikexiezai|uninstall|极客卸载,,,,https://geekuninstaller.com/download
 程序,shortcuts\lx-music-desktop.lnk,,洛雪音乐助手,luoxueyinyuezhushou|洛雪音乐助手,,,,https://github.com/lyswhut/lx-music-desktop/releases
 程序,shortcuts\驱动精灵.lnk,,驱动精灵,qudongjingling|驱动精灵,,,,
 程序,shortcuts\驱动人生.lnk,,驱动人生,qudongrensheng|驱动人生,,,,
@@ -102,14 +102,14 @@
 文本,很牛呀,,,,,xnb,,
 文本,你妹的,,,,,xnm,,
 ,,,,,,,,
-文本,😄,,,,,xwx ,,微笑
-文本,😊,,,,,xlh,,脸红
-文本,👌,,,,,xok,,OK
-文本,❤️,,,,,xax,,爱心
-文本,📰,,,,,xbz,,报纸
-文本,🏷️,,,,,xbq,,标签
-文本,🔖,,,,,xsq,,书签
-文本,💩,,,,,xsh,,大便
+文本,??,,,,,xwx ,,微笑
+文本,??,,,,,xlh,,脸红
+文本,??,,,,,xok,,OK
+文本,????,,,,,xax,,爱心
+文本,??,,,,,xbz,,报纸
+文本,????,,,,,xbq,,标签
+文本,??,,,,,xsq,,书签
+文本,??,,,,,xsh,,大便
 ,,,,,,,,
 文本,```java{Enter}{Enter}```{Up},,,,,xjava,,
 文本,```js{Enter}{Enter}```{Up},,,,,xjs,,
@@ -210,8 +210,8 @@
 内部,,,下一曲,xiayiqu|下一曲 ,,,,
 内部,,,暂停,zantingbofang|暂停播放,,,,
 ,,,,,,,,
-双击Alt,,,睡眠 ,,,,,
-双击Ctrl,,,关机,,,,,
-双击Shift,,,锁屏 ,,,,,
+双击Alt,,,息屏,,,,,
+双击Home,,,睡眠,,,,,
+双击End,,,关机,,,,,
 ,,,,,,,,
 外部,custom\customAhkFile1.ahk,,hello,hello|哈喽,,,,

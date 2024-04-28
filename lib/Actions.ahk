@@ -1,7 +1,7 @@
 /**
  * 智能的关闭窗口
  */
-SmartCloseWindow() {
+smartCloseWindow() {
   if WinExist('A') {
     if IsDesktop()
       return
@@ -148,7 +148,7 @@ MaximizeWindow() {
 /**
  * 窗口最小化
  */
-MinimizeWindow() {
+minimizeWindow() {
   if (NotActiveWin() || WinGetProcessName("A") == "Rainmeter.exe")
     return
 
@@ -158,7 +158,7 @@ MinimizeWindow() {
 /**
  * 移动活动窗口位置
  */
-MakeWindowDraggable() {
+makeWindowDraggable() {
   hwnd := WinExist("A")
   if (WindowMaxOrMin())
     WinRestore("A")
