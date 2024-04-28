@@ -171,7 +171,7 @@ exitFunc(exitReason, exitCode) {
 #HotIf
 
 doubleClick(hk, command) {
-    if (hk == A_PriorHotkey && A_TimeSincePriorHotkey > 100 && A_TimeSincePriorHotkey < 250)
+    if (hk == A_PriorHotkey && A_TimeSincePriorHotkey > 100 && A_TimeSincePriorHotkey < 239)
         openInnerCommand(command, True)
 }
 
