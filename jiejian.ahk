@@ -51,12 +51,9 @@ SetTitleMatchMode 'RegEx' ; 设置 WinTitle parameter 在内置函数中的匹�
 #Include 'modules/CheckUpdate.ahk'
 #Include 'modules/MyTrayMenu.ahk'
 
-generateShortcuts() ; 生成快捷方式
-generateShortcuts() {
-    ; 每次运行检测如果 shortcuts 里的文件为空则重新生成一次快捷方式，要想重新生成可以双击 GenerateShortcuts.ahk 脚本或者清空或删除该文件夹
-    if !FileExist(A_WorkingDir . "\shortcuts\*")
-        Run('extra/GenerateShortcuts.exe')
-}
+; 生成快捷方式：每次运行检测如果 shortcuts 里的文件为空则重新生成一次快捷方式，要想重新生成可以双击 GenerateShortcuts.ahk 脚本或者清空或删除该文件夹
+if !FileExist(A_WorkingDir . "\shortcuts\*")
+    Run('extra/GenerateShortcuts.exe')
 
 settingTray()
 ; 设置托盘图标和菜单

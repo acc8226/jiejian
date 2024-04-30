@@ -4,7 +4,11 @@
 global SUPPORT_LEN := 32
 global DATA_FILTER_REG := 'i)^(?:' . DataType.app . '|' . DataType.file . '|' . DataType.web . '|' . DataType.inner . '|' . DataType.ext . ')$'
 global IS_HTTP_Reg := 'i)^(?:https?://)?(?:[\w-]+\.)+[\w-]+(?:/[\w-./?%&=]*)?\s*$'
+
 global MY_GUI
+global MY_GUI_WIDTH := 432
+global MY_GUI_MARGINX_X := 2.8
+global MY_GUI_TITLE := '快捷启动'
 
 global MyActionArray := [
     MyAction('打开网址', 'list', path => path ~= IS_HTTP_Reg, appendWebsiteName, jumpURL), ; 是否提前些比较好，不用了，兜底挺好
@@ -21,11 +25,11 @@ global MyActionArray := [
     MyAction('在 IDEA 中打开', 'list', path => IsSet(MY_IDEA) && path !== '*' && path !== '/' && FileExist(path),, openInIDEA),
     
     ; 彩蛋 
-    MyAction('bjip', 'edit',,, getIPAddresses) ; 本机 IP
+    MyAction('myip', 'edit',,, getIPAddresses) ; 本机 IP
 ]
 
 ; 设置监听
-#HotIf WinActive("快捷启动 ahk_class AutoHotkeyGUI")
+#HotIf WinActive(MY_GUI_TITLE . " ahk_class i)AutoHotkeyGUI")
 ~Down::{
     ; 当前焦点在 edit 上
     if MY_GUI.FocusedCtrl.type = 'Edit'
@@ -42,28 +46,25 @@ global MyActionArray := [
 #HotIf
 
 anyrun() {
-    guiTitle := "快捷启动"
     ; 检查窗口是否已经存在，如果窗口已经存在，如果窗口不存在，则创建新窗口
-    if WinExist(guiTitle)
+    if WinExist(MY_GUI_TITLE)
         WinClose ; 使用由上一句 WinExist 找到的窗口
     else {
-        width := 432
         ; S: 尺寸(单位为磅)
         ; AlwaysOnTop 使窗口保持在所有其他窗口的顶部
         ; Owner 可以让当前窗口从属于另一个窗口。从属的窗口默认不显示在任务栏, 并且它总是显示在其父窗口的上面. 当其父窗口销毁时它也被自动销毁
         ; -Caption 移除背景透明的窗口的边框和标题栏
         ; -Resize 禁止用户重新调整窗口的大小
-        global MY_GUI := Gui('AlwaysOnTop Owner -Caption -Resize', guiTitle)
+        global MY_GUI := Gui('AlwaysOnTop Owner -Caption -Resize', MY_GUI_TITLE)
         ; 横向和纵向边框收窄
-        MY_GUI.MarginX := 3.6
-        MY_GUI.MarginY := MY_GUI.MarginX
+        MY_GUI.MarginY := MY_GUI.MarginX := MY_GUI_MARGINX_X
         fontSize := 's21'
         MY_GUI.SetFont(fontSize, 'Consolas') ; 设置兜底字体(21 磅) Consolas
         MY_GUI.SetFont(fontSize, 'Microsoft YaHei') ; 设置优先字体(21 磅) 微软雅黑
-        myEdit := MY_GUI.AddEdit(Format("w{1}", width))
+        myEdit := MY_GUI.AddEdit(Format("w{1}", MY_GUI_WIDTH))
         ; R5：做到贴边 默认只显示 5 行
         ; Hidden：让控件初始为隐藏状态
-        listBox := MY_GUI.AddListBox(Format("R5 w{1} XM+0 Y+0 BackgroundF0F0F0 Hidden", width))
+        listBox := MY_GUI.AddListBox(Format("R5 w{1} XM+0 Y+0 BackgroundF0F0F0 Hidden", MY_GUI_WIDTH))
         button := MY_GUI.Add('Button', "default X0 Y0 Hidden", 'OK')
 
         myEdit.OnEvent('Change', onEditChange)
@@ -150,8 +151,6 @@ anyrun() {
             listBoxDataArray := unset
             if (NOT IsSet(dataArray) || dataArray.Length == 0)
                 listBoxDataArray := []
-
-
             else {
                 dataArraySort(dataArray)
                 listBoxDataArray := listBoxData(dataArray)
@@ -171,8 +170,9 @@ anyrun() {
                     if action.HasOwnProp('appendTitle') {
                         ; 最终的标题
                         listBoxDataArray.push(action.title . action.appendTitle.Call(editValue))
-                    } else
+                    } else {
                         listBoxDataArray.push(action.title)
+                    }
             }
             if IsSet(MY_GUI) {
                 ; 显示出来
@@ -182,8 +182,9 @@ anyrun() {
                     listBox.Choose(1)
                 }
                 MY_GUI.Show("AutoSize")
-            } else
+            } else {
                 MsgBox('anyrun 组件异常销毁', APP_NAME)
+            }
         }
 
         onEditLoseFocus(*) {
@@ -258,9 +259,10 @@ anyrun() {
                         Send "{Space}"
                     } catch
                         MsgBox("找不到目标应用")
-                } else
+                } else {
                     ; 启动逻辑为每次都新建应用，而非打开已有应用 ActivateOrRun('', item.path)
                     Run(item.path)
+                }
             }
             if IsSet(MY_GUI) {
                 MY_GUI.Destroy()
@@ -272,9 +274,10 @@ anyrun() {
             ; 如果 listbox 有焦点
             if (listBox.Focused)
               onListBoxDoubleClick(listBox)
-            else
-              ; 如果焦点在 编辑框 且按下回车则会触发弹窗提示；否则表示焦点在 edit，如果列表有匹配项 则获取编辑框文本内容
-              Trim(myEdit.Value) == '' ? MsgBox('输入内容不能为空') : onListBoxDoubleClick(listBox)
+            else {
+                ; 如果焦点在 编辑框 且按下回车则会触发弹窗提示；否则表示焦点在 edit，如果列表有匹配项 则获取编辑框文本内容
+                Trim(myEdit.Value) == '' ? MsgBox('输入内容不能为空') : onListBoxDoubleClick(listBox)
+            }
         }
     }
 }
@@ -328,10 +331,12 @@ isDir(path) {
         ; 抽出文件夹
         if RegExMatch(path, '.*[\\/]', &regExMatchInfo)
             isMatch := DirExist(regExMatchInfo.0)
-        else 
+        else {
             isMatch := false
-    } else
+        }
+    } else {
         isMatch := false
+    }
     return isMatch
 }
 
@@ -356,10 +361,11 @@ appendWebsiteName(path) {
                 }
                 ; 去掉 ://
                 else {
-                    if InStr(it.path, '://')
+                    if InStr(it.path, '://') {
                         uri := SubStr(it.path, InStr(it.path, '://') + StrLen('://'))
-                    else
+                    } else {
                         uri := it.path
+                    }
                     ; 如果是顶级域名（简单认为分段数为 2）则加上 www
                     is_top_level_domain := 2 == StrSplit(uri, '.').Length
                     newUri := 'i)^(?:https?://)?' . (is_top_level_domain ? '(?:www\.)?' : '') . StrReplace(uri, '.', "\.") . '(?:/.*)?$'
@@ -394,7 +400,7 @@ appendFileType(path) {
         case 'epub': return "开放式电子书"
         case 'et': return " WPS 表格文件"
         case 'exe', 'msi': return "可执行文件"
-        case 'htm', 'html': return "HTML 文件"
+        case 'htm', 'html': return " HTML 文件"
         case 'ipa': return " iOS 应用安装包"
         case 'iso': return "光盘映像文件"
         case 'lnk': return "快捷方式"
@@ -423,7 +429,7 @@ appendFileType(path) {
         case 'wps': return " WPS 文档"
         case 'xls': return " Excel 表格（旧版）"
         case 'xlsx': return " Excel 表格"
-        case 'xml': return "可扩展标记语言文件"
+        case 'xml': return " xml 文件"
         default: return "文件"            
     }
 }
@@ -481,14 +487,16 @@ openInnerCommand(title, isConfirm := False) {
             if (isConfirm) {
                 if (MsgBox("立即" . title . "?", APP_NAME, "YesNo") = "Yes")
                     SystemReboot()
-            } else
+            } else {
                 SystemReboot()
+            }
         case '关机': 
             if (isConfirm) {
                 if (MsgBox("立即" . title . "?", APP_NAME, "YesNo") = "Yes")
                     SystemShutdown()
-            } else
+            } else {
                 SystemShutdown()
+            }
         case '锁屏': SystemLockScreen()
         case '睡眠': SystemSleep()
         case '激活屏幕保护程序': SendMessage(0x0112, 0xF140, 0,, "Program Manager") ; 0x0112 为 WM_SYSCOMMAND, 而 0xF140 为 SC_SCREENSAVE.
@@ -502,16 +510,18 @@ openInnerCommand(title, isConfirm := False) {
         case '暂停': Send '{Media_Play_Pause}'
         ; shell
         case '终端': Run(A_ComSpec) ; 在用户根目录打开文件夹
-        case '网络连接': Run("shell:ConnectionsFolder")
-        case '我的下载': Run("shell:downloads")
-        case '收藏夹': Run("shell:Favorites")
-        case '字体': Run("shell:Fonts")
-        case '打印机': Run("shell:PrintersFolder")
-        case '我的文档': Run("shell:Personal")
-        case '回收站': Run("shell:RecycleBinFolder")
-        case '我的图片': Run("shell:My Pictures")
-        case '我的视频': Run("shell:My Video")
-        case '我的音乐': Run("shell:My Music")
+        case '网络连接': Run "shell:ConnectionsFolder" ; 第二种方式 ncpa.cpl
+        case '收藏夹': Run "shell:Favorites"
+        case '字体': Run "shell:Fonts"
+        case '打印机': Run "shell:PrintersFolder"
+        case '我的文档': Run "shell:Personal"
+        case '回收站': Run "shell:RecycleBinFolder"
+        case '我的桌面': Run "shell:desktop"
+        case '我的下载': Run "shell:downloads"
+        case '我的图片': Run "shell:My Pictures"
+        case '我的视频': Run "shell:My Video"
+        case '我的音乐': Run "shell:My Music"
+        case '环境变量': Run "rundll32 sysdm.cpl,EditEnvironmentVariables"
         default: MsgBox('非系统内置命令！', APP_NAME)
     }
 }
@@ -520,6 +530,6 @@ getIPAddresses() {
     addresses := SysGetIPAddresses()
     msg := "IP 地址:`n"
     for address in addresses
-        msg .= address "`n"
+        msg .= address . "`n"
     MsgBox(msg, APP_NAME)
 }

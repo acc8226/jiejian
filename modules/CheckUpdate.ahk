@@ -35,8 +35,9 @@
                     MsgBox('升级页面找不到', '检查更新-捷键')
                 else if (req.status = 12029)
                     MsgBox("网络连接错误，请稍候再试", '检查更新-捷键')
-                else
+                else {
                     MsgBox('检测升级失败，错误码为 ' . req.status . '，请稍候再试', '检查更新-捷键')
+                }
             }
         }
     }

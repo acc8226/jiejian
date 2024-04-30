@@ -141,8 +141,9 @@ MaximizeWindow() {
 
   if WindowMaxOrMin() {
     WinRestore("A")
-  } else
+  } else {
     WinMaximize("A")
+  }
 }
 
 /**

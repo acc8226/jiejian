@@ -15,15 +15,20 @@ regMyHotKey()
 regMyHotKey() {
   Loop DATA_LIST.Length {
     it := DATA_LIST[A_Index]
+
     ; 热键：：目前仅作用于程序、文本 和 网址跳转
-    if (StrLen(it.hk) > 0 && StrLen(it.path) > 0)
-        Hotkey(it.hk, startByHotKey)
+    if (StrLen(it.hk) > 0 && StrLen(it.path) > 0) {
+      ; 如果有多个变体符合触发条件, 那么仅触发最早创建的那个
+      Hotkey(it.hk, startByHotKey)
+    }
+
     ; 热串：目前仅作用于网址跳转
     if (StrLen(it.hs) > 0 && it.type = DataType.web) {
         ; 排除在 编辑器中 可跳转网址
         HotIfWinNotactive('ahk_group ' . TEXT_GROUP)
         Hotstring(":C*:" . it.hs, startByHotString)
-        HotIfWinNotactive
+        ; 要关闭上下文相关性(也就是说, 使后续创建的热键和 热字串在所有窗口中工作), 调用任意 HotIf 或其中一个 HotIfWin 函数, 但省略参数. 例如: HotIf 或 HotIfWinActive
+        HotIf
     }
   }
 }
@@ -136,20 +141,23 @@ parseData(fileName) {
         if InStr(info.path, '.lnk') {
           FileGetShortcut(info.path, &OutTarget)
           MY_BASH := OutTarget
-        } else
+        } else {
           MY_BASH := info.path
+        }
       } else if info.title = 'VSCode' {
         if InStr(info.path, '.lnk') {
           FileGetShortcut(info.path, &OutTarget)
           MY_VSCode := OutTarget
-        } else
+        } else {
           MY_VSCode := info.path
+        }
       } else if info.title = 'IDEA' {
         if InStr(info.path, '.lnk') {
           FileGetShortcut(info.path, &OutTarget)
           MY_IDEA := OutTarget
-        } else
+        } else {
           MY_IDEA := info.path
+        }
       }
     }
     return info
