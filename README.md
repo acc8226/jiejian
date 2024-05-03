@@ -4,7 +4,7 @@
 
 强烈建议搭配全局鼠标手势软件 + 带侧边按键的鼠标。
 
-[视频演示](https://www.bilibili.com/video/BV19H4y1e7hJ?vd_source=54168537affc2c02555097cb26797d99) ｜ [软件下载](https://atomgit.com/acc8226/jiejian/tags?tab=release)
+[视频演示](https://www.bilibili.com/video/BV19H4y1e7hJ?vd_source=54168537affc2c02555097cb26797d99) ｜ [软件下载][捷键]
 
 **注意事项：**
 
@@ -610,7 +610,7 @@ jiejian.exe 的文件版本为当前四位版本号，产品版本为当前编�
   [Quicker]: https://getquicker.net/ ""
   [uTools]: https://www.u.tools/ ""
 
-  [捷键]: https://gitcode.com/acc8226/jiejian/releases "我的诚意之作" 
+  [捷键]: https://atomgit.com/acc8226/jiejian/tags?tab=release "我的诚意之作" 
 
   [bilibili 哔哩哔哩]: https://www.bilibili.com/ '哔哩哔哩'
   [汽水音乐]: https://www.douyin.com/qishui '汽水音乐'
