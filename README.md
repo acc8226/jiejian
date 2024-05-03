@@ -131,7 +131,7 @@
 * `Ctrl + Alt + v` 剪贴板的内容输入到当前活动应用程序中，防止了一些网站禁止在 HTML 密码框中进行粘贴操作
 * `Ctrl + Shift + "`  插入一对双引号
 
-## 7. Anyrun 应用启动器
+## 7. Anyrun 启动器
 
 争做一款简洁、高效的应用启动器。
 
@@ -144,9 +144,9 @@
 
 使用说明：
 
-`Alt + 空格` 开启快捷启动器。若再次按下 空格/esc键/鼠标在启动器外点击 则关闭该组件。
-
-支持全拼甚至首字母简拼模糊搜索，上下键切换选中项，回车或直接鼠标双击进行确认。
+* `Alt + 空格` 开启快捷启动器。若再次按下 空格/esc键/鼠标在启动器外点击 则关闭该组件。
+* 自动识别剪切板有没有内容，如果输入内容是文件或者网址 且离最后一次 ctrl + c 操作小于 13 秒则自动粘贴内容。
+* 支持全拼甚至首字母简拼模糊搜索，上下键切换选中项，回车或直接鼠标双击进行确认。
 
 ### 打开程序/文件/网址
 
@@ -181,16 +181,18 @@
 内部命令
 
 * `zhongduan/cmd/终端` 终端
-* `wangluolianjie|网络连接` 网络连接
-* `wodexiazai|我的下载` 我的下载
+* 网络连接
 * 收藏夹
 * 字体
 * 打印机
 * 我的文档
 * 回收站
+* 我的桌面
+* 我的下载
 * 我的图片
 * 我的视频
 * 我的音乐
+* 环境变量
 * 重启
 * 关机
 * 锁屏
@@ -203,6 +205,9 @@
 * 上一曲
 * 下一曲
 * 暂停
+* 息屏
+* 睡眠
+* 关机
 
 ### 增强的操作文件和网址的能力
 
@@ -214,10 +219,10 @@
 * 查看属性
 * 打印文件
 * 删除文件
-* 在 Bash 中打开（若 data.csv 中 d 列 bash 对应的 b 列路径存即启用）
-* 在终端中打开
-* 在 VSCode 中打开（若 data.csv 中 d 列 VSCode 对应的 b 列路径存即启用）
-* 在 IDEA 中打开（若 data.csv 中 d 列 IDEA 对应的 b 列路径存即启用）
+* 在 Bash 中打开（若 data.csv 中 d 列 `Bash` 对应的 b 列路径存即启用）
+* 在终端中打开（若 data.csv 中 d 列 `新终端` 对应的 b 列路径存即启用新终端，否则启用旧终端 cmd.exe）
+* 在 VSCode 中打开（若 data.csv 中 d 列 `VSCode` 对应的 b 列路径存即启用）
+* 在 IDEA 中打开（若 data.csv 中 d 列 `IDEA` 对应的 b 列路径存即启用）
 
 ## 8. 热串 之 直达网址（Z 直达模式）
 
@@ -275,10 +280,10 @@ data.csv 可自由配置
 
 | 按键 | 用途 |
 | ---- | ---- |
-| Q | 最大化或还原 |
+| Q | 最大化或还原程序 |
 | W | 切换到上个窗口 |
 | E | 当前窗口恢复不透明 |
-| R | 在当前程序的窗口间轮换 |
+| R | 在当前程序的窗口轮换 |
 | T | 当前窗口调成半透明(Translucent) |
 | Y | 切换到上一个虚拟桌面 |
 | P | 切换到下一个虚拟桌面 |
@@ -286,18 +291,18 @@ data.csv 可自由配置
 | X | 关闭窗口 |
 | V | 窗口移到下一个显示器 |
 | B | 窗口最小化 |
-| 空格 | 复制文件路径并打开 Anyrun 应用启动器 |
+| 空格 | 复制选中文件路径并打开 Anyrun 启动器 |
 
 ## 12. 双击模式
 
 预设动作如下，若 2 次双击小于 239 毫秒则触发
 
-* 双击 Alt：息屏
-* 双击 Home：睡眠
-* 双击 End：关机
+* 双击 Alt：息屏（无提醒）
+* 双击 Home：睡眠（无提醒）
+* 双击 End：关机（有确认对话框）
 
 可以手动去 data.csv 中进行修改。
-由于中英文切换经常用到 Shift，日常快捷键常用到 ctrl，所以这两个按键不提供作为前置键的选项。
+由于中英文切换经常用到 Shift，日常快捷键常用到 ctrl，所以这两个按键不再提供作为前置键。
 d 列置空 或者 删除该列可以屏蔽该命令。目前仅支持上述第 7 小节列出的所有内部命令。
 
 ## 13. 自定义配置说明
@@ -384,22 +389,23 @@ anyrun 启动器用
 * 【压缩】WinRAR 6.24
 * 【压缩】WinZip
 * 【压缩】好压【部分支持】
-* 【系统】Win 7~11 资源管理器
-* 【系统】Win 7 记事本
+* 【系统】Win 7、10、11 资源管理器
+* 【系统】Win 7、10 记事本
 * 【系统】Win 11 新版记事本
-* 【系统】Win 11 设置
-* 【浏览器】115
-* 【浏览器】123
+* 【系统】Win 7 桌面
+* 【系统】Win 10 桌面
+* 【系统】Win 10、11 设置
+* 【浏览器】115、123
 * 【浏览器】2345
 * 【浏览器】360 AI
 * 【浏览器】360 极速
 * 【浏览器】360 游戏
 * 【浏览器】360 安全
-* 【浏览器】Avast
-* 【浏览器】Brave
+* 【浏览器】Avast 浏览器
+* 【浏览器】Brave 浏览器
 * 【浏览器】CCleaner Browser
 * 【浏览器】Chrome 谷歌 & 百分 & 小马
-* 【浏览器】Duck
+* 【浏览器】Duck 浏览器
 * 【浏览器】Duoyu 多御
 * 【浏览器】Edge
 * 【浏览器】Firefox火狐 & Tor洋葱 & Waterfox
@@ -417,20 +423,18 @@ anyrun 启动器用
 * 【浏览器】联想
 * 【浏览器】猎豹
 * 【浏览器】猫眼
+* 【浏览器】猎鹰
 * 【浏览器】蚂蚁
 * 【浏览器】青鸟
 * 【浏览器】搜狗
 * 【浏览器】双核
 * 【浏览器】星愿
 * 【浏览器】想天
-* 【浏览器】小K
-* 【浏览器】小白
-* 【浏览器】小智双核
+* 【浏览器】小K、小白、小智
 * 【浏览器】一点
-* 【浏览器】猎鹰
-* 【浏览器】IE 11【已过时】
+* 【浏览器】微软 IE 11【已过时】
 * 【浏览器】红芯【已过时】
-* 【音乐类】foobar2000
+* 【音乐类】Foobar2000
 * 【音乐类】iTunes
 * 【音乐类】MusicBee
 * 【音乐类】MusicPlayer2
@@ -487,7 +491,7 @@ anyrun 启动器用
 * 【editor】Atom【已过时】
 * 【file compare】Beyond Compare
 * 【file compare】WinMerge
-* 【IDE】Dev C++
+* 【IDE】DevC++
 * 【IDE】Eclipse
 * 【IDE】HbuilderX
 * 【IDE】Aqua、Clion、Datagrip、Dataspell、Goland、Idea、Pycharm、Phpstorm、Rider、RubyMine、RustRover、Webstorm、Writerside
@@ -532,11 +536,12 @@ anyrun 启动器用
 * 【pdf】金山 PDF 独立版
 * 【pdf】迅读 PDF
 * 【pdf】永中 Office 版式阅读器
-* 【pdf】可牛PDF
+* 【pdf】可牛 PDF
+* 【pdf】万兴 PDF 阅读器
 * 【office】LibreOffice
-* 【office】MS Excel 2021
-* 【office】MS PPT 2021
-* 【office】MS Word 2021
+* 【office】微软 Excel 2007、2021
+* 【office】微软 PPT 2007、2021
+* 【office】微软 Word 2007、2021
 * 【office】ONLYOFFICE
 * 【office】WPS Office
 * 【office】永中简报 2024
@@ -547,10 +552,10 @@ anyrun 启动器用
 * 【看图】Honeyview or BandiView
 * 【看图】ImageGlass
 * 【看图】JPEGView
+* 【看图】pineapple pictures 菠萝看图
 * 【看图】Windows 照片查看器
 * 【看图】WPS 图片查看器
 * 【看图】xnview
-* 【看图】pineapple pictures 菠萝看图
 * Motrix
 * Snipaste
 * Thunderbird 雷鸟

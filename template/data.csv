@@ -1,55 +1,61 @@
 类型,启动路径,要激活的窗口(仅app 热串用),运行名称,anyrun 匹配关键字,热键关键字,热串关键字,是否启用 y/n,备注
-程序,diskmgmt.msc,,磁盘管理,cipanguanli|diskmgmt|磁盘管理,,,,
 程序,powercfg.cpl,,电源选项,dianyuanxuanxiang|电源选项,,,,
-程序,magnify,,放大镜,fangdajing|放大镜,,,,
 程序,Firewall.cpl,,防火墙,fanghuoqiang|防火墙,,,,
-程序,winver,,关于Windows,guanyuwindows|关于Windows,,,,
-程序,mspaint,,画图,huatu|mspaint|画图,,,,
-程序,inetcpl.cpl,,Internet选项,Internet选项|inetcpl,,,,
-程序,notepad,ahk_exe i)Notepad.exe$,记事本,jishiben|notepad|记事本,!j,,,记事本
-程序,control,,控制面板,kongzhimianban|control|控制面板,,,,
-程序,sk.cpl,,屏幕分辨率,pingmufenbianlv|屏幕分辨率,,,,
-程序,osk,,屏幕键盘,pingmujianpan|屏幕键盘,,,,
-程序,taskmgr,,任务管理器,renwuguanliqi|taskmgr|任务管理器,,,,
 程序,hdwwiz.cpl,,设备管理器,shebeiguanliqi|hdwwiz.cpl|设备管理器,,,,
+程序,inetcpl.cpl,,Internet选项,Internet选项|inetcpl,,,,
 程序,mmsys.cpl,,声音属性,shengyinshuxing|mmsys.cpl|声音属性,,,,
-程序,eventvwr ,,事件查看器,shijianchakanqi|eventvwr|事件查看器,,,,
 程序,main.cpl,,鼠标属性,shubiaoshuxing|main.cpl|鼠标属性,,,,
-程序,netstat,,网络状态,wangluozhuangtai|网络状态,,,,
-程序,write,,写字板,xieziban|write|写字板,,,,
+程序,diskmgmt.msc,,磁盘管理,cipanguanli|diskmgmt|磁盘管理,,,,
+程序,perfmon.msc ,,性能监视器 ,xingnengjianshiqi|性能监视器,,,,
+程序,control,,控制面板,kongzhimianban|control|控制面板,,,,
+程序,eventvwr,,事件查看器,shijianchakanqi|eventvwr|事件查看器,,,,
+程序,magnify,,放大镜,fangdajing|放大镜,,,,
+程序,mspaint,,画图,huatu|mspaint|画图,,,,
+程序,notepad,ahk_exe i)Notepad.exe$,记事本,jishiben|notepad|记事本,!j,,,
 程序,mstsc,,远程桌面,yuanchengzhuomian|mstsc|远程桌面,,,,
+程序,osk,,屏幕键盘,pingmujianpan|屏幕键盘,,,,
 程序,regedit,,注册表,zhucebiao|regedit|注册表,,,,
+程序,sk.cpl,,屏幕分辨率,pingmufenbianlv|屏幕分辨率,,,,
+程序,taskmgr,,任务管理器,renwuguanliqi|taskmgr|任务管理器,,,,
+程序,write,,写字板,xieziban|write|写字板,,,,
+程序,winver,,关于Windows,guanyuwindows|关于Windows,,,,
+,,,,,,,,
 程序,::{20D04FE0-3AEA-1069-A2D8-08002B30309D},ahk_exe explorer.exe ahk_class CabinetWClass,我的电脑,wodediannao|wodejisuanji|ziyuanguanliqi|explorer|我的电脑|资源管理器,!1,,,
 ,,,,,,,,
+程序,shortcuts\git-bash.lnk,,Bash,Bash,,,,
+程序,shortcuts\wt.lnk,,新终端,WindowsTerminal|新终端,,,,
+程序,shortcuts\Code.lnk,ahk_exe Code.exe ahk_class Chrome_WidgetWin_1,VSCode,VSCode,!3,,,https://code.visualstudio.com
+程序,shortcuts\idea64.lnk,,IDEA,IDEA,,,,
+,,,,,,,,
+程序,C:\Program Files\Bandizip\Bandizip.exe,,Bandizip,Bandizip,,,,https://www.bandisoft.com/bandizip
+程序,C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe,,Edge,Edge,,,,
+程序,C:\Program Files\FastGestures\FastGestures.exe,,FastGestures,FastGestures,,,,
+程序,C:\Program Files\Mozilla Firefox\firefox.exe,,Firefox,Firefox,!3,,,
+程序,C:\Program Files\DAUM\PotPlayer\PotPlayerMini64.exe,,PotPlayer,PotPlayer,,,,https://potplayer.org
+程序,C:\Program Files (x86)\MGTVPCC\芒果TV.exe,,芒果TV,芒果TV,,,,
 程序,extra\WindowSpyU32.exe,,Spy,WindowSpy,,,,
-程序,shortcuts\360 安全卫士.lnk,,360 安全卫士,Anquanweishi|360安全卫士,,,,https://weishi.360.cn/
-程序,shortcuts\360 极速浏览器X.lnk,ahk_exe i)360ChromeX.exe,360 极速浏览器,jisuliulanqi|360极速浏览器,!2,,,https://browser.360.cn/ee/
+程序,shortcuts\360 安全卫士.lnk,,360 安全卫士,Anquanweishi|360安全卫士,,,,https://weishi.360.cn
+程序,shortcuts\360 极速浏览器X.lnk,ahk_exe i)360ChromeX.exe,360 极速浏览器,jisuliulanqi|360极速浏览器,!2,,,https://browser.360.cn/ee
 程序,shortcuts\360 软件管家.lnk,,360 软件管家,Ruanjianguanjia|360软件管家,,,,
-程序,C:\Program Files\Bandizip\Bandizip.exe,,Bandizip,Bandizip,,,,https://www.bandisoft.com/bandizip/
 程序,shortcuts\battle.net.lnk,,战网,zhanwang|battle|战网,,,,
 程序,shortcuts\Beekeeper-Studio.lnk,,BeekeeperStudio,BeekeeperStudio,,,,https://github.com/beekeeper-studio/beekeeper-studio/releases
 程序,shortcuts\Bitwarden.lnk,,Bitwarden,Bitwarden,,,,https://bitwarden.com/download
 程序,shortcuts\ClickShow.lnk,,ClickShow,ClickShow,,,,
-程序,shortcuts\Code.lnk,ahk_exe Code.exe ahk_class Chrome_WidgetWin_1,VSCode,VSCode,!3,,,https://code.visualstudio.com/
 程序,shortcuts\EVAVEdit.lnk,,EV 剪辑,Evjianji|EV剪辑,,,,
 程序,shortcuts\EVCapture.lnk,,EV 录屏,Evluping|EV录屏,,,,
 程序,shortcuts\Everything.lnk,,Everything,Everything,,,,https://www.voidtools.com/zh-cn/downloads
 程序,shortcuts\FastGestures.lnk,,FastGestures,FastGestures,,,,
 程序,shortcuts\fileu.lnk,,文件蜈蚣,wenjianwugong|文件蜈蚣,,,,http://www.filecxx.com/zh_CN/index.html
 程序,shortcuts\Foxmail.lnk,,Foxmail,Foxmail,,,,
-程序,shortcuts\git-bash.lnk,,Bash,Bash,,,,
 程序,shortcuts\HBuilderX.lnk,,HBuilderX,HBuilderX,,,,https://www.dcloud.io/hbuilderx.html
 程序,shortcuts\heidisql.lnk,,Heidisql,Heidisql,,,,https://www.heidisql.com/download.php?download=portable-64
 程序,shortcuts\HTTPie.lnk,,HTTPie,HTTPie,,,,https://httpie.io/download
-程序,shortcuts\idea64.lnk,,IDEA,IDEA,,,,
 程序,shortcuts\MarkText.lnk,,MarkText,MarkText,,,,https://github.com/marktext/marktext/releases
 程序,shortcuts\Motrix.lnk,,Motrix,Motrix,,,,https://motrix.app/zh-CN
-程序,shortcuts\msedge.lnk,,Edge,Edge,,,,
 程序,shortcuts\MusicPlayer2.lnk,,MusicPlayer2,MusicPlayer2,,,,https://github.com/zhongyang219/MusicPlayer2
 程序,shortcuts\MQTTX.lnk,,MQTTX,MQTTX,,,,
 程序,shortcuts\PDManer.lnk,,PDManer,PDManer,,,,https://gitee.com/robergroup/pdmaner/releases
 程序,shortcuts\PixPin.lnk,,PixPin,PixPin,,,,https://pixpinapp.com
-程序,C:\Program Files\DAUM\PotPlayer\PotPlayerMini64.exe,,PotPlayer,PotPlayer,,,,https://potplayer.org
 程序,shortcuts\pycharm64.lnk,,PyCharm,PyCharm,,,,https://www.jetbrains.com/zh-cn/pycharm/
 程序,shortcuts\QQ.lnk,,QQ,QQ ,,,,
 程序,shortcuts\QQMusic.lnk,,QQ 音乐,qqmusic|QQ音乐,,,,https://y.qq.com/download/index.html
@@ -69,7 +75,7 @@
 程序,shortcuts\WizTree64.lnk,,WizTree,WizTree,,,,https://www.diskanalyzer.com
 程序,shortcuts\WizMouse.lnk,,WizMouse,WizMouse,,,,
 程序,shortcuts\zeal.lnk,,zeal,zeal,,,,https://zealdocs.org
-程序,shortcuts\阿里云盘.lnk,,阿里云盘,aliyunpan|阿里云盘,,,,https://www.alipan.com/
+程序,shortcuts\阿里云盘.lnk,,阿里云盘,aliyunpan|阿里云盘,,,,https://www.alipan.com
 程序,shortcuts\哔哩哔哩.lnk,,哔哩哔哩,bilibili|b站|哔哩哔哩,,,,
 程序,shortcuts\方格音乐.lnk,,方格音乐,fanggeyinyue|方格音乐,,,,http://morin.vin
 程序,shortcuts\坚果云.lnk,,坚果云,jianguoyun|坚果云,,,,https://www.jianguoyun.com/s/downloads
@@ -85,19 +91,22 @@
 程序,shortcuts\微信.lnk,,微信,weixin|wechat|微信,,,,https://weixin.qq.com
 程序,shortcuts\微信开发者工具.lnk,,微信开发者工具,weixinkaifazhe|微信开发者,,,,https://developers.weixin.qq.com/miniprogram/dev/devtools/devtools.html
 程序,shortcuts\迅雷.lnk,,迅雷,xunlei|thunder|迅雷,,,,
+程序,C:\Program Files\PDFgear\PDFLauncher.exe,,PDFgear,PDFgear,,,,
+程序,C:\Users\acc8226\AppData\Roaming\搜狐影音\SHPlayer.exe,,搜狐影音,souhuyingyin|搜狐影音,,,,
 ,,,,,,,,
 文件,D:\,,D盘,dpan|D盘,!d,,,
 文件,E:\,,E盘,epan|E盘,,,,
 文件,F:\,,F盘,fpan|F盘,,,,
 文件,G:\,,G盘,gpan|G盘,,,,
-文件,H:\,,H盘,hpan|H盘,,,,
+文件,H:\,,H盘,Hpan|H盘,,,,
+文件,I:\,,I盘,Ipan|I盘,,,,
+文件,J:\,,J盘,Jpan|J盘,,,,
+文件,K:\,,K盘,Kpan|K盘,,,,
 文件,x:\,,X盘,xpan|X盘,,,,
 文件,y:\,,Y盘,ypan|Y盘,,,,
 文件,z:\,,Z盘,zpan|Z盘,,,,
-文件,D:\ac86\exec,,我的软件,exec,,,,
-文件,D:\ac86\code,,我的代码,code,,,,
-文件,D:\ac86\doc,,我的文档,doc,,,,
-文件,D:\ac86\game,,我的游戏,game,,,,
+文件,D:\code,,我的代码,wodedaima,,,,
+文件,D:\exec,,我的软件,woderuanjian,,,,
 ,,,,,,,,
 文本,很牛呀,,,,,xnb,,
 文本,你妹的,,,,,xnm,,
@@ -123,7 +132,7 @@
 ,,,,,,,,
 网址,163.com ,,网易网 ,,,,,
 网址,https://apple.com.cn,,苹果官网,Apple,,,,
-网址,appinn.com,,小众软件,xiaozhongruanjian|小众软件,,,,
+网址,https://appinn.com,,小众软件,xiaozhongruanjian|小众软件,,,,
 网址,atomgit.com,,atomgit,atomgit,,,,
 网址,book.qq.com,,QQ阅读,QQ阅读,,,,
 网址,qq.com,,腾讯网,tengxunwang|腾讯网,,,,
@@ -145,7 +154,7 @@
 网址,wenshushu.com,,文叔叔,wenshushu|文叔叔,,,,
 网址,sspai.com,,少数派 ,shaoshupai|少数派,,,,
 网址,wx.qq.com,,微信网页版,weixin|wechat|微信,,,,
-网址,baidu.com,,百度,baidu|百度,,zbd,,
+网址,www.baidu.com,,百度,baidu|百度,,zbd,,
 网址,www.bilibili.com,,b站,bilibili|b站|哔哩哔哩,!6,zbi,,
 网址,www.cnblogs.com,,博客园,bokeyuan|cnblogs|博客园,,zcn,,
 网址,www.cncn.com,,欣欣旅游,xinxinlvyou|欣欣旅游 ,,,,
@@ -163,7 +172,7 @@
 网址,www.mgtv.com,,芒果TV,mangguotv|芒果TV,,,,
 网址,https://www.soso.com ,,搜搜网 ,,,,,
 网址,www.speedtest.cn,,网速测试,wangsuceshi|网速测试,,,,
-网址,www.zhihu.com,,知乎,zhihu|知乎,,zzh,,
+网址,www.zhihu.com,,知乎,zhihu|知乎,,,,
 网址,www.zhipin.com,,BOSS直聘,bosszhipin|BOSS直聘,,,,
 网址,y.qq.com,,QQ音乐,QQ音乐|qqmusic,,,,
 网址,yiyan.baidu.com,,文心一言,wenxinyiyan,,,,
@@ -182,15 +191,17 @@
 ,,,,,,,,
 内部,,,终端,zhongduan|cmd|终端,,,,
 内部,,,网络连接,wangluolianjie|网络连接,,,,
-内部,,,我的下载,wodexiazai|我的下载,,,,
 内部,,,收藏夹,shoucangjia|收藏夹,,,,
 内部,,,字体,ziti|font|字体,,,,
 内部,,,打印机,dayinji|fax|打印机,,,,
 内部,,,我的文档,wodewendang|我的文档,,,,
 内部,,,回收站,huishouzhan|回收站,,,,
+内部,,,我的桌面,wodezhuomian|我的桌面,,,,
+内部,,,我的下载,wodexiazai|我的下载,,,,
 内部,,,我的图片,wodetupian|我的图片 ,,,,
 内部,,,我的视频,wodeshipin|我的视频 ,,,,
 内部,,,我的音乐,wodeyinyue|我的音乐 ,,,,
+内部,,,环境变量,huanjingbianliang|env|环境变量,,,,
 ,,,,,,,,
 内部,,,重启,chongqi|重启,,,,
 内部,,,关机,guanji|关机,,,,

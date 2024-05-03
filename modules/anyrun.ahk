@@ -15,33 +15,33 @@ global MyActionArray := [
     ; 打开（文件，可能是 mp3 或者 mp4 或者 mov）
     MyAction('打开', 'list', path => path != '*' && path != '/' && FileExist(path) && NOT DirExist(path), appendFileType, path => Run(path)) ,
     MyAction('前往文件夹', 'list', isDir,, openDir),
-    MyAction('查看属性', 'list', path => path !== '*' && path !== '/' && FileExist(path),, path => Run('properties "' . path . '"')),
+    MyAction('查看属性', 'list', isFileOrDirExists,, path => Run('properties "' . path . '"')),
     MyAction('打印文件', 'list', path => path !== '*' && path !== '/' && FileExist(path) && NOT DirExist(path) && path ~= 'i).+\.(?:BMP|GIF|png|jpe?g|pdf|docx?|pptx?|xlsx?)$',, path => Run('print "' . path . '"')),
-    
-    MyAction('删除文件', 'list', path => path !== '*' && path !== '/' && FileExist(path),, delFileOrDir),
-    MyAction('在 Bash 中打开', 'list', path => IsSet(MY_BASH) && path != '*' && path != '/' && FileExist(path),, openInBash),
-    MyAction('在终端中打开', 'list', path => path !== '*' && path !== '/' && FileExist(path),, openInTerminal),
-    MyAction('在 VSCode 中打开', 'list', path => IsSet(MY_VSCode) && path !== '*' && path !== '/' && FileExist(path),, openInVSCode),
-    MyAction('在 IDEA 中打开', 'list', path => IsSet(MY_IDEA) && path !== '*' && path !== '/' && FileExist(path),, openInIDEA),
-    
-    ; 彩蛋 
-    MyAction('myip', 'edit',,, getIPAddresses) ; 本机 IP
+    MyAction('删除文件', 'list', isFileOrDirExists,, delFileOrDir),
 ]
+if IsSet(MY_BASH)
+    MyActionArray.Push(MyAction('在 Bash 中打开', 'list', isFileOrDirExists,, openInBash))
+useTerminal := IsSet(MY_NEW_TERMINAL) ? openInNewTerminal : openInTerminal
+MyActionArray.Push(MyAction('在终端中打开', 'list', isFileOrDirExists,, useTerminal))
+if IsSet(MY_VSCode)
+    MyActionArray.Push(MyAction('在 VSCode 中打开', 'list', isFileOrDirExists,, openInVSCode))
+if IsSet(MY_IDEA)
+    MyActionArray.Push(MyAction('在 IDEA 中打开', 'list', isFileOrDirExists,, openInIDEA))
+
+; 彩蛋 本机 IP
+MyActionArray.Push(MyAction('myip', 'edit',,, getIPAddresses))
 
 ; 设置监听
-#HotIf WinActive(MY_GUI_TITLE . " ahk_class i)AutoHotkeyGUI")
+#HotIf WinActive(MY_GUI_TITLE . " ahk_class i)^AutoHotkeyGUI$")
 ~Down::{
-    ; 当前焦点在 edit 上
-    if MY_GUI.FocusedCtrl.type = 'Edit'
-        ; 且如果 listbox 有东西 则 焦点移动到 listbox
-        if (StrLen(MY_GUI['listbox1'].Text) > 0)
-            ControlFocus 'listbox1'
+    ; 当前焦点在 edit 上 且如果 listbox 有东西 则 焦点移动到 listbox
+    if (MY_GUI.FocusedCtrl.type = 'Edit' && StrLen(MY_GUI['listbox1'].Text) > 0)
+        ControlFocus 'listbox1'
 }
 ~UP::{
     ; 如果焦点在 listbox 首项 再向上则焦点移动到 edit
-    if (MY_GUI.FocusedCtrl.type = 'ListBox')
-        if (MY_GUI['listbox1'].value) == 1
-            ControlFocus 'Edit1'
+    if (MY_GUI.FocusedCtrl.type = 'ListBox' && MY_GUI['listbox1'].value == 1)
+        ControlFocus 'Edit1'
 }
 #HotIf
 
@@ -84,8 +84,8 @@ anyrun() {
         ; 居中但是稍微往上偏移些
         MY_GUI.Show(Format("xCenter y{1} AutoSize", A_ScreenHeight / 2 - 300))
 
-        ; 判断剪切板有木有内容 且输入内容是文件或者网址 且离最后一次 ctrl + c/x 操作小于 22 秒则打开 anyrun 组件 这样给用户的自主性更大           
-        if (A_Clipboard != '' && DateDiff(A_NowUTC, CTRL_TIMESTAMP, 'Seconds') < 22) {
+        ; 判断剪切板有没有内容 如果输入内容是文件或者网址 且离最后一次 ctrl + c/x 操作小于 13 秒则打开 anyrun 组件 这样给用户的自主性更大           
+        if (A_Clipboard != '' && DateDiff(A_NowUTC, CTRL_TIMESTAMP, 'Seconds') < 13) {
             pasteText := Trim(A_Clipboard, ' `t`r`n')
             if (pasteText ~= IS_HTTP_Reg || FileExist(pasteText))
                 Send "^v"
@@ -166,13 +166,14 @@ anyrun() {
             ; 模糊匹配 按照顺序
             for action in MyActionArray {
                 ; 如果是 list 类型 且 符合条件
-                if (action.type == 'list' && action.isMatch.Call(editValue))
+                if (action.type = 'list' && action.isMatch.Call(editValue)) {
                     if action.HasOwnProp('appendTitle') {
                         ; 最终的标题
                         listBoxDataArray.push(action.title . action.appendTitle.Call(editValue))
                     } else {
                         listBoxDataArray.push(action.title)
                     }
+                }
             }
             if IsSet(MY_GUI) {
                 ; 显示出来
@@ -443,6 +444,10 @@ openDir(path) {
     }
 }
 
+isFileOrDirExists(path) {
+    return path !== '*' && path !== '/' && FileExist(path)
+}
+
 delFileOrDir(path) {
     DirExist(path) ? DirDelete(path) : FileDelete(path)
 }
@@ -459,6 +464,31 @@ openInTerminal(path) {
         Run(A_ComSpec, regExMatchInfo.0)
     }
 }
+
+openInNewTerminal(path) {
+    ; 在终端中打开所在文件夹
+    if DirExist(path) {
+        ; 盘符根目录需要以 \ 结尾才生效
+        endChar := SubStr(path, StrLen(path))
+        addSomething := (endChar = '\' || endChar = '/') ? "" : "\"
+        Run(MY_NEW_TERMINAL . ' -d' . path . addSomething)
+    } else {
+        RegExMatch(path, '.*[\\/]', &regExMatchInfo)
+        Run(MY_NEW_TERMINAL . ' -d' . regExMatchInfo.0)
+    }
+}
+
+; openInPwsh(path) {
+;     if DirExist(path) {
+;         ; 盘符根目录需要以 \ 结尾才生效，所以都统一加上
+;         endChar := SubStr(path, StrLen(path))
+;         addSomething := (endChar = '\' || endChar = '/') ? "" : "\"
+;         Run(MY_PWSH, path . addSomething)
+;     } else {
+;         RegExMatch(path, '.*[\\/]', &regExMatchInfo)
+;         Run(MY_PWSH, regExMatchInfo.0)
+;     }
+; }
 
 openInBash(path) {
     ; 在 bash 中打开所在文件夹

@@ -35,7 +35,7 @@ regMyHotKey() {
 
 parseData(fileName) {
   parseDataLine(line, eachLineLen) {
-    global MY_BASH, MY_VSCode, MY_IDEA
+    global MY_BASH, MY_VSCode, MY_IDEA, MY_NEW_TERMINAL
     global MY_DOUBLE_ALT, MY_DOUBLE_HOME, MY_DOUBLE_END
   
     split := StrSplit(line, ",")
@@ -157,6 +157,13 @@ parseData(fileName) {
           MY_IDEA := OutTarget
         } else {
           MY_IDEA := info.path
+        }
+      } else if info.title = '新终端' {
+        if InStr(info.path, '.lnk') {
+          FileGetShortcut(info.path, &OutTarget)
+          MY_NEW_TERMINAL := OutTarget
+        } else {
+          MY_NEW_TERMINAL := info.path
         }
       }
     }

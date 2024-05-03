@@ -22,6 +22,11 @@
 ,,,,,,,,
 程序,::{20D04FE0-3AEA-1069-A2D8-08002B30309D},ahk_exe explorer.exe ahk_class CabinetWClass,我的电脑,wodediannao|wodejisuanji|ziyuanguanliqi|explorer|我的电脑|资源管理器,!1,,,
 ,,,,,,,,
+程序,shortcuts\git-bash.lnk,,Bash,Bash,,,,
+程序,shortcuts\wt.lnk,,新终端,WindowsTerminal|新终端,,,,
+程序,shortcuts\Code.lnk,ahk_exe Code.exe ahk_class Chrome_WidgetWin_1,VSCode,VSCode,!3,,,https://code.visualstudio.com
+程序,shortcuts\idea64.lnk,,IDEA,IDEA,,,,
+,,,,,,,,
 程序,C:\Program Files\Bandizip\Bandizip.exe,,Bandizip,Bandizip,,,,https://www.bandisoft.com/bandizip
 程序,C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe,,Edge,Edge,,,,
 程序,C:\Program Files\FastGestures\FastGestures.exe,,FastGestures,FastGestures,,,,
@@ -36,18 +41,15 @@
 程序,shortcuts\Beekeeper-Studio.lnk,,BeekeeperStudio,BeekeeperStudio,,,,https://github.com/beekeeper-studio/beekeeper-studio/releases
 程序,shortcuts\Bitwarden.lnk,,Bitwarden,Bitwarden,,,,https://bitwarden.com/download
 程序,shortcuts\ClickShow.lnk,,ClickShow,ClickShow,,,,
-程序,shortcuts\Code.lnk,ahk_exe Code.exe ahk_class Chrome_WidgetWin_1,VSCode,VSCode,!3,,,https://code.visualstudio.com
 程序,shortcuts\EVAVEdit.lnk,,EV 剪辑,Evjianji|EV剪辑,,,,
 程序,shortcuts\EVCapture.lnk,,EV 录屏,Evluping|EV录屏,,,,
 程序,shortcuts\Everything.lnk,,Everything,Everything,,,,https://www.voidtools.com/zh-cn/downloads
 程序,shortcuts\FastGestures.lnk,,FastGestures,FastGestures,,,,
 程序,shortcuts\fileu.lnk,,文件蜈蚣,wenjianwugong|文件蜈蚣,,,,http://www.filecxx.com/zh_CN/index.html
 程序,shortcuts\Foxmail.lnk,,Foxmail,Foxmail,,,,
-程序,shortcuts\git-bash.lnk,,Bash,Bash,,,,
 程序,shortcuts\HBuilderX.lnk,,HBuilderX,HBuilderX,,,,https://www.dcloud.io/hbuilderx.html
 程序,shortcuts\heidisql.lnk,,Heidisql,Heidisql,,,,https://www.heidisql.com/download.php?download=portable-64
 程序,shortcuts\HTTPie.lnk,,HTTPie,HTTPie,,,,https://httpie.io/download
-程序,shortcuts\idea64.lnk,,IDEA,IDEA,,,,
 程序,shortcuts\MarkText.lnk,,MarkText,MarkText,,,,https://github.com/marktext/marktext/releases
 程序,shortcuts\Motrix.lnk,,Motrix,Motrix,,,,https://motrix.app/zh-CN
 程序,shortcuts\MusicPlayer2.lnk,,MusicPlayer2,MusicPlayer2,,,,https://github.com/zhongyang219/MusicPlayer2
@@ -89,6 +91,8 @@
 程序,shortcuts\微信.lnk,,微信,weixin|wechat|微信,,,,https://weixin.qq.com
 程序,shortcuts\微信开发者工具.lnk,,微信开发者工具,weixinkaifazhe|微信开发者,,,,https://developers.weixin.qq.com/miniprogram/dev/devtools/devtools.html
 程序,shortcuts\迅雷.lnk,,迅雷,xunlei|thunder|迅雷,,,,
+程序,C:\Program Files\PDFgear\PDFLauncher.exe,,PDFgear,PDFgear,,,,
+程序,C:\Users\acc8226\AppData\Roaming\搜狐影音\SHPlayer.exe,,搜狐影音,souhuyingyin|搜狐影音,,,,
 ,,,,,,,,
 文件,D:\,,D盘,dpan|D盘,!d,,,
 文件,E:\,,E盘,epan|E盘,,,,
@@ -132,7 +136,7 @@
 ,,,,,,,,
 网址,163.com ,,网易网 ,,,,,
 网址,https://apple.com.cn,,苹果官网,Apple,,,,
-网址,appinn.com,,小众软件,xiaozhongruanjian|小众软件,,,,
+网址,https://appinn.com,,小众软件,xiaozhongruanjian|小众软件,,,,
 网址,atomgit.com,,atomgit,atomgit,,,,
 网址,book.qq.com,,QQ阅读,QQ阅读,,,,
 网址,qq.com,,腾讯网,tengxunwang|腾讯网,,,,
@@ -154,7 +158,7 @@
 网址,wenshushu.com,,文叔叔,wenshushu|文叔叔,,,,
 网址,sspai.com,,少数派 ,shaoshupai|少数派,,,,
 网址,wx.qq.com,,微信网页版,weixin|wechat|微信,,,,
-网址,baidu.com,,百度,baidu|百度,,zbd,,
+网址,www.baidu.com,,百度,baidu|百度,,zbd,,
 网址,www.bilibili.com,,b站,bilibili|b站|哔哩哔哩,!6,zbi,,
 网址,www.cnblogs.com,,博客园,bokeyuan|cnblogs|博客园,,zcn,,
 网址,www.cncn.com,,欣欣旅游,xinxinlvyou|欣欣旅游 ,,,,
@@ -172,7 +176,7 @@
 网址,www.mgtv.com,,芒果TV,mangguotv|芒果TV,,,,
 网址,https://www.soso.com ,,搜搜网 ,,,,,
 网址,www.speedtest.cn,,网速测试,wangsuceshi|网速测试,,,,
-网址,www.zhihu.com,,知乎,zhihu|知乎,,zzh,,
+网址,www.zhihu.com,,知乎,zhihu|知乎,,,,
 网址,www.zhipin.com,,BOSS直聘,bosszhipin|BOSS直聘,,,,
 网址,y.qq.com,,QQ音乐,QQ音乐|qqmusic,,,,
 网址,yiyan.baidu.com,,文心一言,wenxinyiyan,,,,

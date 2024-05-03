@@ -1,7 +1,3 @@
-; 
-; Window Spy for AHKv2
-;
-
 #Requires AutoHotkey v2.0
 
 #NoTrayIcon
@@ -13,13 +9,10 @@ Global oGui
 
 WinSpyGui()
 
-WinSpyGui() {
-    Global oGui
-    
-    try TraySetIcon "inc\spy.ico"
+WinSpyGui() {    
     DllCall("shell32\SetCurrentProcessExplicitAppUserModelID", "wstr", "AutoHotkey.WindowSpy")
     
-    oGui := Gui("AlwaysOnTop Resize MinSize +DPIScale","Window Spy for AHKv2")
+    Global oGui := Gui("AlwaysOnTop Resize MinSize +DPIScale","Window Spy for AHKv2")
     oGui.OnEvent("Close",WinSpyClose)
     oGui.OnEvent("Size",WinSpySize)
     
@@ -27,24 +20,32 @@ WinSpyGui() {
     
     oGui.Add("Text",,"Window Title, Class and Process:")
     oGui.Add("Checkbox","yp xp+200 w120 Right vCtrl_FollowMouse","Follow Mouse").Value := 1
+
     oGui.Add("Edit","xm w320 r5 ReadOnly -Wrap vCtrl_Title")
+
     oGui.Add("Text",,"Mouse Position:")
+
     oGui.Add("Edit","w320 r4 ReadOnly vCtrl_MousePos")
-    oGui.Add("Text","w320 vCtrl_CtrlLabel",(txtFocusCtrl := "Focused Control") ":")
+
+    oGui.Add("Text","w320 vCtrl_CtrlLabel",(txtFocusCtrl := "Focused Control") . ":")
     oGui.Add("Edit","w320 r4 ReadOnly vCtrl_Ctrl")
+
     oGui.Add("Text",,"Active Window Position:")
     oGui.Add("Edit","w320 r2 ReadOnly vCtrl_Pos")
+
     oGui.Add("Text",,"Status Bar Text:")
     oGui.Add("Edit","w320 r2 ReadOnly vCtrl_SBText")
     oGui.Add("Checkbox","vCtrl_IsSlow","Slow TitleMatchMode")
+
     oGui.Add("Text",,"Visible Text:")
     oGui.Add("Edit","w320 r2 ReadOnly vCtrl_VisText")
+
     oGui.Add("Text",,"All Text:")
     oGui.Add("Edit","w320 r2 ReadOnly vCtrl_AllText")
     oGui.Add("Text","w320 r1 vCtrl_Freeze",(txtNotFrozen := "(Hold Ctrl or Shift to suspend updates)"))
     
     oGui.Show("NoActivate")
-    WinGetClientPos(&x_temp, &y_temp2,,,"ahk_id " oGui.hwnd)
+    WinGetClientPos(&x_temp,,,,"ahk_id " oGui.hwnd)
     
     ; oGui.horzMargin := x_temp*96//A_ScreenDPI - 320 ; now using oGui.MarginX
     
@@ -62,7 +63,7 @@ WinSpySize(GuiObj, MinMax, Width, Height) {
     If !oGui.HasProp("txtNotFrozen") ; WinSpyGui() not done yet, return until it is
         return
     
-    SetTimer Update, (MinMax=0)?250:0 ; suspend updates on minimize
+    SetTimer Update, (MinMax=0) ? 250 : 0 ; suspend updates on minimize
     
     ctrlW := Width - (oGui.MarginX * 2) ; ctrlW := Width - horzMargin
     list := "Title,MousePos,Ctrl,Pos,SBText,VisText,AllText,Freeze"
@@ -140,8 +141,9 @@ TryUpdate() {
                . "Text:`t" textMangle(ctrlTxt) "`n"
                . "Screen:`tx: " sX "`ty: " sY "`tw: " sW "`th: " sH "`n"
                . "Client:`tx: " cX "`ty: " cY "`tw: " cW "`th: " cH
-    } else
+    } else {
         cText := ""
+    }
     
     UpdateText("Ctrl_Ctrl", cText)
     wX := "", wY := "", wW := "", wH := ""
@@ -190,7 +192,7 @@ WinGetTextFast(detect_hidden) {
     
     static WINDOW_TEXT_SIZE := 32767 ; Defined in AutoHotkey source.
     
-    buf := Buffer(WINDOW_TEXT_SIZE * 2,0)
+    buf := Buffer(WINDOW_TEXT_SIZE * 2, 0)
     
     text := ""
     
@@ -201,7 +203,7 @@ WinGetTextFast(detect_hidden) {
         if !DllCall("GetWindowText", "ptr", hCtl, "Ptr", buf.ptr, "int", WINDOW_TEXT_SIZE)
             continue
         
-        text .= StrGet(buf) "`r`n" ; text .= buf "`r`n"
+        text .= StrGet(buf) "`r`n"
     }
     return text
 }

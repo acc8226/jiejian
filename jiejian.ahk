@@ -9,7 +9,7 @@ vscode 插件安装 https://marketplace.visualstudio.com/items?itemName=thqby.vs
 ;@Ahk2Exe-SetCopyright 全民反诈 union
 ;@Ahk2Exe-SetDescription 捷键-为简化键鼠操作而生
 
-global CODE_VERSION := '24.4.23-beta'
+global CODE_VERSION := '24.5.3-beta'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
@@ -45,9 +45,9 @@ SetTitleMatchMode 'RegEx' ; 设置 WinTitle parameter 在内置函数中的匹�
 
 #Include 'modules/ConfigMouse.ahk'
 #Include 'modules/Utils.ahk'
-#Include 'modules/Anyrun.ahk'
 #Include 'modules/ReadApp.ahk'
 #Include 'modules/ReadData.ahk'
+#Include 'modules/Anyrun.ahk'
 #Include 'modules/CheckUpdate.ahk'
 #Include 'modules/MyTrayMenu.ahk'
 
@@ -118,10 +118,10 @@ checkUpdate() ; 检查更新
 ; ----- 热串 之 自定义表情符号：将输入的特定字符串替换为自定义的表情符号或 Emoji -----
 
 :C*:xnow::{
-    SendText FormatTime(, 'yyyy-MM-dd HH:mm:ss')
+    SendText(FormatTime(, 'yyyy-MM-dd HH:mm:ss'))
 }
 :C*:xdate::{
-    SendText FormatTime(, "'date:' yyyy-MM-dd HH:mm:ss")
+    SendText(FormatTime(, "'date:' yyyy-MM-dd HH:mm:ss"))
 }
 
 ; 注册一个当脚本退出时, 会自动调用的函数
@@ -149,8 +149,9 @@ exitFunc(exitReason, exitCode) {
     if (text) {
         if RegExMatch(text, "i)^\s*((?:https?://)?(?:[\w-]+\.)+[\w-]+(?:/[\w-./?%&=]*)?\s*)$", &regExMatchInfo) {
             text := regExMatchInfo.1
-            if NOT InStr(text, 'http')
+            if NOT InStr(text, 'http') {
                 text := ("http://" . text)
+            }
             Run(text)
         } else {
             Run('https://www.baidu.com/s?wd=' . text)
@@ -172,9 +173,8 @@ doubleClick(hk, command) {
         openInnerCommand(command, True)
 }
 
-~^c::
-~^v::
-updateCtrlTimestamp(*) { ; 监控 ctrl + c / ctrl + v 按键
+~^c Up:: ; 监控 ctrl + c 按键放下
+updateCtrlTimestamp(*) {
     global CTRL_TIMESTAMP := A_NowUTC
 }
 
@@ -186,13 +186,14 @@ Capslock::{
         global ENABLE_CHANGE_CAPS_STATE := False
     }
     
-    SetTimer(disableCapsChange, -300) ; 300ms 犹豫操作时间
+    SetTimer(disableCapsChange, -300) ; 300 ms 犹豫操作时间
     KeyWait('CapsLock') ; 等待用户物理释放按键
     IS_CAPS_PRESSED := False ; Capslock 先置空，来关闭 Capslock+ 功能的触发
     ; 松开的时候才切换大小写
-    if (ENABLE_CHANGE_CAPS_STATE)
+    if (ENABLE_CHANGE_CAPS_STATE) {
         ; 切换 CapsLock 到相反的状态
         SetCapsLockState(!GetKeyState("CapsLock", "T"))
+    }
     disableCapsChange()
 
 }
@@ -228,9 +229,9 @@ e::WinSetTransparent("Off", 'A')
 t::WinSetTransparent(210, 'A')
 ; 复制选中文件路径并打开 anyrun 组件
 Space::{
+    copySelectedAsPlainTextQuiet()
     ; 由于命令发送 ctrl + c 不会触发监听则手动更新时间戳
     updateCtrlTimestamp()
-    copySelectedAsPlainTextQuiet()
     anyrun()
 }
 
