@@ -93,7 +93,7 @@ checkUpdate() ; 检查更新
     Send('{Home}{Shift Down}{End}{Shift Up}') ; 切到首部然后选中到尾部
     Sleep(100)
     Send('^x')
-    ClipWait ; 等待剪贴板中出现文本.
+    ClipWait ; 等待剪贴板中出现文本
     newText := RegExReplace(A_Clipboard, "\s*$", "") ; 去掉尾部空格
     newText := RegExReplace(newText, "^#{1,6}\s+(.*)", "$1")
     nums := SubStr(A_ThisHotkey, 2)
@@ -105,7 +105,11 @@ checkUpdate() ; 检查更新
 }
 #HotIf
 
-^!r::Reload() ; Ctrl + Alt + R 重启脚本
+; Ctrl + Alt + R 重启脚本
+^!r::{
+    Sleep 50 ; 不创建多个实例的情况下重新加载脚本的简单实现，给个暂停时长
+    Reload() 
+}
 ^!s::JJ_TRAY_MENU.mySuspend() ; Ctrl + Alt + S 暂停脚本
 ^!v::Send(A_Clipboard) ; Ctrl + Alt + V 将剪贴板的内容输入到当前活动应用程序中，防止了一些网站禁止在 HTML 密码框中进行粘贴操作
 ^+"::Send('""{Left}') ; Ctrl + Shift + " 快捷操作-插入双引号

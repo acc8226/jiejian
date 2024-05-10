@@ -2,7 +2,7 @@
 
 ; 正则匹配最大支持长度默认为 32 位
 global SUPPORT_LEN := 32
-global DATA_FILTER_REG := 'i)^(?:' . DataType.app . '|' . DataType.file . '|' . DataType.web . '|' . DataType.inner . '|' . DataType.ext . ')$'
+global DATA_FILTER_REG := 'i)^(?:' . DataType.app . '|' . DataType.file . '|' . DataType.web . '|' . DataType.inner . '|' . DataType.ext . '|' . DataType.dl . ')$'
 global IS_HTTP_Reg := 'i)^(?:https?://)?(?:[\w-]+\.)+[\w-]+(?:/[\w-./?%&=]*)?\s*$'
 
 global MY_GUI
@@ -142,7 +142,7 @@ anyrun() {
                         } else if RegExMatch(it.alias, needleRegEx, &regExMatchInfo)
                             ; 如果能匹配
                             dataArray.Push({degree: computeDegree(regExMatchInfo)
-                                            , title: it.title
+                                            , title: it.title ; . '-' . computeDegree(regExMatchInfo) 测试用
                                             , type: it.type
                             })
                     }
@@ -249,7 +249,7 @@ anyrun() {
                 Run('jiejian' . (A_PtrSize == 4 ? '32' : '64') . '.exe /script ' . item.path)
             ; 兜底 精确处理：app file web 程序文件网址类型
             else {
-                if (item.type = DataType.web)
+                if (item.type = DataType.web || item.type = DataType.dl)
                     jumpURL(item.path)
                 else if (item.type = DataType.app && item.title == '微信') { ; 对微信特殊处理：自动登录微信
                     try {
@@ -290,8 +290,10 @@ anyrun() {
  * @returns {number} 
  */
 computeDegree(regExMatchInfo) {
+    ; 总的匹配度
     degree := 0
     loop regExMatchInfo.Count {
+        ; A_Index 第一次循环体执行时, 它为 1. 第二次, 它的值为 2; 依次类推
         item := SUPPORT_LEN - regExMatchInfo.Pos[A_Index]
         if (item < 0)
             break
@@ -332,9 +334,8 @@ isDir(path) {
         ; 抽出文件夹
         if RegExMatch(path, '.*[\\/]', &regExMatchInfo)
             isMatch := DirExist(regExMatchInfo.0)
-        else {
+        else
             isMatch := false
-        }
     } else {
         isMatch := false
     }

@@ -17,10 +17,10 @@
 
 | 功能 |  macOS 平台 | Windows 平台 |
 | ---- | ---- | ---- |
-| 侧边按键支持 | BetterAndBetter【免费】 | [捷键][]【免费】 |
-| 热字符串 | Espanso【免费】 | [捷键][]【免费】 |
-| 启动器 | Raycast【免费】/Alfred【付费】| [捷键][]【免费】 |
-| 启动程序/窗口切换 | hammerspoon【免费】 | [捷键][]【免费】 |
+| 侧边按键支持 | BetterAndBetter【免费】 | [捷键][]【免费】 或 一些鼠标手势软件支持 |
+| 热字符串 | Espanso【免费】 | [捷键][]【免费】 或 Espanso |
+| 启动器 | Raycast【免费】/Alfred【付费】/ HapiGo【付/免费】 | [捷键][]【免费】 或 uTools 或 Listary |
+| 启动程序/窗口切换 | hammerspoon 脚本【免费】 | [捷键][]【免费】 或 mykeymap 或 ahk 脚本 |
 
 但这毕竟这是我业余摸鱼节假日其他时间个人开发维护，优点怕只剩下功能较多和足够小巧了。这同时指导了我的下一步工作，将逐渐提升交互。尽量做到开箱即用。
 
@@ -173,6 +173,7 @@
 * `xg` 西瓜视频
 * `yc` 异次元软件
 * `gh` Github
+* `qr` 创建二维码
 
 ![](https://foruda.gitee.com/images/1689321508560702893/2457a573_426858.gif "动画.gif")
 
@@ -208,6 +209,10 @@
 * 息屏
 * 睡眠
 * 关机
+
+### 打开软件下载站
+
+例如输入 `qqmusic` 表示跳转到 QQ 音乐下载站点
 
 ### 增强的操作文件和网址的能力
 
@@ -295,10 +300,10 @@ data.csv 可自由配置
 
 ## 12. 双击模式
 
-预设动作如下，若 2 次双击小于 239 毫秒则触发
+预设动作如下，若 2 次双击间隔小于 239 毫秒会触发：
 
-* 双击 Alt：息屏（无提醒）
-* 双击 Home：睡眠（无提醒）
+* 双击 Alt：息屏（无弹窗提醒）
+* 双击 Home：睡眠（无弹窗提醒）
 * 双击 End：关机（有确认对话框）
 
 可以手动去 data.csv 中进行修改。
@@ -353,7 +358,7 @@ anyrun 启动器用
 
 ## 未来计划
 
-* 支持 Arc 浏览器 for windows
+* 支持 Arc 浏览器 for windows，目前 arc 只开放了 win 11，导致我的 win 10 还不支持无法测试
 * icon 点击后使用新图标，而不是系统样式的图标
 * 配置文件不太易用，需要优化
 
@@ -363,11 +368,9 @@ anyrun 启动器用
 
 在系统栏中找到捷键，勾选开机自启即可。
 
-也可手动开启。运行 `shell:startup`，根据自己是 32 还是 64 位系统，按住 Alt 键后将 `jiejian32.exe` 或 `jiejian64.exe` 拖入 Startup 文件夹内即可。
+### 填写 xxx.exe 程序无法启动
 
-### 启动 zeal.exe 发现加载目录为空
-
-使用 zeal.lnk 这种形式进行启动。汽水音乐使用 `C:\Users\zhangsan\AppData\Local\Programs\Soda Music\SodaMusic.lnk` 也是同理，因为直接用 exe 也起不来。
+以汽水音乐为例，使用实际的 `C:\Users\zhangsan\AppData\Local\Programs\Soda Music\SodaMusic.lnk` lnk 文件替代 exe 方式即可。
 
 ## 附录
 

@@ -502,8 +502,8 @@ XButton2::Send '^+{Tab}'
 ^+n::Send "^n"
 
 ; L 列 F11 功能键增强 全屏
-; 如果是浏览器 且 打开的是 bilibili 则特殊处理，将 f11 转成按键 f
-#HotIf WinActive("哔哩哔哩_bilibili ahk_group browser_group")
+; 如果是浏览器 且 打开的是 bilibili 或 YouTube 则特殊处理，将 f11 转成按键 f
+#HotIf WinActive("(?:- YouTube -|哔哩哔哩_bilibili) ahk_group browser_group")
 F11::Send "f"
 
 #HotIf WinActive('ahk_group fullscreen_DoubleClick')

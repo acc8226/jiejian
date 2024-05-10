@@ -5,15 +5,15 @@ swap(arr, i, j) {
     arr[j] := temp
 }
 
-; 稳定的冒泡排序，从大到小
+; 冒泡排序，从大到小 属于稳定排序
 dataArraySort(dataArray) {
     ; 对 listBoxData 进行冒泡排序
     i := 0
-    while i < dataArray.Length - 1 {
+    while (i < dataArray.Length - 1) {
         flag := false
         j := 0
-        while j < dataArray.Length - 1 - i {
-            if dataArrayCompare(dataArray[j + 1], dataArray[j + 2]) < 0 {
+        while (j < dataArray.Length - 1 - i) {
+            if (dataArrayCompare(dataArray[j + 1], dataArray[j + 2]) < 0) {
                 swap(dataArray, j + 1, j + 2)
                 flag := true
             }
@@ -33,12 +33,18 @@ dataArraySort(dataArray) {
  * @returns {number}
  */
 dataArrayCompare(it1, it2) {
-    ; 按照 degree 降序、title 升序、type 升序 进行排序
+    ; 排序按照 degree 降序、title 升序、type 升序
     result := it1.degree - it2.degree
     if result == 0 {
         result := StrCompare(it2.title, it1.title)
-        if result == 0
-            result := StrCompare(it2.type, it1.type)
+        if result == 0 {
+            ; 程序 优先于 下载
+            ; if (it1.type == '程序' && it2.type == '下载') {
+            ;     return 1
+            ; } else {
+                result := StrCompare(it2.type, it1.type)
+            ; }
+        }
     }
     return result
 }

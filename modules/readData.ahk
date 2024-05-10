@@ -8,6 +8,7 @@ class DataType {
   static search := '搜索'
   static inner := '内部'
   static ext := '外部'
+  static dl := '下载'
 }
 
 ; 注册热键 和 热字符串
@@ -94,7 +95,7 @@ parseData(fileName) {
           }
         }
       }
-    } else if (info.type  = DataType.web) {
+    } else if (info.type = DataType.web || info.type = DataType.dl) {
       ; 为节约内存。如果 https 开头则默认去掉
       if InStr(info.path, "https://")
         info.path := SubStr(info.path, StrLen("https://") + 1)
