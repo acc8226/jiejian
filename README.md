@@ -44,11 +44,6 @@
 
 ## 2. 热键 之 键鼠操作
 
-1. 按住 CapsLock 后可以用鼠标左键拖动窗口
-2. 当鼠标移动到屏幕左边缘或者停留在任务栏时，鼠标滑轮滚动可以调节音量。
-
-![](https://foruda.gitee.com/images/1689318820722473769/d4f9efe3_426858.gif)
-
 | 鼠标 | 按键 | 建议映射手势 | 名称 | 默认用途 | 多标签软件 | 音乐类软件 | 视频类软件 | 看图软件 | 焦点在任务栏 | 焦点在左边界 | 焦点在上边界 | 焦点在桌面 |
 | ---- | ---- | ---- |---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
 | - | Esc | - | 逃逸/esc | 退出窗口 | - | - | - | - | - | - | - | - |
@@ -68,14 +63,18 @@
 | - | Ctrl + F7 | 右左 | 置顶/zhiding | 置顶 | | | | | | | | |
 | - | F11 | ↓↑ | 全屏/fullscreen | 全屏/取消全屏 | | | | | | | | |
 
+下图为鼠标滚动调节音量示例
+
+![鼠标滚动示例](https://foruda.gitee.com/images/1689318820722473769/d4f9efe3_426858.gif)
+
 注：
 
-1. 能用鼠标按键尽量用按键，因此最好使用带侧边按键的鼠标。其次考虑使用鼠标手势，最后才考虑使用快捷键。
+1. 能用鼠标按键尽量用按键，因此最好搭配带侧边按键的鼠标。其次考虑使用鼠标手势/快捷键。
 2. 多标签软件主要为浏览器，支持多标签的文本编辑器、IDE 等。
-3. 音乐类软件如 Spotify、QQ 音乐。其中 Ctrl + F3 打开文件对本地音乐播放器适配良好，在线音乐类软件可能不适用。
-4. 视频类软件如 PotPlayer、VLC。
-5. 看图软件如 2345 看图王、Bandiview。
-6. F11 特别适配了 b 站。
+3. 音乐类软件主要囊括了 Spotify、QQ 音乐、网易云音乐等。其中 Ctrl + F3 打开文件对本地音乐播放器适配良好，在线音乐类软件可能不适用。
+4. 视频类软件例如 PotPlayer、VLC。
+5. 看图软件如 2345 看图王、Bandiview、ImageGlass。
+6. F11 特别适配了 b 站和油管。
 
 以下部分场景使用了鼠标手势软件 WGestures 替代了手动键入快捷键。
 
@@ -281,7 +280,8 @@ data.csv 可自由配置
 
 ## 11. CapsLock 模式
 
-在按下 CapsLock 键的同时再按下以下键，其中大部分按键习惯同 [MyKeymap][]。
+按住 CapsLock 后可以用鼠标左键拖动窗口；
+按住 CapsLock 键的同时按下以下键可激活特殊功能，其中大部分按键参考了 [MyKeymap][]。
 
 | 按键 | 用途 |
 | ---- | ---- |
@@ -382,7 +382,7 @@ anyrun 启动器用
 
 ### 已适配软件
 
-软件入选原则：主要收录热门软件，其中主要以浏览器比较全。
+软件挑选原则：个人偏好以及热门、常用软件。其中又以浏览器收集最为全面。
 
 支持但不限于以下百余款软件，且持续更新中...
 
@@ -597,9 +597,9 @@ jiejian.exe 的文件版本为当前四位版本号，产品版本为当前编�
 
 ## 写在最后
 
-本程序编辑 csv 文件用到了开源软件 LiberOffice。主要发布平台为 [GitHub](https://github.com) 和 [AtomGit](https://atomgit.com)。
+本程序编辑 csv 文件用到了开源软件 LiberOffice。源码发布在 [AtomGit](https://atomgit.com) 和 [GitHub](https://github.com)。
 
-由于 autohotkey 这门语言容易学习。再加上我之前编程功底，从设计到开发均由我一人完成。部分功能以及代码参考自 Windows 软件 [MyKeymap][] | [源码][MyKeymap Github repo]、[Capslock+][]，并从 Win 软件 [Quicker][]、[uTools][] 以及 macOS 软件 [BetterAndBetter][]、[HapiGo][] 和 [Raycast][] 中受到启发。在此默默感谢。
+由于 Autohotkey 这门语言容易学习。再加上我之前编程功底，从设计到开发均由我一人完成。部分功能以及代码参考自 Windows 软件 MyKeymap [主页][MyKeymap] | [源码][MyKeymap Github repo]、Capslock+ [主页][Capslock+] | [源码][Capslock+源码]，并从 Win 软件 [Quicker][]、[uTools][] 以及 macOS 软件 [BetterAndBetter][]、[HapiGo][] 和 [Raycast][] 中受到启发。在此默默感谢。
 
   [MyKeymap]: https://xianyukang.com/MyKeymap.html '很多代码都参考借鉴了它'
   [MyKeymap Github repo]: https://github.com/xianyukang/MyKeymap "感谢作者"
@@ -607,13 +607,11 @@ jiejian.exe 的文件版本为当前四位版本号，产品版本为当前编�
   [WGestures 2]: https://www.yingdev.com/projects/wgestures2 "一款很屌的付费鼠标手势"
   [WGestures 2付费链接]: https://store.lizhi.io/site/products/id/523?cid=46jjayiu "一款很屌的付费鼠标手势"
   [Capslock+]: https://capslox.com/capslock-plus ""
+  [Capslock+源码]: https://github.com/wo52616111/capslock-plus ""
   [Raycast]: https://www.raycast.com ""
   [HapiGo]: https://www.hapigo.com ""
   [BetterAndBetter]: https://www.better365.cn/bab2.html ""
   [Quicker]: https://getquicker.net/ ""
   [uTools]: https://www.u.tools/ ""
 
-  [捷键]: https://atomgit.com/acc8226/jiejian/tags?tab=release "我的诚意之作" 
-
-  [bilibili 哔哩哔哩]: https://www.bilibili.com/ '哔哩哔哩'
-  [汽水音乐]: https://www.douyin.com/qishui '汽水音乐'
+  [捷键]: https://atomgit.com/acc8226/jiejian/tags?tab=release "我的诚意之作"
