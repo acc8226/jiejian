@@ -3,7 +3,8 @@
 ; 正则匹配最大支持长度默认为 32 位
 global SUPPORT_LEN := 32
 global DATA_FILTER_REG := 'i)^(?:' . DataType.app . '|' . DataType.file . '|' . DataType.web . '|' . DataType.inner . '|' . DataType.ext . '|' . DataType.dl . ')$'
-global IS_HTTP_Reg := 'i)^(?:https?://)?(?:[\w-]+\.)+[\w-]+(?:/[\w-./?%&=]*)?\s*$'
+; 端口判断过于简单 但是基本够用了
+global IS_HTTP_Reg := 'i)^(?:https?://)?(?:[\w-]+\.)+[\w-]+(:(?!0)(?![7-9]\d{4})\d{1,5})?(?:/[\w-./?%&=]*)?\s*$'
 
 global MY_GUI
 global MY_GUI_WIDTH := 432
@@ -369,7 +370,7 @@ appendWebsiteName(path) {
                         uri := it.path
                     }
                     ; 如果是顶级域名（简单认为分段数为 2）则加上 www
-                    is_top_level_domain := 2 == StrSplit(uri, '.').Length
+                    is_top_level_domain := (2 == StrSplit(uri, '.').Length)
                     newUri := 'i)^(?:https?://)?' . (is_top_level_domain ? '(?:www\.)?' : '') . StrReplace(uri, '.', "\.") . '(?:/.*)?$'
                 } 
                 if (path ~= newUri) {

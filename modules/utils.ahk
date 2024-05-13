@@ -40,7 +40,7 @@ startByHotString(hotstring) {
 
 jumpURL(input) {
     if NOT InStr(input, 'http')
-        ; https 将逐渐替代 http
+        ; https 将逐渐替代 http，这是大势所趋
         input := "https://" . input
     Run(input)
 }
