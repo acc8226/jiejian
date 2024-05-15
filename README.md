@@ -1,15 +1,23 @@
 # 捷键 for win 使用说明
 
+A key mapping/shortcut enhancement tool developed based on [Autohotkey2](https://www.autohotkey.com/), designed to simplify keyboard and mouse operations in Windows. It can serve as a traditional launcher and also supports mouse side buttons and hotkeys effectively.
+
+It is highly recommended to use it in conjunction with global mouse gesture software and a mouse with side buttons.
+
+System Requirements: Compatible with Windows XP and above, but it is recommended to run smoothly on at least Windows 7.
+
 基于 [Autohotkey2](https://www.autohotkey.com/) 开发，为简化 Windows 键鼠操作而生的按键映射/快捷键增强工具。既可当作一个传统启动器，又对鼠标侧边按键和热字符支持良好。
 
 强烈建议搭配全局鼠标手势软件 + 带侧边按键的鼠标。
 
-[视频演示](https://www.bilibili.com/video/BV19H4y1e7hJ?vd_source=54168537affc2c02555097cb26797d99) ｜ [软件下载][捷键]
+系统要求：Windows XP 以上均可，推荐至少在 Win 7 上运行良好。
+
+[Video Demonstration 视频演示](https://www.bilibili.com/video/BV19H4y1e7hJ?vd_source=54168537affc2c02555097cb26797d99) | [Download 下载地址][捷键] 
 
 **注意事项：**
 
 1. 若软件功能有差异，以最新版为准。
-2. 本程序开源，无毒无后门不收集任何信息。如被误报错杀，可加入安全类软件排除清单。
+2. 本程序开源，无毒无后门不收集任何信息。如被误报错杀，请加入排除清单。
 
 **和一些软件对比**
 
@@ -22,7 +30,7 @@
 | 启动器 | Raycast【免费】/Alfred【付费】/ HapiGo【付/免费】 | [捷键][]【免费】 或 uTools 或 Listary |
 | 启动程序/窗口切换 | hammerspoon 脚本【免费】 | [捷键][]【免费】 或 mykeymap 或 ahk 脚本 |
 
-但这毕竟这是我业余摸鱼节假日其他时间个人开发维护，优点怕只剩下功能较多和足够小巧了。这同时指导了我的下一步工作，将逐渐提升交互。尽量做到开箱即用。
+毕竟是我业内摸鱼和业外空闲时间开发，优点恐怕只剩下功能较多和足够小巧了。下一步我的工作将逐渐放在提升交互上。
 
 ## 0. 程序目录结构
 
@@ -39,8 +47,6 @@
 * 热字符串支持
 * 可作为启动器使用，由于定制化程度太高甚至会导致难以上手，提供快捷启动和内置系统命令（锁屏、睡眠、关机等）
 * 试验性的加入左键辅助功能
-
-建议搭配免费的全局鼠标手势软件 WGestures 1【免费】/FastGestures【免费】/[WGestures 2【付费】][WGestures 2付费链接]，再说说题外话 mac 平台我觉得 BetterAndBetter【免费】做得很好。
 
 ## 2. 热键 之 键鼠操作
 
@@ -69,12 +75,14 @@
 
 注：
 
-1. 能用鼠标按键尽量用按键，因此最好搭配带侧边按键的鼠标。其次考虑使用鼠标手势/快捷键。
+1. 建议优先使用鼠标按键进行驱动，因此最好搭配带侧边按键的鼠标。其次考虑安装鼠标鼠标手势驱动快捷键例如 [WGestures 2][WGestures 2付费链接]，最后才考虑直接使用快捷键。
 2. 多标签软件主要为浏览器，支持多标签的文本编辑器、IDE 等。
 3. 音乐类软件主要囊括了 Spotify、QQ 音乐、网易云音乐等。其中 Ctrl + F3 打开文件对本地音乐播放器适配良好，在线音乐类软件可能不适用。
 4. 视频类软件例如 PotPlayer、VLC。
 5. 看图软件如 2345 看图王、Bandiview、ImageGlass。
 6. F11 特别适配了 b 站和油管。
+
+除了 [WGestures 2][WGestures 2付费链接]【付费】 以外，[WGestures 1][]【免费】 和 [FastGestures][]【免费】也是不错的选择。
 
 以下部分场景使用了鼠标手势软件 WGestures 替代了手动键入快捷键。
 
@@ -606,6 +614,7 @@ jiejian.exe 的文件版本为当前四位版本号，产品版本为当前编�
   [WGestures 1]: https://www.yingdev.com/projects/wgestures '一款很屌的免费鼠标手势'
   [WGestures 2]: https://www.yingdev.com/projects/wgestures2 "一款很屌的付费鼠标手势"
   [WGestures 2付费链接]: https://store.lizhi.io/site/products/id/523?cid=46jjayiu "一款很屌的付费鼠标手势"
+  [FastGestures]: https://fg.zhaokeli.com/ "FastGestures官网 - 鼠标/触控板/屏手势势"
   [Capslock+]: https://capslox.com/capslock-plus ""
   [Capslock+源码]: https://github.com/wo52616111/capslock-plus ""
   [Raycast]: https://www.raycast.com ""

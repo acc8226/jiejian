@@ -5,13 +5,13 @@
         global IS_AUTO_START_UP
 
         this.editScript:= '编辑脚本(&E)'
-        this.ListVars:= '查看变量(&L)'
-        this.pause := Format("{1:-10}", "暂停(Ctrl+Alt+S)")
+        this.listVars:= '查看变量(&L)'
+        this.pause := "暂停(Ctrl+Alt+S)"
         this.restart:= '重启(Ctrl+Alt+R)'
-        this.sou:= '搜一搜(Alt+空格)'
-        this.biaozhifu:= '查看窗口标识符(&V)'
-        this.tongji:= '使用统计(&S)'
-        this.kaijiziqi:= '开机自启(&A)'
+        this.search:= '搜一搜(Alt+空格)'
+        this.viewWinId:= '查看窗口标识符(&V)'
+        this.statistics:= '使用统计(&S)'
+        this.startUp:= '开机自启(&A)'
 
         this.help:= '帮助(&H)'
         this.document:= '文档(&D)'
@@ -39,16 +39,16 @@
         A_TrayMenu.Delete()
         if (NOT A_IsCompiled) {
             A_TrayMenu.Add(this.editScript, myTrayMenuHandler)
-            A_TrayMenu.Add(this.ListVars, myTrayMenuHandler)
+            A_TrayMenu.Add(this.listVars, myTrayMenuHandler)
             A_TrayMenu.Add
         }
         ; 右对齐不好使，我醉了
         A_TrayMenu.Add(this.pause, myTrayMenuHandler)
         A_TrayMenu.Add(Format("{1:-10}", this.restart), myTrayMenuHandler)
-        A_TrayMenu.Add(Format("{1:-10}", this.sou), myTrayMenuHandler)
-        A_TrayMenu.Add(this.biaozhifu, myTrayMenuHandler)
-        A_TrayMenu.Add(this.tongji, myTrayMenuHandler)
-        A_TrayMenu.Add(this.kaijiziqi, myTrayMenuHandler)
+        A_TrayMenu.Add(Format("{1:-10}", this.search), myTrayMenuHandler)
+        A_TrayMenu.Add(this.viewWinId, myTrayMenuHandler)
+        A_TrayMenu.Add(this.statistics, myTrayMenuHandler)
+        A_TrayMenu.Add(this.startUp, myTrayMenuHandler)
         A_TrayMenu.Add
 
         ; 添加子菜单到上面的菜单中
@@ -69,14 +69,14 @@
             FileGetShortcut(this.LinkFile, &OutTarget)
             if (OutTarget !== this.shortcut) {
                 IS_AUTO_START_UP := false
-                A_TrayMenu.UnCheck(this.kaijiziqi)
+                A_TrayMenu.UnCheck(this.startUp)
             } else {
                 IS_AUTO_START_UP := true
-                A_TrayMenu.Check(this.kaijiziqi)
+                A_TrayMenu.Check(this.startUp)
             }
         } else {
             IS_AUTO_START_UP := false
-            A_TrayMenu.UnCheck(this.kaijiziqi)
+            A_TrayMenu.UnCheck(this.startUp)
         }
         A_TrayMenu.Default := this.pause
         A_TrayMenu.ClickCount := 1 ; 单击可以暂停
@@ -94,12 +94,12 @@
 
         switch ItemName, 'off' {
         case this.editScript: Edit
-        case this.ListVars: ListVars
+        case this.listVars: ListVars
         case this.pause: this.jiejianToggleSuspend
         case this.restart: jiejianReload()
-        case this.sou: anyrun()
-        case this.biaozhifu: Run("extra/WindowSpyU32.exe")
-        case this.tongji:
+        case this.search: anyrun()
+        case this.viewWinId: Run("extra/WindowSpyU32.exe")
+        case this.statistics:
             ; 统计软件使用总分钟数
             recordMinsValueName := 'record_mins'
             recordMins := RegRead(REG_KEY_NAME, recordMinsValueName, 0) + DateDiff(A_NowUTC, START_TIME, 'Minutes')
@@ -129,7 +129,7 @@
                 sb .= '）'
             }                     
             MsgBox(sb, '使用统计')
-        case this.kaijiziqi:
+        case this.startUp:
             ; 当前是开机自启
             if (IS_AUTO_START_UP) {
                 ; 设置为开机不自启
@@ -138,7 +138,7 @@
                 ; 设置为开机自启
                 FileCreateShortcut(this.shortcut, this.linkFile, A_WorkingDir)
             }
-            A_TrayMenu.ToggleCheck(this.kaijiziqi)
+            A_TrayMenu.ToggleCheck(this.startUp)
             IS_AUTO_START_UP := !IS_AUTO_START_UP
     
             case this.document: Run('https://atomgit.com/acc8226/jiejian/blob/main/README.md')
@@ -154,7 +154,7 @@
                 . "`n当前用户: " . A_UserName
                 . "`n是否管理员权限运行: " . (A_IsAdmin ? '是' : '否')
                 . "`n是否 64 位程式: " . (A_PtrSize == 8 ? '是' : '否')
-                , APP_NAME, 'Iconi')
+                , APP_NAME, 'Iconi T60')
         case this.exit: jiejianExit
         }
     }

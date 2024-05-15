@@ -14,10 +14,10 @@ global MY_GUI_TITLE := '快捷启动'
 global MyActionArray := [
     MyAction('打开网址', 'list', path => path ~= IS_HTTP_Reg, appendWebsiteName, jumpURL), ; 是否提前些比较好，不用了，兜底挺好
     ; 打开（文件，可能是 mp3 或者 mp4 或者 mov）
-    MyAction('打开', 'list', path => path != '*' && path != '/' && FileExist(path) && NOT DirExist(path), appendFileType, path => Run(path)) ,
+    MyAction('打开', 'list', path => isFileOrDirExists(path) && NOT DirExist(path), appendFileType, path => Run(path)) ,
     MyAction('前往文件夹', 'list', isDir,, openDir),
     MyAction('查看属性', 'list', isFileOrDirExists,, path => Run('properties "' . path . '"')),
-    MyAction('打印文件', 'list', path => path !== '*' && path !== '/' && FileExist(path) && NOT DirExist(path) && path ~= 'i).+\.(?:BMP|GIF|png|jpe?g|pdf|docx?|pptx?|xlsx?)$',, path => Run('print "' . path . '"')),
+    MyAction('打印文件', 'list', path => path ~= 'i).+\.(?:bmp|docx?|gif|jpe?g|ofd|pdf|png|pptx?|xlsx?)$' && isFileOrDirExists(path) && NOT DirExist(path),, path => Run('print "' . path . '"')),
     MyAction('删除文件', 'list', isFileOrDirExists,, delFileOrDir),
 ]
 if IsSet(MY_BASH)
@@ -225,7 +225,7 @@ anyrun() {
                     ; 如果是 list 则表示必须在列表中存在
                     if (action.type = 'list') {
                         ; 必须满足匹配规则：action.title 在 listBox.Text 首部
-                        if 1 == InStr(listBox.Text, action.title) {
+                        if (1 == InStr(listBox.Text, action.title)) {
                             action.run.Call(editValue)
                             break
                         }
@@ -240,9 +240,7 @@ anyrun() {
                     }
                 }
             } else if (item.type = DataType.search) { ; 模糊处理：搜索
-                ; 拿到 alias 例如为 bd
-                ; 取出除 bd 开头的字符串
-                ; 进行拼接
+                ; 拿到 alias 例如为 bd 并去除 bd 开头的字符串
                 Run(item.path . SubStr(editValue, StrLen(item.alias) + 1))
             } else if (item.type = DataType.inner) { ; 精确处理：内部               
                 openInnerCommand(item.title, True)
@@ -254,11 +252,11 @@ anyrun() {
                     jumpURL(item.path)
                 else if (item.type = DataType.app && item.title == '微信') { ; 对微信特殊处理：自动登录微信
                     try {
-                        Run item.path,,, &pid
-                        WinWaitActive "ahk_pid " pid
+                        Run(item.path,,, &pid)
+                        WinWaitActive("ahk_pid " . pid)
                         ; 手动等待 1.1 秒，否则可能会跳到扫码页
                         Sleep(1100)
-                        Send "{Space}"
+                        Send("{Space}")
                     } catch
                         MsgBox("找不到目标应用")
                 } else {
@@ -274,9 +272,9 @@ anyrun() {
 
         onButtonClick(*) {
             ; 如果 listbox 有焦点
-            if (listBox.Focused)
+            if (listBox.Focused) {
               onListBoxDoubleClick(listBox)
-            else {
+            } else {
                 ; 如果焦点在 编辑框 且按下回车则会触发弹窗提示；否则表示焦点在 edit，如果列表有匹配项 则获取编辑框文本内容
                 Trim(myEdit.Value) == '' ? MsgBox('输入内容不能为空') : onListBoxDoubleClick(listBox)
             }
@@ -385,12 +383,11 @@ appendWebsiteName(path) {
 
 appendFileType(path) {
     ; 取出文件后缀名
-    RegExMatch(path, '\.([^.]*$)', &regExMatchInfo)
-    extension := regExMatchInfo.1
-
+    RegExMatch(path, '\.([^.]*$)', &matchInfo)
+    extension := matchInfo.1
     switch extension, false {
         case '3gp', 'avi', 'flv', 'mkv', 'mov', 'mp4', 'wmv': return "视频"
-        case '7z', 'zip', 'rar', 'tar', 'gz', 'bz2': return "压缩文件"
+        case '7z', 'bz2', 'gz', 'gz2', 'rar', 'tar', 'zip': return "压缩文件"
         case 'aac', 'flac', 'mp3', 'ogg', 'png', 'wav', 'wma': return "音频"
         case 'apk': return "安卓安装包"
         case 'bat', 'cmd': return " Windows 批处理文件"
@@ -451,7 +448,8 @@ openDir(path) {
 }
 
 isFileOrDirExists(path) {
-    return path !== '*' && path !== '/' && FileExist(path)
+    ; con 文件或目录 为何存在，我用不到
+    return path !== '*' && path !== '/' && 'con' != SubStr(path, 1, 3) && FileExist(path)
 }
 
 delFileOrDir(path) {

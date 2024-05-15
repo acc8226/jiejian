@@ -65,7 +65,7 @@ parseData(fileName) {
         return
     } else if (info.type  = DataType.app) {
       ; 如果是以字母开头 and 不是 shell: 开头
-      if IsAlpha(SubStr(info.path, 1, 1)) && 1 !== InStr(info.path, 'shell:', 0) {
+      if IsAlpha(SubStr(info.path, 1, 1)) && 1 !== InStr(info.path, 'shell:', False) {
         ; 如果是绝对路径
         if InStr(info.path, ':') {
           if NOT FileExist(info.path)
