@@ -4,7 +4,7 @@
 global SUPPORT_LEN := 32
 global DATA_FILTER_REG := 'i)^(?:' . DataType.app . '|' . DataType.file . '|' . DataType.web . '|' . DataType.inner . '|' . DataType.ext . '|' . DataType.dl . ')$'
 ; 端口判断过于简单 但是基本够用了
-global IS_HTTP_Reg := 'i)^(?:https?://)?(?:[\w-]+\.)+[\w-]+(:(?!0)(?![7-9]\d{4})\d{1,5})?(?:/[\w-./?%&=]*)?\s*$'
+global IS_HTTP_Reg := 'i)^(?:https?://)?(?:localhost|(?:\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])\.(?:\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])\.(?:\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])\.(?:\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])|(?!(?:\d+\.)+\d+)(?:[\w-]+\.)+[\w-]+)(:(?!0)(?![7-9]\d{4})\d{1,5})?(?:/[\w-./?%&=]*)?\s*$'
 
 global MY_GUI
 global MY_GUI_WIDTH := 432
