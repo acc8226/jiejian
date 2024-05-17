@@ -9,7 +9,7 @@ vscode 插件安装 https://marketplace.visualstudio.com/items?itemName=thqby.vs
 ;@Ahk2Exe-SetCopyright 全民反诈 union
 ;@Ahk2Exe-SetDescription 捷键-为简化键鼠操作而生
 
-global CODE_VERSION := '24.5.3-beta'
+global CODE_VERSION := '24.5.17-beta'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%

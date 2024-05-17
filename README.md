@@ -8,9 +8,9 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 
 基于 [Autohotkey2](https://www.autohotkey.com/) 开发，为简化 Windows 键鼠操作而生的按键映射/快捷键增强工具。既可当作一个传统启动器，又对鼠标侧边按键和热字符支持良好。
 
-强烈建议搭配全局鼠标手势软件 + 带侧边按键的鼠标。
+强烈建议搭配全局鼠标手势软件 + 带侧边按键的鼠标（不限定任何品牌的鼠标）。
 
-系统要求：Windows XP 以上均可，推荐至少在 Win 7 上运行良好。
+系统要求：Windows XP 以上均可，推荐包含 Win 7 以上操作系统。
 
 [Video Demonstration 视频演示](https://www.bilibili.com/video/BV19H4y1e7hJ?vd_source=54168537affc2c02555097cb26797d99) | [Download 下载地址][捷键] 
 
@@ -25,28 +25,20 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 
 | 功能 |  macOS 平台 | Windows 平台 |
 | ---- | ---- | ---- |
-| 侧边按键支持 | BetterAndBetter【免费】 | [捷键][]【免费】 或 一些鼠标手势软件支持 |
-| 热字符串 | Espanso【免费】 | [捷键][]【免费】 或 Espanso |
-| 启动器 | Raycast【免费】/Alfred【付费】/ HapiGo【付/免费】 | [捷键][]【免费】 或 uTools 或 Listary |
-| 启动程序/窗口切换 | hammerspoon 脚本【免费】 | [捷键][]【免费】 或 mykeymap 或 ahk 脚本 |
+| 侧边按键支持 | [BetterAndBetter][]【免费】 | [捷键][]【免费】 或 一些鼠标手势软件支持 |
+| 热字符串 | [Espanso][]【免费】 | [捷键][]【免费】 或 Espanso |
+| 启动器 | [Raycast][]【免费】/Alfred【付费】/ HapiGo【部分免费】 | [捷键][]【免费】 或 uTools 或 Listary |
+| 启动程序/窗口切换 | [Hammerspoon][] 脚本【免费】 | [捷键][]【免费】 或 mykeymap 或 ahk 脚本 |
 
 毕竟是我业内摸鱼和业外空闲时间开发，优点恐怕只剩下功能较多和足够小巧了。下一步我的工作将逐渐放在提升交互上。
 
-## 0. 程序目录结构
+## 1. 程序目录结构
 
 1. custom/ 自定义 ahk 函数，用于自定义外部命令
 2. extra/【增强体验】WGestures 和 FastGestures 预设手势模版。WindowSpyU32.exe 用于查看窗口标识符。GenerateShortcuts.exe 用于生成快捷方式文件夹 shortcuts。
 3. app.csv 配置文件
 4. data.csv 配置文件
 5. **jiejian32/64.exe** 分别为 32/64 位主程序。无需安装，双击即用，强烈建议设置为开机自启
-
-## 1. 特点
-
-* 开箱即用，支持自定义快捷键，专注按键改写和增强
-* 侧边按键支持，推荐搭配带侧边键的鼠标（不区分鼠标厂商）
-* 热字符串支持
-* 可作为启动器使用，由于定制化程度太高甚至会导致难以上手，提供快捷启动和内置系统命令（锁屏、睡眠、关机等）
-* 试验性的加入左键辅助功能
 
 ## 2. 热键 之 键鼠操作
 
@@ -65,8 +57,8 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 | **鼠标侧边前进键**(XB2) | - | - | 上一个/prev | - | 上一页 | 上一曲 | 上个视频 | - | 上一曲 | 上一曲 | - | 上一曲 |
 | - | **Ctrl + Shift + Tab** | 上左 | 上一个/prev | - | 上一页 | 上一曲 | 上个视频 | - | - | - | - | - |
 | - | **Ctrl + Tab** | 上右 | 下一个/next | - | 下一页 | 下一曲 | 下个视频 | - | - | - | - | - |
-| - | **Ctrl + Shift + N** | 右下 | 新建窗口/new| 新建窗口 | - | - | - | - | - | - | - | - |
-| - | **Ctrl + F7** | 右左 | 置顶/zhiding | 置顶 | - | - | - | - | - | - | - | - |
+| - | **Ctrl + Shift + N** | 右下 | 新建窗口/new | 新建窗口 | - | - | - | - | - | - | - | - |
+| - | **Ctrl + F7** | 右左 | 置顶/top | 置顶 | - | - | - | - | - | - | - | - |
 | - | **F11** | ↓↑ | 全屏/fullscreen | 全屏/取消全屏 | - | - | - | - | - | - | - | - |
 
 下图为鼠标滚动调节音量示例
@@ -76,17 +68,17 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 注：
 
 1. 建议优先使用鼠标按键进行驱动，因此最好搭配带侧边按键的鼠标。其次考虑安装鼠标鼠标手势驱动快捷键例如 [WGestures 2][WGestures 2付费链接]，最后才考虑直接使用快捷键。
-2. 多标签软件主要为浏览器，支持多标签的文本编辑器、IDE 等。
-3. 音乐类软件主要囊括了 Spotify、QQ 音乐、网易云音乐等。其中 Ctrl + F3 打开文件对本地音乐播放器适配良好，在线音乐类软件可能不适用。
+2. 多标签软件主要为各类浏览器，支持多标签的文本编辑器、IDE 等等。
+3. 音乐类软件囊括了 Spotify、QQ 音乐、网易云音乐等。其中 Ctrl + F3 打开文件对本地音乐播放器适配良好，在线音乐类软件可能不适用。
 4. 视频类软件例如 PotPlayer、VLC。
 5. 看图软件如 2345 看图王、Bandiview、ImageGlass。
 6. F11 特别适配了 b 站和油管。
 
-除了 [WGestures 2][WGestures 2付费链接]【付费】 以外，[WGestures 1][]【免费】 和 [FastGestures][]【免费】也是不错的选择。
+除了 [WGestures 2][WGestures 2付费链接]【付费】以外，[WGestures 1][]【免费】和 [FastGestures][]【免费】也是不错的选择。
 
-以下部分场景使用了鼠标手势软件 WGestures 替代了手动键入快捷键。
+以下部分场景使用了鼠标手势软件替代了手动键入快捷键。
 
-操作资源管理器
+操作 windows 资源管理器
 
 ![](https://foruda.gitee.com/images/1689318878983165049/4F89b32d_426858.gif "动画.gif")
 
@@ -140,27 +132,27 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 
 ## 7. Anyrun 启动器
 
-争做一款简洁、高效的应用启动器。
+争做一款简洁、高效的应用启动器。由于定制化程度太高甚至会导致难以上手，提供快捷启动和内置系统命令（锁屏、睡眠、关机等）
 
 特点：
 
-1. 无边框设计，界面极简。设计简洁，支持模糊搜索，帮助快速定位应用。
+1. 窄边框设计，界面极简。支持模糊搜索，帮助快速定位应用。
 2. 使用普适易读的微软雅黑字体，字号设计合理，字体风格简洁大方。
-3. 支持自定义多种关键词进行应用匹配，智能识别用户的启动意图。
+3. 支持自定义多种关键词进行应用匹配，智能识别用户意图。
 4. 系统资源占用少，启动迅速，可靠性高，全天候支持用户的应用启动需求。
 
 使用说明：
 
 * `Alt + 空格` 开启快捷启动器。若再次按下 空格/esc键/鼠标在启动器外点击 则关闭该组件。
 * 自动识别剪切板有没有内容，如果输入内容是文件或者网址 且离最后一次 ctrl + c 操作小于 13 秒则自动粘贴内容。
-* 支持全拼甚至首字母简拼模糊搜索，上下键切换选中项，回车或直接鼠标双击进行确认。
+* 支持全拼甚至首字母简拼模糊搜索，上下键切换，回车或鼠标双击进行选中。
 
 ### 打开程序/文件/网址
 
 在输入框中输入内容后按下回车
 
-* guanyu 打开关于 windows 程序
-* fdj 打开放大镜程序
+* `guanyu` 打开关于 windows 程序
+* `fdj` 打开放大镜程序
 * `163.com` 打开网址-网易网
 * `https://www.soso.com` 打开网址-搜搜网
 * `D:\code\atomgit\jiejian` 前往文件夹
@@ -308,15 +300,15 @@ data.csv 可自由配置
 
 ## 12. 双击模式
 
-预设动作如下，若 2 次双击间隔小于 239 毫秒会触发：
+预设动作如下，若双击间隔大于 100 毫秒 且 小于 239 毫秒会触发：
 
 * 双击 Alt：息屏（无弹窗提醒）
 * 双击 Home：睡眠（无弹窗提醒）
 * 双击 End：关机（有确认对话框）
 
-可以手动去 data.csv 中进行修改。
-由于中英文切换经常用到 Shift，日常快捷键常用到 ctrl，所以这两个按键不再提供作为前置键。
-d 列置空 或者 删除该列可以屏蔽该命令。目前仅支持上述第 7 小节列出的所有内部命令。
+可以手动去 data.csv 中对意图进行修改。d 列置空 或者 删除该列可以屏蔽该命令。
+<br />由于中英文切换经常用到 Shift，日常快捷键常用到 ctrl，所以这两个按键不再提供作为前置键。
+<br />目前仅支持上述第 7 小节列出的所有内部命令。
 
 ## 13. 自定义配置说明
 
@@ -366,7 +358,7 @@ anyrun 启动器用
 
 ## 未来计划
 
-* 支持 Arc 浏览器 for windows，目前 arc 只开放了 win 11，导致我的 win 10 还不支持无法测试
+* 支持 Arc 浏览器 for windows，目前 arc 只开放了 win 11，导致我的 win 10 不支持无法测试
 * icon 点击后使用新图标，而不是系统样式的图标
 * 配置文件不太易用，需要优化
 
@@ -401,6 +393,7 @@ anyrun 启动器用
 * 【压缩】WinZip
 * 【压缩】好压【部分支持】
 * 【系统】Win 7、10、11 资源管理器
+* 【系统】Win 10 画图
 * 【系统】Win 7、10 记事本
 * 【系统】Win 11 新版记事本
 * 【系统】Win 7 桌面
@@ -461,7 +454,7 @@ anyrun 启动器用
 * 【音乐类】酷狗音乐
 * 【视频类】GridPlayer【部分支持】
 * 【视频类】KMPlayer 64位
-* 【视频类】mpv【部分支持】
+* 【视频类】MPV【部分支持】
 * 【视频类】PotPlayer 64位
 * 【视频类】vlc
 * 【视频类】暴风影音 5
@@ -575,6 +568,7 @@ anyrun 启动器用
 * 炉石传说
 * 腾讯 QQ
 * 微信
+* IDLE Shell
 
 不支持的软件：
 
@@ -591,18 +585,6 @@ anyrun 启动器用
 * Caps + x / ctrl + f4 关闭窗口对一些软件不奏效：极客卸载、注册表编辑器、windows 任务管理器（似乎屏蔽了 Ctrl 键）、高级系统设置等窗口、WGestures 的导入导出窗口。
 * 当任务管理器或者高级系统设置等窗口激活时鼠标滚轮捕捉不到，会导致鼠标靠在边界调节音量功能失效
 
-### 软件升级
-
-jiejian.exe 的文件版本为当前四位版本号，产品版本为当前编译的 ahk 版本。
-
-升级信息会写入了注册表，而非传统 ini 文件。
-
-升级有两个渠道，release 为正式版 和 snapshot 为测试版。release 版本中会自动检查更新间隔为 1 天。snapshot 版本中为每次启动的时候。
-
-下载新的发布包，提取 jiejian.exe / jiejian64.exe 覆盖即可。
-
-另外 app.csv 和 data.csv 可按需覆盖。一般情况下建议 app.csv 和 data.csv 自定义内容追加在尾部，方便迁移数据。
-
 ## 写在最后
 
 本程序编辑 csv 文件用到了开源软件 LiberOffice。源码发布在 [AtomGit](https://atomgit.com) 和 [GitHub](https://github.com)。
@@ -614,7 +596,7 @@ jiejian.exe 的文件版本为当前四位版本号，产品版本为当前编�
   [WGestures 1]: https://www.yingdev.com/projects/wgestures '一款很屌的免费鼠标手势'
   [WGestures 2]: https://www.yingdev.com/projects/wgestures2 "一款很屌的付费鼠标手势"
   [WGestures 2付费链接]: https://store.lizhi.io/site/products/id/523?cid=46jjayiu "一款很屌的付费鼠标手势"
-  [FastGestures]: https://fg.zhaokeli.com/ "FastGestures官网 - 鼠标/触控板/屏手势势"
+  [FastGestures]: https://fg.zhaokeli.com/ ""
   [Capslock+]: https://capslox.com/capslock-plus ""
   [Capslock+源码]: https://github.com/wo52616111/capslock-plus ""
   [Raycast]: https://www.raycast.com ""
@@ -622,5 +604,7 @@ jiejian.exe 的文件版本为当前四位版本号，产品版本为当前编�
   [BetterAndBetter]: https://www.better365.cn/bab2.html ""
   [Quicker]: https://getquicker.net/ ""
   [uTools]: https://www.u.tools/ ""
+  [Hammerspoon]: https://www.hammerspoon.org/ ""
+  [Espanso]: https://espanso.org/ "A Privacy-first, Cross-platform Text Expander"
 
   [捷键]: https://atomgit.com/acc8226/jiejian/tags?tab=release "我的诚意之作"

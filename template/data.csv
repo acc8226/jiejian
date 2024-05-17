@@ -24,75 +24,77 @@
 ,,,,,,,,
 程序,shortcuts\git-bash.lnk,,Bash,Bash,,,,
 程序,shortcuts\wt.lnk,,新终端,WindowsTerminal|新终端,,,,
-程序,shortcuts\Code.lnk,ahk_exe Code.exe ahk_class Chrome_WidgetWin_1,VSCode,VSCode,!3,,,https://code.visualstudio.com
+程序,shortcuts\Code.lnk,ahk_exe Code.exe ahk_class Chrome_WidgetWin_1,VSCode,VSCode,!3,,,
 程序,shortcuts\idea64.lnk,,IDEA,IDEA,,,,
 ,,,,,,,,
-程序,C:\Program Files\Bandizip\Bandizip.exe,,Bandizip,Bandizip,,,,https://www.bandisoft.com/bandizip
+程序,C:\Program Files\Bandizip\Bandizip.exe,,Bandizip,Bandizip,,,,
 程序,C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe,,Edge,Edge,,,,
 程序,C:\Program Files\FastGestures\FastGestures.exe,,FastGestures,FastGestures,,,,
 程序,C:\Program Files\Mozilla Firefox\firefox.exe,,Firefox,Firefox,!3,,,
-程序,C:\Program Files\DAUM\PotPlayer\PotPlayerMini64.exe,,PotPlayer,PotPlayer,,,,https://potplayer.org
+程序,C:\Program Files\DAUM\PotPlayer\PotPlayerMini64.exe,,PotPlayer,PotPlayer,,,,
 程序,C:\Program Files (x86)\MGTVPCC\芒果TV.exe,,芒果TV,芒果TV,,,,
-程序,extra\WindowSpyU32.exe,,Spy,WindowSpy,,,,
-程序,shortcuts\360 安全卫士.lnk,,360 安全卫士,Anquanweishi|360安全卫士,,,,https://weishi.360.cn
-程序,shortcuts\360 极速浏览器X.lnk,ahk_exe i)360ChromeX.exe,360 极速浏览器,jisuliulanqi|360极速浏览器,!2,,,https://browser.360.cn/ee
+程序,extra\WindowSpyU32.exe,,Spy,Spy,,,,
+程序,shortcuts\360 安全卫士.lnk,,360 安全卫士,Anquanweishi|360安全卫士,,,,
+程序,shortcuts\360 极速浏览器X.lnk,ahk_exe i)360ChromeX.exe,360 极速浏览器,jisuliulanqi|360极速浏览器,!2,,,
 程序,shortcuts\360 软件管家.lnk,,360 软件管家,Ruanjianguanjia|360软件管家,,,,
 程序,shortcuts\battle.net.lnk,,战网,zhanwang|battle|战网,,,,
-程序,shortcuts\Beekeeper-Studio.lnk,,BeekeeperStudio,BeekeeperStudio,,,,https://github.com/beekeeper-studio/beekeeper-studio/releases
-程序,shortcuts\Bitwarden.lnk,,Bitwarden,Bitwarden,,,,https://bitwarden.com/download
+程序,shortcuts\Beekeeper-Studio.lnk,,BeekeeperStudio,BeekeeperStudio,,,,
+程序,shortcuts\Bitwarden.lnk,,Bitwarden,Bitwarden,,,,
 程序,shortcuts\ClickShow.lnk,,ClickShow,ClickShow,,,,
 程序,shortcuts\EVAVEdit.lnk,,EV 剪辑,Evjianji|EV剪辑,,,,
 程序,shortcuts\EVCapture.lnk,,EV 录屏,Evluping|EV录屏,,,,
-程序,shortcuts\Everything.lnk,,Everything,Everything,,,,https://www.voidtools.com/zh-cn/downloads
+程序,shortcuts\Everything.lnk,,Everything,Everything,,,,
 程序,shortcuts\FastGestures.lnk,,FastGestures,FastGestures,,,,
-程序,shortcuts\fileu.lnk,,文件蜈蚣,wenjianwugong|文件蜈蚣,,,,http://www.filecxx.com/zh_CN/index.html
+程序,shortcuts\fileu.lnk,,文件蜈蚣,wenjianwugong|文件蜈蚣,,,,
 程序,shortcuts\Foxmail.lnk,,Foxmail,Foxmail,,,,
-程序,shortcuts\HBuilderX.lnk,,HBuilderX,HBuilderX,,,,https://www.dcloud.io/hbuilderx.html
-程序,shortcuts\heidisql.lnk,,Heidisql,Heidisql,,,,https://www.heidisql.com/download.php?download=portable-64
-程序,shortcuts\HTTPie.lnk,,HTTPie,HTTPie,,,,https://httpie.io/download
-程序,shortcuts\MarkText.lnk,,MarkText,MarkText,,,,https://github.com/marktext/marktext/releases
-程序,shortcuts\Motrix.lnk,,Motrix,Motrix,,,,https://motrix.app/zh-CN
-程序,shortcuts\MusicPlayer2.lnk,,MusicPlayer2,MusicPlayer2,,,,https://github.com/zhongyang219/MusicPlayer2
+程序,shortcuts\HBuilder X.lnk,,HBuilderX,HBuilderX,,,,
+程序,shortcuts\heidisql.lnk,,Heidisql,Heidisql,,,,
+程序,shortcuts\HTTPie.lnk,,HTTPie,HTTPie,,,,
+程序,shortcuts\MarkText.lnk,,MarkText,MarkText,,,,
+程序,shortcuts\Motrix.lnk,,Motrix,Motrix,,,,
+程序,shortcuts\MusicPlayer2.lnk,,MusicPlayer2,MusicPlayer2,,,,
 程序,shortcuts\MQTTX.lnk,,MQTTX,MQTTX,,,,
-程序,shortcuts\PDManer.lnk,,PDManer,PDManer,,,,https://gitee.com/robergroup/pdmaner/releases
-程序,shortcuts\PixPin.lnk,,PixPin,PixPin,,,,https://pixpinapp.com
-程序,shortcuts\pycharm64.lnk,,PyCharm,PyCharm,,,,https://www.jetbrains.com/zh-cn/pycharm/
+程序,shortcuts\PDManer.lnk,,PDManer,PDManer,,,,
+程序,shortcuts\PixPin.lnk,,PixPin,PixPin,,,,
+程序,shortcuts\pycharm64.lnk,,PyCharm,PyCharm,,,,
 程序,shortcuts\QQ.lnk,,QQ,QQ ,,,,
-程序,shortcuts\QQMusic.lnk,,QQ 音乐,qqmusic|QQ音乐,,,,https://y.qq.com/download/index.html
+程序,shortcuts\QQMusic.lnk,,QQ 音乐,qqmusic|QQ音乐,,,,
 程序,shortcuts\QuickLook.lnk,,QuickLook,QuickLook,,,,
 程序,shortcuts\RedisInsight.lnk,,RedisInsight,RedisInsight,,,,
-程序,shortcuts\Shadowsocks.lnk,,Shadowsocks,Shadowsocks,,,,https://github.com/shadowsocks/shadowsocks-windows
+程序,shortcuts\Shadowsocks.lnk,,Shadowsocks,Shadowsocks,,,,
 程序,shortcuts\Spotify.lnk,,Spotify,Spotify,,,,
-程序,shortcuts\SumatraPDF.lnk,,SumatraPDF,pdf,,,,https://www.sumatrapdfreader.org/free-pdf-reader
-程序,shortcuts\Termius.lnk,,Termius,Termius,,,,https://www.termius.com
+程序,shortcuts\SumatraPDF.lnk,,SumatraPDF,pdf,,,,
+程序,shortcuts\Termius.lnk,,Termius,Termius,,,,
 程序,shortcuts\TIM.lnk,,TIM,TIM,,,,
 程序,shortcuts\ToDesk.lnk,,ToDesk,ToDesk,,,,
 程序,shortcuts\tts-vue.lnk,,tts,tts,,,,
-程序,shortcuts\TrafficMonitor.lnk,,TrafficMonitor,TrafficMonitor,,,,https://github.com/zhongyang219/TrafficMonitor
-程序,shortcuts\Umi-OCR.lnk,,OCR,OCR,,,,https://github.com/hiroi-sora/Umi-OCR
-程序,shortcuts\WinMergeU.lnk,,WinMerge,WinMerge,,,,tps://winmerge.org/downloads/?lang=en
+程序,shortcuts\TrafficMonitor.lnk,,TrafficMonitor,TrafficMonitor,,,,
+程序,shortcuts\Umi-OCR.lnk,,OCR,OCR,,,,
+程序,shortcuts\WinMergeU.lnk,,WinMerge,WinMerge,,,,
 程序,shortcuts\WPS.lnk,,WPS Office,WPSoffice,,,,
-程序,shortcuts\WizTree64.lnk,,WizTree,WizTree,,,,https://www.diskanalyzer.com
+程序,shortcuts\WizTree64.lnk,,WizTree,WizTree,,,,
 程序,shortcuts\WizMouse.lnk,,WizMouse,WizMouse,,,,
-程序,shortcuts\zeal.lnk,,zeal,zeal,,,,https://zealdocs.org
-程序,shortcuts\阿里云盘.lnk,,阿里云盘,aliyunpan|阿里云盘,,,,https://www.alipan.com
+程序,shortcuts\zeal.lnk,,zeal,zeal,,,,
+程序,shortcuts\阿里云盘.lnk,,阿里云盘,aliyunpan|阿里云盘,,,,
 程序,shortcuts\哔哩哔哩.lnk,,哔哩哔哩,bilibili|b站|哔哩哔哩,,,,
-程序,shortcuts\方格音乐.lnk,,方格音乐,fanggeyinyue|方格音乐,,,,http://morin.vin
-程序,shortcuts\坚果云.lnk,,坚果云,jianguoyun|坚果云,,,,https://www.jianguoyun.com/s/downloads
-程序,shortcuts\荐片高清影音.lnk,,荐片,jianpian|荐片,,,,https://www.jianpian9.com 
-程序,shortcuts\geek.lnk,,极客卸载,jikexiezai|uninstall|极客卸载,,,,https://geekuninstaller.com/download
-程序,shortcuts\lx-music-desktop.lnk,,洛雪音乐助手,luoxueyinyuezhushou|洛雪音乐助手,,,,https://github.com/lyswhut/lx-music-desktop/releases
+程序,shortcuts\方格音乐.lnk,,方格音乐,fanggeyinyue|方格音乐,,,,
+程序,shortcuts\坚果云.lnk,,坚果云,jianguoyun|坚果云,,,,
+程序,shortcuts\荐片高清影音.lnk,,荐片,jianpian|荐片,,,,
+程序,shortcuts\geek.lnk,,极客卸载,jikexiezai|uninstall|极客卸载,,,,
+程序,shortcuts\lx-music-desktop.lnk,,洛雪音乐助手,luoxueyinyuezhushou|洛雪音乐助手,,,,
 程序,shortcuts\驱动精灵.lnk,,驱动精灵,qudongjingling|驱动精灵,,,,
 程序,shortcuts\驱动人生.lnk,,驱动人生,qudongrensheng|驱动人生,,,,
-程序,shortcuts\汽水音乐.lnk,,汽水音乐,qishuiyinyue|汽水音乐,,,,https://music.douyin.com/qishui
+程序,shortcuts\汽水音乐.lnk,,汽水音乐,qishuiyinyue|汽水音乐,,,,
 程序,shortcuts\天翼云盘.lnk,,天翼云盘,tianyiyun|天翼云盘,,,,
 程序,shortcuts\腾讯会议.lnk,,腾讯会议,tenxunhuiyi|腾讯会议,,,,
-程序,shortcuts\网易云音乐.lnk,,网易云音乐,wangyiyunyinyue|网易云音乐,,,,https://music.163.com/#/download
-程序,shortcuts\微信.lnk,,微信,weixin|wechat|微信,,,,https://weixin.qq.com
-程序,shortcuts\微信开发者工具.lnk,,微信开发者工具,weixinkaifazhe|微信开发者,,,,https://developers.weixin.qq.com/miniprogram/dev/devtools/devtools.html
+程序,shortcuts\网易云音乐.lnk,,网易云音乐,wangyiyunyinyue|网易云音乐,,,,
+程序,C:\Program Files\Tencent\WeChat\WeChat.exe,,微信,weixin|wechat|微信,,,,
+程序,shortcuts\微信开发者工具.lnk,,微信开发者工具,weixinkaifazhe|微信开发者,,,,
 程序,shortcuts\迅雷.lnk,,迅雷,xunlei|thunder|迅雷,,,,
 程序,C:\Program Files\PDFgear\PDFLauncher.exe,,PDFgear,PDFgear,,,,
 程序,C:\Users\acc8226\AppData\Roaming\搜狐影音\SHPlayer.exe,,搜狐影音,souhuyingyin|搜狐影音,,,,
+程序,shortcuts\Clash Verge.lnk,,Clash Verge,ClashVerge,,,,
+程序,C:\Program Files (x86)\AdGuardVpn\AdGuardVpn.exe,,AdGuard VPN,AdGuard VPN,,,,
 ,,,,,,,,
 文件,D:\,,D盘,dpan|D盘,!d,,,
 文件,E:\,,E盘,epan|E盘,,,,
@@ -139,10 +141,9 @@
 网址,doubao.com,,豆包,doubao|豆包,,zdb,,
 网址,fanyi.caiyunapp.com,,彩云小译,fanyi|彩云小译,,zfan,,
 网址,filehelper.weixin.qq.com ,,微信文件传输助手网页版 ,微信文件传输助手,,,,
-网址,gitcode.com,,Gitcode,gitcode,,zco,,
+网址,gitcode.com,,GitCode,gitcode,,zco,,
 网址,gitee.com,,码云,gitee|码云,,zge,,
 网址,github.com,,Github,github,,zgh,,
-网址,im.qq.com,,QQ下载,QQ下载,,,,
 网址,juejin.cn,,掘金,juejin|掘金,,,,
 网址,jjwxc.net,,晋江文学城 ,晋江文学城 ,,,,
 网址,mail.qq.com,,QQ邮箱,qqmail|QQ邮箱,,zma,,
@@ -188,6 +189,7 @@
 搜索,https://www.ixigua.com/search/,,西瓜视频,xg,,,,
 搜索,https://www.iplaysoft.com/?s=,,异次元软件,yc,,,,
 搜索,https://github.com/search?q=,,Github,gh,,,,
+搜索,https://api.caoliao.net/api/qrcode/code?text=,,二维码生成,qr,,,,
 ,,,,,,,,
 内部,,,终端,zhongduan|cmd|终端,,,,
 内部,,,网络连接,wangluolianjie|网络连接,,,,
@@ -222,3 +224,42 @@
 双击End,,,关机,,,,,
 ,,,,,,,,
 外部,custom\customAhkFile1.ahk,,hello,hello|哈喽,,,,
+,,,,,,,,
+下载,https://code.visualstudio.com,,VSCode,xiazaiVSCode,,,,
+下载,https://www.bandisoft.com/bandizip,,bandizip,xiazaibandizip,,,,
+下载,https://potplayer.org,,potplayer,xiazaipotplayer,,,,
+下载,https://weishi.360.cn,,360安全卫士,xiazaiAnquanweishi|下载360安全卫士,,,,
+下载,https://browser.360.cn/ee,,360极速浏览器,xiazaijisuliulanqi|下载360极速浏览器,,,,
+下载,https://github.com/beekeeper-studio/beekeeper-studio/releases,,BeekeeperStudio,xiazaiBeekeeperStudio,,,,
+下载,https://bitwarden.com/download,,Bitwarden,xiazaiBitwarden,,,,
+下载,https://www.voidtools.com/zh-cn/downloads,,Everything,xiazaiEverything,,,,
+下载,http://www.filecxx.com/zh_CN/index.html,,文件蜈蚣,xiazaiwenjianwugong|下载文件蜈蚣,,,,
+下载,https://www.dcloud.io/hbuilderx.html,,HBuilderX,xiazaiHBuilderX,,,,
+下载,https://www.heidisql.com/download.php?download=portable-64,,Heidisql,xiazaiHeidisql,,,,
+下载,https://httpie.io/download,,HTTPie,xiazaiHTTPie,,,,
+下载,https://github.com/marktext/marktext/releases,,MarkText,xiazaiMarkText,,,,
+下载,https://motrix.app/zh-CN,,Motrix,xiazaiMotrix,,,,
+下载,https://github.com/zhongyang219/MusicPlayer2,,MusicPlayer2,xiazaiMusicPlayer2,,,,
+下载,https://gitee.com/robergroup/pdmaner/releases,,PDManer,xiazaiPDManer,,,,
+下载,https://pixpinapp.com,,PixPin,xiazaiPixPin,,,,
+下载,https://www.jetbrains.com/zh-cn/pycharm,,PyCharm,xiazaiPyCharm,,,,
+下载,https://y.qq.com/download/index.html,,QQ音乐,xiazaiqqmusic|下载QQ音乐,,,,
+下载,https://github.com/shadowsocks/shadowsocks-windows,,Shadowsocks,xiazaiShadowsocks,,,,
+下载,https://www.sumatrapdfreader.org/free-pdf-reader,,SumatraPDF,xiazaipdf,,,,
+下载,https://www.termius.com,,Termius,xiazaiTermius,,,,
+下载,https://github.com/zhongyang219/TrafficMonitor,,TrafficMonitor,xiazaiTrafficMonitor,,,,
+下载,https://github.com/hiroi-sora/Umi-OCR,,OCR,xiazaiOCR,,,,
+下载,tps://winmerge.org/downloads/?lang=en,,WinMerge,xiazaiWinMerge,,,,
+下载,https://www.diskanalyzer.com,,WizTree,xiazaiWizTree,,,,
+下载,https://zealdocs.org,,zeal,xiazaizeal,,,,
+下载,https://www.alipan.com,,阿里云盘,xiazaialiyunpan|下载阿里云盘,,,,
+下载,http://morin.vin,,方格音乐,xiazaifanggeyinyue|下载方格音乐,,,,
+下载,https://www.jianguoyun.com/s/downloads,,坚果云,xiazaijianguoyun|下载坚果云,,,,
+下载,https://www.jianpian9.com ,,荐片,xiazaijianpian|下载荐片,,,,
+下载,https://geekuninstaller.com/download,,极客卸载,xiazaijikexiezai|uninstall|下载极客卸载,,,,
+下载,https://github.com/lyswhut/lx-music-desktop/releases,,洛雪音乐助手,xiazailuoxueyinyuezhushou|下载洛雪音乐助手,,,,
+下载,https://music.douyin.com/qishui,,汽水音乐,xiazaiqishuiyinyue|下载汽水音乐,,,,
+下载,https://music.163.com/#/download,,网易云音乐,xiazaiwangyiyunyinyue|下载网易云音乐,,,,
+下载,https://weixin.qq.com,,微信,xiazaiweixin|xiazaiwechat|下载微信,,,,
+下载,https://developers.weixin.qq.com/miniprogram/dev/devtools/devtools.html,,微信开发者工具,xiazaiweixinkaifazhe|下载微信开发者,,,,
+下载,im.qq.com,,QQ,下载QQ,,,,
