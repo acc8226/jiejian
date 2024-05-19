@@ -209,9 +209,9 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 * 睡眠
 * 关机
 
-### 打开软件下载站
+### DL-打开软件下载站
 
-例如输入 `qqmusic` 表示跳转到 QQ 音乐下载站点
+例如输入 `DLqqmusic` 表示跳转到 QQ 音乐客户端下载网址
 
 ### 增强的操作文件和网址的能力
 
