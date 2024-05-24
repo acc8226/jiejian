@@ -1,3 +1,10 @@
+---
+title: 捷键使用说明
+date: 2023-05-01 09:00:00
+updated: 2024-05-23 16:20:20
+categories: 我的创作
+---
+
 # 捷键 for win 使用说明
 
 A key mapping/shortcut enhancement tool developed based on [Autohotkey2](https://www.autohotkey.com/), designed to simplify keyboard and mouse operations in Windows. It can serve as a traditional launcher and also supports mouse side buttons and hotkeys effectively.
@@ -12,7 +19,9 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 
 系统要求：Windows XP 以上均可，推荐包含 Win 7 以上操作系统。
 
-[Video Demonstration 视频演示](https://www.bilibili.com/video/BV19H4y1e7hJ?vd_source=54168537affc2c02555097cb26797d99) | [Download 下载地址][捷键] 
+<iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/7329720816328376847?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
+
+[video demonstration 视频演示](https://www.bilibili.com/video/BV19H4y1e7hJ?vd_source=54168537affc2c02555097cb26797d99) | [download 下载地址][捷键]
 
 **注意事项：**
 
@@ -50,15 +59,15 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 | **滚轮上滑** | - | - | - | - | - | - | - | - | 调高音量 | 调高音量 | 下一曲 | - |
 | **滚轮下滑** | - | - | - | - | - | - | - | - | 调低音量 | 调低音量 | 上一曲 | - |
 | **鼠标侧边后退键**(XB1) | - | - | 关闭/close | 关闭窗口 | 关闭标签 | 关闭窗口 | 关闭窗口 | 关闭窗口 | 下一曲 | 下一曲 | - | - |
-| - | **Ctrl + F4** | ↑ | 关闭/close | 关闭窗口 | 关闭标签 | 关闭窗口 | 关闭窗口 | 关闭窗口 | - | - | - | - |
-| - | **Ctrl + F8** | ↓ | 新建/new | 打开或新建文件 | 新建标签 | 打开文件 或 无操作 | 打开文件 或 无操作 | 打开文件 或 无操作 | - | - | - | - |
+| - | **Ctrl+F4** | ↑ | 关闭/close | 关闭窗口 | 关闭标签 | 关闭窗口 | 关闭窗口 | 关闭窗口 | - | - | - | - |
+| - | **Ctrl+F8** | ↓ | 新建/new | 打开或新建文件 | 新建标签 | 打开文件 或 无操作 | 打开文件 或 无操作 | 打开文件 或 无操作 | - | - | - | - |
 | - | **Alt + ←** | ← | 后退/prev | 后退 | 后退 | 上一曲 | 快退 | 上一张 | - | - | - | 上一曲 |
 | - | **Alt + →** | → | 前进/next | 前进 | 前进 | 下一曲 | 快进 | 下一张 | - | - | - | 下一曲 |
 | **鼠标侧边前进键**(XB2) | - | - | 上一个/prev | - | 上一页 | 上一曲 | 上个视频 | - | 上一曲 | 上一曲 | - | 上一曲 |
-| - | **Ctrl + Shift + Tab** | 上左 | 上一个/prev | - | 上一页 | 上一曲 | 上个视频 | - | - | - | - | - |
-| - | **Ctrl + Tab** | 上右 | 下一个/next | - | 下一页 | 下一曲 | 下个视频 | - | - | - | - | - |
-| - | **Ctrl + Shift + N** | 右下 | 新建窗口/new | 新建窗口 | - | - | - | - | - | - | - | - |
-| - | **Ctrl + F7** | 右左 | 置顶/top | 置顶 | - | - | - | - | - | - | - | - |
+| - | **Ctrl+Shift+Tab** | 上左 | 上一个/prev | - | 上一页 | 上一曲 | 上个视频 | - | - | - | - | - |
+| - | **Ctrl+Tab** | 上右 | 下一个/next | - | 下一页 | 下一曲 | 下个视频 | - | - | - | - | - |
+| - | **Ctrl+Shift+N** | 右下 | 新建窗口/new | 新建窗口 | - | - | - | - | - | - | - | - |
+| - | **Ctrl+F7** | 右左 | 置顶/top | 置顶 | - | - | - | - | - | - | - | - |
 | - | **F11** | ↓↑ | 全屏/fullscreen | 全屏/取消全屏 | - | - | - | - | - | - | - | - |
 
 下图为鼠标滚动调节音量示例
@@ -211,7 +220,7 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 
 ### DL-打开软件下载站
 
-例如输入 `DLqqmusic` 表示跳转到 QQ 音乐客户端下载网址
+例如输入 `dlqqmusic` 表示跳转到 QQ 音乐客户端下载网址
 
 ### 增强的操作文件和网址的能力
 
@@ -310,13 +319,11 @@ data.csv 可自由配置
 <br />由于中英文切换经常用到 Shift，日常快捷键常用到 ctrl，所以这两个按键不再提供作为前置键。
 <br />目前仅支持上述第 7 小节列出的所有内部命令。
 
-## 13. 自定义配置说明
+## 自定义配置说明
 
 配置文件 **app.csv**（用于配置软件的快捷键）、**data.csv**（用于配置启动器候选项以及热键、热串） 必须和 ahk 脚本文件在同一级目录，且必须使用 GB18030 字符集。
-
-app.csv 使用了正则表达式，需要使用者对正则有一定了解。主要用到了 `^$` 锚和不区分大小写 `i` 选项。
-
-推荐使用 [LiberOffice](https://www.libreoffice.org/download/download-libreoffice/) 或微软 Office 打开。不要使用 WPS 进行打开，WPS 目前有兼容性问题。
+<br />app.csv 使用了正则表达式，需要使用者对正则有一定了解。主要用到了 `^$` 锚和不区分大小写 `i` 选项。
+<br />推荐使用开源软件 [LiberOffice](https://www.libreoffice.org/download/download-libreoffice/) 或微软 Office 打开。不要使用 WPS 进行打开，WPS 目前有兼容性问题。
 
 ### app.csv 配置
 
@@ -382,9 +389,9 @@ anyrun 启动器用
 
 ### 已适配软件
 
-软件挑选原则：个人偏好以及热门、常用软件。其中又以浏览器收集最为全面。
+软件挑选原则：个人偏好以及热门、常用软件，其中又以浏览器收集最为全面。
 
-支持但不限于以下百余款软件，且持续更新中...
+支持但不限于以下两百余款软件，且持续更新中...
 
 * 【压缩】360 压缩 4.0【部分支持】
 * 【压缩】7zip 24.01
@@ -585,16 +592,23 @@ anyrun 启动器用
 * Caps + x / ctrl + f4 关闭窗口对一些软件不奏效：极客卸载、注册表编辑器、windows 任务管理器（似乎屏蔽了 Ctrl 键）、高级系统设置等窗口、WGestures 的导入导出窗口。
 * 当任务管理器或者高级系统设置等窗口激活时鼠标滚轮捕捉不到，会导致鼠标靠在边界调节音量功能失效
 
+## 如何反馈
+
+1. b 站私信
+2. 软件完全免费开源，仓库地址 [AtomGit source](https://atomgit.com/acc8226/jiejian/) | [Github source](https://github.com/acc8226/jiejian)，有问题或需求欢迎提 [issue](https://github.com/acc8226/jiejian/issues)
+
+## 支持作者
+
+如果认为它有用/有帮助，欢迎进行任何形式的支持，不限于[充电](https://space.bilibili.com/107606582)、[follow](https://github.com/acc8226)、fork、star 和[微信打赏](https://github.com/acc8226/acc8226/blob/main/needYou.png)，都将激励作者后续维护和开发新功能。
+
 ## 写在最后
 
-本程序编辑 csv 文件用到了开源软件 LiberOffice。源码发布在 [AtomGit](https://atomgit.com) 和 [GitHub](https://github.com)。
+由于 Autohotkey 这门语言容易学习。再加上我之前编程功底，从设计到开发均由我一人完成。部分源码参考了 Windows 软件 MyKeymap [主页][MyKeymap] | [源码][MyKeymap Github repo]、Capslock+ [主页][Capslock+] | [源码][Capslock+源码]。并从 Windows 软件 [Quicker][]、[uTools][] 和 macOS 软件 [BetterAndBetter][]、[HapiGo][] 和 [Raycast][] 中受到启发。因此依旧感谢开源和非开源。
 
-由于 Autohotkey 这门语言容易学习。再加上我之前编程功底，从设计到开发均由我一人完成。部分功能以及代码参考自 Windows 软件 MyKeymap [主页][MyKeymap] | [源码][MyKeymap Github repo]、Capslock+ [主页][Capslock+] | [源码][Capslock+源码]，并从 Windows 软件 [Quicker][]、[uTools][] 以及 macOS 软件 [BetterAndBetter][]、[HapiGo][] 和 [Raycast][] 中受到启发。在此默默感谢。
-
-  [MyKeymap]: https://xianyukang.com/MyKeymap.html '很多代码都参考借鉴了它'
-  [MyKeymap Github repo]: https://github.com/xianyukang/MyKeymap "感谢作者"
-  [WGestures 1]: https://www.yingdev.com/projects/wgestures '一款很屌的免费鼠标手势'
-  [WGestures 2]: https://www.yingdev.com/projects/wgestures2 "一款很屌的付费鼠标手势"
+  [MyKeymap]: https://xianyukang.com/MyKeymap.html ''
+  [MyKeymap Github repo]: https://github.com/xianyukang/MyKeymap ""
+  [WGestures 1]: https://www.yingdev.com/projects/wgestures ''
+  [WGestures 2]: https://www.yingdev.com/projects/wgestures2 ""
   [WGestures 2付费链接]: https://store.lizhi.io/site/products/id/523?cid=46jjayiu "一款很屌的付费鼠标手势"
   [FastGestures]: https://fg.zhaokeli.com/ ""
   [Capslock+]: https://capslox.com/capslock-plus ""
@@ -605,6 +619,6 @@ anyrun 启动器用
   [Quicker]: https://getquicker.net/ ""
   [uTools]: https://www.u.tools/ ""
   [Hammerspoon]: https://www.hammerspoon.org/ ""
-  [Espanso]: https://espanso.org/ "A Privacy-first, Cross-platform Text Expander"
+  [Espanso]: https://espanso.org/ ""
 
   [捷键]: https://atomgit.com/acc8226/jiejian/tags?tab=release "我的诚意之作"

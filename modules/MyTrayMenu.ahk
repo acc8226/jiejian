@@ -141,7 +141,7 @@
             A_TrayMenu.ToggleCheck(this.startUp)
             IS_AUTO_START_UP := !IS_AUTO_START_UP
     
-            case this.document: Run('https://atomgit.com/acc8226/jiejian/blob/main/README.md')
+            case this.document: Run('https://feipig.fun/zh-cn/4c2b72aaa7d0')
             case this.video: Run('https://www.bilibili.com/video/BV19H4y1e7hJ')
             ; case this.followMeCSDN: Run('https://blog.csdn.net/acc8226')
             case this.followMeGH: Run('https://github.com/acc8226')
