@@ -5,7 +5,16 @@ updated: 2024-05-23 16:20:20
 categories: 我的创作
 ---
 
-# 捷键 for win 使用说明
+# 捷键使用说明
+
+<span>
+  <img alt="Static Badge" src="https://img.shields.io/badge/%E6%8D%B7%E9%94%AE-for%20windows-blue" style="display:inline-block;margin: 0 1px;">
+  <img src="https://img.shields.io/github/languages/top/acc8226/jiejian" style="display:inline-block;margin: 0 1px;" alt="GitHub top language">
+  <img src="https://img.shields.io/github/commit-activity/y/acc8226/jiejian" style="display:inline-block;margin: 0 1px;" alt="GitHub commit activity">
+  <img src="https://img.shields.io/github/last-commit/acc8226/jiejian" style="display:inline-block;margin: 0 1px;" alt="GitHub last commit">
+  <img src="https://img.shields.io/badge/release-24.2.12-green" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
+  <img src="https://img.shields.io/badge/beta-24.5.17-yellow" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
+</span>
 
 A key mapping/shortcut enhancement tool developed based on [Autohotkey2](https://www.autohotkey.com/), designed to simplify keyboard and mouse operations in Windows. It can serve as a traditional launcher and also supports mouse side buttons and hotkeys effectively.
 
@@ -15,11 +24,9 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 
 基于 [Autohotkey2](https://www.autohotkey.com/) 开发，为简化 Windows 键鼠操作而生的按键映射/快捷键增强工具。既可当作一个传统启动器，又对鼠标侧边按键和热字符支持良好。
 
-强烈建议搭配全局鼠标手势软件 + 带侧边按键的鼠标（不限定任何品牌的鼠标）。
+**强烈建议搭配全局鼠标手势软件 和 任意带侧边按键的鼠标器**（本软件不挑鼠标厂商）以获得最佳体验。
 
-系统要求：Windows XP 以上均可，推荐包含 Win 7 以上操作系统。
-
-<iframe width="720" height="405" frameborder="0" src="https://www.ixigua.com/iframe/7329720816328376847?autoplay=0" referrerpolicy="unsafe-url" allowfullscreen></iframe>
+系统要求：支持 32 位和 64 位 Windows，理论上 XP 以上系统均可，Win 7 以上使用更佳。
 
 [video demonstration 视频演示](https://www.bilibili.com/video/BV19H4y1e7hJ?vd_source=54168537affc2c02555097cb26797d99) | [download 下载地址][捷键]
 
@@ -43,17 +50,17 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 
 ## 1. 程序目录结构
 
-1. custom/ 自定义 ahk 函数，用于自定义外部命令
-2. extra/【增强体验】WGestures 和 FastGestures 预设手势模版。WindowSpyU32.exe 用于查看窗口标识符。GenerateShortcuts.exe 用于生成快捷方式文件夹 shortcuts。
+1. custom/customAhkFile1.ahk 为自定义 ahk 脚本，用于集成额外脚本或者函数
+2. extra/FastGestures 和 WGestures 为预设鼠标手势模版。GenerateShortcuts.exe 用于生成快捷方式文件夹 shortcuts。WindowSpyU32.exe 用于查看窗口标识符。
 3. app.csv 配置文件
 4. data.csv 配置文件
-5. **jiejian32/64.exe** 分别为 32/64 位主程序。无需安装，双击即用，强烈建议设置为开机自启
+5. **jiejian32/64.exe** 分别为 32/64 位主程序。双击即用，并强烈建议设置为开机自启
 
 ## 2. 热键 之 键鼠操作
 
 | 鼠标 | 按键 | 建议映射手势 | 名称 | 默认用途 | 多标签软件 | 音乐类软件 | 视频类软件 | 看图软件 | 焦点在任务栏 | 焦点在左边界 | 焦点在上边界 | 焦点在桌面 |
 | ---- | ---- | ---- |---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
-| - | Esc | - | 逃逸/esc | 退出窗口 | - | - | - | - | - | - | - | - |
+| - | **Esc** | - | 逃逸/esc | 退出窗口 | - | - | - | - | - | - | - | - |
 | **鼠标右键** | - | - | - | - | - | - | - | - | - | 播放/暂停 | 播放/暂停 | - |
 | **鼠标中键** | - | - | - | - | - | - | - | - | 静音 | 静音 | 静音 | - |
 | **滚轮上滑** | - | - | - | - | - | - | - | - | 调高音量 | 调高音量 | 下一曲 | - |
@@ -329,43 +336,43 @@ data.csv 可自由配置
 
 用于增强和改写快捷键
 
-* C 列（标识符）为必填项。其余皆为可选项。只需填写需要变更的快捷键即可，否则可留空。
-* F 列可留空，否则默认触发关闭窗口动作。
-
-其他列可参考已有写法。
-
+* A 列 必填 名称
+* B 列 非必填 默认不填为低，一般搭配窗口使用窗口页填高
+* C 列（标识符）必填项。其余皆为可选项。只需填写需要变更的快捷键即可，否则可留空
+* F 列 非必填，否则默认触发关闭窗口动作
 * M 列 是否启用列，默认启用，不启用请填写 n 或者 N。
+* 其他列可参考已有写法，可填入要增强/改写得对于软件的快捷键
 
 ### data.csv 配置
 
 anyrun 启动器用
 
-* A列 类型：app / web
-* B列 启动路径：实际运行的网址或程序路径
-* D列 运行名称：用于展示
-* E列 运行关键字：匹配关键字，若有多个通过 | 进行分割。
+* A 列 类型：程序 / 文件 / 网址 / 搜索 / 内部 / 外部 / 下载
+* B 列 启动路径：实际运行的网址或程序路径
+* D 列 运行名称：用于展示
+* E 列 运行关键字：匹配关键字，若有多个通过 | 进行分割。
 
 自定义热键
 
-* A列 类型：app / web / file / text
-* B列 启动路径：实际运行的网址或程序路径
-* F列 热键关键字：例如 !6 表示 Ctrl + 数字 6
+* A 列 类型：程序 / 文件 / 网址
+* B 列 启动路径：实际运行的网址或程序路径
+* C 列 要激活的窗口(仅热键 激活 程序时使用)
+* F 列 热键关键字：例如 !6 表示 Ctrl + 数字 6
 
 自定义热串
 
-* A列 类型：app / web / file / text
-* B列 启动路径：实际运行的网址或程序路径
-* C列 要激活的窗口(仅app 热串用)
-* G列 热串关键字：例如 zbd 表示打开百度网
+* A 列 类型：文本 / 网址
+* B 列 启动路径：实际运行的网址或程序路径
+* G 列 热串关键字：例如 zbd 表示打开百度网
 
-其他列可参考已有写法。
+其他列说明
 
-* H列 是否启用列，默认启用，不启用请填写 n 或者 N。
-* I列 备注列，改列不会被解析
+* H 列 是否启用列，默认启用，不启用请填写 n 或者 N。
+* I 列 备注列，该列不会被解析
 
 ## 未来计划
 
-* 支持 Arc 浏览器 for windows，目前 arc 只开放了 win 11，导致我的 win 10 不支持无法测试
+* 支持 Arc 浏览器 for windows，目前 Arc 只开放了 win 11
 * icon 点击后使用新图标，而不是系统样式的图标
 * 配置文件不太易用，需要优化
 
@@ -373,7 +380,7 @@ anyrun 启动器用
 
 ### 如何将捷键设置为开机自启
 
-在系统栏中找到捷键，勾选开机自启即可。
+在系统栏中找到捷键，鼠标右击并勾选*开机自启(A)*。
 
 ### 填写 xxx.exe 程序无法启动
 
@@ -599,7 +606,7 @@ anyrun 启动器用
 
 ## 支持作者
 
-如果认为它有用/有帮助，欢迎进行任何形式的支持，不限于[充电](https://space.bilibili.com/107606582)、[follow](https://github.com/acc8226)、fork、star 和[微信打赏](https://github.com/acc8226/acc8226/blob/main/needYou.png)，都将激励作者后续维护和开发新功能。
+如果认为它有用/有帮助，欢迎任何形式的支持，不限于[充电](https://space.bilibili.com/107606582)、[follow](https://github.com/acc8226)、fork、star 和[微信打赏](https://github.com/acc8226/acc8226/blob/main/needYou.png)，这都将激励作者后续前进。
 
 ## 写在最后
 
