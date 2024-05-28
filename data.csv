@@ -1,4 +1,4 @@
-类型,启动路径,要激活的窗口(仅app 热串用),运行名称,anyrun 匹配关键字,热键关键字,热串关键字,是否启用 y/n,备注
+类型,启动路径,要激活的窗口(仅热键 激活 程序时使用),运行名称,anyrun 匹配关键字,热键关键字,热串关键字,是否启用 y/n,备注
 程序,powercfg.cpl,,电源选项,dianyuanxuanxiang|电源选项,,,,
 程序,Firewall.cpl,,防火墙,fanghuoqiang|防火墙,,,,
 程序,hdwwiz.cpl,,设备管理器,shebeiguanliqi|hdwwiz.cpl|设备管理器,,,,
@@ -90,7 +90,7 @@
 程序,shortcuts\天翼云盘.lnk,,天翼云盘,tianyiyun|天翼云盘,,,,
 程序,shortcuts\腾讯会议.lnk,,腾讯会议,tenxunhuiyi|腾讯会议,,,,
 程序,shortcuts\网易云音乐.lnk,,网易云音乐,wangyiyunyinyue|网易云音乐,,,,
-程序,shortcuts\WeChat.lnk,,微信,weixin|wechat|微信,,,,
+程序,shortcuts\微信.lnk,,微信,weixin|wechat|微信,,,,
 程序,shortcuts\微信开发者工具.lnk,,微信开发者工具,weixinkaifazhe|微信开发者,,,,
 程序,shortcuts\迅雷.lnk,,迅雷,xunlei|thunder|迅雷,,,,
 程序,shortcuts\SHPlayer.lnk,,搜狐影音,souhuyingyin|搜狐影音,,,,
@@ -263,3 +263,4 @@
 下载,pcmanager.microsoft.com/zh-cn,,微软电脑管家,DLweiruandiannaoguanjia|下载微软电脑管家 ,,,,
 下载,z.weixin.qq.com,,微信输入法,DLweixinshurufa|下载微信输入法,,,,
 下载,https://weixin.qq.com,,微信,DLweixin|xiazaiwechat|下载微信,,,,
+下载,https://www.jianguoyun.com,,坚果云,Dljianguoyun|下载坚果云,,,,

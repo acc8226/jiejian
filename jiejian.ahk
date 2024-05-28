@@ -6,10 +6,10 @@ vscode 插件安装 https://marketplace.visualstudio.com/items?itemName=thqby.vs
 #SingleInstance force ; 跳过对话框并自动替换旧实例
 
 ;@Ahk2Exe-Set Language, 0x0804
-;@Ahk2Exe-SetCopyright 全民反诈 union
+;@Ahk2Exe-SetCopyright 全民反诈联盟
 ;@Ahk2Exe-SetDescription 捷键-为简化键鼠操作而生
 
-global CODE_VERSION := '24.5.17-beta'
+GLOBAL CODE_VERSION := '24.5-beta10'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
@@ -20,7 +20,7 @@ global CODE_VERSION := '24.5.17-beta'
 
 SetDefaults()
 SetDefaults() {
-    global
+    GLOBAL
     REG_KEY_NAME := 'HKEY_CURRENT_USER\SOFTWARE\jiejian'
     START_TIME := A_NowUTC
     APP_NAME := '捷键' ; 用于 msgbox 标题展示
@@ -118,8 +118,6 @@ checkUpdate() ; 检查更新
 
 ; ----- 热串 之 打开网址。选择 z 而非 q，因为 q 的距离在第一行太远了，我称之为 Z 模式，用于全局跳转网址 -----
 ; ----- 热串 之 缩写扩展：将短缩词自动扩展为长词或长句（英文单词中哪个字母开头的单词数最少，我称之为 X 模式）-----
-; ----- 热串 之 片段展开-----
-; ----- 热串 之 自定义表情符号：将输入的特定字符串替换为自定义的表情符号或 Emoji -----
 
 :C*:xnow::{
     SendText(FormatTime(, 'yyyy-MM-dd HH:mm:ss'))
@@ -153,9 +151,8 @@ exitFunc(exitReason, exitCode) {
     if (text) {
         if RegExMatch(text, "i)^\s*((?:https?://)?(?:[\w-]+\.)+[\w-]+(?:/[\w-./?%&=]*)?\s*)$", &regExMatchInfo) {
             text := regExMatchInfo.1
-            if NOT InStr(text, 'http') {
+            if NOT InStr(text, 'http')
                 text := ("http://" . text)
-            }
             Run(text)
         } else {
             Run('https://www.baidu.com/s?wd=' . text)
@@ -173,64 +170,58 @@ exitFunc(exitReason, exitCode) {
 #HotIf
 
 doubleClick(hk, command) {
-    if (hk == A_PriorHotkey && A_TimeSincePriorHotkey > 100 && A_TimeSincePriorHotkey < 239)
+    if hk == A_PriorHotkey && A_TimeSincePriorHotkey > 100 && A_TimeSincePriorHotkey < 239
         openInnerCommand(command, True)
 }
 
 ~^c Up:: ; 监控 ctrl + c 按键放下
 updateCtrlTimestamp(*) {
-    global CTRL_TIMESTAMP := A_NowUTC
+    GLOBAL CTRL_TIMESTAMP := A_NowUTC
 }
 
 Capslock::{
-    global IS_CAPS_PRESSED := True
-    global ENABLE_CHANGE_CAPS_STATE := True
+    GLOBAL IS_CAPS_PRESSED := True
+    GLOBAL ENABLE_CHANGE_CAPS_STATE := True
 
     disableCapsChange() {
-        global ENABLE_CHANGE_CAPS_STATE := False
+        GLOBAL ENABLE_CHANGE_CAPS_STATE := False
     }
     
     SetTimer(disableCapsChange, -300) ; 300 ms 犹豫操作时间
     KeyWait('CapsLock') ; 等待用户物理释放按键
     IS_CAPS_PRESSED := False ; Capslock 先置空，来关闭 Capslock+ 功能的触发
-    ; 松开的时候才切换大小写
-    if (ENABLE_CHANGE_CAPS_STATE) {
-        ; 切换 CapsLock 到相反的状态
+    ; 松开的时候才切换 CapsLock 大小写
+    if ENABLE_CHANGE_CAPS_STATE
         SetCapsLockState(!GetKeyState("CapsLock", "T"))
-    }
     disableCapsChange()
-
 }
 
 ; 需要按一次按键才会生效，时好时坏
 #HotIf IS_CAPS_PRESSED
 
-; 最大化或还原
-q::MaximizeWindow()
+; 关闭窗口
+q::smartCloseWindow()
 ; 切换到上个窗口
-w::Send("!{tab}")
+e::Send("!{tab}")
 ; 程序内切换窗口
 r::LoopRelatedWindows()
+
 ; 切换到上一个虚拟桌面
 y::Send("^#{Left}")
 ; 切换到下一个虚拟桌面
 p::Send("^#{Right}")
 
+; 最大化或还原
+f::MaximizeWindow()
+
 ; 复制路径
 z::copySelectedAsPlainText()
-; 关闭窗口
-x::smartCloseWindow()
 ; 窗口移到下一个显示器
 v::Send("#+{right}")
-; 窗口最小化
-b::minimizeWindow()
 
-; ---我的自定义---
+; 窗口最小化 参考了 mac
+m::minimizeWindow()
 
-; 恢复不透明
-e::WinSetTransparent("Off", 'A')
-; 相当于 CapsLock + t
-t::WinSetTransparent(210, 'A')
 ; 复制选中文件路径并打开 anyrun 组件
 Space::{
     copySelectedAsPlainTextQuiet()

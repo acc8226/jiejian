@@ -12,8 +12,8 @@ categories: 我的创作
   <img src="https://img.shields.io/github/languages/top/acc8226/jiejian" style="display:inline-block;margin: 0 1px;" alt="GitHub top language">
   <img src="https://img.shields.io/github/commit-activity/y/acc8226/jiejian" style="display:inline-block;margin: 0 1px;" alt="GitHub commit activity">
   <img src="https://img.shields.io/github/last-commit/acc8226/jiejian" style="display:inline-block;margin: 0 1px;" alt="GitHub last commit">
-  <img src="https://img.shields.io/badge/release-24.2.12-green" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
-  <img src="https://img.shields.io/badge/beta-24.5.17-yellow" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
+  <img src="https://img.shields.io/badge/release-24.5-green" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
+  <img src="https://img.shields.io/badge/测试版-24.5--beta10-yellow" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
 </span>
 
 A key mapping/shortcut enhancement tool developed based on [Autohotkey2](https://www.autohotkey.com/), designed to simplify keyboard and mouse operations in Windows. It can serve as a traditional launcher and also supports mouse side buttons and hotkeys effectively.
@@ -83,14 +83,12 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 
 注：
 
-1. 建议优先使用鼠标按键进行驱动，因此最好搭配带侧边按键的鼠标。其次考虑安装鼠标鼠标手势驱动快捷键例如 [WGestures 2][WGestures 2付费链接]，最后才考虑直接使用快捷键。
+1. 建议优先使用鼠标按键进行驱动，因此最好搭配带侧边按键的鼠标。其次考虑安装鼠标鼠标手势驱动快捷键例如 [【付费】WGestures 2][WGestures 2付费链接]，最后才考虑直接使用快捷键。
 2. 多标签软件主要为各类浏览器，支持多标签的文本编辑器、IDE 等等。
 3. 音乐类软件囊括了 Spotify、QQ 音乐、网易云音乐等。其中 Ctrl + F3 打开文件对本地音乐播放器适配良好，在线音乐类软件可能不适用。
 4. 视频类软件例如 PotPlayer、VLC。
 5. 看图软件如 2345 看图王、Bandiview、ImageGlass。
 6. F11 特别适配了 b 站和油管。
-
-除了 [WGestures 2][WGestures 2付费链接]【付费】以外，[WGestures 1][]【免费】和 [FastGestures][]【免费】也是不错的选择。
 
 以下部分场景使用了鼠标手势软件替代了手动键入快捷键。
 
@@ -296,22 +294,21 @@ data.csv 可自由配置
 
 ## 11. CapsLock 模式
 
-按住 CapsLock 后可以用鼠标左键拖动窗口；
-按住 CapsLock 键的同时按下以下键可激活特殊功能，其中大部分按键参考了 [MyKeymap][]。
+CapsLock + 鼠标左键 拖动窗口
+
+CapsLock + 以下按键 将激活特殊功能，其中大部分按键参考了 [MyKeymap][] 的预设按键，小部分习惯参考自苹果 macOS 系统。
 
 | 按键 | 用途 |
 | ---- | ---- |
-| Q | 最大化或还原程序 |
-| W | 切换到上个窗口 |
-| E | 当前窗口恢复不透明 |
+| Q | 关闭窗口(参考 macOS 意为 quit) |
+| E | 切换到上个窗口 |
 | R | 在当前程序的窗口轮换 |
-| T | 当前窗口调成半透明(Translucent) |
 | Y | 切换到上一个虚拟桌面 |
 | P | 切换到下一个虚拟桌面 |
+| F | 最大化或还原程序(参考 macOS 意为 fullscreen) |
 | Z | 复制文件路径或纯文本 |
-| X | 关闭窗口 |
 | V | 窗口移到下一个显示器 |
-| B | 窗口最小化 |
+| M | 窗口最小化(参考 macOS 意为 minimize) |
 | 空格 | 复制选中文件路径并打开 Anyrun 启动器 |
 
 ## 12. 双击模式
@@ -390,9 +387,7 @@ anyrun 启动器用
 
 ### 软件搭配玩法
 
-可搭配 WGestures 2
-
-由于 WGestures 1 由于不支持字母手势。这里我选用的是【付费】【win mac】[WGestures 2][WGestures 2付费链接]。它是一款跨平台全局鼠标手势，且完美契合本软件。目前售价 35 米，优惠的[购买地址][WGestures 2付费链接]我也放这儿了。
+这里我推荐使用【付费】【win mac】[WGestures 2][]。它是一款跨平台全局鼠标手势，且完美契合本软件。目前售价 35 米，优惠的[购买地址][WGestures 2付费链接]我也放这儿了。另外 [WGestures 1][]【免费】和 [FastGestures][]【免费】也是不错的选择。WGestures 1 代只是不支持字母手势但是免费，FastGestures 的优点也是免费，但是功能配置稍显复杂。不过可以直接导入我提供的 extra 里面的模板进行使用。
 
 ### 已适配软件
 
@@ -401,7 +396,7 @@ anyrun 启动器用
 支持但不限于以下两百余款软件，且持续更新中...
 
 * 【压缩】360 压缩 4.0【部分支持】
-* 【压缩】7zip 24.01
+* 【压缩】7zip 24
 * 【压缩】Bandizip 7.32
 * 【压缩】WinRAR 6.24
 * 【压缩】WinZip
@@ -627,5 +622,4 @@ anyrun 启动器用
   [uTools]: https://www.u.tools/ ""
   [Hammerspoon]: https://www.hammerspoon.org/ ""
   [Espanso]: https://espanso.org/ ""
-
   [捷键]: https://atomgit.com/acc8226/jiejian/tags?tab=release "我的诚意之作"
