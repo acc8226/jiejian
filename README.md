@@ -7,14 +7,12 @@ categories: 我的创作
 
 # 捷键使用说明
 
-<span>
-  <img alt="Static Badge" src="https://img.shields.io/badge/%E6%8D%B7%E9%94%AE-for%20windows-blue" style="display:inline-block;margin: 0 1px;">
-  <img src="https://img.shields.io/github/languages/top/acc8226/jiejian" style="display:inline-block;margin: 0 1px;" alt="GitHub top language">
-  <img src="https://img.shields.io/github/commit-activity/y/acc8226/jiejian" style="display:inline-block;margin: 0 1px;" alt="GitHub commit activity">
-  <img src="https://img.shields.io/github/last-commit/acc8226/jiejian" style="display:inline-block;margin: 0 1px;" alt="GitHub last commit">
-  <img src="https://img.shields.io/badge/release-24.5-green" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
-  <img src="https://img.shields.io/badge/测试版-24.5--beta10-yellow" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
-</span>
+<span><img alt="Static Badge" src="https://img.shields.io/badge/%E6%8D%B7%E9%94%AE-for%20windows-blue" style="display:inline-block;margin: 0 1px;">
+<img src="https://img.shields.io/github/languages/top/acc8226/jiejian" style="display:inline-block;margin: 0 1px;" alt="GitHub top language">
+<img src="https://img.shields.io/github/commit-activity/y/acc8226/jiejian" style="display:inline-block;margin: 0 1px;" alt="GitHub commit activity">
+<img src="https://img.shields.io/github/last-commit/acc8226/jiejian" style="display:inline-block;margin: 0 1px;" alt="GitHub last commit">
+<img src="https://img.shields.io/badge/release-24.5-green" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
+<img src="https://img.shields.io/badge/测试版-24.5--beta10-yellow" style="display:inline-block;margin: 0 1px;" alt="Static Badge"></span>
 
 A key mapping/shortcut enhancement tool developed based on [Autohotkey2](https://www.autohotkey.com/), designed to simplify keyboard and mouse operations in Windows. It can serve as a traditional launcher and also supports mouse side buttons and hotkeys effectively.
 
@@ -40,18 +38,18 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 当我开发几个月后，发现市场上早就有了此类成熟软件，我可能连其中任一软件的百分之十的完成度都达不到。
 
 | 功能 |  macOS 平台 | Windows 平台 |
-| ---- | ---- | ---- |
+| --- | --- | --- |
 | 侧边按键支持 | [BetterAndBetter][]【免费】 | [捷键][]【免费】 或 一些鼠标手势软件支持 |
 | 热字符串 | [Espanso][]【免费】 | [捷键][]【免费】 或 Espanso |
-| 启动器 | [Raycast][]【免费】/Alfred【付费】/ HapiGo【部分免费】 | [捷键][]【免费】 或 uTools 或 Listary |
-| 启动程序/窗口切换 | [Hammerspoon][] 脚本【免费】 | [捷键][]【免费】 或 mykeymap 或 ahk 脚本 |
+| 启动器 | [Raycast][]【免费】/Alfred【付费】/ HapiGo【部分免费】 | [捷键][]【免费】或 uTools【免费】或 Listary |
+| 启动程序/窗口切换 | [Hammerspoon][] 脚本【免费】 | [捷键][]【免费】或 mykeymap【免费】或 ahk 脚本 |
 
 毕竟是我业内摸鱼和业外空闲时间开发，优点恐怕只剩下功能较多和足够小巧了。下一步我的工作将逐渐放在提升交互上。
 
 ## 1. 程序目录结构
 
 1. custom/customAhkFile1.ahk 为自定义 ahk 脚本，用于集成额外脚本或者函数
-2. extra/FastGestures 和 WGestures 为预设鼠标手势模版。GenerateShortcuts.exe 用于生成快捷方式文件夹 shortcuts。WindowSpyU32.exe 用于查看窗口标识符。
+2. extra/FastGestures 和 WGestures 为预设鼠标手势模版。GenerateShortcuts.exe 用于生成快捷方式文件夹 shortcuts。WindowSpyU32.exe 用于查看窗口标识符
 3. app.csv 配置文件
 4. data.csv 配置文件
 5. **jiejian32/64.exe** 分别为 32/64 位主程序。双击即用，并强烈建议设置为开机自启
@@ -59,7 +57,7 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 ## 2. 热键 之 键鼠操作
 
 | 鼠标 | 按键 | 建议映射手势 | 名称 | 默认用途 | 多标签软件 | 音乐类软件 | 视频类软件 | 看图软件 | 焦点在任务栏 | 焦点在左边界 | 焦点在上边界 | 焦点在桌面 |
-| ---- | ---- | ---- |---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | - | **Esc** | - | 逃逸/esc | 退出窗口 | - | - | - | - | - | - | - | - |
 | **鼠标右键** | - | - | - | - | - | - | - | - | - | 播放/暂停 | 播放/暂停 | - |
 | **鼠标中键** | - | - | - | - | - | - | - | - | 静音 | 静音 | 静音 | - |
@@ -83,7 +81,7 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 
 注：
 
-1. 建议优先使用鼠标按键进行驱动，因此最好搭配带侧边按键的鼠标。其次考虑安装鼠标鼠标手势驱动快捷键例如 [【付费】WGestures 2][WGestures 2付费链接]，最后才考虑直接使用快捷键。
+1. 建议优先使用鼠标按键进行驱动，因此最好搭配带侧边按键的鼠标。其次考虑使用鼠标手势驱动快捷键，例如【付费】[WGestures 2][WGestures 2付费链接]，最后才考虑键入快捷键。
 2. 多标签软件主要为各类浏览器，支持多标签的文本编辑器、IDE 等等。
 3. 音乐类软件囊括了 Spotify、QQ 音乐、网易云音乐等。其中 Ctrl + F3 打开文件对本地音乐播放器适配良好，在线音乐类软件可能不适用。
 4. 视频类软件例如 PotPlayer、VLC。
@@ -591,7 +589,7 @@ anyrun 启动器用
 ### 已知 bug
 
 * 适配不太好的软件：Right PDF Reader 的鼠标侧边后退键无效。
-* Caps + x / ctrl + f4 关闭窗口对一些软件不奏效：极客卸载、注册表编辑器、windows 任务管理器（似乎屏蔽了 Ctrl 键）、高级系统设置等窗口、WGestures 的导入导出窗口。
+* CapsLock + q 和 Ctrl + f4 关闭窗口对一些软件不奏效：极客卸载、注册表编辑器、windows 任务管理器（似乎屏蔽了 Ctrl 键）、高级系统设置等窗口、WGestures 的导入导出窗口。
 * 当任务管理器或者高级系统设置等窗口激活时鼠标滚轮捕捉不到，会导致鼠标靠在边界调节音量功能失效
 
 ## 如何反馈
@@ -610,7 +608,7 @@ anyrun 启动器用
   [MyKeymap]: https://xianyukang.com/MyKeymap.html ''
   [MyKeymap Github repo]: https://github.com/xianyukang/MyKeymap ""
   [WGestures 1]: https://www.yingdev.com/projects/wgestures ''
-  [WGestures 2]: https://www.yingdev.com/projects/wgestures2 ""
+  [WGestures 2]: https://www.yingdev.com/projects/wgestures2 ''
   [WGestures 2付费链接]: https://store.lizhi.io/site/products/id/523?cid=46jjayiu "一款很屌的付费鼠标手势"
   [FastGestures]: https://fg.zhaokeli.com/ ""
   [Capslock+]: https://capslox.com/capslock-plus ""
@@ -622,4 +620,4 @@ anyrun 启动器用
   [uTools]: https://www.u.tools/ ""
   [Hammerspoon]: https://www.hammerspoon.org/ ""
   [Espanso]: https://espanso.org/ ""
-  [捷键]: https://atomgit.com/acc8226/jiejian/tags?tab=release "我的诚意之作"
+  [捷键]: https://atomgit.com/acc8226/jiejian/tags?tab=release ""

@@ -149,6 +149,8 @@ parseAppCSV() {
       ; k 列 新建窗口
       switch it.newWin, 'Off' {
         case "^n": GroupAdd("newWin_ctrl_n", it.exe)
+        case "^!n", "!^n": GroupAdd("newWin_ctrl_alt_n", it.exe)
+        case "^+n", "+^n": GroupAdd("newWin_ctrl_shift_n", it.exe)
       }
       ; l 列 全屏
       switch it.fs, 'Off' {
@@ -499,7 +501,11 @@ XButton2::Send '^+{Tab}'
 
 ; k 列 新建窗口
 #HotIf WinActive('ahk_group newWin_ctrl_n')
-^+n::Send "^n"
+^F9::Send "^n"
+#HotIf WinActive('ahk_group newWin_ctrl_alt_n')
+^F9::Send "^!n"
+#HotIf WinActive('ahk_group newWin_ctrl_shift_n')
+^F9::Send "^+n"
 
 ; L 列 F11 功能键增强 全屏
 ; 如果是浏览器 且 打开的是 bilibili 或 YouTube 则特殊处理，将 f11 转成按键 f

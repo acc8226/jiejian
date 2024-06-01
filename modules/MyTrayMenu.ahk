@@ -13,8 +13,8 @@
         this.statistics:= '使用统计(&S)'
         this.startUp:= '开机自启(&A)'
 
-        this.help:= '帮助(&H)'
-        this.document:= '文档(&D)'
+        this.more:= '更多(&M)'
+        this.document:= '帮助文档(&H)'
         this.video:= '视频教程(&V)'
         ; this.followMeCSDN:= '在 CSDN 上关注我(&F)'
         this.followMeGH:= '在 Github 上关注我(&F)'
@@ -52,14 +52,14 @@
         A_TrayMenu.Add
 
         ; 添加子菜单到上面的菜单中
-        helpMenu := Menu()
-        helpMenu.Add(this.document, myTrayMenuHandler)
-        helpMenu.Add(this.video, myTrayMenuHandler)
-        ; helpMenu.Add(this.followMeCSDN, myTrayMenuHandler)
-        helpMenu.Add(this.followMeGH, myTrayMenuHandler)
-        helpMenu.Add(this.update, myTrayMenuHandler)
-        helpMenu.Add(this.about, myTrayMenuHandler)
-        A_TrayMenu.Add(this.help, helpMenu)
+        moreMenu := Menu()
+        moreMenu.Add(this.document, myTrayMenuHandler)
+        moreMenu.Add(this.video, myTrayMenuHandler)
+        ; moreMenu.Add(this.followMeCSDN, myTrayMenuHandler)
+        moreMenu.Add(this.followMeGH, myTrayMenuHandler)
+        moreMenu.Add(this.update, myTrayMenuHandler)
+        moreMenu.Add(this.about, myTrayMenuHandler)
+        A_TrayMenu.Add(this.more, moreMenu)
 
         A_TrayMenu.Add(this.exit, myTrayMenuHandler)
 
