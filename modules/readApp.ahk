@@ -501,29 +501,37 @@ XButton2::Send '^+{Tab}'
 
 ; k 列 新建窗口
 #HotIf WinActive('ahk_group newWin_ctrl_n')
-^F9::Send "^n"
+^F9::Send("{Blind}^n")
 #HotIf WinActive('ahk_group newWin_ctrl_alt_n')
-^F9::Send "^!n"
+^F9::Send("{Blind}^!n")
 #HotIf WinActive('ahk_group newWin_ctrl_shift_n')
-^F9::Send "^+n"
+^F9::Send("{Blind}^+n")
 
 ; L 列 F11 功能键增强 全屏
 ; 如果是浏览器 且 打开的是 bilibili 或 YouTube 则特殊处理，将 f11 转成按键 f
 #HotIf WinActive("(?:- YouTube -|哔哩哔哩_bilibili) ahk_group browser_group")
-F11::Send "f"
+F11::Send('f')
 
 #HotIf WinActive('ahk_group fullscreen_DoubleClick')
-F11::MouseClick "left", , , 2
+F11::MouseClick("left", , , 2)
 #HotIf WinActive('ahk_group fullscreen_Enter')
-F11::Send '{Enter}'
+F11::Send('{Enter}')
 #HotIf WinActive('ahk_group fullscreen_f')
-F11::Send 'f'
+F11::Send('f')
 #HotIf WinActive('ahk_group fullscreen_alt_f')
-F11::Send '!f'
+F11::Send('!f')
 #HotIf WinActive('ahk_group fullscreen_alt_Enter')
-F11::Send '!{Enter}'
+F11::Send('!{Enter}')
 #HotIf WinActive('ahk_group fullscreen_ctrl_shift_F12')
-F11::Send '^+{F12}'
+F11::Send('^+{F12}')
+
+; 增强：edge 浏览器的复制标签页
+#HotIf WinActive('ahk_exe i)msedge.exe')
+^k::Send('{Blind}^+k')
+
+; 增强：火狐浏览器的新建隐私窗口
+#HotIf WinActive('ahk_exe i)(?:firefox|waterfox).exe')
+^+n::Send('{Blind}^+p')
 
 ; ctrl + F7 通用：置顶/取消置顶
 #HotIf
