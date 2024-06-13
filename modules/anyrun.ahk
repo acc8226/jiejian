@@ -159,10 +159,12 @@ anyrun() {
 
             ; 搜索匹配
             ; 查询出所有搜索，如果前缀满足则添加到列表
-            for it in DATA_LIST
-                if (it.type == '搜索')
+            for it in DATA_LIST {
+                if (it.type == '搜索') {
                     if 1 = InStr(editValue, it.alias)
                         listBoxDataArray.push(it.title . '-' . it.type)
+                }
+            }
                 
             ; 模糊匹配 按照顺序
             for action in MyActionArray {
@@ -241,7 +243,13 @@ anyrun() {
                 }
             } else if (item.type = DataType.search) { ; 模糊处理：搜索
                 ; 拿到 alias 例如为 bd 并去除 bd 开头的字符串
-                Run(item.path . SubStr(editValue, StrLen(item.alias) + 1))
+                realStr := SubStr(editValue, StrLen(item.alias) + 1)
+                runUrl := unset
+                if InStr(item.path, "{query}")
+                    runUrl := strReplace(item.path, "{query}", realStr) 
+                else
+                    runUrl := item.path . realStr
+                Run(runUrl)
             } else if (item.type = DataType.inner) { ; 精确处理：内部               
                 openInnerCommand(item.title, True)
             } else if (item.type = DataType.ext) ; 精确处理：外部
@@ -382,60 +390,62 @@ appendWebsiteName(path) {
 }
 
 appendFileType(path) {
-    ; 取出文件后缀名
-    RegExMatch(path, '\.([^.]*$)', &matchInfo)
-    extension := matchInfo.1
-    switch extension, false {
-        case '3gp', 'avi', 'flv', 'mkv', 'mov', 'mp4', 'wmv': return "视频"
-        case '7z', 'bz2', 'gz', 'gz2', 'rar', 'tar', 'zip': return "压缩文件"
-        case 'aac', 'flac', 'mp3', 'ogg', 'png', 'wav', 'wma': return "音频"
-        case 'apk': return "安卓安装包"
-        case 'bat', 'cmd': return " Windows 批处理文件"
-        case 'bmp', 'gif', 'ico', 'jpeg', 'jpg', 'tiff', 'png', 'webp': return "图片文件"
-        case 'css': return " CSS 样式表"
-        case 'csv': return "逗号分隔值文件（表格数据）"
-        case 'cer', 'crt': return "安全证书文件"
-        case 'doc': return " Word 文档（旧版）"
-        case 'docx': return " Word 文档"
-        case 'dps': return " WPS 演示文件"
-        case 'dwg': return " AutoCAD 绘图文件"
-        case 'epub': return "开放式电子书"
-        case 'et': return " WPS 表格文件"
-        case 'exe', 'msi': return "可执行文件"
-        case 'htm', 'html': return "网页文件"
-        case 'ipa': return " iOS 应用安装包"
-        case 'iso': return "光盘映像文件"
-        case 'lnk': return "快捷方式"
-        case 'log': return "日志文件"
-        case 'json': return " JSON 数据文件"
-        case 'md', 'markdown': return " markdown 文档"
-        case 'mobi': return " Kindle 电子书格式"
-        case 'js': return " JavaScript 脚本"
-        case 'odf': return "电子表格"
-        case 'odg': return " OpenDocument 绘图"
-        case 'odp': return " OpenDocument 演示文稿"
-        case 'ods': return " OpenDocument 表格"
-        case 'odt': return " OpenDocument 文本"
-        case 'ofd': return "国产 OFD 文档"
-        case 'pdf': return " PDF 文档"
-        case 'php': return " PHP 脚本文件"
-        case 'ppt': return " PowerPoint 演示文稿（旧版）"
-        case 'pptx': return " PowerPoint 演示文稿"
-        case 'psd': return " Microsoft Visio 文件"
-        case 'ps1': return " PowerShell 脚本文件"
-        case 'py': return " Python 脚本文件"
-        case 'rtf': return " RTF 文档"
-        case 'svg': return "可缩放矢量图形文件"
-        case 'torrent': return "种子文件"
-        case 'txt': return "纯文本"
-        case 'url' : return "网络书签"
-        case 'vsd': return " Adobe Photoshop 文件"
-        case 'wps': return " WPS 文档"
-        case 'xls': return " Excel 表格（旧版）"
-        case 'xlsx': return " Excel 表格"
-        case 'xml': return " xml 文件"
-        default: return "文件"
+    ; 取出文件后缀名，若有的话
+    if RegExMatch(path, '\.([^.]*$)', &matchInfo) {
+        extension := matchInfo.1
+        switch extension, false {
+            case '3gp', 'avi', 'flv', 'mkv', 'mov', 'mp4', 'wmv': return "视频"
+            case '7z', 'bz2', 'gz', 'gz2', 'rar', 'tar', 'zip': return "压缩文件"
+            case 'aac', 'flac', 'mp3', 'ogg', 'png', 'wav', 'wma': return "音频"
+            case 'apk': return "安卓安装包"
+            case 'bat', 'cmd': return " Windows 批处理文件"
+            case 'bmp', 'gif', 'ico', 'jpeg', 'jpg', 'tiff', 'png', 'webp': return "图片文件"
+            case 'css': return " CSS 样式表"
+            case 'csv': return "逗号分隔值文件(二维表格)"
+            case 'cer', 'crt': return "安全证书文件"
+            case 'doc': return " Word 文档（旧版）"
+            case 'docx': return " Word 文档"
+            case 'dps': return " WPS 演示文件"
+            case 'dwg': return " AutoCAD 绘图文件"
+            case 'epub': return "开放式电子书"
+            case 'et': return " WPS 表格文件"
+            case 'exe', 'msi': return "可执行文件"
+            case 'htm', 'html': return "网页文件"
+            case 'ipa': return " iOS 应用安装包"
+            case 'iso': return "光盘映像文件"
+            case 'lnk': return "快捷方式"
+            case 'log': return "日志文件"
+            case 'json': return " JSON 数据文件"
+            case 'md', 'markdown': return " markdown 文档"
+            case 'mobi': return " Kindle 电子书格式"
+            case 'js': return " JavaScript 脚本"
+            case 'odf': return "电子表格"
+            case 'odg': return " OpenDocument 绘图"
+            case 'odp': return " OpenDocument 演示文稿"
+            case 'ods': return " OpenDocument 表格"
+            case 'odt': return " OpenDocument 文本"
+            case 'ofd': return "国产 OFD 文档"
+            case 'pdf': return " PDF 文档"
+            case 'php': return " PHP 脚本文件"
+            case 'ppt': return " PowerPoint 演示文稿（旧版）"
+            case 'pptx': return " PowerPoint 演示文稿"
+            case 'psd': return " Microsoft Visio 文件"
+            case 'ps1': return " PowerShell 脚本文件"
+            case 'py': return " Python 脚本文件"
+            case 'rtf': return " RTF 文档"
+            case 'svg': return "可缩放矢量图形文件"
+            case 'torrent': return "种子文件"
+            case 'txt': return "纯文本"
+            case 'url' : return "网络书签"
+            case 'vsd': return " Adobe Photoshop 文件"
+            case 'wps': return " WPS 文档"
+            case 'xls': return " Excel 表格（旧版）"
+            case 'xlsx': return " Excel 表格"
+            case 'xml': return " xml 文件"
+            default: return "文件"
+        }
     }
+    return "文件"
 }
 
 openDir(path) {
@@ -519,14 +529,14 @@ openInnerCommand(title, isConfirm := False) {
     switch title {
         case '重启': 
             if (isConfirm) {
-                if (MsgBox("立即" . title . "?", APP_NAME, "YesNo") = "Yes")
+                if MsgBox("立即" . title . "?", APP_NAME, "YesNo") = "Yes"
                     SystemReboot()
             } else {
                 SystemReboot()
             }
         case '关机': 
             if (isConfirm) {
-                if (MsgBox("立即" . title . "?", APP_NAME, "YesNo") = "Yes")
+                if MsgBox("立即" . title . "?", APP_NAME, "YesNo") = "Yes"
                     SystemShutdown()
             } else {
                 SystemShutdown()
