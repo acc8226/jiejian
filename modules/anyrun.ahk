@@ -4,15 +4,23 @@
 global SUPPORT_LEN := 32
 global DATA_FILTER_REG := 'i)^(?:' . DataType.app . '|' . DataType.file . '|' . DataType.web . '|' . DataType.inner . '|' . DataType.ext . '|' . DataType.dl . ')$'
 ; 端口判断过于简单 但是基本够用了
-global IS_HTTP_Reg := 'i)^(?:https?://)?(?:localhost|(?:\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])\.(?:\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])\.(?:\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])\.(?:\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])|(?!(?:\d+\.)+\d+)(?:[\w-]+\.)+[\w-]+)(:(?!0)(?![7-9]\d{4})\d{1,5})?(?:/[\w-./?%&=]*)?\s*$'
-
+global IS_HTTP_Reg := 'i)^(?:https?://)?' ; 协议
+                    ; local 或 ip地址 或 英文网址
+                    . '(?:localhost'
+                        . '|(?:\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])\.(?:\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])\.(?:\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])\.(?:\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])' 
+                        . '|(?!(?:\d+\.)+\d+)(?:[\w-一-龥]+\.)+[\w-一-龥]+' ; 华为.网址
+                        ; 警惕 中文.com 的网络诈骗：有些诈骗者可能会利用账户变更的名义来诱骗用户泄露个人信息。如果收到任何要求你提供账户信息的邮件或消息，务必通过官方客服渠道进行核实
+                        ; .com 是全球最广泛认可和使用的顶级域名，而.网址是中国的国家级域名，但是在国内还是 .网址比较正规，因为要有备案。 我就知道 中文.com 的诈骗案例
+                    . ')'
+                    . '(:(?!0)(?![7-9]\d{4})\d{1,5})?' ; 端口
+                    . '(?:/[\w-./?%&=#一-龻]*)?\s*$' ; 路径（可以包含中文）
 global MY_GUI
 global MY_GUI_WIDTH := 432
 global MY_GUI_MARGINX_X := 2.8
 global MY_GUI_TITLE := '快捷启动'
 
 global MyActionArray := [
-    MyAction('打开网址', 'list', path => path ~= IS_HTTP_Reg, appendWebsiteName, jumpURL), ; 是否提前些比较好，不用了，兜底挺好
+    MyAction('打开网址', 'list', isLegitimateWebsite, appendWebsiteName, jumpURL), ; 是否提前些比较好，不用了，兜底挺好
     ; 打开（文件，可能是 mp3 或者 mp4 或者 mov）
     MyAction('打开', 'list', path => isFileOrDirExists(path) && NOT DirExist(path), appendFileType, path => Run(path)) ,
     MyAction('前往文件夹', 'list', isDir,, openDir),
@@ -455,6 +463,11 @@ openDir(path) {
         RegExMatch(path, '.*[\\/]', &regExMatchInfo)
         Run(regExMatchInfo.0)
     }
+}
+
+; 是否是网站
+isLegitimateWebsite(url) {
+    return url ~= IS_HTTP_Reg
 }
 
 isFileOrDirExists(path) {

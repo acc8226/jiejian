@@ -39,9 +39,14 @@ startByHotString(hotstring) {
 }
 
 jumpURL(input) {
-    if NOT InStr(input, 'http')
+    if (input ~= '^[^\/]*[一-龥]+.*') {
+        MsgBox '禁止访问中文域名，谨防诈骗'
+        return
+    }
+    if !InStr(input, 'http') {
         ; https 将逐渐替代 http，这是大势所趋
         input := "https://" . input
+    }    
     Run(input)
 }
 
