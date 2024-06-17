@@ -24,7 +24,7 @@
 ,,,,,,,,
 程序,shortcuts\git-bash.lnk,,Bash,Bash,,,,
 程序,shortcuts\wt.lnk,,新终端,WindowsTerminal|新终端,,,,
-程序,shortcuts\Code.lnk,ahk_exe Code.exe ahk_class Chrome_WidgetWin_1,VSCode,VSCode,!3,,,
+程序,shortcuts\Visual Studio Code.lnk,ahk_exe Code.exe ahk_class Chrome_WidgetWin_1,VSCode,VSCode,!3,,,
 程序,shortcuts\idea64.lnk,,IDEA,IDEA,,,,
 ,,,,,,,,
 程序,shortcuts\360安全卫士.lnk,,360安全卫士,anquanweishi|360安全卫士,,,,

@@ -32,6 +32,7 @@ parseAppCSV() {
         case "F3", "{F3}": GroupAdd("new_F3", it.exe)
         case 'F8', "{F8}": GroupAdd("new_F8", it.exe)
         case 'L', : GroupAdd("new_L", it.exe)
+        case 'O', : GroupAdd("new_O", it.exe)
         case "!a": GroupAdd("new_alt_a", it.exe)
         case "!c": GroupAdd("new_alt_c", it.exe)
   
@@ -274,6 +275,8 @@ XButton1::Send "^{F4}"
 ^F8::Send "{F8}"
 #HotIf WinActive("ahk_group new_L")
 ^F8::Send 'l'
+#HotIf WinActive("ahk_group new_O")
+^F8::Send 'o'
 #HotIf WinActive("ahk_group new_alt_a")
 ^F8::Send '!a'
 #HotIf WinActive("ahk_group new_alt_c")
@@ -329,19 +332,20 @@ XButton1::Send "^w"
 XButton1::Send "^!q"
 #HotIf WinActive("ahk_group close_ctrl_shift_w")
 ^F4::
-XButton1::Send "^+w"
+XButton1::Send("^+w")
 
-; ^F4 兜底
-; #HotIf WinActive("ahk_class #32770")
-; ^F4::Send '{Esc}'
-#HotIf not WinActive("ahk_group close_ctrl_F4")
-^F4::SmartCloseWindow ; 比 WinClose "A" 好使
-
+; 如果填写的不是 ctrl + f4 则关闭
+#HotIf !WinActive("ahk_group close_ctrl_F4")
+^F4::
+XButton1::SmartCloseWindow ; 比 WinClose "A" 好使
+; 否则则是 ctrl + f4，如果遇到的是窗口则 esc
+#HotIf WinActive("ahk_class #32770")
+^F4::
+XButton1::Send('{Esc}')
+; 最终则是 ctrl + f4 且非窗口则 ctrl + f4
 ; XButton1 兜底
-#HotIf WinActive("ahk_group close_ctrl_F4")
-XButton1::Send "^{F4}"
 #HotIf
-XButton1::SmartCloseWindow
+XButton1::Send("^{F4}")
 
 ; g. 前进键
 #HotIf WinActive("ahk_group forward_MediaNext")
@@ -525,11 +529,11 @@ F11::Send('!{Enter}')
 #HotIf WinActive('ahk_group fullscreen_ctrl_shift_F12')
 F11::Send('^+{F12}')
 
-; 增强：edge 浏览器的复制标签页
+; 增强：edge 浏览器 的 复制标签页
 #HotIf WinActive('ahk_exe i)msedge.exe')
 ^k::Send('{Blind}^+k')
 
-; 增强：火狐浏览器的新建隐私窗口
+; 增强：火狐浏览器 的 新建隐私窗口
 #HotIf WinActive('ahk_exe i)(?:firefox|waterfox).exe')
 ^+n::Send('{Blind}^+p')
 
