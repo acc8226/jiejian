@@ -1,10 +1,11 @@
-﻿; 根据显示内容反向查询路径
-findPathByListBoxText(title, type) {
-    if (StrLen(title) > 0)
+﻿; 根据显示内容反查 item，例如在 anyrun 组件中 b站-网址，其中 title 在前，type 在后
+findItemByTypeAndTitle(type, title) {
+    if (StrLen(title) > 0) {
         for (it in DATA_LIST)
             ; 两个条件的匹配更精确
             if (title = it.title && type = it.type)
                 return it
+    }
 }
 
 ; 热键启动
@@ -43,10 +44,9 @@ jumpURL(input) {
         MsgBox '禁止访问中文域名，谨防诈骗'
         return
     }
-    if !InStr(input, 'http') {
-        ; https 将逐渐替代 http，这是大势所趋
+    ; https 将逐渐替代 http，这是大势所趋
+    if !InStr(input, 'http')
         input := "https://" . input
-    }    
     Run(input)
 }
 

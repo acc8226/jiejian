@@ -1,18 +1,20 @@
 ---
 title: 捷键使用说明
 date: 2023-05-01 09:00:00
-updated: 2024-05-23 16:20:20
+updated: 2024-06-18 10:17:32
 categories: 我的创作
 ---
 
 # 捷键使用说明
 
-<span><img alt="Static Badge" src="https://img.shields.io/badge/%E6%8D%B7%E9%94%AE-for%20windows-blue" style="display:inline-block;margin: 0 1px;">
+<div>
+<img alt="Static Badge" src="https://img.shields.io/badge/%E6%8D%B7%E9%94%AE-for%20windows-blue" style="display:inline-block;margin: 0 1px;">
 <img src="https://img.shields.io/github/languages/top/acc8226/jiejian" style="display:inline-block;margin: 0 1px;" alt="GitHub top language">
 <img src="https://img.shields.io/github/commit-activity/y/acc8226/jiejian" style="display:inline-block;margin: 0 1px;" alt="GitHub commit activity">
 <img src="https://img.shields.io/github/last-commit/acc8226/jiejian" style="display:inline-block;margin: 0 1px;" alt="GitHub last commit">
 <img src="https://img.shields.io/badge/release-24.5-green" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
-<img src="https://img.shields.io/badge/测试版-24.5--beta10-yellow" style="display:inline-block;margin: 0 1px;" alt="Static Badge"></span>
+<img src="https://img.shields.io/badge/测试版-24.6--beta2-yellow" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
+</div>
 
 A key mapping/shortcut enhancement tool developed based on [Autohotkey2](https://www.autohotkey.com/), designed to simplify keyboard and mouse operations in Windows. It can serve as a traditional launcher and also supports mouse side buttons and hotkeys effectively.
 
@@ -22,11 +24,11 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 
 基于 [Autohotkey2](https://www.autohotkey.com/) 开发，为简化 Windows 键鼠操作而生的按键映射/快捷键增强工具。既可当作一个传统启动器，又对鼠标侧边按键和热字符支持良好。
 
-**强烈建议搭配全局鼠标手势软件 和 任意带侧边按键的鼠标器**（本软件不挑鼠标厂商）以获得最佳体验。
+强烈建议搭配全局鼠标手势软件 和 任意带侧边按键的鼠标并将捷键设置为开机自启以获得最佳体验。
 
-系统要求：支持 32 位和 64 位 Windows，理论上 XP 以上系统均可，Win 7 以上使用更佳。
+系统要求：支持 32 位和 64 位 Windows XP 以上系统，Win 7 以上使用更佳。
 
-[video demonstration 视频演示](https://www.bilibili.com/video/BV19H4y1e7hJ?vd_source=54168537affc2c02555097cb26797d99) | [download 下载地址][捷键]
+[**video demonstration 视频演示**](https://www.bilibili.com/video/BV19H4y1e7hJ?vd_source=54168537affc2c02555097cb26797d99) | [**download 下载地址**][捷键]
 
 **注意事项：**
 
@@ -39,41 +41,61 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 
 | 功能 |  macOS 平台 | Windows 平台 |
 | --- | --- | --- |
-| 侧边按键支持 | [BetterAndBetter][]【免费】 | [捷键][]【免费】 或 一些鼠标手势软件支持 |
-| 热字符串 | [Espanso][]【免费】 | [捷键][]【免费】 或 Espanso |
-| 启动器 | [Raycast][]【免费】/Alfred【付费】/ HapiGo【部分免费】 | [捷键][]【免费】或 uTools【免费】或 Listary |
-| 启动程序/窗口切换 | [Hammerspoon][] 脚本【免费】 | [捷键][]【免费】或 mykeymap【免费】或 ahk 脚本 |
+| 侧边按键支持 | [BetterAndBetter][]【免费】| [捷键][] 或一些全局鼠标手势软件 |
+| 热字符串 | [Espanso][]【免费】| [捷键][]【免费】或 Espanso【免费】|
+| 启动器 | [Raycast][]【免费】/Alfred【付费】/ HapiGo【部分免费】| [捷键][]【免费】或 uTools【免费】或 Listary【付费】|
+| 启动程序/窗口切换 | [Hammerspoon][] 脚本【免费】| [捷键][]【免费】或 mykeymap【免费】|
 
 毕竟是我业内摸鱼和业外空闲时间开发，优点恐怕只剩下功能较多和足够小巧了。下一步我的工作将逐渐放在提升交互上。
 
-## 1. 程序目录结构
+## 程序目录结构
 
-1. custom/customAhkFile1.ahk 为自定义 ahk 脚本，用于集成额外脚本或者函数
-2. extra/FastGestures 和 WGestures 为预设鼠标手势模版。GenerateShortcuts.exe 用于生成快捷方式文件夹 shortcuts。WindowSpyU32.exe 用于查看窗口标识符
+1. custom/customAhkFile1.ahk 为自定义 ahk 脚本，用于集成自定义功能
+2. extra/FastGestures 和 WGestures 为预设鼠标手势模版；GenerateShortcuts.exe 用于生成快捷方式到 shortcuts 文件夹；WindowSpyU32.exe 用于捕获窗口标识符
 3. app.csv 配置文件
 4. data.csv 配置文件
-5. **jiejian32/64.exe** 分别为 32/64 位主程序。双击即用，并强烈建议设置为开机自启
+5. **jiejian32/64.exe** 分别为 32/64 位主程序，双击即用
+
+## 1. CapsLock 模式
+
+CapsLock + 单按键能激活某些预设功能，其中部分键位参考了 [MyKeymap][]，并从苹果 macOS 系统的快捷键得到启发。
+
+| + 按键 | 用途 |
+| ---- | ---- |
+| 鼠标左键 | 移动窗口 |
+| Q | 关闭窗口(参考 macOS 意为 quit) |
+| E | 切换到上个窗口 |
+| R | 在当前程序的窗口轮换 |
+| Y | 切换到上一个虚拟桌面 |
+| P | 切换到下一个虚拟桌面 |
+| F | 最大化或还原程序(参考 macOS 意为 fullscreen) |
+| Z | 复制文件路径或纯文本 |
+| V | 窗口移到下一个显示器 |
+| M | 窗口最小化(参考 macOS 意为 minimize) |
+| 空格 | 复制选中文件路径并打开 Anyrun 启动器 |
 
 ## 2. 热键 之 键鼠操作
 
-| 鼠标 | 按键 | 建议映射手势 | 名称 | 默认用途 | 多标签软件 | 音乐类软件 | 视频类软件 | 看图软件 | 焦点在任务栏 | 焦点在左边界 | 焦点在上边界 | 焦点在桌面 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| - | **Esc** | - | 逃逸/esc | 退出窗口 | - | - | - | - | - | - | - | - |
-| **鼠标右键** | - | - | - | - | - | - | - | - | - | 播放/暂停 | 播放/暂停 | - |
-| **鼠标中键** | - | - | - | - | - | - | - | - | 静音 | 静音 | 静音 | - |
-| **滚轮上滑** | - | - | - | - | - | - | - | - | 调高音量 | 调高音量 | 下一曲 | - |
-| **滚轮下滑** | - | - | - | - | - | - | - | - | 调低音量 | 调低音量 | 上一曲 | - |
-| **鼠标侧边后退键**(XB1) | - | - | 关闭/close | 关闭窗口 | 关闭标签 | 关闭窗口 | 关闭窗口 | 关闭窗口 | 下一曲 | 下一曲 | - | - |
+| 鼠标 | 按键 | 推荐映射手势 | 名称 | 默认用途 | 多标签软件 | 音乐类软件 | 视频类软件 | 看图软件 | 焦点在任务栏 | 焦点在左边界 | 焦点在上边界 | 焦点在桌面 |
+| ---- | ---- | ---- |---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| - | Esc | - | 逃逸/esc | 退出窗口 | - | - | - | - | - | - | - | - |
+| 鼠标右键 | - | - | - | - | - | - | - | - | - | 播放/暂停 | 播放/暂停 | - |
+| 鼠标中键 | - | - | - | - | - | - | - | - | 静音 | 静音 | 静音 | - |
+| 滚轮上滑 | - | - | - | - | - | - | - | - | 调高音量 | 调高音量 | 下一曲 | - |
+| 滚轮下滑 | - | - | - | - | - | - | - | - | 调低音量 | 调低音量 | 上一曲 | - |
+| 鼠标侧边后退键**(XB1) | - | - | 关闭/close | 关闭窗口 | 关闭标签 | 关闭窗口 | 关闭窗口 | 关闭窗口 | 下一曲 | 下一曲 | - | - |
 | - | **Ctrl+F4** | ↑ | 关闭/close | 关闭窗口 | 关闭标签 | 关闭窗口 | 关闭窗口 | 关闭窗口 | - | - | - | - |
 | - | **Ctrl+F8** | ↓ | 新建/new | 打开或新建文件 | 新建标签 | 打开文件 或 无操作 | 打开文件 或 无操作 | 打开文件 或 无操作 | - | - | - | - |
-| - | **Alt + ←** | ← | 后退/prev | 后退 | 后退 | 上一曲 | 快退 | 上一张 | - | - | - | 上一曲 |
-| - | **Alt + →** | → | 前进/next | 前进 | 前进 | 下一曲 | 快进 | 下一张 | - | - | - | 下一曲 |
+| - | Alt + ← | ← | 后退/prev | 后退 | 后退 | 上一曲 | 快退 | 上一张 | - | - | - | 上一曲 |
+| - | Alt + → | → | 前进/next | 前进 | 前进 | 下一曲 | 快进 | 下一张 | - | - | - | 下一曲 |
 | **鼠标侧边前进键**(XB2) | - | - | 上一个/prev | - | 上一页 | 上一曲 | 上个视频 | - | 上一曲 | 上一曲 | - | 上一曲 |
-| - | **Ctrl+Shift+Tab** | 上左 | 上一个/prev | - | 上一页 | 上一曲 | 上个视频 | - | - | - | - | - |
-| - | **Ctrl+Tab** | 上右 | 下一个/next | - | 下一页 | 下一曲 | 下个视频 | - | - | - | - | - |
-| - | **Ctrl+Shift+N** | 右下 | 新建窗口/new | 新建窗口 | - | - | - | - | - | - | - | - |
+| - | Ctrl+Shift+Tab | 上左 | 上一个/prev | - | 上一页 | 上一曲 | 上个视频 | - | - | - | - | - |
+| - | Ctrl+Tab | 上右 | 下一个/next | - | 下一页 | 下一曲 | 下个视频 | - | - | - | - | - |
+| - | **Ctrl+F9** | 右下 | 新建窗口/new | 新建窗口 | - | - | - | - | - | - | - | - |
 | - | **Ctrl+F7** | 右左 | 置顶/top | 置顶 | - | - | - | - | - | - | - | - |
-| - | **F11** | ↓↑ | 全屏/fullscreen | 全屏/取消全屏 | - | - | - | - | - | - | - | - |
+| - | F11 | ↓↑ | 全屏/fullscreen | 全屏/取消全屏 | - | - | - | - | - | - | - | - |
+| - | Ctrl+k | ↖↘ | 浏览器复制标签【部分支持】| - | - | - | - | - | - | - | - | - |
+| - | Ctrl+Shift+n | →↓↑ | 浏览器新建隐私窗口| - | - | - | - | - | - | - | - | - |
 
 下图为鼠标滚动调节音量示例
 
@@ -86,7 +108,7 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 3. 音乐类软件囊括了 Spotify、QQ 音乐、网易云音乐等。其中 Ctrl + F3 打开文件对本地音乐播放器适配良好，在线音乐类软件可能不适用。
 4. 视频类软件例如 PotPlayer、VLC。
 5. 看图软件如 2345 看图王、Bandiview、ImageGlass。
-6. F11 特别适配了 b 站和油管。
+6. F11 特别适配了 B 站和油管。
 
 以下部分场景使用了鼠标手势软件替代了手动键入快捷键。
 
@@ -144,7 +166,7 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 
 ## 7. Anyrun 启动器
 
-争做一款简洁、高效的应用启动器。由于定制化程度太高甚至会导致难以上手，提供快捷启动和内置系统命令（锁屏、睡眠、关机等）
+一款简洁、高效的应用启动器。由于定制化程度太高甚至导致难以上手
 
 特点：
 
@@ -159,42 +181,36 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 * 自动识别剪切板有没有内容，如果输入内容是文件或者网址 且离最后一次 ctrl + c 操作小于 13 秒则自动粘贴内容。
 * 支持全拼甚至首字母简拼模糊搜索，上下键切换，回车或鼠标双击进行选中。
 
-### 打开程序/文件/网址
+### 打开程序
 
-在输入框中输入内容后按下回车
+* `huatu` 打开画图
+* `kongzhimianban|control|控制面板` 打开控制面板
+* ...
 
-* `guanyu` 打开关于 windows 程序
-* `fdj` 打开放大镜程序
-* `163.com` 打开网址-网易网
-* `https://www.soso.com` 打开网址-搜搜网
-* `D:\code\atomgit\jiejian` 前往文件夹
-* `D:\code\atomgit\jiejian\README.md` 打开 markdown 文档
-* `D:\code\atomgit\jiejian\shortcuts\File Explorer.lnk` 打开快捷方式
-* `xg/xigua` 打开西瓜视频
+更多关键字，请去 data.csv 查询，重点关注 A、B、D、E 列。
 
-### 打开搜索
+### 打开文件
 
-* `by` 必应搜索：在框中输入 by[空格?]{关键字}
-* `bi` 哔哩哔哩搜索
-* `bd` 百度搜索
-* `ip` 归属地查询
-* `so` 360 搜索
-* `sg` 搜狗搜索
-* `wz` 无追搜索
-* `xg` 西瓜视频
-* `yc` 异次元软件
-* `gh` Github
-* `qr` 创建二维码
+* `cpan` 打开 C 盘
+* `dpan` 打开 D 盘
+* `epan` 打开 E 盘
+* ...
 
-![](https://foruda.gitee.com/images/1689321508560702893/2457a573_426858.gif "动画.gif")
+### 打开网址
 
-### 打开内部/外部命令
+* `baidu` 打开百度
+* `zhihu` 打开知乎
+* ...
 
-内部命令
+### 打开软件下载站
 
-* `zhongduan/cmd/终端` 终端
-* 网络连接
-* 收藏夹
+格式为 `dl软件名称`。例如输入 `dlvscode` 表示跳转到 VSCode 下载站
+
+### 打开内部命令
+
+* `zhongduan|cmd|终端` 打开 终端
+* `wangluolianjie|网络连接` 打开网络连接
+* `shoucangjia|收藏夹` 打开收藏夹
 * 字体
 * 打印机
 * 我的文档
@@ -205,29 +221,32 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 * 我的视频
 * 我的音乐
 * 环境变量
-* 重启
-* 关机
-* 锁屏
-* 睡眠
-* 激活屏幕保护程序
-* 清空回收站
-* 息屏
-* 注销
-* 静音
-* 上一曲
-* 下一曲
-* 暂停
-* 息屏
-* 睡眠
-* 关机
+* ...
 
-### DL-打开软件下载站
+### 打开外部命令
 
-例如输入 `dlqqmusic` 表示跳转到 QQ 音乐客户端下载网址
+* `hello|哈喽` 打开预设脚本 custom\customAhkFile1.ahk
 
-### 增强的操作文件和网址的能力
+### 动作
 
-当在 anyrun 编辑框中输入文件路径/网址可以获得以下能力：
+在框中输入 {关键字}[空格?]{搜索内容}
+
+* `bd`、`ss`、`百度` 百度搜索
+* `bi` 哔哩哔哩搜索
+* `xg` 西瓜视频
+* `gh` Github
+* `qr` 二维码生成
+* `ip` ip查询
+* `pi` ping检测
+* `se` SEO综合查询
+* `tq` 天气查询
+* `kd` 快递查询查询
+
+![](https://foruda.gitee.com/images/1689321508560702893/2457a573_426858.gif "动画.gif")
+
+### 对文件和网址的上下文操作
+
+当在 anyrun 编辑框中输入 文件路径/网址 可以获得以下能力：
 
 * 打开网址
 * 打开文件
@@ -240,9 +259,16 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 * 在 VSCode 中打开（若 data.csv 中 d 列 `VSCode` 对应的 b 列路径存即启用）
 * 在 IDEA 中打开（若 data.csv 中 d 列 `IDEA` 对应的 b 列路径存即启用）
 
+例如
+
+* `C:\Windows\System32\drivers\etc\hosts` 打开 host 文件
+* `163.com` 打开网易网
+* `https://www.soso.com` 打开搜搜网
+* `D:` 前往文件夹
+
 ## 8. 热串 之 直达网址（Z 直达模式）
 
-为避免误触，排除了在文本编辑器/ftp/git/IDE/office/sql/窗口软件中激活 z 模式。
+为避免误触，排除了在 文本编辑器/ftp/git/IDE/office/sql 软件中激活 z 模式。
 
 * zbd 打开 百度一下
 * zbi 打开 哔哩哔哩
@@ -251,15 +277,17 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 * zma 打开 QQ 邮箱
 * zxg 打开 西瓜视频
 
-zbd 示例
+测试使用 zbd 打开百度网
 
 ![](https://foruda.gitee.com/images/1689318989538537685/7b71d232_426858.gif)
 
-zbi 示例
+zbi 打开 b 站
 
 ![](https://foruda.gitee.com/images/1689319007424875617/4934e693_426858.gif)
 
-## 9. 热串之 扩展片段：将字符串替换为自定义话术（X 拓展模式）【可配置】
+## 9. 热串 之 扩展片段（X 拓展模式）
+
+可以将字符串替换为自定义话术【可配置】
 
 固定配置
 
@@ -286,46 +314,27 @@ data.csv 可自由配置
 
 ## 10. 左键辅助
 
-受到 quicker 影响，试验性的加入左键辅助功能。
+受到 quicker 启发，试验性的加入左键辅助功能。
 
 在鼠标左键按下的同时按下 a 键时，若选中为网址则打开网址，否则百度搜索选中内容。
 
-## 11. CapsLock 模式
+## 11. 双击模式
 
-CapsLock + 鼠标左键 拖动窗口
-
-CapsLock + 以下按键 将激活特殊功能，其中大部分按键参考了 [MyKeymap][] 的预设按键，小部分习惯参考自苹果 macOS 系统。
-
-| 按键 | 用途 |
-| ---- | ---- |
-| Q | 关闭窗口(参考 macOS 意为 quit) |
-| E | 切换到上个窗口 |
-| R | 在当前程序的窗口轮换 |
-| Y | 切换到上一个虚拟桌面 |
-| P | 切换到下一个虚拟桌面 |
-| F | 最大化或还原程序(参考 macOS 意为 fullscreen) |
-| Z | 复制文件路径或纯文本 |
-| V | 窗口移到下一个显示器 |
-| M | 窗口最小化(参考 macOS 意为 minimize) |
-| 空格 | 复制选中文件路径并打开 Anyrun 启动器 |
-
-## 12. 双击模式
-
-预设动作如下，若双击间隔大于 100 毫秒 且 小于 239 毫秒会触发：
+预设动作如下，若双击间隔大于 100 毫秒 且 小于 239 毫秒会触发一次：
 
 * 双击 Alt：息屏（无弹窗提醒）
 * 双击 Home：睡眠（无弹窗提醒）
-* 双击 End：关机（有确认对话框）
+* 双击 End：关机（有确认对话框，可按 esc 键退出）
 
-可以手动去 data.csv 中对意图进行修改。d 列置空 或者 删除该列可以屏蔽该命令。
-<br />由于中英文切换经常用到 Shift，日常快捷键常用到 ctrl，所以这两个按键不再提供作为前置键。
-<br />目前仅支持上述第 7 小节列出的所有内部命令。
+可以手动去 data.csv 中对意图进行修改。d 列置空 或者 删除该列可以屏蔽该命令。d 列格式为：`类型-运行名称`，举例：`内部-息屏`。目前支持非动作和上下文操作外的所有选项。
+
+注：由于中英文切换经常用到 Shift，日常快捷键常用到 ctrl，所以我暂无将这两个键作为前置键的打算。
 
 ## 自定义配置说明
 
 配置文件 **app.csv**（用于配置软件的快捷键）、**data.csv**（用于配置启动器候选项以及热键、热串） 必须和 ahk 脚本文件在同一级目录，且必须使用 GB18030 字符集。
-<br />app.csv 使用了正则表达式，需要使用者对正则有一定了解。主要用到了 `^$` 锚和不区分大小写 `i` 选项。
-<br />推荐使用开源软件 [LiberOffice](https://www.libreoffice.org/download/download-libreoffice/) 或微软 Office 打开。不要使用 WPS 进行打开，WPS 目前有兼容性问题。
+<br />app.csv 使用了正则表达式，需要使用者对正则有一定了解。主要用到了 `^$` 锚和不区分大小写的 `i` 选项。
+<br />推荐使用微软 Office 或开源软件 [LiberOffice](https://www.libreoffice.org/download/download-libreoffice/) 打开。不要使用目前对 csv 有兼容性问题的 WPS 打开。
 
 ### app.csv 配置
 
@@ -342,7 +351,7 @@ CapsLock + 以下按键 将激活特殊功能，其中大部分按键参考了 [
 
 anyrun 启动器用
 
-* A 列 类型：程序 / 文件 / 网址 / 搜索 / 内部 / 外部 / 下载
+* A 列 类型：程序 / 文件 / 网址 / 动作 / 下载 / 内部 / 外部 
 * B 列 启动路径：实际运行的网址或程序路径
 * D 列 运行名称：用于展示
 * E 列 运行关键字：匹配关键字，若有多个通过 | 进行分割。
@@ -357,7 +366,7 @@ anyrun 启动器用
 自定义热串
 
 * A 列 类型：文本 / 网址
-* B 列 启动路径：实际运行的网址或程序路径
+* B 列 启动路径：用于文本替换和打开网址
 * G 列 热串关键字：例如 zbd 表示打开百度网
 
 其他列说明
@@ -370,6 +379,7 @@ anyrun 启动器用
 * 支持 Arc 浏览器 for windows，目前 Arc 只开放了 win 11
 * icon 点击后使用新图标，而不是系统样式的图标
 * 配置文件不太易用，需要优化
+* 支持更多的语言，例如 English
 
 ## 常见问题
 
@@ -385,11 +395,11 @@ anyrun 启动器用
 
 ### 软件搭配玩法
 
-这里我推荐使用【付费】【win mac】[WGestures 2][]。它是一款跨平台全局鼠标手势，且完美契合本软件。目前售价 35 米，优惠的[购买地址][WGestures 2付费链接]我也放这儿了。另外 [WGestures 1][]【免费】和 [FastGestures][]【免费】也是不错的选择。WGestures 1 代只是不支持字母手势但是免费，FastGestures 的优点也是免费，但是功能配置稍显复杂。不过可以直接导入我提供的 extra 里面的模板进行使用。
+这里我推荐使用【付费】【win mac】[WGestures 2][]。它是一款跨平台全局鼠标手势，且完美契合本软件。目前售价 35 米，优惠的[购买地址][WGestures 2付费链接]我也放这儿了。另外 [WGestures 1][]【免费】也是不错的选择，除了不支持字母手势。另外一款 [FastGestures][]【免费】功能配置稍显复杂。不过我都提供了模板进行导入。
 
 ### 已适配软件
 
-软件挑选原则：个人偏好以及热门、常用软件，其中又以浏览器收集最为全面。
+软件挑选原则：个人偏好以及目前市面上常用软件，其中又以浏览器收集最为全面。
 
 支持但不限于以下两百余款软件，且持续更新中...
 
@@ -575,7 +585,7 @@ anyrun 启动器用
 * 炉石传说
 * 腾讯 QQ
 * 微信
-* IDLE Shell
+* Python IDLE Shell
 
 不支持的软件：
 
@@ -595,15 +605,15 @@ anyrun 启动器用
 ## 如何反馈
 
 1. b 站私信
-2. 软件完全免费开源，仓库地址 [AtomGit source](https://atomgit.com/acc8226/jiejian/) | [Github source](https://github.com/acc8226/jiejian)，有问题或需求欢迎提 [issue](https://github.com/acc8226/jiejian/issues)
+2. 软件完全免费开源，仓库地址 [AtomGit source](https://atomgit.com/acc8226/jiejian/) | [Github source](https://github.com/acc8226/jiejian)。欢迎发表意见和提 [issue](https://github.com/acc8226/jiejian/issues)
 
 ## 支持作者
 
-如果认为它有用/有帮助，欢迎任何形式的支持，不限于[充电](https://space.bilibili.com/107606582)、[follow](https://github.com/acc8226)、fork、star 和[微信打赏](https://github.com/acc8226/acc8226/blob/main/needYou.png)，这都将激励作者后续前进。
+如果认为该软件对你有帮助，欢迎各种形式的支持，不限于[充电](https://space.bilibili.com/107606582)、[follow](https://github.com/acc8226)、fork、star 和[微信打赏](https://github.com/acc8226/acc8226/blob/main/needYou.png)。这都将激励作者后续开发维护。
 
 ## 写在最后
 
-由于 Autohotkey 这门语言容易学习。再加上我之前编程功底，从设计到开发均由我一人完成。部分源码参考了 Windows 软件 MyKeymap [主页][MyKeymap] | [源码][MyKeymap Github repo]、Capslock+ [主页][Capslock+] | [源码][Capslock+源码]。并从 Windows 软件 [Quicker][]、[uTools][] 和 macOS 软件 [BetterAndBetter][]、[HapiGo][] 和 [Raycast][] 中受到启发。因此依旧感谢开源和非开源。
+由于 Autohotkey 语言的简单易学，再加上我之前编程功底，从设计到开发测试均由我一人完成。部分源码参考了 Windows 软件 MyKeymap [主页][MyKeymap] | [源码][MyKeymap Github repo]、Capslock+ [主页][Capslock+] | [源码][Capslock+源码]。并从 Windows 软件 [Quicker][]、[uTools][] 和 macOS 软件 [BetterAndBetter][]、[HapiGo][] 和 [Raycast][] 的使用中得到启发。
 
   [MyKeymap]: https://xianyukang.com/MyKeymap.html ''
   [MyKeymap Github repo]: https://github.com/xianyukang/MyKeymap ""

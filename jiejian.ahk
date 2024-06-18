@@ -9,7 +9,7 @@ vscode 插件安装 https://marketplace.visualstudio.com/items?itemName=thqby.vs
 ;@Ahk2Exe-SetCopyright 全民反诈联盟
 ;@Ahk2Exe-SetDescription 捷键-为简化键鼠操作而生
 
-GLOBAL CODE_VERSION := '24.5-beta10'
+GLOBAL CODE_VERSION := '24.6-beta2'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
@@ -107,8 +107,8 @@ checkUpdate() ; 检查更新
 
 ; Ctrl + Alt + R 重启脚本
 ^!r::{
-    Sleep 50 ; 不创建多个实例的情况下重新加载脚本的简单实现，给个暂停时长
-    Reload() 
+    Reload()
+    Sleep(50) ; 不创建多个实例的情况下重新加载脚本的简单实现，给个暂停时长
 }
 ^!s::JJ_TRAY_MENU.mySuspend() ; Ctrl + Alt + S 暂停脚本
 ^!v::Send(A_Clipboard) ; Ctrl + Alt + V 将剪贴板的内容输入到当前活动应用程序中，防止了一些网站禁止在 HTML 密码框中进行粘贴操作
@@ -160,7 +160,7 @@ exitFunc(exitReason, exitCode) {
     }
 }
  
-; 双击模式我比较推荐 双击 Alt 和 双击 Alt，因为 shift 可能会影响到输入法中英文切换
+; 双击模式我只推荐 双击 Alt，因为 shift 和 ctrl 太过常用
 #HotIf IsSet(MY_DOUBLE_ALT)
 ~Alt::doubleClick(ThisHotkey, MY_DOUBLE_ALT)
 #HotIf IsSet(MY_DOUBLE_HOME)
@@ -169,9 +169,24 @@ exitFunc(exitReason, exitCode) {
 ~End::doubleClick(ThisHotkey, MY_DOUBLE_END)
 #HotIf
 
+; command 约定是 type-title 的组合
 doubleClick(hk, command) {
-    if hk == A_PriorHotkey && A_TimeSincePriorHotkey > 100 && A_TimeSincePriorHotkey < 239
-        openInnerCommand(command, True)
+    if (hk == A_PriorHotkey && A_TimeSincePriorHotkey > 100 && A_TimeSincePriorHotkey < 239) {
+        item := unset
+        if (StrLen(command) > 0) {
+            split := StrSplit(command, '-')
+            ; 分割并截取类型 type 和 title 名称
+            if split.Length == 2 {
+                type := split[1]
+                title := split[2]
+                item := findItemByTypeAndTitle(type, title)
+            }
+        }
+        if (!IsSet(item) || item == '') {
+            MsgBox(hk . ' 对应指令找不到！', APP_NAME)
+        } else
+            openPathByType(item)
+    }
 }
 
 ~^c Up:: ; 监控 ctrl + c 按键放下

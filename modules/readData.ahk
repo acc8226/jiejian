@@ -1,14 +1,20 @@
 ﻿global DATA_LIST := parseData("data.csv")
 
 class DataType {
-  static app := '程序'
-  static file := '文件'
-  static text := '文本'
-  static web := '网址'
-  static search := '搜索'
-  static inner := '内部'
-  static ext := '外部'
-  static dl := '下载'
+  static text := '文本' ; 用于热字符串替换
+
+  static app := '程序' ; 精确匹配
+  static file := '文件' ; 精确匹配
+  static web := '网址' ; 精确匹配
+  static dl := '下载' ; 精确匹配
+  static inner := '内部' ; 精确匹配
+  static ext := '外部' ; 精确匹配
+  
+  static action := '动作' ; 用于 bd + 关键字
+  
+  static d_alt := '双击Alt' ; 用于热字符串替换
+  static d_home := '双击Home' ; 用于热字符串替换
+  static d_end := '双击End' ; 用于热字符串替换
 }
 
 ; 注册热键 和 热字符串
@@ -17,12 +23,10 @@ regMyHotKey() {
   Loop DATA_LIST.Length {
     it := DATA_LIST[A_Index]
 
-    ; 热键：：目前仅作用于程序、文本 和 网址跳转
-    if (StrLen(it.hk) > 0 && StrLen(it.path) > 0) {
-      ; 如果有多个变体符合触发条件, 那么仅触发最早创建的那个
+    ; 热键：目前仅作用于程序、文本 和 网址跳转。Hotkey 的规则是如果有多个变体符合触发条件, 那么仅触发最早创建的那个
+    if (StrLen(it.hk) > 0 && StrLen(it.path) > 0)
       Hotkey(it.hk, startByHotKey)
-    }
-
+    
     ; 热串：目前仅作用于网址跳转
     if (StrLen(it.hs) > 0 && it.type = DataType.web) {
         ; 排除在 编辑器中 可跳转网址
@@ -104,23 +108,23 @@ parseData(fileName) {
     ; 热串关键字
     info.hs := Trim(split[7])
     if info.type = DataType.text {
-      ; text 类型用完即走 不加入 array 中
-      if (StrLen(info.hs) > 0)
+      ; text 类型用完即走 不加入 array 中  
+      if StrLen(info.hs) > 0          
           Hotstring ":C*:" . info.hs, info.path
       return
     }
   
-    ; 运行名称
+    ; 运行名称：可能是息屏、睡眠、关机
     info.title := Trim(split[4])
-    if info.type = '双击Alt' {
+    if info.type = DataType.d_alt {
       MY_DOUBLE_ALT := info.title
       return
     }
-    if info.type = '双击Home' {
+    if info.type = DataType.d_home {
       MY_DOUBLE_HOME := info.title
       return
     }
-    if info.type = '双击End' {
+    if info.type = DataType.d_end {
       MY_DOUBLE_END := info.title
       return
     }

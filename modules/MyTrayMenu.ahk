@@ -111,33 +111,26 @@
             if (recordMins >= 60) {
                 sb .= '（约 '
                 recordYears := recordMins // (365 * 24 * 60)
-                if (recordYears > 0) {
+                if recordYears > 0
                     sb .= recordYears . ' 年 '
-                }
                 recordDays := recordMins // (24 * 60) - recordYears * 365
-                if (recordDays >= 1) {
+                if recordDays >= 1
                     sb .= recordDays . ' 天 '
-                }
                 recordHours := recordMins // 60 - recordYears * 365 * 24 - recordDays * 24
-                if (recordHours >= 1) {
+                if recordHours >= 1
                     sb .= recordHours . ' 小时 '
-                }
                 mins := recordMins - recordMins // 60 * 60
-                if (mins >= 1) {
+                if mins >= 1
                     sb .= mins . ' 分钟'
-                }
                 sb .= '）'
             }                     
             MsgBox(sb, '使用统计')
         case this.startUp:
-            ; 当前是开机自启
-            if (IS_AUTO_START_UP) {
-                ; 设置为开机不自启
+            ; 当前是开机自启则设置为开机不自启，否则设置为开机自启
+            if IS_AUTO_START_UP
                 FileDelete(this.linkFile)
-            } else {
-                ; 设置为开机自启
+            else
                 FileCreateShortcut(this.shortcut, this.linkFile, A_WorkingDir)
-            }
             A_TrayMenu.ToggleCheck(this.startUp)
             IS_AUTO_START_UP := !IS_AUTO_START_UP
     

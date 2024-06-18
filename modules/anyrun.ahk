@@ -55,6 +55,9 @@ MyActionArray.Push(MyAction('myip', 'edit',,, getIPAddresses))
 #HotIf
 
 anyrun() {
+    ; reload 过程中 MY_GUI_TITLE 会未定义
+    if !IsSet(MY_GUI_TITLE)
+        return
     ; 检查窗口是否已经存在，如果窗口已经存在，如果窗口不存在，则创建新窗口
     if WinExist(MY_GUI_TITLE)
         WinClose ; 使用由上一句 WinExist 找到的窗口
@@ -168,10 +171,8 @@ anyrun() {
             ; 搜索匹配
             ; 查询出所有搜索，如果前缀满足则添加到列表
             for it in DATA_LIST {
-                if (it.type == '搜索') {
-                    if 1 = InStr(editValue, it.alias)
-                        listBoxDataArray.push(it.title . '-' . it.type)
-                }
+                if (it.type == DataType.action and 1 = InStr(editValue, it.alias))                        
+                    listBoxDataArray.push(it.title . '-' . it.type)
             }
                 
             ; 模糊匹配 按照顺序
@@ -221,15 +222,15 @@ anyrun() {
                 split := StrSplit(listBox.Text, '-')
                 ; 分离出类型 和 名称
                 if split.Length == 2 {
-                    title := split[1]
                     type := split[2]
-                    item := findPathByListBoxText(title, type)
-                    ; 能否根据序号直接找到 item 呢，而不是通过反查，综合评估感觉不高效所以不采用
+                    title := split[1]
+                    item := findItemByTypeAndTitle(type, title)
+                    ; 能否根据序号直接找到 item 呢，而不是通过反查，感觉不高效因此不采用
                 }
             }
             editValue := myEdit.Value
 
-            ; 模糊匹配：（打开网址 打开文件 前往文件夹 等）如果 条目 不匹配 则啥事都不做
+            ; 不能精确匹配，则尝试（打开网址 打开文件 前往文件夹 等），否则无事发生
             if (!IsSet(item) || item == '') {
                 for action in MyActionArray {
                     ; 如果是 list 则表示必须在列表中存在
@@ -249,7 +250,9 @@ anyrun() {
                         }
                     }
                 }
-            } else if (item.type = DataType.search) { ; 模糊处理：搜索
+            }
+            ; 用于 action 匹配，形如 bd + 关键字
+            else if (item.type = DataType.action) {
                 ; 拿到 alias 例如为 bd 并去除 bd 开头的字符串
                 realStr := SubStr(editValue, StrLen(item.alias) + 1)
                 runUrl := unset
@@ -258,27 +261,10 @@ anyrun() {
                 else
                     runUrl := item.path . realStr
                 Run(runUrl)
-            } else if (item.type = DataType.inner) { ; 精确处理：内部               
-                openInnerCommand(item.title, True)
-            } else if (item.type = DataType.ext) ; 精确处理：外部
-                Run('jiejian' . (A_PtrSize == 4 ? '32' : '64') . '.exe /script ' . item.path)
-            ; 兜底 精确处理：app file web 程序文件网址类型
+            }
+            ; 兜底 精确匹配 DATA_FILTER_REG
             else {
-                if (item.type = DataType.web || item.type = DataType.dl)
-                    jumpURL(item.path)
-                else if (item.type = DataType.app && item.title == '微信') { ; 对微信特殊处理：自动登录微信
-                    try {
-                        Run(item.path,,, &pid)
-                        WinWaitActive("ahk_pid " . pid)
-                        ; 手动等待 1.1 秒，否则可能会跳到扫码页
-                        Sleep(1100)
-                        Send("{Space}")
-                    } catch
-                        MsgBox("找不到目标应用")
-                } else {
-                    ; 启动逻辑为每次都新建应用，而非打开已有应用 ActivateOrRun('', item.path)
-                    Run(item.path)
-                }
+                openPathByType(item)
             }
             if IsSet(MY_GUI) {
                 MY_GUI.Destroy()
@@ -315,6 +301,29 @@ computeDegree(regExMatchInfo) {
         degree += (2 ** item)
     }
     return degree
+}
+
+; 用到了 item.type、item.path 和 item.title
+openPathByType(item) {
+    if (item.type = DataType.web || item.type = DataType.dl)
+        jumpURL(item.path)
+    else if (item.type = DataType.inner) { ; 精确处理：内部               
+        openInnerCommand(item.title, True)
+    } else if (item.type = DataType.ext) ; 精确处理：外部
+        Run('jiejian' . (A_PtrSize == 4 ? '32' : '64') . '.exe /script ' . item.path)
+    else if (item.type = DataType.app && item.title == '微信') { ; 对微信特殊处理：自动登录微信
+        try {
+            Run(item.path,,, &pid)
+            WinWaitActive("ahk_pid " . pid)
+            ; 手动等待 1.1 秒，否则可能会跳到扫码页
+            Sleep(1100)
+            Send("{Space}")
+        } catch
+            MsgBox("找不到目标应用")
+    } else {
+        ; 启动逻辑为每次都新建应用，而非打开已有应用 ActivateOrRun('', item.path)
+        Run(item.path)
+    }
 }
 
 class MyAction {
@@ -538,18 +547,19 @@ openInIDEA(path) {
     Run(MY_IDEA . ' ' . path)
 }
 
+; 包含了所有我预设的内部命令
 openInnerCommand(title, isConfirm := False) {
     switch title {
         case '重启': 
             if (isConfirm) {
-                if MsgBox("立即" . title . "?", APP_NAME, "YesNo") = "Yes"
+                if MsgBox("立即" . title . "?", APP_NAME, "OKCancel") = "OK"
                     SystemReboot()
             } else {
                 SystemReboot()
             }
         case '关机': 
             if (isConfirm) {
-                if MsgBox("立即" . title . "?", APP_NAME, "YesNo") = "Yes"
+                if MsgBox("立即" . title . "?", APP_NAME, "OKCancel") = "OK"
                     SystemShutdown()
             } else {
                 SystemShutdown()
