@@ -157,14 +157,138 @@ minimizeWindow() {
 }
 
 /**
- * 移动活动窗口位置
+ * 窗口居中并修改其大小
+ * @param width 窗口宽度
+ * @param height 窗口高度
+ * @returns {void} 
  */
-makeWindowDraggable() {
-  hwnd := WinExist("A")
-  if (WindowMaxOrMin())
-    WinRestore("A")
+CenterAndResizeWindow(width, height) {
+  if NotActiveWin() {
+    return
+  }
 
-  PostMessage("0x0112", "0xF010", 0)
-  Sleep 50
-  SendInput("{Right}")
+  ; 在 mousemove 时需要 PER_MONITOR_AWARE (-3), 否则当两个显示器有不同的缩放比例时, mousemove 会有诡异的漂移
+  ; 在 winmove 时需要 UNAWARE (-1), 这样即使写死了窗口大小为 1200x800, 系统会帮你缩放到合适的大小
+  DllCall("SetThreadDpiAwarenessContext", "ptr", -1, "ptr")
+
+  WinExist("A")
+  if (WindowMaxOrMin())
+    WinRestore
+
+  ; 获取指定窗口的位置和大小
+  WinGetPos(&x, &y, &w, &h)
+
+  ; ms 为 监视器编号, 介于 1 和 MonitorGetCount 返回的数字之间.
+  ms := GetMonitorAt(x + w / 2, y + h / 2)
+  ; 分别为左上右下
+  MonitorGetWorkArea(ms, &l, &t, &r, &b)
+  ; 获得宽度和高度
+  w := r - l
+  h := b - t
+
+  ; 预设宽度 和 屏幕宽度的最小值
+  winW := Min(width, w)
+  ; 预设高度 和 屏幕宽度的最小值
+  winH := Min(height, h)
+  ; 最终窗口的 x 值
+  winX := l + (w - winW) / 2
+  ; 最终窗口的 y 值
+  winY := t + (h - winH) / 2
+
+  WinMove(winX, winY, winW, winH)
+  DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
+}
+
+; 我新加的
+CenterAndResizeWindow_X_Percent(percent) {
+  if NotActiveWin() {
+    return
+  }
+
+  ; 在 mousemove 时需要 PER_MONITOR_AWARE (-3), 否则当两个显示器有不同的缩放比例时, mousemove 会有诡异的漂移
+  ; 在 winmove 时需要 UNAWARE (-1), 这样即使写死了窗口大小为 1200x800, 系统会帮你缩放到合适的大小
+  DllCall("SetThreadDpiAwarenessContext", "ptr", -1, "ptr")
+
+  WinExist("A")
+  if (WindowMaxOrMin())
+    WinRestore
+
+  ; 获取指定窗口的位置和大小
+  WinGetPos(&x, &y, &w, &h)
+
+  ; ms 为 监视器编号, 介于 1 和 MonitorGetCount 返回的数字之间.
+  ms := GetMonitorAt(x + w / 2, y + h / 2)
+  ; 分别为左上右下
+  MonitorGetWorkArea(ms, &l, &t, &r, &b)
+  ; 获得宽度和高度
+  w := r - l
+  h := b - t
+
+  ; 预设宽度 和 屏幕宽度的最小值
+  winW := w * percent
+  ; 预设高度 和 屏幕宽度的最小值
+  winH := h * percent
+  ; 最终窗口的 x 值
+  winX := l + (w - winW) / 2
+  ; 最终窗口的 y 值
+  winY := t + (h - winH) / 2
+
+  WinMove(winX, winY, winW, winH)
+  DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
+}
+
+; 我新加的 高度拓展至全屏
+setWindowHeightToFullScreen() {
+  if NotActiveWin() {
+    return
+  }
+
+  ; 在 mousemove 时需要 PER_MONITOR_AWARE (-3), 否则当两个显示器有不同的缩放比例时, mousemove 会有诡异的漂移
+  ; 在 winmove 时需要 UNAWARE (-1), 这样即使写死了窗口大小为 1200x800, 系统会帮你缩放到合适的大小
+  DllCall("SetThreadDpiAwarenessContext", "ptr", -1, "ptr")
+
+  WinExist("A")
+
+  WinGetPos(&originX,,&originW)
+
+  if (WindowMaxOrMin())
+    WinRestore
+
+  ; 获取指定窗口的位置和大小
+  WinGetPos(&x, &y, &w, &h)
+  ; ms 为 监视器编号, 介于 1 和 MonitorGetCount 返回的数字之间.
+  ms := GetMonitorAt(x + w / 2, y + h / 2)
+
+  ; 分别为左上右下
+  MonitorGetWorkArea(ms,, &t,, &b)
+  WinMove(originX, t, originW, b - t)
+  DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
+}
+
+; 我新加的 宽度拓展至全屏
+setWindowWeightToFullScreen() {
+  if NotActiveWin() {
+    return
+  }
+
+  ; 在 mousemove 时需要 PER_MONITOR_AWARE (-3), 否则当两个显示器有不同的缩放比例时, mousemove 会有诡异的漂移
+  ; 在 winmove 时需要 UNAWARE (-1), 这样即使写死了窗口大小为 1200x800, 系统会帮你缩放到合适的大小
+  DllCall("SetThreadDpiAwarenessContext", "ptr", -1, "ptr")
+
+  WinExist("A")
+
+  WinGetPos(, &originY, , &originH)
+
+  if (WindowMaxOrMin())
+    WinRestore
+
+  ; 获取指定窗口的位置和大小
+  WinGetPos(&x, &y, &w, &h)
+
+  ; ms 为 监视器编号, 介于 1 和 MonitorGetCount 返回的数字之间.
+  ms := GetMonitorAt(x + w / 2, y + h / 2)
+  ; 分别为左上右下
+  MonitorGetWorkArea(ms, &l,, &r)
+  WinMove(l, originY, r - l, originH)
+  DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 }

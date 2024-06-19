@@ -226,6 +226,18 @@ y::Send("^#{Left}")
 ; 切换到下一个虚拟桌面
 p::Send("^#{Right}")
 
+; 窗口缩放至全屏 60%
+a::CenterAndResizeWindow_X_Percent(0.6)
+; 窗口居中至全屏 80%
+s::CenterAndResizeWindow_X_Percent(0.8)
+; 窗口居中至全屏 90%
+d::CenterAndResizeWindow_X_Percent(0.9)
+
+; 宽度拉升至最大
+w::setWindowWeightToFullScreen()
+; 高度拉升至最大
+h::setWindowHeightToFullScreen()
+
 ; 最大化或还原
 f::MaximizeWindow()
 

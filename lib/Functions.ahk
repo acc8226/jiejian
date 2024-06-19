@@ -393,3 +393,20 @@ ShellRun(target, arguments?, directory?, operation?, show?) {
 WindowMaxOrMin(winTitle := "A") {
   return WinGetMinMax(winTitle)
 }
+
+/**
+ * 获取当前焦点在哪个显示器上
+ * @param x 窗口X轴的长度
+ * @param y 窗口y轴的长度
+ * @param {number} default 显示器下标
+ * @returns {string|number} 匹配的显示器下标
+ */
+GetMonitorAt(x, y, default := 1) {
+  m := SysGet(80)
+  loop m {
+    MonitorGet(A_Index, &l, &t, &r, &b)
+    if (x >= l && x <= r && y >= t && y <= b)
+      return A_Index
+  }
+  return default
+}
