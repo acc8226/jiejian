@@ -15,6 +15,7 @@ class DataType {
   static d_alt := '双击Alt' ; 用于热字符串替换
   static d_home := '双击Home' ; 用于热字符串替换
   static d_end := '双击End' ; 用于热字符串替换
+  static d_esc := '双击ESC'
 }
 
 ; 注册热键 和 热字符串
@@ -41,7 +42,7 @@ regMyHotKey() {
 parseData(fileName) {
   parseDataLine(line, eachLineLen) {
     global MY_BASH, MY_VSCode, MY_IDEA, MY_NEW_TERMINAL
-    global MY_DOUBLE_ALT, MY_DOUBLE_HOME, MY_DOUBLE_END
+    global MY_DOUBLE_ALT, MY_DOUBLE_HOME, MY_DOUBLE_END, MY_DOUBLE_ESC
   
     split := StrSplit(line, ",")
     ; 跳过不符合条件的行
@@ -126,6 +127,10 @@ parseData(fileName) {
     }
     if info.type = DataType.d_end {
       MY_DOUBLE_END := info.title
+      return
+    }
+    if info.type = DataType.d_esc {
+      MY_DOUBLE_ESC := info.title
       return
     }
   

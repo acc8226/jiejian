@@ -167,11 +167,14 @@ exitFunc(exitReason, exitCode) {
 ~Home::doubleClick(ThisHotkey, MY_DOUBLE_HOME)
 #HotIf IsSet(MY_DOUBLE_END)
 ~End::doubleClick(ThisHotkey, MY_DOUBLE_END)
+; 双击 esc 表示关闭
+#HotIf IsSet(MY_DOUBLE_ESC)
+~Esc::doubleClick(ThisHotkey, MY_DOUBLE_ESC)
 #HotIf
 
 ; command 约定是 type-title 的组合
 doubleClick(hk, command) {
-    if (hk == A_PriorHotkey && A_TimeSincePriorHotkey > 100 && A_TimeSincePriorHotkey < 239) {
+    if (hk == A_PriorHotkey && A_TimeSincePriorHotkey > 100 && A_TimeSincePriorHotkey < 230) {
         item := unset
         if (StrLen(command) > 0) {
             split := StrSplit(command, '-')
@@ -184,8 +187,9 @@ doubleClick(hk, command) {
         }
         if (!IsSet(item) || item == '') {
             MsgBox(hk . ' 对应指令找不到！', APP_NAME)
-        } else
+        } else {
             openPathByType(item)
+        }
     }
 }
 
@@ -226,11 +230,11 @@ y::Send("^#{Left}")
 ; 切换到下一个虚拟桌面
 p::Send("^#{Right}")
 
-; 窗口缩放至全屏 60%
+; 窗口缩放居中至全屏 60%
 a::CenterAndResizeWindow_X_Percent(0.6)
-; 窗口居中至全屏 80%
+; 窗口缩放居中至全屏 80%
 s::CenterAndResizeWindow_X_Percent(0.8)
-; 窗口居中至全屏 90%
+; 窗口缩放居中至全屏 90%
 d::CenterAndResizeWindow_X_Percent(0.9)
 
 ; 宽度拉升至最大

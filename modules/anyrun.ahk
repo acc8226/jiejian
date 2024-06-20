@@ -589,6 +589,7 @@ openInnerCommand(title, isConfirm := False) {
         case '我的视频': Run "shell:My Video"
         case '我的音乐': Run "shell:My Music"
         case '环境变量': Run "rundll32 sysdm.cpl,EditEnvironmentVariables"
+        case '关闭程序': smartCloseWindow
         default: MsgBox('非系统内置命令！', APP_NAME)
     }
 }

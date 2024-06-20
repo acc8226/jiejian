@@ -285,10 +285,17 @@ setWindowWeightToFullScreen() {
   ; 获取指定窗口的位置和大小
   WinGetPos(&x, &y, &w, &h)
 
+  ; 如果是 360 极速浏览器则特殊处理
+  processName := WinGetProcessName("A")
+  offset := 0
+  if (processName = '360ChromeX.exe') {
+    offset := 3
+  }
+
   ; ms 为 监视器编号, 介于 1 和 MonitorGetCount 返回的数字之间.
   ms := GetMonitorAt(x + w / 2, y + h / 2)
   ; 分别为左上右下
   MonitorGetWorkArea(ms, &l,, &r)
-  WinMove(l, originY, r - l, originH)
+  WinMove(l + offset, originY, r - (l + offset) - offset, originH)
   DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 }
