@@ -13,7 +13,7 @@ categories: 我的创作
 <img src="https://img.shields.io/github/commit-activity/y/acc8226/jiejian" style="display:inline-block;margin: 0 1px;" alt="GitHub commit activity">
 <img src="https://img.shields.io/github/last-commit/acc8226/jiejian" style="display:inline-block;margin: 0 1px;" alt="GitHub last commit">
 <img src="https://img.shields.io/badge/release-24.5-green" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
-<img src="https://img.shields.io/badge/测试版-24.6--beta2-yellow" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
+<img src="https://img.shields.io/badge/测试版-24.6--beta3-yellow" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
 </div>
 
 A key mapping/shortcut enhancement tool developed based on [Autohotkey2](https://www.autohotkey.com/), designed to simplify keyboard and mouse operations in Windows. It can serve as a traditional launcher and also supports mouse side buttons and hotkeys effectively.
@@ -24,7 +24,7 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 
 基于 [Autohotkey2](https://www.autohotkey.com/) 开发，为简化 Windows 键鼠操作而生的按键映射/快捷键增强工具。既可当作一个传统启动器，又对鼠标侧边按键和热字符支持良好。
 
-强烈建议搭配全局鼠标手势软件 和 任意带侧边按键的鼠标并将捷键设置为开机自启以获得最佳体验。
+强烈建议搭配任意带侧边按键的鼠标和全局鼠标手势软件，并将捷键设置为开机自启以获得最佳体验。
 
 系统要求：支持 32 位和 64 位 Windows XP 以上系统，Win 7 以上使用更佳。
 
@@ -37,7 +37,7 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 
 **和一些软件对比**
 
-当我开发几个月后，发现市场上早就有了此类成熟软件，我可能连其中任一软件的百分之十的完成度都达不到。
+当我开发几个月后，发现市场上早就有了此类成熟软件，捷键的完成度远低于其中任一软件。毕竟是我空闲时间开发，功能还是很多的。优点恐怕只剩下功能较多和足够小巧了。下一步我的工作将逐渐放在提升用户交互上。
 
 | 功能 |  macOS 平台 | Windows 平台 |
 | --- | --- | --- |
@@ -45,8 +45,6 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 | 热字符串 | [Espanso][]【免费】| [捷键][]【免费】或 Espanso【免费】|
 | 启动器 | [Raycast][]【免费】/Alfred【付费】/ HapiGo【部分免费】| [捷键][]【免费】或 uTools【免费】或 Listary【付费】|
 | 启动程序/窗口切换 | [Hammerspoon][] 脚本【免费】| [捷键][]【免费】或 mykeymap【免费】|
-
-毕竟是我业内摸鱼和业外空闲时间开发，优点恐怕只剩下功能较多和足够小巧了。下一步我的工作将逐渐放在提升交互上。
 
 ## 程序目录结构
 
@@ -60,21 +58,30 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 
 CapsLock + 单按键能激活某些预设功能，其中部分键位参考了 [MyKeymap][]，并从苹果 macOS 系统的快捷键得到启发。
 
-| + 按键 | 用途 |
+| 搭配按键 | 用途 |
 | ---- | ---- |
 | 鼠标左键 | 移动窗口 |
-| Q | 关闭窗口(参考 macOS 意为 quit) |
+| Q | 关闭窗口(参考 macOS command + q（quit）) |
+| W | 宽度拉升至最大 |
 | E | 切换到上个窗口 |
 | R | 在当前程序的窗口轮换 |
 | Y | 切换到上一个虚拟桌面 |
 | P | 切换到下一个虚拟桌面 |
-| F | 最大化或还原程序(参考 macOS 意为 fullscreen) |
+| A | 窗口缩放至全屏 60% |
+| S | 窗口居中至全屏 80% |
+| D | 窗口居中至全屏 90% |
+| F | 最大化或还原程序(fullscreen 全屏) |
+| H | 高度拉升至最大 |
 | Z | 复制文件路径或纯文本 |
 | V | 窗口移到下一个显示器 |
-| M | 窗口最小化(参考 macOS 意为 minimize) |
+| M | 窗口最小化(参考 macOS command + m（minimize）) |
 | 空格 | 复制选中文件路径并打开 Anyrun 启动器 |
 
-## 2. 热键 之 键鼠操作
+例如要最大化窗口，左手 CapsLock + f 即可轻松实现。
+
+## 2. 热键操作
+
+### 2.1 键鼠操作
 
 | 鼠标 | 按键 | 推荐映射手势 | 名称 | 默认用途 | 多标签软件 | 音乐类软件 | 视频类软件 | 看图软件 | 焦点在任务栏 | 焦点在左边界 | 焦点在上边界 | 焦点在桌面 |
 | ---- | ---- | ---- |---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
@@ -103,12 +110,11 @@ CapsLock + 单按键能激活某些预设功能，其中部分键位参考了 [M
 
 注：
 
-1. 建议优先使用鼠标按键进行驱动，因此最好搭配带侧边按键的鼠标。其次考虑使用鼠标手势驱动快捷键，例如【付费】[WGestures 2][WGestures 2付费链接]，最后才考虑键入快捷键。
-2. 多标签软件主要为各类浏览器，支持多标签的文本编辑器、IDE 等等。
-3. 音乐类软件囊括了 Spotify、QQ 音乐、网易云音乐等。其中 Ctrl + F3 打开文件对本地音乐播放器适配良好，在线音乐类软件可能不适用。
-4. 视频类软件例如 PotPlayer、VLC。
-5. 看图软件如 2345 看图王、Bandiview、ImageGlass。
-6. F11 特别适配了 B 站和油管。
+1. 多标签软件主要为各类浏览器，支持多标签的文本编辑器、IDE 等等。
+2. 音乐类软件囊括了 Spotify、QQ 音乐、网易云音乐等。其中 Ctrl + F3 打开文件对本地音乐播放器适配良好，在线音乐类软件可能不适用。
+3. 视频类软件例如 PotPlayer、VLC。
+4. 看图软件如 2345 看图王、Bandiview、ImageGlass。
+5. F11 特别适配了 B 站和油管。
 
 以下部分场景使用了鼠标手势软件替代了手动键入快捷键。
 
@@ -128,15 +134,7 @@ CapsLock + 单按键能激活某些预设功能，其中部分键位参考了 [M
 
 ![](https://foruda.gitee.com/images/1689318894573526368/39027a0d_426858.gif "动画.gif")
 
-## 3. 热键 之 打开网址
-
-* Alt + 6 打开 B 站
-* Alt + 7 打开 IT 之家
-* Alt + 8 打开 西瓜视频
-
-![打开网址](https://foruda.gitee.com/images/1689318923398248705/25b1c4c9_426858.gif "动画.gif")
-
-## 4. 热键 之 运行程序
+### 2.2 运行程序
 
 * Alt + 1 打开/切换窗口 资源管理器
 * Alt + 2 打开/切换窗口 360 极速浏览器【若程序路径存在 data.csv 中】
@@ -145,13 +143,21 @@ CapsLock + 单按键能激活某些预设功能，其中部分键位参考了 [M
 
 ![打开记事本](https://foruda.gitee.com/images/1689318934831690368/2606bf7a_426858.gif "动画.gif")
 
-## 5. 热键 之 启动文件夹
+### 2.3 启动文件夹
 
 * Alt + d 打开 D 盘
 
 ![打开 D 盘](https://foruda.gitee.com/images/1689318944226542670/0337e814_426858.gif "动画.gif")
 
-## 6. 热键 之 其他
+### 2.4 打开网址
+
+* Alt + 6 打开 B 站
+* Alt + 7 打开 IT 之家
+* Alt + 8 打开 西瓜视频
+
+![打开网址](https://foruda.gitee.com/images/1689318923398248705/25b1c4c9_426858.gif "动画.gif")
+
+### 2.5 其他热键操作
 
 预设条件：当 vscode 或 windows 记事本在激活状态下。
 
@@ -164,7 +170,7 @@ CapsLock + 单按键能激活某些预设功能，其中部分键位参考了 [M
 * `Ctrl + Alt + v` 剪贴板的内容输入到当前活动应用程序中，防止了一些网站禁止在 HTML 密码框中进行粘贴操作
 * `Ctrl + Shift + "`  插入一对双引号
 
-## 7. Anyrun 启动器
+## 3. Anyrun 启动器
 
 一款简洁、高效的应用启动器。由于定制化程度太高甚至导致难以上手
 
@@ -227,7 +233,7 @@ CapsLock + 单按键能激活某些预设功能，其中部分键位参考了 [M
 
 * `hello|哈喽` 打开预设脚本 custom\customAhkFile1.ahk
 
-### 动作
+### 关键字动作
 
 在框中输入 {关键字}[空格?]{搜索内容}
 
@@ -240,13 +246,13 @@ CapsLock + 单按键能激活某些预设功能，其中部分键位参考了 [M
 * `pi` ping检测
 * `se` SEO综合查询
 * `tq` 天气查询
-* `kd` 快递查询查询
+* `kd` 快递查询
 
 ![](https://foruda.gitee.com/images/1689321508560702893/2457a573_426858.gif "动画.gif")
 
-### 对文件和网址的上下文操作
+### 上下文操作
 
-当在 anyrun 编辑框中输入 文件路径/网址 可以获得以下能力：
+anyrun 编辑框中如果输入的是文件路径/网址，提供了以下上下文能力：
 
 * 打开网址
 * 打开文件
@@ -266,7 +272,9 @@ CapsLock + 单按键能激活某些预设功能，其中部分键位参考了 [M
 * `https://www.soso.com` 打开搜搜网
 * `D:` 前往文件夹
 
-## 8. 热串 之 直达网址（Z 直达模式）
+## 4. 热串操作
+
+### 4.1 直达网址（Z 直达模式）
 
 为避免误触，排除了在 文本编辑器/ftp/git/IDE/office/sql 软件中激活 z 模式。
 
@@ -285,7 +293,7 @@ zbi 打开 b 站
 
 ![](https://foruda.gitee.com/images/1689319007424875617/4934e693_426858.gif)
 
-## 9. 热串 之 扩展片段（X 拓展模式）
+### 4.2 扩展片段（X 拓展模式）
 
 可以将字符串替换为自定义话术【可配置】
 
@@ -312,49 +320,51 @@ data.csv 可自由配置
 
 ![](https://foruda.gitee.com/images/1689259802922906219/d546cc12_426858.gif "动画.gif")
 
-## 10. 左键辅助
+## 5. 双击模式
+
+若双击间隔小于 210 毫秒会触发预设动作：
+
+* 双击 ESC：关闭应用 注：如果是 VScode 这种频繁使用 esc 按键且关闭不弹确认框的软件，我禁用了 esc 按键
+* 双击 Alt：息屏（无弹窗提醒）
+* 双击 Home：睡眠（无弹窗提醒）
+* 双击 End：关机（有确认对话框，可按 esc 键退出）
+
+可以手动去 data.csv 中对意图进行修改。d 列置空 或者 删除该列可以屏蔽该命令。d 列格式为：`类型-运行名称`，举例：`内部-息屏`。目前支持 data.csv 当中非文本、动作和上下文操作外的所有选项。
+
+注：由于中英文切换经常用到 Shift，日常快捷键常用到 ctrl，所以我没有将这两个键作为前置键。
+
+## 6. 左键辅助
 
 受到 quicker 启发，试验性的加入左键辅助功能。
 
 在鼠标左键按下的同时按下 a 键时，若选中为网址则打开网址，否则百度搜索选中内容。
 
-## 11. 双击模式
-
-预设动作如下，若双击间隔大于 100 毫秒 且 小于 239 毫秒会触发一次：
-
-* 双击 Alt：息屏（无弹窗提醒）
-* 双击 Home：睡眠（无弹窗提醒）
-* 双击 End：关机（有确认对话框，可按 esc 键退出）
-
-可以手动去 data.csv 中对意图进行修改。d 列置空 或者 删除该列可以屏蔽该命令。d 列格式为：`类型-运行名称`，举例：`内部-息屏`。目前支持非动作和上下文操作外的所有选项。
-
-注：由于中英文切换经常用到 Shift，日常快捷键常用到 ctrl，所以我暂无将这两个键作为前置键的打算。
-
 ## 自定义配置说明
 
-配置文件 **app.csv**（用于配置软件的快捷键）、**data.csv**（用于配置启动器候选项以及热键、热串） 必须和 ahk 脚本文件在同一级目录，且必须使用 GB18030 字符集。
-<br />app.csv 使用了正则表达式，需要使用者对正则有一定了解。主要用到了 `^$` 锚和不区分大小写的 `i` 选项。
+csv 文件 必须和 ahk 脚本文件在同一级目录，且必须使用 GB18030 字符集。
 <br />推荐使用微软 Office 或开源软件 [LiberOffice](https://www.libreoffice.org/download/download-libreoffice/) 打开。不要使用目前对 csv 有兼容性问题的 WPS 打开。
 
 ### app.csv 配置
 
 用于增强和改写快捷键
+<br />app.csv 使用了正则表达式，需要使用者对正则有一定了解。主要用到了 `^$` 锚和不区分大小写的 `i` 选项。
 
 * A 列 必填 名称
 * B 列 非必填 默认不填为低，一般搭配窗口使用窗口页填高
 * C 列（标识符）必填项。其余皆为可选项。只需填写需要变更的快捷键即可，否则可留空
-* F 列 非必填，否则默认触发关闭窗口动作
-* M 列 是否启用列，默认启用，不启用请填写 n 或者 N。
-* 其他列可参考已有写法，可填入要增强/改写得对于软件的快捷键
+* D~K列 非必填 按键行为，其中 e 列如果留空则默认触发关闭窗口行为
+* L 列 是否启用列，默认启用，不启用请填写 n 或者 N。
 
 ### data.csv 配置
+
+用于配置 anyrun 启动器候选项以及热键、热串
 
 anyrun 启动器用
 
 * A 列 类型：程序 / 文件 / 网址 / 动作 / 下载 / 内部 / 外部 
 * B 列 启动路径：实际运行的网址或程序路径
 * D 列 运行名称：用于展示
-* E 列 运行关键字：匹配关键字，若有多个通过 | 进行分割。
+* E 列 运行关键字：匹配关键字，若有多个通过竖线 | 进行分割。
 
 自定义热键
 
@@ -374,12 +384,28 @@ anyrun 启动器用
 * H 列 是否启用列，默认启用，不启用请填写 n 或者 N。
 * I 列 备注列，该列不会被解析
 
+## 最佳实践
+
+建议优先使用鼠标按键进行驱动，因此最好搭配带侧边按键的鼠标。其次考虑使用鼠标手势驱动快捷键，例如【付费】[WGestures 2][WGestures 2付费链接]，最后才考虑键入快捷键。
+
+【付费】【win mac】[WGestures 2][] 是一款跨平台全局鼠标手势，且完美契合本软件。目前活动售价不到三十，优惠[链接][WGestures 2付费链接]我也放这儿了。另外 [WGestures 1][]【免费】也是不错的选择，除了不支持字母手势。另外还有一款 [FastGestures][]【免费】功能配置稍显复杂。不过我都提供了模板进行导入。
+
+比如我经常用到鼠标滚动切换音量。
+caps + f 或者鼠标手势 ↗ 进行窗口最大化。
+anyrun 组件去设置 Internet 选项。
+
 ## 未来计划
+
+沉淀已有功能，新增功能，并在易用性上下功夫。
 
 * 支持 Arc 浏览器 for windows，目前 Arc 只开放了 win 11
 * icon 点击后使用新图标，而不是系统样式的图标
 * 配置文件不太易用，需要优化
 * 支持更多的语言，例如 English
+* 支持暗黑模式
+* 鼠标在标题栏上通过鼠标上下滑动对窗口最大化和最小化
+* 鼠标在标题栏上长按以置顶窗口
+* 窗口靠边收缩
 
 ## 常见问题
 
@@ -391,13 +417,11 @@ anyrun 启动器用
 
 以汽水音乐为例，使用实际的 `C:\Users\zhangsan\AppData\Local\Programs\Soda Music\SodaMusic.lnk` lnk 文件替代 exe 方式即可。
 
-## 附录
+### 本软件默认需要获取管理员权限
 
-### 软件搭配玩法
+如果获取失败可能会导致 CapsLock + q 和 Ctrl + f4 关闭窗口对一些软件不奏效：极客卸载、注册表编辑器、windows 任务管理器、高级系统设置等窗口、WGestures 的导入导出窗口。同时可能导致当任务管理器或者高级系统设置等窗口激活时鼠标滚轮捕捉不到鼠标靠在边界调节音量功能
 
-这里我推荐使用【付费】【win mac】[WGestures 2][]。它是一款跨平台全局鼠标手势，且完美契合本软件。目前售价 35 米，优惠的[购买地址][WGestures 2付费链接]我也放这儿了。另外 [WGestures 1][]【免费】也是不错的选择，除了不支持字母手势。另外一款 [FastGestures][]【免费】功能配置稍显复杂。不过我都提供了模板进行导入。
-
-### 已适配软件
+## 已适配软件
 
 软件挑选原则：个人偏好以及目前市面上常用软件，其中又以浏览器收集最为全面。
 
@@ -596,11 +620,9 @@ anyrun 启动器用
 
 * 西瓜视频
 
-### 已知 bug
+适配不太好的软件：
 
-* 适配不太好的软件：Right PDF Reader 的鼠标侧边后退键无效。
-* CapsLock + q 和 Ctrl + f4 关闭窗口对一些软件不奏效：极客卸载、注册表编辑器、windows 任务管理器（似乎屏蔽了 Ctrl 键）、高级系统设置等窗口、WGestures 的导入导出窗口。
-* 当任务管理器或者高级系统设置等窗口激活时鼠标滚轮捕捉不到，会导致鼠标靠在边界调节音量功能失效
+Right PDF Reader 的鼠标侧边后退键无效。
 
 ## 如何反馈
 
@@ -613,7 +635,9 @@ anyrun 启动器用
 
 ## 写在最后
 
-由于 Autohotkey 语言的简单易学，再加上我之前编程功底，从设计到开发测试均由我一人完成。部分源码参考了 Windows 软件 MyKeymap [主页][MyKeymap] | [源码][MyKeymap Github repo]、Capslock+ [主页][Capslock+] | [源码][Capslock+源码]。并从 Windows 软件 [Quicker][]、[uTools][] 和 macOS 软件 [BetterAndBetter][]、[HapiGo][] 和 [Raycast][] 的使用中得到启发。
+由于 Autohotkey 语言的简单易学，再加上我之前编程功底，从设计到开发测试均由我一人完成。部分源码参考了 Windows 软件 MyKeymap [主页][MyKeymap] | [源码][MyKeymap Github repo]、Capslock+ [主页][Capslock+] | [源码][Capslock+源码]。
+
+并从 Windows 软件 [Quicker][]、[uTools][]、preme for windows 和 macOS 软件 [BetterAndBetter][]、[HapiGo][] 和 [Raycast][] 的使用中得到启发。
 
   [MyKeymap]: https://xianyukang.com/MyKeymap.html ''
   [MyKeymap Github repo]: https://github.com/xianyukang/MyKeymap ""
@@ -630,4 +654,4 @@ anyrun 启动器用
   [uTools]: https://www.u.tools/ ""
   [Hammerspoon]: https://www.hammerspoon.org/ ""
   [Espanso]: https://espanso.org/ ""
-  [捷键]: https://atomgit.com/acc8226/jiejian/tags?tab=release ""
+  [捷键]: https://share.feijipan.com/s/bAAKufr3 ""

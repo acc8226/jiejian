@@ -231,7 +231,8 @@ parseAppLine(line, eachLineLen) {
         || '微信' = name
         || '腾讯 QQ' = name
       ) {
-      GroupAdd(TEXT_GROUP, info.exe)
+        ; 文本编辑
+        GroupAdd(TEXT_GROUP, info.exe)
     }
   }
   return info

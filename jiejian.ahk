@@ -27,7 +27,7 @@ if not (A_IsAdmin or RegExMatch(full_command_line, " /restart(?!\S)")) {
     }
 }
 
-GLOBAL CODE_VERSION := '24.6-beta2'
+GLOBAL CODE_VERSION := '24.6-beta3'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
@@ -177,16 +177,14 @@ exitFunc(exitReason, exitCode) {
         }            
     }
 }
- 
-; 双击模式我只推荐 双击 Alt，因为 shift 和 ctrl 太过常用
-#HotIf IsSet(MY_DOUBLE_ALT)
+
+#HotIf IsSet(MY_DOUBLE_ALT) ; 双击模式我只推荐 双击 Alt，因为 shift 和 ctrl 太过常用
 ~Alt::doubleClick(ThisHotkey, MY_DOUBLE_ALT)
 #HotIf IsSet(MY_DOUBLE_HOME)
 ~Home::doubleClick(ThisHotkey, MY_DOUBLE_HOME)
 #HotIf IsSet(MY_DOUBLE_END)
 ~End::doubleClick(ThisHotkey, MY_DOUBLE_END)
-; 双击 esc 表示关闭
-#HotIf IsSet(MY_DOUBLE_ESC)
+#HotIf IsSet(MY_DOUBLE_ESC) ; 双击 esc 表示关闭，esc 不适用于 vscode 防止误操作
 ~Esc::doubleClick(ThisHotkey, MY_DOUBLE_ESC)
 #HotIf
 
@@ -195,10 +193,11 @@ doubleClick(hk, command) {
     ; esc 不适用于 vscode 和 liberoffice 防止误操作
     if (hk = '~Esc') {
         processName := WinGetProcessName('A')
-        if processName = 'Code.exe' or processName = 'soffice.bin'
+        ; 如果是 code 这种频繁使用 esc 按键的软件则禁用双击 esc
+        if processName = 'Code.exe'
             return
     }
-    if (hk == A_PriorHotkey && A_TimeSincePriorHotkey > 100 && A_TimeSincePriorHotkey < 220) {
+    if (hk == A_PriorHotkey && A_TimeSincePriorHotkey > 100 && A_TimeSincePriorHotkey < 210) {
         item := unset
         if (StrLen(command) > 0) {
             split := StrSplit(command, '-')
@@ -214,10 +213,11 @@ doubleClick(hk, command) {
         } else {
             openPathByType(item)
         }
-    }
+    }    
 }
 
-~^c Up:: ; 监控 ctrl + c 按键放下
+; 监控 ctrl + c 按键放下
+~^c Up::
 updateCtrlTimestamp(*) {
     GLOBAL CTRL_TIMESTAMP := A_NowUTC
 }
