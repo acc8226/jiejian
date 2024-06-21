@@ -9,6 +9,24 @@ vscode 插件安装 https://marketplace.visualstudio.com/items?itemName=thqby.vs
 ;@Ahk2Exe-SetCopyright 全民反诈联盟
 ;@Ahk2Exe-SetDescription 捷键-为简化键鼠操作而生
 
+full_command_line := DllCall("GetCommandLine", "str")
+; 如果 非管理器启动 且 不含 /restart 参数（表示首次启动）则以管理员方式启动
+if not (A_IsAdmin or RegExMatch(full_command_line, " /restart(?!\S)")) {
+    try {
+        if A_IsCompiled
+            Run '*RunAs "' A_ScriptFullPath '" /restart'
+        else {
+            ; 双击 .ahk 会进入此，形如 *runs as "autohotkey64.exe" /restart "zhangsan.ahk"
+            Run '*RunAs "' A_AhkPath '" /restart "' A_ScriptFullPath '"'
+        }
+        ; 退出
+        ExitApp
+    } catch Error as e {
+        hasTip := true
+        ToolTip("`n    捷键正在以普通权限运行。`n    捷键无法在具有管理员权限的窗口中工作（例如，Taskmgr.exe）。    `n ")
+    }
+}
+
 GLOBAL CODE_VERSION := '24.6-beta2'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
@@ -174,7 +192,13 @@ exitFunc(exitReason, exitCode) {
 
 ; command 约定是 type-title 的组合
 doubleClick(hk, command) {
-    if (hk == A_PriorHotkey && A_TimeSincePriorHotkey > 100 && A_TimeSincePriorHotkey < 230) {
+    ; esc 不适用于 vscode 和 liberoffice 防止误操作
+    if (hk = '~Esc') {
+        processName := WinGetProcessName('A')
+        if processName = 'Code.exe' or processName = 'soffice.bin'
+            return
+    }
+    if (hk == A_PriorHotkey && A_TimeSincePriorHotkey > 100 && A_TimeSincePriorHotkey < 220) {
         item := unset
         if (StrLen(command) > 0) {
             split := StrSplit(command, '-')

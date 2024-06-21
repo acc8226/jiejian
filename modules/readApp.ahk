@@ -320,7 +320,7 @@ XButton1::Send("^+w")
 #HotIf !WinActive("ahk_group close_ctrl_F4")
 ^F4::
 XButton1::SmartCloseWindow ; 比 WinClose "A" 好使
-; 否则是 ctrl + f4，如果遇到的是窗口则使用 esc 
+; 否则是 ctrl + f4，凡是遇到【#32770 窗口】则使用 esc 进行统一处理
 #HotIf WinActive("ahk_class #32770")
 ^F4::
 XButton1::Send('{Esc}')
