@@ -1,11 +1,9 @@
 /**
- * 智能的关闭窗口
+ * 智能的关闭窗口，如果是桌面就 alt +f4
  */
 smartCloseWindow() {
   if WinExist('A') {
-    if IsDesktop()
-      return
-    if (WinGetClass("A") == "ApplicationFrameWindow" || GetProcessName() == "explorer.exe")
+    if IsDesktop() or (WinGetClass("A") == "ApplicationFrameWindow" || GetProcessName() == "explorer.exe")
       Send "!{F4}"
     else
       PostMessage(0x112, 0xF060, , , "A")

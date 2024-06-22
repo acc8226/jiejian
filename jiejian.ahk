@@ -190,14 +190,20 @@ exitFunc(exitReason, exitCode) {
 
 ; command 约定是 type-title 的组合
 doubleClick(hk, command) {
-    ; esc 不适用于 vscode 和 liberoffice 防止误操作
-    if (hk = '~Esc') {
-        processName := WinGetProcessName('A')
-        ; 如果是 code 这种频繁使用 esc 按键的软件则禁用双击 esc
-        if processName = 'Code.exe'
-            return
-    }
     if (hk == A_PriorHotkey && A_TimeSincePriorHotkey > 100 && A_TimeSincePriorHotkey < 210) {
+        ; esc 不适用于 vscode 防止误操作
+        if (hk = '~Esc') {
+            try {
+                processName := WinGetProcessName('A')
+                ; 如果是 code 这种频繁使用 esc 按键的软件则禁用双击 esc
+                if processName = 'Code.exe'
+                    return
+            } catch as e {
+                MsgBox "An error was thrown!`nSpecifically: " e.Message
+                return
+            }
+        }
+
         item := unset
         if (StrLen(command) > 0) {
             split := StrSplit(command, '-')
