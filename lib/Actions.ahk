@@ -5,8 +5,13 @@ smartCloseWindow() {
   if WinExist('A') {
     if IsDesktop() or (WinGetClass("A") == "ApplicationFrameWindow" || GetProcessName() == "explorer.exe")
       Send "!{F4}"
-    else
-      PostMessage(0x112, 0xF060, , , "A")
+    else {
+      try {
+        PostMessage(0x112, 0xF060, , , "A")
+      } catch Error as e {
+        MsgBox '该程序暂时无法关闭，2 秒后弹窗自动关闭后请重试', , 'T2'      
+      }
+    }
   } else {
     MsgBox '无活动窗口，2 秒后弹窗自动关闭后请重试', , 'T2'
   }
