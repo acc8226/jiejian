@@ -136,7 +136,7 @@
 【IDE】MyEclipse,,ahk_class i)^SWT_Window0$ ahk_exe i)javaw.exe,^n,^F4,,^PgDn,,^PgUp,,,
 【IDE】Rstudio,,ahk_exe i)rstudio.exe,^+n,^w,,,,,,,
 【IDE】SpringToolSuite4,,ahk_exe i)SpringToolSuite\d,^n,^F4,,^PgDn,,^PgUp,,,
-【标签页】VS Code,高,i)^●|\(已删除\)|^Welcome - |^Untitled-[1-9]?\d* - |- .+ - Visual Studio Code|\..* - Visual Studio Code ahk_exe i)Code.exe$ ahk_class i)^Chrome,,^F4,,,,,,,
+【标签页】VS Code,高,i)^●|\(已删除\)|^Welcome - |^开始 - |^Untitled-[1-9]?\d* - |- .+ - Visual Studio Code|\..* - Visual Studio Code ahk_exe i)Code.exe$ ahk_class i)^Chrome,,^F4,,,,,,,
 【IDE】VS Code,,ahk_class i)^Chrome ahk_exe i)Code.exe,^n,,,^PgDn,,^PgUp,^+n,,
 【窗口】Visual Studio,高,^(?:Microsoft Visual Studio 帐户设置|自定义|管理扩展|关于 Microsoft Visual Studio)$ ahk_exe devenv.exe,,Esc,,,,,,,
 【标签页】Visual Studio,高,- Microsoft Visual Studio$ ahk_exe devenv.exe,,^F4,,,,,,,

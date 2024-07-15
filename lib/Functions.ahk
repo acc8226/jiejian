@@ -402,6 +402,7 @@ WindowMaxOrMin(winTitle := "A") {
  * @returns {string|number} 匹配的显示器下标
  */
 GetMonitorAt(x, y, default := 1) {
+  ; 80 SM_CMONITORS: 桌面上监视器数目(不包括 "不显示的伪监视器")
   m := SysGet(80)
   loop m {
     MonitorGet(A_Index, &l, &t, &r, &b)

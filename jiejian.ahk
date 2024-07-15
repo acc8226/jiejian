@@ -27,7 +27,7 @@ if not (A_IsAdmin or RegExMatch(full_command_line, " /restart(?!\S)")) {
     }
 }
 
-GLOBAL CODE_VERSION := '24.6-beta3'
+GLOBAL CODE_VERSION := '24.7-beta1'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
@@ -294,3 +294,13 @@ Space::{
 ; 按住 CapsLock 时同时按下鼠标左键拖动窗口
 LButton::moveWindow()
 #HotIf
+
+; windows 版本
+; Windows 10 [10.0.10240] (29.07.2015)
+; Windows 8.1 [6.3.9200]
+; Windows 8 [6.2.9200]
+; Windows7 service pack 1(SP1) [6.1.7601]
+; Windows7 [6.1.7600]
+; Windows Vista service pack 2(SP2) [6.0.6002]
+; Windows Vista [6.0.6000]
+; Windows XP service pack 3(SP3) [5.1.2600]
