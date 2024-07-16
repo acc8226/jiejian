@@ -76,7 +76,7 @@ parseData(fileName) {
           if NOT FileExist(info.path)
             return
         } else {
-          ; 如果是相对路径
+          ; 否则认为是相对路径 且 当前路径不存在则继续处理
           if NOT FileExist(info.path) {
               exeExist := false           
               ; 从环境变量 PATH 中获取
@@ -95,6 +95,7 @@ parseData(fileName) {
                   break
                 }
               }
+              ; 若文件路径找不到则跳过该条目
               if (!exeExist)
                 return
           }

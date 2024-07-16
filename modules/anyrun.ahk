@@ -44,12 +44,12 @@ MyActionArray.Push(MyAction('myip', 'edit',,, getIPAddresses))
 #HotIf WinActive(MY_GUI_TITLE . " ahk_class i)^AutoHotkeyGUI$")
 ~Down::{
     ; 当前焦点在 edit 上 且如果 listbox 有东西 则 焦点移动到 listbox
-    if (MY_GUI.FocusedCtrl.type = 'Edit' && StrLen(MY_GUI['listbox1'].Text) > 0)
+    if MY_GUI.FocusedCtrl.type = 'Edit' && StrLen(MY_GUI['listbox1'].Text) > 0
         ControlFocus 'listbox1'
 }
 ~UP::{
     ; 如果焦点在 listbox 首项 再向上则焦点移动到 edit
-    if (MY_GUI.FocusedCtrl.type = 'ListBox' && MY_GUI['listbox1'].value == 1)
+    if MY_GUI.FocusedCtrl.type = 'ListBox' && MY_GUI['listbox1'].value == 1
         ControlFocus 'Edit1'
 }
 #HotIf
@@ -125,13 +125,11 @@ anyrun() {
             }
             dataArray := unset
             ; 精确匹配失败 将 转到模糊匹配
-            ; 若为空则清空列表 或 大于设定长度 或 非字母和数字汉子和空格的组合则退出 \u4e00-\u9fa5 可以表示为 一-龥
-            if (StrLen(editValue) <= SUPPORT_LEN && editValue ~= '^[a-zA-Z一-龥\d]+$') {
-                needleRegEx := ''
+            ; 若为空则清空列表 或 大于设定长度 或 满足正则
+            if (StrLen(editValue) <= SUPPORT_LEN && editValue ~= '^[\d\.a-zA-Z一-龥]+$') {
+                needleRegEx := 'i)'
                 Loop Parse, editValue
-                    needleRegEx .= '(' . A_LoopField . ").*"
-                needleRegEx := 'i)' . needleRegEx
-                
+                    needleRegEx .= '(' . A_LoopField . ").*"                
                 dataArray := Array()
                 for it in DATA_LIST {
                     if (it.type ~= DATA_FILTER_REG) {
@@ -146,7 +144,7 @@ anyrun() {
                                             , title: it.title ; 标题
                                             , type: it.type ; 类型
                                     }
-                                    if !IsSet(maxData)
+                                    if NOT IsSet(maxData)
                                         maxData := data
                                     else if (dataArrayCompare(maxData, data) < 0)
                                         maxData := data
@@ -299,7 +297,7 @@ computeDegree(regExMatchInfo) {
     loop regExMatchInfo.Count {
         ; A_Index 第一次循环体执行时, 它为 1. 第二次, 它的值为 2; 依次类推
         item := SUPPORT_LEN - regExMatchInfo.Pos[A_Index]
-        if (item < 0)
+        if item < 0
             break
         degree += (2 ** item)
     }

@@ -1,5 +1,6 @@
 ﻿#HotIf mouseIsOnLeftEdge()
 MButton::{
+  ; 静音/不静音主音量
   Send "{Volume_Mute}"
   Tip('静音/恢复', -399)
 }
@@ -8,8 +9,8 @@ RButton::{
   Tip('暂停/恢复', -399)
 }
 
-WheelUp::Send "{Volume_Up}"
-WheelDown::Send "{Volume_Down}"
+WheelUp::volumeUp
+WheelDown::volumeDown
 
 ; 上一曲
 XButton2::{
@@ -44,8 +45,9 @@ WheelDown::{
 ; 鼠标移动到任务栏上
 #HotIf MouseIsOver('ahk_class Shell_TrayWnd')
 MButton::Send "{Volume_Mute}"
-WheelUp::Send "{Volume_Up}"
-WheelDown::Send "{Volume_Down}"
+WheelUp::volumeUp
+WheelDown::volumeDown
+
 ; 下一曲
 XButton1::Send "{Media_Next}"
 ; 上一曲
@@ -67,4 +69,20 @@ mouseIsOnTopEdge() {
 MouseIsOver(WinTitle) {
   MouseGetPos ,, &Win
   return WinExist(WinTitle . " ahk_id " . Win)
+}
+
+volumeUp() {
+  Send "{Volume_Up}"
+  if (VerCompare(A_OSVersion, "6.2") < 0) {
+    sleep 69
+    Tip(Round(SoundGetVolume()), -399)
+  }
+}
+
+volumeDown() {
+  Send "{Volume_Down}"
+  if (VerCompare(A_OSVersion, "6.2") < 0) {
+    sleep 69
+    Tip(Round(SoundGetVolume()), -399)
+  }
 }
