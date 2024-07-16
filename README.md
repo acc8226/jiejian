@@ -1,7 +1,7 @@
 ---
 title: 捷键使用说明
 date: 2023-05-01 09:00:00
-updated: 2024-06-18 10:17:32
+updated: 2024-06-21 19:45:39
 categories: 我的创作
 ---
 
@@ -22,7 +22,8 @@ It is highly recommended to use it in conjunction with global mouse gesture soft
 
 System Requirements: Compatible with Windows XP and above, but it is recommended to run smoothly on at least Windows 7.
 
-基于 [Autohotkey2](https://www.autohotkey.com/) 开发，为简化 Windows 键鼠操作而生的按键映射/快捷键增强工具。既可当作一个传统启动器，又对鼠标侧边按键和热字符支持良好。
+基于 [Autohotkey2](https://www.autohotkey.com/) 开发，为简化 Windows 键鼠操作而生的键鼠增强工具。
+重新定义了一套快捷键方案，并充分发掘带侧键鼠标的潜力。又能作为一个高效启动器，最后还对热字符支持良好。
 
 强烈建议搭配任意带侧边按键的鼠标和全局鼠标手势软件，并将捷键设置为开机自启以获得最佳体验。
 
@@ -39,12 +40,14 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 
 当我开发几个月后，发现市场上早就有了此类成熟软件，捷键的完成度远低于其中任一软件。毕竟是我空闲时间开发，功能还是很多的。优点恐怕只剩下功能较多和足够小巧了。下一步我的工作将逐渐放在提升用户交互上。
 
-| 功能 |  macOS 平台 | Windows 平台 |
-| --- | --- | --- |
-| 侧边按键支持 | [BetterAndBetter][]【免费】| [捷键][] 或一些全局鼠标手势软件 |
-| 热字符串 | [Espanso][]【免费】| [捷键][]【免费】或 Espanso【免费】|
-| 启动器 | [Raycast][]【免费】/Alfred【付费】/ HapiGo【部分免费】| [捷键][]【免费】或 uTools【免费】或 Listary【付费】|
-| 启动程序/窗口切换 | [Hammerspoon][] 脚本【免费】| [捷键][]【免费】或 mykeymap【免费】|
+| 功能 |  macOS 平台 | linux 平台 | Windows 平台 |
+| --- | --- | --- | --- |
+| 应用启动器 | [Raycast][]【免费】/ Alfred【付费】/ HapiGo【部分免费】| uTools【免费】| 基于 ahk 的 [捷键][]【免费】或 uTools【免费】或 Listary【付费】|
+| 键鼠自动化 | [Hammerspoon][] 脚本【免费】| 有很多命令行工具，例如 autokey 脚本 | 基于 ahk 的 [捷键][] |
+| 【低层次】热字符串拓展 | [Espanso][]【免费】| autokey 脚本或 Espanso【免费】软件 | 基于 ahk 的 [捷键][]【免费】或 Espanso【免费】|
+| 【低层次】鼠标侧键映射 | [BetterAndBetter][]【免费】| 【已过时】easystroke 软件或者 xbindkeys 脚本 | 基于 ahk 的 [捷键][] |
+| 【低层次】热键拓展/改写 | [BetterAndBetter][]【免费】| autokey 脚本 | 基于 ahk 的 [捷键][] |
+| 【低层次】启动程序/窗口切换 | [Hammerspoon][] 脚本【免费】| KDE 的 meta + 数字键 | 基于 ahk 的 [捷键][]【免费】或 mykeymap【免费】|
 
 ## 程序目录结构
 
@@ -65,11 +68,11 @@ CapsLock + 单按键能激活某些预设功能，其中部分键位参考了 [M
 | W | 宽度拉升至最大 |
 | E | 切换到上个窗口 |
 | R | 在当前程序的窗口轮换 |
-| Y | 切换到上一个虚拟桌面 |
-| P | 切换到下一个虚拟桌面 |
-| A | 窗口缩放至全屏 60% |
-| S | 窗口居中至全屏 80% |
-| D | 窗口居中至全屏 90% |
+| Y | 切换到上一个虚拟桌面（win 10 以上）|
+| P | 切换到下一个虚拟桌面（win 10 以上）|
+| A | 窗口缩放至 818 * 460（约 480p）并居中 |
+| S | 窗口缩放至 1280 * 770（约 720p）并居中 |
+| D | 窗口缩放至 1920 * 1080p 并居中 |
 | F | 最大化或还原程序(fullscreen 全屏) |
 | H | 高度拉升至最大 |
 | Z | 复制文件路径或纯文本 |
@@ -85,13 +88,12 @@ CapsLock + 单按键能激活某些预设功能，其中部分键位参考了 [M
 
 | 鼠标 | 按键 | 推荐映射手势 | 名称 | 默认用途 | 多标签软件 | 音乐类软件 | 视频类软件 | 看图软件 | 焦点在任务栏 | 焦点在左边界 | 焦点在上边界 | 焦点在桌面 |
 | ---- | ---- | ---- |---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
-| - | Esc | - | 逃逸/esc | 退出窗口 | - | - | - | - | - | - | - | - |
 | 鼠标右键 | - | - | - | - | - | - | - | - | - | 播放/暂停 | 播放/暂停 | - |
 | 鼠标中键 | - | - | - | - | - | - | - | - | 静音 | 静音 | 静音 | - |
 | 滚轮上滑 | - | - | - | - | - | - | - | - | 调高音量 | 调高音量 | 下一曲 | - |
 | 滚轮下滑 | - | - | - | - | - | - | - | - | 调低音量 | 调低音量 | 上一曲 | - |
 | 鼠标侧边后退键**(XB1) | - | - | 关闭/close | 关闭窗口 | 关闭标签 | 关闭窗口 | 关闭窗口 | 关闭窗口 | 下一曲 | 下一曲 | - | - |
-| - | **Ctrl+F4** | ↑ | 关闭/close | 关闭窗口 | 关闭标签 | 关闭窗口 | 关闭窗口 | 关闭窗口 | - | - | - | - |
+| - | **Ctrl+F4** | ↑ | 关闭/close | 关闭窗口 | 关闭标签 | 关闭窗口 | 关闭窗口 | 关闭窗口 | - | - | - | 关闭 Windows |
 | - | **Ctrl+F8** | ↓ | 新建/new | 打开或新建文件 | 新建标签 | 打开文件 或 无操作 | 打开文件 或 无操作 | 打开文件 或 无操作 | - | - | - | - |
 | - | Alt + ← | ← | 后退/prev | 后退 | 后退 | 上一曲 | 快退 | 上一张 | - | - | - | 上一曲 |
 | - | Alt + → | → | 前进/next | 前进 | 前进 | 下一曲 | 快进 | 下一张 | - | - | - | 下一曲 |
@@ -118,9 +120,7 @@ CapsLock + 单按键能激活某些预设功能，其中部分键位参考了 [M
 
 以下部分场景使用了鼠标手势软件替代了手动键入快捷键。
 
-操作 windows 资源管理器
-
-![](https://foruda.gitee.com/images/1689318878983165049/4F89b32d_426858.gif "动画.gif")
+操作 windows 资源管理器【图片地址已失效】
 
 操作 360 极速浏览器
 
@@ -335,7 +335,7 @@ data.csv 可自由配置
 
 ## 6. 左键辅助
 
-受到 quicker 启发，试验性的加入左键辅助功能。
+受到 quicker 启发，试验性加入左键辅助。
 
 在鼠标左键按下的同时按下 a 键时，若选中为网址则打开网址，否则百度搜索选中内容。
 
@@ -393,6 +393,36 @@ anyrun 启动器用
 比如我经常用到鼠标滚动切换音量。
 caps + f 或者鼠标手势 ↗ 进行窗口最大化。
 anyrun 组件去设置 Internet 选项。
+
+### 搭配鼠标手势软件记得导入模版
+
+手势模板一览（只需关注 windows 列）
+
+| 序号 | 方向 | 名称 | win 按键/功能 | 对应 mac 按键 | 对应 linux 按键（以 KDE 环境为例） |
+| ----  | ---- | ---- | ---- | ---- | ---- |
+| 1 | ↗︎ |【常用】 最大化/max | Win + ↑ | - | meta + pageUp |
+| 2 | ↙︎ |【常用】最小化/min | 最小化 | ⌘m | meta + pageDown |
+| 3 | ↖︎ | 复制/copy | Ctrl + c | ⌘c | Ctrl + c |
+| 4 | ↘︎ | 粘贴/paste | Ctrl + v | ⌘v | Ctrl + v |
+| 5 | ↑ |【常用】关闭/close| Ctrl + F4【捷键 新增】| ⌘w | Ctrl + w |
+| 6 | ↓ |【常用】新建/new | Ctrl + F8【捷键 新增】| ⌘t | Ctrl + t |
+| 7 | ← |【常用】后退/prev | Alt + ← 【捷键 增强】| ⌘[ | Alt + ← |
+| 8 | → |【常用】前进/next | Alt + → 【捷键 增强】| ⌘] | Alt + → |
+| 9 | ↩ | 重新打开/reopen | Ctrl + Shift + t | ⌘⇧t | Ctrl + Shift + t |
+| 10 | ↪ | 关闭/close | Alt + F4 | ⌘q | Alt + F4 |
+| 11 | ↑← | 上一个/prev | Ctrl + Shift + tab【捷键 增强】| ⌘⇧[ | Ctrl + Shift + tab |
+| 12 | ↑→ | 下一个/next | Ctrl + tab【捷键 增强】| ⌘⇧] | Ctrl + tab |
+| 13 | ←↑ | 剪切/cut | Ctrl + x | ⌘x | Ctrl + x |
+| 14 | ←↓ | 删除/del | del | del | del |
+| 15 | →↑ | 搜索 | 百度选中内容，可通过鼠标手势软件进行设置 | - | - |
+| 16 | →↓ | 新建窗口/new | Ctrl + F9【捷键 新增】| ⌘n | Ctrl +n |
+| 17 | →← | 置顶/zhiding | Ctrl + F7【捷键 新增】| - | - |
+| 18 | ↓↑ | 全屏/fullscreen | F11【捷键 增强】| ⌃⌘f | Ctrl + Shift + f |
+| 19 | ↑↓ | 暂停/pause | 空格 | 空格 | 空格 |
+| 20 | ←→ | 保存/save | Ctrl + s | ⌘s | Ctrl + s |
+| 21 | ↑→↓ | 全选/all | Ctrl + a | ⌘a | Ctrl + a |
+| 22 | →↓↑ | 新建浏览器隐私窗口 | Ctrl + Shift + n | ⌘⇧n | Ctrl + Shift + p |
+| 23 | ↖︎↘︎（若支持）| 复制浏览器标签 | Ctrl + k | ⌘k | - |
 
 ## 未来计划
 
@@ -615,29 +645,33 @@ anyrun 组件去设置 Internet 选项。
 
 * 抖音
 * 快压
-
-无需适配的软件：
-
-* 西瓜视频
+* 360企业安全云 对方屏蔽了快捷键
 
 适配不太好的软件：
 
 Right PDF Reader 的鼠标侧边后退键无效。
 
+无需适配的软件：
+
+* 西瓜视频
+
 ## 如何反馈
 
-1. b 站私信
-2. 软件完全免费开源，仓库地址 [AtomGit source](https://atomgit.com/acc8226/jiejian/) | [Github source](https://github.com/acc8226/jiejian)。欢迎发表意见和提 [issue](https://github.com/acc8226/jiejian/issues)
+软件完全免费开源，仓库地址 [AtomGit source](https://atomgit.com/acc8226/jiejian/) | [Github source](https://github.com/acc8226/jiejian)。
+
+1. [邮件反馈](mailto:acc8226@qq.com)
+2. [b 站](https://space.bilibili.com/107606582)私信
+3. 提 [issue](https://github.com/acc8226/jiejian/issues)
 
 ## 支持作者
 
-如果认为该软件对你有帮助，欢迎各种形式的支持，不限于[充电](https://space.bilibili.com/107606582)、[follow](https://github.com/acc8226)、fork、star 和[微信打赏](https://github.com/acc8226/acc8226/blob/main/needYou.png)。这都将激励作者后续开发维护。
+如果认为该软件对你有帮助，欢迎各种形式的支持，不限于 b 站[充电](https://space.bilibili.com/107606582)、[follow](https://github.com/acc8226)、fork、star 和[微信打赏](https://github.com/acc8226/acc8226/blob/main/needYou.png)。这都将激励作者后续开发维护。
 
 ## 写在最后
 
 由于 Autohotkey 语言的简单易学，再加上我之前编程功底，从设计到开发测试均由我一人完成。部分源码参考了 Windows 软件 MyKeymap [主页][MyKeymap] | [源码][MyKeymap Github repo]、Capslock+ [主页][Capslock+] | [源码][Capslock+源码]。
 
-并从 Windows 软件 [Quicker][]、[uTools][]、preme for windows 和 macOS 软件 [BetterAndBetter][]、[HapiGo][] 和 [Raycast][] 的使用中得到启发。
+并从 Windows 软件 [Quicker][]、[uTools][]、[Preme][] 和 macOS 软件 [BetterAndBetter][]、[HapiGo][] 和 [Raycast][] 的使用中得到启发。
 
   [MyKeymap]: https://xianyukang.com/MyKeymap.html ''
   [MyKeymap Github repo]: https://github.com/xianyukang/MyKeymap ""
@@ -655,3 +689,4 @@ Right PDF Reader 的鼠标侧边后退键无效。
   [Hammerspoon]: https://www.hammerspoon.org/ ""
   [Espanso]: https://espanso.org/ ""
   [捷键]: https://share.feijipan.com/s/bAAKufr3 ""
+  [Preme]: http://www.premeforwindows.com/ ""
