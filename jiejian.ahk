@@ -11,7 +11,7 @@ vscode 插件安装 https://marketplace.visualstudio.com/items?itemName=thqby.vs
 
 full_command_line := DllCall("GetCommandLine", "str")
 ; 如果 非管理器启动 且 不含 /restart 参数（表示首次启动）则以管理员方式启动
-if not (A_IsAdmin or RegExMatch(full_command_line, " /restart(?!\S)")) {
+if NOT (A_IsAdmin or RegExMatch(full_command_line, " /restart(?!\S)")) {
     try {
         if A_IsCompiled
             Run '*RunAs "' A_ScriptFullPath '" /restart'
@@ -70,7 +70,7 @@ SetTitleMatchMode 'RegEx' ; 设置 WinTitle parameter 在内置函数中的匹�
 #Include 'modules/MyTrayMenu.ahk'
 
 ; 生成快捷方式：每次运行检测如果 shortcuts 里的文件为空则重新生成一次快捷方式，要想重新生成可以双击 GenerateShortcuts.ahk 脚本或者清空或删除该文件夹
-if !FileExist(A_WorkingDir . "\shortcuts\*")
+if NOT FileExist(A_WorkingDir . "\shortcuts\*")
     Run('extra/GenerateShortcuts.exe')
 
 settingTray()
@@ -90,7 +90,8 @@ settingTray() {
     }
 }
 
-checkUpdate() ; 检查更新
+; 检查更新
+checkUpdate()
 
 ; ----- 热键 之 快捷键重写和增强 -----
 ; ----- 热键 之 打开网址 -----
@@ -252,6 +253,7 @@ Capslock::{
 q::smartCloseWindow()
 ; 切换到上个窗口
 e::Send("!{tab}")
+
 ; 程序内切换窗口
 r::LoopRelatedWindows()
 
@@ -260,12 +262,11 @@ y::Send("^#{Left}")
 ; 切换到下一个虚拟桌面
 p::Send("^#{Right}")
 
-; 窗口缩放居中至全屏 60%
-a::CenterAndResizeWindow_X_Percent(0.6)
-; 窗口缩放居中至全屏 80%
-s::CenterAndResizeWindow_X_Percent(0.8)
-; 窗口缩放居中至全屏 90%
-d::CenterAndResizeWindow_X_Percent(0.9)
+; 适合 b 站
+a::CenterAndResizeWindow(818, 460)
+; 适合 b 站
+s::CenterAndResizeWindow(1280, 770)
+d::CenterAndResizeWindow(1920, 1080)
 
 ; 宽度拉升至最大
 w::setWindowWeightToFullScreen()

@@ -61,7 +61,7 @@ ToggleWindowTopMost() {
 
 ; 关闭显示器:
 SystemSleepScreen() {
-  Sleep 1000  ; 让用户有机会释放按键(以防释放它们时再次唤醒显视器).
+  Sleep 1000 ; 让用户有机会释放按键(以防释放它们时再次唤醒显视器)
   ; 关闭显示器:
   SendMessage 0x0112, 0xF170, 2,, "Program Manager"  ; 0x0112 is WM_SYSCOMMAND, 0xF170 is SC_MONITORPOWER.
 }
@@ -153,10 +153,61 @@ MaximizeWindow() {
  * 窗口最小化
  */
 minimizeWindow() {
-  if (NotActiveWin() || WinGetProcessName("A") == "Rainmeter.exe")
+  if (NotActiveWin() || WinGetProcessName("A") = "Rainmeter.exe")
     return
 
   WinMinimize("A")
+}
+
+/**
+ * 窗口居中并修改其大小
+ * @param width 窗口宽度
+ * @param height 窗口高度
+ * @returns {void} 
+ */
+ CenterAndResizeWindow(width, height) {
+  if NotActiveWin()
+    return
+
+  ; 在 mousemove 时需要 PER_MONITOR_AWARE (-3), 否则当两个显示器有不同的缩放比例时, mousemove 会有诡异的漂移
+  ; 在 winmove 时需要 UNAWARE (-1), 这样即使写死了窗口大小为 1200x800, 系统会帮你缩放到合适的大小
+  ; 不适用于 win 7 以下系统
+  if VerCompare(A_OSVersion, "6.2") >= 0
+    DllCall("SetThreadDpiAwarenessContext", "ptr", -1, "ptr")
+
+  WinExist("A")
+  if WindowMaxOrMin()
+    WinRestore
+  ; 返回监视器的数量
+  monitorCount  := MonitorGetCount()
+  if (monitorCount > 1) {
+    ; 获取指定窗口的位置和大小
+    WinGetPos(&x, &y, &w, &h)
+    ; ms 为 监视器编号, 介于 1 和 MonitorGetCount 返回的数字之间
+    monitorCount := GetMonitorAt(x + w / 2, y + h / 2)
+  }
+  ; 检查指定的监视器是否存在, 并可选地检索其工作区域的边界坐标。分别为左上右下
+  MonitorGetWorkArea(monitorCount, &l, &t, &r, &b)
+  ; 获得宽度和高度
+  w := r - l
+  h := b - t
+
+  ; 预设宽度 和 屏幕宽度的最小值
+  winW := Min(width, w)
+  ; 预设高度 和 屏幕宽度的最小值
+  if winW == 800 {
+    winH := winW * 9 / 16
+  } else {
+    winH := Min(height, h)
+  }
+  ; 最终窗口的 x 值
+  winX := l + (w - winW) / 2
+  ; 最终窗口的 y 值
+  winY := t + (h - winH) / 2
+
+  WinMove(winX, winY, winW, winH)
+  if VerCompare(A_OSVersion, "6.2") >= 0
+    DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 }
 
 ; 我新加的
@@ -256,9 +307,8 @@ setWindowWeightToFullScreen() {
   ; 如果是 360 极速浏览器则特殊处理
   processName := WinGetProcessName("A")
   offset := 0
-  if (processName = '360ChromeX.exe') {
+  if processName = '360ChromeX.exe'
     offset := 3
-  }
 
   ; ms 为 监视器编号, 介于 1 和 MonitorGetCount 返回的数字之间.
   ms := GetMonitorAt(x + w / 2, y + h / 2)

@@ -17,7 +17,7 @@
 【浏览器】115、123,,ahk_exe i)(?:115chrome|123browser).exe,^t,^F4,,,,,^n,,
 【浏览器】2345,,ahk_exe i)2345Explorer.exe,^t,^F4,,,,,^n,,
 【浏览器】360 AI,,ahk_exe i)360aibrowser.exe$ ahk_class i)^360aibrowser,^t,^F4,,,,,^n,,
-【窗口】360 极速,高,^(?:|修改书签|修改收藏|下载|下载管理|添加收藏)$ ahk_exe i)360ChromeX.exe,,Esc,,,,,,,
+【窗口】360 极速,高,^(?:|修改书签|修改收藏|新建下载任务|下载|下载管理|添加收藏)$ ahk_exe i)360ChromeX.exe,,Esc,,,,,,,
 【浏览器】360 极速,,ahk_exe i)360ChromeX.exe,^t,^F4,,,,,^n,,
 【窗口】360 游戏,高,^下载$ ahk_exe i)360gt.exe,,Esc,,,,,,,
 【浏览器】360 游戏,,ahk_exe i)360gt.exe,^t,^F4,,,,,^n,,
