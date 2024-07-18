@@ -56,60 +56,78 @@ parseData(fileName) {
     info := {}
     info.type := Trim(split[1])
   
-    ; 去掉首尾的双引号，但不知为何首尾的一对双引号会转义为三对
-    info.path := Trim(split[2])
-    if (StrLen(info.path) > 1 && '"""' == SubStr(info.path, 1, 3) && '"""' == SubStr(info.path, -3))
-      info.path := SubStr(info.path, 4, -3)
-  
+    ; 去掉首尾的双引号，但不知为何只要行内出现 " 则首尾会加入一对 ""，然后里面的每个 " 都会转义为 ""
+    ; info.path := Trim(split[2])
+    ; if (StrLen(info.path) > 1 && '"' == SubStr(info.path, 1, 1) && '"' == SubStr(info.path, -1))
+    ;   info.path := SubStr(info.path, 2, -1)
+    info.path := RegExReplace(Trim(split[2]), '"+')
+      
     ; 过滤空行
-    if (info.type == '' && info.path == '')
+    if info.type == '' && info.path == ''
       return
     ; 过滤无效路径
     if (info.type = DataType.file) {
       if NOT FileExist(info.path)
         return
     } else if (info.type  = DataType.app) {
-      ; 如果是以字母开头 and 不是 shell: 开头
-      if IsAlpha(SubStr(info.path, 1, 1)) && 1 !== InStr(info.path, 'shell:', False) {
-        ; 如果是绝对路径
-        if InStr(info.path, ':') {
-          if NOT FileExist(info.path)
-            return
-        } else {
-          ; 否则认为是相对路径 且 当前路径不存在则继续处理
-          if NOT FileExist(info.path) {
-              exeExist := false           
+      ; 如果包含竖线则进行分割，并按照从左到右进行匹配
+      pathSplit := StrSplit(info.path, "|")
+      exeExist := false
+      Loop pathSplit.Length {
+        ; 如果能匹配
+        item := pathSplit[A_Index]
+        ; 过滤空行
+        if item == ''
+          continue
+        ; 如果是以字母开头 and 不是 shell: 开头
+        if (IsAlpha(SubStr(item, 1, 1)) && 1 !== InStr(item, 'shell:', False)) {
+          ; 如果是绝对路径
+          if (InStr(item, ':')) {
+            if FileExist(item)
+              exeExist := true
+          } else {
+            ; 否则认为是相对路径 且 当前路径不存在则继续处理
+            if (FileExist(item)) {
+                exeExist := true                
+            } else {
               ; 从环境变量 PATH 中获取
               DosPath := EnvGet("PATH")
-              isEndsWithExe := '.exe' = SubStr(info.path, StrLen(info.path) - 3)  
+              isEndsWithExe := '.exe' = SubStr(item, StrLen(item) - 3)  
               loop parse DosPath, "`;" {
                 if A_LoopField == ""
                   continue
-                if FileExist(A_LoopField "\" info.path) {
+                if (FileExist(A_LoopField "\" item)) {
                   exeExist := true
                   break
                 }
                 ; 如果不以 exe 结尾则拼接 exe 继续尝试
-                if NOT isEndsWithExe && FileExist(A_LoopField "\" info.path . '.exe') {
+                if (!isEndsWithExe && FileExist(A_LoopField "\" item . '.exe')) {
                   exeExist := true
                   break
                 }
               }
-              ; 若文件路径找不到则跳过该条目
-              if (!exeExist)
-                return
+            }
           }
+        } else {
+          exeExist := true
         }
-      }
+        if (exeExist) {
+          info.path := item
+          break
+        }
+      }      
+      ; 若文件路径找不到则跳过该条目
+      if NOT exeExist
+        return
     } else if (info.type = DataType.web || info.type = DataType.dl) {
-      ; 为节约内存。如果 https 开头则默认去掉
+      ; 为节约内存。若以 https 开头则默认去掉
       if InStr(info.path, "https://")
         info.path := SubStr(info.path, StrLen("https://") + 1)
     }
     
     ; 热串关键字
     info.hs := Trim(split[7])
-    if info.type = DataType.text {
+    if (info.type = DataType.text) {
       ; text 类型用完即走 不加入 array 中  
       if StrLen(info.hs) > 0          
           Hotstring ":C*:" . info.hs, info.path
@@ -118,19 +136,19 @@ parseData(fileName) {
   
     ; 运行名称：可能是息屏、睡眠、关机
     info.title := Trim(split[4])
-    if info.type = DataType.d_alt {
+    if (info.type = DataType.d_alt) {
       MY_DOUBLE_ALT := info.title
       return
     }
-    if info.type = DataType.d_home {
+    if (info.type = DataType.d_home) {
       MY_DOUBLE_HOME := info.title
       return
     }
-    if info.type = DataType.d_end {
+    if (info.type = DataType.d_end) {
       MY_DOUBLE_END := info.title
       return
     }
-    if info.type = DataType.d_esc {
+    if (info.type = DataType.d_esc) {
       MY_DOUBLE_ESC := info.title
       return
     }
@@ -147,30 +165,30 @@ parseData(fileName) {
     info.hk := Trim(split[6])
   
     ; 设置 bash 全局变量，如果存在的话，最终会供给启动器使用
-    if info.type = DataType.app {
-      if info.title = 'Bash' {
-        if InStr(info.path, '.lnk') {
+    if (info.type = DataType.app) {
+      if (info.title = 'Bash') {
+        if (InStr(info.path, '.lnk')) {
           FileGetShortcut(info.path, &OutTarget)
           MY_BASH := OutTarget
         } else {
           MY_BASH := info.path
         }
-      } else if info.title = 'VSCode' {
-        if InStr(info.path, '.lnk') {
+      } else if (info.title = 'VSCode') {
+        if (InStr(info.path, '.lnk')) {
           FileGetShortcut(info.path, &OutTarget)
           MY_VSCode := OutTarget
         } else {
           MY_VSCode := info.path
         }
-      } else if info.title = 'IDEA' {
-        if InStr(info.path, '.lnk') {
+      } else if (info.title = 'IDEA') {
+        if (InStr(info.path, '.lnk')) {
           FileGetShortcut(info.path, &OutTarget)
           MY_IDEA := OutTarget
         } else {
           MY_IDEA := info.path
         }
-      } else if info.title = '新终端' {
-        if InStr(info.path, '.lnk') {
+      } else if (info.title = '新终端') {
+        if (InStr(info.path, '.lnk')) {
           FileGetShortcut(info.path, &OutTarget)
           MY_NEW_TERMINAL := OutTarget
         } else {
@@ -186,10 +204,10 @@ parseData(fileName) {
   ; 每次从字符串中检索字符串(片段)
   Loop Parse, FileRead(fileName), "`n", "`r" {
       ; 跳过首行
-      if (A_Index = 1)
+      if A_Index = 1
           continue
       appInfo := parseDataLine(A_LoopField, eachLineLen)
-      if (appInfo)
+      if appInfo
           dataList.Push(appInfo)
   }
   return dataList  

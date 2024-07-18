@@ -22,6 +22,6 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 
 系统要求：支持 32 位和 64 位 Windows XP 以上系统，Win 7 以上使用更佳。
 
-[**video demonstration 视频演示**](https://www.bilibili.com/video/BV19H4y1e7hJ?vd_source=54168537affc2c02555097cb26797d99) | [**download 下载地址**][捷键] | [帮助文档](https://feipig.fun/zh-cn/4c2b72aaa7d0/)
+[video demonstration 视频演示](https://www.bilibili.com/video/BV19H4y1e7hJ?vd_source=54168537affc2c02555097cb26797d99) | [download 下载地址][捷键] | [帮助文档](https://feipig.fun/zh-cn/4c2b72aaa7d0/)
 
   [捷键]: https://share.feijipan.com/s/bAAKufr3 ""
