@@ -116,6 +116,7 @@ parseAppCSV() {
       }
       ; I 列 上个标签
       switch it.previousTag, 'Off' {
+        case 'Left', "{Left}": GroupAdd("previous_Left", it.exe)
         case "p": GroupAdd('previous_p', it.exe)
         case "z": GroupAdd('previous_z', it.exe)
         case "[": GroupAdd('previous_openBracket', it.exe)
@@ -284,7 +285,7 @@ XButton1::Send "^{F4}"
 #HotIf WinActive("ahk_group new_ctrl_shift_n")
 ^F8::Send "^+n"
 
-; e. 关闭 打头
+; e. 关闭 打头 和 鼠标后退键 用
 #HotIf WinActive("ahk_group close_WinClose")
 ^F4::
 XButton1::WinClose
@@ -423,7 +424,10 @@ XButton1::Send("^{F4}")
 #HotIf WinActive("ahk_group back_ctrl_shift_Left")
 !Left::Send "^+{Left}"
 
-; I 列：上个标签
+; I 列：上个标签 和 鼠标前进键 用
+#HotIf WinActive("ahk_group previous_Left")
+^+Tab::
+XButton2::Send "{Left}"
 #HotIf WinActive("ahk_group previous_p")
 ^+Tab::
 XButton2::Send "p"
