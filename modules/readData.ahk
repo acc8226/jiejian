@@ -72,52 +72,52 @@ parseData(fileName) {
     } else if (info.type  = DataType.app) {
       ; 如果包含竖线则进行分割，并按照从左到右进行匹配
       pathSplit := StrSplit(info.path, "|")
-      exeExist := false
+      isPathExist := false
       Loop pathSplit.Length {
         ; 如果能匹配
         item := pathSplit[A_Index]
         ; 过滤空行
         if item == ''
           continue
-        ; 如果是以字母开头 and 不是 shell: 开头
-        if (IsAlpha(SubStr(item, 1, 1)) && 1 !== InStr(item, 'shell:', False)) {
-          ; 如果是绝对路径
-          if (InStr(item, ':')) {
-            if FileExist(item)
-              exeExist := true
-          } else {
-            ; 否则认为是相对路径 且 当前路径不存在则继续处理
-            if (FileExist(item)) {
-                exeExist := true                
+        ; 如果是以字母开头 并且 不是以 shell: 开头
+        if (IsAlpha(SubStr(item, 1, 1)) && 1 !== InStr(item, 'shell:', false)) {   
+          if (FileExist(item)) {
+            ; 特殊处理 .lnk 则目标必须存在
+            if (SubStr(item, -4) == ".lnk") {
+              FileGetShortcut(item, &OutTarget)
+              if OutTarget && FileExist(OutTarget)
+                isPathExist := true
             } else {
-              ; 从环境变量 PATH 中获取
-              DosPath := EnvGet("PATH")
-              isEndsWithExe := '.exe' = SubStr(item, StrLen(item) - 3)  
-              loop parse DosPath, "`;" {
-                if A_LoopField == ""
-                  continue
-                if (FileExist(A_LoopField "\" item)) {
-                  exeExist := true
-                  break
-                }
-                ; 如果不以 exe 结尾则拼接 exe 继续尝试
-                if (!isEndsWithExe && FileExist(A_LoopField "\" item . '.exe')) {
-                  exeExist := true
-                  break
-                }
-              }
+              isPathExist := true              
             }
+          } else if (NOT InStr(item, ':')) { ; 否则认为是相对路径则继续处理         
+            ; 从环境变量 PATH 中获取
+            dosPath := EnvGet("PATH")
+            isEndsWithExe := '.exe' = SubStr(item, StrLen(item) - 3)  
+            loop parse dosPath, "`;" {
+              if A_LoopField == ""
+                continue
+              if (FileExist(A_LoopField "\" item)) {
+                isPathExist := true
+                break
+              }
+              ; 如果不以 exe 结尾则拼接 exe 继续尝试
+              if (!isEndsWithExe && FileExist(A_LoopField "\" item . '.exe')) {
+                isPathExist := true
+                break
+              }
+            }            
           }
         } else {
-          exeExist := true
+          isPathExist := true
         }
-        if (exeExist) {
+        if (isPathExist) {
           info.path := item
           break
         }
       }      
       ; 若文件路径找不到则跳过该条目
-      if NOT exeExist
+      if NOT isPathExist
         return
     } else if (info.type = DataType.web || info.type = DataType.dl) {
       ; 为节约内存。若以 https 开头则默认去掉

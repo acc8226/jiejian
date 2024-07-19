@@ -41,7 +41,7 @@ parseAppCSV() {
         case "^+t", "+^t": GroupAdd('new_ctrl_shift_t', it.exe)
         case "^+n", "+^n": GroupAdd('new_ctrl_shift_n', it.exe)
       }
-      ; e 列 关闭
+      ; e 列 关闭 和 鼠标后退键
       switch it.close, 'Off' {
         case "WinClose", '关闭': GroupAdd("close_WinClose", it.exe)
         case "Esc", "{Esc}": GroupAdd("close_Esc", it.exe)
@@ -51,6 +51,8 @@ parseAppCSV() {
   
         case "!q": GroupAdd("close_alt_q", it.exe)
         case "!w": GroupAdd("close_alt_w", it.exe)
+        case "^c": GroupAdd("close_ctrl_c", it.exe)
+        case "^v": GroupAdd("close_ctrl_v", it.exe)
         case "^w": GroupAdd("close_ctrl_w", it.exe)
         case "^!q", "!^q": GroupAdd("close_ctrl_alt_q", it.exe)        
         case "^+w", "+^w": GroupAdd("close_ctrl_shift_w", it.exe)
@@ -114,7 +116,7 @@ parseAppCSV() {
         case "^+Tab", "^+{Tab}", "+^Tab", "+^{Tab}": GroupAdd "back_ctrl_shift_Tab", it.exe
         case "^+Left", "^+{Left}", "+^Left", "+^{Left}": GroupAdd "back_ctrl_shift_Left", it.exe
       }
-      ; I 列 上个标签
+      ; I 列 上个标签 和 前进键
       switch it.previousTag, 'Off' {
         case 'Left', "{Left}": GroupAdd("previous_Left", it.exe)
         case "p": GroupAdd('previous_p', it.exe)
@@ -135,6 +137,8 @@ parseAppCSV() {
         case "^Left", "^{Left}": GroupAdd('previous_ctrl_Left', it.exe)
         case "^PgUp", "^{PgUp}": GroupAdd('previous_ctrl_PgUp', it.exe)
   
+        case "^c": GroupAdd('previous_ctrl_c', it.exe)
+        case "^v": GroupAdd('previous_ctrl_v', it.exe)
         case "^b": GroupAdd('previous_ctrl_b', it.exe)
         case "^!Left", "^!{Left}", "!^Left", "!^{Left}": GroupAdd("previous_ctrl_alt_Left", it.exe)
         case "^+Left", "^+{Left}", "+^Left", "+^{Left}": GroupAdd("previous_ctrl_shift_Left", it.exe)
@@ -308,6 +312,12 @@ XButton1::Send '!q'
 #HotIf WinActive("ahk_group close_alt_w")
 ^F4::
 XButton1::Send "!w"
+#HotIf WinActive("ahk_group close_ctrl_c")
+^F4::
+XButton1::Send "^c"
+#HotIf WinActive("ahk_group close_ctrl_v")
+^F4::
+XButton1::Send "^v"
 #HotIf WinActive("ahk_group close_ctrl_w")
 ^F4::
 XButton1::Send "^w"
@@ -476,6 +486,12 @@ XButton2::Send "^{Left}"
 ^+Tab::
 XButton2::Send "^{PgUp}"
 
+#HotIf WinActive('ahk_group previous_ctrl_c')
+^+Tab::
+XButton2::Send "^c"
+#HotIf WinActive('ahk_group previous_ctrl_v')
+^+Tab::
+XButton2::Send "^v"
 #HotIf WinActive('ahk_group previous_ctrl_b')
 ^+Tab::
 XButton2::Send "^b"

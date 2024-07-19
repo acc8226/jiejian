@@ -347,8 +347,8 @@ ShortcutTargetExist(LnkPath) {
   if SubStr(LnkPath, -4) == ".lnk" {
     FileGetShortcut(LnkPath, &OutTarget)
 
-    ; 没有获取到目标路径可能是因为是uwp应用的快捷方式
-    ; 也有可能是ms-setting: 或shell:之类的连接
+    ; 没有获取到目标路径可能是因为是 uwp 应用的快捷方式
+    ; 也有可能是 ms-setting: 或shell: 之类的连接
     if !OutTarget || SubStr(outTarget, 2, 2) != ":\"
       return
 

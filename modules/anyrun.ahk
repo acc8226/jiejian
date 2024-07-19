@@ -56,7 +56,7 @@ MyActionArray.Push(MyAction('myip', 'edit',,, getIPAddresses))
 
 anyrun() {
     ; reload 过程中 MY_GUI_TITLE 会未定义
-    if !IsSet(MY_GUI_TITLE)
+    if NOT IsSet(MY_GUI_TITLE)
         return
     ; 检查窗口是否已经存在，如果窗口已经存在，如果窗口不存在，则创建新窗口
     if WinExist(MY_GUI_TITLE)
@@ -74,7 +74,7 @@ anyrun() {
         MY_GUI.SetFont(fontSize, 'Consolas') ; 设置兜底字体(21 磅) Consolas
         MY_GUI.SetFont(fontSize, 'Microsoft YaHei') ; 设置优先字体(21 磅) 微软雅黑
         myEdit := MY_GUI.AddEdit(Format("w{1}", MY_GUI_WIDTH))
-        ; R5：做到贴边 默认只显示 5 行
+        ; R7：做到贴边 默认只显示 7 行
         ; Hidden：让控件初始为隐藏状态
         listBox := MY_GUI.AddListBox(Format("R7 w{1} XM+0 Y+0 BackgroundF0F0F0 Hidden", MY_GUI_WIDTH))
         fontSize := 's19'
@@ -133,7 +133,7 @@ anyrun() {
                 dataArray := Array()
                 for it in DATA_LIST {
                     if (it.type ~= DATA_FILTER_REG) {
-                        if 'Array' == Type(it.alias) {
+                        if ('Array' == Type(it.alias)) {
                             ; 如果有则选出最匹配的 array
                             ; maxData 为 最佳匹配对象
                             maxData := unset
@@ -222,7 +222,7 @@ anyrun() {
             if (StrLen(listBox.Text) > 0) {
                 split := StrSplit(listBox.Text, '-')
                 ; 分离出类型 和 名称
-                if split.Length == 2 {
+                if (split.Length == 2) {
                     type := split[2]
                     title := split[1]
                     item := findItemByTypeAndTitle(type, title)
@@ -267,7 +267,7 @@ anyrun() {
             else {
                 openPathByType(item)
             }
-            if IsSet(MY_GUI) {
+            if (IsSet(MY_GUI)) {
                 MY_GUI.Destroy()
                 MY_GUI := unset
             }
@@ -350,7 +350,7 @@ class MyAction {
 ; 是否是文件夹，如果当前是文件则提取
 isDir(path) {
     if (path == '*' || path == '/')
-        return False
+        return false
 
     isMatch := unset
     if DirExist(path) {
@@ -388,11 +388,10 @@ appendWebsiteName(path) {
                 }
                 ; 去掉 ://
                 else {
-                    if InStr(it.path, '://') {
+                    if InStr(it.path, '://')
                         uri := SubStr(it.path, InStr(it.path, '://') + StrLen('://'))
-                    } else {
+                    else
                         uri := it.path
-                    }
                     ; 如果是顶级域名（简单认为分段数为 2）则加上 www
                     is_top_level_domain := (2 == StrSplit(uri, '.').Length)
                     newUri := 'i)^(?:https?://)?' . (is_top_level_domain ? '(?:www\.)?' : '') . StrReplace(uri, '.', "\.") . '(?:/.*)?$'
@@ -467,7 +466,7 @@ appendFileType(path) {
 }
 
 openDir(path) {
-    if DirExist(path) {
+    if (DirExist(path)) {
         Run(path)
     } else {
         RegExMatch(path, '.*[\\/]', &regExMatchInfo)
@@ -491,7 +490,7 @@ delFileOrDir(path) {
 
 openInTerminal(path) {
     ; 在终端中打开所在文件夹
-    if DirExist(path) {
+    if (DirExist(path)) {
         ; 盘符根目录需要以 \ 结尾才生效
         endChar := SubStr(path, StrLen(path))
         addSomething := (endChar = '\' || endChar = '/') ? "" : "\"
@@ -504,7 +503,7 @@ openInTerminal(path) {
 
 openInNewTerminal(path) {
     ; 在终端中打开所在文件夹
-    if DirExist(path) {
+    if (DirExist(path)) {
         ; 盘符根目录需要以 \ 结尾才生效
         endChar := SubStr(path, StrLen(path))
         addSomething := (endChar = '\' || endChar = '/') ? "" : "\"
@@ -529,7 +528,7 @@ openInNewTerminal(path) {
 
 openInBash(path) {
     ; 在 bash 中打开所在文件夹
-    if DirExist(path) {
+    if (DirExist(path)) {
         ; 盘符根目录需要以 \ 结尾才生效，所以都统一加上
         endChar := SubStr(path, StrLen(path))
         addSomething := (endChar = '\' || endChar = '/') ? "" : "\"
@@ -549,7 +548,7 @@ openInIDEA(path) {
 }
 
 ; 包含了所有我预设的内部命令
-openInnerCommand(title, isConfirm := False) {
+openInnerCommand(title, isConfirm := false) {
     switch title {
         case '重启': 
             if (isConfirm) {
