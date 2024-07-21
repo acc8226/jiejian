@@ -251,6 +251,12 @@ Capslock::{
 
 ; 关闭窗口
 q::smartCloseWindow()
+
+; 宽度拉升至最大
+w::setWindowWeightToFullScreen()
+; 高度拉升至最大
+h::setWindowHeightToFullScreen()
+
 ; 切换到上个窗口
 e::Send("!{tab}")
 
@@ -267,12 +273,6 @@ a::CenterAndResizeWindow(818, 460)
 ; 适合 b 站
 s::CenterAndResizeWindow(1280, 770)
 d::CenterAndResizeWindow(1920, 1080)
-
-; 宽度拉升至最大
-w::setWindowWeightToFullScreen()
-; 高度拉升至最大
-h::setWindowHeightToFullScreen()
-
 ; 最大化或还原
 f::MaximizeWindow()
 
@@ -280,8 +280,7 @@ f::MaximizeWindow()
 z::copySelectedAsPlainText()
 ; 窗口移到下一个显示器
 v::Send("#+{right}")
-
-; 窗口最小化 参考了 mac
+; 窗口最小化
 m::minimizeWindow()
 
 ; 复制选中文件路径并打开 anyrun 组件
