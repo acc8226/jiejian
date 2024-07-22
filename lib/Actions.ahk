@@ -160,7 +160,7 @@ minimizeWindow() {
 }
 
 /**
- * 窗口居中并修改其大小
+ * 窗口居中并修改为指定大小
  * @param width 窗口宽度
  * @param height 窗口高度
  * @returns {void} 
@@ -188,18 +188,21 @@ minimizeWindow() {
   }
   ; 检查指定的监视器是否存在, 并可选地检索其工作区域的边界坐标。分别为左上右下
   MonitorGetWorkArea(monitorCount, &l, &t, &r, &b)
-  ; 获得宽度和高度
+  ; 获得当前屏幕的宽度和高度
   w := r - l
   h := b - t
 
   ; 预设宽度 和 屏幕宽度的最小值
   winW := Min(width, w)
   ; 预设高度 和 屏幕宽度的最小值
-  if winW == 800 {
-    winH := winW * 9 / 16
-  } else {
-    winH := Min(height, h)
-  }
+  winH := Min(height, h)
+
+  ; 设置最小宽度 和 高度
+  if winW < 160
+    winW := 160
+  if winH < 100
+    winH := 100
+  
   ; 最终窗口的 x 值
   winX := l + (w - winW) / 2
   ; 最终窗口的 y 值
@@ -210,7 +213,7 @@ minimizeWindow() {
     DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 }
 
-; 我新加的
+; 我新加的 窗口按照屏幕的百分比 和 宽高比 8 比 5 进行显示
 CenterAndResizeWindow_X_Percent(percent) {
   if NotActiveWin()
     return
@@ -239,9 +242,9 @@ CenterAndResizeWindow_X_Percent(percent) {
   w := r - l
   h := b - t
 
-  ; 预设高度
+  ; 高度作为基准
   winH := h * percent
-  ; 预设宽度按照 16:10 即 8:5，这样在超宽屏幕上显示正常
+  ; 宽度按照 16:10 即 8:5，这样在超宽屏幕上显示正常
   winW := winH * 8 / 5
   ; 最终窗口的 x 值
   winX := l + (w - winW) / 2
@@ -264,7 +267,6 @@ setWindowHeightToFullScreen() {
     DllCall("SetThreadDpiAwarenessContext", "ptr", -1, "ptr")
 
   WinExist("A")
-
   WinGetPos(&originX,,&originW)
 
   if (WindowMaxOrMin())
@@ -295,7 +297,6 @@ setWindowWeightToFullScreen() {
     DllCall("SetThreadDpiAwarenessContext", "ptr", -1, "ptr")
 
   WinExist("A")
-
   WinGetPos(, &originY, , &originH)
 
   if WindowMaxOrMin()

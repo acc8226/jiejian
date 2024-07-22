@@ -9,8 +9,20 @@ RButton::{
   Tip('暂停/恢复', -399)
 }
 
-WheelUp::volumeUp
-WheelDown::volumeDown
+WheelUp::{
+  Send "{Volume_Up}"
+  if (VerCompare(A_OSVersion, "6.2") < 0) {
+    sleep 69
+    Tip('音量 ' . Round(SoundGetVolume()), -399)
+  }
+}
+WheelDown::{
+  Send "{Volume_Down}"
+  if (VerCompare(A_OSVersion, "6.2") < 0) {
+    sleep 69
+    Tip('音量 ' . Round(SoundGetVolume()), -399)
+  }
+}
 
 ; 上一曲
 XButton2::{
@@ -45,8 +57,21 @@ WheelDown::{
 ; 鼠标移动到任务栏上
 #HotIf MouseIsOver('ahk_class Shell_TrayWnd')
 MButton::Send "{Volume_Mute}"
-WheelUp::volumeUp
-WheelDown::volumeDown
+WheelUp::{
+  Send "{Volume_Up}"
+  if (VerCompare(A_OSVersion, "10.1") < 0) {
+    sleep 69
+    Tip('音量 ' . Round(SoundGetVolume()), -399)
+  }
+}
+WheelDown::{
+  Send "{Volume_Down}"
+  if (VerCompare(A_OSVersion, "10.1") < 0) {
+    sleep 69
+    Tip('音量 ' . Round(SoundGetVolume()), -399)
+  }
+}
+
 
 ; 下一曲
 XButton1::Send "{Media_Next}"
@@ -69,20 +94,4 @@ mouseIsOnTopEdge() {
 MouseIsOver(WinTitle) {
   MouseGetPos ,, &Win
   return WinExist(WinTitle . " ahk_id " . Win)
-}
-
-volumeUp() {
-  Send "{Volume_Up}"
-  if (VerCompare(A_OSVersion, "6.2") < 0) {
-    sleep 69
-    Tip(Round(SoundGetVolume()), -399)
-  }
-}
-
-volumeDown() {
-  Send "{Volume_Down}"
-  if (VerCompare(A_OSVersion, "6.2") < 0) {
-    sleep 69
-    Tip(Round(SoundGetVolume()), -399)
-  }
 }

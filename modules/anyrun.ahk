@@ -77,7 +77,7 @@ anyrun() {
         ; R7：做到贴边 默认只显示 7 行
         ; Hidden：让控件初始为隐藏状态
         listBox := MY_GUI.AddListBox(Format("R7 w{1} XM+0 Y+0 BackgroundF0F0F0 Hidden", MY_GUI_WIDTH))
-        fontSize := 's19'
+        fontSize := 's18'
         listBox.SetFont(fontSize, 'Consolas') ; 设置兜底字体(21 磅) Consolas
         listBox.SetFont(fontSize, 'Microsoft YaHei') ; 设置优先字体(21 磅) 微软雅黑
         button := MY_GUI.Add('Button', "default X0 Y0 Hidden", 'OK')
