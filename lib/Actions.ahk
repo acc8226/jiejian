@@ -2,8 +2,8 @@
  * 智能的关闭窗口，如果是桌面就 alt +f4
  */
 smartCloseWindow() {
-  if WinExist('A') {
-    if IsDesktop() or (WinGetClass("A") == "ApplicationFrameWindow" || GetProcessName() == "explorer.exe")
+  if (WinExist('A')) {
+    if (IsDesktop() or (WinGetClass("A") == "ApplicationFrameWindow" || GetProcessName() == "explorer.exe"))
       Send "!{F4}"
     else {
       try {
@@ -38,7 +38,7 @@ ActivateOrRun(winTitle := "", target := "", args := "", workingDir := "", admin 
 
   ; 切换程序
   winTitle := Trim(winTitle)
-  if (winTitle && activateWindow(winTitle, isHide))
+  if winTitle && activateWindow(winTitle, isHide)
     return
 
   ; 程序没有运行，运行程序
@@ -52,11 +52,10 @@ ActivateOrRun(winTitle := "", target := "", args := "", workingDir := "", admin 
 ToggleWindowTopMost() {
   value := !(WinGetExStyle("A") & 0x8)
   WinSetAlwaysOnTop(value, "A")
-  if value {
+  if value
     Tip("已置顶当前窗口")
-  } else {
+  else
     Tip("取消置顶")
-  }
 }
 
 ; 关闭显示器:
@@ -77,16 +76,16 @@ SystemLockScreen() {
 /**
  * 注销
  */
- SystemLogoff() {
+SystemLogoff() {
   Shutdown(0)
 }
 
 /**
  * 关机
  */
- SystemShutdown() {
+SystemShutdown() {
   ; 如果存在 SlideToShutDown.exe 则使用滑动关机，否则使用普通关机
-  if FileExist(A_WinDir "\System32\SlideToShutDown.exe") {
+  if (FileExist(A_WinDir "\System32\SlideToShutDown.exe")) {
     Run("SlideToShutDown.exe")
     sleep(1300)
     CoordMode("Mouse", "Screen")
@@ -99,7 +98,7 @@ SystemLockScreen() {
 /**
  * 重启
  */
- SystemReboot() {
+SystemReboot() {
   Shutdown(2)
 }
 
@@ -116,8 +115,8 @@ SystemSleep() {
 
 copySelectedAsPlainText() {
   A_Clipboard := ""
-  Send "^c"
-  if !ClipWait(1) {
+  Send("^c")
+  if (!ClipWait(1)) {
     Tip("复制失败")
     return
   }
@@ -128,7 +127,7 @@ copySelectedAsPlainText() {
 copySelectedAsPlainTextQuiet() {
   A_Clipboard := ""
   Send "^c"
-  if !ClipWait(1) {
+  if (!ClipWait(1)) {
     Tip("复制失败")
     return
   }
@@ -142,18 +141,17 @@ MaximizeWindow() {
   if NotActiveWin()
     return
 
-  if WindowMaxOrMin() {
+  if WindowMaxOrMin()
     WinRestore("A")
-  } else {
+  else
     WinMaximize("A")
-  }
 }
 
 /**
  * 窗口最小化
  */
 minimizeWindow() {
-  if (NotActiveWin() || WinGetProcessName("A") = "Rainmeter.exe")
+  if NotActiveWin() || WinGetProcessName("A") = "Rainmeter.exe"
     return
 
   WinMinimize("A")
@@ -213,7 +211,7 @@ minimizeWindow() {
     DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 }
 
-; 我新加的 窗口按照屏幕的百分比 和 宽高比 8 比 5 进行显示
+; 我新加的 窗口按照屏幕的百分比 和 宽高比 8:5 进行显示
 CenterAndResizeWindow_X_Percent(percent) {
   if NotActiveWin()
     return
@@ -317,6 +315,108 @@ setWindowWeightToFullScreen() {
   MonitorGetWorkArea(ms, &l,, &r)
   WinMove(l + offset, originY, r - (l + offset) - offset, originH)
 
+  if VerCompare(A_OSVersion, "6.2") >= 0
+    DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
+}
+
+; 我新加的 窗口按照 指定像素进行缩放，例如 120 或者 -120
+CenterAndResizeWindow_window_percent(step) {
+  if NotActiveWin()
+    return
+
+  WinExist("A")
+  ; 不适用于最大化和最小化的状态下
+  if WindowMaxOrMin()
+    return
+  
+  ; 在 mousemove 时需要 PER_MONITOR_AWARE (-3), 否则当两个显示器有不同的缩放比例时, mousemove 会有诡异的漂移
+  ; 在 winmove 时需要 UNAWARE (-1), 这样即使写死了窗口大小为 1200x800, 系统会帮你缩放到合适的大小
+  ; 不适用于 win 7 以下系统
+  if VerCompare(A_OSVersion, "6.2") >= 0
+    DllCall("SetThreadDpiAwarenessContext", "ptr", -1, "ptr")
+
+  ; 获取指定窗口的位置和大小
+  WinGetPos(&x, &y, &w, &h)
+
+  ; 返回监视器的数量
+  monitorCount  := MonitorGetCount()
+  if (monitorCount > 1) {
+    ; ms 为 监视器编号, 介于 1 和 MonitorGetCount 返回的数字之间
+    monitorCount := GetMonitorAt(x + w / 2, y + h / 2)
+  }
+  ; 检查指定的监视器是否存在, 并可选地检索其工作区域的边界坐标。分别为 左上右下
+  MonitorGetWorkArea(monitorCount, &l, &t, &r, &b)
+  ; 获得监视器的宽度和高度
+  monitorWidth := r - l
+  monitorHeight := b - t
+
+  ; 如果是扩大
+  if (step > 0) {
+    ; 只需要再当前窗口的基础上 x 和 y 轴拓展 二分之 step 长度即可
+    winW := w + step
+    winH := h + step
+    if (winW > monitorWidth || winH > monitorHeight) {
+      winW := monitorWidth
+      winH := monitorHeight
+    }
+    winX := x - step / 2.0
+    if winX < 0
+      winX := 0
+    winY := y - step / 2.0
+    if winY < 0
+      winY := 0
+  } else {
+    ; 否则表示缩小
+    myMinimumWidth := 400
+    myMinimumHeight := 270
+
+    ; 如果当前小于就免谈，否则说明还有缩小空间
+    if (w <= myMinimumWidth and h <= myMinimumHeight) {
+      if VerCompare(A_OSVersion, "6.2") >= 0
+        DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
+      return
+    }
+    if (w > myMinimumWidth) {
+      ; 如果原有宽度大于最小宽度则还有操作空间
+      if (w + step <= myMinimumWidth) {
+        winW := myMinimumWidth
+        winX := x + (w - myMinimumWidth) / 2.0
+      } else {
+        winW := w + step
+        winX := x - step / 2.0
+      }    
+    } else {
+      winW := w
+      winX := x
+    }
+
+    if (h > myMinimumHeight) {
+      if (h + step <= myMinimumHeight) {
+        winH := myMinimumHeight
+        winY := y + (h - myMinimumHeight) / 2.0
+      } else {
+        winH := h + step
+        winY := y - step / 2.0
+      }  
+    } else {
+      winH := h
+      winY := y
+    }
+  }
+  ; 记住上次的数值
+  static prevW := unset
+  static prevH := unset
+
+  ; 如果是缩小 且 两次数值相等且 非屏幕的宽度和高度 则啥都不做
+  if (step < 0 and IsSet(prevW) and prevW == w and IsSet(prevH) and prevH == h and w !== monitorWidth and h !== monitorHeight) {
+    ; do nothing
+  } else {
+    WinMove(winX, winY, winW, winH)
+    prevW := w
+    prevH := h
+    if !A_IsCompiled
+      tip 'x = ' x  ' y = ' y ' w = ' w  ' h = ' h '`n winX = ' winX  ' winY = ' winY ' w = ' winW ' h = ' winH
+  }
   if VerCompare(A_OSVersion, "6.2") >= 0
     DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 }

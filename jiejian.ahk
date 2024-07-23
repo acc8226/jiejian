@@ -27,7 +27,7 @@ if NOT (A_IsAdmin or RegExMatch(full_command_line, " /restart(?!\S)")) {
     }
 }
 
-GLOBAL CODE_VERSION := '24.7-beta1'
+GLOBAL CODE_VERSION := '24.7-beta2'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
@@ -275,6 +275,9 @@ s::CenterAndResizeWindow(1280, 770)
 d::CenterAndResizeWindow(1920, 1080)
 ; 最大化或还原
 f::MaximizeWindow()
+
+j::CenterAndResizeWindow_window_percent(200)
+k::CenterAndResizeWindow_window_percent(-200)
 
 ; 复制路径
 z::copySelectedAsPlainText()

@@ -27,7 +27,7 @@
         this.linkFile := A_Startup "\jiejian.lnk"
 
         this.shortcut := unset
-        if (A_IsCompiled)
+        if A_IsCompiled
             this.shortcut := 'jiejian' . (A_Is64bitOS ? '64' : '32' ) . '.exe'
         else
             this.shortcut := 'jiejian.ahk'
@@ -64,7 +64,7 @@
         A_TrayMenu.Add(this.exit, myTrayMenuHandler)
 
         ; 检查是否是自启状态
-        if FileExist(this.LinkFile) {
+        if (FileExist(this.LinkFile)) {
             ; 获取快捷方式(.lnk) 文件的信息, 例如其目标文件
             FileGetShortcut(this.LinkFile, &OutTarget)
             if (OutTarget !== this.shortcut) {
