@@ -11,6 +11,7 @@ RButton::{
 
 WheelUp::{
   Send "{Volume_Up}"
+  ; win 8 以前
   if (VerCompare(A_OSVersion, "6.2") < 0) {
     sleep 69
     Tip('音量 ' . Round(SoundGetVolume()), -399)
@@ -59,14 +60,15 @@ WheelDown::{
 MButton::Send "{Volume_Mute}"
 WheelUp::{
   Send "{Volume_Up}"
-  if (VerCompare(A_OSVersion, "10.1") < 0) {
+  ; win 11 22533 版本更新了音量指示器，底部居中显示且更加美观了
+  if (VerCompare(A_OSVersion, "10.1.22533") < 0) {
     sleep 69
     Tip('音量 ' . Round(SoundGetVolume()), -399)
   }
 }
 WheelDown::{
   Send "{Volume_Down}"
-  if (VerCompare(A_OSVersion, "10.1") < 0) {
+  if (VerCompare(A_OSVersion, "10.1.22533") < 0) {
     sleep 69
     Tip('音量 ' . Round(SoundGetVolume()), -399)
   }
