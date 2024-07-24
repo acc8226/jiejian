@@ -75,6 +75,7 @@ parseAppCSV() {
   
         case "^!Right", "^!{Right}", "!^Right", "!^{Right}": GroupAdd("forward_ctrl_alt_Right", it.exe)
         case "^+Right", "^+{Right}", "+^Right", "+^{Right}": GroupAdd("forward_ctrl_shift_Right", it.exe)
+        case "^+f", "+^f": GroupAdd("forward_ctrl_shift_f", it.exe)
       }
       ; g 列 下个标签
       switch it.nextTag, 'Off' {
@@ -92,10 +93,11 @@ parseAppCSV() {
   
         case "^PgDn", "^{PgDn}": GroupAdd('next_ctrl_PgDn', it.exe)
         case "^Right", "^{Right}": GroupAdd("next_ctrl_Right", it.exe)
+        case "^f": GroupAdd("next_ctrl_f", it.exe)
         case "^n": GroupAdd("next_ctrl_n", it.exe)
         case "^!PgDn", "^!{PgDn}", "!^PgDn", "!^{PgDn}": GroupAdd("next_ctrl_alt_PgDn", it.exe)
-        case "^!Right", "^!{Right}", "!^Right", "!^{Right}": GroupAdd("next_ctrl_alt_Right", it.exe)
-  
+
+        case "^!Right", "^!{Right}", "!^Right", "!^{Right}": GroupAdd("next_ctrl_alt_Right", it.exe)  
         case "^+Right", "^+{Right}", "+^Right", "+^{Right}": GroupAdd("next_ctrl_shift_Right", it.exe)
       }
       ; h 列 后退
@@ -113,6 +115,7 @@ parseAppCSV() {
         case "^b": GroupAdd('back_ctrl_b', it.exe)
   
         case "^!Left", "^!{Left}", "!^Left", "!^{Left}": GroupAdd "back_ctrl_alt_Left", it.exe
+        case "^+b", "+^b": GroupAdd('back_ctrl_shift_b', it.exe)
         case "^+Tab", "^+{Tab}", "+^Tab", "+^{Tab}": GroupAdd "back_ctrl_shift_Tab", it.exe
         case "^+Left", "^+{Left}", "+^Left", "+^{Left}": GroupAdd "back_ctrl_shift_Left", it.exe
       }
@@ -368,38 +371,43 @@ XButton1::Send("^{F4}")
 !Right::Send "^!{Right}"
 #HotIf WinActive("ahk_group forward_ctrl_shift_Right")
 !Right::Send "^+{Right}"
+#HotIf WinActive("ahk_group forward_ctrl_shift_f")
+!Right::Send "^+f"
 
 ; g. 下个标签
-#HotIf WinActive('ahk_group next_b')
-^Tab::Send "b"
-#HotIf WinActive('ahk_group next_n')
-^Tab::Send "n"
-#HotIf WinActive("ahk_group next_z")
-^Tab::Send "z"
 #HotIf WinActive('ahk_group next_closeBracket')
 ^Tab::Send "]"
+#HotIf WinActive("ahk_group next_Down")
+^Tab::Send "{Down}"
 #HotIf WinActive("ahk_group next_MediaNext")
 ^Tab::Send "{Media_Next}"
 #HotIf WinActive("ahk_group next_PgDn")
 ^Tab::Send "{PgDn}"
+#HotIf WinActive('ahk_group next_b')
+^Tab::Send "b"
 
-#HotIf WinActive("ahk_group next_Down")
-^Tab::Send "{Down}"
+#HotIf WinActive('ahk_group next_n')
+^Tab::Send "n"
+#HotIf WinActive("ahk_group next_z")
+^Tab::Send "z"
 #HotIf WinActive("ahk_group next_alt_closeBracket")
 ^Tab::Send "!]"
 #HotIf WinActive("ahk_group next_ctrl_closeBracket")
 ^Tab::Send "^]"
+#HotIf WinActive("ahk_group next_alt_Right")
+^Tab::Send "!{Right}"
+
 #HotIf WinActive("ahk_group next_ctrl_PgDn")
 ^Tab::Send "^{PgDn}"
 #HotIf WinActive("ahk_group next_ctrl_Right")
 ^Tab::Send "^{Right}"
+#HotIf WinActive("ahk_group next_ctrl_f")
+^Tab::Send "^f"
 #HotIf WinActive("ahk_group next_ctrl_n")
 ^Tab::Send "^n"
-#HotIf WinActive("ahk_group next_alt_Right")
-^Tab::Send "!{Right}"
-
 #HotIf WinActive("ahk_group next_ctrl_alt_PgDn")
 ^Tab::Send "^!{PgDn}"
+
 #HotIf WinActive("ahk_group next_ctrl_alt_Right")
 ^Tab::Send "^!{Right}"
 #HotIf WinActive("ahk_group next_ctrl_shift_Right")
@@ -429,6 +437,8 @@ XButton1::Send("^{F4}")
 !Left::Send "^b"
 #HotIf WinActive("ahk_group back_ctrl_alt_Left")
 !Left::Send "^!{Left}"
+#HotIf WinActive("ahk_group back_ctrl_shift_b")
+!Left::Send "^+b"
 #HotIf WinActive("ahk_group back_ctrl_shift_Tab")
 !Left::Send "^+{Tab}"
 #HotIf WinActive("ahk_group back_ctrl_shift_Left")
@@ -529,17 +539,13 @@ F11::Send('f')
 F11::Send('!f')
 #HotIf WinActive('ahk_group fullscreen_alt_Enter')
 F11::Send('!{Enter}')
-#HotIf WinActive('ahk_group fullscreen_ctrl_shift_F124')
+#HotIf WinActive('ahk_group fullscreen_ctrl_shift_F12')
 F11::Send('^+{F12}')
 
-; 增强：edge 浏览器 的 复制标签页
-#HotIf WinActive('ahk_exe i)msedge.exe')
-^k::Send('{Blind}^+k')
-
 ; 增强：火狐浏览器 的 新建隐私窗口
-#HotIf WinActive('ahk_exe i)(?:firefox|waterfox).exe')
+#HotIf WinActive('ahk_class ^MozillaWindowClass$')
 ^+n::Send('{Blind}^+p')
 
 ; ctrl + F7 通用：置顶/取消置顶
 #HotIf
-^F7::ToggleWindowTopMost()
+^F7::ToggleWindowTopMost

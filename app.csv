@@ -72,6 +72,7 @@
 【视频类】迅雷影音,,迅雷影音$ ahk_exe i)Xmp.exe,^o,,Right,PgDn,Left,PgUp,,,
 【视频类】影音先锋,,ahk_exe i)xfplay.exe,,,Right,PgDn,Left,PgUp,,,
 【视频类】荐片播放器,,ahk_exe i)jianpian.exe,,,Right,,Left,,,Enter,
+【视频类】Windows Media Player 12,,ahk_exe i)wmplayer.exe,^o,,^+f,^f,^+b,^b,,!Enter,
 ,,,,,,,,,,,
 【视频类】哔哩哔哩,,ahk_exe 哔哩哔哩.exe ahk_class i)^Chrome_WidgetWin_1$,,,Right,],Left,[,,f,
 【视频类】爱奇艺,,ahk_exe i)QyClient.exe,,,Right,^Right,Left,,,!Enter,
