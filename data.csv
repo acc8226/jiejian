@@ -76,7 +76,7 @@
 程序,shortcuts\Everything.lnk,,Everything,Everything,,,,
 程序,shortcuts\EyesGuard.lnk|C:\Program Files (x86)\Avestura Technologies\Eyes Guard\EyesGuard.exe,,EyesGuard,EyesGuard,,,,
 程序,shortcuts\EVAVEdit.lnk,,EV剪辑,Evjianji|EV剪辑,,,,
-程序,shortcuts\EVCapture.lnk,,EV录屏,Evluping|EV录屏,,,,
+程序,shortcuts\EVCapture.lnk|C:\Program Files (x86)\EVCapture\EVCapture.exe,,EV录屏,Evluping|EV录屏,,,,
 程序,shortcuts\f.lux.lnk|C:\Users\Administrator\AppData\Local\FluxSoftware\Flux\flux.exe,,f.lux,f.lux,,,,
 程序,shortcuts\FastGestures.lnk,,FastGestures,FastGestures,,,,
 程序,shortcuts\Firefox.lnk|C:\Program Files (x86)\Mozilla Firefox\firefox.exe,,Firefox,Firefox|火狐浏览器,,,,
@@ -129,7 +129,7 @@
 程序,shortcuts\按键精灵2014.06.lnk|C:\Program Files (x86)\按键精灵\按键精灵2014\按键精灵2014.exe,,按键精灵,anjianjingling|按键精灵,,,,
 程序,shortcuts\暴雪战网.lnk|D:\battle\Battle.net\Battle.net Launcher.exe,,战网,zhanwang|战网,,,,
 程序,shortcuts\Battle.net.lnk|C:\Program Files (x86)\Battle.net\Battle.net Launcher.exe,,battleNet,battleNet|战网国际版,,,,
-程序,shortcuts\必剪.lnk,,必剪,bijian|必剪,,,,
+程序,shortcuts\必剪.lnk|C:\Users\Administrator\AppData\Local\BcutBilibili\BCUT.exe,,必剪,bijian|必剪,,,,
 程序,shortcuts\钉钉.lnk,,钉钉,dingding|钉钉,,,,
 程序,shortcuts\方格音乐.lnk,,方格音乐,fanggeyinyue|方格音乐,,,,
 程序,shortcuts\芒果TV.lnk,,芒果TV,mangguotv|芒果TV,,,,
@@ -164,7 +164,7 @@
 程序,shortcuts\迅游加速器.lnk|C:\Program Files (x86)\xunyou\xunyou.exe,,迅游加速器,xunyoujiasuqi|迅游加速器,,,,
 程序,shortcuts\火绒安全软件.lnk|C:\Program Files\Huorong\Sysdiag\bin\HipsMain.exe,,火绒安全软件,huoronganquanruanjian|火绒安全软件,,,,
 程序,shortcuts\Meld.lnk|C:\Program Files\Meld\Meld.exe,,Meld,Meld,,,,
-程序,shortcuts\Windows Media Player.lnk|%ProgramFiles(x86)%\Windows Media Player\wmplayer.exe,,Windows Media Player,wmplayer|Windows Media Player,,,,
+程序,shortcuts\Windows Media Player.lnk|C:\Program Files (x86)\Windows Media Player\wmplayer.exe,,Windows Media Player,wmplayer|Windows Media Player,,,,
 ,,,,,,,,
 ,,,,,,,,
 文件,C:\,,C盘,cpan|C盘,,,,
@@ -246,7 +246,7 @@
 下载,music.163.com/#/download,,网易云音乐,DLwangyiyunyinyue|下载网易云音乐,,,,13.音频类
 下载,https://github.com/lyswhut/lx-music-desktop/releases/,,lxmusic,DLlxmusic,,,,13.音频类
 下载,https://app.bilibili.com/,,哔哩哔哩,DLbilibili|下载bilibili,,,,14.视频类
-下载,potplayer.tv/?lang=zh_CN,,potplayer,DLpotplayer,,,,14.视频类
+下载,potplayer.tv/?lang=zh_CN,,PotPlayer,DLpotplayer,,,,14.视频类
 下载,jianpian9.com,,荐片,DLjianpian|下载荐片,,,,14.视频类
 下载,im.qq.com,,QQ,DLqq|xiazaiQQ|下载QQ,,,,15.社交类
 下载,weixin.qq.com,,微信,DLweixin|xiazaiwechat|下载微信,,,,15.社交类
@@ -294,16 +294,16 @@
 ,,,,,,,,
 动作,www.baidu.com/s?wd=,,百度一下,bd,,,,
 动作,www.baidu.com/s?wd=,,搜索,ss,,,,
-动作 ,https://www.baidu.com/s?wd=,,百度一下,百度,,,,
-动作 ,https://search.bilibili.com/all?keyword=,,b站视频搜索,bi,,,,
-动作 ,www.ixigua.com/search/,,西瓜视频搜索,xg,,,,
-动作 ,https://github.com/search?q=,,Github搜索,gh,,,,
-动作 ,https://api.caoliao.net/api/qrcode/code?text=,,二维码生成,qr,,,,
-动作 ,https://www.ip138.com/iplookup.php?ip=,,ip检测,ip,,,,
-动作 ,ping.chinaz.com/,,ping检测,pi,,,,
-动作 ,https://seo.chinaz.com/,,SEO综合查询,se,,,,
-动作 ,https://www.baidu.com/s?wd={query}天气,,查天气,tq,,,,
-动作 ,https://www.baidu.com/s?wd=快递单,,查快递,kd,,,,
+动作,www.baidu.com/s?wd=,,百度一下,百度,,,,
+动作,search.bilibili.com/all?keyword=,,b站视频搜索,bi,,,,
+动作,www.ixigua.com/search/,,西瓜视频搜索,xg,,,,
+动作,https://github.com/search?q=,,Github搜索,gh,,,,
+动作,https://api.caoliao.net/api/qrcode/code?text=,,二维码生成,qr,,,,
+动作,www.ip138.com/iplookup.php?ip=,,ip检测,ip,,,,
+动作,ping.chinaz.com/,,ping检测,pi,,,,
+动作,seo.chinaz.com/,,SEO综合查询,se,,,,
+动作,www.baidu.com/s?wd={query}天气,,查天气,tq,,,,
+动作,www.baidu.com/s?wd=快递单,,查快递,kd,,,,
 ,,,,,,,,
 ,,,,,,,,
 双击Alt,,,内部-息屏,,,,,

@@ -6,8 +6,7 @@ moveWindow() {
     if !WinGetMinMax(EWD_MouseWin)  ; Only if the window isn't maximized 
         SetTimer EWD_WatchMouse, 10 ; Track the mouse as the user drags it.
 
-    EWD_WatchMouse()
-    {
+    EWD_WatchMouse() {
         if !GetKeyState("LButton", "P")  ; Button has been released, so drag is complete.
         {
             SetTimer , 0

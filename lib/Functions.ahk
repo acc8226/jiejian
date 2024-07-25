@@ -22,29 +22,12 @@ IsDesktop() {
 GetProcessName() {
   fn := (winTitle) => (WinGetProcessName(winTitle) == 'ApplicationFrameHost.exe')
   winTitle := "A"
-  if fn(winTitle) {
+  if (fn(winTitle)) {
     for hCtrl in WinGetControlsHwnd(winTitle)
       bool := fn(hCtrl)
     until !bool && winTitle := hCtrl
   }
   return WinGetProcessName(winTitle)
-}
-
-/**
- * 重启程序
- */
-jiejianReload() {  
-  Tip("Reload")
-  Reload()
-}
-
-/**
- * 退出程序
- * @param ExitReason 退出原因
- * @param ExitCode 传递给 Exit 或 ExitApp 的退出代码.
- */
-jiejianExit(ExitReason?, ExitCode?) {
-  ExitApp
 }
 
 /**
@@ -55,13 +38,12 @@ jiejianExit(ExitReason?, ExitCode?) {
  */
 ReplaceSelectedText(&target, &args) {
   text := GetSelectedText()
-  if not (text) {
+  if not (text) 
     text := ""
-  }
 
-  if InStr(args, "://") || InStr(target, "://") {
+  if InStr(args, "://") || InStr(target, "://")
     text := URIEncode(text)
-  }
+  
   args := strReplace(args, "{selected}", text)
   target := strReplace(target, "{selected}", text)
 

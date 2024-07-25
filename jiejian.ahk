@@ -30,7 +30,7 @@ if NOT (A_IsAdmin or RegExMatch(full_command_line, " /restart(?!\S)")) {
     }
 }
 
-GLOBAL CODE_VERSION := '24.7-beta2'
+GLOBAL CODE_VERSION := '24.7-beta3'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
@@ -39,7 +39,7 @@ GLOBAL CODE_VERSION := '24.7-beta2'
 ; 提取出 文件名 再拼接 PostExec.exe; 版本号; When: 2 仅在指定 UPX 压缩时运行 ; WorkingDir: 脚本所在路径
 ;@Ahk2Exe-%U_V% %A_ScriptName~\.[^\.]+$~PostExec.exe% %U_version%, 2, %A_ScriptDir%
 
-SetDefaults()
+SetDefaults
 SetDefaults() {
     GLOBAL
     REG_KEY_NAME := 'HKEY_CURRENT_USER\SOFTWARE\jiejian'
@@ -49,9 +49,9 @@ SetDefaults() {
     
     ; CapsLock 模式：对任务管理器 和 系统高级设置没用
     ; 短按依旧有用 确保了 CapsLock 灯不会闪
-    IS_CAPS_PRESSED := False
+    IS_CAPS_PRESSED := false
     ; 使用过会清除这个变量
-    ENABLE_CHANGE_CAPS_STATE := False
+    ENABLE_CHANGE_CAPS_STATE := false
 }
 
 ; ----- 1. 热键 之 鼠标操作 -----
@@ -76,7 +76,7 @@ SetTitleMatchMode 'RegEx' ; 设置 WinTitle parameter 在内置函数中的匹�
 if NOT FileExist(A_WorkingDir . "\shortcuts\*")
     Run('extra/GenerateShortcuts.exe')
 
-settingTray()
+settingTray
 ; 设置托盘图标和菜单
 settingTray() {
     global JJ_TRAY_MENU := MyTrayMenu()
@@ -119,7 +119,7 @@ checkUpdate()
     newText := RegExReplace(A_Clipboard, "\s*$", "") ; 去掉尾部空格
     newText := RegExReplace(newText, "^#{1,6}\s+(.*)", "$1")
     nums := SubStr(A_ThisHotkey, 2)
-    Send "{Home}{# " . nums . "}" . ' '
+    Send("{Home}{# " . nums . "}" . ' ')
     ; 之所以拆开是为防止被中文输入法影响
     SendText(newText)
     Send('{End}')
@@ -129,7 +129,7 @@ checkUpdate()
 
 ; Ctrl + Alt + R 重启脚本
 ^!r::{
-    Reload()
+    Reload
     Sleep(50) ; 不创建多个实例的情况下重新加载脚本的简单实现，给个暂停时长
 }
 ^!s::JJ_TRAY_MENU.mySuspend() ; Ctrl + Alt + S 暂停脚本
@@ -203,7 +203,7 @@ doubleClick(hk, command) {
                 if processName = 'Code.exe'
                     return
             } catch as e {
-                MsgBox "An error was thrown!`nSpecifically: " e.Message
+                MsgBox("An error was thrown!`nSpecifically: " e.Message)
                 return
             }
         }
@@ -218,11 +218,10 @@ doubleClick(hk, command) {
                 item := findItemByTypeAndTitle(type, title)
             }
         }
-        if (!IsSet(item) || item == '') {
+        if !IsSet(item) || item == ''
             MsgBox(hk . ' 对应指令找不到！', APP_NAME)
-        } else {
+        else
             openPathByType(item)
-        }
     }    
 }
 
@@ -233,38 +232,38 @@ updateCtrlTimestamp(*) {
 }
 
 Capslock::{
-    GLOBAL IS_CAPS_PRESSED := True
-    GLOBAL ENABLE_CHANGE_CAPS_STATE := True
+    GLOBAL IS_CAPS_PRESSED := true
+    GLOBAL ENABLE_CHANGE_CAPS_STATE := true
 
     disableCapsChange() {
-        GLOBAL ENABLE_CHANGE_CAPS_STATE := False
+        GLOBAL ENABLE_CHANGE_CAPS_STATE := false
     }
     
     SetTimer(disableCapsChange, -300) ; 300 ms 犹豫操作时间
     KeyWait('CapsLock') ; 等待用户物理释放按键
-    IS_CAPS_PRESSED := False ; Capslock 先置空，来关闭 Capslock+ 功能的触发
+    IS_CAPS_PRESSED := false ; Capslock 先置空，来关闭 Capslock+ 功能的触发
     ; 松开的时候才切换 CapsLock 大小写
     if ENABLE_CHANGE_CAPS_STATE
         SetCapsLockState(!GetKeyState("CapsLock", "T"))
-    disableCapsChange()
+    disableCapsChange
 }
 
 ; 需要按一次按键才会生效，时好时坏
 #HotIf IS_CAPS_PRESSED
 
 ; 关闭窗口
-q::smartCloseWindow()
+q::smartCloseWindow
 
 ; 宽度拉升至最大
-w::setWindowWeightToFullScreen()
+w::setWindowWeightToFullScreen
 ; 高度拉升至最大
-h::setWindowHeightToFullScreen()
+h::setWindowHeightToFullScreen
 
 ; 切换到上个窗口
 e::Send("!{tab}")
 
 ; 程序内切换窗口
-r::LoopRelatedWindows()
+r::LoopRelatedWindows
 
 ; 切换到上一个虚拟桌面
 y::Send("^#{Left}")
@@ -277,28 +276,28 @@ a::CenterAndResizeWindow(818, 460)
 s::CenterAndResizeWindow(1280, 770)
 d::CenterAndResizeWindow(1920, 1080)
 ; 最大化或还原
-f::MaximizeWindow()
+f::MaximizeWindow
 
 j::CenterAndResizeWindow_window_percent(200)
 k::CenterAndResizeWindow_window_percent(-200)
 
 ; 复制路径
-z::copySelectedAsPlainText()
+z::copySelectedAsPlainText
 ; 窗口移到下一个显示器
 v::Send("#+{right}")
 ; 窗口最小化
-m::minimizeWindow()
+m::minimizeWindow
 
 ; 复制选中文件路径并打开 anyrun 组件
 Space::{
-    copySelectedAsPlainTextQuiet()
+    copySelectedAsPlainTextQuiet
     ; 由于命令发送 ctrl + c 不会触发监听则手动更新时间戳
-    updateCtrlTimestamp()
-    anyrun()
+    updateCtrlTimestamp
+    anyrun
 }
 
 ; 按住 CapsLock 时同时按下鼠标左键拖动窗口
-LButton::moveWindow()
+LButton::moveWindow
 #HotIf
 
 ; windows 版本

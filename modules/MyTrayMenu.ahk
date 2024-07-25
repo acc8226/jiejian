@@ -7,7 +7,7 @@
         this.editScript:= '编辑脚本(&E)'
         this.listVars:= '查看变量(&L)'
         this.pause := "暂停(Ctrl+Alt+S)"
-        this.restart:= '重启(Ctrl+Alt+R)'
+        this.restart:= '重载程序(Ctrl+Alt+R)'
         this.search:= '搜一搜(Alt+空格)'
         this.viewWinId:= '查看窗口标识符(&V)'
         this.statistics:= '使用统计(&S)'
@@ -16,7 +16,7 @@
         this.more:= '更多(&M)'
         this.document:= '帮助文档(&H)'
         this.video:= '视频教程(&V)'
-        ; this.followMeCSDN:= '在 CSDN 上关注我(&F)'
+        this.followMeCSDN:= '在 CSDN 上关注我(&F)'
         this.followMeGH:= '在 Github 上关注我(&F)'
         this.update:= '检查更新(&U)...'
         this.about:= '关于(&A)'
@@ -55,7 +55,7 @@
         moreMenu := Menu()
         moreMenu.Add(this.document, myTrayMenuHandler)
         moreMenu.Add(this.video, myTrayMenuHandler)
-        ; moreMenu.Add(this.followMeCSDN, myTrayMenuHandler)
+        moreMenu.Add(this.followMeCSDN, myTrayMenuHandler)
         moreMenu.Add(this.followMeGH, myTrayMenuHandler)
         moreMenu.Add(this.update, myTrayMenuHandler)
         moreMenu.Add(this.about, myTrayMenuHandler)
@@ -96,8 +96,8 @@
         case this.editScript: Edit
         case this.listVars: ListVars
         case this.pause: this.jiejianToggleSuspend
-        case this.restart: jiejianReload()
-        case this.search: anyrun()
+        case this.restart: Reload
+        case this.search: anyrun
         case this.viewWinId: Run("extra/WindowSpyU32.exe")
         case this.statistics:
             ; 统计软件使用总分钟数
@@ -136,7 +136,7 @@
     
             case this.document: Run('https://feipig.fun/zh-cn/4c2b72aaa7d0')
             case this.video: Run('https://www.bilibili.com/video/BV19H4y1e7hJ')
-            ; case this.followMeCSDN: Run('https://blog.csdn.net/acc8226')
+            case this.followMeCSDN: Run('https://blog.csdn.net/acc8226')
             case this.followMeGH: Run('https://github.com/acc8226')
             case this.update: checkUpdate(true)
             case this.about: MsgBox(      
@@ -148,7 +148,7 @@
                 . "`n是否管理员权限运行: " . (A_IsAdmin ? '是' : '否')
                 . "`n是否 64 位程式: " . (A_PtrSize == 8 ? '是' : '否')
                 , APP_NAME, 'Iconi T60')
-        case this.exit: jiejianExit
+        case this.exit: ExitApp
         }
     }
 
