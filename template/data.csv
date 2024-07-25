@@ -2,13 +2,13 @@
 文本,很牛呀,,,,,xnb,,
 文本,你妹的,,,,,xnm,,
 ,,,,,,,,
-文本,😄,,,,,xwx ,,微笑
-文本,😊,,,,,xlh,,脸红
-文本,👌,,,,,xok,,OK
-文本,❤️,,,,,xax,,爱心
-文本,📰,,,,,xbz,,报纸
-文本,🔖,,,,,xsq,,书签
-文本,💩,,,,,xsh,,大便
+文本,??,,,,,xwx ,,微笑
+文本,??,,,,,xlh,,脸红
+文本,??,,,,,xok,,OK
+文本,????,,,,,xax,,爱心
+文本,??,,,,,xbz,,报纸
+文本,??,,,,,xsq,,书签
+文本,??,,,,,xsh,,大便
 ,,,,,,,,
 文本,```java{Enter}{Enter}```{Up},,,,,xjava,,
 文本,```js{Enter}{Enter}```{Up},,,,,xjs,,
@@ -42,6 +42,9 @@
 程序,write,,写字板,xieziban|write.exe|写字板,,,,
 程序,winver,,关于Windows,guanyuwindows|winver.exe|关于Windows,,,,
 程序,services.msc,,服务,fuwu|services.msc|服务,,,,
+程序,SystemPropertiesAdvanced ,,SystemPropertiesAdvanced ,高级系统设置,,,,
+程序,taskschd.msc ,,taskschd.msc ,任务计划程序,,,,
+程序,snippingtool ,,snippingtool ,截图工具,,,,
 ,,,,,,,,
 程序,::{20D04FE0-3AEA-1069-A2D8-08002B30309D},ahk_exe explorer.exe ahk_class CabinetWClass,我的电脑,wodediannao|wodejisuanji|ziyuanguanliqi|explorer|我的电脑|资源管理器,!1,,,
 ,,,,,,,,
@@ -157,7 +160,7 @@
 程序,shortcuts\迅游加速器.lnk|C:\Program Files (x86)\xunyou\xunyou.exe,,迅游加速器,xunyoujiasuqi|迅游加速器,,,,
 程序,shortcuts\火绒安全软件.lnk|C:\Program Files\Huorong\Sysdiag\bin\HipsMain.exe,,火绒安全软件,huoronganquanruanjian|火绒安全软件,,,,
 程序,shortcuts\Meld.lnk|C:\Program Files\Meld\Meld.exe,,Meld,Meld,,,,
-程序,shortcuts\Windows Media Player.lnk|%ProgramFiles(x86)%\Windows Media Player\wmplayer.exe,,Windows Media Player,Windows Media Player,,,,
+程序,shortcuts\Windows Media Player.lnk|%ProgramFiles(x86)%\Windows Media Player\wmplayer.exe,,Windows Media Player,wmplayer|Windows Media Player,,,,
 ,,,,,,,,
 ,,,,,,,,
 文件,C:\,,C盘,cpan|C盘,,,,
@@ -268,7 +271,7 @@
 ,,,,,,,,
 内部,,,重启,chongqi|重启,,,,
 内部,,,关机,guanji|关机,,,,
-内部,,,锁屏,suopin|锁屏,,,,
+内部,,,锁屏（锁定）,suopin|锁屏|suoding|锁定,,,,
 内部,,,睡眠,shuimian|sleep|睡眠,,,,
 内部,,,激活屏幕保护程序,pingmubaohuchengxu|激活屏幕保护程序,,,,
 内部,,,清空回收站,qingkonghuishouzhan|清空回收站,,,,

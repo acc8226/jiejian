@@ -126,10 +126,14 @@ anyrun() {
             dataArray := unset
             ; 精确匹配失败 将 转到模糊匹配
             ; 若为空则清空列表 或 大于设定长度 或 满足正则
-            if (StrLen(editValue) <= SUPPORT_LEN && editValue ~= '^[\d\.a-zA-Z一-龥]+$') {
+            if (StrLen(editValue) <= SUPPORT_LEN && editValue ~= '^[\s\d\.a-zA-Z一-龥]+$') {
                 needleRegEx := 'i)'
-                Loop Parse, editValue
-                    needleRegEx .= '(' . A_LoopField . ").*"                
+                Loop Parse, editValue {
+                    if A_LoopField == ' '
+                        needleRegEx .= '( )'
+                    else
+                        needleRegEx .= '(' . A_LoopField . ').*'
+                }
                 dataArray := Array()
                 for it in DATA_LIST {
                     if (it.type ~= DATA_FILTER_REG) {
@@ -550,31 +554,6 @@ openInIDEA(path) {
 ; 包含了所有我预设的内部命令
 openInnerCommand(title, isConfirm := false) {
     switch title {
-        case '重启': 
-            if (isConfirm) {
-                if MsgBox("立即" . title . "?", APP_NAME, "OKCancel") = "OK"
-                    SystemReboot()
-            } else {
-                SystemReboot()
-            }
-        case '关机': 
-            if (isConfirm) {
-                if MsgBox("立即" . title . "?", APP_NAME, "OKCancel") = "OK"
-                    SystemShutdown()
-            } else {
-                SystemShutdown()
-            }
-        case '锁屏': SystemLockScreen()
-        case '睡眠': SystemSleep()
-        case '激活屏幕保护程序': SendMessage(0x0112, 0xF140, 0,, "Program Manager") ; 0x0112 为 WM_SYSCOMMAND, 而 0xF140 为 SC_SCREENSAVE.
-        case '清空回收站': FileRecycleEmpty()
-        case '息屏': SystemSleepScreen()
-        case '注销': SystemLogoff()
-        ; 媒体类
-        case '静音': Send '{Volume_Mute}'
-        case '上一曲': Send '{Media_Prev}'
-        case '下一曲': Send '{Media_Next}'
-        case '暂停': Send '{Media_Play_Pause}'
         ; shell
         case '终端': Run(A_ComSpec) ; 在用户根目录打开文件夹
         case '网络连接': Run "shell:ConnectionsFolder" ; 第二种方式 ncpa.cpl
@@ -589,6 +568,33 @@ openInnerCommand(title, isConfirm := false) {
         case '我的视频': Run "shell:My Video"
         case '我的音乐': Run "shell:My Music"
         case '环境变量': Run "rundll32 sysdm.cpl,EditEnvironmentVariables"
+        ; 系统操作
+        case '重启': 
+            if (isConfirm) {
+                if MsgBox("立即" . title . "?", APP_NAME, "OKCancel") = "OK"
+                    SystemReboot
+            } else {
+                SystemReboot
+            }
+        case '关机': 
+            if (isConfirm) {
+                if MsgBox("立即" . title . "?", APP_NAME, "OKCancel") = "OK"
+                    SystemShutdown
+            } else {
+                SystemShutdown
+            }
+        case '锁屏', '锁定', '锁屏（锁定）' : SystemLockScreen
+        case '睡眠': SystemSleep
+        case '激活屏幕保护程序': SendMessage(0x0112, 0xF140, 0,, "Program Manager") ; 0x0112 为 WM_SYSCOMMAND, 而 0xF140 为 SC_SCREENSAVE.
+        case '清空回收站': FileRecycleEmpty()
+        case '息屏': SystemSleepScreen
+        case '注销': SystemLogoff
+        ; 媒体类
+        case '静音': Send '{Volume_Mute}'
+        case '上一曲': Send '{Media_Prev}'
+        case '下一曲': Send '{Media_Next}'
+        case '暂停': Send '{Media_Play_Pause}'
+        ; 其他
         case '关闭程序': smartCloseWindow
         default: MsgBox('非系统内置命令！', APP_NAME)
     }

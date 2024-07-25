@@ -2,6 +2,9 @@
 快速参考 | AutoHotkey v2 https://wyagd001.github.io/v2/docs/
 vscode 插件安装 https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp
 */
+/*
+TODO 对环境变量路径的识别 比如 %ProgramFiles(x86)%\Windows Media Player\wmplayer.exe
+*/
 #Requires AutoHotkey >=v2.0
 #SingleInstance force ; 跳过对话框并自动替换旧实例
 
@@ -299,11 +302,13 @@ LButton::moveWindow()
 #HotIf
 
 ; windows 版本
+;
+; Windows 11 [10.1.xxxxx]
 ; Windows 10 [10.0.10240] (29.07.2015)
 ; Windows 8.1 [6.3.9200]
 ; Windows 8 [6.2.9200]
-; Windows7 service pack 1(SP1) [6.1.7601]
-; Windows7 [6.1.7600]
+; Windows 7 service pack 1(SP1) [6.1.7601]
+; Windows 7 [6.1.7600]
 ; Windows Vista service pack 2(SP2) [6.0.6002]
 ; Windows Vista [6.0.6000]
 ; Windows XP service pack 3(SP3) [5.1.2600]
