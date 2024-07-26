@@ -350,34 +350,51 @@ CenterAndResizeWindow_window_percent(step) {
   ; 获得监视器的宽度和高度
   monitorWidth := r - l
   monitorHeight := b - t
-
+  
   ; 如果是扩大
   if (step > 0) {
-    ; 只需要再当前窗口的基础上 x 和 y 轴拓展 二分之 step 长度即可
-    finalWidth := w + step
-    finalHeight := h + step
-    if finalWidth > monitorWidth
-      finalWidth := monitorWidth
-    if finalHeight > monitorHeight
-      finalHeight := monitorHeight
-
-    finalX := x - step / 2.0
-    if finalX < 0
+    finalX := unset
+    finalY := unset
+    if x < 0 {
       finalX := 0
-    else if finalX + finalWidth > monitorWidth
-      finalX := monitorWidth - finalWidth
-    
-    finalY := y - step / 2.0    
-    if finalY < 0
+    } else if x + w / 2.0 > monitorWidth { ; 如果窗口超过一半被挡住
+      finalX := monitorWidth - w
+    }
+    if y < 0 {
       finalY := 0
-    else if finalY + finalHeight > monitorHeight
-      finalY := monitorHeight - finalHeight
+    } else if y + h / 2.0 > monitorHeight { ; 如果窗口超过一半被挡住
+      finalY := monitorHeight - h
+    }
+
+    if IsSet(finalX) OR IsSet(finalY) {
+      if NOT IsSet(finalX)
+        finalX := x
+      if NOT IsSet(finalY)
+        finalY := y  
+      finalWidth := w
+      finalHeight := h
+    } else {
+      ; 只需要再当前窗口的基础上 x 和 y 轴拓展 二分之 step 长度即可
+      finalWidth := w + step
+      finalHeight := h + step
+      if finalWidth > monitorWidth
+        finalWidth := monitorWidth
+      if finalHeight > monitorHeight
+        finalHeight := monitorHeight
+  
+      finalX := x - step / 2.0
+      if finalX < 0
+        finalX := 0
+      
+      finalY := y - step / 2.0    
+      if finalY < 0
+        finalY := 0
+    }
   } else {
     ; 否则表示缩小
     myMinimumWidth := 400
     myMinimumHeight := 270
 
-    ; 如果当前小于就免谈，否则说明还有缩小空间
     if (w <= myMinimumWidth and h <= myMinimumHeight) {
       if VerCompare(A_OSVersion, "6.2") >= 0
         DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
@@ -408,20 +425,27 @@ CenterAndResizeWindow_window_percent(step) {
     } else {
       finalHeight := h
       finalY := y
-    }
+    }    
   }
-  ; 记住上次的数值
-  static prevW := unset
-  static prevH := unset
-
+  ; 记住缩小的上次的数值，防止最小状态下再次缩小
+  static lastStep := 0
+  static prevW := 0
+  static prevH := 0
   ; 如果 NOT (是缩小 且 两次数值相等且 非屏幕的宽度和高度)
-  if (NOT (step < 0 and IsSet(prevW) and prevW == w and IsSet(prevH) and prevH == h and w !== monitorWidth and h !== monitorHeight)) {
-    WinMove(finalX, finalY, finalWidth, finalHeight)
-    prevW := w
-    prevH := h
-    if !A_IsCompiled
-      tip 'x = ' x  ' y = ' y ' w = ' w  ' h = ' h '`n finalX = ' finalX  ' finalY = ' finalY ' w = ' finalWidth ' h = ' finalHeight '`n monitorWidth = ' monitorWidth  ' monitorHeight = ' monitorHeight
+  if (lastStep < 0 and step < 0 and prevW == w and prevH == h) {
+    if VerCompare(A_OSVersion, "6.2") >= 0
+      DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
+    return
   }
+    
+  WinMove(finalX, finalY, finalWidth, finalHeight)
+  lastStep := step
+  prevW := w    
+  prevH := h
+
+  if !A_IsCompiled
+    tip 'x = ' x  ' y = ' y ' w = ' w  ' h = ' h '`n finalX = ' finalX  ' finalY = ' finalY ' finalWidth = ' finalWidth ' finalHeight = ' finalHeight '`n monitorWidth = ' monitorWidth  ' monitorHeight = ' monitorHeight
+  
   if VerCompare(A_OSVersion, "6.2") >= 0
     DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 }

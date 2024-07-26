@@ -3,9 +3,13 @@
  * @param message 要提示的文本
  * @param {number} time 超时后关闭
  */
-Tip(message, time := -1299) {
+Tip(message, time := -1299, X := unset, Y := unset) {
   ; 不喜欢不吉利的🔢🌶
-  ToolTip(message)
+  if IsSet(X) {
+    ToolTip(message, X, Y)
+  } else {
+    ToolTip(message)
+  }
   SetTimer(() => ToolTip(), time)
 }
 
