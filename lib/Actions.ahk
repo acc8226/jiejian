@@ -9,7 +9,7 @@ smartCloseWindow() {
       try {
         PostMessage(0x112, 0xF060, , , "A")
       } catch Error as e {
-        MsgBox '该程序暂时无法关闭，2 秒后弹窗自动关闭后请重试', , 'T2'      
+        MsgBox '该程序暂时无法关闭，2 秒后弹窗自动关闭后请重试', , 'T2'
       }
     }
   } else {
@@ -440,7 +440,7 @@ CenterAndResizeWindow_window_percent(step) {
     
   WinMove(finalX, finalY, finalWidth, finalHeight)
   lastStep := step
-  prevW := w    
+  prevW := w
   prevH := h
 
   if !A_IsCompiled
@@ -448,4 +448,20 @@ CenterAndResizeWindow_window_percent(step) {
   
   if VerCompare(A_OSVersion, "6.2") >= 0
     DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
+}
+
+; 左移动 x 像素，上移动 y 像素
+moveRelative(relativeX, relativeY := 0) {
+  if NotActiveWin()
+    return
+
+  WinExist("A")
+  ; 不适用于最大化和最小化的状态下
+  if (WindowMaxOrMin()) {
+    Tip("请在窗口模式下缩放")
+    return
+  }
+
+  WinGetPos(&x, &y)
+  WinMove(x + relativeX, y + relativeY)
 }

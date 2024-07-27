@@ -262,13 +262,14 @@ h::setWindowHeightToFullScreen
 ; 切换到上个窗口
 e::Send("!{tab}")
 
-; 程序内切换窗口
+; 程序内切换窗口 caps + ` 或者 r 来切换
+SC029::
 r::LoopRelatedWindows
 
 ; 切换到上一个虚拟桌面
 y::Send("^#{Left}")
 ; 切换到下一个虚拟桌面
-p::Send("^#{Right}")
+n::Send("^#{Right}")
 
 ; 适合 b 站
 a::CenterAndResizeWindow(818, 460)
@@ -280,6 +281,14 @@ f::MaximizeWindow
 
 j::CenterAndResizeWindow_window_percent(200)
 k::CenterAndResizeWindow_window_percent(-200)
+
+u::Click
+i::Click "Up Right"
+
+o::MouseMove 0, -3, , "R" ; 上移
+l::MouseMove -3, 0, , "R" ; 左移
+SC027::MouseMove 3, 0, , "R" ; 右移 caps + ;
+SC034::MouseMove 0, 3, , "R" ; 下移 caps + .
 
 ; 复制路径
 z::copySelectedAsPlainText
@@ -298,6 +307,12 @@ Space::{
 
 ; 按住 CapsLock 时同时按下鼠标左键拖动窗口
 LButton::moveWindow
+
+Left::moveRelative(-28)
+Right::moveRelative(28)
+Up::moveRelative(0, -28)
+Down::moveRelative(0, 28)
+
 #HotIf
 
 ; windows 版本

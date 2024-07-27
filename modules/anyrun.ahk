@@ -21,6 +21,7 @@ global MY_GUI_TITLE := '快捷启动'
 
 global MyActionArray := [
     MyAction('打开网址', 'list', isLegitimateWebsite, appendWebsiteName, jumpURL), ; 是否提前些比较好，不用了，兜底挺好
+    MyAction('生成二维码', 'list', isLegitimateWebsite, , path => Run('https://api.caoliao.net/api/qrcode/code?text=' . path)),
     ; 打开（文件，可能是 mp3 或者 mp4 或者 mov）
     MyAction('打开', 'list', path => isFileOrDirExists(path) && NOT DirExist(path), appendFileType, path => Run(path)) ,
     MyAction('前往文件夹', 'list', isDir,, openDir),
@@ -176,7 +177,7 @@ anyrun() {
             ; 搜索匹配
             ; 查询出所有搜索，如果前缀满足则添加到列表
             for it in DATA_LIST {
-                if (it.type == DataType.action and 1 = InStr(editValue, it.alias))                        
+                if (it.type == DataType.action and 1 = InStr(editValue, it.alias))
                     listBoxDataArray.push(it.title . '-' . it.type)
             }
                 
@@ -262,7 +263,7 @@ anyrun() {
                 realStr := SubStr(editValue, StrLen(item.alias) + 1)
                 runUrl := unset
                 if InStr(item.path, "{query}")
-                    runUrl := strReplace(item.path, "{query}", realStr) 
+                    runUrl := strReplace(item.path, "{query}", realStr)
                 else
                     runUrl := item.path . realStr
                 Run(runUrl)
@@ -310,13 +311,13 @@ computeDegree(regExMatchInfo) {
 
 ; 用到了 item.type、item.path 和 item.title
 openPathByType(item) {
-    if (item.type = DataType.web || item.type = DataType.dl)
+    if (item.type = DataType.web || item.type = DataType.dl) {
         jumpURL(item.path)
-    else if (item.type = DataType.inner) { ; 精确处理：内部               
+    } else if (item.type = DataType.inner) { ; 精确处理：内部
         openInnerCommand(item.title, True)
-    } else if (item.type = DataType.ext) ; 精确处理：外部
+    } else if (item.type = DataType.ext) { ; 精确处理：外部
         Run('jiejian' . (A_PtrSize == 4 ? '32' : '64') . '.exe /script ' . item.path)
-    else if (item.type = DataType.app && item.title == '微信') { ; 对微信特殊处理：自动登录微信
+    } else if (item.type = DataType.app && item.title == '微信') { ; 对微信特殊处理：自动登录微信
         try {
             Run(item.path,,, &pid)
             WinWaitActive("ahk_pid " . pid)
@@ -337,6 +338,7 @@ class MyAction {
         this.title := title
         ; 类型 edit or list
         this.type := type
+
         ; 过滤条件 是否符合匹配
         if IsSet(isMatch)
             this.isMatch := isMatch
@@ -353,10 +355,9 @@ class MyAction {
 
 ; 是否是文件夹，如果当前是文件则提取
 isDir(path) {
-    if (path == '*' || path == '/')
+    if path == '*' || path == '/'
         return false
 
-    isMatch := unset
     if DirExist(path) {
         isMatch := true
     } else if FileExist(path) {
@@ -374,40 +375,38 @@ isDir(path) {
 appendWebsiteName(path) {
     ; 对网址进行细化处理
     ; 从 dava.csv 中抽取符合条件的 b 列 (http 网址)，若满足则赋值 d 列
-    match := ''
+    appendName := ''
     for (it in DATA_LIST) {
         if (it.type == DataType.web) {
             ; 完全匹配
             if (path == it.path) {
-                match := '-' . it.title
+                appendName := '-' . it.title
                 break
             } else {
                 ; 可以匹配 www.doubao.com doubao.com https://www.doubao.com http://www.doubao.com https://www.doubao.com/ http://www.doubao.com/a/b.html 但不能匹配 abc.doubao.com https://edf.doubao.com http://ghi.doubao.com
                 ; 提取关键部位
                 ; 去掉 www
-                newUri := unset
-                if 1 == InStr(it.path, 'http://www.') || 1 == InStr(it.path, 'https://www.') || 1 == InStr(it.path, 'www.') {
+                if (1 == InStr(it.path, 'http://www.') || 1 == InStr(it.path, 'https://www.') || 1 == InStr(it.path, 'www.')) {
                     uri := SubStr(it.path, InStr(it.path, 'www.') + StrLen('www.'))
-                    newUri := 'i)^(?:https?://)?(?:www\.)?' . StrReplace(uri, '.', "\.") . '(?:/.*)?$'
-                }
-                ; 去掉 ://
-                else {
+                    newUriReg := 'i)^(?:https?://)?(?:www\.)?' . StrReplace(uri, '.', "\.") . '(?:/.*)?$'
+                } else {
+                    ; 去掉 ://
                     if InStr(it.path, '://')
                         uri := SubStr(it.path, InStr(it.path, '://') + StrLen('://'))
                     else
                         uri := it.path
                     ; 如果是顶级域名（简单认为分段数为 2）则加上 www
                     is_top_level_domain := (2 == StrSplit(uri, '.').Length)
-                    newUri := 'i)^(?:https?://)?' . (is_top_level_domain ? '(?:www\.)?' : '') . StrReplace(uri, '.', "\.") . '(?:/.*)?$'
+                    newUriReg := 'i)^(?:https?://)?' . (is_top_level_domain ? '(?:www\.)?' : '') . StrReplace(uri, '.', "\.") . '(?:/.*)?$'
                 } 
-                if (path ~= newUri) {
-                    match := '-' . it.title
+                if (path ~= newUriReg) {
+                    appendName := '-' . it.title
                     break
                 }
             }
         }
     }
-    return match
+    return appendName
 }
 
 appendFileType(path) {
@@ -478,7 +477,7 @@ openDir(path) {
     }
 }
 
-; 是否是网站
+; 是否是合法网站
 isLegitimateWebsite(url) {
     return url ~= IS_HTTP_Reg
 }

@@ -39,14 +39,15 @@ startByHotString(hotstring) {
         }
 }
 
+; 打开网址
 jumpURL(input) {
     if (input ~= '^[^\/]*[一-龥]+.*') {
         MsgBox '禁止访问中文域名，谨防诈骗'
         return
     }
     ; https 将逐渐替代 http，这是大势所趋
-    if !InStr(input, 'http')
-        input := "https://" . input
+    if NOT InStr(input, 'http')
+        input := ("https://" . input)
     Run(input)
 }
 
