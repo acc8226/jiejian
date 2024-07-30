@@ -1,4 +1,4 @@
-﻿global TEXT_GROUP := 'text_group'
+﻿GLOBAL TEXT_GROUP := 'text_group'
 ; 完善 TEXT_GROUP 组信息
 GroupAdd TEXT_GROUP, 'ahk_class ^AutoHotkeyGUI$'
 

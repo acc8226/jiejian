@@ -1,10 +1,10 @@
 ﻿#Include "Sort.ahk"
 
 ; 正则匹配最大支持长度默认为 32 位
-global SUPPORT_LEN := 32
-global DATA_FILTER_REG := 'i)^(?:' . DataType.app . '|' . DataType.file . '|' . DataType.web . '|' . DataType.inner . '|' . DataType.ext . '|' . DataType.dl . ')$'
+GLOBAL SUPPORT_LEN := 32
+GLOBAL DATA_FILTER_REG := 'i)^(?:' . DataType.app . '|' . DataType.file . '|' . DataType.web . '|' . DataType.inner . '|' . DataType.ext . '|' . DataType.dl . ')$'
 ; 端口判断过于简单 但是基本够用了
-global IS_HTTP_Reg := 'i)^(?:https?://)?' ; 协议
+GLOBAL IS_HTTP_Reg := 'i)^(?:https?://)?' ; 协议
                     ; local 或 ip地址 或 英文网址
                     . '(?:localhost'
                         . '|(?:\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])\.(?:\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])\.(?:\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])\.(?:\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])' 
@@ -14,12 +14,12 @@ global IS_HTTP_Reg := 'i)^(?:https?://)?' ; 协议
                     . ')'
                     . '(:(?!0)(?![7-9]\d{4})\d{1,5})?' ; 端口
                     . '(?:/[\w-./?%&=#一-龻]*)?\s*$' ; 路径（可以包含中文）
-global MY_GUI
-global MY_GUI_WIDTH := 432
-global MY_GUI_MARGINX_X := 2.8
-global MY_GUI_TITLE := '快捷启动'
+GLOBAL MY_GUI
+GLOBAL MY_GUI_WIDTH := 432
+GLOBAL MY_GUI_MARGINX_X := 2.8
+GLOBAL MY_GUI_TITLE := '快捷启动'
 
-global MyActionArray := [
+GLOBAL MyActionArray := [
     MyAction('打开网址', 'list', isLegitimateWebsite, appendWebsiteName, jumpURL), ; 是否提前些比较好，不用了，兜底挺好
     MyAction('生成二维码', 'list', isLegitimateWebsite, , path => Run('https://api.caoliao.net/api/qrcode/code?text=' . path)),
     ; 打开（文件，可能是 mp3 或者 mp4 或者 mov）
@@ -30,13 +30,13 @@ global MyActionArray := [
     MyAction('删除文件', 'list', isFileOrDirExists,, delFileOrDir),
 ]
 if IsSet(MY_BASH)
-    MyActionArray.Push(MyAction('在 Bash 中打开', 'list', isFileOrDirExists,, openInBash))
+    MyActionArray.Push(MyAction('在 Bash 中打开所在位置', 'list', isFileOrDirExists,, openInBash))
 useTerminal := IsSet(MY_NEW_TERMINAL) ? openInNewTerminal : openInTerminal
-MyActionArray.Push(MyAction('在终端中打开', 'list', isFileOrDirExists,, useTerminal))
+MyActionArray.Push(MyAction('在 终端 中打开所在位置', 'list', isFileOrDirExists,, useTerminal))
 if IsSet(MY_VSCode)
-    MyActionArray.Push(MyAction('在 VSCode 中打开', 'list', isFileOrDirExists,, openInVSCode))
+    MyActionArray.Push(MyAction('在 VSCode 中打开', 'list', isCodeFileOrDir,, openInVSCode))
 if IsSet(MY_IDEA)
-    MyActionArray.Push(MyAction('在 IDEA 中打开', 'list', isFileOrDirExists,, openInIDEA))
+    MyActionArray.Push(MyAction('在 IDEA 中打开', 'list', isCodeFileOrDir,, openInIDEA))
 
 ; 彩蛋 本机 IP
 MyActionArray.Push(MyAction('myip', 'edit',,, getIPAddresses))
@@ -68,7 +68,7 @@ anyrun() {
         ; Owner 可以让当前窗口从属于另一个窗口。从属的窗口默认不显示在任务栏, 并且它总是显示在其父窗口的上面. 当其父窗口销毁时它也被自动销毁
         ; -Caption 移除背景透明的窗口的边框和标题栏
         ; -Resize 禁止用户重新调整窗口的大小
-        global MY_GUI := Gui('AlwaysOnTop Owner -Caption -Resize', MY_GUI_TITLE)
+        GLOBAL MY_GUI := Gui('AlwaysOnTop Owner -Caption -Resize', MY_GUI_TITLE)
         ; 横向和纵向边框收窄
         MY_GUI.MarginY := MY_GUI.MarginX := MY_GUI_MARGINX_X
         fontSize := 's21'
@@ -415,11 +415,11 @@ appendFileType(path) {
         extension := matchInfo.1
         switch extension, false {
             case '3gp', 'avi', 'flv', 'mkv', 'mov', 'mp4', 'wmv': return "视频"
-            case '7z', 'bz2', 'gz', 'gz2', 'rar', 'tar', 'zip': return "压缩文件"
-            case 'aac', 'flac', 'mp3', 'ogg', 'png', 'wav', 'wma': return "音频"
+            case '7z', 'bz2', 'gz', 'gz2', 'rar', 'tar', 'zip': return "压缩包"
+            case 'aac', 'flac', 'mp3', 'ogg', 'wav', 'wma': return "音频"
             case 'apk': return "安卓安装包"
             case 'bat', 'cmd': return " Windows 批处理文件"
-            case 'bmp', 'gif', 'ico', 'jpeg', 'jpg', 'tiff', 'png', 'webp': return "图片文件"
+            case 'bmp', 'gif', 'ico', 'jpeg', 'jpg', 'tiff', 'png', 'webp': return "图片"
             case 'css': return " CSS 样式表"
             case 'csv': return "逗号分隔值文件(二维表格)"
             case 'cer', 'crt': return "安全证书文件"
@@ -485,6 +485,18 @@ isLegitimateWebsite(url) {
 isFileOrDirExists(path) {
     ; con 文件或目录 为何存在，我用不到
     return path !== '*' && path !== '/' && 'con' != SubStr(path, 1, 3) && FileExist(path)
+}
+
+isCodeFileOrDir(path) {
+    ; con 文件或目录 为何存在，我用不到
+    if path == '*' || path == '/' || 'con' = SubStr(path, 1, 3)
+        return false
+    if FileExist(path) {
+        if DirExist(path)
+            return true
+        return path ~= 'i)\.(?:txt|html?|xml|xslt?|js|ts|css|php|asp|pl|py|java|c|cpp|cc|h|hpp|hh|cs|vb|sql|sh|ini|bat|cmd|aspx|ashx|asmx|ascx|cfg|conf|json|yaml|yml|rb|lua|swift|m|mm|r|pas|go|rs|dart|kt|scala|hs|erl|hrl|clj|groovy|fs|ps1|vhd|vhdl|verilog|markdown|md|ahk)'
+    }
+    return false
 }
 
 delFileOrDir(path) {
@@ -593,6 +605,16 @@ openInnerCommand(title, isConfirm := false) {
         case '上一曲': Send '{Media_Prev}'
         case '下一曲': Send '{Media_Next}'
         case '暂停': Send '{Media_Play_Pause}'
+        case '音量设为10': SoundSetVolume 10
+        case '音量设为20': SoundSetVolume 20
+        case '音量设为30': SoundSetVolume 30
+        case '音量设为40': SoundSetVolume 40
+        case '音量设为50': SoundSetVolume 50
+        case '音量设为60': SoundSetVolume 60
+        case '音量设为70': SoundSetVolume 70
+        case '音量设为80': SoundSetVolume 80
+        case '音量设为90': SoundSetVolume 90
+        case '音量设为最大': SoundSetVolume 100
         ; 其他
         case '关闭程序': smartCloseWindow
         default: MsgBox('非系统内置命令！', APP_NAME)

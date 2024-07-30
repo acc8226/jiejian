@@ -2,7 +2,7 @@
     
     __new() {
         ; 当前是否是选中状态
-        global IS_AUTO_START_UP
+        GLOBAL IS_AUTO_START_UP
 
         this.editScript:= '编辑脚本(&E)'
         this.listVars:= '查看变量(&L)'
@@ -90,7 +90,7 @@
      * @param MyMenu
      */
     TrayMenuHandler(ItemName, ItemPos, MyMenu) {        
-        global IS_AUTO_START_UP
+        GLOBAL IS_AUTO_START_UP
 
         switch ItemName, 'off' {
         case this.editScript: Edit

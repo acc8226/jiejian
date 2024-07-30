@@ -79,7 +79,7 @@ if NOT FileExist(A_WorkingDir . "\shortcuts\*")
 settingTray
 ; 设置托盘图标和菜单
 settingTray() {
-    global JJ_TRAY_MENU := MyTrayMenu()
+    GLOBAL JJ_TRAY_MENU := MyTrayMenu()
 
     localIsAlphaOrBeta := InStr(CODE_VERSION, "alpha") || InStr(CODE_VERSION, "beta")
     A_IconTip := "捷键 " . CODE_VERSION . (A_IsCompiled ? "" : " 未编译") . (localIsAlphaOrBeta ? " 测试版" : " ") . (A_PtrSize == 4 ? '32位' : '64位')
@@ -275,7 +275,7 @@ n::Send("^#{Right}")
 a::CenterAndResizeWindow(818, 460)
 ; 适合 b 站
 s::CenterAndResizeWindow(1280, 770)
-d::CenterAndResizeWindow(1920, 1080)
+d::CenterAndResizeWindow(1920, 1080) ; 16:9
 ; 最大化或还原
 f::MaximizeWindow
 

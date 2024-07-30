@@ -210,7 +210,7 @@ minimizeWindow() {
     DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 }
 
-; 我新加的 窗口按照屏幕的百分比 和 宽高比 8:5 进行显示
+; 我新加的 窗口按照屏幕的百分比 和 宽高比 16:9 进行显示
 CenterAndResizeWindow_X_Percent(percent) {
   if NotActiveWin()
     return
@@ -241,8 +241,8 @@ CenterAndResizeWindow_X_Percent(percent) {
 
   ; 高度作为基准
   finalHeight := h * percent
-  ; 宽度按照 16:10 即 8:5，这样在超宽屏幕上显示正常
-  finalWidth := finalHeight * 8 / 5
+  ; 宽度按照 16:9 这样在超宽屏幕上显示正常
+  finalWidth := finalHeight * 16 / 9
   ; 最终窗口的 x 值
   finalX := l + (w - finalWidth) / 2
   ; 最终窗口的 y 值

@@ -1,4 +1,4 @@
-﻿global DATA_LIST := parseData("data.csv")
+﻿GLOBAL DATA_LIST := parseData("data.csv")
 
 class DataType {
   static text := '文本' ; 用于热字符串替换
@@ -41,8 +41,8 @@ regMyHotKey() {
 
 parseData(fileName) {
   parseDataLine(line, eachLineLen) {
-    global MY_BASH, MY_VSCode, MY_IDEA, MY_NEW_TERMINAL
-    global MY_DOUBLE_ALT, MY_DOUBLE_HOME, MY_DOUBLE_END, MY_DOUBLE_ESC
+    GLOBAL MY_BASH, MY_VSCode, MY_IDEA, MY_NEW_TERMINAL
+    GLOBAL MY_DOUBLE_ALT, MY_DOUBLE_HOME, MY_DOUBLE_END, MY_DOUBLE_ESC
   
     split := StrSplit(line, ",")
     ; 跳过不符合条件的行
