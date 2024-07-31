@@ -6,7 +6,7 @@
 <img src="https://img.shields.io/github/commit-activity/y/acc8226/jiejian" style="display:inline-block;margin: 0 1px;" alt="GitHub commit activity">
 <img src="https://img.shields.io/github/last-commit/acc8226/jiejian" style="display:inline-block;margin: 0 1px;" alt="GitHub last commit">
 <img src="https://img.shields.io/badge/release-24.5-green" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
-<img src="https://img.shields.io/badge/测试版-24.7--beta2-yellow" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
+<img src="https://img.shields.io/badge/测试版-24.7--beta3-yellow" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
 </div>
 
 A key mapping/shortcut enhancement tool developed based on [Autohotkey2](https://www.autohotkey.com/), designed to simplify keyboard and mouse operations in Windows. It can serve as a traditional launcher and also supports mouse side buttons and hotkeys effectively.
@@ -17,7 +17,7 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 
 捷键是一款实用的 Windows 键鼠增强工具，基于 [Autohotkey2](https://www.autohotkey.com/) 开发。为简化 Windows 键鼠操作而生，拥有强大按键映射以及快捷键增强功能，可作为一个传统启动器，并且支持鼠标侧边按键和热字符。为获得最佳体验，强烈建议搭配侧键鼠标和全局鼠标手势软件，并设置为开机自启。
 
-大小： 1.66MB / 语言： 简体中文 / 环境： 32 位和 64 位 Windows XP 以上系统，Win 7 以上使用更佳 
+大小： 1.58MB / 语言： 简体中文 / 环境： 32 位和 64 位 Windows XP 以上系统，Win 7 以上使用更佳 
 
 ![软件截图](https://cdnjson.com/images/2024/07/23/1720686143392778.png)
 
