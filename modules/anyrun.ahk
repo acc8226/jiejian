@@ -21,7 +21,7 @@ GLOBAL MY_GUI_TITLE := '快捷启动'
 
 GLOBAL MyActionArray := [
     MyAction('打开网址', 'list', isLegitimateWebsite, appendWebsiteName, jumpURL), ; 是否提前些比较好，不用了，兜底挺好
-    MyAction('生成二维码', 'list', isLegitimateWebsite, , path => Run('https://api.caoliao.net/api/qrcode/code?text=' . path)),
+    MyAction('生成二维码', 'list', isLegitimateWebsite, , path => Run('https://api.caoliao.net/api/qrcode/code?text=' . URIEncode(path))),
     ; 打开（文件，可能是 mp3 或者 mp4 或者 mov）
     MyAction('打开', 'list', path => isFileOrDirExists(path) && NOT DirExist(path), appendFileType, path => Run(path)) ,
     MyAction('前往文件夹', 'list', isDir,, openDir),
@@ -260,7 +260,7 @@ anyrun() {
             ; 用于 action 匹配，形如 bd + 关键字
             else if (item.type = DataType.action) {
                 ; 拿到 alias 例如为 bd 并去除 bd 开头的字符串
-                realStr := SubStr(editValue, StrLen(item.alias) + 1)
+                realStr := URIEncode(SubStr(editValue, StrLen(item.alias) + 1))
                 runUrl := unset
                 if InStr(item.path, "{query}")
                     runUrl := strReplace(item.path, "{query}", realStr)
