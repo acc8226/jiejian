@@ -6,7 +6,7 @@
 <img src="https://img.shields.io/github/commit-activity/y/acc8226/jiejian" style="display:inline-block;margin: 0 1px;" alt="GitHub commit activity">
 <img src="https://img.shields.io/github/last-commit/acc8226/jiejian" style="display:inline-block;margin: 0 1px;" alt="GitHub last commit">
 <img src="https://img.shields.io/badge/release-24.5-green" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
-<img src="https://img.shields.io/badge/测试版-24.7--beta3-yellow" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
+<img src="https://img.shields.io/badge/测试版-24.8--beta1-yellow" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
 </div>
 
 A key mapping/shortcut enhancement tool developed based on [Autohotkey2](https://www.autohotkey.com/), designed to simplify keyboard and mouse operations in Windows. It can serve as a traditional launcher and also supports mouse side buttons and hotkeys effectively.
