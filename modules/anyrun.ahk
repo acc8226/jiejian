@@ -615,6 +615,31 @@ openInnerCommand(title, isConfirm := false) {
         case '音量设为80': SoundSetVolume 80
         case '音量设为90': SoundSetVolume 90
         case '音量设为最大': SoundSetVolume 100
+
+        case '取消关机任务': Run('shutdown -a', , 'Hide')
+        case '15秒后关机': Run('shutdown -a', , 'Hide')
+            Run('shutdown /s /t 15', , 'Hide')
+        case '30秒后关机': Run('shutdown -a', , 'Hide')
+            Run('shutdown /s /t 30', , 'Hide')
+        case '1分钟后关机': Run('shutdown -a', , 'Hide')
+            Run('shutdown /s /t 60', , 'Hide')
+        case '3分钟后关机': Run('shutdown -a', , 'Hide')
+            Run('shutdown /s /t 180', , 'Hide')
+        case '5分钟后关机': Run('shutdown -a', , 'Hide')
+            Run('shutdown /s /t 300', , 'Hide')
+        case '10分钟后关机': Run('shutdown -a', , 'Hide')
+            Run('shutdown /s /t 600', , 'Hide')
+        case '20分钟后关机': Run('shutdown -a', , 'Hide')
+            Run('shutdown /s /t 1200', , 'Hide')
+        case '30分钟后关机': Run('shutdown -a', , 'Hide')
+            Run('shutdown /s /t 1800', , 'Hide')
+        case '1小时后关机': Run('shutdown -a', , 'Hide')
+            Run('shutdown /s /t 3600', , 'Hide')
+        case '3小时后关机': Run('shutdown -a', , 'Hide')
+            Run('shutdown /s /t 10800', , 'Hide')
+        case '5小时后关机': Run('shutdown -a', , 'Hide')
+            Run('shutdown /s /t 18000', , 'Hide')
+
         ; 其他
         case '关闭程序': smartCloseWindow
         default: MsgBox('非系统内置命令！', APP_NAME)
