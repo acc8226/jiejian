@@ -113,6 +113,7 @@
 【editor】Ultraedit,,ahk_exe i)uedit,^n,^F4,,,,,,,
 【editor】Atom【已过时】,,ahk_exe i)atom.exe,^n,^F4,,^PgDn,,^PgUp,,,
 ,,,,,,,,,,,
+【窗口】Beyond Compare,高,ahk_class i)TaboutDialog ahk_exe i)Bcompare.exe,,Esc,,,,,,,
 【file compare】Beyond Compare,,ahk_exe i)Bcompare.exe,^t,^w,,,,,,,
 【file compare】WinMerge,,ahk_exe i)WinMergeU.exe,^n,^F4,,,,,,,
 ,,,,,,,,,,,
