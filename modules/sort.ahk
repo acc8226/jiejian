@@ -19,7 +19,7 @@ dataArraySort(dataArray) {
             }
             j++
         }
-        if not flag
+        if !flag
             break
         i++
     }
@@ -35,16 +35,10 @@ dataArraySort(dataArray) {
 dataArrayCompare(it1, it2) {
     ; 排序按照 degree 降序、title 升序、type 升序
     result := it1.degree - it2.degree
-    if result == 0 {
+    if (result == 0) {
         result := StrCompare(it2.title, it1.title)
-        if result == 0 {
-            ; 程序 优先于 下载
-            ; if (it1.type == '程序' && it2.type == '下载') {
-            ;     return 1
-            ; } else {
-                result := StrCompare(it2.type, it1.type)
-            ; }
-        }
+        if result == 0        
+            result := StrCompare(it2.type, it1.type)
     }
     return result
 }
