@@ -21,7 +21,8 @@ GLOBAL MY_GUI_TITLE := '快捷启动'
 
 GLOBAL MyActionArray := [
     MyAction('打开网址', 'list', isLegitimateWebsite, appendWebsiteName, jumpURL), ; 是否提前些比较好，不用了，兜底挺好
-    MyAction('生成二维码', 'list', isLegitimateWebsite, , path => Run('https://api.caoliao.net/api/qrcode/code?text=' . URIEncode(path))),
+    MyAction('生成二维码(磁力链)', 'list', isMagnetUrl, , path => Run('https://api.caoliao.net/api/qrcode/code?text=' . URIEncode(path))),
+    MyAction('生成二维码(网址)', 'list', isLegitimateWebsite, , path => Run('https://api.caoliao.net/api/qrcode/code?text=' . URIEncode(path))),
     ; 打开（文件，可能是 mp3 或者 mp4 或者 mov）
     MyAction('打开', 'list', path => isFileOrDirExists(path) && NOT DirExist(path), appendFileType, path => Run(path)) ,
     MyAction('前往文件夹', 'list', isDir,, openDir),
@@ -259,8 +260,10 @@ anyrun() {
             }
             ; 用于 action 匹配，形如 bd + 关键字
             else if (item.type = DataType.action) {
+                realStr := SubStr(editValue, StrLen(item.alias) + 1)
                 ; 拿到 alias 例如为 bd 并去除 bd 开头的字符串
-                realStr := URIEncode(SubStr(editValue, StrLen(item.alias) + 1))
+                if item.alias != 'pi'
+                    realStr := URIEncode(realStr)
                 runUrl := unset
                 if InStr(item.path, "{query}")
                     runUrl := strReplace(item.path, "{query}", realStr)
@@ -480,6 +483,11 @@ openDir(path) {
 ; 是否是合法网站
 isLegitimateWebsite(url) {
     return url ~= IS_HTTP_Reg
+}
+
+; 是否是合法磁力链
+isMagnetUrl(url) {        
+    return RegExMatch(url, '^magnet:.+')
 }
 
 isFileOrDirExists(path) {
