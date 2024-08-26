@@ -260,9 +260,10 @@ anyrun() {
             }
             ; 用于 action 匹配，形如 bd + 关键字
             else if (item.type = DataType.action) {
+                ; 拿到 alias 例如为 bd 则去除头部 bd
                 realStr := SubStr(editValue, StrLen(item.alias) + 1)
-                ; 拿到 alias 例如为 bd 并去除 bd 开头的字符串
-                if item.alias != 'pi'
+                ; GitHub 加速服务主要由 https://www.7ed.net/gitmirror/hub.html 提供
+                if NOT(item.alias == 'pi' || item.alias == 'js')
                     realStr := URIEncode(realStr)
                 runUrl := unset
                 if InStr(item.path, "{query}")
