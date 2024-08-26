@@ -6,7 +6,7 @@
 <img src="https://img.shields.io/github/commit-activity/y/acc8226/jiejian" style="display:inline-block;margin: 0 1px;" alt="GitHub commit activity">
 <img src="https://img.shields.io/github/last-commit/acc8226/jiejian" style="display:inline-block;margin: 0 1px;" alt="GitHub last commit">
 <img src="https://img.shields.io/badge/release-24.5-green" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
-<img src="https://img.shields.io/badge/测试版-24.8--beta1-yellow" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
+<img src="https://img.shields.io/badge/测试版-24.8--beta2-yellow" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
 </div>
 
 A key mapping/shortcut enhancement tool developed based on [Autohotkey2](https://www.autohotkey.com/), designed to simplify keyboard and mouse operations in Windows. It can serve as a traditional launcher and also supports mouse side buttons and hotkeys effectively.
@@ -21,6 +21,6 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 
 ![软件截图](https://cdnjson.com/images/2024/07/23/1720686143392778.png)
 
-[**download 下载地址**][捷键] | [video demonstration 视频演示](https://www.bilibili.com/video/BV19H4y1e7hJ?vd_source=54168537affc2c02555097cb26797d99) | [帮助文档](https://feipig.fun/zh-cn/4c2b72aaa7d0/)
+[**download 下载地址**][捷键] | [video demonstration 视频演示](https://www.bilibili.com/video/BV19H4y1e7hJ?vd_source=54168537affc2c02555097cb26797d99) | [帮助文档](http://acc8226.test.upcdn.net/)
 
-  [捷键]: https://share.feijipan.com/s/bAAKufr3 ""
+  [捷键]: https://gitee.com/acc8226/shortcut-key/releases/download/2024%E5%B9%B45%E6%9C%88%E5%A4%A9/jiejian-24.8-beta1.7z ""
