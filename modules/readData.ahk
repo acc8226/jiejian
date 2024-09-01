@@ -1,4 +1,5 @@
-﻿GLOBAL DATA_LIST := parseData("data.csv")
+﻿GLOBAL EACH_LINE_LEN := 8
+GLOBAL DATA_LIST := parseData("data.csv")
 
 class DataType {
   static text := '文本' ; 用于热字符串替换
@@ -29,7 +30,7 @@ regMyHotKey() {
       Hotkey(it.hk, startByHotKey)
     
     ; 热串：目前仅作用于网址跳转
-    if (StrLen(it.hs) > 0 && it.type = DataType.web) {
+    if (DataType.web = it.type && StrLen(it.hs) > 0) {
         ; 排除在 编辑器中 可跳转网址
         HotIfWinNotactive('ahk_group ' . TEXT_GROUP)
         Hotstring(":C*:" . it.hs, startByHotString)
@@ -39,31 +40,30 @@ regMyHotKey() {
   }
 }
 
+; 只供内部调用
 parseData(fileName) {
-  parseDataLine(line, eachLineLen) {
+  parseDataLine(line) {
     GLOBAL MY_BASH, MY_VSCode, MY_IDEA, MY_NEW_TERMINAL
     GLOBAL MY_DOUBLE_ALT, MY_DOUBLE_HOME, MY_DOUBLE_END, MY_DOUBLE_ESC
   
     split := StrSplit(line, ",")
     ; 跳过不符合条件的行
-    if split.Length < eachLineLen
+    if split.Length < EACH_LINE_LEN
       return
-    splitEachLineLen := Trim(split[eachLineLen])
+    splitEACH_LINE_LEN := Trim(split[EACH_LINE_LEN])
     ; 过滤不启用的行
-    if NOT (splitEachLineLen = '' || splitEachLineLen = 'y')
-      return
-    
+    if NOT (splitEACH_LINE_LEN = '' || splitEACH_LINE_LEN = 'y')
+      return    
     info := {}
     info.type := Trim(split[1])
-  
+      
     ; 去掉首尾的双引号，但不知为何只要行内出现 " 则首尾会加入一对 ""，然后里面的每个 " 都会转义为 ""
     ; info.path := Trim(split[2])
     ; if (StrLen(info.path) > 1 && '"' == SubStr(info.path, 1, 1) && '"' == SubStr(info.path, -1))
     ;   info.path := SubStr(info.path, 2, -1)
-    info.path := RegExReplace(Trim(split[2]), '"+')
-      
+    info.path := RegExReplace(Trim(split[2]), '"+')      
     ; 过滤空行
-    if info.type == '' && info.path == ''
+    if info.type == '' and info.path == ''
       return
     ; 过滤无效路径
     if (info.type = DataType.file) {
@@ -130,7 +130,7 @@ parseData(fileName) {
     if (info.type = DataType.text) {
       ; text 类型用完即走 不加入 array 中  
       if StrLen(info.hs) > 0          
-          Hotstring ":C*:" . info.hs, info.path
+          Hotstring(":C*:" . info.hs, info.path)
       return
     }
   
@@ -200,13 +200,12 @@ parseData(fileName) {
   } 
 
   dataList := []
-  eachLineLen := 8
   ; 每次从字符串中检索字符串(片段)
   Loop Parse, FileRead(fileName), "`n", "`r" {
       ; 跳过首行
       if A_Index = 1
           continue
-      appInfo := parseDataLine(A_LoopField, eachLineLen)
+      appInfo := parseDataLine(A_LoopField)
       if appInfo
           dataList.Push(appInfo)
   }

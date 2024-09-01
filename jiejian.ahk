@@ -30,7 +30,7 @@ if NOT (A_IsAdmin or RegExMatch(full_command_line, " /restart(?!\S)")) {
     }
 }
 
-GLOBAL CODE_VERSION := '24.8-beta1'
+GLOBAL CODE_VERSION := '24.9-beta1'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
@@ -81,8 +81,8 @@ settingTray
 settingTray() {
     GLOBAL JJ_TRAY_MENU := MyTrayMenu()
 
-    localIsAlphaOrBeta := InStr(CODE_VERSION, "alpha") || InStr(CODE_VERSION, "beta")
-    A_IconTip := "捷键 " . CODE_VERSION . (A_IsCompiled ? "" : " 未编译") . (localIsAlphaOrBeta ? " 测试版" : " ") . (A_PtrSize == 4 ? '32位' : '64位')
+    localIsAlphaOrBeta := InStr(CODE_VERSION, 'alpha') || InStr(CODE_VERSION, 'beta')
+    A_IconTip := "捷键 " . CODE_VERSION . (A_IsCompiled ? '' : ' 未编译') . (localIsAlphaOrBeta ? " 测试版" : " ") . (A_PtrSize == 4 ? '32位' : '64位')
 
     if (NOT A_IsCompiled) {
         ; 建议使用 16*16 或 32*32 像素的图标，使用 Ahk2Exe-Let 提取出 favicon.ico
@@ -141,12 +141,24 @@ checkUpdate()
 ; ----- 热串 之 打开网址。选择 z 而非 q，因为 q 的距离在第一行太远了，我称之为 Z 模式，用于全局跳转网址 -----
 ; ----- 热串 之 缩写扩展：将短缩词自动扩展为长词或长句（英文单词中哪个字母开头的单词数最少，我称之为 X 模式）-----
 
-:C*:xnow::{
+; 意为 'now'
+:C*:xnn::{
     SendText(FormatTime(, 'yyyy-MM-dd HH:mm:ss'))
 }
-:C*:xdate::{
+; 意为 'day'
+:C*:xdd::{
     SendText(FormatTime(, "'date:' yyyy-MM-dd HH:mm:ss"))
 }
+; 意为 '分割线的首字母 f'
+:C*:xff::{
+    SendText('——————— ฅ՞• •՞ฅ ———————')
+}
+; 意为 idcard
+#HotIf NOT A_IsCompiled
+:C*:xii::{
+    SendText('431121199210010012')
+}
+#HotIf
 
 ; 注册一个当脚本退出时, 会自动调用的函数
 OnExit(exitFunc)

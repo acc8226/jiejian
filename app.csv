@@ -5,6 +5,7 @@
 【压缩】WinRAR 6~7,,ahk_exe i)WinRAR.exe,^o,,,,,,,,
 【压缩】WinZip,,ahk_class i)^WinZipWClass$,^o,,,,,,,,
 【压缩】好压【部分支持】,,ahk_exe i)HaoZip.exe,^o,,,,,,,,
+【压缩】NanaZip【部分支持】,,ahk_exe NanaZip.+exe,,,,,退格,,,,
 ,,,,,,,,,,,
 【系统】Win 资源管理器,,ahk_exe i)explorer.exe ahk_class i)^CabinetWClass$,^t,^w,,,,,^n,,
 【系统】Win 7、10 画图【部分支持】,,ahk_exe i)mspaint.exe,^n,,,,,,,,
