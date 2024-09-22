@@ -262,9 +262,17 @@ anyrun() {
             else if (item.type = DataType.action) {
                 ; 拿到 alias 例如为 bd 则去除头部 bd
                 realStr := SubStr(editValue, StrLen(item.alias) + 1)
-                ; GitHub 加速服务主要由 https://www.7ed.net/gitmirror/hub.html 提供
-                if NOT(item.alias == 'pi' || item.alias == 'js')
+                ; GitHub 加速服务 js 由 https://www.7ed.net/gitmirror/hub.html 提供
+                if NOT(item.alias == 'pi' || item.alias == 'js') {
+                    ; 特殊处理 ip
+                    if (item.alias == 'ip') {
+                        ; 去掉 http:// 和 https://
+                        len := InStr(realStr, "://")
+                        if len
+                            realStr := SubStr(realStr, len + 3)
+                    }
                     realStr := URIEncode(realStr)
+                }
                 runUrl := unset
                 if InStr(item.path, "{query}")
                     runUrl := strReplace(item.path, "{query}", realStr)
