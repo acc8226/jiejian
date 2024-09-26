@@ -9,15 +9,16 @@
         this.pause := "暂停(Ctrl+Alt+S)"
         this.restart:= '重载程序(Ctrl+Alt+R)'
         this.search:= '搜一搜(Alt+空格)'
+
         this.viewWinId:= '查看窗口标识符(&V)'
         this.statistics:= '使用统计(&S)'
         this.startUp:= '开机自启(&A)'
-
         this.more:= '更多(&M)'
         this.document:= '帮助文档(&H)'
+
         this.video:= '视频教程(&V)'
-        this.followMeCSDN:= '在 CSDN 上关注我(&F)'
-        this.followMeGH:= '在 Github 上关注我(&F)'
+        this.followMeCSDN:= 'CSDN 上关注我(&F)'
+        ; this.followMeGH:= '在 Github 上关注我(&F)'
         this.update:= '检查更新(&U)...'
         this.about:= '关于(&A)'
 
@@ -42,12 +43,11 @@
             A_TrayMenu.Add(this.listVars, myTrayMenuHandler)
             A_TrayMenu.Add
         }
+        
         ; 右对齐不好使，我醉了
         A_TrayMenu.Add(this.pause, myTrayMenuHandler)
         A_TrayMenu.Add(Format("{1:-10}", this.restart), myTrayMenuHandler)
         A_TrayMenu.Add(Format("{1:-10}", this.search), myTrayMenuHandler)
-        A_TrayMenu.Add(this.viewWinId, myTrayMenuHandler)
-        A_TrayMenu.Add(this.statistics, myTrayMenuHandler)
         A_TrayMenu.Add(this.startUp, myTrayMenuHandler)
         A_TrayMenu.Add
 
@@ -55,8 +55,10 @@
         moreMenu := Menu()
         moreMenu.Add(this.document, myTrayMenuHandler)
         moreMenu.Add(this.video, myTrayMenuHandler)
+        moreMenu.Add(this.statistics, myTrayMenuHandler)
+        moreMenu.Add(this.viewWinId, myTrayMenuHandler)
         moreMenu.Add(this.followMeCSDN, myTrayMenuHandler)
-        moreMenu.Add(this.followMeGH, myTrayMenuHandler)
+        ; moreMenu.Add(this.followMeGH, myTrayMenuHandler)
         moreMenu.Add(this.update, myTrayMenuHandler)
         moreMenu.Add(this.about, myTrayMenuHandler)
         A_TrayMenu.Add(this.more, moreMenu)
@@ -93,52 +95,65 @@
         GLOBAL IS_AUTO_START_UP
 
         switch ItemName, 'off' {
-        case this.editScript: Edit
-        case this.listVars: ListVars
-        case this.pause: this.jiejianToggleSuspend
-        case this.restart: Reload
-        case this.search: anyrun
-        case this.viewWinId: Run("extra/WindowSpyU32.exe")
-        case this.statistics:
-            ; 统计软件使用总分钟数
-            recordMinsValueName := 'record_mins'
-            recordMins := RegRead(REG_KEY_NAME, recordMinsValueName, 0) + DateDiff(A_NowUTC, START_TIME, 'Minutes')
-            ; 统计软件使用次数
-            launchCountValueName := 'launch_count'
-            launchCount := RegRead(REG_KEY_NAME, launchCountValueName, 1)
-    
-            sb := '总启动次数 ' . launchCount . ' 次，您目前已使用捷键 ' . recordMins . ' 分钟'
-            if (recordMins >= 60) {
-                sb .= '（约 '
-                recordYears := recordMins // (365 * 24 * 60)
-                if recordYears > 0
-                    sb .= recordYears . ' 年 '
-                recordDays := recordMins // (24 * 60) - recordYears * 365
-                if recordDays >= 1
-                    sb .= recordDays . ' 天 '
-                recordHours := recordMins // 60 - recordYears * 365 * 24 - recordDays * 24
-                if recordHours >= 1
-                    sb .= recordHours . ' 小时 '
-                mins := recordMins - recordMins // 60 * 60
-                if mins >= 1
-                    sb .= mins . ' 分钟'
-                sb .= '）'
-            }                     
-            MsgBox(sb, '使用统计')
-        case this.startUp:
-            ; 当前是开机自启则设置为开机不自启，否则设置为开机自启
-            if IS_AUTO_START_UP
-                FileDelete(this.linkFile)
-            else
-                FileCreateShortcut(this.shortcut, this.linkFile, A_WorkingDir)
-            A_TrayMenu.ToggleCheck(this.startUp)
-            IS_AUTO_START_UP := !IS_AUTO_START_UP
-    
-            ; case this.document: Run('https://acc8226.pages.dev/mypage/jumpJiejian') 备用
+            case this.editScript: Edit
+            case this.listVars: ListVars
+            case this.pause: this.jiejianToggleSuspend
+            case this.restart: Reload
+            case this.search: anyrun
+
+            case this.viewWinId: Run("extra/WindowSpyU32.exe")
+            case this.statistics:
+                ; 统计软件使用总分钟数
+                recordMinsValueName := 'record_mins'
+                recordMins := RegRead(REG_KEY_NAME, recordMinsValueName, 0) + DateDiff(A_NowUTC, START_TIME, 'Minutes')
+                ; 统计软件使用次数
+                launchCountValueName := 'launch_count'
+                launchCount := RegRead(REG_KEY_NAME, launchCountValueName, 1)
+        
+                if recordMins < 10000
+                    tit := '青铜'
+                else if recordMins < 20000
+                    tit := '白银'
+                else if recordMins < 40000
+                    tit := '黄金'
+                else if recordMins < 80000
+                    tit := '铂金'
+                else if recordMins < 160000
+                    tit := '钻石'
+                else
+                    tit := '传说'
+                sb := '尊敬的' . tit . '用户：`n' . '　　您当前总启动次数 ' . launchCount . ' 次，您目前已使用捷键 ' . recordMins . ' 分钟'
+                if (recordMins >= 60) {
+                    sb .= '（'
+                    recordYears := recordMins // (365 * 24 * 60)
+                    if recordYears > 0
+                        sb .= recordYears . ' 年 '
+                    recordDays := recordMins // (24 * 60) - recordYears * 365
+                    if recordDays >= 1
+                        sb .= recordDays . ' 天 '
+                    recordHours := recordMins // 60 - recordYears * 365 * 24 - recordDays * 24
+                    if recordHours >= 1
+                        sb .= recordHours . ' 小时 '
+                    mins := recordMins - recordMins // 60 * 60
+                    if mins >= 1
+                        sb .= mins . ' 分钟'
+                    sb .= '）'
+                }                     
+                MsgBox(sb, '捷键-使用统计')
+            case this.startUp:
+                ; 当前是开机自启则设置为开机不自启，否则设置为开机自启
+                if IS_AUTO_START_UP
+                    FileDelete(this.linkFile)
+                else
+                    FileCreateShortcut(this.shortcut, this.linkFile, A_WorkingDir)
+                A_TrayMenu.ToggleCheck(this.startUp)
+                IS_AUTO_START_UP := !IS_AUTO_START_UP
+        
             case this.document: Run('http://acc8226.test.upcdn.net') ; 还是选用国内服务访问最快
             case this.video: Run('https://www.bilibili.com/video/BV19H4y1e7hJ')
+
             case this.followMeCSDN: Run('https://blog.csdn.net/acc8226')
-            case this.followMeGH: Run('https://github.com/acc8226')
+            ; case this.followMeGH: Run('https://github.com/acc8226')
             case this.update: checkUpdate(true)
             case this.about: MsgBox(      
                 '版本: ' . CODE_VERSION
@@ -149,7 +164,7 @@
                 . "`n是否管理员权限运行: " . (A_IsAdmin ? '是' : '否')
                 . "`n是否 64 位程式: " . (A_PtrSize == 8 ? '是' : '否')
                 , APP_NAME, 'Iconi T60')
-        case this.exit: ExitApp
+            case this.exit: ExitApp
         }
     }
 

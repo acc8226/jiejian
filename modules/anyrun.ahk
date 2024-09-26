@@ -181,7 +181,7 @@ anyrun() {
                 if (it.type == DataType.action and 1 = InStr(editValue, it.alias))
                     listBoxDataArray.push(it.title . '-' . it.type)
             }
-                
+
             ; 模糊匹配 按照顺序
             for action in MyActionArray {
                 ; 如果是 list 类型 且 符合条件
@@ -292,12 +292,12 @@ anyrun() {
 
         onButtonClick(*) {
             ; 如果 listbox 有焦点
-            if (listBox.Focused) {
-              onListBoxDoubleClick(listBox)
-            } else {
-                ; 如果焦点在 编辑框 且按下回车则会触发弹窗提示；否则表示焦点在 edit，如果列表有匹配项 则获取编辑框文本内容
-                Trim(myEdit.Value) == '' ? MsgBox('输入内容不能为空') : onListBoxDoubleClick(listBox)
-            }
+            if listBox.Focused
+                onListBoxDoubleClick(listBox)
+            else if Trim(myEdit.Value) == '' ; 如果焦点在 编辑框 且按下回车则会触发弹窗提示
+                MsgBox('输入内容不能为空')
+            else ; 否则表示焦点在 edit，如果列表有匹配项 则获取编辑框文本内容
+                onListBoxDoubleClick(listBox)
         }
     }
 }
@@ -583,19 +583,21 @@ openInIDEA(path) {
 openInnerCommand(title, isConfirm := false) {
     switch title {
         ; shell
-        case '终端': Run(A_ComSpec) ; 在用户根目录打开文件夹
-        case '网络连接': Run "shell:ConnectionsFolder" ; 第二种方式 ncpa.cpl
-        case '收藏夹': Run "shell:Favorites"
-        case '字体': Run "shell:Fonts"
         case '打印机': Run "shell:PrintersFolder"
-        case '我的文档': Run "shell:Personal"
-        case '回收站': Run "shell:RecycleBinFolder"
-        case '我的桌面': Run "shell:desktop"
-        case '我的下载': Run "shell:downloads"
-        case '我的图片': Run "shell:My Pictures"
-        case '我的视频': Run "shell:My Video"
-        case '我的音乐': Run "shell:My Music"
         case '环境变量': Run "rundll32 sysdm.cpl,EditEnvironmentVariables"
+        case '回收站': Run "shell:RecycleBinFolder"
+        case '网络连接': Run "shell:ConnectionsFolder" ; 第二种方式 ncpa.cpl
+        case '我的视频': Run "shell:My Video"
+
+        case '我的图片': Run "shell:My Pictures"
+        case '我的下载': Run "shell:downloads"
+        case '我的音乐': Run "shell:My Music"
+        case '我的文档': Run "shell:Personal"
+        case '我的桌面': Run "shell:desktop"
+
+        case '收藏夹': Run "shell:Favorites"
+        case '终端': Run(A_ComSpec) ; 在用户根目录打开文件夹
+        case '字体': Run "shell:Fonts"
         ; 系统操作
         case '重启': 
             if (isConfirm) {
@@ -611,9 +613,10 @@ openInnerCommand(title, isConfirm := false) {
             } else {
                 SystemShutdown
             }
-        case '锁屏', '锁定', '锁屏（锁定）' : SystemLockScreen
+        case '锁屏', '锁定', '锁屏/锁定' : SystemLockScreen
         case '睡眠': SystemSleep
-        case '激活屏幕保护程序': SendMessage(0x0112, 0xF140, 0,, "Program Manager") ; 0x0112 为 WM_SYSCOMMAND, 而 0xF140 为 SC_SCREENSAVE.
+        case '激活屏幕保护程序': SendMessage(0x0112, 0xF140, 0,, "Program Manager") ; 0x0112 为 WM_SYSCOMMAND, 而 0xF140 为 SC_SCREENSAVE
+
         case '清空回收站': FileRecycleEmpty()
         case '息屏': SystemSleepScreen
         case '注销': SystemLogoff
@@ -622,11 +625,13 @@ openInnerCommand(title, isConfirm := false) {
         case '上一曲': Send '{Media_Prev}'
         case '下一曲': Send '{Media_Next}'
         case '暂停': Send '{Media_Play_Pause}'
+
         case '音量设为10': SoundSetVolume 10
         case '音量设为20': SoundSetVolume 20
         case '音量设为30': SoundSetVolume 30
         case '音量设为40': SoundSetVolume 40
         case '音量设为50': SoundSetVolume 50
+
         case '音量设为60': SoundSetVolume 60
         case '音量设为70': SoundSetVolume 70
         case '音量设为80': SoundSetVolume 80
@@ -634,38 +639,23 @@ openInnerCommand(title, isConfirm := false) {
         case '音量设为最大': SoundSetVolume 100
 
         case '取消关机任务': Run('shutdown /a', , 'Hide')
-        case '10秒后关机': Run('shutdown /a', , 'Hide')
-            Run('shutdown /s /t 10',, 'Hide')
-        case '30秒后关机': Run('shutdown /a', , 'Hide')
-            Run('shutdown /s /t 30',, 'Hide')
-        case '60秒后关机', '1分钟后关机': Run('shutdown /a', , 'Hide')
-            Run('shutdown /s /t 60',, 'Hide')
-        case '3分钟后关机': Run('shutdown /a', , 'Hide')
-            Run('shutdown /s /t 180',, 'Hide')
-        case '5分钟后关机': Run('shutdown /a', , 'Hide')
-            Run('shutdown /s /t 300',, 'Hide')
-        case '10分钟后关机': Run('shutdown /a', , 'Hide')
-            Run('shutdown /s /t 600',, 'Hide')
-        case '15分钟后关机': Run('shutdown /a', , 'Hide')
-            Run('shutdown /s /t 900',, 'Hide')
-        case '20分钟后关机': Run('shutdown /a', , 'Hide')
-            Run('shutdown /s /t 1200',, 'Hide')
-        case '30分钟后关机': Run('shutdown /a', , 'Hide')
-            Run('shutdown /s /t 1800',, 'Hide')
-        case '40分钟后关机': Run('shutdown /a', , 'Hide')
-            Run('shutdown /s /t 2400',, 'Hide')
-        case '60分钟后关机', '1小时后关机': Run('shutdown /a', , 'Hide')
-            Run('shutdown /s /t 3600',, 'Hide')
-        case '2小时后关机': Run('shutdown /a', , 'Hide')
-            Run('shutdown /s /t 7200',, 'Hide')
-        case '3小时后关机': Run('shutdown /a', , 'Hide')
-            Run('shutdown /s /t 10800',, 'Hide')
-        case '5小时后关机': Run('shutdown /a',, 'Hide')
-            Run('shutdown /s /t 18000',, 'Hide')
-
         ; 其他
         case '关闭程序': smartCloseWindow
-        default: MsgBox('非系统内置命令！', APP_NAME)
+        default: 
+            if FoundPos := InStr(title, "秒后关机") {
+                second := SubStr(title, 1, FoundPos  - 1)
+                Run('shutdown /a', , 'Hide')
+                Run('shutdown /s /t ' . second,, 'Hide')
+            } else if FoundPos := InStr(title, "分钟后关机") {
+                min := SubStr(title, 1, FoundPos  - 1)
+                Run('shutdown /a', , 'Hide')
+                Run('shutdown /s /t ' . min * 60,, 'Hide')
+            } else if FoundPos := InStr(title, "小时后关机") {
+                hour := SubStr(title, 1, FoundPos  - 1)
+                Run('shutdown /a', , 'Hide')
+                Run('shutdown /s /t ' . hour * 60 * 60,, 'Hide')
+            } else
+                MsgBox('非系统内置命令！', APP_NAME)
     }
 }
 
