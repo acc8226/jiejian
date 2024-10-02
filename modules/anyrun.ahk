@@ -21,8 +21,8 @@ GLOBAL MY_GUI_TITLE := '快捷启动'
 
 GLOBAL MyActionArray := [
     MyAction('打开网址', 'list', isLegitimateWebsite, appendWebsiteName, jumpURL), ; 是否提前些比较好，不用了，兜底挺好
-    MyAction('生成二维码(磁力链)', 'list', isMagnetUrl, , path => Run('https://api.cl2wm.cn/api/qrcode/code?text=' . URIEncode(path))),
-    MyAction('生成二维码(网址)', 'list', isLegitimateWebsite, , path => Run('https://api.caoliao.net/api/qrcode/code?text=' . URIEncode(path))),
+    MyAction('生成二维码(磁力链)', 'list', isMagnetUrl,, createQRcode),
+    MyAction('生成二维码(网址)', 'list', isLegitimateWebsite,, createQRcode),
     ; 打开（文件，可能是 mp3 或者 mp4 或者 mov）
     MyAction('打开', 'list', path => isFileOrDirExists(path) && NOT DirExist(path), appendFileType, path => Run(path)) ,
     MyAction('前往文件夹', 'list', isDir,, openDir),
@@ -35,9 +35,9 @@ if IsSet(MY_BASH)
 useTerminal := IsSet(MY_NEW_TERMINAL) ? openInNewTerminal : openInTerminal
 MyActionArray.Push(MyAction('在 终端 中打开所在位置', 'list', isFileOrDirExists,, useTerminal))
 if IsSet(MY_VSCode)
-    MyActionArray.Push(MyAction('在 VSCode 中打开', 'list', isCodeFileOrDir,, openInVSCode))
+    MyActionArray.Push(MyAction('在 VSCode 中打开', 'list', isCodeFileOrDir,, path => Run(MY_VSCode . ' ' . path)))
 if IsSet(MY_IDEA)
-    MyActionArray.Push(MyAction('在 IDEA 中打开', 'list', isCodeFileOrDir,, openInIDEA))
+    MyActionArray.Push(MyAction('在 IDEA 中打开', 'list', isCodeFileOrDir,, path => Run(MY_IDEA . ' ' . path)))
 
 ; 彩蛋 本机 IP
 MyActionArray.Push(MyAction('myip', 'edit',,, getIPAddresses))
@@ -61,10 +61,10 @@ anyrun() {
     if NOT IsSet(MY_GUI_TITLE)
         return
     ; 检查窗口是否已经存在，如果窗口已经存在，如果窗口不存在，则创建新窗口
-    if WinExist(MY_GUI_TITLE)
+    if (WinExist(MY_GUI_TITLE)) {
         WinClose ; 使用由上一句 WinExist 找到的窗口
-    else {
-        ; S: 尺寸(单位为磅)
+    } else {
+        ; S: 字体尺寸(单位为磅)
         ; AlwaysOnTop 使窗口保持在所有其他窗口的顶部
         ; Owner 可以让当前窗口从属于另一个窗口。从属的窗口默认不显示在任务栏, 并且它总是显示在其父窗口的上面. 当其父窗口销毁时它也被自动销毁
         ; -Caption 移除背景透明的窗口的边框和标题栏
@@ -109,7 +109,7 @@ anyrun() {
         }
 
         onEscape(*) {
-            if IsSet(MY_GUI) {
+            if (IsSet(MY_GUI)) {
                 MY_GUI.Destroy()
                 MY_GUI := unset
             }
@@ -168,9 +168,9 @@ anyrun() {
                 }
             }
             listBoxDataArray := unset
-            if (NOT IsSet(dataArray) || dataArray.Length == 0)
+            if (NOT IsSet(dataArray) || dataArray.Length == 0) {
                 listBoxDataArray := []
-            else {
+            } else {
                 dataArraySort(dataArray)
                 listBoxDataArray := listBoxData(dataArray)
             }
@@ -182,16 +182,14 @@ anyrun() {
                     listBoxDataArray.push(it.title . '-' . it.type)
             }
 
-            ; 模糊匹配 按照顺序
+            ; 模糊匹配 按顺序
             for action in MyActionArray {
                 ; 如果是 list 类型 且 符合条件
                 if (action.type = 'list' && action.isMatch.Call(editValue)) {
-                    if action.HasOwnProp('appendTitle') {
-                        ; 最终的标题
-                        listBoxDataArray.push(action.title . action.appendTitle.Call(editValue))
-                    } else {
+                    if action.HasOwnProp('appendTitle')
+                        listBoxDataArray.push(action.title . action.appendTitle.Call(editValue)) ; 最终的标题
+                    else
                         listBoxDataArray.push(action.title)
-                    }
                 }
             }
             if IsSet(MY_GUI) {
@@ -208,14 +206,14 @@ anyrun() {
         }
 
         onEditLoseFocus(*) {
-            if (IsSet(MY_GUI) && !listBox.Focused) {
+            if (IsSet(MY_GUI) && NOT listBox.Focused) {
                 MY_GUI.Destroy()
                 MY_GUI := unset
             }
         }
 
         onListboxLoseFocus(*) {
-            if (IsSet(MY_GUI) && !myEdit.Focused) {
+            if (IsSet(MY_GUI) && NOT myEdit.Focused) {
                 MY_GUI.Destroy()
                 MY_GUI := unset                
             }
@@ -365,25 +363,7 @@ class MyAction {
     }
 }
 
-; 是否是文件夹，如果当前是文件则提取
-isDir(path) {
-    if path == '*' || path == '/'
-        return false
-
-    if DirExist(path) {
-        isMatch := true
-    } else if FileExist(path) {
-        ; 抽出文件夹
-        if RegExMatch(path, '.*[\\/]', &regExMatchInfo)
-            isMatch := DirExist(regExMatchInfo.0)
-        else
-            isMatch := false
-    } else {
-        isMatch := false
-    }
-    return isMatch
-}
-
+; --- appendTitle 开始 ---
 appendWebsiteName(path) {
     ; 对网址进行细化处理
     ; 从 dava.csv 中抽取符合条件的 b 列 (http 网址)，若满足则赋值 d 列
@@ -480,14 +460,7 @@ appendFileType(path) {
     return "文件"
 }
 
-openDir(path) {
-    if (DirExist(path)) {
-        Run(path)
-    } else {
-        RegExMatch(path, '.*[\\/]', &regExMatchInfo)
-        Run(regExMatchInfo.0)
-    }
-}
+; --- isMatch 开始 ---
 
 ; 是否是合法网站
 isLegitimateWebsite(url) {
@@ -504,6 +477,25 @@ isFileOrDirExists(path) {
     return path !== '*' && path !== '/' && 'con' != SubStr(path, 1, 3) && FileExist(path)
 }
 
+; 是否是文件夹，如果当前是文件则提取
+isDir(path) {
+    if path == '*' || path == '/'
+        return false
+
+    if DirExist(path) {
+        isMatch := true
+    } else if FileExist(path) {
+        ; 抽出文件夹
+        if RegExMatch(path, '.*[\\/]', &regExMatchInfo)
+            isMatch := DirExist(regExMatchInfo.0)
+        else
+            isMatch := false
+    } else {
+        isMatch := false
+    }
+    return isMatch
+}
+
 isCodeFileOrDir(path) {
     ; con 文件或目录 为何存在，我用不到
     if path == '*' || path == '/' || 'con' = SubStr(path, 1, 3)
@@ -516,8 +508,35 @@ isCodeFileOrDir(path) {
     return false
 }
 
+; --- run 开始 ---
+createQRcode(path) {
+    Run('https://api.cl2wm.cn/api/qrcode/code?text=' . URIEncode(path))
+}
+
+openDir(path) {
+    if (DirExist(path)) {
+        Run(path)
+    } else {
+        RegExMatch(path, '.*[\\/]', &regExMatchInfo)
+        Run(regExMatchInfo.0)
+    }
+}
+
 delFileOrDir(path) {
     DirExist(path) ? DirDelete(path) : FileDelete(path)
+}
+
+openInBash(path) {
+    ; 在 bash 中打开所在文件夹
+    if (DirExist(path)) {
+        ; 盘符根目录需要以 \ 结尾才生效，所以都统一加上
+        endChar := SubStr(path, StrLen(path))
+        addSomething := (endChar = '\' || endChar = '/') ? "" : "\"
+        Run(MY_BASH, path . addSomething)
+    } else {
+        RegExMatch(path, '.*[\\/]', &regExMatchInfo)
+        Run(MY_BASH, regExMatchInfo.0)
+    }
 }
 
 openInTerminal(path) {
@@ -536,7 +555,7 @@ openInTerminal(path) {
 openInNewTerminal(path) {
     ; 在终端中打开所在文件夹
     if (DirExist(path)) {
-        ; 盘符根目录需要以 \ 结尾才生效
+        ; 盘符根目录需要以 \ 结尾才生效，所以都统一加上
         endChar := SubStr(path, StrLen(path))
         addSomething := (endChar = '\' || endChar = '/') ? "" : "\"
         Run(MY_NEW_TERMINAL . ' -d' . path . addSomething)
@@ -544,39 +563,6 @@ openInNewTerminal(path) {
         RegExMatch(path, '.*[\\/]', &regExMatchInfo)
         Run(MY_NEW_TERMINAL . ' -d' . regExMatchInfo.0)
     }
-}
-
-; openInPwsh(path) {
-;     if DirExist(path) {
-;         ; 盘符根目录需要以 \ 结尾才生效，所以都统一加上
-;         endChar := SubStr(path, StrLen(path))
-;         addSomething := (endChar = '\' || endChar = '/') ? "" : "\"
-;         Run(MY_PWSH, path . addSomething)
-;     } else {
-;         RegExMatch(path, '.*[\\/]', &regExMatchInfo)
-;         Run(MY_PWSH, regExMatchInfo.0)
-;     }
-; }
-
-openInBash(path) {
-    ; 在 bash 中打开所在文件夹
-    if (DirExist(path)) {
-        ; 盘符根目录需要以 \ 结尾才生效，所以都统一加上
-        endChar := SubStr(path, StrLen(path))
-        addSomething := (endChar = '\' || endChar = '/') ? "" : "\"
-        Run(MY_BASH, path . addSomething)
-    } else {
-        RegExMatch(path, '.*[\\/]', &regExMatchInfo)
-        Run(MY_BASH, regExMatchInfo.0)
-    }
-}
-
-openInVSCode(path) {
-    Run(MY_VSCode . ' ' . path)
-}
-
-openInIDEA(path) {
-    Run(MY_IDEA . ' ' . path)
 }
 
 ; 包含了所有我预设的内部命令
