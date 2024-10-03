@@ -18,14 +18,14 @@
 
         this.video:= '视频教程(&V)'
         this.followMeCSDN:= 'CSDN 上关注我(&F)'
-        ; this.followMeGH:= '在 Github 上关注我(&F)'
+        this.followMeGH:= 'follow me on Github(&G)'
         this.update:= '检查更新(&U)...'
         this.about:= '关于(&A)'
 
         this.exit:= '退出(&X)'
 
         ; 快捷方式以 lnk 结尾
-        this.linkFile := A_Startup "\jiejian.lnk"
+        this.linkFile := A_Startup . "\jiejian.lnk"
 
         this.shortcut := unset
         if A_IsCompiled
@@ -58,7 +58,7 @@
         moreMenu.Add(this.statistics, myTrayMenuHandler)
         moreMenu.Add(this.viewWinId, myTrayMenuHandler)
         moreMenu.Add(this.followMeCSDN, myTrayMenuHandler)
-        ; moreMenu.Add(this.followMeGH, myTrayMenuHandler)
+        moreMenu.Add(this.followMeGH, myTrayMenuHandler)
         moreMenu.Add(this.update, myTrayMenuHandler)
         moreMenu.Add(this.about, myTrayMenuHandler)
         A_TrayMenu.Add(this.more, moreMenu)
@@ -91,7 +91,7 @@
      * @param ItemPos 
      * @param MyMenu
      */
-    TrayMenuHandler(ItemName, ItemPos, MyMenu) {        
+    TrayMenuHandler(ItemName, ItemPos, MyMenu) {
         GLOBAL IS_AUTO_START_UP
 
         switch ItemName, 'off' {
@@ -153,7 +153,7 @@
             case this.video: Run('https://www.bilibili.com/video/BV19H4y1e7hJ')
 
             case this.followMeCSDN: Run('https://blog.csdn.net/acc8226')
-            ; case this.followMeGH: Run('https://github.com/acc8226')
+            case this.followMeGH: Run('https://github.com/acc8226')
             case this.update: checkUpdate(true)
             case this.about: MsgBox(      
                 '版本: ' . CODE_VERSION
@@ -187,6 +187,6 @@
      */
     mySuspend() {
         Suspend(!A_IsSuspended)
-        A_IsSuspended ? A_TrayMenu.Check(this.pause) : A_TrayMenu.UnCheck(this.pause)   
+        A_IsSuspended ? A_TrayMenu.Check(this.pause) : A_TrayMenu.UnCheck(this.pause)
     }
 }
