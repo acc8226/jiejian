@@ -5,12 +5,12 @@ GLOBAL SUPPORT_LEN := 32
 GLOBAL DATA_FILTER_REG := 'i)^(?:' . DataType.app . '|' . DataType.file . '|' . DataType.web . '|' . DataType.inner . '|' . DataType.ext . '|' . DataType.dl . ')$'
 ; 端口判断过于简单 但是基本够用了
 GLOBAL IS_HTTP_Reg := 'i)^(?:https?://)?' ; 协议
-                    ; local 或 ip地址 或 英文网址
+                    ; local 或 IP 或 英文网址
                     . '(?:localhost'
                         . '|(?:\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])\.(?:\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])\.(?:\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])\.(?:\d{1,2}|1\d{2}|2[0-4]\d|25[0-5])' 
                         . '|(?!(?:\d+\.)+\d+)(?:[\w-一-龥]+\.)+[\w-一-龥]+' ; 华为.网址
                         ; 警惕 中文.com 的网络诈骗：有些诈骗者可能会利用账户变更的名义来诱骗用户泄露个人信息。如果收到任何要求你提供账户信息的邮件或消息，务必通过官方客服渠道进行核实
-                        ; .com 是全球最广泛认可和使用的顶级域名，而.网址是中国的国家级域名，但是在国内还是 .网址比较正规，因为要有备案。 我就知道 中文.com 的诈骗案例
+                        ; .com 是全球最广泛认可和使用的顶级域名，而 .网址是中国的国家级域名，但是在国内还是 .网址 比较正规，因为要有备案
                     . ')'
                     . '(:(?!0)(?![7-9]\d{4})\d{1,5})?' ; 端口
                     . '(?:/[\w-./?%&=#一-龻]*)?\s*$' ; 路径（可以包含中文）
@@ -30,10 +30,10 @@ GLOBAL MyActionArray := [
     MyAction('打印文件', 'list', path => path ~= 'i).+\.(?:bmp|docx?|gif|jpe?g|ofd|pdf|png|pptx?|xlsx?)$' && isFileOrDirExists(path) && NOT DirExist(path),, path => Run('print "' . path . '"')),
     MyAction('删除文件', 'list', isFileOrDirExists,, delFileOrDir),
 ]
+
 if IsSet(MY_BASH)
     MyActionArray.Push(MyAction('在 Bash 中打开所在位置', 'list', isFileOrDirExists,, openInBash))
-useTerminal := IsSet(MY_NEW_TERMINAL) ? openInNewTerminal : openInTerminal
-MyActionArray.Push(MyAction('在 终端 中打开所在位置', 'list', isFileOrDirExists,, useTerminal))
+MyActionArray.Push(MyAction('在 终端 中打开所在位置', 'list', isFileOrDirExists,, (IsSet(MY_NEW_TERMINAL) ? openInNewTerminal : openInTerminal)))
 if IsSet(MY_VSCode)
     MyActionArray.Push(MyAction('在 VSCode 中打开', 'list', isCodeFileOrDir,, path => Run(MY_VSCode . ' ' . path)))
 if IsSet(MY_IDEA)

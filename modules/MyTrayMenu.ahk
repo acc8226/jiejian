@@ -1,28 +1,35 @@
 ﻿class MyTrayMenu {
     
     __new() {
+        ; 读取当前语言状态，如果读取不到则默认是中文
+        LANG_PATH := A_ScriptDir "\lang\" . settingLanguage . ".ini"
+
         ; 当前是否是选中状态
         GLOBAL IS_AUTO_START_UP
 
-        this.editScript:= '编辑脚本(&E)'
-        this.listVars:= '查看变量(&L)'
-        this.pause := "暂停(Ctrl+Alt+S)"
-        this.restart:= '重载程序(Ctrl+Alt+R)'
-        this.search:= '搜一搜(Alt+空格)'
+        this.editScript:= IniRead(LANG_PATH, "Tray", "editScript")
+        this.listVars:= IniRead(LANG_PATH, "Tray", "listVars")
 
-        this.viewWinId:= '查看窗口标识符(&V)'
-        this.statistics:= '使用统计(&S)'
-        this.startUp:= '开机自启(&A)'
-        this.more:= '更多(&M)'
-        this.document:= '帮助文档(&H)'
+        this.pause := IniRead(LANG_PATH, "Tray", "pause")
+        this.restart:= IniRead(LANG_PATH, "Tray", "restart")
+        this.search:= IniRead(LANG_PATH, "Tray", "search")
+        this.startUp:= IniRead(LANG_PATH, "Tray", "startUp")
 
-        this.video:= '视频教程(&V)'
-        this.followMeCSDN:= 'CSDN 上关注我(&F)'
-        this.followMeGH:= 'follow me on Github(&G)'
-        this.update:= '检查更新(&U)...'
-        this.about:= '关于(&A)'
+        this.more:= IniRead(LANG_PATH, "Tray", "more")
+        this.document:= IniRead(LANG_PATH, "Tray", "document")
+        this.video:= IniRead(LANG_PATH, "Tray", "video")
+        this.statistics:= IniRead(LANG_PATH, "Tray", "statistics")
+        this.viewWinId:= IniRead(LANG_PATH, "Tray", "viewWinId")
+        this.followMeCSDN:= IniRead(LANG_PATH, "Tray", "followMeCSDN")
+        this.followMeGH:= IniRead(LANG_PATH, "Tray", "followMeGH")
+        this.update:= IniRead(LANG_PATH, "Tray", "update")
+        this.about:= IniRead(LANG_PATH, "Tray", "about")
 
-        this.exit:= '退出(&X)'
+        this.switchLang:= IniRead(LANG_PATH, "Tray", "switchLang")
+
+        this.exit:= IniRead(LANG_PATH, "Tray", "exit")
+
+        this.langMenu := Menu()
 
         ; 快捷方式以 lnk 结尾
         this.linkFile := A_Startup . "\jiejian.lnk"
@@ -46,10 +53,12 @@
         
         ; 右对齐不好使，我醉了
         A_TrayMenu.Add(this.pause, myTrayMenuHandler)
-        A_TrayMenu.Add(Format("{1:-10}", this.restart), myTrayMenuHandler)
-        A_TrayMenu.Add(Format("{1:-10}", this.search), myTrayMenuHandler)
+        A_TrayMenu.Add(this.restart, myTrayMenuHandler)
+        A_TrayMenu.Add(this.search, myTrayMenuHandler)
         A_TrayMenu.Add(this.startUp, myTrayMenuHandler)
-        A_TrayMenu.Add
+        ; 切换语言
+        A_TrayMenu.Add(this.switchLang, this.langMenu)
+        this.createLangMenu()
 
         ; 添加子菜单到上面的菜单中
         moreMenu := Menu()
@@ -84,6 +93,20 @@
         A_TrayMenu.ClickCount := 1 ; 单击可以暂停
     }
 
+    createLangMenu() {
+        this.langMenu.Delete
+        Loop Files A_ScriptDir "\lang\*.ini" {
+            SplitPath A_LoopFileName, , , , &FileNameNoExt
+            this.langMenu.Add(FileNameNoExt, this.switchLanguage.Bind(this))
+        }
+        this.langMenu.Check(settingLanguage)
+    }
+
+    switchLanguage(ItemName, ItemPos, MyMenu) {
+        global settingLanguage := ItemName
+        Reload
+    }
+
     /**
      * 托盘菜单被点击
      * 
@@ -97,18 +120,16 @@
         switch ItemName, 'off' {
             case this.editScript: Edit
             case this.listVars: ListVars
-            case this.pause: this.jiejianToggleSuspend
+            case this.pause: this.toggleSuspend
             case this.restart: Reload
             case this.search: anyrun
 
             case this.viewWinId: Run("extra/WindowSpyU32.exe")
             case this.statistics:
                 ; 统计软件使用总分钟数
-                recordMinsValueName := 'record_mins'
-                recordMins := RegRead(REG_KEY_NAME, recordMinsValueName, 0) + DateDiff(A_NowUTC, START_TIME, 'Minutes')
+                recordMins := RegRead(REG_KEY_NAME, REG_RECORD_MINS, 0) + DateDiff(A_NowUTC, START_TIME, 'Minutes')
                 ; 统计软件使用次数
-                launchCountValueName := 'launch_count'
-                launchCount := RegRead(REG_KEY_NAME, launchCountValueName, 1)
+                launchCount := RegRead(REG_KEY_NAME, REG_LAUNCH_COUNT, 1)
         
                 if recordMins < 10000
                     tit := '青铜'
@@ -155,15 +176,7 @@
             case this.followMeCSDN: Run('https://blog.csdn.net/acc8226')
             case this.followMeGH: Run('https://github.com/acc8226')
             case this.update: checkUpdate(true)
-            case this.about: MsgBox(      
-                '版本: ' . CODE_VERSION
-                . "`nAHK 主程序版本: " . A_AhkVersion
-                . "`nWindows " . A_OSVersion . (A_Is64bitOS ? ' x64' : '')
-                . "`n计算机名: " . A_ComputerName
-                . "`n当前用户: " . A_UserName
-                . "`n是否管理员权限运行: " . (A_IsAdmin ? '是' : '否')
-                . "`n是否 64 位程式: " . (A_PtrSize == 8 ? '是' : '否')
-                , APP_NAME, 'Iconi T60')
+            case this.about: this.aboutFunc
             case this.exit: ExitApp
         }
     }
@@ -171,7 +184,7 @@
     /**
      * 菜单中的暂停
      */
-    jiejianToggleSuspend() {
+    toggleSuspend() {
         Suspend(!A_IsSuspended)
         if (A_IsSuspended) {
             A_TrayMenu.Check(this.pause)
@@ -188,5 +201,85 @@
     mySuspend() {
         Suspend(!A_IsSuspended)
         A_IsSuspended ? A_TrayMenu.Check(this.pause) : A_TrayMenu.UnCheck(this.pause)
+    }
+
+    aboutFunc(){
+        MsgBox(      
+            '版本: ' . CODE_VERSION
+            . "`nAHK 主程序版本: " . A_AhkVersion
+            . "`n系统默认语言: " . this.localLang(A_Language)
+            . "`nWindows " . A_OSVersion . (A_Is64bitOS ? ' 64 位' : '')
+            . "`n计算机名: " . A_ComputerName
+            . "`n当前用户: " . A_UserName
+            . "`n是否管理员权限运行: " . (A_IsAdmin ? '是' : '否')
+            . "`n是否 64 位程式: " . (A_PtrSize == 8 ? '是' : '否')
+            , APP_NAME, 'Iconi T60')
+    }
+
+    localLang(language) {
+        if language = '7804'
+            return '中文'
+        else if language = '0004'
+            return '简体中文'
+        else if language = '0804'
+            return '简体中文（中国）'
+        else if language = '1004'
+            return '简体中文（新加坡）'
+        else if language = '7C04'
+            return '繁体中文'
+        else if language = '0C04'
+            return '繁体中文（香港特别行政区）'
+        else if language = '1404'
+            return '繁体中文（澳门特别行政区）'
+        else if language = '0404'
+            return '繁体中文（台湾）'
+        LCID := Integer('0x' . language)
+        LOCALE_ALLOW_NEUTRAL_NAMES := 0x08000000
+        LOCALE_SENGLISHDISPLAYNAME := 0x72
+        LocaleName := this.LCIDToLocaleName(LCID, LOCALE_ALLOW_NEUTRAL_NAMES)
+        if LocaleName {
+            DisplayName := this.GetLocaleInfo(LocaleName, LOCALE_SENGLISHDISPLAYNAME)
+        } else {
+            DisplayName := 'unknown'
+        }
+        return DisplayName      
+    }
+
+    LCIDToLocaleName(LCID, Flags := 0) {
+        reqBufSize := DllCall("LCIDToLocaleName", "UInt", LCID, "Ptr", 0, "UInt", 0, "UInt", Flags)
+        out := Buffer(reqBufSize*2)
+        DllCall("LCIDToLocaleName", "UInt", LCID, "Ptr", out, "UInt", out.Size, "UInt", Flags)
+        return StrGet(out)
+    }
+
+    GetLocaleInfo(LocaleName, LCType) {
+        reqBufSize := DllCall("GetLocaleInfoEx", "Str", LocaleName, "UInt", LCType, "Ptr", 0, "UInt", 0)
+        out := Buffer(reqBufSize*2)
+        DllCall("GetLocaleInfoEx", "Str", LocaleName, "UInt", LCType, "Ptr", out, "UInt", out.Size)
+        return StrGet(out)
+    }
+}
+
+initLanguage() {
+    folderCheckList := ['lang']
+    for item in folderCheckList
+        If !FileExist(A_ScriptDir . '\' . item)
+            DirCreate(A_ScriptDir . '\' . item)
+    ; 在已编译的脚本中包含指定的文件
+    if (A_IsCompiled) {
+        ; 要添加到已编译可执行文件中的文件名. 如果没有指定绝对路径, 则假定该文件位于(或相对于) 脚本自己的目录中
+        FileInstall('lang\ar.ini', 'lang\ar.ini')
+        FileInstall('lang\de-de.ini', 'lang\de-de.ini')
+        FileInstall('lang\en-us.ini', 'lang\en-us.ini')
+        FileInstall('lang\es-es.ini', 'lang\es-es.ini')
+        FileInstall('lang\fr-fr.ini', 'lang\fr-fr.ini')
+        FileInstall('lang\it-it.ini', 'lang\it-it.ini')
+        FileInstall('lang\ja-jp.ini', 'lang\ja-jp.ini')
+        FileInstall('lang\ko-kr.ini', 'lang\ko-kr.ini')
+        FileInstall('lang\pt-br.ini', 'lang\pt-br.ini')
+        FileInstall('lang\ru-ru.ini', 'lang\ru-ru.ini')
+        FileInstall('lang\tr-tr.ini', 'lang\tr-tr.ini')
+        FileInstall('lang\zh-cn.ini', 'lang\zh-cn.ini')
+        FileInstall('lang\zh-tw.ini', 'lang\zh-tw.ini')
     }
 }

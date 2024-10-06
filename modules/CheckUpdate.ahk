@@ -1,12 +1,12 @@
 ﻿checkUpdate(isNeedCallback := False) {
-    localIsAlphaOrBeta := InStr(CODE_VERSION, "alpha") || InStr(CODE_VERSION, "beta")
+    localIsAlphaOrBeta := InStr(CODE_VERSION, 'alpha') || InStr(CODE_VERSION, 'beta')
     regValueName := 'last_check_date'
     ; 手动检查更新 或 本地为调试版本 或 正式版的检查间隔需大于 24 小时
-    if (isNeedCallback || localIsAlphaOrBeta || DateDiff(A_NowUTC, RegRead(REG_KEY_NAME, regValueName, '20000101000000'), "days") >= 1) {
-        req := ComObject("Msxml2.XMLHTTP")
+    if (isNeedCallback || localIsAlphaOrBeta || DateDiff(A_NowUTC, RegRead(REG_KEY_NAME, regValueName, '20000101000000'), 'days') >= 1) {
+        req := ComObject('Msxml2.XMLHTTP')
         ; 打开启用异步的请求.
-        checkUrl := 'https://acc8226.atomgit.net/jiejian/' . (localIsAlphaOrBeta ? "SNAPSHOT" : "RELEASE")
-        req.open("GET", checkUrl, true)
+        checkUrl := 'https://acc8226.atomgit.net/jiejian/' . (localIsAlphaOrBeta ? 'SNAPSHOT' : 'RELEASE')
+        req.open('GET', checkUrl, true)
 
         ; 设置回调函数
         req.onreadystatechange := ready
@@ -20,9 +20,9 @@
                 serverVersion := req.responseText
                 ; 正式版需要写入当前日期信息
                 if !localIsAlphaOrBeta
-                    RegWrite(A_NowUTC, "REG_SZ", REG_KEY_NAME, regValueName)
+                    RegWrite(A_NowUTC, 'REG_SZ', REG_KEY_NAME, regValueName)
                 if (VerCompare(CODE_VERSION, serverVersion) < 0) {
-                    if MsgBox("捷键 " CODE_VERSION " 非最新，去下载最新版 " serverVersion "？", "检查更新", "YesNo") = "Yes"
+                    if MsgBox('捷键 ' . CODE_VERSION . ' 非最新，去下载最新版 ' . serverVersion . '？', '检查更新', 'YesNo') = 'Yes'
                         Run('https://gitcode.com/acc8226/jiejian/releases/')
                 } else if (isNeedCallback) {
                     MsgBox('当前已是最新版本', '检查更新-捷键')

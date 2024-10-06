@@ -3,11 +3,11 @@
  */
 smartCloseWindow() {
   if (WinExist('A')) {
-    if (IsDesktop() or (WinGetClass("A") == "ApplicationFrameWindow" || GetProcessName() == "explorer.exe"))
-      Send "!{F4}"
+    if (IsDesktop() or (WinGetClass('A') == 'ApplicationFrameWindow' || GetProcessName() == 'explorer.exe'))
+      Send '!{F4}'
     else {
       try {
-        PostMessage(0x112, 0xF060, , , "A")
+        PostMessage(0x112, 0xF060, , , 'A')
       } catch Error as e {
         MsgBox '该程序暂时无法关闭，2 秒后弹窗自动关闭后请重试', , 'T2'
       }
@@ -28,9 +28,9 @@ smartCloseWindow() {
  * @param {bool} isHide 窗口是否为隐藏窗口
  * @returns {void} 
  */
-ActivateOrRun(winTitle := "", target := "", args := "", workingDir := "", admin := false, isHide := false, runInBackground := false) {
+ActivateOrRun(winTitle := '', target := '', args := '', workingDir := '', admin := false, isHide := false, runInBackground := false) {
   ; 如果是程序或参数中带有“选中的文件” 则通过该程序打开该连接
-  if (InStr(target, "{selected}") || InStr(args, "{selected}")) {
+  if (InStr(target, '{selected}') || InStr(args, '{selected}')) {
     ; 没有获取到文字直接返回
     if !ReplaceSelectedText(&target, &args)
       return
@@ -50,19 +50,19 @@ ActivateOrRun(winTitle := "", target := "", args := "", workingDir := "", admin 
  * 窗口置顶
  */
 ToggleWindowTopMost() {
-  value := !(WinGetExStyle("A") & 0x8)
-  WinSetAlwaysOnTop(value, "A")
+  value := !(WinGetExStyle('A') & 0x8)
+  WinSetAlwaysOnTop(value, 'A')
   if value
-    Tip("已置顶当前窗口")
+    Tip('已置顶当前窗口')
   else
-    Tip("取消置顶")
+    Tip('取消置顶')
 }
 
 ; 关闭显示器:
 SystemSleepScreen() {
   Sleep 1000 ; 让用户有机会释放按键(以防释放它们时再次唤醒显视器)
   ; 关闭显示器:
-  SendMessage 0x0112, 0xF170, 2,, "Program Manager"  ; 0x0112 is WM_SYSCOMMAND, 0xF170 is SC_MONITORPOWER.
+  SendMessage 0x0112, 0xF170, 2,, 'Program Manager' ; 0x0112 is WM_SYSCOMMAND, 0xF170 is SC_MONITORPOWER.
 }
 
 /**

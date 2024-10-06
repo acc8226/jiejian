@@ -21,7 +21,7 @@ IsDesktop() {
  */
 GetProcessName() {
   fn := (winTitle) => (WinGetProcessName(winTitle) == 'ApplicationFrameHost.exe')
-  winTitle := "A"
+  winTitle := 'A'
   if (fn(winTitle)) {
     for hCtrl in WinGetControlsHwnd(winTitle)
       bool := fn(hCtrl)
@@ -31,7 +31,7 @@ GetProcessName() {
 }
 
 /**
- *  将程序路径或参数中的{selected} 替换为选中的文字
+ *  将程序路径或参数中的 {selected} 替换为选中的文字
  * @param target 程序路径的引用
  * @param args 参数的引用
  * @returns {void|number} 
@@ -39,15 +39,15 @@ GetProcessName() {
 ReplaceSelectedText(&target, &args) {
   text := GetSelectedText()
   if not (text) 
-    text := ""
+    text := ''
 
   if InStr(args, "://") || InStr(target, "://")
     text := URIEncode(text)
   
-  args := strReplace(args, "{selected}", text)
-  target := strReplace(target, "{selected}", text)
+  args := strReplace(args, '{selected}', text)
+  target := strReplace(target, '{selected}', text)
 
-  return 1
+  return true
 }
 
 /**
@@ -279,9 +279,8 @@ RunPrograms(target, args := "", workingDir := "", admin := false, runInBackgroun
 ActivateDesktop() {
   tmp := A_DetectHiddenWindows
   DetectHiddenWindows true
-  if WinExist("ahk_class ForegroundStaging") {
+  if WinExist('ahk_class ForegroundStaging')
     WinActivate
-  }
   DetectHiddenWindows tmp
 }
 
@@ -293,7 +292,7 @@ ActivateDesktop() {
  */
 CompleteProgramPath(target) {
   ; 工作目录下的程序
-  PathName := A_WorkingDir "\" target
+  PathName := A_WorkingDir . '\' . target
   if FileExist(PathName)
     return PathName
 
@@ -302,7 +301,7 @@ CompleteProgramPath(target) {
     return target
 
   ; 从环境变量 PATH 中获取
-  DosPath := EnvGet("PATH")
+  DosPath := EnvGet('PATH')
   loop parse DosPath, "`;" {
     if A_LoopField == ""
       continue
@@ -313,7 +312,7 @@ CompleteProgramPath(target) {
 
   ; 从安装的程序中获取
   try {
-    PathName := RegRead("HKLM", "SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\" target)
+    PathName := RegRead('HKLM', 'SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\' . target)
     if FileExist(PathName)
       return PathName
   }
