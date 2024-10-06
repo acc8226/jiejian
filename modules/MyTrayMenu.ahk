@@ -1,13 +1,21 @@
 ﻿class MyTrayMenu {
     
     __new() {
-        ; 读取当前语言状态，如果读取不到则默认是中文
-        LANG_PATH := A_ScriptDir "\lang\" . settingLanguage . ".ini"
-
         ; 当前是否是选中状态
         GLOBAL IS_AUTO_START_UP
 
-        this.editScript:= IniRead(LANG_PATH, "Tray", "editScript")
+        ; 读取当前语言状态，如果读取不到则默认是中文
+        LANG_PATH := A_ScriptDir "\lang\" . settingLanguage . ".ini"
+
+        try
+            this.editScript:= IniRead(LANG_PATH, "Tray", "editScript")
+        catch as e {
+            ; 发生 error，语言恢复成英文
+            MsgBox "An error was thrown!`nSpecifically: " e.Message
+            global settingLanguage := 'en'
+            LANG_PATH := A_ScriptDir "\lang\" . settingLanguage . ".ini"
+            this.editScript:= IniRead(LANG_PATH, "Tray", "editScript")
+        }        
         this.listVars:= IniRead(LANG_PATH, "Tray", "listVars")
 
         this.pause := IniRead(LANG_PATH, "Tray", "pause")
@@ -41,38 +49,38 @@
             this.shortcut := 'jiejian.ahk'
         this.shortcut := A_WorkingDir . '\' . this.shortcut
 
-        myTrayMenuHandler := this.TrayMenuHandler.Bind(this)
+        trayMenuHandlerFunc := this.TrayMenuHandler.Bind(this)
 
         ; 删除原有的 菜单项
         A_TrayMenu.Delete()
         if (NOT A_IsCompiled) {
-            A_TrayMenu.Add(this.editScript, myTrayMenuHandler)
-            A_TrayMenu.Add(this.listVars, myTrayMenuHandler)
+            A_TrayMenu.Add(this.editScript, trayMenuHandlerFunc)
+            A_TrayMenu.Add(this.listVars, trayMenuHandlerFunc)
             A_TrayMenu.Add
         }
         
         ; 右对齐不好使，我醉了
-        A_TrayMenu.Add(this.pause, myTrayMenuHandler)
-        A_TrayMenu.Add(this.restart, myTrayMenuHandler)
-        A_TrayMenu.Add(this.search, myTrayMenuHandler)
-        A_TrayMenu.Add(this.startUp, myTrayMenuHandler)
+        A_TrayMenu.Add(this.pause, trayMenuHandlerFunc)
+        A_TrayMenu.Add(this.restart, trayMenuHandlerFunc)
+        A_TrayMenu.Add(this.search, trayMenuHandlerFunc)
+        A_TrayMenu.Add(this.startUp, trayMenuHandlerFunc)
         ; 切换语言
         A_TrayMenu.Add(this.switchLang, this.langMenu)
         this.createLangMenu()
 
         ; 添加子菜单到上面的菜单中
         moreMenu := Menu()
-        moreMenu.Add(this.document, myTrayMenuHandler)
-        moreMenu.Add(this.video, myTrayMenuHandler)
-        moreMenu.Add(this.statistics, myTrayMenuHandler)
-        moreMenu.Add(this.viewWinId, myTrayMenuHandler)
-        moreMenu.Add(this.followMeCSDN, myTrayMenuHandler)
-        moreMenu.Add(this.followMeGH, myTrayMenuHandler)
-        moreMenu.Add(this.update, myTrayMenuHandler)
-        moreMenu.Add(this.about, myTrayMenuHandler)
+        moreMenu.Add(this.document, trayMenuHandlerFunc)
+        moreMenu.Add(this.video, trayMenuHandlerFunc)
+        moreMenu.Add(this.statistics, trayMenuHandlerFunc)
+        moreMenu.Add(this.viewWinId, trayMenuHandlerFunc)
+        moreMenu.Add(this.followMeCSDN, trayMenuHandlerFunc)
+        moreMenu.Add(this.followMeGH, trayMenuHandlerFunc)
+        moreMenu.Add(this.update, trayMenuHandlerFunc)
+        moreMenu.Add(this.about, trayMenuHandlerFunc)
         A_TrayMenu.Add(this.more, moreMenu)
 
-        A_TrayMenu.Add(this.exit, myTrayMenuHandler)
+        A_TrayMenu.Add(this.exit, trayMenuHandlerFunc)
 
         ; 检查是否是自启状态
         if (FileExist(this.LinkFile)) {
@@ -95,15 +103,32 @@
 
     createLangMenu() {
         this.langMenu.Delete
+
+        switchLanguageFunc := this.switchLanguage.Bind(this)
         Loop Files A_ScriptDir "\lang\*.ini" {
             SplitPath A_LoopFileName, , , , &FileNameNoExt
-            this.langMenu.Add(FileNameNoExt, this.switchLanguage.Bind(this))
+            if (FileNameNoExt == 'zh-Hans') {
+                this.langMenu.Add('简体中文', switchLanguageFunc)
+            } else if (FileNameNoExt == 'zh-Hant') {
+                this.langMenu.Add('繁体中文', switchLanguageFunc)
+            } else {
+                this.langMenu.Add(FileNameNoExt, switchLanguageFunc)
+            }
         }
-        this.langMenu.Check(settingLanguage)
+
+        switch settingLanguage {
+            case 'zh-Hans': this.langMenu.Check('简体中文')
+            case 'zh-Hant': this.langMenu.Check('繁体中文') 
+            default: this.langMenu.Check(settingLanguage)
+        }
     }
 
     switchLanguage(ItemName, ItemPos, MyMenu) {
-        global settingLanguage := ItemName
+        switch ItemName {
+            case '简体中文': global settingLanguage := 'zh-Hans'
+            case '繁体中文': global settingLanguage := 'zh-Hant'     
+            default: global settingLanguage := ItemName
+        }
         Reload
     }
 
@@ -269,17 +294,17 @@ initLanguage() {
     if (A_IsCompiled) {
         ; 要添加到已编译可执行文件中的文件名. 如果没有指定绝对路径, 则假定该文件位于(或相对于) 脚本自己的目录中
         FileInstall('lang\ar.ini', 'lang\ar.ini')
-        FileInstall('lang\de-de.ini', 'lang\de-de.ini')
-        FileInstall('lang\en-us.ini', 'lang\en-us.ini')
-        FileInstall('lang\es-es.ini', 'lang\es-es.ini')
-        FileInstall('lang\fr-fr.ini', 'lang\fr-fr.ini')
-        FileInstall('lang\it-it.ini', 'lang\it-it.ini')
-        FileInstall('lang\ja-jp.ini', 'lang\ja-jp.ini')
-        FileInstall('lang\ko-kr.ini', 'lang\ko-kr.ini')
-        FileInstall('lang\pt-br.ini', 'lang\pt-br.ini')
-        FileInstall('lang\ru-ru.ini', 'lang\ru-ru.ini')
-        FileInstall('lang\tr-tr.ini', 'lang\tr-tr.ini')
-        FileInstall('lang\zh-cn.ini', 'lang\zh-cn.ini')
-        FileInstall('lang\zh-tw.ini', 'lang\zh-tw.ini')
+        FileInstall('lang\de.ini', 'lang\de.ini')
+        FileInstall('lang\en.ini', 'lang\en.ini')
+        FileInstall('lang\es.ini', 'lang\es.ini')
+        FileInstall('lang\fr.ini', 'lang\fr.ini')
+        FileInstall('lang\it.ini', 'lang\it.ini')
+        FileInstall('lang\ja.ini', 'lang\ja.ini')
+        FileInstall('lang\ko.ini', 'lang\ko.ini')
+        FileInstall('lang\pt.ini', 'lang\pt.ini')
+        FileInstall('lang\ru.ini', 'lang\ru.ini')
+        FileInstall('lang\tr.ini', 'lang\tr.ini')
+        FileInstall('lang\zh-Hans.ini', 'lang\zh-Hans.ini')
+        FileInstall('lang\zh-Hant.ini', 'lang\zh-Hant.ini')
     }
 }

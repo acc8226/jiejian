@@ -18,7 +18,6 @@ TODO 对环境变量路径的识别 比如 %ProgramFiles(x86)%\Windows Media Pla
 
 ; --------------------- COMPILER DIRECTIVES --------------------------
 
-;@Ahk2Exe-Set Language, 0x0804
 ;@Ahk2Exe-SetCopyright 全民反诈联盟
 ;@Ahk2Exe-SetDescription 捷键-为简化键鼠操作而生
 
@@ -59,8 +58,15 @@ SetDefaults() {
     REG_LAUNCH_COUNT := 'launch_count'
     REG_LANG := 'LANG'
 
-    settingLanguage := RegRead(REG_KEY_NAME, REG_LANG, 'zh-cn')
-
+    settingLanguage := RegRead(REG_KEY_NAME, REG_LANG, '')
+    if (settingLanguage = '') {
+        switch A_Language {
+            case '7804', '0004', '0804', '1004' : settingLanguage := 'zh-Hans'
+            case '7C04', '0C04', '1404', '0404' : settingLanguage := 'zh-Hant'
+            default: settingLanguage := 'en'
+        } 
+    }
+    
     START_TIME := A_NowUTC
     APP_NAME := '捷键' ; 用于 msgbox 标题展示
     CTRL_TIMESTAMP := A_NowUTC ; 记录 ctrl + c/x 最新时间戳
@@ -75,8 +81,10 @@ SetDefaults() {
 ; ----- 1. 热键 之 鼠标操作 -----
 #Include 'lib/Functions.ahk'
 #Include 'lib/Actions.ahk'
-#Include 'lib/MoveWindow.ahk'
 #Include 'lib/Utils.ahk'
+
+#Include <MoveWindow>
+#Include <WindowsTheme>
 
 #Include 'modules/ConfigMouse.ahk'
 #Include 'modules/Utils.ahk'
@@ -85,6 +93,9 @@ SetDefaults() {
 #Include 'modules/Anyrun.ahk'
 #Include 'modules/CheckUpdate.ahk'
 #Include 'modules/MyTrayMenu.ahk'
+
+global SYSTEM_THEME_MODE := RegRead("HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "SystemUsesLightTheme")
+WindowsTheme.SetAppMode(!SYSTEM_THEME_MODE)
 
 initLanguage
 
@@ -326,7 +337,7 @@ v::Send('#+{right}')
 ; 窗口最小化
 m::minimizeWindow
 
-; 复制选中文件路径并打开 anyrun 组件
+; 复制选中文件路径并打开 Anyrun 组件
 Space::{
     copySelectedAsPlainTextQuiet
     ; 由于命令发送 ctrl + c 不会触发监听则手动更新时间戳
