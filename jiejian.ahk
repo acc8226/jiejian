@@ -20,6 +20,8 @@ TODO 对环境变量路径的识别 比如 %ProgramFiles(x86)%\Windows Media Pla
 
 ;@Ahk2Exe-SetCopyright 全民反诈联盟
 ;@Ahk2Exe-SetDescription 捷键-为简化键鼠操作而生
+;@Ahk2Exe-SetMainIcon icons\favicon.ico
+;@Ahk2Exe-AddResource icons\favicon-paused.ico, 206 ; 编译后 替换成 标准图标
 
 ; --------------------- GLOBAL --------------------------
 
@@ -41,7 +43,7 @@ if NOT (A_IsAdmin or RegExMatch(DllCall('GetCommandLine', 'str'), ' /restart(?!\
 }
 
 ; 定义版本信息并写入
-GLOBAL CODE_VERSION := '24.10-beta2'
+GLOBAL CODE_VERSION := '24.10-beta3'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
@@ -58,12 +60,12 @@ SetDefaults() {
     REG_LAUNCH_COUNT := 'launch_count'
     REG_LANG := 'LANG'
 
-    settingLanguage := RegRead(REG_KEY_NAME, REG_LANG, '')
-    if (settingLanguage = '') {
+    CURRENT_LANG := RegRead(REG_KEY_NAME, REG_LANG, '')
+    if (CURRENT_LANG = '') {
         switch A_Language {
-            case '7804', '0004', '0804', '1004' : settingLanguage := 'zh-Hans'
-            case '7C04', '0C04', '1404', '0404' : settingLanguage := 'zh-Hant'
-            default: settingLanguage := 'en'
+            case '7804', '0004', '0804', '1004' : CURRENT_LANG := 'zh-Hans'
+            case '7C04', '0C04', '1404', '0404' : CURRENT_LANG := 'zh-Hant'
+            default: CURRENT_LANG := 'en'
         } 
     }
     
@@ -112,13 +114,8 @@ settingTray() {
     localIsAlphaOrBeta := InStr(CODE_VERSION, 'alpha') || InStr(CODE_VERSION, 'beta')
     A_IconTip := "捷键 " . CODE_VERSION . (A_IsCompiled ? '' : ' 未编译') . (localIsAlphaOrBeta ? " 测试版" : " ") . (A_PtrSize == 4 ? '32位' : '64位')
 
-    if (NOT A_IsCompiled) {
-        ; 建议使用 16*16 或 32*32 像素的图标，使用 Ahk2Exe-Let 提取出 favicon.ico
-        faviconIco := 'favicon.ico'
-        ;@Ahk2Exe-Let U_faviconIco = %A_PriorLine~U).+['"](.+)['"]~$1%
-        ;@Ahk2Exe-SetMainIcon %U_faviconIco%
-        TraySetIcon(faviconIco)
-    }
+    if !A_IsCompiled
+        TraySetIcon('icons\favicon.ico') ; 建议使用 16*16 或 32*32 像素的图标，使用 Ahk2Exe-Let 提取出 favicon.ico
 }
 
 ; 检查更新
@@ -203,7 +200,7 @@ exitFunc(exitReason, exitCode) {
         RegWrite(launchCount, "REG_DWORD", REG_KEY_NAME, REG_LAUNCH_COUNT)
     }
     ; 当前选择的语言
-    RegWrite(settingLanguage, "REG_SZ", REG_KEY_NAME, REG_LANG)
+    RegWrite(CURRENT_LANG, "REG_SZ", REG_KEY_NAME, REG_LANG)
 }
 
 ; 触发热键时, 热键中按键原有的功能不会被屏蔽(对操作系统隐藏)
@@ -352,8 +349,27 @@ Left::moveRelative(-28)
 Right::moveRelative(28)
 Up::moveRelative(0, -28)
 Down::moveRelative(0, 28)
-
 #HotIf
+
+; 尽量避免为编译程序 和 以编译的程序打架
+if A_IsCompiled {
+    ; 32 位 和 64 位独活一个
+    if (A_PtrSize == 8) {
+        ; 杀掉 32 位程式
+        if PID := ProcessExist("jiejian32.exe")
+            ProcessClose PID
+    } else {
+        ; 杀掉 64 位程式
+        if PID := ProcessExist("jiejian64.exe")
+            ProcessClose PID
+    }
+} else {
+    ; 关闭所有测试程序
+    if PID := ProcessExist("jiejian32.exe")
+        ProcessClose PID
+    if PID := ProcessExist("jiejian64.exe")
+        ProcessClose PID
+}
 
 ; windows 版本
 ;

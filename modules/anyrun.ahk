@@ -15,8 +15,6 @@ GLOBAL IS_HTTP_Reg := 'i)^(?:https?://)?' ; 协议
                     . '(:(?!0)(?![7-9]\d{4})\d{1,5})?' ; 端口
                     . '(?:/[\w-./?%&=#一-龻]*)?\s*$' ; 路径（可以包含中文）
 GLOBAL MY_GUI
-GLOBAL MY_GUI_WIDTH := 432
-GLOBAL MY_GUI_MARGINX_X := 2.8
 GLOBAL MY_GUI_TITLE := '快捷启动'
 
 GLOBAL MyActionArray := [
@@ -71,14 +69,15 @@ anyrun() {
         ; -Resize 禁止用户重新调整窗口的大小
         GLOBAL MY_GUI := Gui('AlwaysOnTop Owner -Caption -Resize', MY_GUI_TITLE)
         ; 横向和纵向边框收窄
-        MY_GUI.MarginY := MY_GUI.MarginX := MY_GUI_MARGINX_X
+        MY_GUI.MarginY := MY_GUI.MarginX := 2.8   
         fontSize := 's21'
         MY_GUI.SetFont(fontSize, 'Consolas') ; 设置兜底字体(21 磅) Consolas
         MY_GUI.SetFont(fontSize, 'Microsoft YaHei') ; 设置优先字体(21 磅) 微软雅黑
-        myEdit := MY_GUI.AddEdit(Format("w{1}", MY_GUI_WIDTH))
+        guiWidth := 432
+        myEdit := MY_GUI.AddEdit(Format("w{1}", guiWidth))
         ; R7：做到贴边 默认只显示 7 行
         ; Hidden：让控件初始为隐藏状态
-        listBox := MY_GUI.AddListBox(Format("R7 w{1} XM+0 Y+0 BackgroundF0F0F0 Hidden", MY_GUI_WIDTH))
+        listBox := MY_GUI.AddListBox(Format("R7 w{1} XM+0 Y+0 BackgroundF0F0F0 Hidden", guiWidth))
         fontSize := 's18'
         listBox.SetFont(fontSize, 'Consolas') ; 设置兜底字体(21 磅) Consolas
         listBox.SetFont(fontSize, 'Microsoft YaHei') ; 设置优先字体(21 磅) 微软雅黑

@@ -5,15 +5,15 @@
         GLOBAL IS_AUTO_START_UP
 
         ; 读取当前语言状态，如果读取不到则默认是中文
-        LANG_PATH := A_ScriptDir "\lang\" . settingLanguage . ".ini"
+        LANG_PATH := A_ScriptDir "\lang\" . CURRENT_LANG . ".ini"
 
         try
             this.editScript:= IniRead(LANG_PATH, "Tray", "editScript")
         catch as e {
             ; 发生 error，语言恢复成英文
             MsgBox "An error was thrown!`nSpecifically: " e.Message
-            global settingLanguage := 'en'
-            LANG_PATH := A_ScriptDir "\lang\" . settingLanguage . ".ini"
+            global CURRENT_LANG := 'en'
+            LANG_PATH := A_ScriptDir "\lang\" . CURRENT_LANG . ".ini"
             this.editScript:= IniRead(LANG_PATH, "Tray", "editScript")
         }        
         this.listVars:= IniRead(LANG_PATH, "Tray", "listVars")
@@ -53,7 +53,7 @@
 
         ; 删除原有的 菜单项
         A_TrayMenu.Delete()
-        if (NOT A_IsCompiled) {
+        if (!A_IsCompiled) {
             A_TrayMenu.Add(this.editScript, trayMenuHandlerFunc)
             A_TrayMenu.Add(this.listVars, trayMenuHandlerFunc)
             A_TrayMenu.Add
@@ -116,18 +116,18 @@
             }
         }
 
-        switch settingLanguage {
+        switch CURRENT_LANG {
             case 'zh-Hans': this.langMenu.Check('简体中文')
             case 'zh-Hant': this.langMenu.Check('繁体中文') 
-            default: this.langMenu.Check(settingLanguage)
+            default: this.langMenu.Check(CURRENT_LANG)
         }
     }
 
     switchLanguage(ItemName, ItemPos, MyMenu) {
         switch ItemName {
-            case '简体中文': global settingLanguage := 'zh-Hans'
-            case '繁体中文': global settingLanguage := 'zh-Hant'     
-            default: global settingLanguage := ItemName
+            case '简体中文': global CURRENT_LANG := 'zh-Hans'
+            case '繁体中文': global CURRENT_LANG := 'zh-Hant'     
+            default: global CURRENT_LANG := ItemName
         }
         Reload
     }
@@ -213,10 +213,10 @@
         Suspend(!A_IsSuspended)
         if (A_IsSuspended) {
             A_TrayMenu.Check(this.pause)
-            Tip('  暂停捷键  ', -500)
+            Tip('  捷键已暂停  ', -500)
         } else {
             A_TrayMenu.UnCheck(this.pause)
-            Tip('  恢复捷键  ', -500)
+            Tip('  捷键已恢复  ', -500)
         }
     }
 
@@ -263,7 +263,7 @@
         LOCALE_SENGLISHDISPLAYNAME := 0x72
         LocaleName := this.LCIDToLocaleName(LCID, LOCALE_ALLOW_NEUTRAL_NAMES)
         if LocaleName {
-            DisplayName := this.GetLocaleInfo(LocaleName, LOCALE_SENGLISHDISPLAYNAME)
+            DisplayName := this.getLocaleInfo(LocaleName, LOCALE_SENGLISHDISPLAYNAME)
         } else {
             DisplayName := 'unknown'
         }
@@ -277,7 +277,7 @@
         return StrGet(out)
     }
 
-    GetLocaleInfo(LocaleName, LCType) {
+    getLocaleInfo(LocaleName, LCType) {
         reqBufSize := DllCall("GetLocaleInfoEx", "Str", LocaleName, "UInt", LCType, "Ptr", 0, "UInt", 0)
         out := Buffer(reqBufSize*2)
         DllCall("GetLocaleInfoEx", "Str", LocaleName, "UInt", LCType, "Ptr", out, "UInt", out.Size)
@@ -293,18 +293,18 @@ initLanguage() {
     ; 在已编译的脚本中包含指定的文件
     if (A_IsCompiled) {
         ; 要添加到已编译可执行文件中的文件名. 如果没有指定绝对路径, 则假定该文件位于(或相对于) 脚本自己的目录中
-        FileInstall('lang\ar.ini', 'lang\ar.ini')
-        FileInstall('lang\de.ini', 'lang\de.ini')
-        FileInstall('lang\en.ini', 'lang\en.ini')
-        FileInstall('lang\es.ini', 'lang\es.ini')
-        FileInstall('lang\fr.ini', 'lang\fr.ini')
-        FileInstall('lang\it.ini', 'lang\it.ini')
-        FileInstall('lang\ja.ini', 'lang\ja.ini')
-        FileInstall('lang\ko.ini', 'lang\ko.ini')
-        FileInstall('lang\pt.ini', 'lang\pt.ini')
-        FileInstall('lang\ru.ini', 'lang\ru.ini')
-        FileInstall('lang\tr.ini', 'lang\tr.ini')
-        FileInstall('lang\zh-Hans.ini', 'lang\zh-Hans.ini')
-        FileInstall('lang\zh-Hant.ini', 'lang\zh-Hant.ini')
+        FileInstall('lang\ar.ini', 'lang\ar.ini', true)
+        FileInstall('lang\de.ini', 'lang\de.ini', true)
+        FileInstall('lang\en.ini', 'lang\en.ini', true)
+        FileInstall('lang\es.ini', 'lang\es.ini', true)
+        FileInstall('lang\fr.ini', 'lang\fr.ini', true)
+        FileInstall('lang\it.ini', 'lang\it.ini', true)
+        FileInstall('lang\ja.ini', 'lang\ja.ini', true)
+        FileInstall('lang\ko.ini', 'lang\ko.ini', true)
+        FileInstall('lang\pt.ini', 'lang\pt.ini', true)
+        FileInstall('lang\ru.ini', 'lang\ru.ini', true)
+        FileInstall('lang\tr.ini', 'lang\tr.ini', true)
+        FileInstall('lang\zh-Hans.ini', 'lang\zh-Hans.ini', true)
+        FileInstall('lang\zh-Hant.ini', 'lang\zh-Hant.ini', true)
     }
 }

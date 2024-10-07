@@ -12,6 +12,6 @@ fileObj.Write(version)
 fileObj.Close()
 
 ; 拷贝文件 + 并最终生成在 out 目录下生成 jiejian-版本 的文件夹
-RunWait("CopyFilesForPackage.bat jiejian-" . version, , "Hide")
+RunWait("packagePrep.bat jiejian-" . version, , "Hide")
 ; 使用 7z 进行压缩
 RunWait('..\package\7zr.exe a jiejian-' . version . '.7z jiejian-' . version, 'out', "Hide")

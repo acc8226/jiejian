@@ -30,7 +30,7 @@ RunWait Ahk2Exe
  . ' /base ' . base . aAutoHotkey . a32exe
  . ' /compress 2'
 
- ; 由于打包 和 构建不知为何发生在 生成 exe 之前，所以再次构建一次
+ ; 由于打包 和 构建不知为何发生在 生成 exe 之前，所以再次构建一次 32 位
 RunWait Ahk2Exe
 . ' /in ' . jiejianAhk
 . ' /out ' . jiejian . a32exe
