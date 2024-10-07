@@ -97,12 +97,12 @@ parseData(fileName) {
             loop parse dosPath, "`;" {
               if A_LoopField == ""
                 continue
-              if (FileExist(A_LoopField "\" item)) {
+              if (FileExist(A_LoopField . "\" . item)) {
                 isPathExist := true
                 break
               }
               ; 如果不以 exe 结尾则拼接 exe 继续尝试
-              if (!isEndsWithExe && FileExist(A_LoopField "\" item . '.exe')) {
+              if (!isEndsWithExe && FileExist(A_LoopField . "\" . item . '.exe')) {
                 isPathExist := true
                 break
               }

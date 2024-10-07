@@ -177,7 +177,7 @@ anyrun() {
             ; 搜索匹配
             ; 查询出所有搜索，如果前缀满足则添加到列表
             for it in DATA_LIST {
-                if (it.type == DataType.action and 1 = InStr(editValue, it.alias))
+                if it.type == DataType.action and 1 == InStr(editValue, it.alias)
                     listBoxDataArray.push(it.title . '-' . it.type)
             }
 
@@ -326,7 +326,7 @@ openPathByType(item) {
         openInnerCommand(item.title, True)
     } else if (item.type = DataType.ext) { ; 精确处理：外部
         Run('jiejian' . (A_PtrSize == 4 ? '32' : '64') . '.exe /script ' . item.path)
-    } else if (item.type = DataType.app && item.title == '微信') { ; 对微信特殊处理：自动登录微信
+    } else if (item.type = DataType.app && item.title == '微信') { ; 对 微信 优化体验：自动登录微信
         try {
             Run(item.path,,, &pid)
             WinWaitActive("ahk_pid " . pid)
@@ -335,6 +335,9 @@ openPathByType(item) {
             Send("{Space}")
         } catch
             MsgBox("找不到目标应用")
+    } else if (item.type = DataType.app && item.title = 'alist') { ; 对 alist 特殊处理：使用命令行打开并添加 server 参数
+        SplitPath(item.path,, &dir)
+        Run(A_ComSpec " /C " . item.path . " server", dir)
     } else {
         ; 启动逻辑为每次都新建应用，而非打开已有应用 ActivateOrRun('', item.path)
         Run(item.path)
@@ -448,12 +451,12 @@ appendFileType(path) {
             case 'torrent': return "种子文件"
             case 'txt': return "纯文本"
             case 'url' : return "网络书签"
-            case 'vsd': return " Adobe Photoshop 文件"
-            case 'wps': return " WPS 文档"
-            case 'xls': return " Excel 表格（旧版）"
-            case 'xlsx': return " Excel 表格"
-            case 'xml': return " xml 文件"
-            default: return "文件"
+            case 'vsd': return ' Adobe Photoshop 文件'
+            case 'wps': return ' WPS 文档'
+            case 'xls': return ' Excel 表格（旧版）'
+            case 'xlsx': return ' Excel 表格'
+            case 'xml': return ' xml 文件'
+            default: return '文件'
         }
     }
     return "文件"
