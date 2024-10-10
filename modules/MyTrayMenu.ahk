@@ -19,37 +19,34 @@ class MyTrayMenu {
             MsgBox "An error was thrown!`nSpecifically: " e.Message
             global CURRENT_LANG := 'en'
             LANG_PATH := A_ScriptDir "\lang\" . CURRENT_LANG . ".ini"
-            this.editScript:= IniRead(LANG_PATH, "Tray", "editScript")
+            this.editScript:= IniRead(LANG_PATH, "Tray", "editScript", 'Edit Script (&E)')
         }
-        this.listVars:= IniRead(LANG_PATH, "Tray", "listVars")
+        this.listVars:= IniRead(LANG_PATH, "Tray", "listVars", 'List Variables')
 
-        this.pause := IniRead(LANG_PATH, "Tray", "pause")
-        this.restart:= IniRead(LANG_PATH, "Tray", "restart")
-        this.search:= IniRead(LANG_PATH, "Tray", "search")
-        this.startUp:= IniRead(LANG_PATH, "Tray", "startUp")
+        this.pause := IniRead(LANG_PATH, "Tray", "pause", 'Disable Shortcuts (&S)')
+        this.restart:= IniRead(LANG_PATH, "Tray", "restart", 'Restart Program (&R)')
+        this.search:= IniRead(LANG_PATH, "Tray", "search", 'Search (&Q)')
+        this.startUp:= IniRead(LANG_PATH, "Tray", "startUp", 'Startup on Boot')
 
-        this.more:= IniRead(LANG_PATH, "Tray", "more")
-        this.document:= IniRead(LANG_PATH, "Tray", "document")
-        this.video:= IniRead(LANG_PATH, "Tray", "video")
-        this.statistics:= IniRead(LANG_PATH, "Tray", "statistics")
-        this.viewWinId:= IniRead(LANG_PATH, "Tray", "viewWinId")
-        this.followMeCSDN:= IniRead(LANG_PATH, "Tray", "followMeCSDN")
-        this.followMeGH:= IniRead(LANG_PATH, "Tray", "followMeGH")
-        this.enableDarkMode:= IniRead(LANG_PATH, "Tray", "enableDarkMode", "enable dark mode")
-        this.enableTimerReminder:= IniRead(LANG_PATH, "Tray", "enableTimerReminder", "enable timer reminder")
-        this.update:= IniRead(LANG_PATH, "Tray", "update")
-        this.about:= IniRead(LANG_PATH, "Tray", "about")
+        this.switchLang:= IniRead(LANG_PATH, "Tray", "switchLang", 'Language (&L)')
 
-        this.switchLang:= IniRead(LANG_PATH, "Tray", "switchLang")
+        this.more:= IniRead(LANG_PATH, "Tray", "more", 'More (&M)')
+        this.document:= IniRead(LANG_PATH, "Tray", "document", 'Help Documentation (&H)')
+        this.video:= IniRead(LANG_PATH, "Tray", "video", 'Video Tutorial (&V)')
+        this.statistics:= IniRead(LANG_PATH, "Tray", "statistics", 'Usage Statistics (&S)')
+        this.viewWinId:= IniRead(LANG_PATH, "Tray", "viewWinId", 'View Window Identifier (&V)')
+        this.followMeCSDN:= IniRead(LANG_PATH, "Tray", "followMeCSDN", 'Follow Me on CSDN (&F)')
+        this.softwareHomepage:= IniRead(LANG_PATH, "Tray", "followMeGH", 'Software Homepage (&G)')
+        this.enableDarkMode:= IniRead(LANG_PATH, "Tray", "enableDarkMode", "Enable Dark Mode")
+        this.enableTimerReminder:= IniRead(LANG_PATH, "Tray", "enableTimerReminder", "Enable Eye Care Reminder")
+        this.update:= IniRead(LANG_PATH, "Tray", "update", 'Check for Updates (&U)...')
+        this.about:= IniRead(LANG_PATH, "Tray", "about", 'About (&A)')     
 
-        this.exit:= IniRead(LANG_PATH, "Tray", "exit")
-
-        this.langMenu := Menu()
+        this.exit:= IniRead(LANG_PATH, "Tray", "exit", 'Exit (&X)')
 
         ; 快捷方式以 lnk 结尾
         this.linkFile := A_Startup . "\jiejian.lnk"
 
-        this.shortcut := unset
         if A_IsCompiled
             this.shortcut := 'jiejian' . (A_Is64bitOS ? '64' : '32' ) . '.exe'
         else
@@ -71,7 +68,10 @@ class MyTrayMenu {
         A_TrayMenu.Add(this.restart, trayMenuHandlerFunc)
         A_TrayMenu.Add(this.search, trayMenuHandlerFunc)
         A_TrayMenu.Add(this.startUp, trayMenuHandlerFunc)
+        A_TrayMenu.Add
+
         ; 切换语言
+        this.langMenu := Menu()
         A_TrayMenu.Add(this.switchLang, this.langMenu)
         this.createLangMenu()
 
@@ -82,7 +82,7 @@ class MyTrayMenu {
         moreMenu.Add(this.statistics, trayMenuHandlerFunc)
         moreMenu.Add(this.viewWinId, trayMenuHandlerFunc)
         moreMenu.Add(this.followMeCSDN, trayMenuHandlerFunc)
-        moreMenu.Add(this.followMeGH, trayMenuHandlerFunc)
+        moreMenu.Add(this.softwareHomepage, trayMenuHandlerFunc)
         moreMenu.Add(this.enableDarkMode, trayMenuHandlerFunc)
         moreMenu.Add(this.enableTimerReminder, trayMenuHandlerFunc)
         moreMenu.Add(this.update, trayMenuHandlerFunc)
@@ -138,26 +138,49 @@ class MyTrayMenu {
         switchLanguageFunc := this.switchLanguage.Bind(this)
         Loop Files A_ScriptDir "\lang\*.ini" {
             SplitPath A_LoopFileName, , , , &FileNameNoExt
-            if (FileNameNoExt == 'zh-Hans') {
-                this.langMenu.Add('简体中文', switchLanguageFunc)
-            } else if (FileNameNoExt == 'zh-Hant') {
-                this.langMenu.Add('繁体中文', switchLanguageFunc)
-            } else {
-                this.langMenu.Add(FileNameNoExt, switchLanguageFunc)
-            }
+            
+            currentLang := code2Language(FileNameNoExt)
+            this.langMenu.Add(currentLang ? currentLang : FileNameNoExt, switchLanguageFunc)
         }
 
-        switch CURRENT_LANG {
-            case 'zh-Hans': this.langMenu.Check('简体中文')
-            case 'zh-Hant': this.langMenu.Check('繁体中文') 
-            default: this.langMenu.Check(CURRENT_LANG)
+        currentLang := code2Language(CURRENT_LANG)
+        this.langMenu.Check(currentLang ? currentLang : CURRENT_LANG)
+
+        code2Language(code) {
+            switch code {
+                case 'zh-Hans': return '简体中文 🇨🇳'
+                case 'zh-Hant': return '繁体中文 🇨🇳'
+                case 'ar': return '(العربية)'
+                case 'de': return 'Deutsch 🇩🇪'
+                case 'en': return 'English'
+                case 'es': return 'Español 🇪🇸'
+                case 'fr': return 'Français 🇫🇷'
+                case 'it': return 'Italiano 🇮🇹'
+                case 'ja': return '日本語 🇯🇵'
+                case 'ko': return '한국어 🇰🇷'
+                case 'pt': return 'Português 🇵🇹'
+                case 'ru': return 'Русский 🇷🇺'
+                case 'tr': return 'Türkçe 🇹🇷'
+                default: return false
+            }
         }
     }
 
     switchLanguage(ItemName, ItemPos, MyMenu) {
         switch ItemName {
-            case '简体中文': global CURRENT_LANG := 'zh-Hans'
-            case '繁体中文': global CURRENT_LANG := 'zh-Hant'     
+            case '简体中文 🇨🇳': global CURRENT_LANG := 'zh-Hans'
+            case '繁体中文 🇨🇳': global CURRENT_LANG := 'zh-Hant'
+            case '(العربية)': global CURRENT_LANG := 'ar'
+            case 'Deutsch 🇩🇪': global CURRENT_LANG := 'de'
+            case 'English': global CURRENT_LANG := 'en'
+            case 'Español 🇪🇸': global CURRENT_LANG := 'es'
+            case 'Français 🇫🇷': global CURRENT_LANG := 'fr'
+            case 'Italiano 🇮🇹': global CURRENT_LANG := 'it'
+            case '日本語 🇯🇵': global CURRENT_LANG := 'ja'
+            case '한국어 🇰🇷': global CURRENT_LANG := 'ko'
+            case 'Português 🇵🇹': global CURRENT_LANG := 'pt'
+            case 'Русский 🇷🇺': global CURRENT_LANG := 'ru'
+            case 'Türkçe 🇹🇷': global CURRENT_LANG := 'tr'
             default: global CURRENT_LANG := ItemName
         }
         Reload
@@ -180,7 +203,7 @@ class MyTrayMenu {
             case this.listVars: ListVars
             case this.pause: this.toggleSuspend
             case this.restart: Reload
-            case this.search: anyrun
+            case this.search: Anyrun
 
             case this.viewWinId: Run("extra/WindowSpyU32.exe")
             case this.statistics:
@@ -232,7 +255,7 @@ class MyTrayMenu {
             case this.video: Run('https://www.bilibili.com/video/BV19H4y1e7hJ')
 
             case this.followMeCSDN: Run('https://blog.csdn.net/acc8226')
-            case this.followMeGH: Run('https://github.com/acc8226')
+            case this.softwareHomepage: Run('https://github.com/acc8226/jiejian')
 
             case this.enableDarkMode:                    
                 RegWrite(ENABLE_DARK_MODE ? false : true, "REG_DWORD", REG_KEY_NAME, REG_DARK_MODE)
@@ -264,10 +287,10 @@ class MyTrayMenu {
         Suspend(!A_IsSuspended)
         if (A_IsSuspended) {
             A_TrayMenu.Check(this.pause)
-            Tip('  捷键已暂停  ', -500)
+            Tip('  热键已禁用  ', -500)
         } else {
             A_TrayMenu.UnCheck(this.pause)
-            Tip('  捷键已恢复  ', -500)
+            Tip('  热键已恢复  ', -500)
         }
     }
 
