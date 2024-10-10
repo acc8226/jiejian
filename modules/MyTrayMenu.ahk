@@ -1,11 +1,16 @@
-﻿class MyTrayMenu {
+﻿
+
+class MyTrayMenu {
     
     __new() {
         ; 当前是否是选中状态
         GLOBAL IS_AUTO_START_UP
+        ; 是否启用定时提醒
+        GLOBAL ENABLE_DARK_MODE := RegRead(REG_KEY_NAME, REG_DARK_MODE, true)
+        GLOBAL ENABLE_TIMER_REMINDER := RegRead(REG_KEY_NAME, REG_RELAX_REMINDER, false)
 
         ; 读取当前语言状态，如果读取不到则默认是中文
-        LANG_PATH := A_ScriptDir "\lang\" . CURRENT_LANG . ".ini"
+        LANG_PATH := A_ScriptDir . "\lang\" . CURRENT_LANG . ".ini"
 
         try
             this.editScript:= IniRead(LANG_PATH, "Tray", "editScript")
@@ -15,7 +20,7 @@
             global CURRENT_LANG := 'en'
             LANG_PATH := A_ScriptDir "\lang\" . CURRENT_LANG . ".ini"
             this.editScript:= IniRead(LANG_PATH, "Tray", "editScript")
-        }        
+        }
         this.listVars:= IniRead(LANG_PATH, "Tray", "listVars")
 
         this.pause := IniRead(LANG_PATH, "Tray", "pause")
@@ -30,6 +35,8 @@
         this.viewWinId:= IniRead(LANG_PATH, "Tray", "viewWinId")
         this.followMeCSDN:= IniRead(LANG_PATH, "Tray", "followMeCSDN")
         this.followMeGH:= IniRead(LANG_PATH, "Tray", "followMeGH")
+        this.enableDarkMode:= IniRead(LANG_PATH, "Tray", "enableDarkMode", "enable dark mode")
+        this.enableTimerReminder:= IniRead(LANG_PATH, "Tray", "enableTimerReminder", "enable timer reminder")
         this.update:= IniRead(LANG_PATH, "Tray", "update")
         this.about:= IniRead(LANG_PATH, "Tray", "about")
 
@@ -76,9 +83,12 @@
         moreMenu.Add(this.viewWinId, trayMenuHandlerFunc)
         moreMenu.Add(this.followMeCSDN, trayMenuHandlerFunc)
         moreMenu.Add(this.followMeGH, trayMenuHandlerFunc)
+        moreMenu.Add(this.enableDarkMode, trayMenuHandlerFunc)
+        moreMenu.Add(this.enableTimerReminder, trayMenuHandlerFunc)
         moreMenu.Add(this.update, trayMenuHandlerFunc)
         moreMenu.Add(this.about, trayMenuHandlerFunc)
         A_TrayMenu.Add(this.more, moreMenu)
+        this.moreMenu := moreMenu
 
         A_TrayMenu.Add(this.exit, trayMenuHandlerFunc)
 
@@ -97,6 +107,27 @@
             IS_AUTO_START_UP := false
             A_TrayMenu.UnCheck(this.startUp)
         }
+
+        WindowsTheme.SetAppMode(ENABLE_DARK_MODE)        
+        if ENABLE_DARK_MODE {
+            WindowsTheme.SetAppMode(ENABLE_DARK_MODE)
+            moreMenu.Check(this.enableDarkMode)
+        } else {
+            moreMenu.UnCheck(this.enableDarkMode)
+        }
+        ; 自动获取系统的深色模式开关
+        ; SYSTEM_THEME_MODE := RegRead("HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "SystemUsesLightTheme", true)
+        ; WindowsTheme.SetAppMode(!SYSTEM_THEME_MODE)
+        
+        ; 是否开启定时提醒
+        this.counter := RelaxCounter()
+        if ENABLE_TIMER_REMINDER {
+            this.counter.start
+            moreMenu.Check(this.enableTimerReminder)
+        } else {
+            moreMenu.UnCheck(this.enableTimerReminder)
+        }
+
         A_TrayMenu.Default := this.pause
         A_TrayMenu.ClickCount := 1 ; 单击可以暂停
     }
@@ -141,6 +172,8 @@
      */
     TrayMenuHandler(ItemName, ItemPos, MyMenu) {
         GLOBAL IS_AUTO_START_UP
+        GLOBAL ENABLE_DARK_MODE
+        GLOBAL ENABLE_TIMER_REMINDER
 
         switch ItemName, 'off' {
             case this.editScript: Edit
@@ -200,6 +233,24 @@
 
             case this.followMeCSDN: Run('https://blog.csdn.net/acc8226')
             case this.followMeGH: Run('https://github.com/acc8226')
+
+            case this.enableDarkMode:                    
+                RegWrite(ENABLE_DARK_MODE ? false : true, "REG_DWORD", REG_KEY_NAME, REG_DARK_MODE)
+                this.moreMenu.ToggleCheck(this.enableDarkMode)
+                ENABLE_DARK_MODE := !ENABLE_DARK_MODE
+                WindowsTheme.SetAppMode(ENABLE_DARK_MODE)
+
+            case this.enableTimerReminder:
+                if ENABLE_TIMER_REMINDER {
+                    RegWrite(0, "REG_DWORD", REG_KEY_NAME, REG_RELAX_REMINDER)
+                    this.counter.Stop
+                } else {
+                    this.counter.start
+                    RegWrite(1, "REG_DWORD", REG_KEY_NAME, REG_RELAX_REMINDER)
+                }
+                this.moreMenu.ToggleCheck(this.enableTimerReminder)
+                ENABLE_TIMER_REMINDER := !ENABLE_TIMER_REMINDER
+
             case this.update: checkUpdate(true)
             case this.about: this.aboutFunc
             case this.exit: ExitApp
@@ -272,24 +323,23 @@
 
     LCIDToLocaleName(LCID, Flags := 0) {
         reqBufSize := DllCall("LCIDToLocaleName", "UInt", LCID, "Ptr", 0, "UInt", 0, "UInt", Flags)
-        out := Buffer(reqBufSize*2)
+        out := Buffer(reqBufSize * 2)
         DllCall("LCIDToLocaleName", "UInt", LCID, "Ptr", out, "UInt", out.Size, "UInt", Flags)
         return StrGet(out)
     }
 
     getLocaleInfo(LocaleName, LCType) {
         reqBufSize := DllCall("GetLocaleInfoEx", "Str", LocaleName, "UInt", LCType, "Ptr", 0, "UInt", 0)
-        out := Buffer(reqBufSize*2)
+        out := Buffer(reqBufSize * 2)
         DllCall("GetLocaleInfoEx", "Str", LocaleName, "UInt", LCType, "Ptr", out, "UInt", out.Size)
         return StrGet(out)
     }
 }
 
 initLanguage() {
-    folderCheckList := ['lang']
-    for item in folderCheckList
-        If !FileExist(A_ScriptDir . '\' . item)
-            DirCreate(A_ScriptDir . '\' . item)
+    if !FileExist(A_ScriptDir . '\' . 'lang')
+        DirCreate(A_ScriptDir . '\' . 'lang')
+
     ; 在已编译的脚本中包含指定的文件
     if (A_IsCompiled) {
         ; 要添加到已编译可执行文件中的文件名. 如果没有指定绝对路径, 则假定该文件位于(或相对于) 脚本自己的目录中
@@ -306,5 +356,51 @@ initLanguage() {
         FileInstall('lang\tr.ini', 'lang\tr.ini', true)
         FileInstall('lang\zh-Hans.ini', 'lang\zh-Hans.ini', true)
         FileInstall('lang\zh-Hant.ini', 'lang\zh-Hant.ini', true)
+    }
+}
+
+; 一个记录秒数的示例类...
+class RelaxCounter {
+    __New() {
+        ; 半小时提醒
+        ; this.interval := 30000
+        this.interval := 1800000
+        ; Tick() 有一个隐式参数 "this", 其引用一个对象
+        ; 所以, 我们需要创建一个封装了 "this " 和调用方法的函数:
+        this.timer := ObjBindMethod(this, "Tick")
+    }
+    start() {
+        SetTimer this.timer, this.interval
+        ; ToolTip "Counter started"
+    }
+    stop() {
+        ; 要关闭计时器, 我们必须传递和之前一样的对象
+        SetTimer this.timer, 0
+        ; ToolTip "Counter stopped"
+    }
+    ; 本例中, 计时器调用了以下方法:
+    Tick() {
+        static count := 0
+        if count == 1
+            count := 2
+        else
+            count := 1
+    
+        ; MsgBox '休息时间到！请远离屏幕，让眼睛休息一下。', '护眼提醒', 'T10'
+        MyGui := Gui('-SysMenu', '捷键提醒（半小时休息）-' . FormatTime(, 'HH:mm'))
+        ; MyGui.AddProgress("w360 h20 c21f505 vMyProgress", 0)
+    
+        MyGui.AddProgress("w360 h20 " . ['c008000', 'c008080'][count] . " vMyProgress", 0)
+        MyGui.Show
+        WinSetAlwaysOnTop(true, 'A')
+    
+        loop {
+            MyGui["MyProgress"].Value += 10  ; 增加 20 到当前位置.
+            if (MyGui["MyProgress"].Value >= 100) {
+                MyGui.Destroy
+                break
+            }
+            Sleep 1000
+        }
     }
 }

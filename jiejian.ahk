@@ -59,6 +59,8 @@ SetDefaults() {
     REG_RECORD_MINS := 'record_mins'
     REG_LAUNCH_COUNT := 'launch_count'
     REG_LANG := 'LANG'
+    REG_RELAX_REMINDER := 'relaxReminder'
+    REG_DARK_MODE := 'darkMode'
 
     CURRENT_LANG := RegRead(REG_KEY_NAME, REG_LANG, '')
     if (CURRENT_LANG = '') {
@@ -95,9 +97,6 @@ SetDefaults() {
 #Include 'modules/Anyrun.ahk'
 #Include 'modules/CheckUpdate.ahk'
 #Include 'modules/MyTrayMenu.ahk'
-
-global SYSTEM_THEME_MODE := RegRead("HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "SystemUsesLightTheme")
-WindowsTheme.SetAppMode(!SYSTEM_THEME_MODE)
 
 initLanguage
 
