@@ -18,27 +18,27 @@ GLOBAL MY_GUI
 GLOBAL MY_GUI_TITLE := '快捷启动'
 
 GLOBAL MyActionArray := [
-    MyAction('打开网址', 'list', isLegitimateWebsite, appendWebsiteName, jumpURL), ; 是否提前些比较好，不用了，兜底挺好
-    MyAction('生成二维码(磁力链)', 'list', isMagnetUrl,, createQRcode),
-    MyAction('生成二维码(网址)', 'list', isLegitimateWebsite,, createQRcode),
+    MyAction('打开网址', 'list', isLegitimateWebsite, AppendWebsiteName, jumpURL), ; 是否提前些比较好，不用了，兜底挺好
+    MyAction('生成二维码(磁力链)', 'list', isMagnetUrl,, CreateQRcode),
+    MyAction('生成二维码(网址)', 'list', isLegitimateWebsite,, CreateQRcode),
     ; 打开（文件，可能是 mp3 或者 mp4 或者 mov）
-    MyAction('打开', 'list', path => isFileOrDirExists(path) && NOT DirExist(path), appendFileType, path => Run(path)) ,
-    MyAction('前往文件夹', 'list', isDir,, openDir),
+    MyAction('打开', 'list', path => isFileOrDirExists(path) && NOT DirExist(path), AppendFileType, path => Run(path)) ,
+    MyAction('前往文件夹', 'list', isDir,, OpenDir),
     MyAction('查看属性', 'list', isFileOrDirExists,, path => Run('properties "' . path . '"')),
     MyAction('打印文件', 'list', path => path ~= 'i).+\.(?:bmp|docx?|gif|jpe?g|ofd|pdf|png|pptx?|xlsx?)$' && isFileOrDirExists(path) && NOT DirExist(path),, path => Run('print "' . path . '"')),
-    MyAction('删除文件', 'list', isFileOrDirExists,, delFileOrDir),
+    MyAction('删除文件', 'list', isFileOrDirExists,, DelFileOrDir),
 ]
 
 if IsSet(MY_BASH)
-    MyActionArray.Push(MyAction('在 Bash 中打开所在位置', 'list', isFileOrDirExists,, openInBash))
-MyActionArray.Push(MyAction('在 终端 中打开所在位置', 'list', isFileOrDirExists,, (IsSet(MY_NEW_TERMINAL) ? openInNewTerminal : openInTerminal)))
+    MyActionArray.Push(MyAction('在 Bash 中打开所在位置', 'list', isFileOrDirExists,, OpenInBash))
+MyActionArray.Push(MyAction('在 终端 中打开所在位置', 'list', isFileOrDirExists,, (IsSet(MY_NEW_TERMINAL) ? OpenInNewTerminal : OpenInTerminal)))
 if IsSet(MY_VSCode)
     MyActionArray.Push(MyAction('在 VSCode 中打开', 'list', isCodeFileOrDir,, path => Run(MY_VSCode . ' ' . path)))
 if IsSet(MY_IDEA)
     MyActionArray.Push(MyAction('在 IDEA 中打开', 'list', isCodeFileOrDir,, path => Run(MY_IDEA . ' ' . path)))
 
 ; 彩蛋 本机 IP
-MyActionArray.Push(MyAction('myip', 'edit',,, getIPAddresses))
+MyActionArray.Push(MyAction('myip', 'edit',,, GetIPAddresses))
 
 ; 设置监听
 #HotIf WinActive(MY_GUI_TITLE . " ahk_class i)^AutoHotkeyGUI$")
@@ -54,7 +54,7 @@ MyActionArray.Push(MyAction('myip', 'edit',,, getIPAddresses))
 }
 #HotIf
 
-anyrun() {
+Anyrun() {
     ; reload 过程中 MY_GUI_TITLE 会未定义
     if NOT IsSet(MY_GUI_TITLE)
         return
@@ -323,7 +323,7 @@ openPathByType(item) {
     if (item.type = DataType.web || item.type = DataType.dl) {
         jumpURL(item.path)
     } else if (item.type = DataType.inner) { ; 精确处理：内部
-        openInnerCommand(item.title, True)
+        OpenInnerCommand(item.title, True)
     } else if (item.type = DataType.ext) { ; 精确处理：外部
         Run('jiejian' . (A_PtrSize == 4 ? '32' : '64') . '.exe /script ' . item.path)
     } else if (item.type = DataType.app && item.title == '微信') { ; 对 微信 优化体验：自动登录微信
@@ -366,7 +366,7 @@ class MyAction {
 }
 
 ; --- appendTitle 开始 ---
-appendWebsiteName(path) {
+AppendWebsiteName(path) {
     ; 对网址进行细化处理
     ; 从 dava.csv 中抽取符合条件的 b 列 (http 网址)，若满足则赋值 d 列
     appendName := ''
@@ -403,7 +403,7 @@ appendWebsiteName(path) {
     return appendName
 }
 
-appendFileType(path) {
+AppendFileType(path) {
     ; 取出文件后缀名，若有的话
     if RegExMatch(path, '\.([^.]*$)', &matchInfo) {
         extension := matchInfo.1
@@ -511,11 +511,11 @@ isCodeFileOrDir(path) {
 }
 
 ; --- run 开始 ---
-createQRcode(path) {
+CreateQRcode(path) {
     Run('https://api.cl2wm.cn/api/qrcode/code?text=' . URIEncode(path))
 }
 
-openDir(path) {
+OpenDir(path) {
     if (DirExist(path)) {
         Run(path)
     } else {
@@ -524,11 +524,11 @@ openDir(path) {
     }
 }
 
-delFileOrDir(path) {
+DelFileOrDir(path) {
     DirExist(path) ? DirDelete(path) : FileDelete(path)
 }
 
-openInBash(path) {
+OpenInBash(path) {
     ; 在 bash 中打开所在文件夹
     if (DirExist(path)) {
         ; 盘符根目录需要以 \ 结尾才生效，所以都统一加上
@@ -541,7 +541,7 @@ openInBash(path) {
     }
 }
 
-openInTerminal(path) {
+OpenInTerminal(path) {
     ; 在终端中打开所在文件夹
     if (DirExist(path)) {
         ; 盘符根目录需要以 \ 结尾才生效
@@ -554,7 +554,7 @@ openInTerminal(path) {
     }
 }
 
-openInNewTerminal(path) {
+OpenInNewTerminal(path) {
     ; 在终端中打开所在文件夹
     if (DirExist(path)) {
         ; 盘符根目录需要以 \ 结尾才生效，所以都统一加上
@@ -568,7 +568,7 @@ openInNewTerminal(path) {
 }
 
 ; 包含了所有我预设的内部命令
-openInnerCommand(title, isConfirm := false) {
+OpenInnerCommand(title, isConfirm := false) {
     switch title {
         ; shell
         case '打印机': Run "shell:PrintersFolder"
@@ -647,7 +647,7 @@ openInnerCommand(title, isConfirm := false) {
     }
 }
 
-getIPAddresses() {
+GetIPAddresses() {
     addresses := SysGetIPAddresses()
     msg := "IP 地址:`n"
     for address in addresses
