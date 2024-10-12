@@ -73,7 +73,7 @@ class MyTrayMenu {
         ; 切换语言
         this.langMenu := Menu()
         A_TrayMenu.Add(this.switchLang, this.langMenu)
-        this.createLangMenu()
+        this.CreateLangMenu()
 
         ; 添加子菜单到上面的菜单中
         moreMenu := Menu()
@@ -122,7 +122,7 @@ class MyTrayMenu {
         ; 是否开启定时提醒
         this.counter := RelaxCounter()
         if ENABLE_TIMER_REMINDER {
-            this.counter.start
+            this.counter.Start
             moreMenu.Check(this.enableTimerReminder)
         } else {
             moreMenu.UnCheck(this.enableTimerReminder)
@@ -132,21 +132,21 @@ class MyTrayMenu {
         A_TrayMenu.ClickCount := 1 ; 单击可以暂停
     }
 
-    createLangMenu() {
+    CreateLangMenu() {
         this.langMenu.Delete
 
         switchLanguageFunc := this.switchLanguage.Bind(this)
         Loop Files A_ScriptDir "\lang\*.ini" {
             SplitPath A_LoopFileName, , , , &FileNameNoExt
             
-            currentLang := code2Language(FileNameNoExt)
+            currentLang := Code2Language(FileNameNoExt)
             this.langMenu.Add(currentLang ? currentLang : FileNameNoExt, switchLanguageFunc)
         }
 
-        currentLang := code2Language(CURRENT_LANG)
+        currentLang := Code2Language(CURRENT_LANG)
         this.langMenu.Check(currentLang ? currentLang : CURRENT_LANG)
 
-        code2Language(code) {
+        Code2Language(code) {
             switch code {
                 case 'zh-Hans': return '简体中文 🇨🇳'
                 case 'zh-Hant': return '繁体中文 🇨🇳'
@@ -275,7 +275,7 @@ class MyTrayMenu {
                 ENABLE_TIMER_REMINDER := !ENABLE_TIMER_REMINDER
 
             case this.update: checkUpdate(true)
-            case this.about: this.aboutFunc
+            case this.about: this.AboutFunc
             case this.exit: ExitApp
         }
     }
@@ -297,16 +297,16 @@ class MyTrayMenu {
     /**
      * 快捷键用的暂停
      */
-    mySuspend() {
+    MySuspend() {
         Suspend(!A_IsSuspended)
         A_IsSuspended ? A_TrayMenu.Check(this.pause) : A_TrayMenu.UnCheck(this.pause)
     }
 
-    aboutFunc(){
+    AboutFunc(){
         MsgBox(      
             '版本: ' . CODE_VERSION
             . "`nAHK 主程序版本: " . A_AhkVersion
-            . "`n系统默认语言: " . this.localLang(A_Language)
+            . "`n系统默认语言: " . this.LocalLang(A_Language)
             . "`nWindows " . A_OSVersion . (A_Is64bitOS ? ' 64 位' : '')
             . "`n计算机名: " . A_ComputerName
             . "`n当前用户: " . A_UserName
@@ -315,7 +315,7 @@ class MyTrayMenu {
             , APP_NAME, 'Iconi T60')
     }
 
-    localLang(language) {
+    LocalLang(language) {
         if language = '7804'
             return '中文'
         else if language = '0004'
@@ -386,44 +386,40 @@ initLanguage() {
 class RelaxCounter {
     __New() {
         ; 半小时提醒
-        ; this.interval := 30000
+        ; this.interval := 15000
         this.interval := 1800000
-        ; Tick() 有一个隐式参数 "this", 其引用一个对象
-        ; 所以, 我们需要创建一个封装了 "this " 和调用方法的函数:
+        ; Tick() 有一个隐式参数 "this", 其引用一个对象。所以, 我们需要创建一个封装了 "this " 和调用方法的函数
         this.timer := ObjBindMethod(this, "Tick")
     }
-    start() {
+    
+    Start() {
         SetTimer this.timer, this.interval
-        ; ToolTip "Counter started"
     }
-    stop() {
+    
+    Stop() {
         ; 要关闭计时器, 我们必须传递和之前一样的对象
         SetTimer this.timer, 0
-        ; ToolTip "Counter stopped"
     }
+    
     ; 本例中, 计时器调用了以下方法:
-    Tick() {
-        static count := 0
-        if count == 1
-            count := 2
-        else
-            count := 1
-    
-        ; MsgBox '休息时间到！请远离屏幕，让眼睛休息一下。', '护眼提醒', 'T10'
-        MyGui := Gui('-SysMenu', '捷键提醒（半小时休息）-' . FormatTime(, 'HH:mm'))
-        ; MyGui.AddProgress("w360 h20 c21f505 vMyProgress", 0)
-    
-        MyGui.AddProgress("w360 h20 " . ['c008000', 'c008080'][count] . " vMyProgress", 0)
-        MyGui.Show
-        WinSetAlwaysOnTop(true, 'A')
-    
+    Tick() {    
+        MyGui := Gui('+AlwaysOnTop -Caption +ToolWindow')
+        MyGui.SetFont("c1A9F55 s15", 'Consolas')
+        MyGui.SetFont("c1A9F55 s15", 'Microsoft YaHei')
+        MyGui.BackColor := "030704"  ; 可以是任何 RGB 颜色(下面会变成透明的)
+        textGUI1 := MyGui.Add("Text",, '护眼提醒（当前） ' . FormatTime(, 'HH:mm') . '`n下次提醒时间　　 ' . FormatTime(DateAdd(A_Now, 30, "Minutes"), 'HH:mm'))    
+        MyGui.AddProgress("w290 h23 " . 'c1A9F55' . " vMyProgress")
+        MyGui.Show('NoActivate')
+            
         loop {
-            MyGui["MyProgress"].Value += 10  ; 增加 20 到当前位置.
             if (MyGui["MyProgress"].Value >= 100) {
-                MyGui.Destroy
+                ; 消失前短暂停留
+                Sleep(800)
+                MyGui.Destroy()
                 break
             }
             Sleep 1000
+            MyGui["MyProgress"].Value += 10  ; 增加 10 到当前位置
         }
     }
 }
