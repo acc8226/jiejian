@@ -2,9 +2,8 @@
 ; 完善 TEXT_GROUP 组信息
 GroupAdd TEXT_GROUP, 'ahk_class ^AutoHotkeyGUI$'
 
-parseAppCSV()
-
-parseAppCSV() {
+ParseAppCSV
+ParseAppCSV() {
   applist := parseApp('app.csv')
   ; 注册热键 和 热字符串
   Loop applist.Length {
@@ -12,7 +11,7 @@ parseAppCSV() {
       continue
   
     it := applist[A_Index]
-    if it.highLevel {
+    if (it.highLevel) {
       ; 高优先级
       ; e 列 关闭
       switch it.close, 'Off' {
@@ -174,7 +173,7 @@ parseApp(fileName) {
       ; 跳过首行
       if (A_Index >= 2) {
         appInfo := parseAppLine(A_LoopField, eachLineLen)
-        if (appInfo)
+        if appInfo
           appList.Push(appInfo)
       }
   }
@@ -184,7 +183,7 @@ parseApp(fileName) {
 parseAppLine(line, eachLineLen) {
   split := StrSplit(line, ",")
   ; 跳过不符合条件的行
-  if (split.Length < eachLineLen)
+  if split.Length < eachLineLen
     return
   splitEachLineLen := Trim(split[eachLineLen])
   ; 过滤不启用的行

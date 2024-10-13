@@ -104,24 +104,24 @@ Anyrun() {
         if (A_Clipboard != '' && DateDiff(A_NowUTC, CTRL_TIMESTAMP, 'Seconds') < 13) {
             pasteText := Trim(A_Clipboard, ' `t`r`n')
             if (pasteText ~= IS_HTTP_Reg || FileExist(pasteText))
-                Send "^v"
+                Send '^v'
         }
 
         onEscape(*) {
             if (IsSet(MY_GUI)) {
-                MY_GUI.Destroy()
+                MY_GUI.Destroy
                 MY_GUI := unset
             }
         }
 
         onEditChange(thisGui, *) {
             ; 一旦文本框有变化立即清空
-            listBox.Delete()
+            listBox.Delete
             ; 获取文本框输入内容
             editValue := thisGui.Value
             if (editValue == '') {
                 listBox.Visible := false
-                MY_GUI.Show('AutoSize')
+                MY_GUI.Show 'AutoSize'
                 return
             }
             dataArray := unset
@@ -195,10 +195,10 @@ Anyrun() {
                 ; 显示出来
                 listBox.Visible := listBoxDataArray.Length > 0
                 if (listBox.Visible) { 
-                    listBox.Add(listBoxDataArray)
-                    listBox.Choose(1)
+                    listBox.Add listBoxDataArray
+                    listBox.Choose 1
                 }
-                MY_GUI.Show("AutoSize")
+                MY_GUI.Show "AutoSize"
             } else {
                 MsgBox('anyrun 组件异常销毁', APP_NAME)
             }
@@ -206,14 +206,14 @@ Anyrun() {
 
         onEditLoseFocus(*) {
             if (IsSet(MY_GUI) && NOT listBox.Focused) {
-                MY_GUI.Destroy()
+                MY_GUI.Destroy
                 MY_GUI := unset
             }
         }
 
         onListboxLoseFocus(*) {
             if (IsSet(MY_GUI) && NOT myEdit.Focused) {
-                MY_GUI.Destroy()
+                MY_GUI.Destroy
                 MY_GUI := unset                
             }
         }
@@ -275,14 +275,14 @@ Anyrun() {
                     runUrl := strReplace(item.path, "{query}", realStr)
                 else
                     runUrl := item.path . realStr
-                Run(runUrl)
+                Run runUrl
             }
             ; 兜底 精确匹配 DATA_FILTER_REG
             else {
-                openPathByType(item)
+                openPathByType item
             }
             if (IsSet(MY_GUI)) {
-                MY_GUI.Destroy()
+                MY_GUI.Destroy
                 MY_GUI := unset
             }
         }
@@ -290,11 +290,11 @@ Anyrun() {
         onButtonClick(*) {
             ; 如果 listbox 有焦点
             if listBox.Focused
-                onListBoxDoubleClick(listBox)
+                onListBoxDoubleClick listBox
             else if Trim(myEdit.Value) == '' ; 如果焦点在 编辑框 且按下回车则会触发弹窗提示
-                MsgBox('输入内容不能为空')
+                MsgBox '输入内容不能为空'
             else ; 否则表示焦点在 edit，如果列表有匹配项 则获取编辑框文本内容
-                onListBoxDoubleClick(listBox)
+                onListBoxDoubleClick listBox
         }
     }
 }
@@ -331,10 +331,10 @@ openPathByType(item) {
             Run(item.path,,, &pid)
             WinWaitActive("ahk_pid " . pid)
             ; 手动等待 1.1 秒，否则可能会跳到扫码页
-            Sleep(1100)
-            Send("{Space}")
+            Sleep 1100
+            Send "{Space}"
         } catch
-            MsgBox("找不到目标应用")
+            MsgBox "找不到目标应用"
     } else if (item.type = DataType.app && item.title = 'alist') { ; 对 alist 特殊处理：使用命令行打开并添加 server 参数
         SplitPath(item.path,, &dir)
         Run(A_ComSpec " /C " . item.path . " server", dir)
@@ -517,7 +517,7 @@ CreateQRcode(path) {
 
 OpenDir(path) {
     if (DirExist(path)) {
-        Run(path)
+        Run path
     } else {
         RegExMatch(path, '.*[\\/]', &regExMatchInfo)
         Run(regExMatchInfo.0)
@@ -584,7 +584,7 @@ OpenInnerCommand(title, isConfirm := false) {
         case '我的桌面': Run "shell:desktop"
 
         case '收藏夹': Run "shell:Favorites"
-        case '终端': Run(A_ComSpec) ; 在用户根目录打开文件夹
+        case '终端': Run A_ComSpec ; 在用户根目录打开文件夹
         case '字体': Run "shell:Fonts"
         ; 系统操作
         case '重启': 
@@ -626,9 +626,9 @@ OpenInnerCommand(title, isConfirm := false) {
         case '音量设为90': SoundSetVolume 90
         case '音量设为最大': SoundSetVolume 100
 
-        case '取消关机任务': Run('shutdown /a', , 'Hide')
+        case '取消关机任务': Run('shutdown /a',, 'Hide')
         ; 其他
-        case '关闭程序': smartCloseWindow
+        case '关闭程序': SmartCloseWindow
         default: 
             if FoundPos := InStr(title, "秒后关机") {
                 second := SubStr(title, 1, FoundPos  - 1)
@@ -651,6 +651,6 @@ GetIPAddresses() {
     addresses := SysGetIPAddresses()
     msg := "IP 地址:`n"
     for address in addresses
-        msg .= address . "`n"
+        msg .= (address . "`n")
     MsgBox(msg, APP_NAME)
 }

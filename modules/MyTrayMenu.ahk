@@ -12,9 +12,9 @@ class MyTrayMenu {
         ; 读取当前语言状态，如果读取不到则默认是中文
         LANG_PATH := A_ScriptDir . "\lang\" . CURRENT_LANG . ".ini"
 
-        try
+        try {
             this.editScript:= IniRead(LANG_PATH, "Tray", "editScript")
-        catch as e {
+        } catch as e {
             ; 发生 error，语言恢复成英文
             MsgBox "An error was thrown!`nSpecifically: " e.Message
             global CURRENT_LANG := 'en'
@@ -109,7 +109,7 @@ class MyTrayMenu {
         }
 
         WindowsTheme.SetAppMode(ENABLE_DARK_MODE)        
-        if ENABLE_DARK_MODE {
+        if (ENABLE_DARK_MODE) {
             WindowsTheme.SetAppMode(ENABLE_DARK_MODE)
             moreMenu.Check(this.enableDarkMode)
         } else {
@@ -121,7 +121,7 @@ class MyTrayMenu {
         
         ; 是否开启定时提醒
         this.counter := RelaxCounter()
-        if ENABLE_TIMER_REMINDER {
+        if (ENABLE_TIMER_REMINDER) {
             this.counter.Start
             moreMenu.Check(this.enableTimerReminder)
         } else {
@@ -201,7 +201,7 @@ class MyTrayMenu {
         switch ItemName, 'off' {
             case this.editScript: Edit
             case this.listVars: ListVars
-            case this.pause: this.toggleSuspend
+            case this.pause: this.ToggleSuspend
             case this.restart: Reload
             case this.search: Anyrun
 
@@ -251,17 +251,17 @@ class MyTrayMenu {
                 A_TrayMenu.ToggleCheck(this.startUp)
                 IS_AUTO_START_UP := !IS_AUTO_START_UP
         
-            case this.document: Run('http://acc8226.test.upcdn.net') ; 还是选用国内服务访问最快
-            case this.video: Run('https://www.bilibili.com/video/BV19H4y1e7hJ')
+            case this.document: Run 'http://acc8226.test.upcdn.net' ; 还是选用国内服务访问最快
+            case this.video: Run 'https://www.bilibili.com/video/BV19H4y1e7hJ'
 
-            case this.followMeCSDN: Run('https://blog.csdn.net/acc8226')
-            case this.softwareHomepage: Run('https://github.com/acc8226/jiejian')
+            case this.followMeCSDN: Run 'https://blog.csdn.net/acc8226'
+            case this.softwareHomepage: Run 'https://github.com/acc8226/jiejian'
 
             case this.enableDarkMode:                    
                 RegWrite(ENABLE_DARK_MODE ? false : true, "REG_DWORD", REG_KEY_NAME, REG_DARK_MODE)
-                this.moreMenu.ToggleCheck(this.enableDarkMode)
+                this.moreMenu.ToggleCheck this.enableDarkMode
                 ENABLE_DARK_MODE := !ENABLE_DARK_MODE
-                WindowsTheme.SetAppMode(ENABLE_DARK_MODE)
+                WindowsTheme.SetAppMode ENABLE_DARK_MODE
 
             case this.enableTimerReminder:
                 if ENABLE_TIMER_REMINDER {
@@ -274,7 +274,7 @@ class MyTrayMenu {
                 this.moreMenu.ToggleCheck(this.enableTimerReminder)
                 ENABLE_TIMER_REMINDER := !ENABLE_TIMER_REMINDER
 
-            case this.update: checkUpdate(true)
+            case this.update: CheckUpdate true
             case this.about: this.AboutFunc
             case this.exit: ExitApp
         }
@@ -283,14 +283,14 @@ class MyTrayMenu {
     /**
      * 菜单中的暂停
      */
-    toggleSuspend() {
+    ToggleSuspend() {
         Suspend(!A_IsSuspended)
         if (A_IsSuspended) {
             A_TrayMenu.Check(this.pause)
-            Tip('  热键已禁用  ', -500)
+            Tip '  热键已禁用  ', -500
         } else {
             A_TrayMenu.UnCheck(this.pause)
-            Tip('  热键已恢复  ', -500)
+            Tip '  热键已恢复  ', -500
         }
     }
 
@@ -366,19 +366,19 @@ initLanguage() {
     ; 在已编译的脚本中包含指定的文件
     if (A_IsCompiled) {
         ; 要添加到已编译可执行文件中的文件名. 如果没有指定绝对路径, 则假定该文件位于(或相对于) 脚本自己的目录中
-        FileInstall('lang\ar.ini', 'lang\ar.ini', true)
-        FileInstall('lang\de.ini', 'lang\de.ini', true)
-        FileInstall('lang\en.ini', 'lang\en.ini', true)
-        FileInstall('lang\es.ini', 'lang\es.ini', true)
-        FileInstall('lang\fr.ini', 'lang\fr.ini', true)
-        FileInstall('lang\it.ini', 'lang\it.ini', true)
-        FileInstall('lang\ja.ini', 'lang\ja.ini', true)
-        FileInstall('lang\ko.ini', 'lang\ko.ini', true)
-        FileInstall('lang\pt.ini', 'lang\pt.ini', true)
-        FileInstall('lang\ru.ini', 'lang\ru.ini', true)
-        FileInstall('lang\tr.ini', 'lang\tr.ini', true)
-        FileInstall('lang\zh-Hans.ini', 'lang\zh-Hans.ini', true)
-        FileInstall('lang\zh-Hant.ini', 'lang\zh-Hant.ini', true)
+        FileInstall 'lang\ar.ini', 'lang\ar.ini', true
+        FileInstall 'lang\de.ini', 'lang\de.ini', true
+        FileInstall 'lang\en.ini', 'lang\en.ini', true
+        FileInstall 'lang\es.ini', 'lang\es.ini', true
+        FileInstall 'lang\fr.ini', 'lang\fr.ini', true
+        FileInstall 'lang\it.ini', 'lang\it.ini', true
+        FileInstall 'lang\ja.ini', 'lang\ja.ini', true
+        FileInstall 'lang\ko.ini', 'lang\ko.ini', true
+        FileInstall 'lang\pt.ini', 'lang\pt.ini', true
+        FileInstall 'lang\ru.ini', 'lang\ru.ini', true
+        FileInstall 'lang\tr.ini', 'lang\tr.ini', true
+        FileInstall 'lang\zh-Hans.ini', 'lang\zh-Hans.ini', true
+        FileInstall 'lang\zh-Hant.ini', 'lang\zh-Hant.ini', true
     }
 }
 
@@ -408,14 +408,14 @@ class RelaxCounter {
         MyGui.SetFont("c1A9F55 s15", 'Microsoft YaHei')
         MyGui.BackColor := "030704"  ; 可以是任何 RGB 颜色(下面会变成透明的)
         textGUI1 := MyGui.Add("Text",, '护眼提醒（当前） ' . FormatTime(, 'HH:mm') . '`n下次提醒时间　　 ' . FormatTime(DateAdd(A_Now, 30, "Minutes"), 'HH:mm'))    
-        MyGui.AddProgress("w290 h23 " . 'c1A9F55' . " vMyProgress")
-        MyGui.Show('NoActivate')
+        MyGui.AddProgress "w290 h23 c1A9F55 vMyProgress"
+        MyGui.Show 'NoActivate'
             
         loop {
             if (MyGui["MyProgress"].Value >= 100) {
                 ; 消失前短暂停留
-                Sleep(800)
-                MyGui.Destroy()
+                Sleep 800
+                MyGui.Destroy
                 break
             }
             Sleep 1000

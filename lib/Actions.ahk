@@ -1,7 +1,7 @@
 /**
  * 智能的关闭窗口，如果是桌面就 alt +f4
  */
-smartCloseWindow() {
+SmartCloseWindow() {
   if (WinExist('A')) {
     if (IsDesktop() or (WinGetClass('A') == 'ApplicationFrameWindow' || GetProcessName() == 'explorer.exe'))
       Send '!{F4}'
@@ -113,7 +113,7 @@ SystemSleep() {
   DllCall("PowrProf\SetSuspendState", "Int", 0, "Int", 0, "Int", 0)
 }
 
-copySelectedAsPlainText() {
+CopySelectedAsPlainText() {
   A_Clipboard := ""
   Send("^c")
   if (!ClipWait(1)) {
@@ -124,7 +124,7 @@ copySelectedAsPlainText() {
   Tip("路径已复制")
 }
 
-copySelectedAsPlainTextQuiet() {
+CopySelectedAsPlainTextQuiet() {
   A_Clipboard := ""
   Send "^c"
   if (!ClipWait(1)) {
@@ -150,7 +150,7 @@ MaximizeWindow() {
 /**
  * 窗口最小化
  */
-minimizeWindow() {
+MinimizeWindow() {
   if NotActiveWin() || WinGetProcessName("A") = "Rainmeter.exe"
     return
   WinMinimize("A")
@@ -254,7 +254,7 @@ CenterAndResizeWindow_X_Percent(percent) {
 }
 
 ; 我新加的 高度拓展至全屏
-setWindowHeightToFullScreen() {
+SetWindowHeightToFullScreen() {
   if NotActiveWin()
     return
 
@@ -283,7 +283,7 @@ setWindowHeightToFullScreen() {
 }
 
 ; 我新加的 宽度拓展至全屏
-setWindowWeightToFullScreen() {
+SetWindowWeightToFullScreen() {
   if NotActiveWin()
     return
 
@@ -451,7 +451,7 @@ CenterAndResizeWindow_window_percent(step) {
 }
 
 ; 左移动 x 像素，上移动 y 像素
-moveRelative(relativeX, relativeY := 0) {
+MoveRelative(relativeX, relativeY := 0) {
   if NotActiveWin()
     return
 

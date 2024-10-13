@@ -1,12 +1,12 @@
 ﻿; 交换数组两元素
-swap(arr, i, j) {
+Swap(arr, i, j) {
     temp := arr[i]
     arr[i] := arr[j]
     arr[j] := temp
 }
 
 ; 冒泡排序，从大到小 属于稳定排序
-dataArraySort(dataArray) {
+DataArraySort(dataArray) {
     ; 对 listBoxData 进行冒泡排序
     i := 0
     while (i < dataArray.Length - 1) {
@@ -19,7 +19,7 @@ dataArraySort(dataArray) {
             }
             j++
         }
-        if !flag
+        if NOT flag
             break
         i++
     }
@@ -32,7 +32,7 @@ dataArraySort(dataArray) {
  * @param it2
  * @returns {number}
  */
-dataArrayCompare(it1, it2) {
+DataArrayCompare(it1, it2) {
     ; 排序按照 degree 降序、title 升序、type 升序
     result := it1.degree - it2.degree
     if (result == 0) {
@@ -44,11 +44,10 @@ dataArrayCompare(it1, it2) {
 }
 
 ; 提取名称
-listBoxData(dataArray) {
+ListBoxData(dataArray) {
     retArray := Array()
-    for it in dataArray {
+    for it in dataArray
         ; 根据 title 添加 “-类型” 的后缀
         retArray.push(it.title . "-" . it.type)
-    }
     return retArray
 }

@@ -1,6 +1,6 @@
 ﻿/*
 AHK2 jiejian
-A key mapping/shortcut enhancement tool developed based on AutoHotkey v2.0+ (http://www.autohotkey.com/)
+A key mapping/shortcut enhancement tool developed based on AutoHotkey v2.0+ (http://www.autohotkey.com)
 
 Copyright 2023-2024 acc8226
 --------------------------------
@@ -102,7 +102,7 @@ initLanguage
 
 ; 生成快捷方式：每次运行检测如果 shortcuts 里的文件为空则重新生成一次快捷方式，要想重新生成可以双击 GenerateShortcuts.ahk 脚本或者清空或删除该文件夹
 if NOT FileExist(A_WorkingDir . '\shortcuts\*')
-    Run('extra/GenerateShortcuts.exe')
+    Run 'extra/GenerateShortcuts.exe'
 
 settingTray
 ; 设置托盘图标和菜单
@@ -114,11 +114,11 @@ settingTray() {
     A_IconTip := "捷键 " . CODE_VERSION . (A_IsCompiled ? '' : ' 未编译') . (localIsAlphaOrBeta ? " 测试版" : " ") . (A_PtrSize == 4 ? '32位' : '64位')
 
     if !A_IsCompiled
-        TraySetIcon('icons\favicon.ico') ; 建议使用 16*16 或 32*32 像素的图标，使用 Ahk2Exe-Let 提取出 favicon.ico
+        TraySetIcon 'icons\favicon.ico' ; 建议使用 16*16 或 32*32 像素的图标，使用 Ahk2Exe-Let 提取出 favicon.ico
 }
 
 ; 检查更新
-checkUpdate()
+CheckUpdate
 
 ; ----- 热键 之 快捷键重写和增强 -----
 ; ----- 热键 之 打开网址 -----
@@ -137,16 +137,16 @@ checkUpdate()
     oldText := A_Clipboard
     A_Clipboard := ''
     Send('{Home}{Shift Down}{End}{Shift Up}') ; 切到首部然后选中到尾部
-    Sleep(100)
-    Send('^x')
+    Sleep 100
+    Send '^x'
     ClipWait ; 等待剪贴板中出现文本
     newText := RegExReplace(A_Clipboard, "\s*$", "") ; 去掉尾部空格
     newText := RegExReplace(newText, "^#{1,6}\s+(.*)", "$1")
     nums := SubStr(A_ThisHotkey, 2)
     Send("{Home}{# " . nums . "}" . ' ')
     ; 之所以拆开是为防止被中文输入法影响
-    SendText(newText)
-    Send('{End}')
+    SendText newText
+    Send '{End}'
     A_Clipboard := oldText
 }
 #HotIf
@@ -156,11 +156,11 @@ checkUpdate()
     Reload
     Sleep(50) ; 不创建多个实例的情况下重新加载脚本的简单实现，给个暂停时长
 }
-^!s::JJ_TRAY_MENU.mySuspend() ; Ctrl + Alt + S 暂停脚本
+^!s::JJ_TRAY_MENU.mySuspend ; Ctrl + Alt + S 暂停脚本
 ^!v::Send(A_Clipboard) ; Ctrl + Alt + V 将剪贴板的内容输入到当前活动应用程序中，防止了一些网站禁止在 HTML 密码框中进行粘贴操作
 ^+"::Send('""{Left}') ; Ctrl + Shift + " 快捷操作-插入双引号
 
-!Space::anyrun() ; 启动窗口
+!Space::Anyrun ; 启动窗口
 
 ; ----- 热串 之 打开网址。选择 z 而非 q，因为 q 的距离在第一行太远了，我称之为 Z 模式，用于全局跳转网址 -----
 ; ----- 热串 之 缩写扩展：将短缩词自动扩展为长词或长句（英文单词中哪个字母开头的单词数最少，我称之为 X 模式）-----
@@ -175,12 +175,12 @@ checkUpdate()
 }
 ; 意为 '分割线的首字母 f'
 :C*:xff::{
-    SendText('——————— ฅ՞• •՞ฅ ———————')
+    SendText '——————— ฅ՞• •՞ฅ ———————'
 }
 ; 意为 idcard
 #HotIf NOT A_IsCompiled
 :C*:xii::{
-    SendText('431121199210010012')
+    SendText '431121199210010012'
 }
 #HotIf
 
@@ -211,7 +211,7 @@ exitFunc(exitReason, exitCode) {
             text := regExMatchInfo.1
             if NOT InStr(text, 'http')
                 text := ("http://" . text)
-            Run(text)
+            Run text
         } else {
             Run('https://www.baidu.com/s?wd=' . text)
         }            
@@ -257,13 +257,13 @@ doubleClick(hk, command) {
         if !IsSet(item) || item == ''
             MsgBox(hk . ' 对应指令找不到！', APP_NAME)
         else
-            openPathByType(item)
+            openPathByType item
     }    
 }
 
 ; 监控 ctrl + c 按键放下
 ~^c Up::
-updateCtrlTimestamp(*) {
+UpdateCtrlTimestamp(*) {
     GLOBAL CTRL_TIMESTAMP := A_NowUTC
 }
 
@@ -271,83 +271,83 @@ Capslock::{
     GLOBAL IS_CAPS_PRESSED := true
     GLOBAL ENABLE_CHANGE_CAPS_STATE := true
 
-    disableCapsChange() {
+    DisableCapsChange() {
         GLOBAL ENABLE_CHANGE_CAPS_STATE := false
     }
     
-    SetTimer(disableCapsChange, -300) ; 300 ms 犹豫操作时间
+    SetTimer DisableCapsChange, -300 ; 300 ms 犹豫操作时间
     KeyWait('CapsLock') ; 等待用户物理释放按键
     IS_CAPS_PRESSED := false ; Capslock 先置空，来关闭 Capslock+ 功能的触发
     ; 松开的时候才切换 CapsLock 大小写
     if ENABLE_CHANGE_CAPS_STATE
         SetCapsLockState(!GetKeyState('CapsLock', 'T'))
-    disableCapsChange
+    DisableCapsChange
 }
 
 ; 需要按一次按键才会生效，时好时坏
 #HotIf IS_CAPS_PRESSED
 
 ; 关闭窗口
-q::smartCloseWindow
+q::SmartCloseWindow
 
 ; 宽度拉升至最大
-w::setWindowWeightToFullScreen
+w::SetWindowWeightToFullScreen
 ; 高度拉升至最大
-h::setWindowHeightToFullScreen
+h::SetWindowHeightToFullScreen
 
 ; 切换到上个窗口
-e::Send('!{tab}')
+e::Send '!{tab}'
 
 ; 程序内切换窗口 caps + ` 或者 r 来切换
 SC029::
 r::LoopRelatedWindows
 
 ; 切换到上一个虚拟桌面
-y::Send('^#{Left}')
+y::Send '^#{Left}'
 ; 切换到下一个虚拟桌面
-n::Send('^#{Right}')
+n::Send '^#{Right}'
 
 ; 适合 b 站
-a::CenterAndResizeWindow(818, 460)
+a::CenterAndResizeWindow 818, 460
 ; 适合 b 站
-s::CenterAndResizeWindow(1280, 770)
-d::CenterAndResizeWindow(1920, 1080) ; 16:9
+s::CenterAndResizeWindow 1280, 770
+d::CenterAndResizeWindow 1920, 1080 ; 16:9
 ; 最大化或还原
 f::MaximizeWindow
 
-j::CenterAndResizeWindow_window_percent(200)
-k::CenterAndResizeWindow_window_percent(-200)
+j::CenterAndResizeWindow_window_percent 200
+k::CenterAndResizeWindow_window_percent -200
 
 u::Click
-i::Click('Up Right')
+i::Click 'Up Right'
 
-o::MouseMove 0, -3, , 'R' ; 上移
-l::MouseMove -3, 0, , 'R' ; 左移
-SC027::MouseMove 3, 0, , 'R' ; 右移 caps + ;
-SC034::MouseMove 0, 3, , 'R' ; 下移 caps + .
+o::MouseMove 0, -3,, 'R' ; 上移
+l::MouseMove -3, 0,, 'R' ; 左移
+SC027::MouseMove 3, 0,, 'R' ; 右移 caps + ;
+SC034::MouseMove 0, 3,, 'R' ; 下移 caps + .
 
 ; 复制路径
-z::copySelectedAsPlainText
+z::CopySelectedAsPlainText
 ; 窗口移到下一个显示器
-v::Send('#+{right}')
+v::Send '#+{right}'
 ; 窗口最小化
-m::minimizeWindow
+m::MinimizeWindow
 
 ; 复制选中文件路径并打开 Anyrun 组件
 Space::{
-    copySelectedAsPlainTextQuiet
+    CopySelectedAsPlainTextQuiet
     ; 由于命令发送 ctrl + c 不会触发监听则手动更新时间戳
-    updateCtrlTimestamp
-    anyrun
+    UpdateCtrlTimestamp
+    Anyrun
 }
 
 ; 按住 CapsLock 时同时按下鼠标左键拖动窗口
-LButton::moveWindow
+LButton::MoveWindow
 
-Left::moveRelative(-28)
-Right::moveRelative(28)
-Up::moveRelative(0, -28)
-Down::moveRelative(0, 28)
+Left::MoveRelative -28
+Right::MoveRelative 28
+Up::MoveRelative 0, -28
+Down::MoveRelative 0, 28
 #HotIf
 
 ; 尽量避免为编译程序 和 以编译的程序打架

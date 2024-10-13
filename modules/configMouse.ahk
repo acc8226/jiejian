@@ -1,12 +1,12 @@
-﻿#HotIf mouseIsOnLeftEdge()
+﻿#HotIf MouseIsOnLeftEdge()
 MButton::{
   ; 静音/不静音主音量
   Send "{Volume_Mute}"
-  Tip('静音/恢复', -399)
+  Tip '静音/恢复', -399
 }
 RButton::{
   Send "{Media_Play_Pause}"
-  Tip('暂停/恢复', -399)
+  Tip '暂停/恢复', -399
 }
 
 WheelUp::{
@@ -28,22 +28,22 @@ WheelDown::{
 ; 上一曲
 XButton2::{
   Send "{Media_Prev}"
-  Tip('上一曲', -399)
+  Tip '上一曲', -399
 }
 ; 下一曲
 XButton1::{
   Send "{Media_Next}"
-  Tip('下一曲', -399)
+  Tip '下一曲', -399
 }
 
-#HotIf mouseIsOnTopEdge()
+#HotIf MouseIsOnTopEdge()
 MButton::{
   Send "{Volume_Mute}"
-  Tip('静音/恢复', -399)
+  Tip '静音/恢复', -399
 }
 RButton::{
   Send "{Media_Play_Pause}"
-  Tip('暂停/恢复', -399)
+  Tip '暂停/恢复', -399
 }
 
 WheelUp::{
@@ -82,13 +82,13 @@ XButton2::Send "{Media_Prev}"
 #HotIf
 
 ; 鼠标移动到屏幕左边缘
-mouseIsOnLeftEdge() {
+MouseIsOnLeftEdge() {
   MouseGetPos &OutputVarX
   return OutputVarX >= 0 && OutputVarX <= 2
 }
 
 ; 鼠标移动到屏幕上边缘
-mouseIsOnTopEdge() {
+MouseIsOnTopEdge() {
   MouseGetPos , &OutputVarY
   return OutputVarY >= 0 && OutputVarY <= 2
 }

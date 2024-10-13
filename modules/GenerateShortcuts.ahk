@@ -2,16 +2,16 @@
 #SingleInstance Force
 #NoTrayIcon
 
-SetWorkingDir A_ScriptDir "\.."
+SetWorkingDir(A_ScriptDir . "\..")
 
 ; 注：每次更新代码后需要覆盖 extra 下的 GenerateShortcuts.exe
 
 ; 由于 windows 系统不允许存在同名文件和文件夹，故预先删除之
-try FileDelete("shortcuts")
-try DirDelete("shortcuts", true)
+try FileDelete "shortcuts"
+try DirDelete "shortcuts", true
 ; 休息 0.05 s，防止 delete 操作未完成引起的 shortcuts 目录被占用问题
-Sleep(50)
-try DirCreate("shortcuts")
+Sleep 50
+try DirCreate "shortcuts"
 
 ; 排除特定的快捷方式
 ; 不能包含特定关键字
@@ -35,8 +35,8 @@ Loop Files A_Startup . "\*.lnk*"
 useless .= ')$'
 
 ; 把开始菜单中的快捷方式都拷贝到 shortcuts 目录 
-copyFiles(A_ProgramsCommon "\*.lnk", "shortcuts\", useless)
-copyFiles(A_Programs "\*.lnk", "shortcuts\", useless)
+CopyFiles(A_ProgramsCommon "\*.lnk", "shortcuts\", useless)
+CopyFiles(A_Programs "\*.lnk", "shortcuts\", useless)
 ; 然后再生成 UWP 相关的快捷方式
 oFolder := ComObject("Shell.Application").NameSpace("shell:AppsFolder")
 if Type(oFolder) = 'ComObject'
@@ -44,9 +44,9 @@ if Type(oFolder) = 'ComObject'
         if NOT(FileExist("shortcuts\" item.Name ".lnk") || item.Name . '.lnk' ~= useless)
             try FileCreateShortcut("shell:appsfolder\" item.Path, "shortcuts\" item.Name ".lnk")
 
-copyFiles(pattern, dest, ignore := "") {
+CopyFiles(pattern, dest, ignore := "") {
     Loop Files pattern, "R" {
-      if (A_LoopFileName ~= ignore)
+      if A_LoopFileName ~= ignore
         continue
       try FileCopy(A_LoopFilePath, dest, true)
     }

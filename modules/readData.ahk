@@ -1,5 +1,5 @@
 ﻿GLOBAL EACH_LINE_LEN := 8
-GLOBAL DATA_LIST := parseData("data.csv")
+GLOBAL DATA_LIST := ParseData("data.csv")
 
 class DataType {
   static text := '文本' ; 用于热字符串替换
@@ -20,13 +20,13 @@ class DataType {
 }
 
 ; 注册热键 和 热字符串
-regMyHotKey()
-regMyHotKey() {
+RegMyHotKey
+RegMyHotKey() {
   Loop DATA_LIST.Length {
     it := DATA_LIST[A_Index]
 
     ; 热键：目前仅作用于程序、文本 和 网址跳转。Hotkey 的规则是如果有多个变体符合触发条件, 那么仅触发最早创建的那个
-    if (StrLen(it.hk) > 0 && StrLen(it.path) > 0)
+    if StrLen(it.hk) > 0 && StrLen(it.path) > 0
       Hotkey(it.hk, startByHotKey)
     
     ; 热串：目前仅作用于网址跳转
@@ -41,8 +41,8 @@ regMyHotKey() {
 }
 
 ; 只供内部调用
-parseData(fileName) {
-  parseDataLine(line) {
+ParseData(fileName) {
+  ParseDataLine(line) {
     GLOBAL MY_BASH, MY_VSCode, MY_IDEA, MY_NEW_TERMINAL
     GLOBAL MY_DOUBLE_ALT, MY_DOUBLE_HOME, MY_DOUBLE_END, MY_DOUBLE_ESC
   
@@ -63,7 +63,7 @@ parseData(fileName) {
     ;   info.path := SubStr(info.path, 2, -1)
     info.path := RegExReplace(Trim(split[2]), '"+')      
     ; 过滤空行
-    if info.type == '' and info.path == ''
+    if info.type == '' && info.path == ''
       return
     ; 过滤无效路径
     if (info.type = DataType.file) {
@@ -205,7 +205,7 @@ parseData(fileName) {
       ; 跳过首行
       if A_Index = 1
           continue
-      appInfo := parseDataLine(A_LoopField)
+      appInfo := ParseDataLine(A_LoopField)
       if appInfo
           dataList.Push(appInfo)
   }
