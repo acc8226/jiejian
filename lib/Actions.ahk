@@ -318,7 +318,7 @@ SetWindowWeightToFullScreen() {
     DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 }
 
-; 我新加的 窗口按照 指定像素进行缩放，例如 120 或者 -120
+; 我新加的 窗口按照 指定像素进行缩放，例如 10 或者 -10
 CenterAndResizeWindow_window_percent(step) {
   if NotActiveWin()
     return
@@ -355,18 +355,18 @@ CenterAndResizeWindow_window_percent(step) {
   if (step > 0) {
     finalX := unset
     finalY := unset
-    if x < 0 {
+    if (x < 0) {
       finalX := 0
-    } else if x + w / 2.0 > monitorWidth { ; 如果窗口超过一半被挡住
+    } else if (x + w / 2.0 > monitorWidth) { ; 如果窗口超过一半被挡住
       finalX := monitorWidth - w
     }
     if y < 0 {
       finalY := 0
-    } else if y + h / 2.0 > monitorHeight { ; 如果窗口超过一半被挡住
+    } else if (y + h / 2.0 > monitorHeight) { ; 如果窗口超过一半被挡住
       finalY := monitorHeight - h
     }
 
-    if IsSet(finalX) OR IsSet(finalY) {
+    if (IsSet(finalX) OR IsSet(finalY)) {
       if NOT IsSet(finalX)
         finalX := x
       if NOT IsSet(finalY)
@@ -386,14 +386,19 @@ CenterAndResizeWindow_window_percent(step) {
       if finalX < 0
         finalX := 0
       
-      finalY := y - step / 2.0    
+      finalY := y - step / 2.0
       if finalY < 0
         finalY := 0
     }
   } else {
     ; 否则表示缩小
-    myMinimumWidth := 400
-    myMinimumHeight := 270
+    myMinimumWidth := 560
+    myMinimumHeight := 300
+    ; 如果是 猫眼浏览器则特殊处理 最小宽度
+    ; processName := WinGetProcessName("A")
+    ; switch processName, false {
+    ;   default:
+    ; }
 
     if (w <= myMinimumWidth and h <= myMinimumHeight) {
       if VerCompare(A_OSVersion, "6.2") >= 0
@@ -421,7 +426,7 @@ CenterAndResizeWindow_window_percent(step) {
       } else {
         finalHeight := h + step
         finalY := y - step / 2.0
-      }  
+      }
     } else {
       finalHeight := h
       finalY := y
@@ -431,11 +436,20 @@ CenterAndResizeWindow_window_percent(step) {
   static lastStep := 0
   static prevW := 0
   static prevH := 0
-  ; 如果 NOT (是缩小 且 两次数值相等且 非屏幕的宽度和高度)
-  if (lastStep < 0 and step < 0 and prevW == w and prevH == h) {
-    if VerCompare(A_OSVersion, "6.2") >= 0
-      DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
-    return
+  ; 如果是缩小 且 两次数值相等且 非屏幕的宽度和高度
+  if (lastStep < 0 and step < 0) {
+    ; 若无再次缩小宽度的可能
+    if (prevW == w) {
+      if (prevH == h) {
+        if VerCompare(A_OSVersion, "6.2") >= 0
+          DllCall("SetThreadDpiAwarenessContext", 'ptr', -3, 'ptr')
+        return
+      } else {
+        ; 不再缩小
+        finalWidth := w
+        finalX := x
+      }
+    }
   }
     
   WinMove(finalX, finalY, finalWidth, finalHeight)
@@ -443,8 +457,8 @@ CenterAndResizeWindow_window_percent(step) {
   prevW := w
   prevH := h
 
-  if !A_IsCompiled
-    tip 'x = ' x  ' y = ' y ' w = ' w  ' h = ' h '`n finalX = ' finalX  ' finalY = ' finalY ' finalWidth = ' finalWidth ' finalHeight = ' finalHeight '`n monitorWidth = ' monitorWidth  ' monitorHeight = ' monitorHeight
+  if NOT A_IsCompiled
+    tip 'x = ' x  ' y = ' y ' w = ' w  ' h = ' h '`n finalX = ' finalX  ' finalY = ' finalY ' finalWidth = ' finalWidth ' finalHeight = ' finalHeight '`n 屏幕宽度 = ' monitorWidth  ' 屏幕高度 = ' monitorHeight
   
   if VerCompare(A_OSVersion, "6.2") >= 0
     DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")

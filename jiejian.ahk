@@ -10,10 +10,6 @@ Copyright 2023-2024 acc8226
 快速参考 | AutoHotkey v2 https://wyagd001.github.io/v2/docs/
 vscode 插件安装 https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp
 */
-
-/*
-TODO 对环境变量路径的识别 比如 %ProgramFiles(x86)%\Windows Media Player\wmplayer.exe
-*/
 #Requires AutoHotkey >=v2.0
 
 ; --------------------- COMPILER DIRECTIVES --------------------------
@@ -104,9 +100,9 @@ initLanguage
 if NOT FileExist(A_WorkingDir . '\shortcuts\*')
     Run 'extra/GenerateShortcuts.exe'
 
-settingTray
+SettingTray
 ; 设置托盘图标和菜单
-settingTray() {
+SettingTray() {
     ; 构建菜单项
     GLOBAL JJ_TRAY_MENU := MyTrayMenu()
 
@@ -143,7 +139,7 @@ CheckUpdate
     newText := RegExReplace(A_Clipboard, "\s*$", "") ; 去掉尾部空格
     newText := RegExReplace(newText, "^#{1,6}\s+(.*)", "$1")
     nums := SubStr(A_ThisHotkey, 2)
-    Send("{Home}{# " . nums . "}" . ' ')
+    Send('{Home}{# ' . nums . '}' . ' ')
     ; 之所以拆开是为防止被中文输入法影响
     SendText newText
     Send '{End}'
@@ -154,11 +150,11 @@ CheckUpdate
 ; Ctrl + Alt + R 重启脚本
 ^!r::{
     Reload
-    Sleep(50) ; 不创建多个实例的情况下重新加载脚本的简单实现，给个暂停时长
+    Sleep 50 ; 不创建多个实例的情况下重新加载脚本的简单实现，给个暂停时长
 }
-^!s::JJ_TRAY_MENU.mySuspend ; Ctrl + Alt + S 暂停脚本
-^!v::Send(A_Clipboard) ; Ctrl + Alt + V 将剪贴板的内容输入到当前活动应用程序中，防止了一些网站禁止在 HTML 密码框中进行粘贴操作
-^+"::Send('""{Left}') ; Ctrl + Shift + " 快捷操作-插入双引号
+^!s::JJ_TRAY_MENU.MySuspend ; Ctrl + Alt + S 暂停脚本
+^!v::Send A_Clipboard ; Ctrl + Alt + V 将剪贴板的内容输入到当前活动应用程序中，防止了一些网站禁止在 HTML 密码框中进行粘贴操作
+^+"::Send '""{Left}' ; Ctrl + Shift + " 快捷操作-插入双引号
 
 !Space::Anyrun ; 启动窗口
 
@@ -185,21 +181,21 @@ CheckUpdate
 #HotIf
 
 ; 注册一个当脚本退出时, 会自动调用的函数
-OnExit(exitFunc)
-exitFunc(exitReason, exitCode) {
+OnExit ExitFunc
+ExitFunc(exitReason, exitCode) {
     ; 统计软件使用总分钟数
     minutesDiff := DateDiff(A_NowUTC, START_TIME, 'Minutes')
     if (minutesDiff > 0) {
         recordMins := RegRead(REG_KEY_NAME, REG_RECORD_MINS, 0) + minutesDiff
-        RegWrite(recordMins, "REG_DWORD", REG_KEY_NAME, REG_RECORD_MINS)
+        RegWrite(recordMins, 'REG_DWORD', REG_KEY_NAME, REG_RECORD_MINS)
     }
     ; 统计软件使用次数
     if (NOT exitReason ~= 'i)^(?:Error|Reload|Single)$') {
         launchCount := RegRead(REG_KEY_NAME, REG_LAUNCH_COUNT, 1) + 1
-        RegWrite(launchCount, "REG_DWORD", REG_KEY_NAME, REG_LAUNCH_COUNT)
+        RegWrite(launchCount, 'REG_DWORD', REG_KEY_NAME, REG_LAUNCH_COUNT)
     }
     ; 当前选择的语言
-    RegWrite(CURRENT_LANG, "REG_SZ", REG_KEY_NAME, REG_LANG)
+    RegWrite(CURRENT_LANG, 'REG_SZ', REG_KEY_NAME, REG_LANG)
 }
 
 ; 触发热键时, 热键中按键原有的功能不会被屏蔽(对操作系统隐藏)
@@ -210,7 +206,7 @@ exitFunc(exitReason, exitCode) {
         if RegExMatch(text, 'i)^\s*((?:https?://)?(?:[\w-]+\.)+[\w-]+(?:/[\w-./?%&=]*)?\s*)$', &regExMatchInfo) {
             text := regExMatchInfo.1
             if NOT InStr(text, 'http')
-                text := ("http://" . text)
+                text := ('http://' . text)
             Run text
         } else {
             Run('https://www.baidu.com/s?wd=' . text)
@@ -219,17 +215,17 @@ exitFunc(exitReason, exitCode) {
 }
 
 #HotIf IsSet(MY_DOUBLE_ALT) ; 双击模式我只推荐 双击 Alt，因为 shift 和 ctrl 太过常用
-~Alt::doubleClick(ThisHotkey, MY_DOUBLE_ALT)
+~Alt::DoubleClick(ThisHotkey, MY_DOUBLE_ALT)
 #HotIf IsSet(MY_DOUBLE_HOME)
-~Home::doubleClick(ThisHotkey, MY_DOUBLE_HOME)
+~Home::DoubleClick(ThisHotkey, MY_DOUBLE_HOME)
 #HotIf IsSet(MY_DOUBLE_END)
-~End::doubleClick(ThisHotkey, MY_DOUBLE_END)
+~End::DoubleClick(ThisHotkey, MY_DOUBLE_END)
 #HotIf IsSet(MY_DOUBLE_ESC) ; 双击 esc 表示关闭，esc 不适用于 vscode 防止误操作
-~Esc::doubleClick(ThisHotkey, MY_DOUBLE_ESC)
+~Esc::DoubleClick(ThisHotkey, MY_DOUBLE_ESC)
 #HotIf
 
 ; command 约定是 type-title 的组合
-doubleClick(hk, command) {
+DoubleClick(hk, command) {
     if (hk == A_PriorHotkey && A_TimeSincePriorHotkey > 100 && A_TimeSincePriorHotkey < 210) {
         ; esc 不适用于 vscode 防止误操作
         if (hk = '~Esc') {
@@ -248,16 +244,16 @@ doubleClick(hk, command) {
         if (StrLen(command) > 0) {
             split := StrSplit(command, '-')
             ; 分割并截取类型 type 和 title 名称
-            if split.Length == 2 {
+            if (split.Length == 2) {
                 type := split[1]
                 title := split[2]
-                item := findItemByTypeAndTitle(type, title)
+                item := FindItemByTypeAndTitle(type, title)
             }
         }
         if !IsSet(item) || item == ''
             MsgBox(hk . ' 对应指令找不到！', APP_NAME)
         else
-            openPathByType item
+            OpenPathByType item
     }    
 }
 
@@ -275,8 +271,8 @@ Capslock::{
         GLOBAL ENABLE_CHANGE_CAPS_STATE := false
     }
     
-    SetTimer DisableCapsChange, -300 ; 300 ms 犹豫操作时间
-    KeyWait('CapsLock') ; 等待用户物理释放按键
+    SetTimer(DisableCapsChange, -300) ; 300 ms 犹豫操作时间
+    KeyWait 'CapsLock' ; 等待用户物理释放按键
     IS_CAPS_PRESSED := false ; Capslock 先置空，来关闭 Capslock+ 功能的触发
     ; 松开的时候才切换 CapsLock 大小写
     if ENABLE_CHANGE_CAPS_STATE
@@ -350,7 +346,7 @@ Up::MoveRelative 0, -28
 Down::MoveRelative 0, 28
 #HotIf
 
-; 尽量避免为编译程序 和 以编译的程序打架
+; 避免 未编译程序 和 已编译的程序打架
 if A_IsCompiled {
     ; 32 位 和 64 位独活一个
     if (A_PtrSize == 8) {

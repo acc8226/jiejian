@@ -200,7 +200,7 @@ Anyrun() {
                 }
                 MY_GUI.Show "AutoSize"
             } else {
-                MsgBox('anyrun 组件异常销毁', APP_NAME)
+                MsgBox 'Anyrun 组件异常销毁', APP_NAME
             }
         }
 
@@ -305,7 +305,7 @@ Anyrun() {
  * @param regExMatchInfo
  * @returns {number} 
  */
-computeDegree(regExMatchInfo) {
+ComputeDegree(regExMatchInfo) {
     ; 总的匹配度
     degree := 0
     loop regExMatchInfo.Count {
@@ -319,7 +319,7 @@ computeDegree(regExMatchInfo) {
 }
 
 ; 用到了 item.type、item.path 和 item.title
-openPathByType(item) {
+OpenPathByType(item) {
     if (item.type = DataType.web || item.type = DataType.dl) {
         jumpURL(item.path)
     } else if (item.type = DataType.inner) { ; 精确处理：内部
@@ -574,7 +574,7 @@ OpenInnerCommand(title, isConfirm := false) {
         case '打印机': Run "shell:PrintersFolder"
         case '环境变量': Run "rundll32 sysdm.cpl,EditEnvironmentVariables"
         case '回收站': Run "shell:RecycleBinFolder"
-        case '网络连接': Run "shell:ConnectionsFolder" ; 第二种方式 ncpa.cpl
+        case '网络连接': Run "shell:ConnectionsFolder" ; 第二种方式为 ncpa.cpl
         case '我的视频': Run "shell:My Video"
 
         case '我的图片': Run "shell:My Pictures"
@@ -643,7 +643,7 @@ OpenInnerCommand(title, isConfirm := false) {
                 Run('shutdown /a', , 'Hide')
                 Run('shutdown /s /t ' . hour * 60 * 60,, 'Hide')
             } else
-                MsgBox('非系统内置命令！', APP_NAME)
+                MsgBox '非系统内置命令！', APP_NAME
     }
 }
 
@@ -652,5 +652,5 @@ GetIPAddresses() {
     msg := "IP 地址:`n"
     for address in addresses
         msg .= (address . "`n")
-    MsgBox(msg, APP_NAME)
+    MsgBox msg, APP_NAME
 }

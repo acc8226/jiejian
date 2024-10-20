@@ -98,22 +98,22 @@ class MyTrayMenu {
             FileGetShortcut(this.LinkFile, &OutTarget)
             if (OutTarget !== this.shortcut) {
                 IS_AUTO_START_UP := false
-                A_TrayMenu.UnCheck(this.startUp)
+                A_TrayMenu.UnCheck this.startUp
             } else {
                 IS_AUTO_START_UP := true
-                A_TrayMenu.Check(this.startUp)
+                A_TrayMenu.Check this.startUp
             }
         } else {
             IS_AUTO_START_UP := false
-            A_TrayMenu.UnCheck(this.startUp)
+            A_TrayMenu.UnCheck this.startUp
         }
 
-        WindowsTheme.SetAppMode(ENABLE_DARK_MODE)        
+        WindowsTheme.SetAppMode ENABLE_DARK_MODE
         if (ENABLE_DARK_MODE) {
-            WindowsTheme.SetAppMode(ENABLE_DARK_MODE)
-            moreMenu.Check(this.enableDarkMode)
+            WindowsTheme.SetAppMode ENABLE_DARK_MODE
+            moreMenu.Check this.enableDarkMode
         } else {
-            moreMenu.UnCheck(this.enableDarkMode)
+            moreMenu.UnCheck this.enableDarkMode
         }
         ; 自动获取系统的深色模式开关
         ; SYSTEM_THEME_MODE := RegRead("HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "SystemUsesLightTheme", true)
@@ -122,6 +122,7 @@ class MyTrayMenu {
         ; 是否开启定时提醒
         this.counter := RelaxCounter()
         if (ENABLE_TIMER_REMINDER) {
+            ; 测试 this.counter.Tick
             this.counter.Start
             moreMenu.Check(this.enableTimerReminder)
         } else {
@@ -167,21 +168,22 @@ class MyTrayMenu {
     }
 
     switchLanguage(ItemName, ItemPos, MyMenu) {
+        global CURRENT_LANG
         switch ItemName {
-            case '简体中文 🇨🇳': global CURRENT_LANG := 'zh-Hans'
-            case '繁体中文 🇨🇳': global CURRENT_LANG := 'zh-Hant'
-            case '(العربية)': global CURRENT_LANG := 'ar'
-            case 'Deutsch 🇩🇪': global CURRENT_LANG := 'de'
-            case 'English': global CURRENT_LANG := 'en'
-            case 'Español 🇪🇸': global CURRENT_LANG := 'es'
-            case 'Français 🇫🇷': global CURRENT_LANG := 'fr'
-            case 'Italiano 🇮🇹': global CURRENT_LANG := 'it'
-            case '日本語 🇯🇵': global CURRENT_LANG := 'ja'
-            case '한국어 🇰🇷': global CURRENT_LANG := 'ko'
-            case 'Português 🇵🇹': global CURRENT_LANG := 'pt'
-            case 'Русский 🇷🇺': global CURRENT_LANG := 'ru'
-            case 'Türkçe 🇹🇷': global CURRENT_LANG := 'tr'
-            default: global CURRENT_LANG := ItemName
+            case '简体中文 🇨🇳': CURRENT_LANG := 'zh-Hans'
+            case '繁体中文 🇨🇳': CURRENT_LANG := 'zh-Hant'
+            case '(العربية)': CURRENT_LANG := 'ar'
+            case 'Deutsch 🇩🇪': CURRENT_LANG := 'de'
+            case 'English': CURRENT_LANG := 'en'
+            case 'Español 🇪🇸': CURRENT_LANG := 'es'
+            case 'Français 🇫🇷': CURRENT_LANG := 'fr'
+            case 'Italiano 🇮🇹': CURRENT_LANG := 'it'
+            case '日本語 🇯🇵': CURRENT_LANG := 'ja'
+            case '한국어 🇰🇷': CURRENT_LANG := 'ko'
+            case 'Português 🇵🇹': CURRENT_LANG := 'pt'
+            case 'Русский 🇷🇺': CURRENT_LANG := 'ru'
+            case 'Türkçe 🇹🇷': CURRENT_LANG := 'tr'
+            default: CURRENT_LANG := ItemName
         }
         Reload
     }
@@ -403,18 +405,19 @@ class RelaxCounter {
     
     ; 本例中, 计时器调用了以下方法:
     Tick() {    
-        MyGui := Gui('+AlwaysOnTop -Caption +ToolWindow')
+        MyGui := Gui('-Caption +AlwaysOnTop +ToolWindow')
         MyGui.SetFont("c1A9F55 s15", 'Consolas')
         MyGui.SetFont("c1A9F55 s15", 'Microsoft YaHei')
         MyGui.BackColor := "030704"  ; 可以是任何 RGB 颜色(下面会变成透明的)
-        textGUI1 := MyGui.Add("Text",, '护眼提醒（当前） ' . FormatTime(, 'HH:mm') . '`n下次提醒时间　　 ' . FormatTime(DateAdd(A_Now, 30, "Minutes"), 'HH:mm'))    
-        MyGui.AddProgress "w290 h23 c1A9F55 vMyProgress"
-        MyGui.Show 'NoActivate'
+        textGUI1 := MyGui.AddText('w' . (500 - MyGui.MarginX * 2) . ' Center', '`n休息提醒（当前） ' . FormatTime(, 'HH:mm') . '`n下次提醒时间　　 ' . FormatTime(DateAdd(A_Now, 30, "Minutes"), 'HH:mm'))    
+        MyGui.AddProgress("XM110 w" . (500 - (MyGui.MarginX + 110) * 2) . " h23 c1A9F55 vMyProgress")
+        ; 当窗口处于最小化或最大化状态时, 还原窗口. 窗口显示但不进行激活.
+        MyGui.Show 'NoActivate W500 H170'
             
         loop {
             if (MyGui["MyProgress"].Value >= 100) {
                 ; 消失前短暂停留
-                Sleep 800
+                Sleep 300
                 MyGui.Destroy
                 break
             }
