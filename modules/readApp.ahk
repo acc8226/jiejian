@@ -337,11 +337,11 @@ XButton1::SmartCloseWindow ; 比 WinClose "A" 好使
 ; 否则是 ctrl + f4，凡是遇到【#32770 窗口】则使用 esc 进行统一处理
 #HotIf WinActive("ahk_class #32770")
 ^F4::
-XButton1::Send('{Esc}')
+XButton1::Send '{Esc}'
 ; 最终则是 ctrl + f4 且非窗口则 ctrl + f4
 ; XButton1 兜底
 #HotIf
-XButton1::Send("^{F4}")
+XButton1::Send "^{F4}"
 
 ; f. 前进键
 #HotIf WinActive("ahk_group forward_MediaNext")
@@ -517,33 +517,33 @@ XButton2::Send '^+{Tab}'
 
 ; J 列 新建窗口
 #HotIf WinActive('ahk_group newWin_ctrl_n')
-^F9::Send("{Blind}^n")
+^F9::Send "{Blind}^n"
 #HotIf WinActive('ahk_group newWin_ctrl_alt_n')
-^F9::Send("{Blind}^!n")
+^F9::Send "{Blind}^!n"
 #HotIf WinActive('ahk_group newWin_ctrl_shift_n')
-^F9::Send("{Blind}^+n")
+^F9::Send "{Blind}^+n"
 
 ; K 列 F11 功能键增强 全屏
 ; 如果是浏览器 且 打开的是 bilibili 或 YouTube 则特殊处理，将 f11 转成按键 f
 #HotIf WinActive("(?:- YouTube -|哔哩哔哩_bilibili) ahk_group browser_group")
-F11::Send('f')
+F11::Send 'f'
 
 #HotIf WinActive('ahk_group fullscreen_DoubleClick')
 F11::MouseClick("left", , , 2)
 #HotIf WinActive('ahk_group fullscreen_Enter')
-F11::Send('{Enter}')
+F11::Send '{Enter}'
 #HotIf WinActive('ahk_group fullscreen_f')
-F11::Send('f')
+F11::Send 'f'
 #HotIf WinActive('ahk_group fullscreen_alt_f')
-F11::Send('!f')
+F11::Send '!f'
 #HotIf WinActive('ahk_group fullscreen_alt_Enter')
-F11::Send('!{Enter}')
+F11::Send '!{Enter}'
 #HotIf WinActive('ahk_group fullscreen_ctrl_shift_F12')
-F11::Send('^+{F12}')
+F11::Send '^+{F12}'
 
 ; 增强：火狐浏览器 的 新建隐私窗口
 #HotIf WinActive('ahk_class ^MozillaWindowClass$')
-^+n::Send('{Blind}^+p')
+^+n::Send '{Blind}^+p'
 
 ; ctrl + F7 通用：置顶/取消置顶
 #HotIf

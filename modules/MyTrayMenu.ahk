@@ -388,7 +388,7 @@ initLanguage() {
 class RelaxCounter {
     __New() {
         ; 半小时提醒
-        ; this.interval := 15000
+        ; this.interval := 13000
         this.interval := 1800000
         ; Tick() 有一个隐式参数 "this", 其引用一个对象。所以, 我们需要创建一个封装了 "this " 和调用方法的函数
         this.timer := ObjBindMethod(this, "Tick")
@@ -409,10 +409,12 @@ class RelaxCounter {
         MyGui.SetFont("c1A9F55 s15", 'Consolas')
         MyGui.SetFont("c1A9F55 s15", 'Microsoft YaHei')
         MyGui.BackColor := "030704"  ; 可以是任何 RGB 颜色(下面会变成透明的)
-        textGUI1 := MyGui.AddText('w' . (500 - MyGui.MarginX * 2) . ' Center', '`n休息提醒（当前） ' . FormatTime(, 'HH:mm') . '`n下次提醒时间　　 ' . FormatTime(DateAdd(A_Now, 30, "Minutes"), 'HH:mm'))    
-        MyGui.AddProgress("XM110 w" . (500 - (MyGui.MarginX + 110) * 2) . " h23 c1A9F55 vMyProgress")
+        guiWidth := 420
+        progressBarPaddingLeft := 72
+        textGUI1 := MyGui.AddText('w' . (guiWidth - MyGui.MarginX * 2) . ' Center', '休息提醒（当前） ' . FormatTime(, 'HH:mm') . '`n下次提醒时间　　 ' . FormatTime(DateAdd(A_Now, 30, "Minutes"), 'HH:mm'))    
+        MyGui.AddProgress("XM" . progressBarPaddingLeft . " w" . (guiWidth - (MyGui.MarginX + progressBarPaddingLeft) * 2) . " h23 c1A9F55 vMyProgress")
         ; 当窗口处于最小化或最大化状态时, 还原窗口. 窗口显示但不进行激活.
-        MyGui.Show 'NoActivate W500 H170'
+        MyGui.Show 'NoActivate W' . guiWidth . ' H116'
             
         loop {
             if (MyGui["MyProgress"].Value >= 100) {

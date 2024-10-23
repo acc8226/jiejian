@@ -48,11 +48,11 @@ RButton::{
 
 WheelUp::{
   Send "{Media_Next}"
-  Tip('下一曲', -399)
+  Tip '下一曲', -399
 }
 WheelDown::{
   Send "{Media_Prev}"
-  Tip('上一曲', -399)
+  Tip '上一曲', -399
 }
 
 ; 鼠标移动到任务栏上
@@ -76,9 +76,9 @@ WheelDown::{
 
 
 ; 下一曲
-XButton1::Send "{Media_Next}"
+XButton1::Send '{Media_Next}'
 ; 上一曲
-XButton2::Send "{Media_Prev}"
+XButton2::Send '{Media_Prev}'
 #HotIf
 
 ; 鼠标移动到屏幕左边缘
