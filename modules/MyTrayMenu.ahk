@@ -389,7 +389,7 @@ class RelaxCounter {
     __New() {
         ; 半小时提醒
         ; this.interval := 13000
-        this.interval := 1800000
+        this.interval := 3600000
         ; Tick() 有一个隐式参数 "this", 其引用一个对象。所以, 我们需要创建一个封装了 "this " 和调用方法的函数
         this.timer := ObjBindMethod(this, "Tick")
     }
@@ -411,11 +411,11 @@ class RelaxCounter {
         MyGui.BackColor := "030704"  ; 可以是任何 RGB 颜色(下面会变成透明的)
         guiWidth := 420
         progressBarPaddingLeft := 72
-        textGUI1 := MyGui.AddText('w' . (guiWidth - MyGui.MarginX * 2) . ' Center', '休息提醒（当前） ' . FormatTime(, 'HH:mm') . '`n下次提醒时间　　 ' . FormatTime(DateAdd(A_Now, 30, "Minutes"), 'HH:mm'))    
+        textGUI1 := MyGui.AddText('w' . (guiWidth - MyGui.MarginX * 2) . ' Center', '休息提醒（当前） ' . FormatTime(, 'HH:mm') . '`n下次提醒时间　　 ' . FormatTime(DateAdd(A_Now, 60, "Minutes"), 'HH:mm'))    
         MyGui.AddProgress("XM" . progressBarPaddingLeft . " w" . (guiWidth - (MyGui.MarginX + progressBarPaddingLeft) * 2) . " h23 c1A9F55 vMyProgress")
         ; 当窗口处于最小化或最大化状态时, 还原窗口. 窗口显示但不进行激活.
         MyGui.Show 'NoActivate W' . guiWidth . ' H116'
-            
+
         loop {
             if (MyGui["MyProgress"].Value >= 100) {
                 ; 消失前短暂停留
@@ -423,8 +423,9 @@ class RelaxCounter {
                 MyGui.Destroy
                 break
             }
+            ; 每 1 秒，进度增长 10% =（100/10）
             Sleep 1000
-            MyGui["MyProgress"].Value += 10  ; 增加 10 到当前位置
+            MyGui["MyProgress"].Value += (100/60) ; 进度增长
         }
     }
 }
