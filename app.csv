@@ -93,6 +93,8 @@
 ¡¾±êÇ©Ò³¡¿MarkText,,- MarkText$ ahk_exe i)MarkText.exe,,^w,,,,,,,
 ¡¾markdown¡¿MarkText,,ahk_exe i)MarkText.exe,^t,,,,,,,,
 ¡¾markdown¡¿Typora,,ahk_exe i)Typora.exe,^n,^w,,,,,,,
+¡¾markdown¡¿Obsidian,,ahk_exe i)Obsidian.exe,^n,^w,,,,,,,
+¡¾markdown¡¿SiYuan,,ahk_exe i)SiYuan.exe,^n,^w,,,,,,,
 ,,,,,,,,,,,
 ¡¾editor¡¿Bracket,,ahk_exe i)Brackets.exe,^n,^w,,^PgDn,,^PgUp,,,
 ¡¾editor¡¿CudaText,,ahk_exe i)cudatext.exe,^n,^w,,,,,,,
