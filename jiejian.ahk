@@ -39,7 +39,7 @@ if NOT (A_IsAdmin or RegExMatch(DllCall('GetCommandLine', 'str'), ' /restart(?!\
 }
 
 ; 定义版本信息并写入
-GLOBAL CODE_VERSION := '24.10-beta3'
+GLOBAL CODE_VERSION := '24.11-beta1'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
@@ -282,7 +282,6 @@ Capslock::{
 
 ; 需要按一次按键才会生效，时好时坏
 #HotIf IS_CAPS_PRESSED
-
 ; 关闭窗口
 q::SmartCloseWindow
 
@@ -344,6 +343,34 @@ Left::MoveRelative -28
 Right::MoveRelative 28
 Up::MoveRelative 0, -28
 Down::MoveRelative 0, 28
+
+; 为程序员们添加 ctrl + alt + t 为在当前页面打开终端
+#HotIf WinActive('ahk_exe explorer.exe')
+^!t::openCMDhere()
+openCMDhere() {
+    WinClass := WinGetClass('A')
+    If (WinClass = 'Progman' or WinClass = 'WorkerW') {
+        if IsSet(MY_NEW_TERMINAL)
+            Run(MY_NEW_TERMINAL ' /d .', A_Desktop)
+        else
+            Run(A_ComSpec, A_Desktop)
+        return
+    }
+    WinHWND := WinGetID('A')
+    for window in ComObject("Shell.Application").Windows {
+        If (window.HWND = WinHWND) {
+            if window.LocationURL = ""
+                return
+            currdir := SubStr(window.LocationURL, 9)
+            currdir := RegExReplace(currdir, "%20", " ")
+            if IsSet(MY_NEW_TERMINAL)
+                Run(MY_NEW_TERMINAL ' /d .', currdir)
+            else
+                Run(A_ComSpec, currdir)
+            break
+        }
+    }
+}
 #HotIf
 
 ; 避免 未编译程序 和 已编译的程序打架
@@ -365,15 +392,3 @@ if A_IsCompiled {
     if PID := ProcessExist("jiejian64.exe")
         ProcessClose PID
 }
-
-; windows 版本
-;
-; Windows 11 [10.1.xxxxx]
-; Windows 10 [10.0.10240] (29.07.2015)
-; Windows 8.1 [6.3.9200]
-; Windows 8 [6.2.9200]
-; Windows 7 service pack 1(SP1) [6.1.7601]
-; Windows 7 [6.1.7600]
-; Windows Vista service pack 2(SP2) [6.0.6002]
-; Windows Vista [6.0.6000]
-; Windows XP service pack 3(SP3) [5.1.2600]

@@ -31,7 +31,10 @@ GLOBAL MyActionArray := [
 
 if IsSet(MY_BASH)
     MyActionArray.Push(MyAction('在 Bash 中打开所在位置', 'list', isFileOrDirExists,, OpenInBash))
-MyActionArray.Push(MyAction('在 终端 中打开所在位置', 'list', isFileOrDirExists,, (IsSet(MY_NEW_TERMINAL) ? OpenInNewTerminal : OpenInTerminal)))
+if IsSet(MY_NEW_TERMINAL)
+    MyActionArray.Push(MyAction('在新终端中打开', 'list', isFileOrDirExists,, OpenInNewTerminal))
+else
+    MyActionArray.Push(MyAction('在终端中打开', 'list', isFileOrDirExists,, OpenInTerminal))
 if IsSet(MY_VSCode)
     MyActionArray.Push(MyAction('在 VSCode 中打开', 'list', isCodeFileOrDir,, path => Run(MY_VSCode . ' ' . path)))
 if IsSet(MY_IDEA)
@@ -560,10 +563,10 @@ OpenInNewTerminal(path) {
         ; 盘符根目录需要以 \ 结尾才生效，所以都统一加上
         endChar := SubStr(path, StrLen(path))
         addSomething := (endChar = '\' || endChar = '/') ? "" : "\"
-        Run(MY_NEW_TERMINAL . ' -d' . path . addSomething)
+        Run(MY_NEW_TERMINAL ' /d .', path . addSomething)
     } else {
         RegExMatch(path, '.*[\\/]', &regExMatchInfo)
-        Run(MY_NEW_TERMINAL . ' -d' . regExMatchInfo.0)
+        Run(MY_NEW_TERMINAL ' /d .', regExMatchInfo.0)
     }
 }
 
