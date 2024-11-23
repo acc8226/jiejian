@@ -328,7 +328,16 @@ OpenPathByType(item) {
     } else if (item.type = DataType.inner) { ; 精确处理：内部
         OpenInnerCommand(item.title, True)
     } else if (item.type = DataType.ext) { ; 精确处理：外部
-        Run('jiejian' . (A_PtrSize == 4 ? '32' : '64') . '.exe /script ' . item.path)
+        if ('custom\SoundControl.exe' = item.path) {
+            wnd := WinExist("A")
+            if wnd {
+              ActivateOrRun(, "custom\SoundControl.exe", "PreviousWindow " . wnd)
+            } else {
+              ActivateOrRun(, "custom\SoundControl.exe")
+            }
+        } else {
+            Run('jiejian' . (A_PtrSize == 4 ? '32' : '64') . '.exe /script ' . item.path)
+        }
     } else if (item.type = DataType.app && item.title == '微信') { ; 对 微信 优化体验：自动登录微信
         try {
             Run(item.path,,, &pid)

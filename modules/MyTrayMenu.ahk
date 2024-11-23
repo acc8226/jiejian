@@ -289,10 +289,10 @@ class MyTrayMenu {
         Suspend(!A_IsSuspended)
         if (A_IsSuspended) {
             A_TrayMenu.Check(this.pause)
-            Tip '  热键已禁用  ', -500
+            Tip '  热键已禁用 ⏸️ ', -500
         } else {
             A_TrayMenu.UnCheck(this.pause)
-            Tip '  热键已恢复  ', -500
+            Tip '  热键已恢复 🚀 ', -500
         }
     }
 

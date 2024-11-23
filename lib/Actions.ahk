@@ -38,10 +38,13 @@ ActivateOrRun(winTitle := '', target := '', args := '', workingDir := '', admin 
 
   ; 切换程序
   winTitle := Trim(winTitle)
-  if winTitle && activateWindow(winTitle, isHide)
+  if (winTitle && activateWindow(winTitle, isHide))
     return
 
   ; 程序没有运行，运行程序
+  if not target {
+    return
+  }
   workingDir := workingDir ? workingDir : A_WorkingDir
   RunPrograms(target, args, workingDir, admin, runInBackground)
 }
