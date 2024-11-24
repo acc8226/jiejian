@@ -42,6 +42,7 @@ if IsSet(MY_IDEA)
 
 ; 彩蛋 本机 IP
 MyActionArray.Push(MyAction('myip', 'edit',,, GetIPAddresses))
+MyActionArray.Push(MyAction('myshu', 'edit',,, GetMouseInfo))
 
 ; 设置监听
 #HotIf WinActive(MY_GUI_TITLE . " ahk_class i)^AutoHotkeyGUI$")
@@ -328,12 +329,14 @@ OpenPathByType(item) {
     } else if (item.type = DataType.inner) { ; 精确处理：内部
         OpenInnerCommand(item.title, True)
     } else if (item.type = DataType.ext) { ; 精确处理：外部
-        if ('custom\SoundControl.exe' = item.path) {
-            SoundControl
-        } else if InStr(item.path, '.ahk') {
+        if InStr(item.path, '.ahk') {
             RunAHK(item.path)
         } else if InStr(item.path, '.exe') {
-            ActivateOrRun(, item.path)
+            ; 音量调节的特殊处理
+            if 'tools\SoundControl.exe' = item.path
+                SoundControl
+            else
+                ActivateOrRun(, item.path)
         } else {
             MsgBox '不支持打开的文件类型：' . item.path
         }
@@ -663,5 +666,12 @@ GetIPAddresses() {
     msg := "IP 地址:`n"
     for address in addresses
         msg .= (address . "`n")
-    MsgBox msg, APP_NAME
+    MsgBox msg, 'IP 信息-' . APP_NAME
+}
+
+GetMouseInfo() {
+    zhang := A_Clipboard    
+    RunWait(A_ComSpec " /c " . A_WorkingDir . "\tools\MouseSC_Query.bat | clip", , "Hide")
+    MsgBox A_Clipboard, '鼠标信息-' . APP_NAME
+    A_Clipboard := zhang
 }

@@ -492,8 +492,8 @@ RunAHK(scriptPath) {
 SoundControl() {
   wnd := WinExist("A")
   if wnd {
-    ActivateOrRun(, "lib\SoundControl.exe", "PreviousWindow " wnd)
+    ActivateOrRun(, "tools\SoundControl.exe", "PreviousWindow " wnd)
   } else {
-    ActivateOrRun(, "lib\SoundControl.exe")
+    ActivateOrRun(, "tools\SoundControl.exe")
   }
 }

@@ -22,9 +22,13 @@ vscode 插件安装 https://marketplace.visualstudio.com/items?itemName=thqby.vs
 ; --------------------- GLOBAL --------------------------
 
 #SingleInstance force ; 跳过对话框并自动替换旧实例
-CoordMode('Mouse', 'Screen') ; RelativeTo 如果省略, 默认为 Screen
+CoordMode 'Mouse' ; 第二个参数如果省略, 默认为 Screen
 FileEncoding 54936 ; Windows XP 及更高版本：GB18030 简体中文 (4 字节)
 SetTitleMatchMode 'RegEx' ; 设置 WinTitle parameter 在内置函数中的匹配行为
+; This is the setting that runs smoothest on my
+; system. Depending on your video card and cpu
+; power, you may want to raise or lower this value.
+SetWinDelay 30
 
 ; 如果 非管理器启动 且 不含 /restart 参数（表示首次启动）则以管理员方式启动
 if NOT (A_IsAdmin or RegExMatch(DllCall('GetCommandLine', 'str'), ' /restart(?!\S)')) {
@@ -60,6 +64,7 @@ SetDefaults() {
 
     CURRENT_LANG := RegRead(REG_KEY_NAME, REG_LANG, '')
     if (CURRENT_LANG = '') {
+        ; https://www.autohotkey.com/docs/v2/misc/Languages.htm
         switch A_Language {
             case '7804', '0004', '0804', '1004' : CURRENT_LANG := 'zh-Hans'
             case '7C04', '0C04', '1404', '0404' : CURRENT_LANG := 'zh-Hant'
@@ -74,8 +79,6 @@ SetDefaults() {
     ; CapsLock 模式：对任务管理器 和 系统高级设置没用
     ; 短按依旧有用 确保了 CapsLock 灯不会闪
     IS_CAPS_PRESSED := false
-    ; 使用过会清除这个变量
-    ENABLE_CHANGE_CAPS_STATE := false
 }
 
 ; ----- 1. 热键 之 鼠标操作 -----
@@ -239,7 +242,9 @@ DoubleClick(hk, command) {
                 return
             }
         }
-
+        ; 分离按下的键
+        key := SubStr(hk, 2)
+        KeyWait key ; This prevents the keyboard's auto-repeat feature from interfering.        
         item := unset
         if (StrLen(command) > 0) {
             split := StrSplit(command, '-')
@@ -265,6 +270,7 @@ UpdateCtrlTimestamp(*) {
 
 Capslock::{
     GLOBAL IS_CAPS_PRESSED := true
+    ; 使用过会清除该变量
     GLOBAL ENABLE_CHANGE_CAPS_STATE := true
 
     DisableCapsChange() {
@@ -273,11 +279,12 @@ Capslock::{
     
     SetTimer(DisableCapsChange, -300) ; 300 ms 犹豫操作时间
     KeyWait 'CapsLock' ; 等待用户物理释放按键
-    IS_CAPS_PRESSED := false ; Capslock 先置空，来关闭 Capslock+ 功能的触发
+
+    ; Capslock 先置空，来关闭 Capslock+ 功能的触发
+    IS_CAPS_PRESSED := false
     ; 松开的时候才切换 CapsLock 大小写
     if ENABLE_CHANGE_CAPS_STATE
         SetCapsLockState(!GetKeyState('CapsLock', 'T'))
-    DisableCapsChange
 }
 
 ; 需要按一次按键才会生效，时好时坏
@@ -318,11 +325,13 @@ i::Click 'Up Right'
 
 o::MouseMove 0, -3,, 'R' ; 上移
 l::MouseMove -3, 0,, 'R' ; 左移
-SC027::MouseMove 3, 0,, 'R' ; 右移 caps + ;
-SC034::MouseMove 0, 3,, 'R' ; 下移 caps + .
+VKba::MouseMove 3, 0,, 'R' ; 右移 caps + ; vk=BA sc=027   
+VKbe::MouseMove 0, 3,, 'R' ; 下移 caps + . vk=BE sc=034
 
 ; 复制路径
 z::CopySelectedAsPlainText
+; 音量调节
+c::SoundControl
 ; 窗口移到下一个显示器
 v::Send '#+{right}'
 ; 窗口最小化
@@ -336,8 +345,9 @@ Space::{
     Anyrun
 }
 
-; 按住 CapsLock 时同时按下鼠标左键拖动窗口
-LButton::MoveWindow
+; 按住 CapsLock 的同时 按下鼠标左键拖动窗口
+LButton::MoveWindow2
+RButton::resizeWindow
 
 Left::MoveRelative -28
 Right::MoveRelative 28
@@ -357,6 +367,7 @@ openCMDhere() {
         return
     }
     WinHWND := WinGetID('A')
+    ; 从所有的文件窗口中进行筛选
     for window in ComObject("Shell.Application").Windows {
         If (window.HWND = WinHWND) {
             if window.LocationURL = ""
@@ -374,7 +385,7 @@ openCMDhere() {
 #HotIf
 
 ; 避免 未编译程序 和 已编译的程序打架
-if A_IsCompiled {
+if (A_IsCompiled) {
     ; 32 位 和 64 位独活一个
     if (A_PtrSize == 8) {
         ; 杀掉 32 位程式
