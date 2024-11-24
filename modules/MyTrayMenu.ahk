@@ -364,6 +364,8 @@ class MyTrayMenu {
 initLanguage() {
     if !FileExist(A_ScriptDir . '\' . 'lang')
         DirCreate(A_ScriptDir . '\' . 'lang')
+    if !FileExist(A_ScriptDir . '\' . 'lib')
+        DirCreate(A_ScriptDir . '\' . 'lib')
 
     ; 在已编译的脚本中包含指定的文件
     if (A_IsCompiled) {
@@ -381,6 +383,8 @@ initLanguage() {
         FileInstall 'lang\tr.ini', 'lang\tr.ini', true
         FileInstall 'lang\zh-Hans.ini', 'lang\zh-Hans.ini', true
         FileInstall 'lang\zh-Hant.ini', 'lang\zh-Hant.ini', true
+
+        FileInstall 'lib\SoundControl.exe', 'lib\SoundControl.exe', true
     }
 }
 

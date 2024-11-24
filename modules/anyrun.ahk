@@ -329,14 +329,13 @@ OpenPathByType(item) {
         OpenInnerCommand(item.title, True)
     } else if (item.type = DataType.ext) { ; 精确处理：外部
         if ('custom\SoundControl.exe' = item.path) {
-            wnd := WinExist("A")
-            if wnd {
-              ActivateOrRun(, "custom\SoundControl.exe", "PreviousWindow " . wnd)
-            } else {
-              ActivateOrRun(, "custom\SoundControl.exe")
-            }
+            SoundControl
+        } else if InStr(item.path, '.ahk') {
+            RunAHK(item.path)
+        } else if InStr(item.path, '.exe') {
+            ActivateOrRun(, item.path)
         } else {
-            Run('jiejian' . (A_PtrSize == 4 ? '32' : '64') . '.exe /script ' . item.path)
+            MsgBox '不支持打开的文件类型：' . item.path
         }
     } else if (item.type = DataType.app && item.title == '微信') { ; 对 微信 优化体验：自动登录微信
         try {

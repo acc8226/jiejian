@@ -91,7 +91,7 @@ SystemShutdown() {
   if (FileExist(A_WinDir "\System32\SlideToShutDown.exe")) {
     Run("SlideToShutDown.exe")
     sleep(1300)
-    CoordMode("Mouse", "Screen")
+    CoordMode("Mouse")
     MouseClick("Left", 100, 100)
   } else {
     Shutdown(1)
@@ -476,9 +476,24 @@ MoveRelative(relativeX, relativeY := 0) {
   ; 不适用于最大化和最小化的状态下
   if (WindowMaxOrMin()) {
     Tip("请在窗口模式下缩放")
-    return
+  } else {
+    WinGetPos(&x, &y)
+    WinMove(x + relativeX, y + relativeY)
   }
+}
 
-  WinGetPos(&x, &y)
-  WinMove(x + relativeX, y + relativeY)
+RunAHK(scriptPath) {
+  if A_IsCompiled
+    Run('jiejian' . (A_PtrSize == 4 ? '32' : '64') . '.exe /script ' . scriptPath)
+  else
+    Run('compiler/AutoHotkey' . (A_PtrSize == 4 ? '32' : '64') . '.exe /script ' . scriptPath)
+}
+
+SoundControl() {
+  wnd := WinExist("A")
+  if wnd {
+    ActivateOrRun(, "lib\SoundControl.exe", "PreviousWindow " wnd)
+  } else {
+    ActivateOrRun(, "lib\SoundControl.exe")
+  }
 }
