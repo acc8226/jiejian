@@ -324,6 +324,7 @@ ComputeDegree(regExMatchInfo) {
 
 ; 用到了 item.type、item.path 和 item.title
 OpenPathByType(item) {
+    ; 处理 web 和 下载
     if (item.type = DataType.web || item.type = DataType.dl) {
         jumpURL(item.path)
     } else if (item.type = DataType.inner) { ; 精确处理：内部
@@ -353,7 +354,7 @@ OpenPathByType(item) {
         SplitPath(item.path,, &dir)
         Run(A_ComSpec " /C " . item.path . " server", dir)
     } else {
-        ; 启动逻辑为每次都新建应用，而非打开已有应用 ActivateOrRun('', item.path)
+        ; 启动逻辑为每次都新建应用，而非通过 ActivateOrRun('', item.path) 打开已有应用
         Run(item.path)
     }
 }
@@ -584,22 +585,8 @@ OpenInNewTerminal(path) {
 ; 包含了所有我预设的内部命令
 OpenInnerCommand(title, isConfirm := false) {
     switch title {
-        ; shell
-        case '打印机': Run "shell:PrintersFolder"
-        case '环境变量': Run "rundll32 sysdm.cpl,EditEnvironmentVariables"
-        case '回收站': Run "shell:RecycleBinFolder"
-        case '网络连接': Run "shell:ConnectionsFolder" ; 第二种方式为 ncpa.cpl
-        case '我的视频': Run "shell:My Video"
-
-        case '我的图片': Run "shell:My Pictures"
-        case '我的下载': Run "shell:downloads"
-        case '我的音乐': Run "shell:My Music"
-        case '我的文档': Run "shell:Personal"
-        case '我的桌面': Run "shell:desktop"
-
-        case '收藏夹': Run "shell:Favorites"
+        case '环境变量': Run 'rundll32 sysdm.cpl,EditEnvironmentVariables'
         case '终端': Run A_ComSpec ; 在用户根目录打开文件夹
-        case '字体': Run "shell:Fonts"
         ; 系统操作
         case '重启': 
             if (isConfirm) {
@@ -619,7 +606,7 @@ OpenInnerCommand(title, isConfirm := false) {
         case '睡眠': SystemSleep
         case '激活屏幕保护程序': SendMessage(0x0112, 0xF140, 0,, "Program Manager") ; 0x0112 为 WM_SYSCOMMAND, 而 0xF140 为 SC_SCREENSAVE
 
-        case '清空回收站': FileRecycleEmpty()
+        case '清空回收站': FileRecycleEmpty
         case '息屏': SystemSleepScreen
         case '注销': SystemLogoff
         ; 媒体类
@@ -656,8 +643,9 @@ OpenInnerCommand(title, isConfirm := false) {
                 hour := SubStr(title, 1, FoundPos  - 1)
                 Run('shutdown /a', , 'Hide')
                 Run('shutdown /s /t ' . hour * 60 * 60,, 'Hide')
-            } else
+            } else {
                 MsgBox '非系统内置命令！', APP_NAME
+            }
     }
 }
 

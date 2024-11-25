@@ -82,25 +82,26 @@ SetDefaults() {
 }
 
 ; ----- 1. 热键 之 鼠标操作 -----
-#Include 'lib/Functions.ahk'
-#Include 'lib/Actions.ahk'
-#Include 'lib/Utils.ahk'
+#Include 'lib\Functions.ahk'
+#Include 'lib\Actions.ahk'
+#Include 'lib\Utils.ahk'
+#Include 'lib\WinHole.ahk'
 
 #Include <MoveWindow>
 #Include <WindowsTheme>
 
-#Include 'modules/ConfigMouse.ahk'
-#Include 'modules/Utils.ahk'
-#Include 'modules/ReadApp.ahk'
-#Include 'modules/ReadData.ahk'
-#Include 'modules/Anyrun.ahk'
-#Include 'modules/CheckUpdate.ahk'
-#Include 'modules/MyTrayMenu.ahk'
+#Include 'modules\ConfigMouse.ahk'
+#Include 'modules\Utils.ahk'
+#Include 'modules\ReadApp.ahk'
+#Include 'modules\ReadData.ahk'
+#Include 'modules\Anyrun.ahk'
+#Include 'modules\CheckUpdate.ahk'
+#Include 'modules\MyTrayMenu.ahk'
 
 initLanguage
 
 ; 生成快捷方式：每次运行检测如果 shortcuts 里的文件为空则重新生成一次快捷方式，要想重新生成可以双击 GenerateShortcuts.ahk 脚本或者清空或删除该文件夹
-if NOT FileExist(A_WorkingDir . '\shortcuts\*')
+if !FileExist(A_WorkingDir . '\shortcuts\*')
     Run 'extra/GenerateShortcuts.exe'
 
 SettingTray
@@ -225,9 +226,11 @@ ExitFunc(exitReason, exitCode) {
 #HotIf IsSet(MY_DOUBLE_ALT) ; 双击模式我只推荐 双击 Alt，因为 shift 和 ctrl 太过常用
 ~Alt::DoubleClick(ThisHotkey, MY_DOUBLE_ALT)
 #HotIf IsSet(MY_DOUBLE_HOME)
-~Home::DoubleClick(ThisHotkey, MY_DOUBLE_HOME)
+~Home::
+~NumpadHome::DoubleClick(ThisHotkey, MY_DOUBLE_HOME)
 #HotIf IsSet(MY_DOUBLE_END)
-~End::DoubleClick(ThisHotkey, MY_DOUBLE_END)
+~End::
+~NumpadEnd::DoubleClick(ThisHotkey, MY_DOUBLE_END)
 #HotIf IsSet(MY_DOUBLE_ESC) ; 双击 esc 表示关闭，esc 不适用于 vscode 防止误操作
 ~Esc::DoubleClick(ThisHotkey, MY_DOUBLE_ESC)
 #HotIf
@@ -236,7 +239,7 @@ ExitFunc(exitReason, exitCode) {
 DoubleClick(hk, command) {
     if (hk == A_PriorHotkey && A_TimeSincePriorHotkey > 100 && A_TimeSincePriorHotkey < 210) {
         ; esc 不适用于 vscode 防止误操作
-        if (hk = '~Esc') {
+        if (hk = 'Esc') {
             try {
                 processName := WinGetProcessName('A')
                 ; 如果是 code 这种频繁使用 esc 按键的软件则禁用双击 esc
@@ -246,10 +249,10 @@ DoubleClick(hk, command) {
                 MsgBox('An error was thrown!`nSpecifically: ' . e.Message)
                 return
             }
+        } else {
+            ; 分离按下的键
+            KeyWait(SubStr(hk, 2)) ; This prevents the keyboard's auto-repeat feature from interfering.
         }
-        ; 分离按下的键
-        key := SubStr(hk, 2)
-        KeyWait key ; This prevents the keyboard's auto-repeat feature from interfering.        
         item := unset
         if (StrLen(command) > 0) {
             split := StrSplit(command, '-')
@@ -260,7 +263,7 @@ DoubleClick(hk, command) {
                 item := FindItemByTypeAndTitle(type, title)
             }
         }
-        if !IsSet(item) || item == ''
+        if !(IsSet(item) && item != '')
             MsgBox(hk . ' 对应指令找不到！', APP_NAME)
         else
             OpenPathByType item
@@ -306,7 +309,7 @@ h::SetWindowHeightToFullScreen
 e::Send '!{tab}'
 
 ; 程序内切换窗口 caps + ` 或者 r 来切换
-SC029::
+vkC0::
 r::LoopRelatedWindows
 
 ; 切换到上一个虚拟桌面
@@ -408,13 +411,3 @@ if (A_IsCompiled) {
     if PID := ProcessExist("jiejian64.exe")
         ProcessClose PID
 }
-
-; inverted := false
-; if !inverted {
-;     WinGetPos ,, &W, &H, "ahk_class Notepad"
-;     regionDefinition .= "0-0 0-" h " " w "-" h " " w "-0 " "0-0 " ; 0-0 0-h w-h w-0 0-0 
-; }
-; ; WinSetRegion regionDefinition "0-0 300-0 300-300 0-300 0-0", "ahk_class Notepad"
-; WinSetRegion , "ahk_class Notepad"
-
-#Include 'custom\WinHoleV2.ahk'

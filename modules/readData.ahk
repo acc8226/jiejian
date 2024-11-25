@@ -69,7 +69,7 @@ ParseData(fileName) {
     if (info.type = DataType.file) {
       if NOT FileExist(info.path)
         return
-    } else if (info.type  = DataType.app) {
+    } else if (info.type  = DataType.app) { ; 程序：精确匹配
       ; 如果包含竖线则进行分割，并按照从左到右进行匹配
       pathSplit := StrSplit(info.path, "|")
       isPathExist := false
@@ -79,8 +79,8 @@ ParseData(fileName) {
         ; 过滤空行
         if item == ''
           continue
-        ; 如果是以字母开头 并且 不是以 shell: 开头
-        if (IsAlpha(SubStr(item, 1, 1)) && 1 !== InStr(item, 'shell:', false)) {   
+        ; 如果是以字母开头 并且 （不包含 ： 或者 ：的位置为 2）则认为是文件形式则要求必须 exist
+        if (IsAlpha(SubStr(item, 1, 1)) && InStr(item, ':', false) <= 2) {
           if (FileExist(item)) {
             ; 特殊处理 .lnk 则目标必须存在
             if (SubStr(item, -4) == ".lnk") {
@@ -88,7 +88,7 @@ ParseData(fileName) {
               if OutTarget && FileExist(OutTarget)
                 isPathExist := true
             } else {
-              isPathExist := true              
+              isPathExist := true
             }
           } else if (NOT InStr(item, ':')) { ; 否则认为是相对路径则继续处理         
             ; 从环境变量 PATH 中获取
@@ -106,9 +106,9 @@ ParseData(fileName) {
                 isPathExist := true
                 break
               }
-            }            
+            }
           }
-        } else {
+        } else { ; 否则认为该项扫描通过
           isPathExist := true
         }
         if (isPathExist) {

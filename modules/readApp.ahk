@@ -64,6 +64,7 @@ ParseAppCSV() {
         case "PgDn", "{PgDn}": GroupAdd "forward_PgDn", it.exe
         case "Right", "{Right}": GroupAdd "forward_Right", it.exe
         case "b": GroupAdd "forward_b", it.exe
+        case "f": GroupAdd "forward_f", it.exe
         case "n": GroupAdd "forward_n", it.exe
   
         case "z": GroupAdd("forward_z", it.exe)
@@ -84,6 +85,7 @@ ParseAppCSV() {
         case 'PgDn', '{PgDn}': GroupAdd("next_PgDn", it.exe)
         case "b": GroupAdd("next_b", it.exe)
   
+        case "f": GroupAdd('next_f', it.exe)
         case "n": GroupAdd('next_n', it.exe)
         case "z": GroupAdd('next_z', it.exe)
         case "!]": GroupAdd('next_alt_closeBracket', it.exe)
@@ -107,8 +109,10 @@ ParseAppCSV() {
         case 'PgUp', "{PgUp}": GroupAdd("back_PgUp", it.exe)
         case 'Up', "{Up}": GroupAdd("back_Up", it.exe)
   
+        case "s": GroupAdd('back_s', it.exe)
         case "v": GroupAdd('back_v', it.exe)
         case "z": GroupAdd('back_z', it.exe)
+
         case "^[": GroupAdd('back_ctrl_openBracket', it.exe)
         case "^Left", "^{Left}": GroupAdd('back_ctrl_Left', it.exe)
         case "^b": GroupAdd('back_ctrl_b', it.exe)
@@ -121,8 +125,12 @@ ParseAppCSV() {
       ; I 列 上个标签 和 前进键
       switch it.previousTag, 'Off' {
         case 'Left', "{Left}": GroupAdd("previous_Left", it.exe)
+
         case "p": GroupAdd('previous_p', it.exe)
+        case "s": GroupAdd('previous_s', it.exe)
+        case "v": GroupAdd('previous_v', it.exe)
         case "z": GroupAdd('previous_z', it.exe)
+
         case "[": GroupAdd('previous_openBracket', it.exe)
         case 'Media_Play_Pause', "{Media_Play_Pause}": GroupAdd("previous_MediaPlayPause", it.exe)
         case 'Media_Prev', "{Media_Prev}": GroupAdd("previous_MediaPrev", it.exe)
@@ -130,7 +138,6 @@ ParseAppCSV() {
         case 'PgUp', "{PgUp}": GroupAdd('previous_PgUp', it.exe)
         case 'Space', "{Space}", "空格": GroupAdd('previous_Space', it.exe)
         case 'Up', "{Up}": GroupAdd('previous_Up', it.exe)
-        case "v": GroupAdd('previous_v', it.exe)
         case "!0": GroupAdd('previous_alt_0', it.exe)
   
         case "![": GroupAdd('previous_alt_openBracket', it.exe)
@@ -352,6 +359,8 @@ XButton1::Send "^{F4}"
 !Right::Send "{Right}"
 #HotIf WinActive("ahk_group forward_b")
 !Right::Send "b"
+#HotIf WinActive("ahk_group forward_f")
+!Right::Send "f"
 #HotIf WinActive("ahk_group forward_n")
 !Right::Send "n"
 
@@ -384,6 +393,8 @@ XButton1::Send "^{F4}"
 ^Tab::Send "{PgDn}"
 #HotIf WinActive('ahk_group next_b')
 ^Tab::Send "b"
+#HotIf WinActive('ahk_group next_f')
+^Tab::Send "f"
 
 #HotIf WinActive('ahk_group next_n')
 ^Tab::Send "n"
@@ -424,6 +435,8 @@ XButton1::Send "^{F4}"
 #HotIf WinActive("ahk_group back_Up")
 !Left::Send "{Up}"
 
+#HotIf WinActive("ahk_group back_s")
+!Left::Send "s"
 #HotIf WinActive("ahk_group back_v")
 !Left::Send "v"
 #HotIf WinActive("ahk_group back_z")
@@ -450,6 +463,9 @@ XButton2::Send "{Left}"
 #HotIf WinActive("ahk_group previous_p")
 ^+Tab::
 XButton2::Send "p"
+#HotIf WinActive("ahk_group previous_s")
+^+Tab::
+XButton2::Send "s"
 #HotIf WinActive("ahk_group previous_z")
 ^+Tab::
 XButton2::Send "z"

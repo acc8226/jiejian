@@ -1,4 +1,5 @@
-﻿#HotIf MouseIsOnLeftEdge()
+﻿; 左边界
+#HotIf MouseIsOnLeftEdge()
 MButton::{
   ; 静音/不静音主音量
   Send "{Volume_Mute}"
@@ -37,6 +38,7 @@ XButton1::{
   Tip '下一曲', -399
 }
 
+; 上边界
 #HotIf MouseIsOnTopEdge()
 MButton::{
   Send "{Volume_Mute}"
@@ -80,6 +82,11 @@ WheelDown::{
 XButton1::Send '{Media_Next}'
 ; 上一曲
 XButton2::Send '{Media_Prev}'
+
+; 音量小组件的滑动用起来
+#HotIf WinActive("ahk_class MyKeymap_Sound_Control")
+WheelUp::Send 'e'
+WheelDown::Send 'd'
 #HotIf
 
 ; 鼠标移动到屏幕左边缘
