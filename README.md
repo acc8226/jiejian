@@ -17,7 +17,7 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 
 捷键是一款实用的 Windows 键鼠增强工具，基于 [Autohotkey2](https://www.autohotkey.com/) 开发。为简化 Windows 键鼠操作而生，拥有强大按键映射以及快捷键增强功能，可作为一个传统启动器，并且支持鼠标侧边按键和热字符。为获得最佳体验，强烈建议搭配侧键鼠标和全局鼠标手势软件，并设置为开机自启。
 
-大小：1.58 MB | 语言：简体中文 | 环境：32 位和 64 位 Windows XP 以上系统，Win 7 以上使用更佳 
+软件大小：低于 2 MB | 语言：简体中文 | 环境：32 位和 64 位 Windows XP 以上系统，Win 7 以上使用更佳 
 
 ![软件截图](https://cdnjson.com/images/2024/07/23/1720686143392778.png)
 

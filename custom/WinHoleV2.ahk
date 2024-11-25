@@ -1,20 +1,48 @@
-﻿global radius := 230	 ; Starting radius of the hole.
+﻿global radius := IniRead('setting.ini', "WinHole", "radus", 270)        ; Starting radius of the hole.
+global increment := 25	 ; Amount to decrease/increase radius of circle when turning scroll wheel 每次的增量
 global inverted := false ; If false, the region is see-throughable. 默认是 false，表示穿透该区域，否则表示不穿透，保留该区域
-global rate := 80		 ; The period (ms) of the timer. 40 ms is 25 "fps" 如果是 80 则是 12.5 fps
+global rate := 100		 ; The period (ms) of the timer. 40 ms is 25 "fps" 如果是 100 则是 10 fps
 
-global toggle := false		 ; 切换窗口的显示状态
+global toggle := 0	     ; 切换窗口的显示状态
+global isPause := false	 ; 是否暂停跟随鼠标
 
 CoordMode 'Mouse'
 
 ; Make the region
-region := makeCircle(radius)
-F1::{
-	global toggle := !toggle
+global region := makeCircle(radius)
+; F7、F8、F9、F10 和 F12 可能不像 F1、F2、F5、F11 那样频繁用于日常操作。特别是F7，由于拼写检查功能在现代应用程序中已经不如以前那么常用，因此可能是最不常用的功能键之一
+F7::{
+	global toggle := !toggle, isPause := false
 	timer(toggle, region, inverted, rate) ; Toggle on/off
 }
 
+#HotIf toggle
+F8::{ ; When on, toggle inverted setting
+	global inverted := !inverted, isPause := false
+	timer(1, region, inverted, rate)
+}			
+F9::{ ; When on, toggle pause. 在 1 和 -1 之间来回切换
+	global isPause := !isPause
+	timer(isPause ? -1 : 1)
+}
+;;; 滚轮我还是固定值了
+; WheelUp::	   ; Increase the radius of the circle
+; WheelDown::{   ; Decrease
+; 	global radius, region
+; 	InStr(A_ThisHotkey, "Up") ? radius += increment : radius -= increment
+; 	radius<100 ? radius := 100 : ""        ; Ensure greater than 0 radius
+; 	region := makeCircle(radius)
+; 	timer(1, region, inverted)
+; }
+; 使用 ESC 不生效，使用 Escape 才生效
+Escape::{
+	global toggle := 0, isPause := false
+	timer(toggle, region, inverted, rate)
+}
+#HotIf
+
 /**
- * timer 函数根据state参数控制定时器的开启、关闭和暂停，以及窗口区域的更新
+ * timer 函数根据 state 参数控制定时器的开启、关闭和暂停，以及窗口区域的更新
  * 
  * @param state Call with state=0 to restore window and stop timer, state=-1 stop timer but do not restore 0 表示停止和退出 -1 表示停止但是不还原
  * @param {String} region see WinSetRegion()
@@ -25,7 +53,7 @@ F1::{
 timer(state, region := "", inverted := false, rate := 50) {
 	static timerFn, paused, hWin, aot
 	; Restore window and turn off timer
-	if (state = 0 ) {
+	if (state = 0) {
 		if timerFn
 			SetTimer timerFn, false
 		if !hWin
@@ -35,8 +63,7 @@ timer(state, region := "", inverted := false, rate := 50) {
 			WinSetAlwaysOnTop false, hWin
 		timerFn := ""
 		paused := 0
-		hWin := ""
-		aot := ""
+		hWin := aot := ""
 		return
 	} else if (IsSet(timerFn) && timerFn) {			  ; Pause/unpause or...
 		if (state = -1) {

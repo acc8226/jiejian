@@ -357,7 +357,7 @@ RunAsAdmin(target, args, workingDir, options) {
  * @param target 程序路径 
  * @param arguments 参数
  * @param directory 工作目录
- * @param operation 选项 (runas/open/edit/print
+ * @param operation 选项 (runAS/open/edit/print
  * @param show 是否显示
  */
 ShellRun(target, arguments?, directory?, operation?, show?) {

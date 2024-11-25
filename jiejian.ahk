@@ -43,7 +43,7 @@ if NOT (A_IsAdmin or RegExMatch(DllCall('GetCommandLine', 'str'), ' /restart(?!\
 }
 
 ; 定义版本信息并写入
-GLOBAL CODE_VERSION := '24.11-beta1'
+GLOBAL CODE_VERSION := '24.11-beta2'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
@@ -159,7 +159,12 @@ CheckUpdate
 ^!v::Send A_Clipboard ; Ctrl + Alt + V 将剪贴板的内容输入到当前活动应用程序中，防止了一些网站禁止在 HTML 密码框中进行粘贴操作
 ^+"::Send '""{Left}' ; Ctrl + Shift + " 快捷操作-插入双引号
 
-!Space::Anyrun ; 启动窗口
+; 启动 Anyrun 组件
+#HotIf NOT IniRead('setting.ini', "Common", "AnyRunUseCtrl")
+!Space::Anyrun 
+#HotIf IniRead('setting.ini', "Common", "AnyRunUseCtrl")
+^Space::Anyrun
+#HotIf
 
 ; ----- 热串 之 打开网址。选择 z 而非 q，因为 q 的距离在第一行太远了，我称之为 Z 模式，用于全局跳转网址 -----
 ; ----- 热串 之 缩写扩展：将短缩词自动扩展为长词或长句（英文单词中哪个字母开头的单词数最少，我称之为 X 模式）-----
@@ -403,3 +408,13 @@ if (A_IsCompiled) {
     if PID := ProcessExist("jiejian64.exe")
         ProcessClose PID
 }
+
+; inverted := false
+; if !inverted {
+;     WinGetPos ,, &W, &H, "ahk_class Notepad"
+;     regionDefinition .= "0-0 0-" h " " w "-" h " " w "-0 " "0-0 " ; 0-0 0-h w-h w-0 0-0 
+; }
+; ; WinSetRegion regionDefinition "0-0 300-0 300-300 0-300 0-0", "ahk_class Notepad"
+; WinSetRegion , "ahk_class Notepad"
+
+#Include 'custom\WinHoleV2.ahk'

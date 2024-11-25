@@ -385,9 +385,10 @@ initLanguage() {
         FileInstall 'lang\zh-Hans.ini', 'lang\zh-Hans.ini', true
         FileInstall 'lang\zh-Hant.ini', 'lang\zh-Hant.ini', true
 
-        ; 鼠标控制
+        ; 鼠标控制 只是加载，目前不在 anyrun 组件中体现
         FileInstall 'tools\MouseSC_x64.exe', 'tools\MouseSC_x64.exe', true
         FileInstall 'tools\MouseSC_Query.bat', 'tools\MouseSC_Query.bat', true
+        
         ; 重建图标缓存 https://www.sordum.org/9194/rebuild-shell-icon-cache-v1-3/
         FileInstall 'tools\ReIconCache_x64.exe', 'tools\ReIconCache_x64.exe', true
         ; Rexplorer_x64 用于重启文件资源管理器
@@ -399,7 +400,9 @@ initLanguage() {
         FileInstall 'tools\W11ClassicMenu.ini', 'tools\W11ClassicMenu.ini', true
         ; 禁用 windows update https://www.sordum.org/9470/windows-update-blocker-v1-8/
         FileInstall 'tools\Wub.ini', 'tools\Wub.ini', true
-        FileInstall 'tools\Wub_x64.exe', 'tools\Wub_x64.exe', true        
+        FileInstall 'tools\Wub_x64.exe', 'tools\Wub_x64.exe', true
+
+        FileInstall 'setting.ini', 'setting.ini', true
     }
 }
 
