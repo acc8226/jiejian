@@ -61,7 +61,7 @@ GetSelectedText() {
 
   Send("^c")
   if not (ClipWait(0.4)) {
-    Tip("没有选中的文本或文件", -700)
+    Tip("没有选中文本或文件", -700)
     return
   }
   text := A_Clipboard

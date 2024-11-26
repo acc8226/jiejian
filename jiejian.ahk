@@ -97,6 +97,7 @@ SetDefaults() {
 #Include 'modules\Anyrun.ahk'
 #Include 'modules\CheckUpdate.ahk'
 #Include 'modules\MyTrayMenu.ahk'
+#Include 'modules\WindowShading.ahk'
 
 initLanguage
 
@@ -205,23 +206,13 @@ ExitFunc(exitReason, exitCode) {
     }
     ; 当前选择的语言
     RegWrite(CURRENT_LANG, 'REG_SZ', REG_KEY_NAME, REG_LANG)
+
+    ; 还原窗口 for shading windows
+    restoreWindows
 }
 
 ; 触发热键时, 热键中按键原有的功能不会被屏蔽(对操作系统隐藏)
-~LButton & a::{
-    ; 没有获取到文字直接返回,否则若选中的是网址则打开，否则进行百度搜索
-    text := GetSelectedText()
-    if (text) {
-        if RegExMatch(text, 'i)^\s*((?:https?://)?(?:[\w-]+\.)+[\w-]+(?:/[\w-./?%&=]*)?\s*)$', &regExMatchInfo) {
-            text := regExMatchInfo.1
-            if NOT InStr(text, 'http')
-                text := ('http://' . text)
-            Run text
-        } else {
-            Run('https://www.baidu.com/s?wd=' . text)
-        }            
-    }
-}
+~LButton & a::OpenSelectedText
 
 #HotIf IsSet(MY_DOUBLE_ALT) ; 双击模式我只推荐 双击 Alt，因为 shift 和 ctrl 太过常用
 ~Alt::DoubleClick(ThisHotkey, MY_DOUBLE_ALT)
@@ -272,7 +263,7 @@ DoubleClick(hk, command) {
 
 ; 监控 ctrl + c 按键放下
 ~^c Up::
-UpdateCtrlTimestamp(*) {
+UpdateCtrlTimestamp(hk?) {
     GLOBAL CTRL_TIMESTAMP := A_NowUTC
 }
 
@@ -339,11 +330,16 @@ VKbe::MouseMove 0, 3,, 'R' ; 下移 caps + . vk=BE sc=034
 ; 复制路径
 z::CopySelectedAsPlainText
 ; 音量调节
-c::SoundControl
+x::SoundControl
+; 搜索或打开网址
+c::OpenSelectedText
 ; 窗口移到下一个显示器
 v::Send '#+{right}'
+
 ; 窗口最小化
 m::MinimizeWindow
+; Window Shading(窗口遮帘) caps + ,
+vkBC::shadingWindows
 
 ; 复制选中文件路径并打开 Anyrun 组件
 Space::{

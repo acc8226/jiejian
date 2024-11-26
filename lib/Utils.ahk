@@ -12,3 +12,25 @@ Tip(message, time := -1299, X := unset, Y := unset) {
   }
   SetTimer(() => ToolTip(), time)
 }
+
+OpenURLOrSearch(text) {
+  if RegExMatch(text, 'i)^\s*((?:https?://)?(?:[\w-]+\.)+[\w-]+(?:/[\w-./?%&=]*)?\s*)$', &regExMatchInfo) {
+    text := regExMatchInfo.1
+    if NOT InStr(text, 'http')
+        text := ('http://' . text)
+    Run text
+  } else {
+    Run('https://www.baidu.com/s?wd=' . text)
+  }
+}
+
+/**
+ * 没有获取到文字直接返回,否则若选中的是网址则打开，否则进行百度搜索。这个功能可以暴露出去作为服务 export
+ * 
+ * @param text 
+ */
+OpenSelectedText() {
+    text := GetSelectedText()
+    if text
+        OpenURLOrSearch text
+}
