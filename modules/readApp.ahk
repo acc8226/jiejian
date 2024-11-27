@@ -255,99 +255,101 @@ parseAppLine(line, eachLineLen) {
 ; 高等级
 ; e. 关闭 打头
 #HotIf WinActive("ahk_group HL_close_esc")
-^F4::
+F13::
 XButton1::Send "{Esc}"
 #HotIf WinActive("ahk_group HL_close_alt_F4")
-^F4::
+F13::
 XButton1::Send "!{F4}"
 ; 主要为窗口服务，若遇到 ctrl + f4 则必须捕获后处理，而非兜底处理
 #HotIf WinActive("ahk_group HL_close_ctrl_F4")
-^F4::Send "{Blind}^{F4}"
+F13::
 XButton1::Send "^{F4}"
 
 ; 低等级
 ; d. 新建
 #HotIf WinActive("ahk_group new_F3")
-^F8::Send "{F3}"
+F14::Send "{F3}"
 #HotIf WinActive("ahk_group new_F8")
-^F8::Send "{F8}"
+F14::Send "{F8}"
 #HotIf WinActive("ahk_group new_L")
-^F8::Send 'l'
+F14::Send 'l'
 #HotIf WinActive("ahk_group new_O")
-^F8::Send 'o'
+F14::Send 'o'
 #HotIf WinActive("ahk_group new_alt_a")
-^F8::Send '!a'
+F14::Send '!a'
 
 #HotIf WinActive("ahk_group new_alt_c")
-^F8::Send '!c'
+F14::Send '!c'
 #HotIf WinActive("ahk_group new_alt_n")
-^F8::Send "!n"
+F14::Send "!n"
 #HotIf WinActive("ahk_group new_alt_o")
-^F8::Send "!o"
+F14::Send "!o"
 #HotIf WinActive("ahk_group new_ctrl_n")
-^F8::Send "^n"
+F14::Send "^n"
 #HotIf WinActive("ahk_group new_ctrl_o")
-^F8::Send "^o"
+F14::Send "^o"
 
-#HotIf WinActive("ahk_group new_ctrl_t")
-^F8::Send "^t"
 #HotIf WinActive("ahk_group new_ctrl_alt_t")
-^F8::Send "^!t"
+F14::Send "^!t"
 #HotIf WinActive("ahk_group new_ctrl_shift_t")
-^F8::Send "^+t"
+F14::Send "^+t"
 #HotIf WinActive("ahk_group new_ctrl_shift_n")
-^F8::Send "^+n"
+F14::Send "^+n"
+; 新建标签还是默认 ctrl + t
+#HotIf
+F14::Send "^t"
 
 ; e. 关闭 打头 和 鼠标后退键 用
 #HotIf WinActive("ahk_group close_WinClose")
-^F4::
+F13::
 XButton1::WinClose
 #HotIf WinActive("ahk_group close_Esc")
-^F4::
+F13::
 XButton1::Send '{Esc}'
 #HotIf WinActive("ahk_group close_alt_F4")
-^F4::
+F13::
 XButton1::Send "!{F4}"
 #HotIf WinActive("ahk_group close_closeBracket")
-^F4::
+F13::
 XButton1::Send "]"
 #HotIf WinActive("ahk_group close_alt_L")
-^F4::
+F13::
 XButton1::Send "!l"
 
 #HotIf WinActive("ahk_group close_alt_q")
-^F4::
+F13::
 XButton1::Send '!q'
 #HotIf WinActive("ahk_group close_alt_w")
-^F4::
+F13::
 XButton1::Send "!w"
 #HotIf WinActive("ahk_group close_ctrl_c")
-^F4::
+F13::
 XButton1::Send "^c"
 #HotIf WinActive("ahk_group close_ctrl_v")
-^F4::
+F13::
 XButton1::Send "^v"
 #HotIf WinActive("ahk_group close_ctrl_w")
-^F4::
+F13::
 XButton1::Send "^w"
 #HotIf WinActive("ahk_group close_ctrl_alt_q")
-^F4::
+F13::
 XButton1::Send "^!q"
 #HotIf WinActive("ahk_group close_ctrl_shift_w")
-^F4::
+F13::
 XButton1::Send("^+w")
 
 ; 如果填写的不是 ctrl + f4 则采取兜底处理：智能关闭
 #HotIf !WinActive("ahk_group close_ctrl_F4")
-^F4::
+F13::
 XButton1::SmartCloseWindow ; 比 WinClose "A" 好使
 ; 否则是 ctrl + f4，凡是遇到【#32770 窗口】则使用 esc 进行统一处理
 #HotIf WinActive("ahk_class #32770")
-^F4::
+F13::
 XButton1::Send '{Esc}'
 ; 最终则是 ctrl + f4 且非窗口则 ctrl + f4
 ; XButton1 兜底
 #HotIf
+F13::
 XButton1::Send "^{F4}"
 
 ; f. 前进键
@@ -533,11 +535,11 @@ XButton2::Send '^+{Tab}'
 
 ; J 列 新建窗口
 #HotIf WinActive('ahk_group newWin_ctrl_n')
-^F9::Send "{Blind}^n"
+F15::Send "^n"
 #HotIf WinActive('ahk_group newWin_ctrl_alt_n')
-^F9::Send "{Blind}^!n"
+F15::Send "^!n"
 #HotIf WinActive('ahk_group newWin_ctrl_shift_n')
-^F9::Send "{Blind}^+n"
+F15::Send "^+n"
 
 ; K 列 F11 功能键增强 全屏
 ; 如果是浏览器 且 打开的是 bilibili 或 YouTube 则特殊处理，将 f11 转成按键 f
@@ -561,6 +563,6 @@ F11::Send '^+{F12}'
 #HotIf WinActive('ahk_class ^MozillaWindowClass$')
 ^+n::Send '{Blind}^+p'
 
-; ctrl + F7 通用：置顶/取消置顶
+; 通用：置顶/取消置顶
 #HotIf
-^F7::ToggleWindowTopMost
+F16::ToggleWindowTopMost
