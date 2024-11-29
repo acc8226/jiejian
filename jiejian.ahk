@@ -29,6 +29,7 @@ SetTitleMatchMode 'RegEx' ; 设置 WinTitle parameter 在内置函数中的匹�
 ; system. Depending on your video card and cpu
 ; power, you may want to raise or lower this value.
 SetWinDelay 30
+SetMouseDelay -1  ; Makes movement smoother.
 
 ; 如果 非管理器启动 且 不含 /restart 参数（表示首次启动）则以管理员方式启动
 if NOT (A_IsAdmin or RegExMatch(DllCall('GetCommandLine', 'str'), ' /restart(?!\S)')) {
@@ -86,6 +87,7 @@ SetDefaults() {
 #Include 'lib\Actions.ahk'
 #Include 'lib\Utils.ahk'
 #Include 'lib\WinHole.ahk'
+#Include 'lib\KeymapManager.ahk'
 
 #Include <MoveWindow>
 #Include <WindowsTheme>
@@ -213,7 +215,7 @@ ExitFunc(exitReason, exitCode) {
 }
 
 ; 触发热键时, 热键中按键原有的功能不会被屏蔽(对操作系统隐藏)
-~LButton & a::OpenSelectedText
+F17::OpenSelectedText
 
 #HotIf IsSet(MY_DOUBLE_ALT) ; 双击模式我只推荐 双击 Alt，因为 shift 和 ctrl 太过常用
 ~Alt::DoubleClick(ThisHotkey, MY_DOUBLE_ALT)
@@ -407,4 +409,180 @@ if (A_IsCompiled) {
         ProcessClose PID
     if PID := ProcessExist("jiejian64.exe")
         ProcessClose PID
+}
+
+; 引入 mykeymap 的 keymapmanager.ahk
+; 窗口组
+GroupAdd("MY_WINDOW_GROUP__1", "Stardew Valley ahk_class SDL_app")
+GroupAdd("MY_WINDOW_GROUP__1", "ahk_exe Rune Factory 3 Special.exe")
+KeymapManager.GlobalKeymap.DisabledAt := "ahk_group MY_WINDOW_GROUP__1"
+
+; 分号模式( ; )
+km13 := KeymapManager.NewKeymap("*;", "分号模式( `; )", "")
+km := km13
+km.Map("*a", _ => (Send("{blind}*")))
+km.Map("*b", _ => (Send("{blind}%")))
+km.Map("*c", _ => (Send("{blind}.")))
+km.Map("*d", _ => (Send("{blind}=")))
+km.Map("*e", _ => (Send("{blind}{^}")))
+km.Map("*f", _ => (Send("{blind}>")))
+km.Map("*g", _ => (Send("{blind}{!}")))
+km.Map("*h", _ => (Send("{blind}{+}")))
+km.Map("*i", _ => (Send("{blind}:")))
+km.Map("*j", _ => (Send("{blind};")))
+km.Map("*k", _ => (Send("{blind}``")))
+km.Map("*m", _ => (Send("{blind}-")))
+km.Map("*n", _ => (Send("{blind}/")))
+km.Map("*r", _ => (Send("{blind}&")))
+km.Map("*s", _ => (Send("{blind}<")))
+km.Map("*t", _ => (Send("{blind}~")))
+km.Map("*u", _ => (Send("{blind}$")))
+km.Map("*v", _ => (Send("{blind}|")))
+km.Map("*w", _ => (Send("{blind}{#}")))
+km.Map("*x", _ => (Send("{blind}_")))
+km.Map("*y", _ => (Send("{blind}@")))
+km.Map("*z", _ => (Send("{blind}\")))
+km.Map("singlePress", _ => Send("{blind};"))
+
+KeymapManager.GlobalKeymap.Enable()
+
+; 是否启用手柄
+if NOT IniRead('setting.ini', "Control", "enable", false)
+    return
+
+; 如果有手柄则开启手柄按键映射
+; If you want to unconditionally use a specific controller number, change
+; the following value from 0 to the number of the controller (1-16).
+; A value of 0 causes the controller number to be auto-detected:
+ControllerNumber := 0
+; Auto-detect the controller number if called for:
+if ControllerNumber <= 0 {
+    Loop 16  ; Query each controller number to find out which ones exist.
+    {
+        if GetKeyState(A_Index "JoyName") {
+            ControllerNumber := A_Index
+            break
+        }
+    }
+    if ControllerNumber <= 0 {
+        return
+    }
+}
+
+; This script converts a controller (gamepad, joystick, etc.) into a three-button
+; mouse. It allows each button to drag just like a mouse button and it uses
+; virtually no CPU time. Also, it will move the cursor faster depending on how far
+; you push the stick from center. You can personalize various settings at the
+; top of the script.
+;
+; Note: For Xbox controller 2013 and newer (anything newer than the Xbox 360
+; controller), this script will only work if a window it owns is active,
+; such as a message box, GUI, or the script's main window.
+
+; Increase the following value to make the mouse cursor move faster:
+ContMultiplier := 0.5
+
+; Decrease the following value to require less stick displacement-from-center
+; to start moving the mouse.  However, you may need to calibrate your stick
+; -- ensuring it's properly centered -- to avoid cursor drift. A perfectly tight
+; and centered stick could use a value of 1:
+ContThreshold := 3
+
+; Change the following to true to invert the Y-axis, which causes the mouse to
+; move vertically in the direction opposite the stick:
+InvertYAxis := false
+
+; If your system has more than one controller, increase this value to use a
+; controller other than the first:
+ControllerNumber := 1
+
+; END OF CONFIG SECTION -- Don't change anything below this point unless you want
+; to alter the basic nature of the script.
+
+ControllerPrefix := ControllerNumber "Joy"
+Hotkey ControllerPrefix . 1, ClickButtonLeft
+Hotkey ControllerPrefix . 2, ClickButtonRight
+; 播放
+Hotkey ControllerPrefix . 3, (*) => Send("{Media_Play_Pause}") 
+; 下一首
+Hotkey ControllerPrefix . 4, (*) => Send("{Media_Next}")
+
+; 菜单键
+Hotkey ControllerPrefix . 7, (*) => Send("{Volume_Down}")
+; 开始键
+Hotkey ControllerPrefix . 8, (*) => Send("{Volume_Up}")
+
+; Calculate the axis displacements that are needed to start moving the cursor:
+ContThresholdUpper := 50 + ContThreshold
+ContThresholdLower := 50 - ContThreshold
+if InvertYAxis
+    YAxisMultiplier := -1
+else
+    YAxisMultiplier := 1
+
+; Monitor the movement of the stick.
+SetTimer WatchController, 30
+
+; The functions below do not use KeyWait because that would sometimes trap the
+; WatchController quasi-thread beneath the wait-for-button-up thread, which would
+; effectively prevent mouse-dragging with the controller.
+ClickButtonLeft(*) {
+    MouseClick "Left",,, 1, 0, "D"  ; Hold down the left mouse button.
+    SetTimer WaitForLeftButtonUp, 10
+    
+    WaitForLeftButtonUp() {
+        if GetKeyState(A_ThisHotkey)
+            return  ; The button is still, down, so keep waiting.
+        ; Otherwise, the button has been released.
+        SetTimer , 0
+        MouseClick "Left",,, 1, 0, "U"  ; Release the mouse button.
+    }
+}
+
+ClickButtonRight(*) {
+    MouseClick "Right",,, 1, 0, "D"  ; Hold down the right mouse button.
+    SetTimer WaitForRightButtonUp, 10
+    
+    WaitForRightButtonUp() {
+        if GetKeyState(A_ThisHotkey)
+            return  ; The button is still, down, so keep waiting.
+        ; Otherwise, the button has been released.
+        SetTimer , 0
+        MouseClick "Right",,, 1, 0, "U"  ; Release the mouse button.
+    }
+}
+
+WatchController() {
+    global
+    MouseNeedsToBeMoved := false  ; Set default.
+    JoyX := GetKeyState(ControllerNumber "JoyX")
+    if NOT JoyX {
+        SetTimer , 0
+        return
+    }
+    JoyY := GetKeyState(ControllerNumber "JoyY")
+
+    if JoyX > ContThresholdUpper {
+        MouseNeedsToBeMoved := true
+        DeltaX := Round(JoyX - ContThresholdUpper)
+    } else if JoyX < ContThresholdLower {
+        MouseNeedsToBeMoved := true
+        DeltaX := Round(JoyX - ContThresholdLower)
+    } else
+        DeltaX := 0
+
+    if JoyY > ContThresholdUpper {
+        MouseNeedsToBeMoved := true
+        DeltaY := Round(JoyY - ContThresholdUpper)
+    }
+    else if JoyY < ContThresholdLower {
+        MouseNeedsToBeMoved := true
+        DeltaY := Round(JoyY - ContThresholdLower)
+    } else
+        DeltaY := 0
+
+    if MouseNeedsToBeMoved {
+        SetMouseDelay -1  ; Makes movement smoother.
+        MouseMove DeltaX * ContMultiplier, DeltaY * ContMultiplier * YAxisMultiplier, 0, "R"
+    }
 }
