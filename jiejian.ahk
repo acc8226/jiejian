@@ -456,7 +456,7 @@ if NOT IniRead('setting.ini', "Control", "enable", false)
 ; A value of 0 causes the controller number to be auto-detected:
 ControllerNumber := 0
 ; Auto-detect the controller number if called for:
-if ControllerNumber <= 0 {
+if (ControllerNumber <= 0) {
     Loop 16  ; Query each controller number to find out which ones exist.
     {
         if GetKeyState(A_Index "JoyName") {
@@ -464,9 +464,8 @@ if ControllerNumber <= 0 {
             break
         }
     }
-    if ControllerNumber <= 0 {
+    if ControllerNumber <= 0
         return
-    }
 }
 
 ; This script converts a controller (gamepad, joystick, etc.) into a three-button
@@ -499,7 +498,7 @@ ControllerNumber := 1
 ; END OF CONFIG SECTION -- Don't change anything below this point unless you want
 ; to alter the basic nature of the script.
 
-ControllerPrefix := ControllerNumber "Joy"
+ControllerPrefix := ControllerNumber . "Joy"
 Hotkey ControllerPrefix . 1, ClickButtonLeft
 Hotkey ControllerPrefix . 2, ClickButtonRight
 ; 播放
@@ -515,33 +514,29 @@ Hotkey ControllerPrefix . 8, (*) => Send("{Volume_Up}")
 ; Calculate the axis displacements that are needed to start moving the cursor:
 ContThresholdUpper := 50 + ContThreshold
 ContThresholdLower := 50 - ContThreshold
-if InvertYAxis
-    YAxisMultiplier := -1
-else
-    YAxisMultiplier := 1
-
+YAxisMultiplier := InvertYAxis ? -1 : 1
 ; Monitor the movement of the stick.
-SetTimer WatchController, 30
+SetTimer(WatchController, 30)
 
 ; The functions below do not use KeyWait because that would sometimes trap the
 ; WatchController quasi-thread beneath the wait-for-button-up thread, which would
 ; effectively prevent mouse-dragging with the controller.
 ClickButtonLeft(*) {
     MouseClick "Left",,, 1, 0, "D"  ; Hold down the left mouse button.
-    SetTimer WaitForLeftButtonUp, 10
+    SetTimer(WaitForLeftButtonUp, 10)
     
     WaitForLeftButtonUp() {
         if GetKeyState(A_ThisHotkey)
             return  ; The button is still, down, so keep waiting.
         ; Otherwise, the button has been released.
         SetTimer , 0
-        MouseClick "Left",,, 1, 0, "U"  ; Release the mouse button.
+        MouseClick("Left",,, 1, 0, "U")  ; Release the mouse button.
     }
 }
 
 ClickButtonRight(*) {
     MouseClick "Right",,, 1, 0, "D"  ; Hold down the right mouse button.
-    SetTimer WaitForRightButtonUp, 10
+    SetTimer(WaitForRightButtonUp, 10)
     
     WaitForRightButtonUp() {
         if GetKeyState(A_ThisHotkey)
@@ -554,34 +549,39 @@ ClickButtonRight(*) {
 
 WatchController() {
     global
+    ; Don't do anything if the script is suspended.
+    if A_IsSuspended
+        return
     MouseNeedsToBeMoved := false  ; Set default.
     JoyX := GetKeyState(ControllerNumber "JoyX")
-    if NOT JoyX {
+    JoyY := GetKeyState(ControllerNumber "JoyY")
+    
+    if (JoyX == '' or JoyY == '' or (JoyX < 5 and JoyY < 5) or (JoyX > 95 and JoyY > 95)) {
         SetTimer , 0
         return
     }
-    JoyY := GetKeyState(ControllerNumber "JoyY")
-
+        
     if JoyX > ContThresholdUpper {
         MouseNeedsToBeMoved := true
         DeltaX := Round(JoyX - ContThresholdUpper)
     } else if JoyX < ContThresholdLower {
         MouseNeedsToBeMoved := true
         DeltaX := Round(JoyX - ContThresholdLower)
-    } else
+    } else {
         DeltaX := 0
+    }
 
     if JoyY > ContThresholdUpper {
         MouseNeedsToBeMoved := true
         DeltaY := Round(JoyY - ContThresholdUpper)
-    }
-    else if JoyY < ContThresholdLower {
+    } else if JoyY < ContThresholdLower {
         MouseNeedsToBeMoved := true
         DeltaY := Round(JoyY - ContThresholdLower)
-    } else
+    } else {
         DeltaY := 0
+    }
 
-    if MouseNeedsToBeMoved {
+    if (MouseNeedsToBeMoved) {
         SetMouseDelay -1  ; Makes movement smoother.
         MouseMove DeltaX * ContMultiplier, DeltaY * ContMultiplier * YAxisMultiplier, 0, "R"
     }
