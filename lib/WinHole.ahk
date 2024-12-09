@@ -7,7 +7,7 @@ https://www.autohotkey.com/boards/viewtopic.php?f=6&t=30622
 --------------------------------
 */
 
-global radius := IniRead('setting.ini', "WinHole", "radius", 270)        ; Starting radius of the hole.
+global radius := IniRead('setting.ini', "WinHole", "radius", 266) ; Starting radius of the hole.
 global increment := 25	 ; Amount to decrease/increase radius of circle when turning scroll wheel 每次的增量
 global inverted := false ; If false, the region is see-throughable. 默认是 false，表示穿透该区域，否则表示不穿透，保留该区域
 global rate := 100		 ; The period (ms) of the timer. 40 ms is 25 "fps" 如果是 100 则是 10 fps
@@ -21,7 +21,12 @@ CoordMode 'Mouse'
 global region := makeCircle(radius)
 ; F7、F8、F9、F10 和 F12 可能不像 F1、F2、F5、F11 那样频繁用于日常操作。特别是F7，由于拼写检查功能在现代应用程序中已经不如以前那么常用，因此可能是最不常用的功能键之一
 F7::{
-	global toggle := !toggle, isPause := false
+	global toggle
+	; 如果当前未开启 且 起始点在桌面则不开启
+	if !toggle and IsDesktop()
+		return
+	toggle := !toggle
+	global isPause := false
 	timer(toggle, region, inverted, rate) ; Toggle on/off
 }
 
@@ -63,7 +68,7 @@ timer(state, region := "", inverted := false, rate := 50) {
 	; Restore window and turn off timer
 	if (state = 0) {
 		if timerFn
-			SetTimer timerFn, false
+			SetTimer timerFn, 0
 		if !hWinID
 			return
 		WinSetRegion , hWinID
@@ -75,27 +80,28 @@ timer(state, region := "", inverted := false, rate := 50) {
 		return
 	} else if (IsSet(timerFn) && timerFn) {	; Pause/unpause or...
 		if (state = -1) {
-			SetTimer timerFn, false
+			SetTimer(timerFn, 0)
 			return paused := true
 		}
-		; 隐式表示 state 为 1
+		; 走到此处则 state 必为 1
 		else if (IsSet(paused) && paused) {
-			SetTimer timerFn, true
+			; 以原来的周期重新启用之前禁用的计时器. 如果计时器不存在, 则进行创建(使用默认的周期 250). 计时器也会重置
+			SetTimer timerFn
 			return paused := false
 		} else {										  ; ... stop timer before starting a new one.
-			SetTimer timerFn, false
+			SetTimer timerFn, 0
 		}
 	}
-	; 隐式表示 state 为 1
-	if !(IsSet(hWinID) && hWinID) {			                  ; Get the window under the mouse. 确定窗口是否具有 WS_EX_TOPMOST 样式(置顶).
+	; 走到此处则 state 必为 1
+	if !(IsSet(hWinID) && hWinID) {			              ; Get the window under the mouse. 确定窗口是否具有 WS_EX_TOPMOST 样式(置顶).
 		MouseGetPos ,, &hWinID
 		aot := WinGetExStyle(hWinID) & 0x8 				  ; Get always-on-top state, to preserve it.
 		if !aot
 			WinSetAlwaysOnTop true, hWinID                  ; 必须指定当前窗口，防止后面的窗口获取焦点
 	}
 	timerFn := timerFunction.Bind(hWinID, region, inverted) ; Initialise the timer.
-	timerFn.Call(1)										  ; For better responsiveness, 1 is for reset static
-	SetTimer timerFn, rate
+	timerFn.Call(1)										    ; For better responsiveness, 1 is for reset static
+	SetTimer(timerFn, rate)
 }
 
 /**
@@ -133,7 +139,7 @@ timerFunction(hWinID, region, inverted, resetStatic := 0) {
  * @param {Integer} inverted inverted=true, make the region the only part visible, vs the only part see-throughable for inverted=false 布尔值，决定区域是可见部分还是透明部分
  */
 setRegion(hWinID, region, dx:=0, dy:=0, inverted := false) {
-	if !inverted {
+	if (!inverted) {
 		WinGetPos ,, &w, &h, hWinID
 		regionDefinition .= "0-0 0-" . h . " " . w . "-" . h . " " . w . "-0 0-0 " ; 0-0 0-h w-h w-0 0-0 
 	}
