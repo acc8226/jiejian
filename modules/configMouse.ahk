@@ -50,7 +50,7 @@ RButton::{
 }
 
 WheelUp::{
-  Send "{Media_Next}"
+  Send '{Media_Next}'
   Tip '下一曲', -399
 }
 WheelDown::{

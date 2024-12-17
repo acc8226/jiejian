@@ -162,13 +162,35 @@ CheckUpdate
 ^!s::JJ_TRAY_MENU.MySuspend ; Ctrl + Alt + S 暂停脚本
 ^!v::Send A_Clipboard ; Ctrl + Alt + V 将剪贴板的内容输入到当前活动应用程序中，防止了一些网站禁止在 HTML 密码框中进行粘贴操作
 ^+"::Send '""{Left}' ; Ctrl + Shift + " 快捷操作-插入双引号
+
+; 将来可改为条件映射或者不改了
+
 RAlt::LControl ; 右 alt 不常用，映射为左 ctrl
 
 ; 启动 Anyrun 组件
-#HotIf NOT IniRead('setting.ini', "Common", "AnyRunUseCtrl")
+#HotIf NOT IniRead('setting.ini', "Common", "AnyRunUseCtrl", '0')
 !Space::Anyrun 
-#HotIf IniRead('setting.ini', "Common", "AnyRunUseCtrl")
+#HotIf IniRead('setting.ini', "Common", "AnyRunUseCtrl", '0')
 ^Space::Anyrun
+
+#HotIf IniRead('setting.ini', "Common", "AppsKey2MediaNext", '0')
+; 称为老板键 或者下一曲，或者老板键，打开计算器都能，暂停播放
+; AppsKey::Send '#d'
+AppsKey::Send '{Media_Next}'
+
+#HotIf IniRead('setting.ini', "Common", "PrintScreen2VolumeDown", '0')
+PrintScreen::Send '{Volume_Down}'
+ScrollLock::Send '{Media_Play_Pause}'
+Pause::Send '{Volume_Up}'
+
+; 数字面板 且 未开启数字键模式
+#HotIf IniRead('setting.ini', "Common", "NumpadOff2Media", '0')
+NumpadDown::Send '{Media_Next}'
+NumpadLeft::Send '{Volume_Down}'
+NumpadClear::Send '{Media_Play_Pause}'
+NumpadRight::Send '{Volume_Up}'
+NumpadUp::Send '{Media_Prev}'
+
 #HotIf
 
 ; ----- 热串 之 打开网址。选择 z 而非 q，因为 q 的距离在第一行太远了，我称之为 Z 模式，用于全局跳转网址 -----
@@ -447,7 +469,7 @@ km.Map("singlePress", _ => Send("{blind};"))
 KeymapManager.GlobalKeymap.Enable()
 
 ; 是否启用手柄
-if NOT IniRead('setting.ini', "Control", "enable", false)
+if NOT IniRead('setting.ini', "JoyControl", "enable", '0')
     return
 
 ; 如果有手柄则开启手柄按键映射
@@ -543,7 +565,7 @@ ClickButtonRight(*) {
             return  ; The button is still, down, so keep waiting.
         ; Otherwise, the button has been released.
         SetTimer , 0
-        MouseClick "Right",,, 1, 0, "U"  ; Release the mouse button.
+        MouseClick("Right",,, 1, 0, "U")  ; Release the mouse button.
     }
 }
 
