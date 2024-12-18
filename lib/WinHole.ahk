@@ -19,8 +19,7 @@ CoordMode 'Mouse'
 
 ; Make the region
 global region := makeCircle(radius)
-; F7、F8、F9、F10 和 F12 可能不像 F1、F2、F5、F11 那样频繁用于日常操作。特别是F7，由于拼写检查功能在现代应用程序中已经不如以前那么常用，因此可能是最不常用的功能键之一
-F7::{
+F18::{
 	global toggle
 	; 如果当前未开启 且 起始点在桌面则不开启
 	if !toggle and IsDesktop()
@@ -31,14 +30,16 @@ F7::{
 }
 
 #HotIf toggle
-F8::{ ; When on, toggle inverted setting
+
+F19::{ ; When on, toggle inverted setting
 	global inverted := !inverted, isPause := false
 	timer(1, region, inverted, rate)
 }			
-F9::{ ; When on, toggle pause. 在 1 和 -1 之间来回切换
+F20::{ ; When on, toggle pause. 在 1 和 -1 之间来回切换
 	global isPause := !isPause
 	timer(isPause ? -1 : 1)
 }
+
 ;;; 滚轮我还是通过 ini 取值了
 ; WheelUp::	   ; Increase the radius of the circle
 ; WheelDown::{   ; Decrease
