@@ -157,7 +157,7 @@ CheckUpdate
 ; Ctrl + Alt + R 重启脚本
 ^!r::{
     Reload
-    Sleep 50 ; 不创建多个实例的情况下重新加载脚本的简单实现，给个暂停时长
+    Sleep 60 ; 不创建多个实例的情况下重新加载脚本的简单实现，给个暂停时长
 }
 ^!s::JJ_TRAY_MENU.MySuspend ; Ctrl + Alt + S 暂停脚本
 ^!v::Send A_Clipboard ; Ctrl + Alt + V 将剪贴板的内容输入到当前活动应用程序中，防止了一些网站禁止在 HTML 密码框中进行粘贴操作
