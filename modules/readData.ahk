@@ -79,8 +79,9 @@ ParseData(fileName) {
         ; 过滤空行
         if item == ''
           continue
-        ; 如果是以字母开头 并且 （不包含 ： 或者 ：的位置为 2）则认为是文件形式则要求必须 exist
+        ; 如果是以字母开头 并且 不包含 ： 或者 ：的位置为 2 则认为是文件形式则要求必须存在
         if (IsAlpha(SubStr(item, 1, 1)) && InStr(item, ':', false) <= 2) {
+          ; 若存在则不用说
           if (FileExist(item)) {
             ; 特殊处理 .lnk 则目标必须存在
             if (SubStr(item, -4) == ".lnk") {
@@ -90,14 +91,14 @@ ParseData(fileName) {
             } else {
               isPathExist := true
             }
-          } else if (NOT InStr(item, ':')) { ; 否则认为是相对路径则继续处理         
+          } else if (InStr(item, 'shortcuts\') != 1 and !InStr(item, ':')) { ; 若文件不存在 且为相对路径
             ; 从环境变量 PATH 中获取
             dosPath := EnvGet("PATH")
             isEndsWithExe := '.exe' = SubStr(item, StrLen(item) - 3)  
             loop parse dosPath, "`;" {
-              if A_LoopField == ""
+              if A_LoopField == ''
                 continue
-              if (FileExist(A_LoopField . "\" . item)) {
+              if (FileExist(A_LoopField . '\' . item)) {
                 isPathExist := true
                 break
               }

@@ -40,7 +40,7 @@ if NOT (A_IsAdmin or RegExMatch(DllCall('GetCommandLine', 'str'), ' /restart(?!\
             Run '*RunAs "' A_AhkPath '" /restart "' A_ScriptFullPath '"' ; 双击 .ahk 会进入此，形如 *runs as "autohotkey64.exe" /restart "zhangsan.ahk"
         ExitApp
     } catch Error as e
-        ToolTip("`n    捷键正在以普通权限运行。`n    捷键无法在具有管理员权限的窗口中工作（例如，Taskmgr.exe）。    `n ")
+        Tip("`n    捷键正在以普通权限运行。`n    捷键无法在具有管理员权限的窗口中工作（例如，Taskmgr.exe）。    `n ")
 }
 
 ; 定义版本信息并写入
@@ -82,6 +82,12 @@ SetDefaults() {
     IS_CAPS_PRESSED := false
 }
 
+; 生成快捷方式：每次运行检测如果 shortcuts 里的文件为空则重新生成一次快捷方式，要想重新生成可以双击 GenerateShortcuts.ahk 脚本或者清空或删除该文件夹
+if not FileExist(A_WorkingDir . '\shortcuts\*') {
+    Run 'extra/GenerateShortcuts.exe'
+    Sleep 100 ; 加入必要的等待时间
+}
+
 ; ----- 1. 热键 之 鼠标操作 -----
 #Include 'lib\Functions.ahk'
 #Include 'lib\Actions.ahk'
@@ -102,10 +108,6 @@ SetDefaults() {
 #Include 'modules\WindowShading.ahk'
 
 initLanguage
-
-; 生成快捷方式：每次运行检测如果 shortcuts 里的文件为空则重新生成一次快捷方式，要想重新生成可以双击 GenerateShortcuts.ahk 脚本或者清空或删除该文件夹
-if !FileExist(A_WorkingDir . '\shortcuts\*')
-    Run 'extra/GenerateShortcuts.exe'
 
 SettingTray
 ; 设置托盘图标和菜单
