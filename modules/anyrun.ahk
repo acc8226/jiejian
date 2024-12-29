@@ -21,6 +21,7 @@ GLOBAL MyActionArray := [
     MyAction('打开网址', 'list', isLegitimateWebsite, AppendWebsiteName, jumpURL), ; 是否提前些比较好，不用了，兜底挺好
     MyAction('生成二维码(磁力链)', 'list', isMagnetUrl,, CreateQRcode),
     MyAction('生成二维码(网址)', 'list', isLegitimateWebsite,, CreateQRcode),
+    MyAction('在线预览 Office 文件', 'list', isOfficeUrl,, JumpOfficeUrl),
     ; 打开（文件，可能是 mp3 或者 mp4 或者 mov）
     MyAction('打开', 'list', path => isFileOrDirExists(path) && NOT DirExist(path), AppendFileType, path => Run(path)) ,
     MyAction('前往文件夹', 'list', isDir,, OpenDir),
@@ -264,7 +265,7 @@ Anyrun() {
                 ; 拿到 alias 例如为 bd 则去除头部 bd
                 realStr := SubStr(editValue, StrLen(item.alias) + 1)
                 ; GitHub 加速服务 js 由 https://www.7ed.net/gitmirror/hub.html 提供
-                if NOT(item.alias == 'pi' || item.alias == 'js') {
+                if NOT(item.alias == 'pi' || item.alias == 'js' || item.alias == 'yl') {
                     ; 特殊处理 ip
                     if (item.alias == 'ip') {
                         ; 去掉 http:// 和 https://
@@ -272,9 +273,9 @@ Anyrun() {
                         if len
                             realStr := SubStr(realStr, len + 3)
                     }
+                    ; 非 pi 和 js、yl 一律会做 urlencode
                     realStr := URIEncode(realStr)
                 }
-                runUrl := unset
                 if InStr(item.path, "{query}")
                     runUrl := strReplace(item.path, "{query}", realStr)
                 else
@@ -489,6 +490,11 @@ isMagnetUrl(url) {
     return RegExMatch(url, '^magnet:.+')
 }
 
+; 是否是在线 office 文件
+isOfficeUrl(url) {        
+    return RegExMatch(url, 'i)^(?:https?://)?.{3,}\.(?:doc|docx|ppt|pptx|xls|xlsx)$')
+}
+
 isFileOrDirExists(path) {
     ; con 文件或目录 为何存在，我用不到
     return path !== '*' && path !== '/' && 'con' != SubStr(path, 1, 3) && FileExist(path)
@@ -528,6 +534,10 @@ isCodeFileOrDir(path) {
 ; --- run 开始 ---
 CreateQRcode(path) {
     Run('https://api.cl2wm.cn/api/qrcode/code?text=' . URIEncode(path))
+}
+
+JumpOfficeUrl(path) {
+    Run('https://view.officeapps.live.com/op/view.aspx?src=' . path)
 }
 
 OpenDir(path) {

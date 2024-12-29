@@ -176,27 +176,27 @@ RAlt::LControl ; 右 alt 不常用，映射为左 ctrl
 ^Space::Anyrun
 
 #HotIf IniRead('setting.ini', "Common", "AppsKey2ShowDesktop", '0')
-; 称为老板键 或者下一曲，或者老板键，打开计算器都能，暂停播放
+; 称为老板键 或者下一曲，或者老板键，打开计算器都能
 AppsKey::Send '#d' 
 
 #HotIf IniRead('setting.ini', "Common", "PrintScreen2VolumeDown", '0')
-PrintScreen::Send '{Volume_Down}'
-ScrollLock::Send '{Media_Play_Pause}'
-Pause::Send '{Volume_Up}'
+PrintScreen::Volume_Down
+ScrollLock::Media_Play_Pause
+Pause::Volume_Up
 
 ; 数字面板 且 未开启数字键模式
 #HotIf IniRead('setting.ini', "Common", "NumpadControl2Media", '0')
-NumpadDown::Send '{Media_Next}'
-NumpadLeft::Send '{Volume_Down}'
-NumpadClear::Send '{Media_Play_Pause}'
-NumpadRight::Send '{Volume_Up}'
-NumpadUp::Send '{Media_Prev}'
+NumpadDown::Media_Next
+NumpadLeft::Volume_Down
+NumpadClear::Media_Play_Pause
+NumpadRight::Volume_Up
+NumpadUp::Media_Prev
 
 #HotIf IniRead('setting.ini', "Common", "Fn2Media", '0')
 F6::Media_Prev
-F7::Media_Play_Pause
-F8::Media_Next
-F9::Volume_Down
+F7::Media_Next
+F8::Volume_Down
+F9::Media_Play_Pause
 F10::Volume_Up
 
 #HotIf

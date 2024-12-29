@@ -461,16 +461,16 @@ XButton1::Send "^{F4}"
 ; I 列：上个标签 和 鼠标前进键 用
 #HotIf WinActive("ahk_group previous_Left")
 ^+Tab::
-XButton2::Send "{Left}"
+XButton2::Send '{Left}'
 #HotIf WinActive("ahk_group previous_p")
 ^+Tab::
-XButton2::Send "p"
+XButton2::Send 'p'
 #HotIf WinActive("ahk_group previous_s")
 ^+Tab::
-XButton2::Send "s"
+XButton2::Send 's'
 #HotIf WinActive("ahk_group previous_z")
 ^+Tab::
-XButton2::Send "z"
+XButton2::Send 'z'
 #HotIf WinActive('ahk_group previous_openBracket')
 ^+Tab::
 XButton2::Send "[" ; 对 bilibili 不好用，由于会触发 ctrl + shift 切换输入法我就醉了
