@@ -372,7 +372,7 @@ v::Send '#+{right}'
 ; 窗口最小化
 m::MinimizeWindow
 ; Window Shading(窗口遮帘) caps + ,
-vkBC::shadingWindows
+vkBC::ShadingWindows
 
 ; 复制选中文件路径并打开 Anyrun 组件
 Space::{

@@ -23,7 +23,7 @@
                     RegWrite(A_NowUTC, 'REG_SZ', REG_KEY_NAME, regValueName)
                 if (VerCompare(CODE_VERSION, serverVersion) < 0) {
                     if MsgBox('捷键 ' . CODE_VERSION . ' 非最新，去下载最新版 ' . serverVersion . '？', '检查更新', 'YesNo') = 'Yes'
-                        Run 'http://acc8226.test.upcdn.net/pages/downloadJiejian.html'
+                        Run 'https://acc8226.onrender.com/mypage/pages/downloadJiejian'
                 } else if (isNeedCallback) {
                     MsgBox('当前已是最新版本', '检查更新-捷键')
                 }

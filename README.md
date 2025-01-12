@@ -7,10 +7,10 @@
 <img src="https://img.shields.io/github/languages/top/acc8226/jiejian" style="display:inline-block;margin: 0 1px;" alt="GitHub top language">
 <img src="https://img.shields.io/github/commit-activity/y/acc8226/jiejian" style="display:inline-block;margin: 0 1px;" alt="GitHub commit activity">
 <img src="https://img.shields.io/github/last-commit/acc8226/jiejian" style="display:inline-block;margin: 0 1px;" alt="GitHub last commit">
-<a href="https://jiejian.sourceforge.io/jiejian.7z" style="border-bottom:none;">
+<a href="https://jiejian.sourceforge.io/jiejian.7z" style="border-bottom:none;" title="更新时间 2024年8月底">
   <img src="https://img.shields.io/badge/release-24.8-green" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
 </a>
-<a href="https://jiejian.sourceforge.io/jiejian-beta.7z" style="border-bottom:none;">
+<a href="https://jiejian.sourceforge.io/jiejian-beta.7z" style="border-bottom:none;" title="更新时间 2025-01-05">
   <img src="https://img.shields.io/badge/beta-24.11--beta2-yellow" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
 </a>
 </div>
@@ -34,4 +34,6 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 * 搭配全局鼠标手势软件，以实现更丰富的操作。
 * 将“捷键”设置为开机自启，以便在计算机启动时自动加载自定义设置。
 
-软件大小 3.29 MB | 多国语言支持 | 最低 32 位和 64 位 Windows XP 系统支持，Win 7 以上系统使用更佳
+软件大小 3.29 MB | 多国语言支持 | 32 位或 64 位 Windows XP 以上版本支持
+
+[**点我下载最新测试版**](https://jiejian.sourceforge.io/jiejian-beta.7z)

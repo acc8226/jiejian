@@ -8,7 +8,7 @@
 
 global shadingWinMap := Map()
 
-shadingWindows() {
+ShadingWindows() {
     ; Uncomment this next line if this subroutine is to be converted
     ; into a custom menu item rather than a hotkey. The delay allows
     ; the active window that was deactivated by the displayed menu to
@@ -26,7 +26,7 @@ shadingWindows() {
     }
 }
 
-restoreWindows() {
+RestoreWindows() {
     for ID, Height in shadingWinMap {
         WinMove ,,, Height, ID
     }

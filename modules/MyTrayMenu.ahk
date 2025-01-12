@@ -253,7 +253,7 @@ class MyTrayMenu {
                 A_TrayMenu.ToggleCheck(this.startUp)
                 IS_AUTO_START_UP := !IS_AUTO_START_UP
         
-            case this.document: Run 'http://acc8226.test.upcdn.net' ; 还是选用国内服务访问最快
+            case this.document: Run 'https://acc8226.onrender.com/mypage' ; 还是选用国内服务访问最快
             case this.video: Run 'https://www.bilibili.com/video/BV19H4y1e7hJ'
 
             case this.followMeCSDN: Run 'https://blog.csdn.net/acc8226'
