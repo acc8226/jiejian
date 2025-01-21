@@ -14,10 +14,14 @@ Tip(message, time := -1299, X := unset, Y := unset) {
 }
 
 OpenURLOrSearch(text) {
+  ; 如果是网址
   if RegExMatch(text, 'i)^\s*((?:https?://)?(?:[\w-]+\.)+[\w-]+(?:/[\w-./?%&=]*)?\s*)$', &regExMatchInfo) {
     text := regExMatchInfo.1
     if NOT InStr(text, 'http')
         text := ('http://' . text)
+    Run text
+  } else if (FileExist(text)) {
+    Sleep 200
     Run text
   } else {
     Run('https://www.baidu.com/s?wd=' . text)
