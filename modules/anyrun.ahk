@@ -131,8 +131,8 @@ Anyrun() {
             }
             dataArray := unset
             ; 精确匹配失败 将 转到模糊匹配
-            ; 若为空则清空列表 或 大于设定长度 或 满足正则
-            if (StrLen(editValue) <= SUPPORT_LEN && editValue ~= '^[\s\d\.a-zA-Z一-龥]+$') {
+            ; 若为空则清空列表 或 大于设定长度 或 满足正则，其中首字符 \- 是 - 的转义
+            if (StrLen(editValue) <= SUPPORT_LEN && editValue ~= '^[\-\s\d\.a-zA-Z一-龥]+$') {
                 needleRegEx := 'i)'
                 Loop Parse, editValue {
                     if A_LoopField == ' '
@@ -231,10 +231,18 @@ Anyrun() {
                 split := StrSplit(listBox.Text, '-')
                 ; 分离出类型 和 名称
                 if (split.Length == 2) {
-                    type := split[2]
+                    type := split[split.Length]
                     title := split[1]
-                    item := findItemByTypeAndTitle(type, title)
                     ; 能否根据序号直接找到 item 呢，而不是通过反查，感觉不高效因此不采用
+                    item := findItemByTypeAndTitle(type, title)
+                } else if (split.Length == 3 and split[2] == '') {
+                    type := split[split.Length]
+                    title := split[1] . '-'
+                    item := findItemByTypeAndTitle(type, title)
+                } else if (split.Length == 4 and split[2] == '' and split[3] == '') {
+                    type := split[split.Length]
+                    title := split[1] . '--'
+                    item := findItemByTypeAndTitle(type, title)
                 }
             }
             editValue := myEdit.Value
@@ -668,8 +676,8 @@ GetIPAddresses() {
 }
 
 GetMouseInfo() {
-    zhang := A_Clipboard    
-    RunWait(A_ComSpec " /c " . A_WorkingDir . "\tools\MouseSC_Query.bat | clip", , "Hide")
+    temp := A_Clipboard
+    RunWait(A_ComSpec . " /c " . A_WorkingDir . "\tools\MouseSC_Query.bat | clip", , "Hide")
     MsgBox A_Clipboard, '鼠标信息-' . APP_NAME
-    A_Clipboard := zhang
+    A_Clipboard := temp
 }

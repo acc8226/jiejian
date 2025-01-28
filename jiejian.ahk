@@ -22,6 +22,7 @@ vscode 插件安装 https://marketplace.visualstudio.com/items?itemName=thqby.vs
 ; --------------------- GLOBAL --------------------------
 
 #SingleInstance force ; 跳过对话框并自动替换旧实例
+#Hotstring C * ; 热字符串开启 区分大小写 和 不用终止符
 CoordMode 'Mouse' ; 第二个参数如果省略, 默认为 Screen
 FileEncoding 54936 ; Windows XP 及更高版本：GB18030 简体中文 (4 字节)
 SetTitleMatchMode 'RegEx' ; 设置 WinTitle parameter 在内置函数中的匹配行为
@@ -205,20 +206,20 @@ F10::Volume_Up
 ; ----- 热串 之 缩写扩展：将短缩词自动扩展为长词或长句（英文单词中哪个字母开头的单词数最少，我称之为 X 模式）-----
 
 ; 意为 'now'
-:C*:xnn::{
+::.nn::{
     SendText(FormatTime(, 'yyyy-MM-dd HH:mm:ss'))
 }
 ; 意为 'day'
-:C*:xdd::{
+::.dd::{
     SendText(FormatTime(, "'date:' yyyy-MM-dd HH:mm:ss"))
 }
 ; 意为 '分割线的首字母 f'
-:C*:xff::{
+::.ff::{
     SendText '——————— ฅ՞• •՞ฅ ———————'
 }
 ; 意为 idcard
 #HotIf NOT A_IsCompiled
-:C*:xii::{
+::.ii::{
     SendText '431121199210010012'
 }
 #HotIf

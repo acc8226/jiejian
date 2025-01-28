@@ -14,10 +14,10 @@ StartByHotKey(hotkey) {
             ; 如果是打开 web 或者 file 类型则会有友好提示
             if (it.type = DataType.web) {
                 jumpURL(it.path)
-                Tip("打开 " . it.title)
+                Tip('打开 ' . it.title)
             } else if (it.type = DataType.file) {
                 Run(it.path)
-                Tip("打开 " . it.title)
+                Tip('打开 ' . it.title)
             } else if (it.type = DataType.app) {                
                 ; 如果是 app 类型会频繁唤醒则不加提示
                 ActivateOrRun(it.winTitle, it.path)
@@ -26,14 +26,14 @@ StartByHotKey(hotkey) {
         }
 }
 
-; 热串启动
-StartByHotString(hotstring) {
-    myHs := StrReplace(hotstring, ":C*:")
+; 热串启动网址
+JumlURLByHotString(hotstring) {
+    myHs := StrReplace(hotstring, '::')
     for it in DATA_LIST
         if (it.hs == myHs) {
             if (it.type = DataType.web) {
-                jumpURL(it.path)
-                Tip("打开 " . it.title)
+                JumpURL(it.path)
+                Tip('打开 ' . it.title)
             }
             break
         }
@@ -47,7 +47,7 @@ JumpURL(input) {
     }
     ; https 将逐渐替代 http，这是大势所趋
     if NOT InStr(input, 'http')
-        input := ("https://" . input)
+        input := ('https://' . input)
     Run input
 }
 

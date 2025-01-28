@@ -20,7 +20,7 @@ class DataType {
 }
 
 ; 注册热键 和 热字符串
-RegMyHotKey
+RegMyHotKey()
 RegMyHotKey() {
   Loop DATA_LIST.Length {
     it := DATA_LIST[A_Index]
@@ -32,10 +32,8 @@ RegMyHotKey() {
     ; 热串：目前仅作用于网址跳转
     if (DataType.web = it.type && StrLen(it.hs) > 0) {
         ; 排除在 编辑器中 可跳转网址
-        HotIfWinNotactive('ahk_group ' . TEXT_GROUP)
-        Hotstring(":C*:" . it.hs, startByHotString)
+        Hotstring('::' . it.hs, JumlURLByHotString)
         ; 要关闭上下文相关性(也就是说, 使后续创建的热键和 热字串在所有窗口中工作), 调用任意 HotIf 或其中一个 HotIfWin 函数, 但省略参数. 例如: HotIf 或 HotIfWinActive
-        HotIf
     }
   }
 }
@@ -46,7 +44,7 @@ ParseData(fileName) {
     GLOBAL MY_BASH, MY_VSCode, MY_IDEA, MY_NEW_TERMINAL
     GLOBAL MY_DOUBLE_ALT, MY_DOUBLE_HOME, MY_DOUBLE_END, MY_DOUBLE_ESC
   
-    split := StrSplit(line, ",")
+    split := StrSplit(line, ',')
     ; 跳过不符合条件的行
     if split.Length < EACH_LINE_LEN
       return
@@ -71,7 +69,7 @@ ParseData(fileName) {
         return
     } else if (info.type  = DataType.app) { ; 程序：精确匹配
       ; 如果包含竖线则进行分割，并按照从左到右进行匹配
-      pathSplit := StrSplit(info.path, "|")
+      pathSplit := StrSplit(info.path, '|')
       isPathExist := false
       Loop pathSplit.Length {
         ; 如果能匹配
@@ -93,7 +91,7 @@ ParseData(fileName) {
             }
           } else if (InStr(item, 'shortcuts\') != 1 and !InStr(item, ':')) { ; 若文件不存在 且为相对路径
             ; 从环境变量 PATH 中获取
-            dosPath := EnvGet("PATH")
+            dosPath := EnvGet('PATH')
             isEndsWithExe := '.exe' = SubStr(item, StrLen(item) - 3)  
             loop parse dosPath, "`;" {
               if A_LoopField == ''
@@ -122,16 +120,16 @@ ParseData(fileName) {
         return
     } else if (info.type = DataType.web || info.type = DataType.dl) {
       ; 为节约内存。若以 https 开头则默认去掉
-      if InStr(info.path, "https://")
-        info.path := SubStr(info.path, StrLen("https://") + 1)
+      if InStr(info.path, 'https://')
+        info.path := SubStr(info.path, StrLen('https://') + 1)
     }
     
     ; 热串关键字
     info.hs := Trim(split[7])
     if (info.type = DataType.text) {
       ; text 类型用完即走 不加入 array 中  
-      if StrLen(info.hs) > 0          
-          Hotstring(":C*:" . info.hs, info.path)
+      if StrLen(info.hs) > 0
+          Hotstring('::' . info.hs, info.path)
       return
     }
   
@@ -202,7 +200,7 @@ ParseData(fileName) {
 
   dataList := []
   ; 每次从字符串中检索字符串(片段)
-  Loop Parse, FileRead(fileName), "`n", "`r" {
+  Loop Parse, FileRead(fileName), '`n', '`r' {
       ; 跳过首行
       if A_Index = 1
           continue

@@ -56,9 +56,9 @@ ToggleWindowTopMost() {
   value := !(WinGetExStyle('A') & 0x8)
   WinSetAlwaysOnTop(value, 'A')
   if value
-    Tip('已置顶当前窗口')
+    Tip '已置顶当前窗口'
   else
-    Tip('取消置顶')
+    Tip '取消置顶'
 }
 
 ; 关闭显示器:
@@ -73,14 +73,14 @@ SystemSleepScreen() {
  */
 SystemLockScreen() {
   Sleep 300
-  DllCall("LockWorkStation")
+  DllCall 'LockWorkStation'
 }
 
 /**
  * 注销
  */
 SystemLogoff() {
-  Shutdown(0)
+  Shutdown 0
 }
 
 /**
@@ -89,12 +89,12 @@ SystemLogoff() {
 SystemShutdown() {
   ; 如果存在 SlideToShutDown.exe 则使用滑动关机，否则使用普通关机
   if (FileExist(A_WinDir "\System32\SlideToShutDown.exe")) {
-    Run("SlideToShutDown.exe")
-    sleep(1300)
-    CoordMode("Mouse")
-    MouseClick("Left", 100, 100)
+    Run 'SlideToShutDown.exe'
+    sleep 1300
+    CoordMode 'Mouse'
+    MouseClick('Left', 100, 100)
   } else {
-    Shutdown(1)
+    Shutdown 1
   }
 }
 
@@ -102,7 +102,7 @@ SystemShutdown() {
  * 重启
  */
 SystemReboot() {
-  Shutdown(2)
+  Shutdown 2
 }
 
 /**
@@ -120,18 +120,18 @@ CopySelectedAsPlainText() {
   A_Clipboard := ""
   Send("^c")
   if (!ClipWait(1)) {
-    Tip("复制失败")
+    Tip('复制失败')
     return
   }
   A_Clipboard := A_Clipboard
-  Tip("路径已复制")
+  Tip '路径已复制'
 }
 
 CopySelectedAsPlainTextQuiet() {
   A_Clipboard := ""
   Send "^c"
   if (!ClipWait(1)) {
-    Tip("复制失败")
+    Tip "复制失败"
     return
   }
   A_Clipboard := A_Clipboard
@@ -145,9 +145,9 @@ MaximizeWindow() {
     return
 
   if WindowMaxOrMin()
-    WinRestore("A")
+    WinRestore "A"
   else
-    WinMaximize("A")
+    WinMaximize "A"
 }
 
 /**
@@ -156,7 +156,7 @@ MaximizeWindow() {
 MinimizeWindow() {
   if NotActiveWin() || WinGetProcessName("A") = "Rainmeter.exe"
     return
-  WinMinimize("A")
+  WinMinimize 'A'
 }
 
 /**
@@ -221,7 +221,7 @@ CenterAndResizeWindow_X_Percent(percent) {
   ; 在 mousemove 时需要 PER_MONITOR_AWARE (-3), 否则当两个显示器有不同的缩放比例时, mousemove 会有诡异的漂移
   ; 在 winmove 时需要 UNAWARE (-1), 这样即使写死了窗口大小为 1200x800, 系统会帮你缩放到合适的大小
   ; 不适用于 win 7 以下系统
-  if VerCompare(A_OSVersion, "6.2") >= 0
+  if VerCompare(A_OSVersion, '6.2') >= 0
     DllCall("SetThreadDpiAwarenessContext", "ptr", -1, "ptr")
 
   WinExist("A")
@@ -252,7 +252,7 @@ CenterAndResizeWindow_X_Percent(percent) {
   finalY := t + (h - finalHeight) / 2
 
   WinMove(finalX, finalY, finalWidth, finalHeight)
-  if VerCompare(A_OSVersion, "6.2") >= 0
+  if VerCompare(A_OSVersion, '6.2') >= 0
     DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 }
 
@@ -263,7 +263,7 @@ SetWindowHeightToFullScreen() {
 
   ; 在 mousemove 时需要 PER_MONITOR_AWARE (-3), 否则当两个显示器有不同的缩放比例时, mousemove 会有诡异的漂移
   ; 在 winmove 时需要 UNAWARE (-1), 这样即使写死了窗口大小为 1200x800, 系统会帮你缩放到合适的大小
-  if VerCompare(A_OSVersion, "6.2") >= 0
+  if VerCompare(A_OSVersion, '6.2') >= 0
     DllCall("SetThreadDpiAwarenessContext", "ptr", -1, "ptr")
 
   WinExist("A")
@@ -281,7 +281,7 @@ SetWindowHeightToFullScreen() {
   MonitorGetWorkArea(ms,, &t,, &b)
   WinMove(originX, t, originW, b - t)
 
-  if VerCompare(A_OSVersion, "6.2") >= 0
+  if VerCompare(A_OSVersion, '6.2') >= 0
     DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 }
 
@@ -306,7 +306,7 @@ SetWindowWeightToFullScreen() {
   WinGetPos(&x, &y, &w, &h)
 
   ; 如果是 360 极速浏览器则特殊处理
-  processName := WinGetProcessName("A")
+  processName := WinGetProcessName('A')
   offset := 0
   if processName = '360ChromeX.exe'
     offset := 3
@@ -317,7 +317,7 @@ SetWindowWeightToFullScreen() {
   MonitorGetWorkArea(ms, &l,, &r)
   WinMove(l + offset, originY, r - (l + offset) - offset, originH)
 
-  if VerCompare(A_OSVersion, "6.2") >= 0
+  if VerCompare(A_OSVersion, '6.2') >= 0
     DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
 }
 
@@ -336,7 +336,7 @@ CenterAndResizeWindow_window_percent(step) {
   ; 在 mousemove 时需要 PER_MONITOR_AWARE (-3), 否则当两个显示器有不同的缩放比例时, mousemove 会有诡异的漂移
   ; 在 winmove 时需要 UNAWARE (-1), 这样即使写死了窗口大小为 1200x800, 系统会帮你缩放到合适的大小
   ; 不适用于 win 7 以下系统
-  if VerCompare(A_OSVersion, "6.2") >= 0
+  if VerCompare(A_OSVersion, '6.2') >= 0
     DllCall("SetThreadDpiAwarenessContext", "ptr", -1, "ptr")
 
   ; 获取指定窗口的位置和大小
@@ -404,7 +404,7 @@ CenterAndResizeWindow_window_percent(step) {
     ; }
 
     if (w <= myMinimumWidth and h <= myMinimumHeight) {
-      if VerCompare(A_OSVersion, "6.2") >= 0
+      if VerCompare(A_OSVersion, '6.2') >= 0
         DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
       return
     }
@@ -444,7 +444,7 @@ CenterAndResizeWindow_window_percent(step) {
     ; 若无再次缩小宽度的可能
     if (prevW == w) {
       if (prevH == h) {
-        if VerCompare(A_OSVersion, "6.2") >= 0
+        if VerCompare(A_OSVersion, '6.2') >= 0
           DllCall("SetThreadDpiAwarenessContext", 'ptr', -3, 'ptr')
         return
       } else {
@@ -464,7 +464,7 @@ CenterAndResizeWindow_window_percent(step) {
     tip 'x = ' x  ' y = ' y ' w = ' w  ' h = ' h '`n finalX = ' finalX  ' finalY = ' finalY ' finalWidth = ' finalWidth ' finalHeight = ' finalHeight '`n 屏幕宽度 = ' monitorWidth  ' 屏幕高度 = ' monitorHeight
   
   if VerCompare(A_OSVersion, "6.2") >= 0
-    DllCall("SetThreadDpiAwarenessContext", "ptr", -3, "ptr")
+    DllCall("SetThreadDpiAwarenessContext", 'ptr', -3, 'ptr')
 }
 
 ; 左移动 x 像素，上移动 y 像素
@@ -475,7 +475,7 @@ MoveRelative(relativeX, relativeY := 0) {
   WinExist("A")
   ; 不适用于最大化和最小化的状态下
   if (WindowMaxOrMin()) {
-    Tip("请在窗口模式下缩放")
+    Tip '请在窗口模式下缩放'
   } else {
     WinGetPos(&x, &y)
     WinMove(x + relativeX, y + relativeY)
@@ -490,10 +490,9 @@ RunAHK(scriptPath) {
 }
 
 SoundControl() {
-  wnd := WinExist("A")
-  if wnd {
-    ActivateOrRun(, "tools\SoundControl.exe", "PreviousWindow " wnd)
-  } else {
-    ActivateOrRun(, "tools\SoundControl.exe")
-  }
+  wnd := WinExist('A')
+  if wnd
+    ActivateOrRun(, 'tools\SoundControl.exe', "PreviousWindow " wnd)
+  else
+    ActivateOrRun(, 'tools\SoundControl.exe')
 }

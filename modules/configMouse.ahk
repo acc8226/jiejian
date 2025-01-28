@@ -2,29 +2,26 @@
 #HotIf MouseIsOnLeftEdge()
 MButton::{
   ; 静音/不静音主音量
-  Send "{Volume_Mute}"
+  Send '{Volume_Mute}'
   Tip '静音/恢复', -399
 }
 RButton::{
-  Send "{Media_Play_Pause}"
+  Send '{Media_Play_Pause}'
   Tip '暂停/恢复', -399
 }
 
 WheelUp::{
-  Send "{Volume_Up}"
-  ; win 8 以前
-  if (VerCompare(A_OSVersion, "6.2") < 0) {
-    sleep 69
-    Tip('音量 ' . Round(SoundGetVolume()), -399)
-  }
+  Send '{Volume_Up}'
+  ; win 8 以前，由于没有侧边音量指示器 
+  if (VerCompare(A_OSVersion, "6.2") < 0)
+    SetTimer(TipRoundSoundVolume, -80)
 }
 
 WheelDown::{
-  Send "{Volume_Down}"
-  if (VerCompare(A_OSVersion, "6.2") < 0) {
-    sleep 69
-    Tip('音量 ' . Round(SoundGetVolume()), -399)
-  }
+  Send '{Volume_Down}'
+  ; win 8 以前，由于没有侧边音量指示器 
+  if (VerCompare(A_OSVersion, "6.2") < 0)
+    SetTimer(TipRoundSoundVolume, -80)
 }
 
 ; 上一曲
@@ -64,18 +61,18 @@ MButton::Send "{Volume_Mute}"
 WheelUp::{
   Send "{Volume_Up}"
   ; win 11 22533 版本更新了音量指示器，底部居中显示且更加美观了
-  if (VerCompare(A_OSVersion, "10.0.22533") < 0) {
-    sleep 69
-    Tip('音量 ' . Round(SoundGetVolume()), -399)
-  }
+  if (VerCompare(A_OSVersion, "10.0.22533") < 0)
+    SetTimer(TipRoundSoundVolume, -80)
 }
 
 WheelDown::{
   Send "{Volume_Down}"
-  if (VerCompare(A_OSVersion, "10.0.22533") < 0) {
-    sleep 69
-    Tip('音量 ' . Round(SoundGetVolume()), -399)
-  }
+  if (VerCompare(A_OSVersion, "10.0.22533") < 0)
+    SetTimer(TipRoundSoundVolume, -80)
+}
+
+TipRoundSoundVolume() {
+  Tip('音量 ' . Round(SoundGetVolume()), -399)
 }
 
 ; 下一曲

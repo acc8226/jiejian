@@ -1,8 +1,4 @@
-﻿GLOBAL TEXT_GROUP := 'text_group'
-; 完善 TEXT_GROUP 组信息
-GroupAdd TEXT_GROUP, 'ahk_class ^AutoHotkeyGUI$'
-
-ParseAppCSV
+﻿ParseAppCSV()
 ParseAppCSV() {
   applist := parseApp('app.csv')
   ; 注册热键 和 热字符串
@@ -232,32 +228,17 @@ parseAppLine(line, eachLineLen) {
   }
 
   name := Trim(split[1])
-  if name !== '' && info.exe !== '' {
-    if 1 == InStr(name, "【浏览器】")
-      GroupAdd "browser_group", info.exe
-    else if (1 == InStr(name, "【editor】")
-        || 1 == InStr(name, "【ftp】")
-        || 1 == InStr(name, "【git】")
-        || 1 == InStr(name, "【IDE】")
-        || 1 == InStr(name, "【office】")
-        || 1 == InStr(name, "【sql】")
-        || 1 == InStr(name, "【窗口】")
-        || '微信' = name
-        || '腾讯 QQ' = name
-      ) {
-        ; 文本编辑
-        GroupAdd(TEXT_GROUP, info.exe)
-    }
-  }
+  if name !== '' and info.exe !== '' and 1 == InStr(name, '【浏览器】')
+    GroupAdd("browser_group", info.exe)
   return info
 }
 
 ; 高等级
 ; e. 关闭 打头
-#HotIf WinActive("ahk_group HL_close_esc")
+#HotIf WinActive('ahk_group HL_close_esc')
 F13::
-XButton1::Send "{Esc}"
-#HotIf WinActive("ahk_group HL_close_alt_F4")
+XButton1::Send '{Esc}'
+#HotIf WinActive('ahk_group HL_close_alt_F4')
 F13::
 XButton1::Send "!{F4}"
 ; 主要为窗口服务，若遇到 ctrl + f4 则必须捕获后处理，而非兜底处理
@@ -282,7 +263,7 @@ F14::Send '!a'
 F14::Send '!c'
 #HotIf WinActive("ahk_group new_alt_n")
 F14::Send "!n"
-#HotIf WinActive("ahk_group new_alt_o")
+#HotIf WinActive('ahk_group new_alt_o')
 F14::Send "!o"
 #HotIf WinActive("ahk_group new_ctrl_n")
 F14::Send "^n"
@@ -306,9 +287,9 @@ XButton1::WinClose
 #HotIf WinActive("ahk_group close_Esc")
 F13::
 XButton1::Send '{Esc}'
-#HotIf WinActive("ahk_group close_alt_F4")
+#HotIf WinActive('ahk_group close_alt_F4')
 F13::
-XButton1::Send "!{F4}"
+XButton1::Send '!{F4}'
 #HotIf WinActive("ahk_group close_closeBracket")
 F13::
 XButton1::Send "]"
@@ -331,15 +312,15 @@ XButton1::Send "^v"
 #HotIf WinActive("ahk_group close_ctrl_w")
 F13::
 XButton1::Send "^w"
-#HotIf WinActive("ahk_group close_ctrl_alt_q")
+#HotIf WinActive('ahk_group close_ctrl_alt_q')
 F13::
 XButton1::Send "^!q"
-#HotIf WinActive("ahk_group close_ctrl_shift_w")
+#HotIf WinActive('ahk_group close_ctrl_shift_w')
 F13::
-XButton1::Send("^+w")
+XButton1::Send '^+w'
 
 ; 如果填写的不是 ctrl + f4 则采取兜底处理：智能关闭
-#HotIf !WinActive("ahk_group close_ctrl_F4")
+#HotIf !WinActive('ahk_group close_ctrl_F4')
 F13::
 XButton1::SmartCloseWindow ; 比 WinClose "A" 好使
 ; 否则是 ctrl + f4，凡是遇到【#32770 窗口】则使用 esc 进行统一处理
@@ -353,7 +334,7 @@ F13::
 XButton1::Send "^{F4}"
 
 ; f. 前进键
-#HotIf WinActive("ahk_group forward_MediaNext")
+#HotIf WinActive('ahk_group forward_MediaNext')
 !Right::Send "{Media_Next}" ; 下一曲
 #HotIf WinActive("ahk_group forward_PgDn")
 !Right::Send "{PgDn}"
@@ -366,7 +347,7 @@ XButton1::Send "^{F4}"
 #HotIf WinActive("ahk_group forward_n")
 !Right::Send "n"
 
-#HotIf WinActive("ahk_group forward_z")
+#HotIf WinActive('ahk_group forward_z')
 !Right::Send "z"
 #HotIf WinActive("ahk_group forward_ctrl_Right")
 !Right::Send "^{Right}"
@@ -535,11 +516,11 @@ XButton2::Send '^+{Tab}'
 
 ; J 列 新建窗口
 #HotIf WinActive('ahk_group newWin_ctrl_n')
-F15::Send "^n"
+F15::Send '^n'
 #HotIf WinActive('ahk_group newWin_ctrl_alt_n')
-F15::Send "^!n"
+F15::Send '^!n'
 #HotIf WinActive('ahk_group newWin_ctrl_shift_n')
-F15::Send "^+n"
+F15::Send '^+n'
 
 ; K 列 F11 功能键增强 全屏
 ; 如果是浏览器 且 打开的是 bilibili 或 YouTube 则特殊处理，将 f11 转成按键 f
