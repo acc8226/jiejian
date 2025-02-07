@@ -45,7 +45,7 @@ if NOT (A_IsAdmin or RegExMatch(DllCall('GetCommandLine', 'str'), ' /restart(?!\
 }
 
 ; 定义版本信息并写入
-GLOBAL CODE_VERSION := '24.11-beta2'
+GLOBAL CODE_VERSION := '25.2-beta1'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
@@ -477,6 +477,10 @@ km.Map("singlePress", _ => Send("{blind};"))
 
 KeymapManager.GlobalKeymap.Enable()
 
+; regular start
+
+; regular end
+
 ; 是否启用手柄
 if NOT IniRead('setting.ini', "JoyControl", "enable", '0')
     return
@@ -553,28 +557,28 @@ SetTimer(WatchController, 30)
 ; WatchController quasi-thread beneath the wait-for-button-up thread, which would
 ; effectively prevent mouse-dragging with the controller.
 ClickButtonLeft(*) {
-    MouseClick "Left",,, 1, 0, "D"  ; Hold down the left mouse button.
+    MouseClick("Left",,, 1, 0, "D") ; Hold down the left mouse button.
     SetTimer(WaitForLeftButtonUp, 10)
     
     WaitForLeftButtonUp() {
         if GetKeyState(A_ThisHotkey)
-            return  ; The button is still, down, so keep waiting.
+            return ; The button is still, down, so keep waiting.
         ; Otherwise, the button has been released.
         SetTimer , 0
-        MouseClick("Left",,, 1, 0, "U")  ; Release the mouse button.
+        MouseClick("Left",,, 1, 0, "U") ; Release the mouse button.
     }
 }
 
 ClickButtonRight(*) {
-    MouseClick "Right",,, 1, 0, "D"  ; Hold down the right mouse button.
+    MouseClick("Right",,, 1, 0, "D") ; Hold down the right mouse button.
     SetTimer(WaitForRightButtonUp, 10)
     
     WaitForRightButtonUp() {
         if GetKeyState(A_ThisHotkey)
-            return  ; The button is still, down, so keep waiting.
+            return ; The button is still, down, so keep waiting.
         ; Otherwise, the button has been released.
         SetTimer , 0
-        MouseClick("Right",,, 1, 0, "U")  ; Release the mouse button.
+        MouseClick("Right",,, 1, 0, "U") ; Release the mouse button.
     }
 }
 
@@ -583,7 +587,7 @@ WatchController() {
     ; Don't do anything if the script is suspended.
     if A_IsSuspended
         return
-    MouseNeedsToBeMoved := false  ; Set default.
+    MouseNeedsToBeMoved := false ; Set default.
     JoyX := GetKeyState(ControllerNumber "JoyX")
     JoyY := GetKeyState(ControllerNumber "JoyY")
     
@@ -613,7 +617,7 @@ WatchController() {
     }
 
     if (MouseNeedsToBeMoved) {
-        SetMouseDelay -1  ; Makes movement smoother.
+        SetMouseDelay -1 ; Makes movement smoother.
         MouseMove DeltaX * ContMultiplier, DeltaY * ContMultiplier * YAxisMultiplier, 0, "R"
     }
 }
