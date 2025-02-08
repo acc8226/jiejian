@@ -42,7 +42,7 @@ RegMyHotKey() {
 ParseData(fileName) {
   ParseDataLine(line) {
     GLOBAL MY_BASH, MY_VSCode, MY_IDEA, MY_NEW_TERMINAL
-    GLOBAL MY_DOUBLE_ALT, MY_DOUBLE_HOME, MY_DOUBLE_END, MY_DOUBLE_ESC
+    GLOBAL MY_DOUBLE_HOME, MY_DOUBLE_END, MY_DOUBLE_ESC
   
     split := StrSplit(line, ',')
     ; 跳过不符合条件的行
@@ -135,10 +135,7 @@ ParseData(fileName) {
   
     ; 运行名称：可能是息屏、睡眠、关机
     info.title := Trim(split[4])
-    if (info.type = DataType.d_alt) {
-      MY_DOUBLE_ALT := info.title
-      return
-    }
+
     if (info.type = DataType.d_home) {
       MY_DOUBLE_HOME := info.title
       return

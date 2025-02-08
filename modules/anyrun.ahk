@@ -65,6 +65,8 @@ Anyrun() {
         return
     ; 检查窗口是否已经存在，如果窗口已经存在，如果窗口不存在，则创建新窗口
     if (WinExist(MY_GUI_TITLE)) {
+        if not A_IsCompiled
+            tip 'WinClose'
         WinClose ; 使用由上一句 WinExist 找到的窗口
     } else {
         ; S: 字体尺寸(单位为磅)
@@ -74,28 +76,24 @@ Anyrun() {
         ; -Resize 禁止用户重新调整窗口的大小
         GLOBAL MY_GUI := Gui('AlwaysOnTop Owner -Caption -Resize', MY_GUI_TITLE)
         ; 横向和纵向边框收窄
-        MY_GUI.MarginY := MY_GUI.MarginX := 2.8   
+        MY_GUI.MarginY := MY_GUI.MarginX := 2.8
         fontSize := 's21'
-        MY_GUI.SetFont(fontSize, 'Consolas') ; 设置兜底字体(21 磅) Consolas
         MY_GUI.SetFont(fontSize, 'Microsoft YaHei') ; 设置优先字体(21 磅) 微软雅黑
         guiWidth := 432
         myEdit := MY_GUI.AddEdit(Format("w{1}", guiWidth))
         ; R7：做到贴边 默认只显示 7 行
         ; Hidden：让控件初始为隐藏状态
         listBox := MY_GUI.AddListBox(Format("R7 w{1} XM+0 Y+0 BackgroundF0F0F0 Hidden", guiWidth))
-        fontSize := 's18'
-        listBox.SetFont(fontSize, 'Consolas') ; 设置兜底字体(21 磅) Consolas
-        listBox.SetFont(fontSize, 'Microsoft YaHei') ; 设置优先字体(21 磅) 微软雅黑
         button := MY_GUI.Add('Button', "default X0 Y0 Hidden", 'OK')
-
         myEdit.OnEvent('Change', onEditChange)
-
-        ; 若两个关键控件都失去焦点则关闭窗口
+        ; 当 edit 控件都失去焦点则关闭窗口
         myEdit.OnEvent('LoseFocus', onEditLoseFocus)
-        listbox.OnEvent('LoseFocus', onListboxLoseFocus)
 
+        ; 当 listbox 控件都失去焦点则关闭窗口
+        listbox.OnEvent('LoseFocus', onListboxLoseFocus)
         ; 双击列表条目 触发事件
         listbox.OnEvent('DoubleClick', onListBoxDoubleClick)
+
         ; 按回车触发 点击事件
         button.OnEvent('Click', onButtonClick)
 
@@ -114,6 +112,8 @@ Anyrun() {
 
         onEscape(*) {
             if (IsSet(MY_GUI)) {
+                if not A_IsCompiled
+                    tip 'esc 导致失去焦点'
                 MY_GUI.Destroy
                 MY_GUI := unset
             }
@@ -211,6 +211,8 @@ Anyrun() {
 
         onEditLoseFocus(*) {
             if (IsSet(MY_GUI) && NOT listBox.Focused) {
+                if not A_IsCompiled
+                    tip 'edit 失去焦点'
                 MY_GUI.Destroy
                 MY_GUI := unset
             }
@@ -218,6 +220,8 @@ Anyrun() {
 
         onListboxLoseFocus(*) {
             if (IsSet(MY_GUI) && NOT myEdit.Focused) {
+                if not A_IsCompiled
+                    tip 'list 失去焦点'
                 MY_GUI.Destroy
                 MY_GUI := unset                
             }
@@ -294,7 +298,10 @@ Anyrun() {
             else {
                 openPathByType item
             }
+
             if (IsSet(MY_GUI)) {
+                if not A_IsCompiled
+                    tip 'double click 导致失去焦点'
                 MY_GUI.Destroy
                 MY_GUI := unset
             }
@@ -344,7 +351,7 @@ OpenPathByType(item) {
         } else if InStr(item.path, '.exe') {
             ; 音量调节的特殊处理
             if 'tools\SoundControl.exe' = item.path
-                SoundControl
+                SoundControl()
             else
                 ActivateOrRun(, item.path)
         } else {
@@ -621,12 +628,12 @@ OpenInnerCommand(title, isConfirm := false) {
                 SystemShutdown
             }
         case '锁屏', '锁定', '锁屏/锁定' : SystemLockScreen
-        case '睡眠': SystemSleep
+        case '睡眠': SystemSleep()
         case '激活屏幕保护程序': SendMessage(0x0112, 0xF140, 0,, "Program Manager") ; 0x0112 为 WM_SYSCOMMAND, 而 0xF140 为 SC_SCREENSAVE
 
-        case '清空回收站': FileRecycleEmpty
-        case '息屏': SystemSleepScreen
-        case '注销': SystemLogoff
+        case '清空回收站': FileRecycleEmpty()
+        case '息屏': SystemSleepScreen()
+        case '注销': SystemLogoff()
         ; 媒体类
         case '静音': Send '{Volume_Mute}'
         case '上一曲': Send '{Media_Prev}'
