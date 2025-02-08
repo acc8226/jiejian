@@ -6,7 +6,7 @@
 ; script exits for any reason, all "rolled up" windows will be
 ; automatically restored to their original heights.
 
-global shadingWinMap := Map()
+global ShadingWinMap := Map()
 
 ShadingWindows() {
     ; Uncomment this next line if this subroutine is to be converted
@@ -15,19 +15,18 @@ ShadingWindows() {
     ; become active again:
     ;Sleep 200
     ActiveID := WinGetID("A")
-    Height := shadingWinMap.Get(ActiveID, false)
+    Height := ShadingWinMap.Get(ActiveID, false)
     if (Height) {
-        WinMove ,,, Height, ActiveID
-        shadingWinMap.Delete(ActiveID)
+        WinMove(,,, Height, ActiveID)
+        ShadingWinMap.Delete(ActiveID)
     } else {
-        WinGetPos ,,, &Height, "A"
-        WinMove ,,, 25, ActiveID    
-        shadingWinMap[ActiveID] := Height
+        WinGetPos(,,, &Height, "A")
+        WinMove(,,, 25, ActiveID)
+        ShadingWinMap[ActiveID] := Height
     }
 }
 
 RestoreWindows() {
-    for ID, Height in shadingWinMap {
-        WinMove ,,, Height, ID
-    }
+    for ID, Height in ShadingWinMap
+        WinMove(,,, Height, ID)
 }

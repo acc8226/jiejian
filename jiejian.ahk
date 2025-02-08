@@ -107,6 +107,7 @@ if not FileExist(A_WorkingDir . '\shortcuts\*') {
 #Include 'modules\CheckUpdate.ahk'
 #Include 'modules\MyTrayMenu.ahk'
 #Include 'modules\WindowShading.ahk'
+#Include 'modules\Crypt.ahk'
 
 initLanguage
 
@@ -220,7 +221,7 @@ F10::Volume_Up
 ; 意为 idcard
 #HotIf NOT A_IsCompiled
 ::.ii::{
-    SendText '431121199210010012'
+    SendText(XOR_Crypt(']_X][]XUP^X\Y]Y\X^'))
 }
 #HotIf
 
@@ -248,8 +249,7 @@ ExitFunc(exitReason, exitCode) {
 ; 触发热键时, 热键中按键原有的功能不会被屏蔽(对操作系统隐藏)
 F17::OpenSelectedText
 
-#HotIf IsSet(MY_DOUBLE_ALT) ; 双击模式我只推荐 双击 Alt，因为 shift 和 ctrl 太过常用
-~Alt::DoubleClick(ThisHotkey, MY_DOUBLE_ALT)
+; 双击模式我只推荐 双击 esc、home 和 end
 #HotIf IsSet(MY_DOUBLE_HOME)
 ~Home::
 ~NumpadHome::DoubleClick(ThisHotkey, MY_DOUBLE_HOME)
@@ -477,9 +477,9 @@ km.Map("singlePress", _ => Send("{blind};"))
 
 KeymapManager.GlobalKeymap.Enable()
 
-; regular start
+; --- regular start ---
 
-; regular end
+; --- regular end ---
 
 ; 是否启用手柄
 if NOT IniRead('setting.ini', "JoyControl", "enable", '0')

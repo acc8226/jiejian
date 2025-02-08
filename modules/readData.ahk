@@ -20,17 +20,17 @@ class DataType {
 }
 
 ; 注册热键 和 热字符串
-RegMyHotKey()
-RegMyHotKey() {
+RegHotKeyAndString()
+RegHotKeyAndString() {
   Loop DATA_LIST.Length {
     it := DATA_LIST[A_Index]
 
     ; 热键：目前仅作用于程序、文本 和 网址跳转。Hotkey 的规则是如果有多个变体符合触发条件, 那么仅触发最早创建的那个
-    if StrLen(it.hk) > 0 && StrLen(it.path) > 0
+    if StrLen(it.hk) > 0 AND StrLen(it.path) > 0
       Hotkey(it.hk, startByHotKey)
     
-    ; 热串：目前仅作用于网址跳转
-    if (DataType.web = it.type && StrLen(it.hs) > 0) {
+    ; 热串：web 类型 用作 网址跳转
+    if (DataType.web = it.type AND StrLen(it.hs) > 0) {
         ; 排除在 编辑器中 可跳转网址
         Hotstring('::' . it.hs, JumlURLByHotString)
         ; 要关闭上下文相关性(也就是说, 使后续创建的热键和 热字串在所有窗口中工作), 调用任意 HotIf 或其中一个 HotIfWin 函数, 但省略参数. 例如: HotIf 或 HotIfWinActive
@@ -128,8 +128,13 @@ ParseData(fileName) {
     info.hs := Trim(split[7])
     if (info.type = DataType.text) {
       ; text 类型用完即走 不加入 array 中  
-      if StrLen(info.hs) > 0
-          Hotstring('::' . info.hs, info.path)
+      if (StrLen(info.hs) > 0) {
+          if IS_Crypt_String(info.path) {
+            Hotstring('::' . info.hs, XOR_Crypt(SubStr(info.path, 2)))
+          } else {
+            Hotstring('::' . info.hs, info.path)
+          }
+      }
       return
     }
   

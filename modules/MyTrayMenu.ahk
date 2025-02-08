@@ -1,6 +1,4 @@
-﻿
-
-class MyTrayMenu {
+﻿class MyTrayMenu {
     
     __new() {
         ; 当前是否是选中状态
@@ -201,11 +199,11 @@ class MyTrayMenu {
         GLOBAL ENABLE_TIMER_REMINDER
 
         switch ItemName, 'off' {
-            case this.editScript: Edit
-            case this.listVars: ListVars
-            case this.pause: this.ToggleSuspend
-            case this.restart: Reload
-            case this.search: Anyrun
+            case this.editScript: Edit()
+            case this.listVars: ListVars()
+            case this.pause: this.ToggleSuspend()
+            case this.restart: Reload()
+            case this.search: Anyrun()
 
             case this.viewWinId: Run("extra/WindowSpyU32.exe")
             case this.statistics:
@@ -277,8 +275,8 @@ class MyTrayMenu {
                 ENABLE_TIMER_REMINDER := !ENABLE_TIMER_REMINDER
 
             case this.update: CheckUpdate true
-            case this.about: this.AboutFunc
-            case this.exit: ExitApp
+            case this.about: this.AboutFunc()
+            case this.exit: ExitApp()
         }
     }
 
@@ -304,8 +302,8 @@ class MyTrayMenu {
         A_IsSuspended ? A_TrayMenu.Check(this.pause) : A_TrayMenu.UnCheck(this.pause)
     }
 
-    AboutFunc(){
-        MsgBox(      
+    AboutFunc() {
+        MsgBox(
             '版本: ' . CODE_VERSION
             . "`nAHK 主程序版本: " . A_AhkVersion
             . "`n系统默认语言: " . this.LocalLang(A_Language)
@@ -406,11 +404,10 @@ initLanguage() {
     }
 }
 
-; 一个记录秒数的示例类...
+; 一个记录秒数的示例类
 class RelaxCounter {
     __New() {
-        ; 半小时提醒
-        ; this.interval := 13000
+        ; 每小时提醒 1 次
         this.interval := 3600000
         ; Tick() 有一个隐式参数 "this", 其引用一个对象。所以, 我们需要创建一个封装了 "this " 和调用方法的函数
         this.timer := ObjBindMethod(this, "Tick")
