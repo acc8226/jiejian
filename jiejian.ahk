@@ -45,7 +45,7 @@ if NOT (A_IsAdmin or RegExMatch(DllCall('GetCommandLine', 'str'), ' /restart(?!\
 }
 
 ; 定义版本信息并写入
-GLOBAL CODE_VERSION := '25.2-beta1'
+GLOBAL CODE_VERSION := '25.2-beta2'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
@@ -165,23 +165,24 @@ CheckUpdate
 }
 ^!s::JJ_TRAY_MENU.MySuspend ; Ctrl + Alt + S 暂停脚本
 ^!v::Send A_Clipboard ; Ctrl + Alt + V 将剪贴板的内容输入到当前活动应用程序中，防止了一些网站禁止在 HTML 密码框中进行粘贴操作
-^+"::Send '""{Left}' ; Ctrl + Shift + " 快捷操作-插入双引号
-
-; 将来可改为条件映射或者不改了
+^+"::Send('""{Left}') ; Ctrl + Shift + " 快捷操作-插入双引号
 
 RAlt::LControl ; 右 alt 不常用，映射为左 ctrl
 
 ; 启动 Anyrun 组件
-#HotIf NOT IniRead('setting.ini', "Common", "AnyRunUseCtrl", '0')
+#HotIf IniRead('setting.ini', "Common", "AnyRunUse", '0') = 'alt'
 !Space::Anyrun 
-#HotIf IniRead('setting.ini', "Common", "AnyRunUseCtrl", '0')
+#HotIf IniRead('setting.ini', "Common", "AnyRunUse", '0') = 'ctrl'
 ^Space::Anyrun
 
-#HotIf IniRead('setting.ini', "Common", "AppsKey2ShowDesktop", '0')
-; 称为老板键 或者下一曲，或者老板键，打开计算器都能
+#HotIf IniRead('setting.ini', "Common", "AppsKey2", '0') = 'ShowDesktop'
+; 可以当作老板键 或者下一曲
 AppsKey::Send '#d' 
+#HotIf IniRead('setting.ini', "Common", "AppsKey2", '0') = 'MediaNext'
+; 可以当作老板键 或者下一曲
+AppsKey::Send '{Media_Next}'
 
-#HotIf IniRead('setting.ini', "Common", "PrintScreen2VolumeDown", '0')
+#HotIf IniRead('setting.ini', "Common", "PrintScrlkPause2Media", '0')
 PrintScreen::Volume_Down
 ScrollLock::Media_Play_Pause
 Pause::Volume_Up
@@ -194,7 +195,7 @@ NumpadClear::Media_Play_Pause
 NumpadRight::Volume_Up
 NumpadUp::Media_Prev
 
-#HotIf IniRead('setting.ini', "Common", "Fn2Media", '0')
+#HotIf IniRead('setting.ini', "Common", "F6toF102Media", '0')
 F6::Media_Prev
 F7::Media_Next
 F8::Volume_Down
@@ -292,7 +293,7 @@ DoubleClick(hk, command) {
             MsgBox(hk . ' 对应指令找不到！', APP_NAME)
         else
             OpenPathByType item
-    }    
+    }
 }
 
 ; 监控 ctrl + c 按键放下
@@ -358,7 +359,7 @@ i::Click 'Up Right'
 
 o::MouseMove 0, -3,, 'R' ; 上移
 l::MouseMove -3, 0,, 'R' ; 左移
-VKba::MouseMove 3, 0,, 'R' ; 右移 caps + ; vk=BA sc=027   
+VKba::MouseMove 3, 0,, 'R' ; 右移 caps + ; vk=BA sc=027
 VKbe::MouseMove 0, 3,, 'R' ; 下移 caps + . vk=BE sc=034
 
 ; 复制路径
