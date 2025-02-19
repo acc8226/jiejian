@@ -26,33 +26,13 @@ vscode 插件安装 https://marketplace.visualstudio.com/items?itemName=thqby.vs
 CoordMode 'Mouse' ; 第二个参数如果省略, 默认为 Screen
 FileEncoding 54936 ; Windows XP 及更高版本：GB18030 简体中文 (4 字节)
 SetTitleMatchMode 'RegEx' ; 设置 WinTitle parameter 在内置函数中的匹配行为
+
 ; This is the setting that runs smoothest on my
 ; system. Depending on your video card and cpu
 ; power, you may want to raise or lower this value.
-SetWinDelay 30
-SetMouseDelay -1  ; Makes movement smoother.
-
-; 如果 非管理器启动 且 不含 /restart 参数（表示首次启动）则以管理员方式启动
-if NOT (A_IsAdmin or RegExMatch(DllCall('GetCommandLine', 'str'), ' /restart(?!\S)')) {
-    try {
-        if A_IsCompiled
-            Run '*RunAs "' A_ScriptFullPath '" /restart'
-        else
-            Run '*RunAs "' A_AhkPath '" /restart "' A_ScriptFullPath '"' ; 双击 .ahk 会进入此，形如 *runs as "autohotkey64.exe" /restart "zhangsan.ahk"
-        ExitApp
-    } catch Error as e
-        Tip("`n    捷键正在以普通权限运行。`n    捷键无法在具有管理员权限的窗口中工作（例如，Taskmgr.exe）。    `n ")
-}
-
-; 定义版本信息并写入
-GLOBAL CODE_VERSION := '25.2-beta2'
-;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
-; FileVersion 将写入 exe
-;@Ahk2Exe-Set FileVersion, %U_version%
-; 往对应文件写入对应版本号，只在生成 32 位 exe 的时候执行
-;@Ahk2Exe-Obey U_V, = %A_PtrSize% == 4 ? 'PostExec' : 'Nop'
-; 提取出 文件名 再拼接 PostExec.exe; 版本号; When: 2 仅在指定 UPX 压缩时运行 ; WorkingDir: 脚本所在路径
-;@Ahk2Exe-%U_V% %A_ScriptName~\.[^\.]+$~PostExec.exe% %U_version%, 2, %A_ScriptDir%
+SetWinDelay 50 ; 如果没有使用 SetWinDelay, 默认延时为 100.
+; 如果没有使用 SetMouseDelay, 则对于传统的 SendEvent 模式默认延时为 10
+SetMouseDelay 10
 
 SetDefaults
 SetDefaults() {
@@ -65,7 +45,7 @@ SetDefaults() {
     REG_DARK_MODE := 'darkMode'
 
     CURRENT_LANG := RegRead(REG_KEY_NAME, REG_LANG, '')
-    if (CURRENT_LANG = '') {
+    if (CURRENT_LANG == '') {
         ; https://www.autohotkey.com/docs/v2/misc/Languages.htm
         switch A_Language {
             case '7804', '0004', '0804', '1004' : CURRENT_LANG := 'zh-Hans'
@@ -74,14 +54,36 @@ SetDefaults() {
         } 
     }
     
-    START_TIME := A_NowUTC
     APP_NAME := '捷键' ; 用于 msgbox 标题展示
+    START_TIME := A_NowUTC
     CTRL_TIMESTAMP := A_NowUTC ; 记录 ctrl + c/x 最新时间戳
     
     ; CapsLock 模式：对任务管理器 和 系统高级设置没用
     ; 短按依旧有用 确保了 CapsLock 灯不会闪
     IS_CAPS_PRESSED := false
 }
+
+; 如果 非管理器启动 且 不含 /restart 参数（表示首次启动）则以管理员方式启动
+if NOT (A_IsAdmin or RegExMatch(DllCall('GetCommandLine', 'str'), ' /restart(?!\S)')) {
+    try {
+        if A_IsCompiled
+            Run '*RunAs "' A_ScriptFullPath '" /restart'
+        else
+            Run '*RunAs "' A_AhkPath '" /restart "' A_ScriptFullPath '"' ; 双击 .ahk 会进入此，形如 *runs as "autohotkey64.exe" /restart "jiejian.ahk"
+        ExitApp
+    } catch Error as e
+        Tip("`n   捷键正在以普通权限运行。`n   捷键无法在具有管理员权限的窗口中工作（例如，Taskmgr.exe）。   `n ", -2600)
+}
+
+; 定义版本信息并写入
+GLOBAL CODE_VERSION := '25.2-beta2'
+;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
+; FileVersion 将写入 exe
+;@Ahk2Exe-Set FileVersion, %U_version%
+; 往对应文件写入对应版本号，只在生成 32 位 exe 的时候执行
+;@Ahk2Exe-Obey U_V, = %A_PtrSize% == 4 ? 'PostExec' : 'Nop'
+; 提取出 文件名 再拼接 PostExec.exe; 版本号; When: 2 仅在指定 UPX 压缩时运行 ; WorkingDir: 脚本所在路径
+;@Ahk2Exe-%U_V% %A_ScriptName~\.[^\.]+$~PostExec.exe% %U_version%, 2, %A_ScriptDir%
 
 ; 生成快捷方式：每次运行检测如果 shortcuts 里的文件为空则重新生成一次快捷方式，要想重新生成可以双击 GenerateShortcuts.ahk 脚本或者清空或删除该文件夹
 if not FileExist(A_WorkingDir . '\shortcuts\*') {
