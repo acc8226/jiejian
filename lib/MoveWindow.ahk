@@ -5,7 +5,7 @@ MoveWindow() {
         SetTimer EWD_WatchMouse, 30 ; Track the mouse as the user drags it.
 
     EWD_WatchMouse() {
-        if !GetKeyState("LButton", "P")  ; Button has been released, so drag is complete.
+        if !GetKeyState("LButton", "P") ; Button has been released, so drag is complete.
         {
             SetTimer , 0
             return
@@ -13,24 +13,25 @@ MoveWindow() {
         ; Otherwise, reposition the window to match the change in mouse coordinates
         ; caused by the user having dragged the mouse:
         CoordMode "Mouse"
-        MouseGetPos &EWD_MouseX, &EWD_MouseY
-        WinGetPos &EWD_WinX, &EWD_WinY,,, EWD_MouseWin
+        MouseGetPos(&EWD_MouseX, &EWD_MouseY)
+        WinGetPos(&EWD_WinX, &EWD_WinY,,, EWD_MouseWin)
 
-        SetWinDelay 30   ; Makes the below move faster/smoother.
+        SetWinDelay 39 ; Makes the below move faster/smoother.
         WinMove EWD_WinX + EWD_MouseX - EWD_MouseStartX, EWD_WinY + EWD_MouseY - EWD_MouseStartY,,, EWD_MouseWin
-        EWD_MouseStartX := EWD_MouseX  ; Update for the next timer-call to this subroutine.
+        EWD_MouseStartX := EWD_MouseX ; Update for the next timer-call to this subroutine.
         EWD_MouseStartY := EWD_MouseY
     }
 }
 
+; 目前在用
 MoveWindow2() {
     ; Get the initial mouse position and window id, and
     ; abort if the window is maximized.
-    MouseGetPos &KDE_X1, &KDE_Y1, &KDE_id
+    MouseGetPos(&KDE_X1, &KDE_Y1, &KDE_id)
     if WinGetMinMax(KDE_id)
         return
     ; Get the initial window position.
-    WinGetPos &KDE_WinX1, &KDE_WinY1,,, KDE_id
+    WinGetPos(&KDE_WinX1, &KDE_WinY1,,, KDE_id)
     Loop {
         if !GetKeyState("LButton", "P") ; Break if button has been released.
             break
@@ -50,7 +51,7 @@ resizeWindow() {
     if WinGetMinMax(KDE_id)
         return
     ; Get the initial window position and size.
-    WinGetPos &KDE_WinX1, &KDE_WinY1, &KDE_WinW, &KDE_WinH, KDE_id
+    WinGetPos(&KDE_WinX1, &KDE_WinY1, &KDE_WinW, &KDE_WinH, KDE_id)
 
     ; Define the window region the mouse is currently in.
     ; The four regions are Up and Left, Up and Right, Down and Left, Down and Right.

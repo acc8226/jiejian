@@ -266,19 +266,19 @@ F14::Send "!n"
 #HotIf WinActive('ahk_group new_alt_o')
 F14::Send "!o"
 #HotIf WinActive("ahk_group new_ctrl_n")
-F14::Send "^n"
+F14::Send '^n'
 #HotIf WinActive("ahk_group new_ctrl_o")
-F14::Send "^o"
+F14::Send '^o'
 
 #HotIf WinActive("ahk_group new_ctrl_alt_t")
-F14::Send "^!t"
+F14::Send '^!t'
 #HotIf WinActive("ahk_group new_ctrl_shift_t")
-F14::Send "^+t"
+F14::Send '^+t'
 #HotIf WinActive("ahk_group new_ctrl_shift_n")
-F14::Send "^+n"
+F14::Send '^+n'
 ; 新建标签还是默认 ctrl + t
 #HotIf
-F14::Send "^t"
+F14::Send '^t'
 
 ; e. 关闭 打头 和 鼠标后退键 用
 #HotIf WinActive("ahk_group close_WinClose")
@@ -292,29 +292,29 @@ F13::
 XButton1::Send '!{F4}'
 #HotIf WinActive("ahk_group close_closeBracket")
 F13::
-XButton1::Send "]"
+XButton1::Send ']'
 #HotIf WinActive("ahk_group close_alt_L")
 F13::
-XButton1::Send "!l"
+XButton1::Send '!l'
 
 #HotIf WinActive("ahk_group close_alt_q")
 F13::
 XButton1::Send '!q'
 #HotIf WinActive("ahk_group close_alt_w")
 F13::
-XButton1::Send "!w"
+XButton1::Send '!w'
 #HotIf WinActive("ahk_group close_ctrl_c")
 F13::
-XButton1::Send "^c"
+XButton1::Send '^c'
 #HotIf WinActive("ahk_group close_ctrl_v")
 F13::
-XButton1::Send "^v"
+XButton1::Send '^v'
 #HotIf WinActive("ahk_group close_ctrl_w")
 F13::
-XButton1::Send "^w"
+XButton1::Send '^w'
 #HotIf WinActive('ahk_group close_ctrl_alt_q')
 F13::
-XButton1::Send "^!q"
+XButton1::Send '^!q'
 #HotIf WinActive('ahk_group close_ctrl_shift_w')
 F13::
 XButton1::Send '^+w'
@@ -322,16 +322,16 @@ XButton1::Send '^+w'
 ; 如果填写的不是 ctrl + f4 则采取兜底处理：智能关闭
 #HotIf !WinActive('ahk_group close_ctrl_F4')
 F13::
-XButton1::SmartCloseWindow ; 比 WinClose "A" 好使
-; 否则是 ctrl + f4，凡是遇到【#32770 窗口】则使用 esc 进行统一处理
-#HotIf WinActive("ahk_class #32770")
+XButton1::SmartCloseWindow() ; 比 WinClose "A" 好使
+; 否则走到此步必定是 ctrl + f4。则凡是遇到【#32770 窗口】则统一使用 esc 关闭窗口
+#HotIf WinActive('ahk_class #32770')
 F13::
 XButton1::Send '{Esc}'
 ; 最终则是 ctrl + f4 且非窗口则 ctrl + f4
 ; XButton1 兜底
 #HotIf
 F13::
-XButton1::Send "^{F4}"
+XButton1::Send '^{F4}'
 
 ; f. 前进键
 #HotIf WinActive('ahk_group forward_MediaNext')

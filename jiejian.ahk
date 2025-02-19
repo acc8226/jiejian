@@ -10,7 +10,7 @@ Copyright 2023-2024 acc8226
 快速参考 | AutoHotkey v2 https://wyagd001.github.io/v2/docs/
 vscode 插件安装 https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp
 */
-#Requires AutoHotkey >=v2.0
+#Requires AutoHotkey >=v2.0.19
 
 ; --------------------- COMPILER DIRECTIVES --------------------------
 
@@ -30,7 +30,7 @@ SetTitleMatchMode 'RegEx' ; 设置 WinTitle parameter 在内置函数中的匹�
 ; This is the setting that runs smoothest on my
 ; system. Depending on your video card and cpu
 ; power, you may want to raise or lower this value.
-SetWinDelay 50 ; 如果没有使用 SetWinDelay, 默认延时为 100.
+SetWinDelay 39 ; 如果没有使用 SetWinDelay, 默认延时为 100.
 ; 如果没有使用 SetMouseDelay, 则对于传统的 SendEvent 模式默认延时为 10
 SetMouseDelay 10
 
