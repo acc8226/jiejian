@@ -60,7 +60,7 @@ WheelDown::{
 MButton::Send "{Volume_Mute}"
 WheelUp::{
   Send '{Volume_Up}'
-  ; win 11 22533 版本更新了音量指示器，底部居中显示且更加美观了
+  ; win 11 22533 版本更新了音量指示器，底部居中显示更加美观了
   if (VerCompare(A_OSVersion, "10.0.22533") < 0)
     SetTimer(TipRoundSoundVolume, -80)
 }

@@ -383,6 +383,9 @@ initLanguage() {
         FileInstall 'lang\zh-Hans.ini', 'lang\zh-Hans.ini', true
         FileInstall 'lang\zh-Hant.ini', 'lang\zh-Hant.ini', true
 
+        ; 配置文件
+        FileInstall 'setting.ini', 'setting.ini', true
+
         ; 鼠标控制 只是加载，目前不在 anyrun 组件中体现
         FileInstall 'tools\MouseSC_x64.exe', 'tools\MouseSC_x64.exe', true
         FileInstall 'tools\MouseSC_Query.bat', 'tools\MouseSC_Query.bat', true
@@ -391,16 +394,23 @@ initLanguage() {
         FileInstall 'tools\ReIconCache_x64.exe', 'tools\ReIconCache_x64.exe', true
         ; Rexplorer_x64 用于重启文件资源管理器
         FileInstall 'tools\Rexplorer_x64.exe', 'tools\Rexplorer_x64.exe', true
+
+        ; https://www.sordum.org/16219
+        FileInstall 'tools\SkipUAC.ini', 'tools\SkipUAC.ini', true
+        FileInstall 'tools\SkipUAC_x64.exe', 'tools\SkipUAC_x64.exe', true
+
         ; 声音控制
         FileInstall 'tools\SoundControl.exe', 'tools\SoundControl.exe', true
+
         ; Windows 11 Classic Context Menu
-        FileInstall 'tools\W11ClassicMenu.exe', 'tools\W11ClassicMenu.exe', true
-        FileInstall 'tools\W11ClassicMenu.ini', 'tools\W11ClassicMenu.ini', true
+        if (VerCompare(A_OSVersion, "10.0.20000") > 0) {
+          FileInstall 'tools\W11ClassicMenu.exe', 'tools\W11ClassicMenu.exe', true
+          FileInstall 'tools\W11ClassicMenu.ini', 'tools\W11ClassicMenu.ini', true
+        }
+
         ; 禁用 windows update https://www.sordum.org/9470/windows-update-blocker-v1-8/
         FileInstall 'tools\Wub.ini', 'tools\Wub.ini', true
         FileInstall 'tools\Wub_x64.exe', 'tools\Wub_x64.exe', true
-
-        FileInstall 'setting.ini', 'setting.ini', true
     }
 }
 
