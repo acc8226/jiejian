@@ -65,8 +65,7 @@ Anyrun() {
         return
     ; 检查窗口是否已经存在，如果窗口已经存在，如果窗口不存在，则创建新窗口
     if (WinExist(MY_GUI_TITLE)) {
-        if not A_IsCompiled
-            tip 'WinClose'
+
         WinClose ; 使用由上一句 WinExist 找到的窗口
     } else {
         ; S: 字体尺寸(单位为磅)
@@ -80,14 +79,14 @@ Anyrun() {
         fontSize := 's21'
         MY_GUI.SetFont(fontSize, 'Microsoft YaHei') ; 设置优先字体(21 磅) 微软雅黑
         guiWidth := 432
-        myEdit := MY_GUI.AddEdit(Format("w{1}", guiWidth))
+        edit := MY_GUI.AddEdit(Format("w{1}", guiWidth))
         ; R7：做到贴边 默认只显示 7 行
         ; Hidden：让控件初始为隐藏状态
         listBox := MY_GUI.AddListBox(Format("R7 w{1} XM+0 Y+0 BackgroundF0F0F0 Hidden", guiWidth))
         button := MY_GUI.Add('Button', "default X0 Y0 Hidden", 'OK')
-        myEdit.OnEvent('Change', onEditChange)
+        edit.OnEvent('Change', onEditChange)
         ; 当 edit 控件都失去焦点则关闭窗口
-        myEdit.OnEvent('LoseFocus', onEditLoseFocus)
+        edit.OnEvent('LoseFocus', onEditLoseFocus)
 
         ; 当 listbox 控件都失去焦点则关闭窗口
         listbox.OnEvent('LoseFocus', onListboxLoseFocus)
@@ -112,8 +111,7 @@ Anyrun() {
 
         onEscape(*) {
             if (IsSet(MY_GUI)) {
-                if not A_IsCompiled
-                    tip 'esc 导致失去焦点'
+
                 MY_GUI.Destroy
                 MY_GUI := unset
             }
@@ -131,12 +129,15 @@ Anyrun() {
             }
             dataArray := unset
             ; 精确匹配失败 将 转到模糊匹配
-            ; 若为空则清空列表 或 大于设定长度 或 满足正则，其中首字符 \- 是 - 的转义
-            if (StrLen(editValue) <= SUPPORT_LEN && editValue ~= '^[\-\s\d\.a-zA-Z一-龥]+$') {
+            ; 若为空则清空列表 或 大于设定长度 或 满足正则。然而, 集合 \.*?+[{|()^$ 中的任何字符则必须在其前面加上反斜杠才能被视为原义
+            if (StrLen(editValue) <= SUPPORT_LEN && editValue ~= '^[-\+\s\d\.a-zA-Z一-龥]+$') {
                 needleRegEx := 'i)'
                 Loop Parse, editValue {
+                    ; 如果 edit 中键入了一个空格 则 只认为是一个空格
                     if A_LoopField == ' '
                         needleRegEx .= '( )'
+                    else if A_LoopField == '+'
+                        needleRegEx .= '(\+).*'
                     else
                         needleRegEx .= '(' . A_LoopField . ').*'
                 }
@@ -210,18 +211,15 @@ Anyrun() {
         }
 
         onEditLoseFocus(*) {
-            if (IsSet(MY_GUI) && NOT listBox.Focused) {
-                if not A_IsCompiled
-                    tip 'edit 失去焦点'
+            if (IsSet(MY_GUI) && NOT listBox.Focused && NOT edit.Focused) {
                 MY_GUI.Destroy
                 MY_GUI := unset
             }
         }
 
         onListboxLoseFocus(*) {
-            if (IsSet(MY_GUI) && NOT myEdit.Focused) {
-                if not A_IsCompiled
-                    tip 'list 失去焦点'
+            if (IsSet(MY_GUI) && NOT edit.Focused) {
+
                 MY_GUI.Destroy
                 MY_GUI := unset                
             }
@@ -249,7 +247,7 @@ Anyrun() {
                     item := findItemByTypeAndTitle(type, title)
                 }
             }
-            editValue := myEdit.Value
+            editValue := edit.Value
 
             ; 不能精确匹配，则尝试（打开网址 打开文件 前往文件夹 等），否则无事发生
             if (!IsSet(item) || item == '') {
@@ -300,8 +298,7 @@ Anyrun() {
             }
 
             if (IsSet(MY_GUI)) {
-                if not A_IsCompiled
-                    tip 'double click 导致失去焦点'
+
                 MY_GUI.Destroy
                 MY_GUI := unset
             }
@@ -311,7 +308,7 @@ Anyrun() {
             ; 如果 listbox 有焦点
             if listBox.Focused
                 onListBoxDoubleClick listBox
-            else if Trim(myEdit.Value) == '' ; 如果焦点在 编辑框 且按下回车则会触发弹窗提示
+            else if Trim(edit.Value) == '' ; 如果焦点在 编辑框 且按下回车则会触发弹窗提示
                 MsgBox '输入内容不能为空'
             else ; 否则表示焦点在 edit，如果列表有匹配项 则获取编辑框文本内容
                 onListBoxDoubleClick listBox
@@ -371,7 +368,11 @@ OpenPathByType(item) {
         Run(A_ComSpec " /C " . item.path . " server", dir)
     } else {
         ; 启动逻辑为每次都新建应用，而非通过 ActivateOrRun('', item.path) 打开已有应用
-        Run(item.path)
+        try Run(item.path)
+        catch as e ; 处理由上面区块抛出的首个错误
+        {
+            MsgBox "运行错误!`n" . e.Extra
+        }
     }
 }
 
@@ -654,7 +655,7 @@ OpenInnerCommand(title, isConfirm := false) {
 
         case '取消关机任务': Run('shutdown /a',, 'Hide')
         ; 其他
-        case '关闭程序': SmartCloseWindow
+        case '关闭程序': SmartCloseWindow()
         default: 
             if FoundPos := InStr(title, "秒后关机") {
                 second := SubStr(title, 1, FoundPos  - 1)
