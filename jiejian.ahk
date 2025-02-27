@@ -22,7 +22,7 @@ vscode 插件安装 https://marketplace.visualstudio.com/items?itemName=thqby.vs
 ; --------------------- GLOBAL --------------------------
 
 #SingleInstance force ; 跳过对话框并自动替换旧实例
-#Hotstring C * ; 热字符串开启 区分大小写 和 不用终止符
+#Hotstring * C ; 热字符串开启 区分大小写 和 禁用终止符。当前自动终止符有 bug 我才禁用的
 CoordMode 'Mouse' ; 第二个参数如果省略, 默认为 Screen
 FileEncoding 54936 ; Windows XP 及更高版本：GB18030 简体中文 (4 字节)
 SetTitleMatchMode 'RegEx' ; 设置 WinTitle parameter 在内置函数中的匹配行为
@@ -76,7 +76,7 @@ if NOT (A_IsAdmin or RegExMatch(DllCall('GetCommandLine', 'str'), ' /restart(?!\
 }
 
 ; 定义版本信息并写入
-GLOBAL CODE_VERSION := '25.2-beta2'
+GLOBAL CODE_VERSION := '25.2-beta3'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
@@ -210,20 +210,16 @@ F10::Volume_Up
 ; ----- 热串 之 缩写扩展：将短缩词自动扩展为长词或长句（英文单词中哪个字母开头的单词数最少，我称之为 X 模式）-----
 
 ; 意为 'now'
-::.nn::{
+::nnz::{
     SendText(FormatTime(, 'yyyy-MM-dd HH:mm:ss'))
 }
-; 意为 'day'
-::.dd::{
-    SendText(FormatTime(, "'date:' yyyy-MM-dd HH:mm:ss"))
-}
 ; 意为 '分割线的首字母 f'
-::.ff::{
+::ffz::{
     SendText '——————— ฅ՞• •՞ฅ ———————'
 }
 ; 意为 idcard
 #HotIf NOT A_IsCompiled
-::.ii::{
+::iiz::{
     SendText(XOR_Crypt(']_X][]XUP^X\Y]Y\X^'))
 }
 #HotIf
