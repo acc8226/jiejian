@@ -219,9 +219,8 @@ Anyrun() {
 
         onListboxLoseFocus(*) {
             if (IsSet(MY_GUI) && NOT edit.Focused) {
-
                 MY_GUI.Destroy
-                MY_GUI := unset                
+                MY_GUI := unset
             }
         }
 
