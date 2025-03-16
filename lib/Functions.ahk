@@ -52,7 +52,7 @@ ReplaceSelectedText(&target, &args) {
 
 /**
  * 获取选中的文字
- * @returns {void|string} 
+ * @returns {void|string}
  */
 GetSelectedText() {
   temp := A_Clipboard
@@ -75,19 +75,22 @@ GetSelectedText() {
  * 来源: https://www.autohotkey.com/boards/viewtopic.php?t=112741
  * @param Uri 需要编码的文本
  * @param {string} encoding 编码格式
- * @returns {string} 
+ * @returns {string}
  */
 URIEncode(Uri, encoding := "UTF-8") {
+  if uri == ''
+    return ''
   var := Buffer(StrPut(Uri, encoding), 0)
   StrPut(Uri, var, encoding)
   pos := 1
   ; 按字节遍历 buffer 中的 utf-8 字符串, 注意字符串有 null-terminator
   While pos < var.Size {
     code := NumGet(var, pos - 1, "UChar")
-    if (code >= 0x30 && code <= 0x39) || (code >= 0x41 && code <= 0x5A) || (code >= 0x61 && code <= 0x7A)
+    if (code >= 0x30 && code <= 0x39) || (code >= 0x41 && code <= 0x5A) || (code >= 0x61 && code <= 0x7A) {
       res .= Chr(code)
-    else
+    } else {
       res .= "%" . Format("{:02X}", code)
+    }
     pos++
   }
   return res
@@ -97,7 +100,7 @@ URIEncode(Uri, encoding := "UTF-8") {
  * 激活窗口
  * @param winTitle AHK中的WinTitle
  * @param {number} isHide 窗口是否为隐藏窗口
- * @returns {number} 
+ * @returns {number}
  */
 ActivateWindow(winTitle := "", isHide := false) {
   ; 如果匹配不到窗口且认为窗口为隐藏窗口时查找隐藏窗口
@@ -136,7 +139,7 @@ ActivateWindow(winTitle := "", isHide := false) {
  * 返回与指定条件匹配的所有窗口
  * @param winTitle AHK中的WinTitle
  * @param predicate 过滤窗口方法，传过Hwnd，返回bool
- * @returns {array} 
+ * @returns {array}
  */
 FindWindows(winTitle, predicate?) {
   temps := WinGetList(winTitle)
@@ -186,7 +189,7 @@ FindHiddenWindows(winTitle) {
  * 轮换程序窗口
  * @param winTitle AHK中的WinTitle
  * @param hwnds 活动窗口的句柄数组
- * @returns {void|number} 
+ * @returns {void|number}
  */
 LoopRelatedWindows(winTitle?, hwnds?) {
   ; 如果没有传句柄数组则获取当前窗口的
@@ -237,7 +240,7 @@ LoopRelatedWindows(winTitle?, hwnds?) {
  * @param {string} args 参数
  * @param {string} workingDir 工作目录
  * @param {number} admin 是否为管理员启动
- * @returns {void} 
+ * @returns {void}
  */
 RunPrograms(target, args := "", workingDir := "", admin := false, runInBackground := false) {
   ; 记录当前窗口的hwnd，当软件启动失败时还原焦点
@@ -369,7 +372,7 @@ ShellRun(target, arguments?, directory?, operation?, show?) {
 /**
  * 当前窗口是最大化还是最小化
  * @param {string} winTitle AHK中的WinTitle
- * @returns {number} 
+ * @returns {number}
  */
 WindowMaxOrMin(winTitle := "A") {
   return WinGetMinMax(winTitle)

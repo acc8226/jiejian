@@ -1,6 +1,6 @@
 # 捷键使用说明
 
-本文最初发布在 [《捷键使用说明》](https://feipig.fun/jiejian)
+文档最新版发布在[《捷键使用说明》](https://feipig.fun/jiejian)
 
 <div>
 <img alt="Static Badge" src="https://img.shields.io/badge/%E6%8D%B7%E9%94%AE-for%20windows-blue" style="display:inline-block;margin: 0 1px;">
@@ -10,10 +10,12 @@
 <a href="https://jiejian.sourceforge.io/jiejian.7z" style="border-bottom:none;" title="更新时间 2024年8月底">
   <img src="https://img.shields.io/badge/release-24.8-green" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
 </a>
-<a href="https://jiejian.sourceforge.io/jiejian-beta.7z" style="border-bottom:none;" title="更新时间 2025-01-05">
-  <img src="https://img.shields.io/badge/beta-24.11--beta2-yellow" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
+<a href="https://jiejian.sourceforge.io/jiejian-beta.7z" style="border-bottom:none;" title="更新时间 2025-03-16">
+  <img src="https://img.shields.io/badge/beta-25.3.16--beta1-yellow" style="display:inline-block;margin: 0 1px;" alt="Static Badge">
 </a>
 </div>
+
+[![Download jiejian（捷键）for windows](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/jiejian/files/latest/download)
 
 A key mapping/shortcut enhancement tool developed based on [Autohotkey2](https://www.autohotkey.com), designed to simplify keyboard and mouse operations on Windows. It can serve as a traditional launcher and also supports mouse side buttons and hotkeys effectively.
 
@@ -30,10 +32,12 @@ System Requirements: Compatible with Windows XP and above, but it is recommended
 
 为了获得最佳体验，建议用户：
 
-* 使用带有侧键的鼠标，以便利用“捷键”增强的鼠标功能。
-* 搭配全局鼠标手势软件，以实现更丰富的操作。
-* 将“捷键”设置为开机自启，以便在计算机启动时自动加载自定义设置。
+* 使用带有侧键的鼠标，以便利用“捷键”增强的鼠标功能
+* 搭配全局鼠标手势软件，以实现更丰富的操作
+* 将“捷键”设置为开机自启
 
-软件大小 3.29 MB | 多国语言支持 | 32 位或 64 位 Windows XP 以上版本支持
+软件大小 3.77 MB | 多国语言支持 | 最低 32 位和 64 位 Windows XP 系统支持，Win 7 以上系统使用更佳
 
-[**点我下载最新测试版**](https://jiejian.sourceforge.io/jiejian-beta.7z)
+![已适配 windows 深色模式](https://cloudflare.cdnjson.com/images/2024/10/10/22222b75ac9b61531a0e3.png '已支持 windows 深色模式')
+
+[download 下载][捷键] | [demonstration 演示](https://www.bilibili.com/video/BV19H4y1e7hJ?vd_source=54168537affc2c02555097cb26797d99)
