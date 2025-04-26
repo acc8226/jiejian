@@ -48,6 +48,6 @@ ListBoxData(dataArray) {
     retArray := Array()
     for it in dataArray
         ; 根据 title 添加 “-类型” 的后缀
-        retArray.push(it.title . "-" . it.type)
+        retArray.push(it.title . '-' . it.type)
     return retArray
 }

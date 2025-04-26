@@ -1,4 +1,4 @@
-﻿#Include "Sort.ahk"
+﻿#Include 'Sort.ahk'
 
 ; 正则匹配最大支持长度默认为 32 位
 GLOBAL SUPPORT_LEN := 32

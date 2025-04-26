@@ -14,13 +14,13 @@ ShadingWindows() {
     ; the active window that was deactivated by the displayed menu to
     ; become active again:
     ;Sleep 200
-    ActiveID := WinGetID("A")
+    ActiveID := WinGetID('A')
     Height := ShadingWinMap.Get(ActiveID, false)
     if (Height) {
         WinMove(,,, Height, ActiveID)
         ShadingWinMap.Delete(ActiveID)
     } else {
-        WinGetPos(,,, &Height, "A")
+        WinGetPos(,,, &Height, 'A')
         WinMove(,,, 25, ActiveID)
         ShadingWinMap[ActiveID] := Height
     }
