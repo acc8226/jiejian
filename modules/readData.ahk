@@ -79,13 +79,17 @@ ParseData(fileName) {
           continue
         ; 如果是以字母开头 并且 不包含 ： 或者 ：的位置为 2 则认为是文件形式则要求必须存在
         if (IsAlpha(SubStr(item, 1, 1)) && InStr(item, ':', false) <= 2) {
-          ; 若存在则不用说
+          ; 如果出现 C:\Users\<UserName>\ 则替换当前为 UserName 用户
+          if (InStr(item, 'C:\Users\<UserName>\') == 1 ) {
+            item := StrReplace(item, 's\<UserName>\', "s\" . A_UserName . "\")
+          }
           if (FileExist(item)) {
             ; 特殊处理 .lnk 则目标必须存在
             if (SubStr(item, -4) == ".lnk") {
               FileGetShortcut(item, &OutTarget)
-              if OutTarget && FileExist(OutTarget)
+              if (OutTarget && FileExist(OutTarget)) {
                 isPathExist := true
+              }
             } else {
               isPathExist := true
             }

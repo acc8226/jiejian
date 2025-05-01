@@ -172,32 +172,32 @@ CheckUpdate
 RAlt::LControl ; 右 alt 不常用，映射为左 ctrl
 
 ; 启动 Anyrun 组件
-#HotIf IniRead('setting.ini', "Common", "AnyRunUse", '0') = 'alt'
+#HotIf IniRead('setting.ini', 'Common', 'AnyRunUse', '0') = 'alt'
 !Space::Anyrun 
-#HotIf IniRead('setting.ini', "Common", "AnyRunUse", '0') = 'ctrl'
+#HotIf IniRead('setting.ini', 'Common', 'AnyRunUse', '0') = 'ctrl'
 ^Space::Anyrun
 
-#HotIf IniRead('setting.ini', "Common", "AppsKey2", '0') = 'ShowDesktop'
+#HotIf IniRead('setting.ini', 'Common', 'AppsKey2', '0') = 'ShowDesktop'
 ; 可以当作老板键 或者下一曲
 AppsKey::Send '#d' 
-#HotIf IniRead('setting.ini', "Common", "AppsKey2", '0') = 'MediaNext'
+#HotIf IniRead('setting.ini', 'Common', 'AppsKey2', '0') = 'MediaNext'
 ; 可以当作老板键 或者下一曲
 AppsKey::Send '{Media_Next}'
 
-#HotIf IniRead('setting.ini', "Common", "PrintScrlkPause2Media", '0')
+#HotIf IniRead('setting.ini', 'Common', 'PrintScrlkPause2Media', '0')
 PrintScreen::Volume_Down
 ScrollLock::Media_Play_Pause
 Pause::Volume_Up
 
 ; 数字面板 且 未开启数字键模式
-#HotIf IniRead('setting.ini', "Common", "NumpadControl2Media", '0')
+#HotIf IniRead('setting.ini', 'Common', 'NumpadControl2Media', '0')
 NumpadDown::Media_Next
 NumpadLeft::Volume_Down
 NumpadClear::Media_Play_Pause
 NumpadRight::Volume_Up
 NumpadUp::Media_Prev
 
-#HotIf IniRead('setting.ini', "Common", "F6toF102Media", '0')
+#HotIf IniRead('setting.ini', 'Common', 'F6toF102Media', '0')
 F6::Media_Prev
 F7::Media_Next
 F8::Volume_Down
@@ -410,7 +410,7 @@ openCMDhere() {
             if window.LocationURL = ""
                 return
             currdir := SubStr(window.LocationURL, 9)
-            currdir := RegExReplace(currdir, "%20", " ")
+            currdir := RegExReplace(currdir, '%20', ' ')
             if IsSet(MY_NEW_TERMINAL)
                 Run(MY_NEW_TERMINAL ' /d .', currdir)
             else
@@ -426,18 +426,18 @@ if (A_IsCompiled) {
     ; 32 位 和 64 位独活一个
     if (A_PtrSize == 8) {
         ; 杀掉 32 位程式
-        if PID := ProcessExist("jiejian32.exe")
+        if PID := ProcessExist('jiejian32.exe')
             ProcessClose PID
     } else {
         ; 杀掉 64 位程式
-        if PID := ProcessExist("jiejian64.exe")
+        if PID := ProcessExist('jiejian64.exe')
             ProcessClose PID
     }
 } else {
     ; 关闭所有测试程序
-    if PID := ProcessExist("jiejian32.exe")
+    if PID := ProcessExist('jiejian32.exe')
         ProcessClose PID
-    if PID := ProcessExist("jiejian64.exe")
+    if PID := ProcessExist('jiejian64.exe')
         ProcessClose PID
 }
 
@@ -448,7 +448,7 @@ GroupAdd("MY_WINDOW_GROUP__1", "ahk_exe Rune Factory 3 Special.exe")
 KeymapManager.GlobalKeymap.DisabledAt := "ahk_group MY_WINDOW_GROUP__1"
 
 ; 分号模式( ; )
-km13 := KeymapManager.NewKeymap("*;", "分号模式( `; )", "")
+km13 := KeymapManager.NewKeymap("*;", "分号模式( `; )", '')
 km := km13
 km.Map("*a", _ => (Send("{blind}*")))
 km.Map("*b", _ => (Send("{blind}%")))
@@ -556,7 +556,7 @@ SetTimer(WatchController, 30)
 ; WatchController quasi-thread beneath the wait-for-button-up thread, which would
 ; effectively prevent mouse-dragging with the controller.
 ClickButtonLeft(*) {
-    MouseClick("Left",,, 1, 0, "D") ; Hold down the left mouse button.
+    MouseClick("Left",,, 1, 0, 'D') ; Hold down the left mouse button.
     SetTimer(WaitForLeftButtonUp, 10)
     
     WaitForLeftButtonUp() {
@@ -569,7 +569,7 @@ ClickButtonLeft(*) {
 }
 
 ClickButtonRight(*) {
-    MouseClick("Right",,, 1, 0, "D") ; Hold down the right mouse button.
+    MouseClick("Right",,, 1, 0, 'D') ; Hold down the right mouse button.
     SetTimer(WaitForRightButtonUp, 10)
     
     WaitForRightButtonUp() {
@@ -587,8 +587,8 @@ WatchController() {
     if A_IsSuspended
         return
     MouseNeedsToBeMoved := false ; Set default.
-    JoyX := GetKeyState(ControllerNumber "JoyX")
-    JoyY := GetKeyState(ControllerNumber "JoyY")
+    JoyX := GetKeyState(ControllerNumber 'JoyX')
+    JoyY := GetKeyState(ControllerNumber 'JoyY')
     
     if (JoyX == '' or JoyY == '' or (JoyX < 5 and JoyY < 5) or (JoyX > 95 and JoyY > 95)) {
         SetTimer , 0
@@ -617,6 +617,6 @@ WatchController() {
 
     if (MouseNeedsToBeMoved) {
         SetMouseDelay -1 ; Makes movement smoother.
-        MouseMove DeltaX * ContMultiplier, DeltaY * ContMultiplier * YAxisMultiplier, 0, "R"
+        MouseMove DeltaX * ContMultiplier, DeltaY * ContMultiplier * YAxisMultiplier, 0, 'R'
     }
 }

@@ -13,14 +13,14 @@ RButton::{
 WheelUp::{
   Send '{Volume_Up}'
   ; win 8 以前，由于没有侧边音量指示器 
-  if (VerCompare(A_OSVersion, "6.2") < 0)
+  if (VerCompare(A_OSVersion, '6.2') < 0)
     SetTimer(TipRoundSoundVolume, -80)
 }
 
 WheelDown::{
   Send '{Volume_Down}'
   ; win 8 以前，由于没有侧边音量指示器 
-  if (VerCompare(A_OSVersion, "6.2") < 0)
+  if (VerCompare(A_OSVersion, '6.2') < 0)
     SetTimer(TipRoundSoundVolume, -80)
 }
 
@@ -57,17 +57,17 @@ WheelDown::{
 
 ; 鼠标移动到任务栏上
 #HotIf MouseIsOver('ahk_class Shell_TrayWnd')
-MButton::Send "{Volume_Mute}"
+MButton::Send '{Volume_Mute}'
 WheelUp::{
   Send '{Volume_Up}'
   ; win 11 22533 版本更新了音量指示器，底部居中显示更加美观了
-  if (VerCompare(A_OSVersion, "10.0.22533") < 0)
+  if (VerCompare(A_OSVersion, '10.0.22533') < 0)
     SetTimer(TipRoundSoundVolume, -80)
 }
 
 WheelDown::{
-  Send "{Volume_Down}"
-  if (VerCompare(A_OSVersion, "10.0.22533") < 0)
+  Send '{Volume_Down}'
+  if (VerCompare(A_OSVersion, '10.0.22533') < 0)
     SetTimer(TipRoundSoundVolume, -80)
 }
 
@@ -81,7 +81,7 @@ XButton1::Send '{Media_Next}'
 XButton2::Send '{Media_Prev}'
 
 ; 音量小组件的滑动用起来
-#HotIf WinActive("ahk_class MyKeymap_Sound_Control")
+#HotIf WinActive('ahk_class MyKeymap_Sound_Control')
 WheelUp::Send 'e'
 WheelDown::Send 'd'
 #HotIf
@@ -100,5 +100,5 @@ MouseIsOnTopEdge() {
 
 MouseIsOver(WinTitle) {
   MouseGetPos(,, &Win)
-  return WinExist(WinTitle . " ahk_id " . Win)
+  return WinExist(WinTitle . ' ahk_id ' . Win)
 }
