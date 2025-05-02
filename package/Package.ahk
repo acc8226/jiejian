@@ -8,7 +8,7 @@ base := "compiler\"
 Ahk2Exe := base . "Ahk2Exe.exe"
 
 jiejian := "jiejian"
-jiejianAhk := jiejian ".ahk"
+jiejianAhk := "Jiejian.ahk"
 
 aAutoHotkey := "AutoHotkey"
 a64exe := "64.exe"
