@@ -76,7 +76,7 @@ if NOT (A_IsAdmin or RegExMatch(DllCall('GetCommandLine', 'str'), ' /restart(?!\
 }
 
 ; 定义版本信息并写入
-GLOBAL CODE_VERSION := '25.2-beta3'
+GLOBAL CODE_VERSION := '25.8-beta1'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
@@ -446,6 +446,31 @@ if (A_IsCompiled) {
 GroupAdd("MY_WINDOW_GROUP__1", "Stardew Valley ahk_class SDL_app")
 GroupAdd("MY_WINDOW_GROUP__1", "ahk_exe Rune Factory 3 Special.exe")
 KeymapManager.GlobalKeymap.DisabledAt := "ahk_group MY_WINDOW_GROUP__1"
+
+; L 模式
+km8 := KeymapManager.NewKeymap("*l", "L 模式", "")
+km := km8
+km.Map("singlePress", _ => (Send("{blind}{l}")))
+km.RemapKey(",", "delete")
+km.RemapKey(".", "insert")
+km.Map("*2", _ => (Send("^+{tab}")))
+km.Map("*3", _ => (Send("^{tab}")))
+km.RemapKey("a", "home")
+km.Map("*b", _ => (Send("^{backspace}")))
+km.RemapKey("c", "backspace")
+km.RemapKey("d", "down")
+km.RemapKey("e", "up")
+km.RemapKey("f", "right")
+km.RemapKey("g", "end")
+km.RemapKey("q", "appskey")
+km.RemapKey("r", "tab")
+km.RemapKey("s", "left")
+km.Map("*t", _ => (Send("{home}+{end}{backspace}")))
+km.Map("*v", _ => (Send("{blind}^{right}")))
+km.Map("*w", _ => (Send("{blind}+{tab}")))
+km.RemapKey("x", "esc")
+km.Map("*z", _ => (Send("{blind}^{left}")))
+km.Map("*space", _ => (Send("{blind}{enter}")))
 
 ; 分号模式( ; )
 km13 := KeymapManager.NewKeymap("*;", "分号模式( `; )", '')
