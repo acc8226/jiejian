@@ -33,7 +33,7 @@ ParseAppCSV() {
 
         case "^t":
           ; 老版本资源管理器没有新建标签页，那就只能 ctrl + n 去新建窗口了
-          if ('ahk_exe i)explorer.exe ahk_class i)^CabinetWClass$' == it.group and VerCompare(A_OSVersion, ' 10.0.14394') < 0) {
+          if ('ahk_exe i)explorer.exe ahk_class i)^CabinetWClass$' == it.group and VerCompare(A_OSVersion, ' 10.0.19046') < 0) {
             GroupAdd("new_ctrl_n", it.group)  
           } else {
             GroupAdd("new_ctrl_t", it.group)  
