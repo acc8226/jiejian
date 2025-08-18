@@ -72,7 +72,10 @@ WheelDown::{
 }
 
 TipRoundSoundVolume() {
-  Tip('音量 ' . Round(SoundGetVolume()), -399)
+  try {
+    Tip('音量 ' . Round(SoundGetVolume()), -399)
+  } catch Error as e
+    Tip(e.Message)
 }
 
 ; 下一曲
