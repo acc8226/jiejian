@@ -2,7 +2,7 @@
 AHK2 jiejian
 A key mapping/shortcut enhancement tool developed based on AutoHotkey v2.0+ (http://www.autohotkey.com)
 
-Copyright 2023-2024 acc8226
+Copyright 2023-2025 acc8226
 --------------------------------
 */
 
@@ -76,7 +76,7 @@ if NOT (A_IsAdmin or RegExMatch(DllCall('GetCommandLine', 'str'), ' /restart(?!\
 }
 
 ; 定义版本信息并写入
-GLOBAL CODE_VERSION := '25.8-beta2'
+GLOBAL CODE_VERSION := '25.8-beta3'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
