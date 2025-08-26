@@ -85,7 +85,7 @@
 程序,D:\software\VSCodium\VSCodium.exe|shortcuts\VSCodium.lnk|C:\Program Files\VSCodium\VSCodium.exe,ahk_exe i)VSCodium.exe ahk_class Chrome_WidgetWin_1,VSCodium,VSCodium,!3,,,
 程序,D:\software\VSCode\Code.exe|shortcuts\Visual Studio Code.lnk|C:\Users\<UserName>\AppData\Local\Programs\Microsoft VS Code\Code.exe|C:\Program Files\Microsoft VS Code\Code.exe,ahk_exe i)Code.exe ahk_class Chrome_WidgetWin_1,VSCode,VSCode,!3,,,
 程序,D:\software\Notepad--\Notepad--.exe|shortcuts\Notepad--.lnk|C:\Users\<UserName>\AppData\Local\Programs\Notepad--\Notepad--.exe|C:\Program Files\Notepad--\Notepad--.exe,ahk_exe i)Notepad--.exe,Notepad--,Notepad--,!3,,,
-程序,shortcuts\Notepad++.lnk,ahk_exe i)notepad\+\+.exe,Notepad++,Notepad++,!3,,,
+程序,shortcuts\Notepad++.lnk|C:\Program Files\Notepad++\notepad++.exe,ahk_exe i)notepad\+\+.exe,Notepad++,Notepad++,!3,,,
 ,,,,,,,,
 程序,shortcuts\微信.lnk|C:\Program Files\Tencent\Weixin\Weixin.exe|C:\Program Files\Tencent\WeChat\WeChat.exe,ahk_exe i)Weixin.exe,微信,weixin|wechat|微信,!4,,,
 程序,shortcuts\QQ.lnk|C:\Program Files\Tencent\QQNT\QQ.exe|C:\Program Files (x86)\Tencent\QQ\Bin\QQScLauncher.exe,,QQ,QQ,!4,,,
@@ -367,7 +367,6 @@
 下载,jetbrains.com/zh-cn/idea,,IDEA,DLIDEA,,,,IDE
 下载,jetbrains.com/zh-cn/pycharm,,PyCharm,DLPyCharm,,,,IDE
 下载,git-scm.com/downloads,,Git,DLGit,,,,版本控制
-下载,termius.com,,Termius,DLTermius,,,,终端
 ,,,,,,,,
 ,,,,,,,,
 内部,,,环境变量,huanjingbianliang|env|环境变量,,,,
@@ -446,6 +445,8 @@
 动作,https://view.officeapps.live.com/op/view.aspx?src=,,Office预览,yl,,,,
 动作,https://fanyi.baidu.com/#en/zh/,,翻译,fy,,,,
 动作,https://search.jd.com/Search?keyword=,,京东商品搜索,jd,,,,
+动作,https://shuidi.cn/pc-search?key=,,水滴信用,sd,,,,
+动作,https://www.tianyancha.com/nsearch?key=,,天眼查,ty,,,,
 ,,,,,,,,
 双击Home,,,内部-睡眠,,,,,
 双击End,,,内部-关机,,,,,
