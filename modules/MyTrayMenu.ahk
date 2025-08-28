@@ -38,7 +38,7 @@
         this.enableDarkMode:= IniRead(LANG_PATH, "Tray", "enableDarkMode", "Enable Dark Mode")
         this.enableTimerReminder:= IniRead(LANG_PATH, "Tray", "enableTimerReminder", "Enable Eye Care Reminder")
         this.update:= IniRead(LANG_PATH, "Tray", "update", 'Check for Updates (&U)...')
-        this.about:= IniRead(LANG_PATH, "Tray", "about", 'About (&A)')     
+        this.about:= IniRead(LANG_PATH, "Tray", "about", 'About (&A)')
 
         this.exit:= IniRead(LANG_PATH, "Tray", "exit", 'Exit (&X)')
 
@@ -341,7 +341,7 @@
         } else {
             DisplayName := 'unknown'
         }
-        return DisplayName      
+        return DisplayName
     }
 
     LCIDToLocaleName(LCID, Flags := 0) {
@@ -417,14 +417,14 @@ initLanguage() {
 ; 一个记录秒数的示例类
 class RelaxCounter {
     __New() {
-        ; 每小时提醒 1 次
-        this.interval := 3600000
+         ; 每 x 分钟提醒 1 次
+        this.min := 45
         ; Tick() 有一个隐式参数 "this", 其引用一个对象。所以, 我们需要创建一个封装了 "this " 和调用方法的函数
         this.timer := ObjBindMethod(this, "Tick")
     }
     
     Start() {
-        SetTimer this.timer, this.interval
+        SetTimer this.timer, this.min * 60 * 1000
     }
     
     Stop() {
@@ -440,11 +440,12 @@ class RelaxCounter {
         MyGui.BackColor := "030704"  ; 可以是任何 RGB 颜色(下面会变成透明的)
         guiWidth := 420
         progressBarPaddingLeft := 72
-        textGUI1 := MyGui.AddText('w' . (guiWidth - MyGui.MarginX * 2) . ' Center', '休息提醒（当前） ' . FormatTime(, 'HH:mm') . '`n下次提醒时间　　 ' . FormatTime(DateAdd(A_Now, 60, "Minutes"), 'HH:mm'))    
+        textGUI1 := MyGui.AddText('w' . (guiWidth - MyGui.MarginX * 2) . ' Center', '休息提醒（当前） ' . FormatTime(, 'HH:mm') . '`n下次提醒时间　　 ' . FormatTime(DateAdd(A_Now, this.min, "Minutes"), 'HH:mm'))    
         MyGui.AddProgress("XM" . progressBarPaddingLeft . " w" . (guiWidth - (MyGui.MarginX + progressBarPaddingLeft) * 2) . " h23 c1A9F55 vMyProgress")
         ; 当窗口处于最小化或最大化状态时, 还原窗口. 窗口显示但不进行激活.
         MyGui.Show 'NoActivate W' . guiWidth . ' H116'
 
+        progress := 0
         loop {
             if (MyGui["MyProgress"].Value >= 100) {
                 ; 消失前短暂停留
@@ -452,9 +453,10 @@ class RelaxCounter {
                 MyGui.Destroy
                 break
             }
-            ; 每 1 秒，进度增长 10% =（100/10）
+            ; 每 1 秒，进度增长百分之 (100 / 180)
             Sleep 1000
-            MyGui["MyProgress"].Value += (100/60) ; 进度增长
+            progress += (100 / 180) ; 进度增长
+            MyGui["MyProgress"].Value := progress
         }
     }
 }
