@@ -212,15 +212,15 @@
                 ; 统计软件使用次数
                 launchCount := RegRead(REG_KEY_NAME, REG_LAUNCH_COUNT, 1)
         
-                if recordMins < 10000
+                if recordMins < 20000
                     tit := '青铜'
-                else if recordMins < 20000
-                    tit := '白银'
                 else if recordMins < 40000
-                    tit := '黄金'
+                    tit := '白银'
                 else if recordMins < 80000
-                    tit := '铂金'
+                    tit := '黄金'
                 else if recordMins < 160000
+                    tit := '铂金'
+                else if recordMins < 320000
                     tit := '钻石'
                 else
                     tit := '传说'
@@ -445,7 +445,7 @@ class RelaxCounter {
         ; 当窗口处于最小化或最大化状态时, 还原窗口. 窗口显示但不进行激活.
         MyGui.Show 'NoActivate W' . guiWidth . ' H116'
 
-        progress := 0
+        tempProgress := 0
         loop {
             if (MyGui["MyProgress"].Value >= 100) {
                 ; 消失前短暂停留
@@ -453,10 +453,13 @@ class RelaxCounter {
                 MyGui.Destroy
                 break
             }
-            ; 每 1 秒，进度增长百分之 (100 / 180)
+            ; 每 1 秒，进度增长百分之 (100 / 200)
             Sleep 1000
-            progress += (100 / 180) ; 进度增长
-            MyGui["MyProgress"].Value := progress
+            tempProgress += (100 / 200) ; 进度增长
+            ; 避免无效刷新
+            if (tempProgress - MyGui["MyProgress"].Value >= 1) {
+                MyGui["MyProgress"].Value := tempProgress
+            }
         }
     }
 }

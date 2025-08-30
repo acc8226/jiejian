@@ -1,11 +1,11 @@
 ﻿CheckUpdate(isNeedCallback := False) {
     localIsAlphaOrBeta := InStr(CODE_VERSION, 'alpha') || InStr(CODE_VERSION, 'beta')
     regValueName := 'last_check_date'
-    ; 手动检查更新 或 本地为调试版本 或 正式版的检查间隔需大于 24 小时
-    if (isNeedCallback || localIsAlphaOrBeta || DateDiff(A_NowUTC, RegRead(REG_KEY_NAME, regValueName, '20000101000000'), 'days') >= 1) {
+    ; 手动检查更新 或 本地为调试版本 或 正式版的检查间隔需大于 20 天
+    if (isNeedCallback || localIsAlphaOrBeta || DateDiff(A_NowUTC, RegRead(REG_KEY_NAME, regValueName, '20000101000000'), 'days') >= 20) {
         req := ComObject('Msxml2.XMLHTTP')
         ; 打开启用异步的请求.
-        checkUrl := 'https://acc8226.atomgit.net/jiejian/' . (localIsAlphaOrBeta ? 'SNAPSHOT' : 'RELEASE')
+        checkUrl := 'https://gitee.com/acc8226/shortcut-key/raw/main/' . (localIsAlphaOrBeta ? 'SNAPSHOT' : 'RELEASE')
         req.open('GET', checkUrl, true)
 
         ; 设置回调函数
@@ -34,6 +34,9 @@
                         MsgBox "请连接网络后重试", '检查更新-捷键'
                         SetTimer CheckUpdate, -60 * 60 * 1000 ; 无网络则 60 分钟后重试
                     case 404:
+                        ; 404 表示页面不可用，所以本次升级延期
+                        if !localIsAlphaOrBeta
+                            RegWrite(A_NowUTC, 'REG_SZ', REG_KEY_NAME, regValueName)
                         MsgBox '升级页面找不到', '检查更新-捷键'
                     case 12029:
                         MsgBox "网络连接错误，请稍候再试", '检查更新-捷键'
