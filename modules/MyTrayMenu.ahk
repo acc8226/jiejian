@@ -1,5 +1,5 @@
 ﻿class MyTrayMenu {
-    
+
     __new() {
         ; 当前是否是选中状态
         GLOBAL IS_AUTO_START_UP
@@ -240,7 +240,7 @@
                     if mins >= 1
                         sb .= mins . ' 分钟'
                     sb .= '）'
-                }                     
+                }
                 MsgBox(sb, '捷键-使用统计')
             case this.startUp:
                 ; 当前是开机自启则设置为开机不自启，否则设置为开机自启
@@ -250,7 +250,7 @@
                     FileCreateShortcut(this.shortcut, this.linkFile, A_WorkingDir)
                 A_TrayMenu.ToggleCheck(this.startUp)
                 IS_AUTO_START_UP := !IS_AUTO_START_UP
-        
+
             case this.document: Run 'https://acc8226.onrender.com/mypage' ; 还是选用国内服务访问最快
             case this.video: Run 'https://www.bilibili.com/video/BV19H4y1e7hJ'
 
@@ -389,7 +389,7 @@ initLanguage() {
         ; 鼠标控制 只是加载，目前不在 anyrun 组件中体现
         FileInstall 'tools\MouseSC_x64.exe', 'tools\MouseSC_x64.exe', true
         FileInstall 'tools\MouseSC_Query.bat', 'tools\MouseSC_Query.bat', true
-        
+
         ; 重建图标缓存 https://www.sordum.org/9194/rebuild-shell-icon-cache-v1-3/
         FileInstall 'tools\ReIconCache_x64.exe', 'tools\ReIconCache_x64.exe', true
         ; Rexplorer_x64 用于重启文件资源管理器
@@ -422,16 +422,16 @@ class RelaxCounter {
         ; Tick() 有一个隐式参数 "this", 其引用一个对象。所以, 我们需要创建一个封装了 "this " 和调用方法的函数
         this.timer := ObjBindMethod(this, "Tick")
     }
-    
+
     Start() {
         SetTimer this.timer, this.min * 60 * 1000
     }
-    
+
     Stop() {
         ; 要关闭计时器, 我们必须传递和之前一样的对象
         SetTimer this.timer, 0
     }
-    
+
     ; 本例中, 计时器调用了以下方法:
     Tick() {    
         MyGui := Gui('-Caption +AlwaysOnTop +ToolWindow')
@@ -453,9 +453,9 @@ class RelaxCounter {
                 MyGui.Destroy
                 break
             }
-            ; 每 1 秒，进度增长百分之 (100 / 200)
+            ; 每 1 秒，进度增长百分之 (100 / 300)
             Sleep 1000
-            tempProgress += (100 / 200) ; 进度增长
+            tempProgress += (100 / 300) ; 进度增长
             ; 避免无效刷新
             if (tempProgress - MyGui["MyProgress"].Value >= 1) {
                 MyGui["MyProgress"].Value := tempProgress
