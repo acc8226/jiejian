@@ -32,7 +32,7 @@ Win 10¡¢11 ÉèÖÃ,,^ÉèÖÃ$ ahk_exe i)ApplicationFrameHost.exe ahk_class i)^Applicat
 ¡¾´°¿Ú¡¿Firefox »ğºüÏµ ÎÒµÄ×ã¼£,¸ß,ÎÒµÄ×ã¼£$ ahk_class i)^MozillaWindowClass$,,!F4,,,,,,,
 ¡¾ä¯ÀÀÆ÷¡¿Firefox »ğºüÏµ ÀıÈç Firefox & Waterfox & Iceweasel & Tor,,ahk_class ^MozillaWindowClass$,,^F4,,,,,^n,,
 ¡¾ä¯ÀÀÆ÷¡¿Opera,,ahk_exe i)opera.exe,,^F4,,,,,^n,,
-¡¾ä¯ÀÀÆ÷¡¿QQä¯ÀÀÆ÷,,ahk_exe i)QQBrowser.exe,,^F4,,,,,^n,,
+¡¾ä¯ÀÀÆ÷¡¿QQä¯ÀÀÆ÷,,ahk_exe i)QQBrowser.exe,,^w,,,,,^n,,
 ¡¾ä¯ÀÀÆ÷¡¿UC,,ahk_exe i)UCBrowser.exe,,^F4,,,,,^n,,
 ¡¾ä¯ÀÀÆ÷¡¿Vivaldi,,ahk_exe i)vivaldi.exe,,^F4,,,,,^n,,
 ¡¾ä¯ÀÀÆ÷¡¿Yandex,,ahk_exe browser.exe ahk_class i)^YandexBrowser_WidgetWin_1$,,^F4,,,,,^n,,
