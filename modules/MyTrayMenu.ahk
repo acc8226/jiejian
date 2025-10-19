@@ -3,12 +3,13 @@
     __new() {
         ; 当前是否是选中状态
         GLOBAL IS_AUTO_START_UP
-        ; 是否启用定时提醒
+        ; 是否启用深色模式
         GLOBAL ENABLE_DARK_MODE := RegRead(REG_KEY_NAME, REG_DARK_MODE, true)
+        ; 是否启用定时提醒
         GLOBAL ENABLE_TIMER_REMINDER := RegRead(REG_KEY_NAME, REG_RELAX_REMINDER, false)
 
         ; 读取当前语言状态，如果读取不到则默认是中文
-        LANG_PATH := A_ScriptDir . "\lang\" . CURRENT_LANG . ".ini"
+        LANG_PATH := (A_ScriptDir . "\lang\" . CURRENT_LANG . ".ini")
 
         try {
             this.editScript:= IniRead(LANG_PATH, "Tray", "editScript")
@@ -81,7 +82,19 @@
         moreMenu.Add(this.viewWinId, trayMenuHandlerFunc)
         moreMenu.Add(this.followMeCSDN, trayMenuHandlerFunc)
         moreMenu.Add(this.softwareHomepage, trayMenuHandlerFunc)
-        moreMenu.Add(this.enableDarkMode, trayMenuHandlerFunc)
+
+        ; Windows 10 版本 1607 (周年更新)下的暗黑模式​开始成熟，可供普通用户使用
+        if (VerCompare(A_OSVersion, '10.0.14393') >= 0) {
+          ; 是否显示“深色模式”选项
+          moreMenu.Add(this.enableDarkMode, trayMenuHandlerFunc)
+          WindowsTheme.SetAppMode(ENABLE_DARK_MODE)
+          if (ENABLE_DARK_MODE) {
+              moreMenu.Check(this.enableDarkMode)
+          } else {
+              moreMenu.UnCheck(this.enableDarkMode)
+          }
+        }
+
         moreMenu.Add(this.enableTimerReminder, trayMenuHandlerFunc)
         moreMenu.Add(this.update, trayMenuHandlerFunc)
         moreMenu.Add(this.about, trayMenuHandlerFunc)
@@ -90,32 +103,20 @@
 
         A_TrayMenu.Add(this.exit, trayMenuHandlerFunc)
 
-        ; 检查是否是自启状态
+        ; 检查是否启用“开机自启”
         if (FileExist(this.LinkFile)) {
             ; 获取快捷方式(.lnk) 文件的信息, 例如其目标文件
             FileGetShortcut(this.LinkFile, &OutTarget)
-            if (OutTarget !== this.shortcut) {
-                IS_AUTO_START_UP := false
-                A_TrayMenu.UnCheck this.startUp
+            IS_AUTO_START_UP := (OutTarget == this.shortcut)
+            if (IS_AUTO_START_UP) {
+                A_TrayMenu.Check(this.startUp)
             } else {
-                IS_AUTO_START_UP := true
-                A_TrayMenu.Check this.startUp
+                A_TrayMenu.UnCheck(this.startUp)
             }
         } else {
             IS_AUTO_START_UP := false
-            A_TrayMenu.UnCheck this.startUp
+            A_TrayMenu.UnCheck(this.startUp)
         }
-
-        WindowsTheme.SetAppMode ENABLE_DARK_MODE
-        if (ENABLE_DARK_MODE) {
-            WindowsTheme.SetAppMode ENABLE_DARK_MODE
-            moreMenu.Check this.enableDarkMode
-        } else {
-            moreMenu.UnCheck this.enableDarkMode
-        }
-        ; 自动获取系统的深色模式开关
-        ; SYSTEM_THEME_MODE := RegRead("HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", "SystemUsesLightTheme", true)
-        ; WindowsTheme.SetAppMode(!SYSTEM_THEME_MODE)
         
         ; 是否开启定时提醒
         this.counter := RelaxCounter()
@@ -259,9 +260,9 @@
 
             case this.enableDarkMode:                    
                 RegWrite(ENABLE_DARK_MODE ? false : true, "REG_DWORD", REG_KEY_NAME, REG_DARK_MODE)
-                this.moreMenu.ToggleCheck this.enableDarkMode
+                this.moreMenu.ToggleCheck(this.enableDarkMode)
                 ENABLE_DARK_MODE := !ENABLE_DARK_MODE
-                WindowsTheme.SetAppMode ENABLE_DARK_MODE
+                WindowsTheme.SetAppMode(ENABLE_DARK_MODE)
 
             case this.enableTimerReminder:
                 if ENABLE_TIMER_REMINDER {
