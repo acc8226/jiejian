@@ -30,7 +30,7 @@ SetTitleMatchMode 'RegEx' ; 设置 WinTitle parameter 在内置函数中的匹�
 ; This is the setting that runs smoothest on my
 ; system. Depending on your video card and cpu
 ; power, you may want to raise or lower this value.
-SetWinDelay 39 ; 如果没有使用 SetWinDelay, 默认延时为 100.
+SetWinDelay 39 ; 如果没有使用 SetWinDelay, 默认延时为 100 毫秒
 ; 如果没有使用 SetMouseDelay, 则对于传统的 SendEvent 模式默认延时为 10
 SetMouseDelay 10
 
@@ -76,7 +76,7 @@ if NOT (A_IsAdmin or RegExMatch(DllCall('GetCommandLine', 'str'), ' /restart(?!\
 }
 
 ; 定义版本信息并写入
-GLOBAL CODE_VERSION := '25.8-beta5'
+GLOBAL CODE_VERSION := '25.11-beta1'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
