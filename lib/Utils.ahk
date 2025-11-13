@@ -1,3 +1,5 @@
+#Include 'Functions.ahk'
+
 /**
  * 自动关闭的提示窗口
  * @param message 要提示的文本
@@ -37,4 +39,14 @@ OpenSelectedText() {
     text := GetSelectedText()
     if text
         OpenURLOrSearch text
+}
+
+/**
+ * 禁用输入法
+ * @param hwnd 
+ */
+DisableIME(hwnd) {
+  controlName := ControlGetFocus(hwnd)
+  controlHwnd := ControlGetHwnd(controlName)
+  DllCall("Imm32\ImmAssociateContext", "ptr", controlHwnd, "ptr", 0, "ptr")
 }
