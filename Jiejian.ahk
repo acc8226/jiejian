@@ -478,6 +478,30 @@ km.RemapKey("*space", 'PgDn')
 KeymapManager.GlobalKeymap.Enable()
 
 ; --- regular start ---
+; monitorCol := Monitor()
+; brightness := ""
+; try {
+;     brightness := monitorCol.GetBrightness(1)["Current"]
+; } catch Error as e {
+;     ; 使用 wmi 获取亮度
+;     For property in ComObjGet("winmgmts:\\.\root\WMI").ExecQuery("SELECT * FROM WmiMonitorBrightness")
+;     brightness := property.CurrentBrightness
+; }
+; brightness := brightness + 10
+; if brightness > 100 {
+;     brightness := 100
+; }
+; SetBrightness(brightness, 1)
+; ; 设置屏幕亮度
+; SetBrightness(brightness, monIndex, timeout := 1) {
+;     try {
+;         monitorCol.setBrightness(brightness, monIndex)
+;     } catch Error as e {
+;         ; 使用wmi设置亮度
+;         For property in ComObjGet("winmgmts:\\.\root\WMI").ExecQuery("SELECT * FROM WmiMonitorBrightnessMethods")
+;         property.WmiSetBrightness(timeout, brightness)
+;     }
+; }
 
 ; --- regular end ---
 
