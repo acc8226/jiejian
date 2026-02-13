@@ -83,8 +83,8 @@
         moreMenu.Add(this.followMeCSDN, trayMenuHandlerFunc)
         moreMenu.Add(this.softwareHomepage, trayMenuHandlerFunc)
 
-        ; Windows 10 版本 1607 (周年更新)下的暗黑模式​开始成熟，可供普通用户使用
-        if (VerCompare(A_OSVersion, '10.0.14393') >= 0) {
+        ; Windows 10 版本 1809（2018年10月更新） 17763 2018年11月 ← 有完整深色模式
+        if (VerCompare(A_OSVersion, '10.0.17763') >= 0) {
           ; 是否显示“深色模式”选项
           moreMenu.Add(this.enableDarkMode, trayMenuHandlerFunc)
           WindowsTheme.SetAppMode(ENABLE_DARK_MODE)
