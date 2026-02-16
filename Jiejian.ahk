@@ -10,7 +10,7 @@ Copyright 2023-2025 acc8226
 快速参考 | AutoHotkey v2 https://wyagd001.github.io/v2/docs/
 vscode 插件安装 https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp
 */
-#Requires AutoHotkey >=v2.0.19
+#Requires AutoHotkey >=v2.0.21
 
 ; --------------------- COMPILER DIRECTIVES --------------------------
 
@@ -76,7 +76,7 @@ if NOT (A_IsAdmin or RegExMatch(DllCall('GetCommandLine', 'str'), ' /restart(?!\
 }
 
 ; 定义版本信息并写入
-GLOBAL CODE_VERSION := '25.11-beta1'
+GLOBAL CODE_VERSION := '26.2-beta1'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%

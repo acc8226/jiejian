@@ -79,7 +79,7 @@
 程序,D:\software\catsxp\catsxp.exe|shortcuts\猫眼浏览器.lnk|C:\Program Files\CatsxpSoftware\Catsxp-Browser\Application\catsxp.exe,ahk_exe i)catsxp.exe,猫眼浏览器,maoyanliulanqi|catsxp|猫眼浏览器,!2,,,
 程序,shortcuts\360 极速浏览器X.lnk|C:\Users\<UserName>\AppData\Local\360ChromeX\Chrome\Application\360ChromeX.exe,ahk_exe i)360ChromeX.exe,360极速浏览器X,360jisuliulanqiX|360 极速浏览器X,!2,,,
 程序,shortcuts\360极速浏览器.lnk|C:\Users\<UserName>\AppData\Local\360Chrome\Chrome\Application\360chrome.exe,ahk_exe i)360ChromeX.exe,360极速浏览器,360jisuliulanqi|360极速浏览器,!2,,,
-程序,shortcuts\Firefox.lnk|C:\Program Files\Mozilla Firefox\firefox.exe|C:\Program Files (x86)\Mozilla Firefox\firefox.exe,,Firefox,huohu|Firefox|火狐浏览器,!2,,,
+程序,shortcuts\Firefox.lnk|C:\Program Files\Mozilla Firefox\firefox.exe|C:\Program Files (x86)\Mozilla Firefox\firefox.exe,ahk_exe i)firefox.exe,Firefox,huohu|Firefox|火狐浏览器,!2,,,
 程序,shortcuts\Google Chrome.lnk|C:\Program Files\Google\Chrome\Application\chrome.exe,ahk_exe i)(?<![\w\s])chrome.exe,Google Chrome,Google Chrome,!2,,,
 程序,shortcuts\Microsoft Edge.lnk|C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe|microsoft-edge:,ahk_exe i)msedge.exe,Edge,Edge浏览器,!2,,,
 ,,,,,,,,
