@@ -10,7 +10,7 @@ Copyright 2023-2025 acc8226
 快速参考 | AutoHotkey v2 https://wyagd001.github.io/v2/docs/
 vscode 插件安装 https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp
 */
-#Requires AutoHotkey >=v2.0.21
+#Requires AutoHotkey >=v2.0.23
 
 ; --------------------- COMPILER DIRECTIVES --------------------------
 
