@@ -104,9 +104,6 @@ if !IsActivated() {
 
 ; ---------- 你的主功能（MButton 热键等） ----------
 MButton::{
-    KeyWait("Shift")
-    KeyWait("Alt")
-
     text := A_Clipboard
     if (text = "")
         return
