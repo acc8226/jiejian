@@ -10,7 +10,7 @@ Copyright 2023-2025 acc8226
 快速参考 | AutoHotkey v2 https://wyagd001.github.io/v2/docs/
 vscode 插件安装 https://marketplace.visualstudio.com/items?itemName=thqby.vscode-autohotkey2-lsp
 */
-#Requires AutoHotkey >=v2.0.23
+#Requires AutoHotkey >=v2.0.26
 
 ; --------------------- COMPILER DIRECTIVES --------------------------
 
@@ -76,7 +76,7 @@ if NOT (A_IsAdmin or RegExMatch(DllCall('GetCommandLine', 'str'), ' /restart(?!\
 }
 
 ; 定义版本信息并写入
-GLOBAL CODE_VERSION := '26.2-beta1'
+GLOBAL CODE_VERSION := '26.6-beta1'
 ;@Ahk2Exe-Let U_version = %A_PriorLine~U).+['"](.+)['"]~$1%
 ; FileVersion 将写入 exe
 ;@Ahk2Exe-Set FileVersion, %U_version%
@@ -137,25 +137,50 @@ CheckUpdate
 
 ; 文本类 为了 md 增强 记事本 & vscode
 ; ctrl + 数字 1-5 为光标所在行添加 markdown 格式标题
-#HotIf WinActive('ahk_exe i)notepad.exe') || WinActive('ahk_class i)Chrome_WidgetWin_1 ahk_exe i)Code.exe') 
+#HotIf WinActive('ahk_exe i)(?:Notepad--|notepad).exe') || WinActive('ahk_class i)Chrome_WidgetWin_1 ahk_exe i)(?:VSCodium|Code).exe')
 ^1::
 ^2::
 ^3::
 ^4::
 ^5::{
+    ; ----- 1. 等待所有修饰键释放（防粘连）-----
+    KeyWait("Control")
+
+    ; ----- 2. 保存旧剪贴板并清空 -----
     oldText := A_Clipboard
-    A_Clipboard := ''
-    Send('{Home}{Shift Down}{End}{Shift Up}') ; 切到首部然后选中到尾部
-    Sleep 100
-    Send '^x'
-    ClipWait ; 等待剪贴板中出现文本
-    newText := RegExReplace(A_Clipboard, "\s*$", "") ; 去掉尾部空格
-    newText := RegExReplace(newText, "^#{1,6}\s+(.*)", "$1")
-    nums := SubStr(A_ThisHotkey, 2)
-    Send('{Home}{# ' . nums . '}' . ' ')
-    ; 之所以拆开是为防止被中文输入法影响
-    SendText newText
-    Send '{End}'
+    A_Clipboard := ""
+
+    ; ----- 3. 选中当前行（从行首到行尾）-----
+    Send("{Home}{Shift Down}{End}{Shift Up}")
+    Sleep(20)   ; 短暂等待，确保选中完成
+
+    ; ----- 4. 剪切 -----
+    Send("^x")
+
+    ; ----- 5. 等待剪贴板出现内容（超时0.5秒）-----
+    if !ClipWait(0.5) {
+        A_Clipboard := oldText
+        MsgBox("未选中文本或剪切失败", "操作取消", "Icon!")
+        return
+    }
+
+    ; ----- 6. 处理剪贴板文本 -----
+    newText := A_Clipboard
+    newText := RegExReplace(newText, "\s*$", "")          ; 去掉尾部空白
+    newText := RegExReplace(newText, "^#{1,6}\s*(.*)", "$1") ; 去掉行首已有的#号
+
+    ; ----- 7. 生成 N 个 # 号 -----
+    nums := SubStr(A_ThisHotkey, 2)   ; 获取数字，例如 "3"
+    hashStr := ""
+    Loop nums
+        hashStr .= "#"
+
+    ; ----- 8. 插入到行首 -----
+    Send("{Home}")
+    SendText(hashStr " " newText)   ; 例如 "### " + 原内容（去掉原有#和尾部空白）
+    Send("{End}")
+
+    ; ----- 9. 恢复剪贴板 -----
     A_Clipboard := oldText
 }
 #HotIf
@@ -166,7 +191,53 @@ CheckUpdate
     Sleep 60 ; 不创建多个实例的情况下重新加载脚本的简单实现，给个暂停时长
 }
 ^!s::JJ_TRAY_MENU.MySuspend ; Ctrl + Alt + S 暂停脚本
-^!v::Send A_Clipboard ; Ctrl + Alt + V 将剪贴板的内容输入到当前活动应用程序中，防止了一些网站禁止在 HTML 密码框中进行粘贴操作
+; Shift + Alt + V 将剪贴板的内容输入到当前活动应用程序中，防止了一些网站禁止在 HTML 密码框中进行粘贴操作
++!v::{
+    KeyWait("Shift")
+    KeyWait("Alt")
+
+    text := A_Clipboard
+    if (text = "")
+        return
+
+    Loop Parse, text, "`n", "`r"  ; 按行解析，并省略掉 `r
+    {
+        if (A_Index > 1)
+            Send("{Enter}")  ; 行与行之间只发一次回车
+        SendText(A_LoopField)
+        Sleep(20)   ; 微小延迟，给系统处理时间
+    }
+}
+; Shift + Alt + P 这个家伙是 PTA 编辑器专用。逐行去除行首空格 Tab，逐字符模拟输入，输入左大括号后延时并删掉网页自动补的右大括号
++!p::{
+    KeyWait("Shift")
+    KeyWait("Alt")
+
+    text := A_Clipboard
+    if (text = "")
+        return
+
+    Loop Parse, text, "`n", "`r"
+    {
+        if (A_Index > 1)
+            Send("{Enter}")
+
+        ; 清除每行开头空格/Tab，避免和编辑器自动缩进叠加偏右
+        currentLine := LTrim(A_LoopField, A_Space A_Tab)
+
+        Loop Parse, currentLine
+        {
+            c := A_LoopField
+            SendText(c)
+            
+            if c == "{" {
+                Sleep(80)        ; 等待网页完成自动补全{}
+                Send("{Delete}") ; 删除光标右侧自动多出的 }
+            }
+            Sleep(Random(20, 27))
+        }
+    }
+}
 ^+"::Send('""{Left}') ; Ctrl + Shift + " 快捷操作-插入双引号
 
 RAlt::LControl ; 右 alt 不常用，映射为左 ctrl

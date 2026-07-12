@@ -107,7 +107,6 @@
       }
       return
     }
-
   }
 
   static SetLockRequest(toLock, toggle, show) {

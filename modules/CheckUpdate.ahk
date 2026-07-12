@@ -5,7 +5,7 @@
     if (isNeedCallback || localIsAlphaOrBeta || DateDiff(A_NowUTC, RegRead(REG_KEY_NAME, regValueName, '20000101000000'), 'days') >= 20) {
         req := ComObject('Msxml2.XMLHTTP')
         ; 打开启用异步的请求.
-        checkUrl := 'https://gitee.com/acc8226/shortcut-key/raw/main/' . (localIsAlphaOrBeta ? 'SNAPSHOT' : 'RELEASE')
+        checkUrl := 'https://raw.giteeusercontent.com/acc8226/jiejian/raw/main/' . (localIsAlphaOrBeta ? 'SNAPSHOT' : 'RELEASE')
         req.open('GET', checkUrl, true)
 
         ; 设置回调函数
