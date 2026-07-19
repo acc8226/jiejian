@@ -51,12 +51,10 @@ k_Layout := [
 
 ; Traverse the keys of the keyboard layout:
 for n, k_Row in k_Layout
-    for i, k_Key in k_Row
-    {
+    for i, k_Key in k_Row {
         k_KeyWidthMultiplier := 1
         ; Get custom key width multiplier:
-        if RegExMatch(k_Key, "(.+):(\d)", &m)
-        {
+        if RegExMatch(k_Key, "(.+):(\d)", &m) {
             k_Key := m[1]
             k_KeyWidthMultiplier := m[2]
         }
@@ -100,33 +98,26 @@ k_yPos := WB - k_height
 MyGui.Show("x" k_xPos " y" k_yPos " NA")
 
 ;---- Function definitions:
-k_KeyPress(BtnCtrl, *)
-{ 
+k_KeyPress(BtnCtrl, *) {
     BtnCtrl.Opt("Default") ; Highlight the last pressed key.
     ControlClick(, BtnCtrl,,,, "D")
     KeyWait(SubStr(A_ThisHotkey, 3))
     ControlClick(, BtnCtrl,,,, "U")
 }
 
-k_ShowHide(*)
-{
+k_ShowHide(*) {
     static isVisible := true
-    if isVisible
-    {
+    if isVisible {
         MyGui.Hide
         A_TrayMenu.Rename k_MenuItemHide, k_MenuItemShow
-        isVisible := false
-    }
-    else
-    {
+    } else {
         MyGui.Show
         A_TrayMenu.Rename k_MenuItemShow, k_MenuItemHide
-        isVisible := true
     }
+    isVisible := not isVisible
 }
 
-GetKeyNameText(Key, Extended := false, DoNotCare := false)
-{
+GetKeyNameText(Key, Extended := false, DoNotCare := false) {
     Params := (GetKeySC(Key) << 16) | (Extended << 24) | (DoNotCare << 25)
     KeyNameText := Buffer(64, 0)
     DllCall("User32.dll\GetKeyNameText", "Int", Params, "Ptr", KeyNameText, "Int", 32)

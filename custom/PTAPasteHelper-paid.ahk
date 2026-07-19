@@ -108,16 +108,14 @@ MButton::{
     if (text = "")
         return
 
-    Loop Parse, text, "`n", "`r"
-    {
+    Loop Parse, text, "`n", "`r" {
         if (A_Index > 1)
             Send("{Enter}")
 
         ; 清除每行开头空格/Tab，避免和编辑器自动缩进叠加偏右
         currentLine := LTrim(A_LoopField, A_Space A_Tab)
 
-        Loop Parse, currentLine
-        {
+        Loop Parse, currentLine {
             c := A_LoopField
             SendText(c)
             
